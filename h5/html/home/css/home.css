@@ -1,0 +1,286 @@
+*{margin: 0;padding: 0;}
+body{
+    /*background: #eeeeee;*/
+}
+/*����ֻ�����*/
+.moblieHeader{
+    width: 100%;
+    height: 2.6rem;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    /*background: url("../img/bai.png") no-repeat bottom center;*/
+}
+.moblieHeader img{
+    width: 100%;
+    position: absolute;
+    margin: auto;
+    top: -9999px;
+    right: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    object-fit: cover;
+    height: 2.6rem;
+}
+.moblieHeader .z_bg{
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+.moblieTit{
+    position: relative;
+    font-size: 0.28rem;
+    clear: both;
+    background: #fff;
+    padding-bottom: 0.1rem;
+    border-bottom: 1px solid #eee;
+    margin: 0 0.2rem;
+}
+.moblieTit img{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+    position: absolute;
+    left: 0.2rem;
+    top: -0.4rem;
+    box-shadow: 0 0 15px #999;
+    z-index: 10;
+}
+.titName{
+    float: left;
+    display: block;
+    width: 2.8rem;
+    padding: 2px;
+    margin-left: 1.5rem;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 0.32rem;
+    /*margin-bottom: 0.1rem;*/
+}
+.fans{
+    float: right;
+    display: block;
+    padding: 2px;
+    margin-right: 0.4rem;
+    margin-top: 0.2rem;
+    font-size: 0.26rem;
+}
+.font-bold{
+    font-weight: bold;
+}
+.guanzhu{
+    float: right;
+    display: block;
+    padding: 2px;
+    border: 1px solid red;
+    color: red!important;
+    margin-right: 0.2rem;
+    margin-top: 3px;
+}
+.titText{
+    /*margin-top: 0.2rem;*/
+	max-height:0.8rem;
+    line-height:0.4rem;
+    padding-left: 1.55rem;
+    padding-right: 5px;
+    color: #999;
+    clear: both;
+    font-size: 0.24rem;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	display:-webkit-box; 
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:2; 
+}
+.moblieTitle{
+    margin: 0.25rem 0;
+    font-size: 0.28rem;
+    /*padding-left: 5px;*/
+    /*padding-right: 5px;*/
+    color: #333;
+    overflow: hidden;
+}
+.moblieTitle .font-bold{
+    font-size: 0.33rem;
+    /*font-weight: normal;*/
+    color: #282828;
+    padding: 0 0.2rem;
+}
+.bigPic{
+    width: 7.1rem;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 0.2rem;
+    position: relative;
+    height: 4rem;
+    /*background: #ccc;*/
+    /*overflow: hidden;*/
+    border-radius: 5px;
+}
+.bigPic:last-child{
+    margin-bottom: 0;
+}
+.bigPic img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    margin: auto;
+    top: -9999px;
+    right: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    object-fit: cover;
+    max-width: 100%;
+    border-radius: 5px;
+}
+.bigPicMask{
+    position: absolute;
+    left: 0px;
+    right: 0;
+    bottom: -10px;
+    height: 0.9rem;
+    line-height: 0.9rem;
+    overflow: hidden;
+    background: url("../img/title_bg.png") no-repeat center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.28rem;
+    padding: 0 0.25rem;
+    color: #fff;
+    border-radius: 0 0 5px 5px;
+    background-size: cover;
+}
+.yugao{
+    position: absolute;
+    left:0.14rem;
+    top: 0;
+    display: block;
+    padding: 5px;
+    background: #ed2222;
+    font-size: 0.24rem;
+	color:#fff;
+}
+.yugao1{
+    position: absolute;
+    left:0;
+    top: 0;
+    display: block;
+    padding: 5px;
+    background: #408ced;
+    font-size: 0.24rem;
+	color:#fff;
+}
+.smallPic{
+    width: 3.45rem;
+    position: relative;
+    margin-left: 0.2rem;
+}
+.smallPicBox{
+    height: 2rem;
+    /*background: #ccc;*/
+    /*overflow: hidden;*/
+    position: relative;
+}
+.smallPicBox img{
+    width: 100%;
+    position: absolute;
+    margin: auto;
+    top: -9999px;
+    right: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    object-fit: cover;
+    border-radius: 5px;
+    height: 2rem;
+}
+.smallPicTit{
+    line-height: 0.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.25rem;
+    color: #666;
+    margin: 0.15rem 0 0.3rem;
+    padding: 0 0.1rem;
+}
+.smallPicText{
+    height: 0.4rem;
+    line-height: 0.4rem;
+    padding: 0 0.1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.24rem;
+    color: #999;
+}
+.followBox {
+    width: 1.48rem;
+    height: 0.58rem;
+    line-height: 0.58rem;
+    text-align: center;
+    margin-top: 0.1rem;
+    margin-right: 0.1rem;
+    border: 1px solid #E8B333;
+    float: right;
+    border-radius: 50px;
+    color: #fff;
+    background: #E8B333;
+    font-size: 0.25rem;
+}
+.bgc-fff{
+    /*background: #fff;*/
+    overflow: hidden;
+    /*margin-top: 0.2rem;*/
+    /*padding: 0.2rem 0;*/
+}
+.font-12{
+    color: #ccc;
+    font-size: 0.28rem!important;
+    margin-right: 0.2rem;
+}
+.lineBlue{
+    width: 2px;
+    height: 0.4rem;
+    background: #0084ff;
+    float: left;
+    margin: 0 0.2rem;
+}
+.slimContent{
+    width: 7.5rem;
+    margin: 0 auto;
+}
+.z_status{
+    width:0.62rem;
+    height: 0.45rem;
+    background: url("../img/pre.png") no-repeat center;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 0.14rem;
+    top: -0.06rem;
+    display: block;
+    font-size: 0.2rem;
+    color: #fff;
+    text-align: center;
+    padding-top: 0.08rem;
+    line-height: 0.32rem;
+}
+.z_review{
+    background-image: url("../img/review.png");
+}
+.z_end{
+    background-image: url("../img/end.png");
+}
+.z_ing{
+    width: 0.67rem;
+    background-image: url("../img/oning.png");
+}
+.z_project{
+    background-image: url("../img/pro.png");
+}
+.z_link{
+    background-image: url("../img/link.png");
+}
+
