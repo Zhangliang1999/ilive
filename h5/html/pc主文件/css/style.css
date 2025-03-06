@@ -1,0 +1,222 @@
+
+.bluegb{ background-color: #0084ff;}
+.rad-border{ border-radius: 5px;}
+.commonbtn{background:#0084ff; color:#fff;border-radius: 5px;}
+.commonbtn:hover,commonbtn:focus{background:#0165c5; color: #fff;}
+.aborder{border:1px solid #fff;}
+.text-white{ color: #fff;}
+.text-lightgray{ color: #ccc;}
+.text-dullgray{ color: #999;}
+i{ font-style: normal;display: inline-block}
+
+
+.login{ background: url(../images/loginbg.png) no-repeat center; background-attachment:fixed; background-size: cover; }
+.loginpage{ width: 400px; height: 570px; position: absolute; left: 0; right: 0;top: 0; bottom: 0; margin:auto;}
+.logo{width: 400px;}
+.form{ width: 400px; height: 430px; background: #fff; margin:20px auto 0; padding: 50px 40px 0; color: #666; border-radius: 5px;}
+.form .form-group>input{ width: 320px; padding-left: 45px; height: 50px; line-height: 50px; border-radius: 0;}
+.form .form-group input.phonenum{ background: url(../images/phone.png) no-repeat 20px center;}
+.form .form-group input.vcode{ background: url(../images/vcode.png) no-repeat 12px center;}
+.form .form-group:nth-child(2){ position: relative;}
+.form .form-group .send-sms{ position: absolute; font-size:13px;top: 6px;right: 6px;width: 90px;height: 38px;line-height: 38px;text-align: center;text-decoration: none;}
+.loginbtn{ width:320px;height: 50px;line-height: 50px;font-size: 20px;padding: 0;margin-top: 25px; }
+.form .form-group input:checked + span{ color: #0084ff;}
+.otherway{ font-size: 14px; color: #ccc; text-align: center; padding-top: 15px;}
+.otherway span{ display: inline-block;width: 75px; border-top: 1px solid #ccc;}
+.otherway .aicon{ width: 25px; height: 25px; text-indent: -8888px; display: inline-block; margin: 15px 15px 0; background-position: center; background-repeat: no-repeat;}
+.otherway .aicon.qq{ background-image: url("../images/qq.png");}
+.otherway .aicon.wx{ background-image: url("../images/wx.png");}
+.otherway .aicon.wb{ background-image: url("../images/wb.png");}
+.otherway .otherlogin{width:160px;border: none; text-align: center;}
+input[type="radio"], input[type="checkbox"]{ margin-top: 0!important;}
+
+.codepage{ height: 430px; }
+.codepage .code-content{ width: 100%; height: 280px; background: #fff; border-radius: 5px; margin-top: 50px;}
+.codepage .code-content h3{ color: #0084ff; line-height: 70px; border-bottom: 1px solid #eee; font-size: 24px;}
+.codeinput{ padding: 30px 20px 5px;}
+.codeinput li{ width: 60px; height: 60px; border:1px solid #ccc; display: inline-block;margin-right: 10px; border-radius: 5px;}
+.codeinput li:last-child{ margin-right: 0;}
+.codeinput li:hover{ border-color: #999;}
+
+body{ background-color: #fff; font-size: 12px;}
+.playheader{ width: 100%; height: 60px; margin: 0 auto;}
+.playlogo{ width: 1000px; margin: 0 auto; height:100%; overflow: hidden;}
+.playcontent{ width: 100%; height: 560px; background: #333;}
+.playinfo{ width:1000px; height: 100%; margin: 0 auto; background:#222;}
+.play-titie{ width: 100%; height: 84px; padding: 15px 20px; color: #ccc;}
+.play-titie h3{ font-size: 20px; color: #fff; margin-bottom: 15px;}
+.player{width: 720px; height: 100%;}
+.watchnum{ padding-left: 26px; background: url("../images/user.png") no-repeat 0px 0px;}
+.share{display: inline-block; cursor: pointer;}
+.zicon i{ width: 16px; height: 17px; background-image: url("../images/icon4.png"); margin:0 6px;}
+.zicon.thumpup{ margin-right: 10px; cursor: pointer; position: relative; right: 40px; padding-right: 20px;}
+.zicon.thumpup label{ position: absolute;top:4px;}
+.zicon.thumpup:hover i,.zicon.thumpup i.active{ background-position: 16px 0px;}
+.share{ position:relative; width: 57px;}
+.share img{ position: absolute; z-index: 5; top:36px;left:-22px;}
+.zicon.share i{ background-position: 0 17px;}
+.zicon.share:hover{ color: #0084ff;}
+.zicon.share img{ display: none;}
+.zicon.share:hover img{ display: block;}
+.share > span{ position: absolute; top:4px;}
+.zicon.share:hover i{ background-position: 17px 17px; }
+.action-bar{ height: 70px; padding: 0 20px; cursor: pointer;}
+.action-bar .zaction{display: inline-block; color: #ccc; font-size: 20px; height: 32px; line-height: 32px; position: relative; width: 100px;}
+.action-bar .zaction:hover{ color: #fff;}
+.action-bar .zaction i{ width: 30px; height: 31px; margin:19px 0 0 12px; background-image: url("../images/icon1.png"); background-repeat: no-repeat; position: absolute; left: 0;}
+.action-bar .zaction:first-child:hover i{ background-position: 0px -31px;}
+.action-bar .zaction:nth-child(2) i{ background-position: -31px 0px;}
+.action-bar .zaction:nth-child(2):hover i{ background-position: -31px -31px;}
+.action-bar .zaction:nth-child(3) i{ background-position: -62px 0px;}
+.action-bar .zaction:nth-child(3):hover i{ background-position: -62px -31px;}
+.action-bar .zaction:last-child i{ background-position: -93px 0px;}
+.action-bar .zaction:last-child:hover i{ background-position: -93px -31px;}
+.action-bar .zaction span{position: absolute;left: 50px;top: 21px;}
+.action-bar .actionlist{ width: 62%; height: 100%;}
+.action-bar .gift{ display: inline-block; height: 100%; width: 38%; padding-top: 15px;}
+.action-bar .gift img{ margin-left: 8px;}
+
+.playfooter{ width: 1000px; margin: 0 auto; padding: 20px 0;}
+.comment{ width: 720px; padding: 0 20px;}
+.comment h2{ font-size: 30px; margin-bottom: 20px;}
+.playfooter .com-send{ width:680px; height: 150px; border: 1px solid #ccc; padding: 10px 10px 0 10px; margin-bottom: 30px; }
+.playfooter .com-send:hover{ border-color: #999;}
+.sendpic{ color: #ccc; padding: 0 10px;}
+.sendpic p{ width: 80px; height: 40px; display: inline-block; font-size: 14px; cursor: pointer;position: relative; margin-top: 5px;}
+.sendpic p i{ width: 28px; height: 25px; background-image: url("../images/icon2.png"); background-repeat: no-repeat; position: absolute; top:8px;}
+.sendpic p span{ position: absolute; left:36px;top:14px;}
+.sendpic p:hover{color: #666;}
+.sendpic p:hover i{ background-position: -28px 0;}
+.sendpic button{ width: 75px; font-size: 14px; margin-top: 12px; padding: 2px 0;}
+.comment-list .headimg{ width: 60px; height: 60px; }
+.username{ margin-top: 10px;}
+.username span{ color: #0084ff; padding-right: 25px;}
+.speak{ margin-top:10px; font-size: 12px; line-height: 18px;}
+.pic{ padding-top: 10px;}
+.pic img{ padding-right: 5px;}
+.comment-list li{overflow: hidden; margin-bottom: 15px;}
+.listinfo{font-size: 16px; width:600px; float: right;}
+
+.review-more{ width: 280px; padding: 0 5px;}
+.review-more h3{ font-size: 16px; margin: 15px 0;}
+.review-more ul{ height: 500px; overflow-y:auto; overflow-x: hidden;}
+.review-more li{ margin-bottom: 15px;}
+.review-more a:focus,.review-more a:hover {color: #0084ff;text-decoration: none;}
+.reviewlist{ position: relative;width:270px;height:152px;overflow: hidden;}
+.reviewlist img{width:270px;object-position: center top;}
+.reviewlist span{position:absolute;color:#fff; background: #000; padding: 5px 6px;bottom: 2px; left: 0;}
+.reviewinfo h4{ width: 90%; font-size: 14px; margin: 10px 0; line-height: 18px;}
+.reviewinfo .uploadtime{ margin-bottom: 10px;}
+.reviewinfo .totalnum span{ position: relative; padding-left: 20px;}
+.reviewinfo .totalnum span i{ width: 13px; height: 13px; background-image: url("../images/icon5.png"); background-repeat: no-repeat;  position: absolute;left: 0;/* top:3px;*/}
+.reviewinfo .totalnum span:first-child{ margin-right: 15px;}
+.reviewinfo .totalnum span:first-child i{ background-position: -43px 0px;}
+
+.play-titie>span{padding-right: 20px; display: inline-block; margin-top: 3px;}
+.play-titie>span:last-child{ margin-top: 0;}
+.livefooter .review-more h3{ color: #333; font-size: 20px;}
+.livefooter .reviewinfo h4{ width: 100%;}
+.livefooter a{ color: #333;}
+.livefooter .review-more ul{ height: 100%;}
+.interaction{ width: 280px; height: 100%; padding: 0 10px;}
+.interaction #myTab{ border-bottom:1px solid #666; margin-bottom: 15px;}
+.interaction #myTab li{ width:46%; text-align: center;}
+.interaction #myTab li a:hover,.interaction .nav-tabs>li.active>a{background: none; border: none;}
+.interaction .nav-tabs>li.active>a:focus,.interaction .nav-tabs>li.active>a:hover{ background: none; border: none; }
+.interaction #myTab li.active{ border-bottom:2px solid #0084ff;}
+.interaction #myTab li:hover a{ font-size: 16px; color: #fff;}
+.interaction #myTab li a{ font-size: 14px; color: #ccc; background: none;}
+.interaction #myTab li.active a{ font-size: 16px; color: #fff;}
+.interaction .tab-content p{ line-height: 16px; margin-bottom: 5px;}
+.sofa{ color: #eee;}
+.quiz{color: #f23622;}
+.interaction .tab-content p label{ color: #fff; border-radius: 25%; padding:0 4px; display: inline-block; margin-right: 5px; font-size: 10px;}
+.quiz label{background: #f23622;}
+.btext{ color: #0084ff;}
+.interaction .tab-content .tab-pane > div{ margin-bottom: 15px;}
+/*.interaction .tab-content{ height:460px;overflow-x: hidden; overflow-y: auto;}*/
+.interaction .tab-content p img{padding-right: 5px;}
+#topic .handle span{ padding-right: 8px; cursor: pointer;}
+#topic .handle i{ width: 13px; height: 12px; display: inline-block; margin-right: 4px; background-image: url("../images/icon3.png"); background-repeat: no-repeat;}
+#topic .handle i.active{ background-position:-28px 0px; }
+#topic .message:hover i{ background-position: -14px 0px;}
+#topic .thumbup i{ background-position: 0px -13px;}
+#topic .thumbup:hover i{ background-position: -14px -13px;}
+#topic .thumbup i.active{ background-position: -28px -13px;}
+.reply{ background-image: url("../images/pic4.png"); background-repeat: no-repeat; background-position:5px 5.1px; padding-top: 10px; line-height: 16px;}
+.reply>div{ background: #333; border-radius: 5px; padding: 10px 12px;}
+.livepage .play-video{ width: 720px; height: 405px; position: relative;z-index: 1;}
+.livepage .mainplayer{ position: absolute; width: 100%; height: 100%; top:0;}
+.player .status p{font-size: 24px; color: #fff;}
+.player .status i{ color: #f23622;}
+.player .status{ position: relative; width: 100%; height: 100%; z-index: 3;background: rgba(0,0,0,0.4);}
+
+.player .status .statusinfo {width: 55%;position: absolute;top: 0px;left: 0px;right: 0px;bottom: 0px;margin: auto; height:150px; }
+.player .status .statusinfo button{ width: 200px; height: 50px; font-size: 20px; color: #fff; margin-top: 20px;}
+.player .status .statusinfo button.ordered{ background-color: #ccc;}
+
+.z-logo{ height: 60px; line-height: 60px;}
+.playlogo img{ max-height: 60px; vertical-align:middle;}
+.attention{display: inline-block;padding-left: 20px; margin-top: 15px; height: 30px; float: left;}
+.follow{height: 25px; background-color: #0084ff;color: #fff; padding: 0 5px; border: none; margin-top: 5px; line-height: 25px;}
+.follow:hover{ color: #fff;}
+.follow i{ width: 13px; height: 13px; background-image: url("../images/star.png"); background-repeat: no-repeat;background-position: 0px -13px;}
+.follow.active{background-color: #ccc; border: none; color: #333;}
+.follow.active i{ background-position: 0px 0px;}
+.introductTil{font-size: 34px;margin-bottom:15px;}
+.inputBox{
+	width:180px;
+	height: 30px;
+	margin: 0 auto;
+	position: relative;
+}
+.inputBox input{
+	width: 140px;
+	height: 30px;
+	border: none;
+	float: left;
+	border-radius: 5px 0 0 5px;
+	padding-left: 31px;
+}
+.sendBtn{
+	width: 40px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: #fff;
+	border: none;
+	background: #0084FF;
+	border-radius: 0 5px 5px 0;
+}
+.questionBox{
+	display: block;
+	width: 30px;
+	text-align: center;
+	line-height: 26px;
+	font-size: 16px;
+	border-right: 1px solid #ccc;
+	border-radius: 5px 0 0 5px;
+	height:26px;
+	position: absolute;
+	left: 0;
+	top: 2px;	
+}
+.questionActive{
+	color: #0084ff;
+}
+.introduct {
+	width: 680px;
+}
+.introductText{
+	font-size: 15px;
+	line-height: 22px;
+	color: #404040;
+	margin-bottom: 20px;
+}
+.introductImg{
+	width: 680px;
+}
+.introductImg img{
+	width: 640px;
+	margin: 0 auto 30px;
+}
