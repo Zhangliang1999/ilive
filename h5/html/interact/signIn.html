@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content="">
+    <meta name="viewport"
+          content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width,viewport-fit=cover"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>签到墙</title>
+    <style>
+        .z_sign li {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="bg signIn">
+    <div class="outer-container">
+        <div class="inner-container">
+            <div class="container">
+
+                <ul class="sign z_sign">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="qrcode">
+        <div id="code"></div>
+        <div class="text">扫一扫，参加活动</div>
+    </div>
+
+</div>
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="js/qrcode.js"></script>
+<script src="js/main.js"></script>
+<script src="../pc/js/base.js"></script>
+<script>
+    var signBox = $('.sign')
+    var signId = GetQueryString("signId")
+    var pageNo = 1
+    var pastTime = 0
+    var flag = true
+
+    $(function () {
+        getData()
+        setInterval(function () {
+            getData()
+        }, 3000)
+    })
+
+    //http://10.102.16.150/ilive/phone/sign.html?roomId=2196&siginId=111
+    function getqrcode(siginId) {
+        var href = "http://" + h5Base + "/phone/sign.html?siginId="+siginId
+        if (flag){
+            new QRCode("code", {
+                text: href,
+                width: 150,
+                height: 150,
+                colorDark : "#000000",
+                colorLight : "#ffffff"
+            });
+            flag = false
+        }
+
+
+    }
+
+    function getData() {
+        console.log('时间已过去' + pastTime / 1000 + '秒')
+        $.ajax({
+            type: "GET",
+            url: "http://" + tomcatBase + "/ilive/prize/siginUserlist.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                signId: signId,
+                pageSize: 18,
+                pageNo: pageNo
+            },
+            success: function (data) {
+                //var roomId = data.res.room.roomId;
+                var siginId = data.res.signId;
+                getqrcode(siginId)
+                console.log(data)
+                var status = data.status
+                if (status == 1) {
+                    signBox.find('li').remove()
+                    var totalPage = data.totalPage
+                    pageNo = data.pageNo
+                    var imgBg = data.res.imgUrl
+                    if (imgBg) {
+                        $('.signIn').css('background-image', 'url(' + imgBg + ')')
+                    }
+                    console.log('当前页是：第' + pageNo + '页')
+                    if (totalPage > pageNo) {
+                        pageNo++
+                    }
+                    else if (totalPage == pageNo) {
+                        console.log('到达最后一页，页面重置为第一页')
+                        pageNo = 1
+                    }
+                    for (var i = 0; i < data.data.length; i++) {
+                        var userName = data.data[i].userName
+                        var userPhoto = data.data[i].userPhoto
+                        if (userPhoto == '') {
+                            userPhoto = "images/tt.jpg"
+                        }
+                        signBox.append('<li> <div class="imgs"><img src="' + userPhoto + '" alt=""></div> <div class="names">' + userName + '</div> </li>')
+                    }
+                    pastTime += 3000
+                    if (pastTime >= 9000/*3 * 60 * 1000*/) { //测试时 9秒重置！！！
+                        console.log('到达3分钟，页面重置为第一页,过去的时间重置为0')
+                        pageNo = 1
+                        pastTime = 0
+                    }
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

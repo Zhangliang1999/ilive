@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>协议</title>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/agreePc.css"/>
+    <script src="js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header" style="display: block;">
+          	  购买协议
+        </div>
+        <div class="main">
+            <p class="title">《天翼直播观看购买协议》</p>
+            <p class="para">不止6月，整个上半年，央企经济运行都保持了稳中向好的态势，收入利润持续快速增长，创历史同期最好水平，交出了一份亮眼的成绩单——累计实现营业收入13.7万亿元，同比增长10.1%；实现增加值3.5万亿元，同比增长7.5%；实现利润8877.9亿元，同比增长23%；上交税费总额1.2万亿元，同比增长10.3%。</p>
+            <p class="para">不止6月，整个上半年，央企经济运行都保持了稳中向好的态势，收入利润持续快速增长，创历史同期最好水平，交出了一份亮眼的成绩单——累计实现营业收入13.7万亿元，同比增长10.1%；实现增加值3.5万亿元，同比增长7.5%；实现利润8877.9亿元，同比增长23%；上交税费总额1.2万亿元，同比增长10.3%。</p>
+            <p class="para">不止6月，整个上半年，央企经济运行都保持了稳中向好的态势，收入利润持续快速增长，创历史同期最好水平，交出了一份亮眼的成绩单——累计实现营业收入13.7万亿元，同比增长10.1%；实现增加值3.5万亿元，同比增长7.5%；实现利润8877.9亿元，同比增长23%；上交税费总额1.2万亿元，同比增长10.3%。</p>
+            <p class="para">不止6月，整个上半年，央企经济运行都保持了稳中向好的态势，收入利润持续快速增长，创历史同期最好水平，交出了一份亮眼的成绩单——累计实现营业收入13.7万亿元，同比增长10.1%；实现增加值3.5万亿元，同比增长7.5%；实现利润8877.9亿元，同比增长23%；上交税费总额1.2万亿元，同比增长10.3%。</p>
+        </div>
+        <div class="footer" onclick="openLive()">同 意</div>
+    </div>
+</body>
+<script src="js/base.js"></script>
+<script>
+    $(document).ready(function(){
+        var winHeight = $(window).height();
+        var headHeight = $(".header").height();
+        var footHeight = $(".footer").height();
+        $(".main").height(winHeight-headHeight-footHeight);
+    });
+    function GetQueryString(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+	    var r = decodeURI(window.location.search.substr(1)).match(reg);
+	    if (r != null)return unescape(r[2]);
+	    return null;
+	}
+   var userId  = GetQueryString("userId");
+   var roomId  = GetQueryString("roomId");
+   function openLive(){
+	   window.location.href="http://"+h5Base+"/pc/play.html?roomId="+roomId+"&userId="+userId;
+   }
+</script>
+</html>
