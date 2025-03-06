@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content="">
+    <meta name="viewport"
+          content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width,viewport-fit=cover"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/Swiper/4.5.0/css/swiper.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="https://cdn.staticfile.org/Swiper/4.5.0/js/swiper.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/clipboard.js/2.0.4/clipboard.min.js"></script>
+    <script type="text/javascript" src="http://zb.tv189.com/phone/js/rem.js"></script>
+    <script type="text/javascript" src="../phone/js/base.js"></script>
+    <script type="text/javascript" src="../phone/js/apis.min.js"></script>
+
+    <title>邀请函</title>
+</head>
+<body>
+<div id="orientLayer" class="mod-orient-layer">
+    <div class="mod-orient-layer__content">
+        <i class="icon mod-orient-layer__icon-orient"></i>
+        <div class="mod-orient-layer__desc">请使用竖屏浏览</div>
+    </div>
+</div>
+<div class="page">
+    <div class="swiper-container">
+        <div class="swiper-wrapper"></div>
+    </div>
+    <img src="images/arrow.png" id="array" style="display: none">
+</div>
+<script>
+    $(function () {
+        const url = window.location.search.substr(1),
+            searchParams = new URLSearchParams(url),
+            Params = {},
+            orientLayer = document.getElementById("orientLayer"),
+            mql = window.matchMedia("(orientation: portrait)"),
+            clipboard = new ClipboardJS('.clipboard'),
+            _height = $(window).height();
+
+        Params.roomId = searchParams.has('roomId') ? searchParams.get('roomId') : '0';
+        Params.id = searchParams.has('id') ? searchParams.get('id') : '0';
+
+
+        onMatchMeidaChange(mql); //检查竖屏
+        init()
+
+
+        function init() {
+            createAPI("http://" + tomcatBase + "/ilive/meetingFile/selectMeetingInvitationDiy.jspx", {
+                roomId: Params.roomId,
+                id: Params.id
+            }).then(function (res) {
+                const source = {
+                    enterpriseName: res.data.enterpriseName,
+                    liveStartTime: new Date(res.data.liveStartTime.time).Format("yyyy年MM月dd日 hh:mm"),
+                    logo: res.data.logo || 'images/videobox.png',
+                    backImage: res.data.backImage || 'images/pic@2x.png',
+                    loginUrl: res.data.loginUrl,
+                    password: res.data.password,
+                    processFlag: res.data.processFlag,
+                    otherImages: res.data.otherImages,
+                    roomId: res.data.roomId,
+                    liveTitle: res.data.liveTitle
+                }
+
+                _shows(source)
+                //mySwiper
+                _swiper()
+
+            })
+
+        }
+
+        function _shows(data) {
+            const processFlag = data.processFlag;
+            const otherImages = data.otherImages;
+            let dom = [];
+            let page;
+
+
+            page = _template.page1(data)
+            dom.push(page)
+            if (processFlag == 1 && otherImages.length > 0) {
+                otherImages.forEach(function (value) {
+                    page = _template.otherPages(value)
+                    dom.push(page)
+                })
+            }
+
+            $('.swiper-wrapper').html(dom.join(''))
+
+            const pageW = $('.page1 .content').width();
+            $('.heade').height(pageW / 16 * 9)
+            clipboard.on('success', function (e) {
+                alert('复制成功')
+                e.clearSelection();
+            });
+
+        }
+
+
+        //template
+        const _template = {
+            page1: function (data) {
+                let dom = '<div class="swiper-slide">\n' +
+                    '                <div class="page1" style="background-image: url(' + data.backImage + ')">\n' +
+                    '                    <div class="body">\n' +
+                    '                        <div class="content">\n' +
+                    '                            <div class="heade">\n' +
+                    '                                <img src="' + data.logo + '" alt="">\n' +
+                    '                            </div>\n' +
+                    '                            <h1>会议邀函</h1>\n' +
+                    '                            <p><strong>' + data.enterpriseName + ' 邀请您参加视频会议</strong></p>\n' +
+                    '                            <dl>\n' +
+                    '                                <dt>会议主题:</dt>\n' +
+                    '                                <dd>[ ' + data.liveTitle + ' ]</dd>\n' +
+                    '                            </dl>\n' +
+                    '                            <dl>\n' +
+                    '                                <dt>会议时间:</dt>\n' +
+                    '                                <dd>' + data.liveStartTime + '</dd>\n' +
+                    '                            </dl>\n' +
+                    '                            <dl>\n' +
+                    '                                <dt>会 议 号:</dt>\n' +
+                    '                                <dd>' + data.roomId + '</dd>\n' +
+                    '                            </dl>\n' +
+                    '                            <dl>\n' +
+                    '                                <dt>参会密码:</dt>\n' +
+                    '                                <dd>' + data.password + '</dd>\n' +
+                    '                            </dl>\n' +
+                    '                            <dl class="PCview">\n' +
+                    '                                <dt>PC会议参与地址:</dt>\n' +
+                    '                                <dd><a href="http://' + h5Base + '/index.html?roomId=' + data.roomId + '"\n' +
+                '                                       style="color: #000;font-weight: normal;text-decoration: none">http://' + h5Base + '/index.html?roomId=' + data.roomId + '</a>\n' +
+                '                                </dd>\n' +
+                '                            </dl>\n' +
+                '                            <div class="code">\n' +
+                '                                <input type="text" style="position: absolute;top: -999999999px;"\n' +
+                '                                       value="http://' + h5Base + '/index.html?roomId='+ data.roomId +'" id="viewAddr">\n' +
+                '                                <a href="javascript:;" class="clipboard viewAddr " data-clipboard-target="#viewAddr">复制链接</a>\n' +
+                '                                <p>手机参与会议请下载天翼直播APP客户端</p>\n' +
+                '                                <img src="http://zb.tv189.com/images/img-popup.png" alt="">\n' +
+                '                            </div>\n' +
+                '                        </div>\n' +
+                '                    </div>\n' +
+                '                </div>\n' +
+                '            </div>';
+
+                return dom;
+            },
+            otherPages: function (image) {
+                let dom = ' <div class="swiper-slide">\n' +
+                    '                <div class="otherpage">\n' +
+                    '                      <img data-src="' + image + '" class="swiper-lazy"  alt=""> <div class="swiper-lazy-preloader"></div>\n' +
+                    '                </div>\n' +
+                    '            </div>';
+                return dom;
+
+            }
+        }
+
+
+        //swiper
+        function _swiper() {
+            new Swiper('.swiper-container', {
+                direction: 'vertical',
+                height: _height,
+                lazy: {
+                    loadPrevNext: true,
+                    loadPrevNextAmount: 2,
+                },
+                on: {
+                    slideChangeTransitionEnd: function () {
+                        if (this.isEnd) {
+                            $('#array').hide()
+                        } else {
+                            $('#array').show()
+                        }
+                    },
+                },
+
+            })
+        }
+
+        function onMatchMeidaChange(mql) {
+            if (mql.matches) {
+                // alert('竖屏')
+                orientLayer.style.display = "none";
+            } else {
+                // alert('横屏')
+                orientLayer.style.display = "block";
+            }
+        }
+
+        mql.addListener(onMatchMeidaChange);
+
+
+        Date.prototype.Format = function (fmt) {
+            const o = {
+                "M+": this.getMonth() + 1,
+                "d+": this.getDate(),
+                "h+": this.getHours(),
+                "m+": this.getMinutes(),
+                "s+": this.getSeconds(),
+                "q+": Math.floor((this.getMonth() + 3) / 3),
+                "S": this.getMilliseconds()
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + ""));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+
+    })
+
+</script>
+</body>
+</html>
