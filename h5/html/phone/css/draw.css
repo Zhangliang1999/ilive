@@ -1,0 +1,80 @@
+.drawList{
+    height: 100%;
+    margin-bottom: 10%;
+    overflow: scroll;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.draw {
+    padding: 0.3rem;
+    background-image: url(../draw/images/bg.png);
+    background-size: 100% 100%;
+    margin: 0 auto;
+    /*height: 5.6rem;*/
+    /*width: 5.5rem;*/
+}
+
+.draw .item {
+    width: 1.6rem;
+    height: 1.6rem;
+    font-size: .2rem;
+    background-image: url(../draw/images/bg1.png);
+    background-size: 100% 100%;
+}
+
+.draw .item.active {
+    background-image: url(../draw/images/bg2.png);
+}
+
+.draw .img {
+    width: .5rem;
+    height: .5rem;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.draw .img img {
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+}
+
+.draw .gap {
+    width: 0.05rem;
+}
+
+.draw .gap-2 {
+    height: 0.05rem;
+}
+
+.draw .name {
+    display: inline-block;
+
+    height: 0.75rem;
+    overflow: hidden;
+    line-height: .75rem;
+}
+
+.draw .draw-btn {
+    display: block;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    border-radius: 0.2rem;
+    font-size: 25px;
+    font-weight: 700;
+    color: #f0ff00;
+    background-color: #fe4135;
+    text-decoration: none;
+}
+
+.draw .draw-btn:hover {
+    background-color: #fe8d85;
+}
+.draw .lottery-unit.drawactive{
+    background-image: url("../draw/images/bg2.png");
+}
