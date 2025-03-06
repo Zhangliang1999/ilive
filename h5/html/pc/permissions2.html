@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>直播结束</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/normalize/8.0.0/normalize.min.css"/>
+    <link rel="stylesheet" href="css/style.min.css?version=2.0.3">
+</head>
+<body class="login">
+<div class="loginpage codepage">
+    <div class="logo text-center">
+        <img src="images/logo.png"/>
+    </div>
+    <div class="code-content rad-border text-center" style="height: 72px; line-height: 72px">
+        <span id="roomName">非常抱歉，该观看码已被其他账号绑定</span><br><br>
+         <span id="roomName">您可以</span>
+          <div><span onclick="gotoLogin()">我有已绑定的账号</span>
+          </div><div><span onclick="gotoCheckF()">再试试其他观看码</span></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+var roomId = 0;
+var fileId = 0;
+var userId = 0;
+$(function () {
+    var param = window.location.search;
+    var newsidinfo = param.substr(param.indexOf("?") + 1, param.length)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+    var split = newsidinfo.split("&")
+    for (var i = 0; i < split.length; i++) {
+        var newsids = split[i].split("=");//对获得的参数字符串按照“=”进行分割
+        var newsid = newsids[1];//得到参数值
+        var newsname = newsids[0];
+        if (newsname == "roomId") {
+            roomId = newsid;
+            $.ajax({
+                type: "GET",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/selectRoom.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    roomId: roomId
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 1) {
+                        var iLiveLiveRoom = JSON.parse(data.iLiveLiveRoom);
+                        var liveEvent = iLiveLiveRoom.liveEvent;
+                        var liveTitle = liveEvent.liveTitle;
+                        var welcomeMsg = liveEvent.welcomeMsg;
+                        if (welcomeMsg == null || welcomeMsg == undefined || welcomeMsg == "") {
+                            welcomeMsg = "";
+                        }
+                        $("#roomName").text(liveTitle);
+                        $("#welcomeMsg").text(welcomeMsg);
+                    }
+                }
+            });
+        } else if (newsname == "fileId") {
+            fileId = newsid;
+        } else if (newsname == "userId") {
+            userId = newsid;
+        }
+    }
+});
+function gotoLogin(){
+	  window.location.href = "http://" + h5Base + "/pc/login.html?roomId=" + roomId;
+};
+function gotoCheckF(){
+	 window.location.href = "http://" + h5Base + "/pc/FCode.html?roomId=" + roomId;
+};
+</script>
+</html>

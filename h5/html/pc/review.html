@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回看</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/jquery.slimscroll.js"></script>
+    <script src="js/base.js"></script>
+    <script src="js/viewer/krpano.js"></script>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_872913_5ogh0ten02x.css"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/normalize/8.0.0/normalize.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/dcswiper.css"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dialog.css"/>
+    <script type="text/javascript" src="js/dialog.js"></script>
+    <style type="text/css">
+        .con {
+            height: 30px;
+            width: 80%;
+            border: none;
+            resize: none;
+            line-height: 17px;
+            border-bottom: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            text-indent: 5px;
+        }
+
+        #dianZanSpan.checked {
+            color: #eb402d;
+        }
+
+        .wdTable .table > tbody > tr > td {
+            border-top: 0;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        #wdModal {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        #wdModal .modal-dialog {
+            width: 400px !important;
+            height: 325px;
+            border-radius: 5px;
+            margin-left: 140px;
+            margin-top: 80px;
+        }
+
+        #wdModal .slimScrollDiv, .wdTable {
+            height: 180px !important;
+        }
+
+        #wdModal .modal-footer {
+            border-top: none;
+        }
+    </style>
+    <script type="text/javascript">
+        var roomId = 0;
+        var userId = 0;
+        var fileId = 0;
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = decodeURI(window.location.search.substr(1)).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+        if (GetQueryString("roomId") != null || GetQueryString("roomId") != undefined) {
+            roomId = GetQueryString("roomId");
+        }
+        if (GetQueryString("userId") != null || GetQueryString("userId") != undefined) {
+            userId = GetQueryString("userId");
+        }
+        if (GetQueryString("fileId") != null || GetQueryString("fileId") != undefined) {
+            fileId = GetQueryString("fileId");
+        }
+        if (/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+            window.location.href = "http://" + h5Base + "/phone/review.html?fileId=" + fileId + "&roomId=" + roomId;//Phone
+        }
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="wrap">
+        <div class="playlogo">
+            <div class="z-logo">
+                <img src="images/Nlogo.png"/>
+            </div>
+            <div class="attention">
+                <div>
+                    <a class="btn follow" id="fenxiang">
+                        <i class="iconfont icon-qiandao"></i>&nbsp;分享
+                    </a>
+                    <div id="popover_content_wrapper" style="display: none">
+                        <div id="zbewmbox"></div>
+                        <img id="qrcodeImg" src="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="playcontent">
+        <div class="playinfo">
+            <div class="pull-left player">
+                <div class="play-video" style="height: 430px;">
+                    <!-- <video src="" controls style="width: 100%;height: 100%;"></video> -->
+                    <div id="flash" style="width:100%;height:100%;z-index:100;"></div>
+                </div>
+                <div class="play-titie">
+                    <div id="fileName"></div>
+                    <div class="actionlist">
+                        <div class="action-bar pull-left">
+                            <div class="roomNumber">
+                                <i class="iconfont icon-mi"></i>
+                                <span id="roomNumber" class="watchnum"></span>
+                            </div>
+                        </div>
+                        <div class="action-bar pull-right">
+                            <div class="pull-right thumpup" id="dianZanSpan" onclick="saveMediaFile()">
+                                <i class="iconfont icon-dianzan"></i>
+                                <span>点赞</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pull-right interaction">
+                <div class="documentLiveDIV2" style="display: none">
+                    <div class="document"></div>
+                    <!--<div class="tabSel" style="display: inline-block; width: 50%" onclick="openDocument()">-->
+                    <!--<i class="iconfont icon-qihuang" onclick="openDocument()"></i>切换播放窗口-->
+                    <!--</div>-->
+                    <div class="documentList"
+                         style="width: 100%;color: #fff;text-align: center; background: #4d2b1e; height: 30px;line-height: 30px; float: right; cursor: pointer">
+                        文档列表
+                    </div>
+                </div>
+                <div class="pull-right comment" style="width: 320px">
+                    <div style="font-size: 16px;color: #fff;border-bottom: 2px solid #0084ff;line-height: 44px; margin-bottom: 15px;">
+                        聊天互动
+                    </div>
+                    <ul class="comment-list" id="talkBoxListDiv"></ul>
+                    <div class="com-send">
+                        <input class="con" maxlength="40" id="msgContent"></input>
+                        <!--<div class="sendpic">-->
+                        <button class="btn pull-right" onclick="saveComments()">发送</button>
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="playfooter wrap livefooter" style="position: relative">
+    <div class="review-more recallingDiv" id="recallingDiv"></div>
+    <div class="introduct">
+        <div class="introductTil">直播简介</div>
+        <div class="introductText" id="liveDesc_enterpriseId"></div>
+    </div>
+</div>
+
+<div class="swiper-container" id="origin-img">
+    <div class="swiper-wrapper"></div>
+    <div class="swiper-pagination"></div>
+    <div class="upload"></div>
+</div>
+
+<!-- 支付模态框（Modal） -->
+<div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+     aria-hidden="true" style="top: 180px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="overflow: hidden;">
+                <div class="payTit" id="welcomeMsg1">欢迎语，欢迎观看直播</div>
+                <div class="payMoney"></div>
+                <div class="code" style="display: none;" id="ewmCode" onclick="openJhm()">使用激活码</div>
+                <div class="payBox">
+                    <button class="payButton" id="payButtonClick">确认支付</button>
+                </div>
+                <div class="checkCon">
+                    <input id="checkbox-1-1" checked="checked" class="regular-checkbox" type="checkbox"/><label
+                        for="checkbox-1-1" onclick="selectCK()"></label>同意 <a id="ewmPayAgreement">《天翼直播观看支付协议》</a>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.modal -->
+</div>
+<!-- 二维码模态框（Modal） -->
+<div class="modal fade" id="ewmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+     aria-hidden="true" style="top: 180px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="overflow: hidden;">
+                <div class="payTit">扫码支付</div>
+                <div class="ewmBox" id="ewmImage">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 激活码模态框（Modal） -->
+<div class="modal fade" id="codeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+     aria-hidden="true" style="top: 180px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="overflow: hidden;">
+                <div class="payTit" id="welcomeMsg2">欢迎语，欢迎观看直播</div>
+                <div class="ewmMoney"><input type="text" class="ewmInput" name="codeEwm" placeholder="激活码"/></div>
+                <div class="payBox">
+                    <button class="payButton" onclick="openRoomActivationCode()">进入直播</button>
+                </div>
+                <div class="tishi">(无需激活码,现在去<span class="color-blue" onclick="openPay()">付费观看</span>)</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 下载文档模态框（Modal） -->
+<div class="modal" id="wdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">文档列表
+                    <small style="font-size: 12px"> （点击文档并确认即可切换展示文档）</small>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="wdTable">
+                    <table class="table">
+                        <thead>
+                        </thead>
+                        <tbody id="fileTbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+                <button type="button" class="btn bluegb text-center text-white" style="padding: 5px 40px;"
+                        data-dismiss="modal">提交
+                </button>
+                <!-- <button type="button" class="btn btn-primary" onclick="downloadAll()">批量下载</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="documentList" style="display: none">
+    <div class="reviewBox select">
+        <table class="layui-hide" id="opendocument" lay-filter="opendocument"></table>
+        <div class="btn">
+            <div class="layui-btn layui-btn-normal" onclick="selectAll()">确定</div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script type="text/javascript" src="js/giftPlayReview.js"></script>
+<script type="text/javascript" src="js/jquery.slimscroll.js"></script>
+<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="js/Fun.min.js?version=2.0.3"></script>
+<script type="text/javascript" src="js/reviewDoc.js"></script>
+<script type="text/javascript" src="js/swiper.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/layer/layer.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        if (fileId == 0) {
+            layerAlert('文件获取失败')
+        } else {
+            // 鉴定登录
+            $.ajax({
+                type: "GET",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/app/room/vod/checklogin.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    fileId: fileId,
+                    roomId: roomId
+                },
+                success: function (data) {
+                    var status = data.code;
+                    if (status == 1) {
+                        var roomNeedLogin = JSON.parse(data.data).roomNeedLogin;
+                        if (roomNeedLogin == 1) {
+                            window.location.href = "http://" + h5Base + "/pc/login.html?roomId=" + roomId + "&fileId=" + fileId + "&userId=" + userId;
+                            return;
+                        } else {
+                            var userInfo = JSON.parse(data.data).userInfo;
+                            if (userInfo != undefined || userInfo != null) {
+                                var id = userInfo.userId;
+                                if (id != undefined || id != null) {
+                                    userId = id;
+                                }
+                            }
+                            //引导鉴权
+                            $.ajax({
+                                type: "GET",//请求方式 get/post
+                                url: "http://" + tomcatBase + "/ilive/app/room/vod/guide.jspx",
+                                dataType: "jsonp",
+                                jsonp: "callback",
+                                cache: false,
+                                data: {
+                                    fileId: fileId,
+                                    roomId: roomId
+                                },
+                                success: function (data) {
+                                    console.log(data);
+                                    var status = data.code;
+                                    if (status == 1) {
+                                        var liveEvent = data.data.liveEvent;
+                                        var viewAuthorized = liveEvent.viewAuthorized;
+                                        if (viewAuthorized == 2) {
+                                            window.location.href = "http://" + h5Base + "/pc/password.html?roomId=" + roomId + "&fileId=" + fileId;
+                                            return;
+                                        }else if (viewAuthorized == 6) {
+                                            window.location.href = "http://" + h5Base + "/pc/FCode.html?roomId=" + roomId + "&fileId=" + fileId;
+                                            return;
+                                        } else if (viewAuthorized == 3) {
+                                            //付费观看
+                                            var viewMoney = liveEvent.viewMoney;
+                                            if (viewMoney == undefined || viewMoney == "" || viewMoney == null) {
+                                                viewMoney = 0.01;
+                                            }
+                                            var totalAmount = parseFloat(viewMoney) * 100;
+                                            var id = $("input[name=userId]").val();
+                                            var liveTitle = liveEvent.liveTitle;
+                                            if (liveTitle == undefined) {
+                                                liveTitle = "";
+                                            }
+                                            var welcomeMsg = liveEvent.welcomeMsg;
+                                            if (welcomeMsg == "" || welcomeMsg == null) {
+                                                welcomeMsg = "欢迎观看直播"
+                                            }
+                                            $(".payMoney").text("￥" + viewMoney);
+                                            $("#welcomeMsg1").text(welcomeMsg);
+                                            $("#welcomeMsg2").text(welcomeMsg);
+                                            $("#payButtonClick").attr("onclick", "wechatSweepUnifyTheOrder(4,'" + liveTitle + "'," + totalAmount + "," + fileId + ")");
+                                            $("#checkbox-1-1").attr("wechatSweepUnifyTheOrder", "wechatSweepUnifyTheOrder(4,'" + liveTitle + "'," + totalAmount + "," + fileId + ")");
+                                            $("#ewmPayAgreement").attr("href", "http://" + h5Base + "/pc/agreePc.html?fileId=" + fileId + "&roomId=" + roomId + "&userId=" + id);
+                                            var openFCodeSwitch = liveEvent.openFCodeSwitch;
+                                            if (openFCodeSwitch == 1) {
+                                                $("#ewmCode").attr("display", "block")
+                                            } else {
+                                                $("#ewmCode").attr("display", "none")
+                                            }
+                                            $('#payModal').modal({backdrop: 'static', keyboard: false});
+                                        } else {
+                                            selectMediaFile(fileId);
+                                            //获取回看
+                                            $.ajax({
+                                                type: "GET",//请求方式 get/post
+                                                url: "http://" + tomcatBase + "/ilive/app/room/getrelatedlist.jspx",
+                                                dataType: "jsonp",
+                                                jsonp: "callback",
+                                                cache: false,
+                                                data: {
+                                                    terminalType: "pc",
+                                                    fileId: fileId,
+                                                    // pageNo: 1,
+                                                    // pageSize: 20
+                                                },
+                                                success: function (data) {
+                                                    console.log(data);
+                                                    if (data.code == 1) {
+                                                        var list = data.data;
+                                                        if (list.length < 1) return;
+                                                        var recallingDiv = "";
+                                                        recallingDiv +=
+                                                            '<div class="introductTil">相关推荐</div>' +
+                                                            '<div class="swiper-container recallingDiv"><div class="swiper-wrapper" >'
+                                                        for (var i = 0; i < list.length; i++) {
+                                                            var mediaFile = list[i];
+                                                            recallingDiv += "<div class=\"swiper-slide\" id=\"fileId_" + mediaFile.fileId + "\" onclick=\"selectMediaFile(" + mediaFile.fileId + ")\">"
+                                                            recallingDiv += "<div class=\"reviewlist\">";
+                                                            recallingDiv += " <img src=\"" + mediaFile.fileImg + "\" /> <span>" + mediaFile.fileDuration + "</span>";
+                                                            recallingDiv += "</div>";
+                                                            recallingDiv += "<div class=\"reviewinfo text-dullgray\">";
+                                                            recallingDiv += "<p style='color: inherit'>";
+                                                            recallingDiv += mediaFile.fileName;
+                                                            recallingDiv += "</p>";
+                                                            recallingDiv += "</div>";
+                                                            recallingDiv += "</div>";
+                                                        }
+                                                        // $("#recallingDiv").html(recallingDiv);
+                                                        recallingDiv += '</div>' +
+                                                            '<div  class="paginationReview" style="top:15px"><div class="swiper-button-prev iconfont icon-zuojiantou"></div><div class="swiper-pagination pagination-bullet"></div>' +
+                                                            '<div class="swiper-button-next iconfont icon-youjiantou"></div></div>' +
+                                                            '</div>';
+                                                        $("#recallingDiv").prepend(recallingDiv);
+                                                        new Swiper('.recallingDiv', {
+                                                            slidesPerView: 5,
+                                                            spaceBetween: 20,
+                                                            slidesPerGroup: 5,
+                                                            pagination: {
+                                                                el: '.swiper-pagination',
+                                                            },
+                                                            navigation: {
+                                                                nextEl: '.swiper-button-next',
+                                                                prevEl: '.swiper-button-prev',
+                                                            },
+                                                        })
+                                                    } else {
+                                                        layerAlert("获取更多回看失败")
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    } else {
+                                        layerAlert(data.message)
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                        window.location.href = "404.html";
+                    }
+                }
+            });
+        }
+    });
+
+    $(".comment-list").slimScroll({
+        height: '425px'
+    });
+
+    $('#erweimaBoxImage').qrcode({
+        render: "canvas", // 渲染方式有table方式和canvas方式
+        width: 160, //默认宽度
+        height: 160, //默认高度
+        text: "http://apizb.tv189.com/version/wap/download/ios", //二维码内容
+        typeNumber: -1, //计算模式一般默认为-1
+        correctLevel: 2, //二维码纠错级别
+        background: "#ffffff", //背景颜色
+        foreground: "#000000" //二维码颜色
+    });
+
+    $('#fenxiang').popover({
+        html: true,
+        trigger: "manual",
+        container: 'body',
+        content: function () {
+            return $('#popover_content_wrapper').html();
+        }
+    }).on("mouseenter",
+        function () {
+            var _this = this;
+            $(this).popover("show");
+            $(".popover").on("mouseleave",
+                function () {
+                    $(_this).popover('hide');
+                });
+        }).on("mouseleave",
+        function () {
+            var _this = this;
+            setTimeout(function () {
+                    if (!$(".popover:hover").length) {
+                        $(_this).popover("hide");
+                    }
+                },
+                100);
+        })
+    var qrcode = $('#zbewmbox').qrcode({
+        render: "canvas", //也可以替换为table
+        width: 120,
+        height: 120,
+        text: "http://" + h5Base + "/phone/review.html?fileId=" + fileId + "&roomId=" + roomId/*可以通过ajax请求动态设置*/
+    });
+    //将生成的二维码转换成图片格式
+    var canvas = qrcode.find('canvas').get(0);
+    $('#qrcodeImg').attr('src', canvas.toDataURL('image/jpg'));
+
+    function selectMediaFileById(fileId) {
+        window.location.href = "http://" + h5Base + "/pc/review.html?fileId=" + fileId + "&userId=" + userId + "&roomId=" + roomId;
+    }
+
+    //回去当前文件信息
+    function selectMediaFile(fileId) {
+        //获得文件信息
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/room/vod/fileinfo.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                fileId: fileId
+            },
+            success: function (data) {
+                console.log(data);
+                var status = data.code;
+                if (status == 1) {
+                    var mediaFile = data.data;
+                    if (mediaFile != null && mediaFile != undefined) {
+                        var mediaFileName = mediaFile.mediaFileName;//媒资文件名称
+                        $("#fileName").text(mediaFileName);
+                        var mediaFileDesc = mediaFile.mediaFileDesc;//媒资描述
+                        var filePath = mediaFile.filePath;// 文件路径
+                        //var rtmpAddr = mediaFile.rtmpAddr;// rtmpAddr
+                        rtmpAddr = filePath.substring(0, filePath.indexOf(".mp4")) + ".mp4/tzwj_video.m3u8";
+                        var viewNum = mediaFile.viewNum;// 视频观看次数
+                        var fileCover = mediaFile.fileCover;// 封面图
+                        var mediaCreateTime = mediaFile.mediaCreateTime;//时间
+                        var vrFile = mediaFile.vrFile;
+                        var allowComment = mediaFile.allowComment;
+                        var isFileDoc = mediaFile.isFileDoc;
+                        if (mediaFileDesc) {
+                            $('.introductText').prepend(mediaFileDesc)
+                        }
+                        $('.watchnum').text('').prepend(viewNum)
+                        if (vrFile == 1) {
+                            videoVrDiv(filePath);
+                        } else {
+                            // videoDiv(filePath);
+                            videoDiv(rtmpAddr);
+                        }
+                        if (allowComment == 1) {
+                            selectComments();
+                        } else {
+                            $('.comment-list').html('聊天互动功能暂未开启').css({
+                                'color': '#bbb',
+                                'text-align': 'center',
+                                'font-size': '16px'
+                            });
+                        }
+                        if (isFileDoc == 1) {
+                            $(".documentLiveDIV2").css("display", "block");
+                            $("#myTabContent").height(175)
+                            $(".comment-list").slimScroll({
+                                height: '165px'
+                            });
+                            $(".wdTable").slimScroll({
+                                height: '330px'
+                            });
+                            $('.documentList').click(function () {
+                                $('#wdModal').show();
+                            })
+                            $('.close').click(function () {
+                                $('#wdModal').hide();
+                            })
+                            documentShow(0)
+                        }
+                    } else {
+                        layerAlert("文件信息错误")
+                    }
+                } else {
+                    layerAlert(data.message)
+                }
+            }
+        });
+    }
+
+    //发表评论
+    function saveComments() {
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/room/vod/AllowComment.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                fileId: fileId
+            },
+            success: function (data) {
+                console.log(data, data.code);
+                var status = data.code;
+                if (status == 1) {
+                    if (userId == 0) {
+                        loginHtml()
+                        return;
+                    } else {
+                        var msgContent = $("#msgContent").val();//发送内容
+                        if (msgContent.replace("\s+", "") == "" || msgContent == undefined) {
+                            layerAlert("发送内容不能为空")
+                            return;
+                        } else {
+                            $.ajax({
+                                type: "GET",//请求方式 get/post
+                                url: "http://" + tomcatBase + "/ilive/app/room/vod/pushcomments.jspx",
+                                dataType: "jsonp",
+                                jsonp: "callback",
+                                cache: false,
+                                data: {
+                                    userId: userId,
+                                    fileId: fileId,
+                                    comments: encodeURI(msgContent)
+                                },
+                                success: function (data) {
+                                    console.log(data, data.code);
+                                    var status = data.code;
+                                    if (status == 1) {
+                                        //selectComments();
+                                        addComments(data.data.commentsId, data.data.userImg, data.data.commentsUser, data.data.createTime, data.data.comments)
+                                        $("input[id=msgContent]").val("");
+                                    } else {
+                                        layerAlert(data.message)
+                                    }
+                                }
+                            });
+                        }
+                    }
+                } else {
+                    layerAlert("聊天互动功能已关闭")
+                }
+            }
+        });
+
+    }
+
+    //添加添加一条自己的评论
+    function addComments(commentsId, userImg, commentsUser, createTime, comments) {
+        var HTML = "";
+        HTML += "<li id=\"commentsId_" + commentsId + "\">";
+        // HTML += "	<div class=\"headimg pull-left\">";
+        // HTML += "		<img src=\"" + userImg + "\" class=\"img-circle\" style=\"width:100%;height:  100%;\"/>";
+        // HTML += "	</div>";
+        HTML += "	<div class=\"listinfo pull-right\">";
+        HTML += "		<p class=\"commentInfo\">";
+        HTML += "			<i class=\"btext\">" + commentsUser + "：</i>" + comments;
+        HTML += "		</p>";
+        // HTML += "		<p class=\"speak\">" + comments + "</p>";
+        HTML += "	</div>";
+        HTML += "</li>";
+        $("#talkBoxListDiv").prepend(HTML);
+    }
+
+    //获取评论
+    function selectComments() {
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/room/vod/getcomments.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                fileId: fileId
+            },
+            success: function (data) {
+                console.log(data, data.data);
+                var status = data.code;
+                if (status == 1) {
+                    var list = data.data;
+                    $("#commentsNumber").text("(" + list.length + ")");
+                    var HTML = "";
+                    for (var i = 0; i < list.length; i++) {
+                        var comments = list[i];
+                        HTML += "<li id=\"commentsId_" + comments.commentsId + "\">";
+                        HTML += "	<div class=\"listinfo pull-right\">";
+                        HTML += "		<p class=\"commentInfo\">";
+                        if (comments.topFlagNum == 1) {
+                            HTML += "		<span class=\"spanTop\">顶</span>";
+                        }
+                        HTML += "			<i class=\"btext\">" + comments.commentsUser + "：</i>" + comments.comments;
+                        HTML += "		</p>";
+                        HTML += "	</div>";
+                        HTML += "</li>";
+                    }
+                    $("#talkBoxListDiv").html(HTML);
+                } else {
+                    layerAlert(data.message)
+                }
+            }
+        });
+    }
+
+    //点赞
+    function saveMediaFile() {
+        var userId = $("input[name=userId]").val();//用户ID
+        var fileId = $("input[name=fileId]").val();//文件ID
+        console.log(fileId);
+        if (true) {
+            /* if(confirm("是否进入登录？")){
+                var roomId = $("input[name=roomId]").val();//直播间ID
+                window.location.href="http://"+h5Base+"/phone/login.html?roomId="+roomId+"&fileId="+fileId+"&userId="+userId;
+            }else{
+                $.DialogBySHF.Alert({
+                      Width: 350,
+                      Height: 200,
+                      Title: "警告",
+                      Content: "不登录无法进行收藏"
+                 });
+            }
+        }else{ */
+            $.ajax({
+                type: "GET",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/register/registerMedia.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    terminalType: "pc",
+                    fileId: fileId,
+                    userId: userId
+                },
+                success: function (data) {
+                    console.log(data);
+                    //$("#shouchang").removeAttr("onclick").addClass('checked');
+                    $("#dianZanSpan").removeAttr("onclick").addClass('checked');
+                    // $("#shouchang").css({
+                    //     "background": "url(img/dianzan.png) no-repeat",
+                    //     "background-size": "100% 100%"
+                    // });
+                    /* if(data.code==1){
+                        $("#shouchang").removeAttr("onclick");
+                        $("#shouchang").css({"background":"url(img/dianzan.png) no-repeat","background-size": "100% 100%"});
+                    } */
+                    /*  else{
+                        $.DialogBySHF.Alert({
+                              Width: 350,
+                              Height: 200,
+                              Title: "警告",
+                              Content: data.message
+                         });
+                    } */
+                }
+            });
+
+        }
+    }
+
+
+    var swiper = new Swiper('#origin-img', {
+        zoom: true,
+        width: window.innerWidth,
+        virtual: true,
+        spaceBetween: 20,
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
+        },
+        on: {
+            click: function () {
+                $('#origin-img').fadeOut('fast');
+                this.virtual.slides.length = 0;
+                this.virtual.cache = [];
+                swiperStatus = false;
+
+            },
+        },
+
+    });
+    $(document).delegate(".toBig", "click", function () {
+        clickIndex = $(this).index();
+        var imglist = $(this).parent().find("img");
+        $(imglist).each(function (i, v) {
+            var imgs = $(v).attr("src")
+            swiper.virtual.appendSlide("<div class=\"swiper-zoom-container\"><img src=\"" + imgs + "\" /></div>");
+        })
+        swiper.slideTo(clickIndex);
+        $('#origin-img').fadeIn('fast');
+        swiperStatus = true;
+
+    })
+    //切换图状态禁止页面缩放
+    document.addEventListener('touchstart', function (event) {
+        if (event.touches.length > 1 && swiperStatus) {
+            event.preventDefault();
+        }
+    })
+    var lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+        var now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false)
+
+    document.addEventListener('touchmove', function (e) {
+        if (swiperStatus) {
+            e.preventDefault();
+        }
+    });
+
+    function errorfunction() {
+        window.location.href = "http://" + h5Base + "/pc/error.html";
+    }
+
+    function loginHtml() {
+        window.location.href = "http://" + h5Base + "/pc/login.html?fileId=" + fileId;
+    }
+
+    function loginHtmlError() {
+        layerAlert("您放弃了登录，无法进行后续操作")
+    }
+
+    $(document).ready(function () {
+        $(".review-more ul").slimscroll({
+            height: '480px'
+        })
+    })
+
+
+    function videoVrDiv(pushStreamAddr) {
+        embedpano({
+            swf: "js/viewer/krpano.swf",
+            xml: "/ilive/app/room/vod/vrPlayerXml.jspx?fileId=" + fileId,
+            target: "flash",
+            html5: "auto",
+            mobilescale: 1.0,
+            passQueryParameters: false
+        });
+    }
+
+    function videoDiv(pushStreamAddr) {
+        console.log("pushStreamAddr：" + pushStreamAddr);
+        interfaceHttp = pushStreamAddr, shareHtmlUrl = "", shareStatu = '', AddressSeparator = '#', authUrl = 'true',
+            ifShowImageBtn = 'false', ifAuthCDN_WS = 'false', PlayVideoAspect = 'diaplasis',//mc43;mc169;diaplasis;bespread
+            ifShowLogo = 'false', AudioPlayerType = '0', AVPlayerType = '0', ifShiftMove = 'false',
+
+            _playAuto = 'true';
+
+        var flashvars = "interfaceHttp=" + interfaceHttp + "&AudioPlayerType=" + AudioPlayerType + "&AVPlayerType="
+            + AVPlayerType + "&authUrl=" + authUrl + "&AddressSeparator=" + AddressSeparator + "&ifShowLogo=" + ifShowLogo
+            + "&ifShiftMove=" + ifShiftMove + "&ifAuthCDN_WS=" + ifAuthCDN_WS + "&PlayVideoAspect=" + PlayVideoAspect
+            + "&ifShowTime=" + ifShowTime + "&ifShowPoopBtn=" + ifShowPoopBtn + "&ifShowImageBtn=" + ifShowImageBtn
+            + "&ifShowSetBtn=" + ifShowSetBtn + "&playAuto=" + _playAuto + "&ifShowStreamBtn=" + ifShowStream
+            + "&bufferLongTime=" + bufferLongTime + "&streamType=" + streamType + "&function_lamp_method="
+            + function_lamp_method + "&small_video_window=" + small_video_window + "&interfaceType=" + interfaceType
+            + "&function_stop_method=" + function_stop_method + "&ifForbitSeek=" + ifForbitSeek + "&shareStatu=" + shareStatu
+            + "&shareSwfUrl=" + shareSwfUrl + "&shareHtmlUrl=" + shareHtmlUrl + "&ifShowMenuItem=" + ifShowMenuItem;
+
+        var swfHtml = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="100%" height="100%" id="'
+            + playerName
+            + '" align="middle">\
+				<param name="movie" value="' + swfUrl + '" />\
+				<param name="quality" value="high" />\
+				<param name="bgcolor" value="#000000" />\
+				<param name="devicefont" value="false" />\
+				<param name="wmode" value="opaque" />\
+				<param name="allowScriptAccess" value="always" />\
+				<param name="allowFullscreen" value="true" />\
+				<param name="allownetworking" value="all" />\
+				<param name="salign" value="lt" />\
+				<param name="flashvars" value="' + flashvars + '"  />\
+					<a href="http://www.adobe.com/go/getflash">\
+						<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获得 Adobe Flash Player" />\
+					</a>\
+			</object>';
+        if (navigator.plugins && navigator.mimeTypes && navigator.mimeTypes.length) {
+            //alert(navigator.userAgent);
+            swfHtml = '<embed   src="'
+                + swfUrl
+                + '" id="'
+                + playerName
+                + '" name="'
+                + playerName
+                + '" type="application/x-shockwave-flash" data="'
+                + swfUrl
+                + '"  quality="high" allowScriptAccess="always" redirectUrl="http://www.adobe.com/shockwave/download/download.cgi?" swLiveConnect="true" menu="false" allowFullScreen="true" salign="lt"  width="100%" height="100%" flashvars="'
+                + flashvars + '">\
+				</embed>';
+        }
+        var _id = 'flash';
+        document.getElementById(_id).innerHTML = swfHtml;
+    }
+</script>
+<script src="js/JWZT_Player.js"></script>
+</html>

@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>直播</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/normalize/8.0.0/normalize.min.css"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/dcswiper.css"/>
+    <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/jquery.slimscroll.js"></script>
+    <script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/base.js"></script>
+    <script src="js/qrcode.js"></script>
+    <script src="js/jquery.qrcode.min.js"></script>
+    <link rel="stylesheet" href="css/dialog.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_872913_vukxjyww2x.css"/>
+    <script type="text/javascript" src="js/dialog.js"></script>
+    <script type="text/javascript" src="js/giftPlay.js"></script>
+    <style type="text/css">
+        .toBig {
+            width: 70px;
+            height: 45px;
+        }
+
+        .toVideo {
+            height: 50%;
+            width: 50%;
+        }
+
+        .suggess {
+            margin: 15px 0 0 10px;
+            color: #fff;
+        }
+    </style>
+    <script type="text/javascript">
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = decodeURI(window.location.search.substr(1)).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+        if (GetQueryString("roomId") != null || GetQueryString("roomId") != undefined) {
+            if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+                window.location.href = "http://" + h5Base + "/phone/live.html?roomId=" + GetQueryString("roomId");//H5
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="wrap">
+        <div class="playlogo">
+            <div class="z-logo">
+                <img src="images/Nlogo.png"/>
+            </div>
+            <!--已关注加上class名：active-->
+            <div class="attention">
+                <div>
+                    <button id="guanzhu" class="btn commonbtn follow" style="display: none;">
+                        <i class="iconfont icon-jia"></i>&nbsp;关注
+                    </button>
+                    <button id="yiguanzhu" class="btn follow active" style="display: none;">
+                        <i></i>已关注
+                    </button>
+                </div>
+                <div>
+                    <a class="btn commonbtn follow" id="fenxiang">
+                        <i class="iconfont icon-qiandao"></i>&nbsp;分享
+                    </a>
+                    <div id="popover_content_wrapper" style="display: none">
+                        <div id="zbewmbox"></div>
+                        <img id="qrcodeImg" src="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="playcontent livepage">
+        <div class="playinfo">
+            <div class="pull-left player">
+                <div class="play-video documentLiveDIV">
+                    <div class="mainplayer">
+                        <div class="wdLiveBig">
+                            <div class="picobox">
+                                <ul id="ul">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-bar documentLiveDIV" style="height: auto">
+                    <p class="suggess">建议使用谷歌浏览器打开</p>
+                    <div class="wdDownload" data-toggle="modal" data-target="#wdModal">
+                        <i class="fa fa-download"></i>
+                    </div>
+                    <div class="firstPage pageDIV" onclick="home()"></div>
+                    <div class="leftPage left pageDIV" onclick="leftPageUL()"></div>
+                    <div class="center">
+                        <span class="num">0</span>/<span class="totle">0</span>
+                    </div>
+                    <div class="rightPage right pageDIV" onclick="rightPageUL()"></div>
+                    <div class="lastPage pageDIV" onclick="last()"></div>
+                    <!-- <div class="wdBtnBox">
+                            <input type="text" placeholder="页数" />
+                            <button type="button" class="wdBtn">确定</button>
+                        </div> -->
+                </div>
+            </div>
+            <div class="pull-right interaction">
+                <div class="videoLiveDIV2">
+                    <div class="wdLive">
+                        <div id="flash" style="width:100%;height:100%;z-index:100;display: none;"></div>
+                        <div id="videoImage" style="width:100%;height:100%;z-index:100;display: none;"></div>
+                        <div class="wdLiveleft" style="z-index:999;width:100%;text-align:center" onclick="openVideo()"><i
+                                class="fa fa-exchange" style="margin-right: 5px;" onclick="openVideo()"></i>切换窗口
+                        </div>
+                    </div>
+                </div>
+                <ul id="myTab" class="nav nav-tabs">
+                    <li id="openMessageType2" class="active" onclick="selectLiveMsgType(2)" style="display: none;"><a
+                            href="#chat" data-toggle="tab">聊天</a></li>
+                    <li id="openMessageType1" class="pull-right" onclick="selectLiveMsgType(1)" style="display: none;"><a
+                            href="#topic" data-toggle="tab">话题</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active " id="chat">
+                        <div class="chatBox">
+                            <div id="topChatMessageDiv">
+                            </div>
+                            <div id="chatMessageDiv">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade text-white " id="topic">
+                        <div class="topoicBox">
+                            <div id="topTopicDiv">
+                            </div>
+                            <div id="topicDiv">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center" style="margin-top: 5px;">
+                    <div class="inputBox">
+                        <span id="questionSpan" class="questionBox" onclick="questionSpan()">问</span>
+                        <input type="text" name="content" maxlength="40"/>
+                        <button class="sendBtn" onclick="sendMessageBtn()">发送</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="playfooter wrap livefooter">
+    <div class="review-more" id="recallingDiv" style="display:none;"></div>
+    <div class="introduct">
+        <div class="introductTil">直播简介</div>
+        <div class="introductText" id="liveDesc_enterpriseId"></div>
+    </div>
+</div>
+<div class="swiper-container" id="origin-img">
+    <div class="swiper-wrapper"></div>
+    <div class="swiper-pagination"></div>
+    <div class="upload"></div>
+</div>
+
+<!--手机绑定-->
+<div class="modal fade in" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="loginpage" style="height: 430px;">
+        <form class="form">
+            <div class="form-group">
+                <input type="text" class="form-control phonenum" placeholder="手机号" maxlength="11" name="phoneNumber">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control vcode" placeholder="请输入验证码" name="passwordCode">
+                <button class="commonbtn send-sms" onclick="getAuthenticode()" id="spenTimer"><span>获取验证码</span>
+                </button>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn commonbtn loginbtn" nclick="savePhone()">绑定</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 下载模态框（Modal） -->
+<div class="modal fade in" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" style="font-size: 16px;font-weight: bold;">直播预约提示</h3>
+            </div>
+            <div class="modal-body" style="overflow: hidden;">
+                <div class="modalLeft">
+                    <div class="erweimaBox" id="erweimaBoxImage">
+                    </div>
+                </div>
+                <div class="modalRight">
+                    <div class="modal_Text" style="margin-top: 30px;">
+                        您已预约成功，直播开始前，您将收到直播观看的提醒短信。打开天翼直播APP，将获得更多更优质的服务哦！
+                    </div>
+                    <div class="modal_Text" style="margin-top: 60px;">
+                        扫一扫二维码，下载天翼直播客户端
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 支付模态框（Modal） -->
+<div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+     aria-hidden="true" style="top: 180px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="overflow: hidden;">
+                <div class="payTit" id="welcomeMsg1">欢迎语，欢迎观看直播</div>
+                <div class="payMoney"></div>
+                <div class="code" style="display: none;" id="ewmCode" onclick="openJhm()">使用激活码</div>
+                <div class="payBox">
+                    <button class="payButton" id="payButtonClick">确认支付</button>
+                </div>
+                <div class="checkCon">
+                    <input id="checkbox-1-1" checked="checked" class="regular-checkbox" type="checkbox"/><label
+                        for="checkbox-1-1" onclick="selectCK()"></label>同意 <a id="ewmPayAgreement">《天翼直播观看支付协议》</a>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.modal -->
+</div>
+<!-- 二维码模态框（Modal） -->
+<div class="modal fade" id="ewmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+     aria-hidden="true" style="top: 180px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="overflow: hidden;">
+                <div class="payTit">扫码支付</div>
+                <div class="ewmBox" id="ewmImage">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 激活码模态框（Modal） -->
+<div class="modal fade" id="codeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+     aria-hidden="true" style="top: 180px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="overflow: hidden;">
+                <div class="payTit" id="welcomeMsg2">欢迎语，欢迎观看直播</div>
+                <div class="ewmMoney"><input type="text" class="ewmInput" name="codeEwm" placeholder="激活码"/></div>
+                <div class="payBox">
+                    <button class="payButton" onclick="openRoomActivationCode()">进入直播</button>
+                </div>
+                <div class="tishi">(无需激活码,现在去<span class="color-blue" onclick="openPay()">付费观看</span>)</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 下载文档模态框（Modal） -->
+<div class="modal fade" id="wdModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">文档下载</h4>
+            </div>
+            <div class="modal-body">
+                <div class="wdTable">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" style="vertical-align: middle;" onclick="selectAll()"
+                                       id="checkboxAll"/>全选
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="fileTbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <!-- <button type="button" class="btn btn-primary" onclick="downloadAll()">批量下载</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="roomId" name="roomId" value="0">
+<input type="hidden" id="userId" name="userId" value="0">
+<input type="hidden" id="liveEventId" name="liveEventId" value="0">
+<input type="hidden" id="liveMsgType" name="liveMsgType" value="2">
+</body>
+<script type="text/javascript">
+    $(function () {
+        var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
+        if (isChrome) {
+            $(".action-bar p").hide();
+        } else {
+            $(".action-bar p").show();
+        }
+        var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
+        if (isChrome) {
+            $(".action-bar p").hide();
+        } else {
+            $(".action-bar p").show();
+        }
+        $('#erweimaBoxImage').qrcode({
+            render: "canvas", // 渲染方式有table方式和canvas方式
+            width: 160, //默认宽度
+            height: 160, //默认高度
+            text: "http://apizb.tv189.com/version/wap/download/ios", //二维码内容
+            typeNumber: -1, //计算模式一般默认为-1
+            correctLevel: 2, //二维码纠错级别
+            background: "#ffffff", //背景颜色
+            foreground: "#000000" //二维码颜色
+        });
+        $('[data-toggle="popover"]').popover()
+    })
+
+    //提交绑定手机账户
+    function savePhone() {
+        var phoneNumber = $("input[name=phoneNumber]").val();
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!myreg.test(phoneNumber)) {
+            $.DialogBySHF.Alert({
+                Width: 350,
+                Height: 200,
+                Title: "提示",
+                Content: "请输入正确的手机号!"
+            });
+            return false;
+        }
+        var vpassword = $("input[name=passwordCode]").val();
+        if (vpassword == null || vpassword == undefined) {
+            $.DialogBySHF.Alert({
+                Width: 350,
+                Height: 200,
+                Title: "提示",
+                Content: "验证码不能为空"
+            });
+            return false;
+        }
+        var roomId = $("input[name=roomId]").val();
+        var userId = $("input[name=userId]").val();
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/personal/bindMobile.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                terminalType: "pc",
+                userId: userId,
+                phoneNum: phoneNumber,
+                vpassword: vpassword
+            },
+            success: function (data) {
+                if (data.code == 1) {
+                    window.location.href = "http://" + h5Base + "/pc/play.html?roomId=" + roomId + "&userId=" + userId;
+                } else {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: data.message
+                    });
+                }
+            }
+        });
+    }
+
+    var countdown = 60;
+
+    //获取验证码
+    function getAuthenticode() {
+        var phoneNumber = $("input[name=phoneNumber]").val();
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!myreg.test(phoneNumber)) {
+            $.DialogBySHF.Alert({
+                Width: 350,
+                Height: 200,
+                Title: "提示",
+                Content: "手机号输入不合法"
+            });
+            return false;
+        }
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/appuser/sendmsg.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                phoneNum: phoneNumber,
+                type: "bindMobile",
+                terminalType: "pc"
+            },
+            success: function (data) {
+                var status = data.code;
+                if (status == 1) {
+                    selectTimer();
+                } else {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: data.message
+                    });
+                }
+            }
+        });
+    }
+
+    function selectTimer() {
+        if (countdown == 0) {
+            $("#spenTimer").css("background", "#0084ff");
+            $("#spenTimer").html("<span>重新发送</span>");
+            $("#spenTimer").attr("onclick", "getAuthenticode()");
+            countdown = 60;
+        } else {
+            $("#spenTimer").css("background", "#656161");
+            $("#spenTimer").html("<span>重新发送(" + countdown + "s)</span>");
+            $("#spenTimer").removeAttr("onclick");
+            countdown--;
+            setTimeout(function () {
+                selectTimer();
+            }, 1000);
+        }
+    }
+
+    function questionSpan() {
+        var liveMsgType = $("input[name=liveMsgType]").val();
+        if (liveMsgType == 2) {
+            $("input[name=liveMsgType]").val(3);
+            $("#questionSpan").addClass("questionActive");
+            $("input[name=content]").attr("maxlength", "100");
+        } else {
+            $("input[name=liveMsgType]").val(2);
+            $("#questionSpan").removeClass("questionActive");
+            $("input[name=content]").attr("maxlength", "40");
+        }
+    }
+
+    function selectLiveMsgType(liveMsgType) {
+        $("#questionSpan").removeClass("questionActive");
+        if (liveMsgType == 2) {
+            $("input[name=liveMsgType]").val(2);
+            $("#questionSpan").attr("onclick", "questionSpan()");
+            $("input[name=content]").removeAttr("readonly");
+            $(".sendBtn").attr("onclick", "sendMessageBtn()");
+        } else if (liveMsgType == 1) {
+            $("input[name=liveMsgType]").val(1);
+            $("input[name=content]").attr("readonly", "readonly");
+            $("#questionSpan").removeAttr("onclick");
+            $(".sendBtn").removeAttr("onclick");
+            selectMessageLIVE();
+        }
+    }
+
+    //点赞
+    function saveDianZan(roomId) {
+        var userId = $("input[name=userId]").val();//用户ID
+        if (userId == 0) {
+            /* $.DialogBySHF.Confirm({
+			      Width: 350,
+			      Height: 200,
+			      Title: "确认登录",
+			      Content: "是否进入登录？",
+			      ConfirmFun: loginHtml,
+			      CancelFun: loginHtmlError
+			    });
+		}else{ */
+            $.ajax({
+                type: "POST",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/register/registerRoom.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    terminalType: "pc",
+                    userId: userId,
+                    roomId: roomId
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 401) {
+                        if (confirm("是否进入登录？")) {
+                            window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId;
+                        } else {
+                            $.DialogBySHF.Alert({
+                                Width: 350,
+                                Height: 200,
+                                Title: "提示",
+                                Content: data.message
+                            });
+                        }
+                    } else if (data.code == 402) {
+                        saveMessagerPhoneNumber();
+                    } else if (data.code == 403) {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: data.message
+                        });
+                    } else if (data.code == 1) {
+                        selectDianZan();
+                    } else if (data.code == 0) {
+                        $("#dianZanSpan").removeClass("fa fa-thumbs-o-up");
+                        $("#dianZanSpan").addClass("fa fa-thumbs-up");
+                        $("#dianZanSpan").removeAttr("onclick");
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: data.message
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    //查询点赞结果
+    function selectDianZan() {
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        var id = $("input[name=userId]").val();//用户ID
+        var liveEventId = $("input[name=liveEventId]").val();//用户ID
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/register/queryIsRegister.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                liveEventId: liveEventId,
+                userId: id,
+            },
+            success: function (data) {
+                var code = data.code;
+                if (code == 1) {
+                    //var isQiandaoReg = data.data.isQiandaoReg;//签到
+                    var isDianzanReg = data.data.isDianzanReg;//点赞
+                    if (isDianzanReg == 1) {
+                        $("#dianZanSpan").removeClass("fa fa-thumbs-o-up");
+                        $("#dianZanSpan").addClass("fa fa-thumbs-up");
+                        $("#dianZanSpan").removeAttr("onclick");
+                    } else {
+                        $("#dianZanSpan").removeClass("fa fa-thumbs-up");
+                        $("#dianZanSpan").addClass("fa fa-thumbs-o-up");
+                        $("#dianZanSpan").attr("onclick", "saveDianZan(" + roomId + ")");
+                    }
+                } else {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: data.message
+                    });
+                }
+            }
+        });
+    }
+
+    $(function () {
+        var swiper = new Swiper('.swiper-container', {
+            zoom: true,
+            width: window.innerWidth,
+            virtual: true,
+            spaceBetween: 20,
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'fraction',
+            },
+            on: {
+                click: function () {
+                    $('#origin-img').fadeOut('fast');
+                    this.virtual.slides.length = 0;
+                    this.virtual.cache = [];
+                    swiperStatus = false;
+
+                },
+            },
+
+        });
+        $(document).delegate(".toBig", "click", function () {
+            clickIndex = $(this).index();
+            var imglist = $(this).parent().find("img");
+            $(imglist).each(function (i, v) {
+                console.log($(v).attr("src"))
+                var imgs = $(v).attr("src")
+                swiper.virtual.appendSlide("<div class=\"swiper-zoom-container\"><img src=\"" + imgs + "\" /></div>");
+            })
+            swiper.slideTo(clickIndex);
+            $('#origin-img').fadeIn('fast');
+            swiperStatus = true;
+
+        })
+
+        //切换图状态禁止页面缩放
+        document.addEventListener('touchstart', function (event) {
+            if (event.touches.length > 1 && swiperStatus) {
+                event.preventDefault();
+            }
+        })
+        var lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            var now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false)
+
+        document.addEventListener('touchmove', function (e) {
+            if (swiperStatus) {
+                e.preventDefault();
+            }
+        });
+    });
+
+    $(document).delegate(".toVideo", "click", function () {
+        clickIndex = $(this).index();
+        var imglist = $(this).parent().find("img");
+        var video = imglist.attr("video");
+        console.log("视频地址：" + video);
+    })
+</script>
+<script type="text/javascript">
+    //获取直播间信息
+    function selectRoomLogo() {
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/selectRoom.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                terminalType: "h5",
+                roomId: roomId
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.code == 1) {
+                    var iLiveLiveRoom = JSON.parse(data.iLiveLiveRoom);
+                    var liveEvent = iLiveLiveRoom.liveEvent;
+                    var openLogoSwitch = liveEvent.openLogoSwitch;//logo显示开关 0为关闭 1为开启
+                    if (openLogoSwitch == 1) {
+                        var logoUrl = liveEvent.logoUrl;// 直播场次LOGO
+                        var logoPosition = liveEvent.logoPosition;//LOGO位置 1:左上角 2:右上角 3:左下角 4:右下角
+                        if (logoPosition == 1) {
+                            $(".pcLogo").css("display", "block");
+                            $(".pcLogo").addClass("logoleft");
+                            $(".pcLogo").removeClass("logoright");
+                            $(".pcLogo").removeClass("logobottomLeft");
+                            $(".pcLogo").removeClass("logobottomRight");
+                            $(".pcLogo").html("<img src=\"" + logoUrl + "\">");
+                        } else if (logoPosition == 2) {
+                            $(".pcLogo").css("display", "block");
+                            $(".pcLogo").removeClass("logoleft");
+                            $(".pcLogo").addClass("logoright");
+                            $(".pcLogo").removeClass("logobottomLeft");
+                            $(".pcLogo").removeClass("logobottomRight");
+                            $(".pcLogo").html("<img src=\"" + logoUrl + "\">");
+                        } else if (logoPosition == 3) {
+                            $(".pcLogo").css("display", "block");
+                            $(".pcLogo").removeClass("logoleft");
+                            $(".pcLogo").removeClass("logoright");
+                            $(".pcLogo").addClass("logobottomLeft");
+                            $(".pcLogo").removeClass("logobottomRight");
+                            $(".pcLogo").html("<img src=\"" + logoUrl + "\">");
+                        } else if (logoPosition == 4) {
+                            $(".pcLogo").css("display", "block");
+                            $(".pcLogo").removeClass("logoleft");
+                            $(".pcLogo").removeClass("logoright");
+                            $(".pcLogo").removeClass("logobottomLeft");
+                            $(".pcLogo").addClass("logobottomRight");
+                            $(".pcLogo").html("<img src=\"" + logoUrl + "\">");
+                        } else {
+                            $(".pcLogo").removeClass("logoleft");
+                            $(".pcLogo").removeClass("logoright");
+                            $(".pcLogo").removeClass("logobottomLeft");
+                            $(".pcLogo").removeClass("logobottomRight");
+                            $(".pcLogo").css("display", "none");
+                            $(".pcLogo").html("");
+                        }
+                    } else {
+                        //关闭
+                        $(".pcLogo").removeClass("logoleft");
+                        $(".pcLogo").removeClass("logoright");
+                        $(".pcLogo").removeClass("logobottomLeft");
+                        $(".pcLogo").removeClass("logobottomRight");
+                        $(".pcLogo").css("display", "none");
+                        $(".pcLogo").html("");
+                    }
+                } else {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: "获取直播间信息失败"
+                    });
+                }
+            }
+        });
+    }
+
+    //预约和取消预约
+    function saveAppointment() {
+        var userId = $("input[name=userId]").val();//用户ID
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        if (userId == 0) {
+            if (confirm("是否进入登录？")) {
+                var roomId = $("input[name=roomId]").val();//直播间ID
+                window.location.href = "http://" + h5Base + "/pc/login.html?roomId=" + roomId;
+            } else {
+                $.DialogBySHF.Alert({
+                    Width: 350,
+                    Height: 200,
+                    Title: "提示",
+                    Content: "不登录无法进行预约"
+                });
+            }
+        } else {
+            $.ajax({
+                type: "POST",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/homepage/saveAppointment.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    terminalType: "h5",
+                    userId: userId,
+                    roomId: roomId
+                },
+                success: function (data) {
+                    //401 手机登录
+                    //402     绑定手机号
+                    //403    微信打开
+                    if (data.code == 401) {
+                        if (confirm("是否进入登录？")) {
+                            window.location.href = "http://" + h5Base + "/pc/login.html?roomId=" + roomId;
+                        } else {
+                            $.DialogBySHF.Alert({
+                                Width: 350,
+                                Height: 200,
+                                Title: "提示",
+                                Content: data.message
+                            });
+                        }
+                    } else if (data.code == 402) {
+                        saveMessagerPhoneNumber();
+                    } else if (data.code == 403) {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: data.message
+                        });
+                    } else if (data.code == 1) {
+                        console.log(data.data.userid);
+                        if (data.data.userid != undefined) {
+                            var status = data.status
+                            if (status == 1) {
+                                //已预约
+                                $('#uploadModal').modal();
+                                selectAppointment();
+                                /* $.DialogBySHF.Confirm({
+							      Width: 350,
+							      Height: 200,
+							      Title: "预约提示",
+							      Content: data.message,
+							      ConfirmFun: openConfirmApp,
+							      CancelFun: temporaryCancelApp
+							 });
+							$("#btnDialogBySHFConfirm").val("现在打开");
+							$("#btnDialogBySHFCancel").val("暂时不用"); */
+                            } else if (status == 2) {
+                                selectAppointment();
+                                $.DialogBySHF.Alert({
+                                    Width: 350,
+                                    Height: 200,
+                                    Title: "预约提示",
+                                    Content: data.message,
+                                });
+                            }
+                        } else {
+                            //未预约
+                            $(".appointment").text("我要预约");
+                            $.DialogBySHF.Alert({
+                                Width: 350,
+                                Height: 200,
+                                Title: "预约提示",
+                                Content: data.message
+                            });
+                        }
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: "预约失败"
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    //现在打开
+    function openConfirmApp() {
+        console.log("你确认了查看直播方更多直播内容");
+        window.location.href = "http://apizb.tv189.com/version/wap/download/ios"
+    }
+
+    //暂时不用
+    function temporaryCancelApp() {
+        console.log("你放弃查看直播方更多直播内容");
+    }
+
+    //绑定手机号
+    function saveMessagerPhoneNumber() {
+        console.log("弹框进行手机号绑定");
+        $('#myModal').modal();
+    }
+
+    //查看是否预约
+    function selectAppointment() {
+        var userId = $("input[name=userId]").val();//用户ID
+        if (userId != 0) {
+            var roomId = $("input[name=roomId]").val();//直播间ID
+            $.ajax({
+                type: "POST",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/homepage/isAppointment.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    terminalType: "h5",
+                    userId: userId,
+                    roomId: roomId
+                },
+                success: function (data) {
+                    if (data.code == 1) {
+                        if (data.data.isAppointment == 1) {
+                            //已预约
+                            $("#saveAppointment").removeClass("commonbtn");
+                            $("#saveAppointment").addClass("ordered");
+                            $("#saveAppointment").text("已预约本场直播");
+                        } else {
+                            //未预约
+                            $("#saveAppointment").removeClass("ordered");
+                            $("#saveAppointment").addClass("commonbtn");
+                            $("#saveAppointment").text("预约本场直播");
+                        }
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: "预约信息查询失败"
+                        });
+                    }
+                }
+            });
+        }
+
+    }
+
+    var liveStart = 0;
+    $(function () {
+        if (GetQueryString("roomId") != null || GetQueryString("roomId") != undefined) {
+            $("input[name=roomId]").val(GetQueryString("roomId"));
+            var id = GetQueryString("roomId");
+            $.ajax({
+                type: "GET",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/selectRoom.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    roomId: id
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 1) {
+                        var iLiveLiveRoom = JSON.parse(data.iLiveLiveRoom);
+                        var liveEvent = iLiveLiveRoom.liveEvent;
+                        var liveTitle = liveEvent.liveTitle;
+                        if (liveTitle == undefined) {
+                            liveTitle = "";
+                        }
+                        $("title").text(liveTitle);
+                        $("#roomName").text(liveTitle);
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: data.message
+                        });
+                    }
+                }
+            });
+            //焦点获取事件
+            $("input[name=content]").focus(function () {
+                var userId = $("input[name=userId]").val();//用户ID
+                if (userId == 0) {
+                    $.DialogBySHF.Confirm({
+                        Width: 350,
+                        Height: 200,
+                        Title: "确认登录",
+                        Content: "是否进入登录？",
+                        ConfirmFun: loginHtml,
+                        CancelFun: loginHtmlError
+                    });
+                    $("input[name=content]").blur();
+                    $(".emojiBox").attr("display", "none");
+                    return false;
+                }
+            });
+            $.ajax({
+                type: "GET",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/selectPageDecorate.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    roomId: id
+                },
+                success: function (data) {
+                    var code = data.code;
+                    if (code == 1) {
+                        var pageDecorates = JSON.parse(data.pageDecorates);
+                        for (var i = 0; i < pageDecorates.length; i++) {
+                            var pageDecorate = pageDecorates[i];
+                            var liveMsgType = pageDecorate.menuType;
+                            var menuName = pageDecorate.menuName;
+                            if (liveMsgType == 1) {
+                                $("#openMessageType1").css("display", "block");
+                                $("#openMessageType1 a").text(menuName);
+                            } else if (liveMsgType == 2) {
+                                $("#openMessageType2").css("display", "block");
+                                $("#openMessageType2 a").text(menuName);
+                            } else if (liveMsgType == 6) {
+                                $("#myTabContent").height(310)
+                                $(".chatBox").slimScroll({
+                                    height: '290px'
+                                });
+                                $(".topoicBox").slimScroll({
+                                    height: '290px'
+                                });
+                                $(".wdTable").slimScroll({
+                                    height: '330px'
+                                });
+                            }
+                        }
+                    }
+                }
+            });
+        } else {
+            $.DialogBySHF.Alert({
+                Width: 350,
+                Height: 200,
+                Title: "提示",
+                Content: "直播错误",
+                ConfirmFun: errorfunction
+            });
+            return;
+        }
+        if (GetQueryString("userId") != null || GetQueryString("userId") != undefined) {
+            $("input[name=userId]").val(GetQueryString("userId"));
+        }
+        var roomId = $("input[name=roomId]").val();
+        if (roomId == 0) {
+            $.DialogBySHF.Alert({
+                Width: 350,
+                Height: 200,
+                Title: "提示",
+                Content: "直播间错误",
+                ConfirmFun: errorfunction
+            });
+            return;
+        }
+        //=====================建立连接================
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/room/checkRoomLogin.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                roomId: roomId
+            },
+            success: function (data) {
+                console.log(data);
+                var status = data.code;
+                if (status == 404) {
+                    window.location.href = "http://" + h5Base + "/pc/end.html";
+                } else if (status == 402) {
+                    var userInfo = JSON.parse(data.data).userInfo;
+                    if (userInfo != undefined || userInfo != null) {
+                        var userId = userInfo.userId;
+                        if (userId != undefined || userId != null) {
+                            $("input[name=userId]").val(userId);
+                        }
+                        window.location.href = "http://" + h5Base + "/pc/phoneNumber.html?roomId=" + roomId + "&userId=" + userId;
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: "绑定手机号，获取用户失败",
+                            ConfirmFun: errorfunction
+                        });
+                    }
+                } else if (status == 1) {
+                    var datas = JSON.parse(data.data);
+                    var repeateGuide = datas.repeateGuide;
+                    /* if(repeateGuide==0){
+						var openGuideSwitch = datas.openGuideSwitch;
+						if(openGuideSwitch==1){
+							//引导页
+							window.location.href=datas.guideAddr;
+							return;
+						}
+					} */
+                    var roomNeedLogin = datas.roomNeedLogin;
+                    if (roomNeedLogin == 1) {
+                        window.location.href = "http://" + h5Base + "/pc/login.html?roomId=" + roomId;
+                        return;
+                    } else if (roomNeedLogin == 2) {
+                        var userInfo = datas.userInfo;
+                        if (userInfo != undefined || userInfo != null) {
+                            var userId = userInfo.userId;
+                            if (userId != undefined || userId != null) {
+                                $("input[name=userId]").val(userId);
+                            }
+                        }
+                        $.ajax({
+                            type: "GET",//请求方式 get/post
+                            url: "http://" + tomcatBase + "/ilive/app/room/getRoomInfo.jspx",
+                            dataType: "jsonp",
+                            jsonp: "callback",
+                            cache: false,
+                            data: {
+                                roomId: roomId
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                var status = data.code;
+                                if (status == 1) {
+                                    var liveEvent = data.data.liveEvent;
+                                    console.log(liveEvent);
+                                    if (liveEvent == null || liveEvent == undefined) {
+                                        $.DialogBySHF.Alert({
+                                            Width: 350,
+                                            Height: 200,
+                                            Title: "提示",
+                                            Content: "直播间信息错误",
+                                            ConfirmFun: errorfunction
+                                        });
+                                        return;
+                                    }
+                                    var liveStatus = liveEvent.liveStatus;
+                                    var playBgAddr = liveEvent.playBgAddr;
+                                    console.log(playBgAddr);
+                                    $(".videoLiveDIV2 img").attr("src", playBgAddr);
+                                    var liveStartTime = liveEvent.liveStartTime;
+                                    $("#startTime").text("开播日期：" + liveStartTime);
+                                    if (liveStatus == 0) {
+                                        liveStart = 0;
+                                        //开始直播
+                                        console.log("直播未开始");
+                                        var openCountdownSwitch = liveEvent.openCountdownSwitch;
+                                        if (openCountdownSwitch == 1) {
+                                            var tempStrs = liveStartTime.split(" ");  //截取时间
+                                            // 解析日期部分
+                                            var dateStrs = tempStrs[0].split("-");
+                                            var start_year = parseInt(dateStrs[0], 10);
+                                            var start_month = parseInt(dateStrs[1], 10) - 1;
+                                            var start_day = parseInt(dateStrs[2], 10);
+                                            // 解析时间部分
+                                            var timeStrs = tempStrs[1].split(":");
+                                            var start_hour = parseInt(timeStrs [0], 10);
+                                            var start_minute = parseInt(timeStrs[1], 10);
+                                            var start_second = parseInt(timeStrs[2], 10);
+                                            var date = new Date(start_year, start_month, start_day, start_hour, start_minute, start_second);
+                                            var newDate = new Date();   // 获取当前时间
+                                            var dateTime = date.getTime() - newDate.getTime();   //时间差的毫秒数
+                                            //计算出相差天数
+                                            var days = Math.floor(dateTime / (24 * 3600 * 1000))
+                                            //计算出小时数
+                                            var leave1 = dateTime % (24 * 3600 * 1000);   //计算天数后剩余的毫秒数
+                                            var hours = Math.floor(leave1 / (3600 * 1000));
+                                            //计算相差分钟数
+                                            var leave2 = leave1 % (3600 * 1000);      //计算小时数后剩余的毫秒数
+                                            var minutes = Math.floor(leave2 / (60 * 1000));
+                                            //计算相差秒数
+                                            var leave3 = leave2 % (60 * 1000);      //计算分钟数后剩余的毫秒数
+                                            var seconds = Math.round(leave3 / 1000);
+                                            var dataTime = days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒";
+                                            console.log(dataTime);
+                                            $("#videoImage").html("<img style=\"width: 100%;height: 100%;position: relative;z-index: 100;\" src=\"" + playBgAddr + "\" />");
+                                            $("#startLiveTime").html("距离直播开始：<i>" + days + "</i>天<i>" + hours + "</i>小时<i>" + minutes + "</i>分<i>" + seconds + "</i>秒");
+                                            //倒计时事件
+                                            selectTimer(liveStartTime);
+                                        } else {
+                                            $("#videoImage").html("<img style=\"width: 100%;height: 100%;position: relative;z-index: 100;\" src=\"" + playBgAddr + "\" />");
+                                        }
+                                        $("#flash").css("display", "none");
+                                        $("#videoImage").css("display", "block");
+                                        $("#startLive").css("display", "block");
+                                        $("#stopLive").css("display", "none");
+                                        $("#endLive").css("display", "none");
+                                        $("#videoStartDiv").css("display", "block");
+                                    } else if (liveStatus == 1) {
+                                        liveStart = 1;
+                                        console.log("直播开始");
+                                        //直播中
+                                        $("#flash").css("display", "block");
+                                        $("#videoImage").css("display", "none");
+                                        $("#videoStartDiv").css("display", "none");
+                                        $("#startLive").css("display", "none");
+                                        $("#stopLive").css("display", "none");
+                                        $("#endLive").css("display", "none");
+                                    } else if (liveStatus == 2) {
+                                        liveStart = 0;
+                                        //暂停
+                                        console.log("直播暂停");
+                                        $("#flash").css("display", "none");
+                                        $("#videoImage").css("display", "block");
+                                        $("#videoStartDiv").css("display", "block");
+                                        $("#videoImage").html("<img style=\"width: 100%;height: 100%;position: relative;z-index: 100;\" src=\"" + playBgAddr + "\" />");
+                                        $("#startLive").css("display", "none");
+                                        $("#stopLive").css("display", "block");
+                                        $("#endLive").css("display", "none");
+                                    } else if (liveStatus == 3) {
+                                        liveStart = 0;
+                                        //直播结束
+                                        console.log("直播结束");
+                                        $("#flash").css("display", "none");
+                                        $("#videoImage").css("display", "block");
+                                        $("#videoStartDiv").css("display", "block");
+                                        $("#videoImage").html("<img style=\"width: 100%;height: 100%;position: relative;z-index: 100;\" src=\"" + playBgAddr + "\" />");
+                                        $("#startLive").css("display", "none");
+                                        $("#stopLive").css("display", "none");
+                                        $("#endLive").css("display", "block");
+                                    } else {
+                                        liveStart = 0;
+                                        console.log("直播状态：" + liveStatus);
+                                        $("#videoImage").html("<img style=\"width: 100%;height: 100%;position: relative;z-index: 100;\" src=\"" + playBgAddr + "\" />");
+                                        $("#flash").css("display", "none");
+                                        $("#videoImage").css("display", "block");
+                                        $("#videoStartDiv").css("display", "block");
+                                    }
+                                    var id = $("input[name=userId]").val()
+                                    var enterprise = data.data.enterprise;
+                                    console.log("企业信息");
+                                    console.log(enterprise);
+                                    if (enterprise != null || enterprise != undefined) {
+                                        var concernStatus = enterprise.concernStatus;//是否关注
+                                        var certStatus = enterprise.certStatus;
+                                        var enterpriseId = enterprise.enterpriseId;
+                                        $("#guanzhu button").attr("onclick", "updateConcernStatus(" + enterpriseId + ",1)");
+                                        $("#yiguanzhu button").attr("onclick", "updateConcernStatus(" + enterpriseId + ",0)");
+                                        if (certStatus == 4) {
+                                            if (concernStatus == 0) {
+                                                //关注
+                                                $("#yiguanzhu").css("display", "none");
+                                                $("#guanzhu").css("display", "block");
+
+                                            } else {
+                                                //已关注
+                                                $("#yiguanzhu").css("display", "block");
+                                                $("#guanzhu").css("display", "none");
+                                            }
+                                        } else {
+                                            $("#yiguanzhu").css("display", "none");
+                                            $("#guanzhu").css("display", "none");
+                                        }
+                                    }
+                                    var liveDesc = liveEvent.liveDesc;
+                                    $("#liveDesc_enterpriseId").html(liveDesc);
+
+                                    var liveEventId = liveEvent.liveEventId;
+                                    $("input[name=liveEventId]").val(liveEventId);
+                                    //是否进入报名页
+                                    var openSignupSwitch = liveEvent.openSignupSwitch;
+                                    if (openSignupSwitch == 1) {
+                                        var diyformAddr = liveEvent.diyformAddr;
+                                        window.location.href = "http://" + h5Base + "/pc/form.html?roomId=" + roomId;
+                                        return;
+                                    }
+
+                                    var viewAuthorized = liveEvent.viewAuthorized;
+                                    if (viewAuthorized == 2) {
+                                        window.location.href = "http://" + h5Base + "/pc/password.html?roomId=" + roomId;
+                                        return;
+                                    } else if (viewAuthorized == 3) {
+                                        //付费观看
+                                        var viewMoney = liveEvent.viewMoney;
+                                        if (viewMoney == undefined || viewMoney == "" || viewMoney == null) {
+                                            viewMoney = 0.01;
+                                        }
+                                        var totalAmount = parseFloat(viewMoney) * 100;
+                                        var id = $("input[name=userId]").val();
+                                        var liveTitle = liveEvent.liveTitle;
+                                        if (liveTitle == undefined) {
+                                            liveTitle = "";
+                                        }
+                                        var welcomeMsg = liveEvent.welcomeMsg;
+                                        if (welcomeMsg == "" || welcomeMsg == null) {
+                                            welcomeMsg = "欢迎观看直播"
+                                        }
+                                        $(".payMoney").text("￥" + viewMoney);
+                                        $("#welcomeMsg1").text(welcomeMsg);
+                                        $("#welcomeMsg2").text(welcomeMsg);
+                                        $("#payButtonClick").attr("onclick", "wechatSweepUnifyTheOrder(3,'" + liveTitle + "'," + totalAmount + ",0)");
+                                        $("#checkbox-1-1").attr("wechatSweepUnifyTheOrder", "wechatSweepUnifyTheOrder(3,'" + liveTitle + "'," + totalAmount + ",0)");
+                                        $("#ewmPayAgreement").attr("href", "http://" + h5Base + "/pc/agreePc.html?roomId=" + roomId + "&userId=" + id);
+                                        var openFCodeSwitch = liveEvent.openFCodeSwitch;
+                                        if (openFCodeSwitch == 1) {
+                                            $("#ewmCode").attr("display", "block")
+                                        } else {
+                                            $("#ewmCode").attr("display", "none")
+                                        }
+                                        $('#payModal').modal({backdrop: 'static', keyboard: false});
+                                    } else {
+                                        selectHTML(roomId);
+                                        selectAppointment();
+                                    }
+                                    var documentId = liveEvent.documentId;
+                                    if (documentId != 0) {
+                                        var documentDownload = liveEvent.documentDownload;
+                                        var documentPageNO = liveEvent.documentPageNO;
+                                        var documentManual = liveEvent.documentManual;
+                                        selectDocument(documentId, documentDownload, documentPageNO, documentManual);
+                                        var enterpriseId = enterprise.enterpriseId;
+                                        selectDocumentList(enterpriseId);
+                                    }
+                                    $.ajax({
+                                        type: "GET",//请求方式 get/post
+                                        url: "http://" + tomcatBase + "/ilive/app/room/getrecordlist.jspx",
+                                        dataType: "jsonp",
+                                        jsonp: "callback",
+                                        cache: false,
+                                        data: {
+                                            roomId: roomId
+                                        },
+                                        success: function (data) {
+                                            if (data.code == 1) {
+                                                var list = data.data;
+                                                console.log("回看信息");
+                                                console.log(list);
+                                                var recallingDiv = "";
+                                                for (var i = 0; i < list.length; i++) {
+                                                    var mediaFile = list[i];
+                                                    recallingDiv += "<li id=\"fileId_" + mediaFile.fileId + "\" onclick=\"selectMediaFile(" + mediaFile.fileId + ")\">"
+                                                    recallingDiv += "<div class=\"reviewlist\">";
+                                                    recallingDiv += " <img src=\"" + mediaFile.fileImg + "\" /> <span>" + mediaFile.fileDuration + "</span>";
+                                                    recallingDiv += "</div>";
+                                                    recallingDiv += "<div class=\"reviewinfo text-dullgray\">";
+                                                    recallingDiv += "	<h4>";
+                                                    recallingDiv += mediaFile.fileName;
+                                                    recallingDiv += "</h4>";
+                                                    recallingDiv += "<p class=\"uploadtime\">" + mediaFile.createTime + "</p>";
+                                                    recallingDiv += "<p class=\"totalnum\">";
+                                                    recallingDiv += "<span><i></i>" + mediaFile.viewNum + "</span> <span><i></i>" + mediaFile.commentsNum + "</span>";
+                                                    recallingDiv += "</p>";
+                                                    recallingDiv += "</div>";
+                                                    recallingDiv += "</li>";
+                                                }
+                                                $("#recallingDiv").prepend(recallingDiv);
+                                            } else {
+                                                $.DialogBySHF.Alert({
+                                                    Width: 350,
+                                                    Height: 200,
+                                                    Title: "提示",
+                                                    Content: data.message
+                                                });
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    $.DialogBySHF.Alert({
+                                        Width: 350,
+                                        Height: 200,
+                                        Title: "提示",
+                                        Content: data.message,
+                                        ConfirmFun: errorfunction
+                                    });
+                                }
+                            }
+                        });
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: data.message,
+                            ConfirmFun: errorfunction
+                        });
+                    }
+                } else {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: data.message,
+                        ConfirmFun: errorfunction
+                    });
+                }
+            }
+        });
+    });
+    var ws;
+
+    //数据接收
+    function selectHTML(roomId) {
+        selectRoomNumber();
+        window.setInterval("selectRoomNumber()", 60000);
+        var interval = window.setInterval(function () { //每隔5秒钟发送一次心跳，避免websocket连接因超时而自动断开
+            var ping = {"p": "1"};
+            if (ws) {
+                try {
+                    ws.send(JSON.stringify(ping));
+                } catch (error) {
+                    console.log("websocket 连接已关闭")
+                }
+            }
+        }, 10000);
+        var userId = $("input[name=userId]").val();//用户ID
+        if (userId != 0) {
+            selectDianZan();
+        } else {
+            $("#dianZanSpan").attr("onclick", "saveDianZan(" + roomId + ")");
+        }
+        //用户登录
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/room/roomenter.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                roomId: roomId,
+                sessionType: 1,//WebSocket使用用户
+                webType: 2
+            },
+            success: function (data) {
+                if (data.code == 404) {
+                    window.location.href = "http://" + h5Base + "/pc/end.html";
+                } else if (data.code == 402) {
+                    var userId = $("input[name=userId]").val();
+                    if (userId != 0) {
+                        window.location.href = "http://" + h5Base + "/pc/phoneNumber.html?roomId=" + roomId + "&userId=" + userId;
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: "绑定手机号，获取用户失败",
+                            ConfirmFun: errorfunction
+                        });
+                    }
+                } else if (data.code == 1) {
+                    selectcommentsList(roomId);
+                    var hlsAddr = data.hlsAddr;
+                    var rtmpAddr = data.rtmpAddr;
+                    console.log("HTTP流地址：" + hlsAddr);
+                    console.log("RTMP流地址：" + rtmpAddr);
+                    videoDiv(rtmpAddr);
+                    selectRoomLogo();
+                    selectAdvertising();
+                    var token = data.token;
+                    var opType = 10;
+                    var estoppelType = data.estoppelType;
+                    if (estoppelType == 0) {
+                        //是否全局禁言 0 禁言开启 1 关闭禁言
+                        $("input[name=content]").attr("disabled", "disabled");
+                        $(".sendBtn").removeAttr("onclick");
+                    } else {
+                        var forbidTalk = data.forbidTalk;
+                        console.log("禁言标示：" + forbidTalk);
+                        if (forbidTalk == 1) {
+                            opType = 11;
+                            $("input[name=content]").attr("disabled", "disabled");
+                            $(".sendBtn").removeAttr("onclick");
+                        } else {
+                            opType = 10;
+                            $("input[name=content]").removeAttr("disabled");
+                            $(".sendBtn").attr("onclick", "sendMessageBtn()");
+                        }
+                    }
+                    if (typeof (WebSocket) == "undefined") {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: "你的浏览器不支持信息交流",
+                            ConfirmFun: errorfunction
+                        });
+                        return;
+                    }
+                    var url = "ws://" + tomcatBase
+                        + "/ilive/webSocketServer.jspx?username="
+                        + token;
+                    ws = new WebSocket(url);
+                    ws.onopen = function (e) {
+                        console.log("连接成功");
+                    }
+                    ws.onclose = function (e) {
+                        console.log("关闭连接 ");
+                    }
+                    ws.onerror = function (e) {
+                        console.log(e);
+                        console.log("建立连接异常" + e);
+                    }
+                    ws.onmessage = function (e) {
+                        var iLiveMessage = JSON.parse(e.data);
+                        if (iLiveMessage.roomType == 1) {
+                            console.log(iLiveMessage);
+                            if (iLiveMessage.deleted == 1) {
+                                $("#msgId_" + iLiveMessage.msgId).remove();
+                            } else {
+                                //消息管理
+                                var deleteAll = iLiveMessage.deleteAll;
+                                if (deleteAll == 1) {
+                                    $("#chatMessageDiv").children().remove();
+                                    $("#topChatMessageDiv").children().remove();
+                                } else {
+                                    var userId = $("input[name=userId]").val();
+                                    if (iLiveMessage.senderId == userId) {
+                                        if (estoppelType == 1) {
+                                            opType = iLiveMessage.opType;
+                                            if (opType == 11) {
+                                                $("input[name=content]").attr("disabled", "disabled");
+                                                $(".sendBtn").removeAttr("onclick");
+                                            } else {
+                                                $("input[name=content]").removeAttr("disabled");
+                                                $(".sendBtn").attr("onclick", "sendMessageBtn()");
+                                            }
+                                        } else {
+                                            opType = iLiveMessage.opType;
+                                        }
+                                    }
+                                    var liveMsgType = iLiveMessage.liveMsgType;
+                                    var update = iLiveMessage.update;
+                                    if (liveMsgType == 2) {
+                                        if (iLiveMessage.checked == 1) {
+                                            $("#msgId_" + iLiveMessage.msgId).remove();
+                                            if (iLiveMessage.top == 0) {
+                                                var HTMLTXT = "<div id=\"msgId_" + iLiveMessage.msgId + "\">";
+                                                HTMLTXT += "		<p class=\"sofa\">";
+                                                HTMLTXT += "			<i class=\"btext\">" + iLiveMessage.senderName + "：</i>" + iLiveMessage.webContent;
+                                                HTMLTXT += "		</p>";
+                                                HTMLTXT += "</div>";
+                                                //新增聊天互动
+                                                $("#topChatMessageDiv #msgId_" + iLiveMessage.msgId).prepend(HTMLTXT);
+                                                $("#chatMessageDiv").prepend(HTMLTXT);
+                                            } else {
+                                                var HTMLTXT = "<div id=\"msgId_" + iLiveMessage.msgId + "\">";
+                                                HTMLTXT += "		<p class=\"sofa\">";
+                                                HTMLTXT += "			<span class=\"spanTop\">顶</span><i class=\"btext\">" + iLiveMessage.senderName + "：</i>" + iLiveMessage.webContent;
+                                                HTMLTXT += "		</p>";
+                                                HTMLTXT += "</div>";
+                                                //新增聊天互动
+                                                $("#chatMessageDiv #msgId_" + iLiveMessage.msgId).prepend(HTMLTXT);
+                                                $("#topChatMessageDiv").prepend(HTMLTXT);
+                                            }
+                                        } else {
+                                            if (iLiveMessage.senderId == userId) {
+                                                $("#msgId_" + iLiveMessage.msgId).remove();
+                                                if (iLiveMessage.top == 0) {
+                                                    var HTMLTXT = "<div id=\"msgId_" + iLiveMessage.msgId + "\">";
+                                                    HTMLTXT += "		<p class=\"sofa\">";
+                                                    HTMLTXT += "			<i class=\"btext\">" + iLiveMessage.senderName + "：</i>" + iLiveMessage.webContent;
+                                                    HTMLTXT += "		</p>";
+                                                    HTMLTXT += "</div>";
+                                                    //新增聊天互动
+                                                    $("#topChatMessageDiv #msgId_" + iLiveMessage.msgId).prepend(HTMLTXT);
+                                                    $("#chatMessageDiv").prepend(HTMLTXT);
+                                                } else {
+                                                    var HTMLTXT = "<div id=\"msgId_" + iLiveMessage.msgId + "\">";
+                                                    HTMLTXT += "		<p class=\"sofa\">";
+                                                    HTMLTXT += "			<span class=\"spanTop\">顶</span><i class=\"btext\">" + iLiveMessage.senderName + "：</i>" + iLiveMessage.webContent;
+                                                    HTMLTXT += "		</p>";
+                                                    HTMLTXT += "</div>";
+                                                    //新增聊天互动
+                                                    $("#chatMessageDiv #msgId_" + iLiveMessage.msgId).prepend(HTMLTXT);
+                                                    $("#topChatMessageDiv").prepend(HTMLTXT);
+                                                }
+                                            }
+                                        }
+                                    } else if (liveMsgType == 3) {
+                                        if (iLiveMessage.replyType == 1) {
+                                            var HTMLTXT = "<div id=\"msgId_" + iLiveMessage.msgId + "\">";
+                                            HTMLTXT += "	<p class=\"quiz\"><label>提问</label><i>" + iLiveMessage.senderName + "：</i>" + iLiveMessage.webContent + "</p>";
+                                            HTMLTXT += "	<p class=\"answer btext\"><label class=\"bluegb\">回答</label><i>" + iLiveMessage.replyName + "：</i>" + iLiveMessage.replyContent + "</p>";
+                                            HTMLTXT += "</div>";
+                                            $("#msgId_" + iLiveMessage.msgId).remove();
+                                            $("#chatMessageDiv").prepend(HTMLTXT);
+                                        } else {
+                                            var senderId = iLiveMessage.senderId;
+                                            var userId = $("input[name=userId]").val();
+                                            if (senderId == 0 || senderId == null || senderId == undefined) {
+                                            } else {
+                                                if (senderId == userId) {
+                                                    var HTMLTXT = "<div id=\"msgId_" + iLiveMessage.msgId + "\">";
+                                                    HTMLTXT += "	<p class=\"quiz\"><label>提问</label><i>" + iLiveMessage.senderName + "：</i>" + iLiveMessage.webContent + "</p>";
+                                                    HTMLTXT += "</div>";
+                                                    $("#msgId_" + iLiveMessage.msgId).remove();
+                                                    $("#chatMessageDiv").prepend(HTMLTXT);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (iLiveMessage.roomType == 0) {
+                            var iLiveEventVo = iLiveMessage.iLiveEventVo;
+                            console.log(iLiveEventVo);
+                            estoppelType = iLiveEventVo.estoppleType;
+                            if (estoppelType == 0) {
+                                //是否全局禁言 0 禁言开启 1 关闭禁言
+                                $("input[name=content]").attr("disabled", "disabled");
+                                $(".sendBtn").removeAttr("onclick");
+                            } else if (estoppelType == 1) {
+                                if (opType == 11) {
+                                    $("input[name=content]").attr("disabled", "disabled");
+                                    $(".sendBtn").removeAttr("onclick");
+                                } else {
+                                    $("input[name=content]").removeAttr("disabled");
+                                    $(".sendBtn").attr("onclick", "sendMessageBtn()");
+                                }
+                            }
+                            /**
+                             * 直播状态：
+                             * 0 直播未开始 1 直播中 2 暂停中 3 直播结束 4待审 5已审 6审核不过
+                             */
+                            var liveStatus = iLiveEventVo.liveStatus;
+                            var playBgAddr = iLiveEventVo.playBgAddr;
+                            console.log(playBgAddr);
+                            if (liveStatus == 0) {
+                                liveStart = 0;
+                                //开始直播
+                                $("#videoImage").html("<img style=\"width: 100%;height: 100%;position: relative;z-index: 100;\" src=\"" + playBgAddr + "\" />");
+                                $("#startLive").css("display", "block");
+                                $("#stopLive").css("display", "none");
+                                $("#endLive").css("display", "none");
+                                $("#videoStartDiv").css("display", "block");
+                                $("#flash").css("display", "none");
+                                $("#videoImage").css("display", "block");
+                            } else if (liveStatus == 1) {
+                                if (liveStart == 0) {
+                                    //直播中
+                                    window.location.href = window.location.href;
+                                    /* videoDiv(iLiveEventVo.hlsUrl);
+									$("#flash").css("display","block");
+									$("#videoImage").css("display","none");
+									$("#videoStartDiv").css("display","none");
+									$("#startLive").css("display","none");
+									$("#stopLive").css("display","none");
+									$("#endLive").css("display","none"); */
+                                }
+                            } else if (liveStatus == 2) {
+                                liveStart = 0;
+                                //暂停
+                                $("#flash").css("display", "none");
+                                $("#videoImage").css("display", "block");
+                                $("#videoImage").html("<img style=\"width: 100%;height: 100%;position: relative;z-index: 100;\" src=\"" + playBgAddr + "\" />");
+                                $("#videoStartDiv").css("display", "block");
+                                $("#startLive").css("display", "none");
+                                $("#stopLive").css("display", "block");
+                                $("#endLive").css("display", "none");
+                            } else if (liveStatus == 3) {
+                                liveStart = 0;
+                                //直播结束
+                                $("#flash").css("display", "none");
+                                $("#videoImage").css("display", "block");
+                                $("#videoStartDiv").css("display", "block");
+                                $("#videoImage").html("<img style=\"width: 100%;height: 100%;position: relative;z-index: 100;\" src=\"" + playBgAddr + "\" />");
+                                $("#startLive").css("display", "none");
+                                $("#stopLive").css("display", "none");
+                                $("#endLive").css("display", "block");
+                            } else {
+                                liveStart = 0;
+                                $("#videoImage").html("<img style=\"width: 100%;height: 100%;position: relative;z-index: 100;\" src=\"" + playBgAddr + "\" />");
+                            }
+                        } else if (iLiveMessage.roomType == 2) {
+                            console.log("发现新话题");
+                        } else if (iLiveMessage.roomType == 3) {
+                            window.location.href = "http://" + h5Base + "/pc/end.html";
+                        } else if (iLiveMessage.roomType == 4) {
+                            console.log("广告滚动");
+                            selectAdvertising();
+                        } else if (iLiveMessage.roomType == 11) {
+                            var documentId = iLiveMessage.documentId;
+                            var documentPageNO = iLiveMessage.documentPageNO;
+                            var documentManual = iLiveMessage.documentManual;
+                            var documentDownload = iLiveMessage.documentDownload;
+                            selectDocument(documentId, documentDownload, documentPageNO, documentManual);
+                        } else {
+                            console.log("操作类型:" + iLiveMessage.roomType);
+                        }
+                    }
+                } else if (data.code == 2) {
+                    //鉴权失败
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "警告",
+                        Content: data.message,
+                        ConfirmFun: errorfunctionAuthentication
+                    });
+                } else if (data.code == 3) {
+                    //直播间人数已满
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "警告",
+                        Content: data.message,
+                        ConfirmFun: errorfunctionFull
+                    });
+                } else {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: "鉴权失败，您无权观看本场直播",
+                        ConfirmFun: errorfunction
+                    });
+                }
+            }
+        });
+    }
+
+    //鉴权失败
+    function errorfunctionAuthentication() {
+        window.location.href = "http://" + h5Base + "/pc/permissions.html";
+    }
+
+    //直播间人数已满
+    function errorfunctionFull() {
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        window.location.href = "http://" + h5Base + "/pc/standby.html?roomId=" + roomId;
+    }
+
+    //获取话题评论
+    function selectcommentsList(roomId) {
+        $.ajax({
+            type: "POST",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/comments/selectList.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                roomId: roomId
+            },
+            success: function (data) {
+                var status = data.code;
+                if (status == 1) {
+                    var iLiveCommentsMap = JSON.parse(data.iLiveCommentsMap);
+                    for (var i = 0; i < iLiveCommentsMap.length; i++) {
+                        var vo = iLiveCommentsMap[i];
+                        var list = vo.list;
+                        var HTMLTXT = "";
+                        for (var j = 0; j < list.length; j++) {
+                            var comments = list[j];
+                            HTMLTXT += "<p>";
+                            HTMLTXT += "		<i class=\"btext\">" + comments.commentsName + ":</i>" + comments.comments;
+                            HTMLTXT += "</p>";
+                        }
+                        $("#commentsNumber_" + vo.msgId).text(list.length);
+                        $("#commentsList_" + vo.msgId).html(HTMLTXT);
+                    }
+                    var praiseMap = JSON.parse(data.praiseMap);
+                    console.log(praiseMap);
+                    var userId = $("input[name=userId]").val();
+                    for (var key in praiseMap) {
+                        var praiseNumber = praiseMap[key].length;
+                        if (praiseNumber == undefined) {
+                            praiseNumber = 0;
+                        }
+                        var ret = 0;
+                        for (var i = 0; i < praiseNumber; i++) {
+                            var praise = praiseMap[key][i];
+                            var id = praise.userId;
+                            if (parseInt(userId) == parseInt(id)) {
+                                ret = 1;
+                            }
+                        }
+                        if (ret == 0) {
+                            var HTML = "<i onclick=\"saveILiveMessagePraise(" + key + ")\"></i>";
+                            HTML += "<span id=\"praiseNumber_" + key + "\">" + praiseNumber + "</span>";
+                            $("#messagePraise_" + key).html(HTML);
+                        } else {
+                            var HTML = "<i style=\"background-position: -29px -13px;\"></i>";
+                            HTML += "<span id=\"praiseNumber_" + key + "\">" + praiseNumber + "</span>";
+                            $("#messagePraise_" + key).html(HTML);
+                        }
+                    }
+                    /* var number = data.number;
+					if(number==undefined){
+						number=0;
+					}
+					$("#roomNumber").text(number); */
+                } else {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: "获取话题评论失败"
+                    });
+                }
+            }
+        });
+    }
+
+    //获取直播间人数
+    function selectRoomNumber() {
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        $.ajax({
+            type: "POST",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/online/number.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                roomId: roomId
+            },
+            success: function (data) {
+                var status = data.code;
+                if (status == 1) {
+                    console.log(data);
+                    var number = JSON.parse(data.data).number;
+                    if (number == undefined || number == null) {
+                        number = 0;
+                    }
+                    $("#roomNumber").text(number);
+                }
+            }
+        });
+    }
+
+    //消息发送
+    function sendMessageBtn() {
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        var userId = $("input[name=userId]").val();//用户ID
+        if (userId == 0) {
+            $.DialogBySHF.Confirm({
+                Width: 350,
+                Height: 200,
+                Title: "确认登录",
+                Content: "是否进入登录？",
+                ConfirmFun: loginHtml,
+                CancelFun: loginHtmlError
+            });
+            return;
+        }
+        var liveMsgType = $("input[name=liveMsgType]").val();//发送消息类型
+        console.log("消息类型：" + liveMsgType);
+        var liveEventId = $("input[name=liveEventId]").val();//场次ID
+        var msgContent = $("input[name=content]").val();//发送消息内容
+        if (msgContent.replace("\s+", "") == "" || msgContent == undefined) {
+            $.DialogBySHF.Alert({
+                Width: 350,
+                Height: 200,
+                Title: "提示",
+                Content: "内容不能为空"
+            });
+            return;
+        }
+
+        if (liveMsgType == 2 || liveMsgType == 3) {
+            $.ajax({
+                type: "POST",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/sendMessage.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    terminalType: "pc",
+                    userId: userId,
+                    roomId: roomId,
+                    liveMsgType: liveMsgType,
+                    content: encodeURI(msgContent),
+                    liveEventId: liveEventId,
+                    msgType: 1
+                },
+                success: function (data) {
+                    var status = data.code;
+                    if (data.code == 401) {
+                        if (confirm("是否进入登录？")) {
+                            window.location.href = "http://" + h5Base + "/pc/login.html?roomId=" + roomId;
+                        } else {
+                            $.DialogBySHF.Alert({
+                                Width: 350,
+                                Height: 200,
+                                Title: "提示",
+                                Content: data.message
+                            });
+                        }
+                    } else if (data.code == 402) {
+                        saveMessagerPhoneNumber();
+                    } else if (data.code == 403) {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: data.message
+                        });
+                    } else if (status == 1) {
+                        console.log("发送消息成功");
+                        var iLiveMessage = data.iLiveMessage;
+                        console.log(iLiveMessage);
+                        if (liveMsgType == 2) {
+                            var HTMLTXT = "<div id=\"msgId_" + iLiveMessage.msgId + "\">";
+                            HTMLTXT += "		<p class=\"sofa\">";
+                            HTMLTXT += "			<i class=\"btext\">" + iLiveMessage.senderName + "：</i>" + iLiveMessage.webContent;
+                            HTMLTXT += "		</p>";
+                            HTMLTXT += "</div>";
+                            //新增聊天互动
+                            $("#chatMessageDiv").prepend(HTMLTXT);
+                        } else if (liveMsgType == 3) {
+                            //问答
+                            var HTMLTXT = "<div id=\"msgId_" + iLiveMessage.msgId + "\">";
+                            HTMLTXT += "	<p class=\"quiz\"><label>提问</label><i>" + iLiveMessage.senderName + "：</i>" + iLiveMessage.webContent + "</p>";
+                            //HTMLTXT += "	<p class=\"answer btext\"><label class=\"bluegb\">回答</label><i>"+iLiveMessage.replyName+"：</i>"+iLiveMessage.replyContent+"</p>";
+                            HTMLTXT += "</div>";
+                            $("#chatMessageDiv").prepend(HTMLTXT);
+                        }
+                        $("input[name=content]").val("");
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: data.message
+                        });
+                    }
+                }
+            });
+        } else if (liveMsgType == 1) {
+            if (msgId == 0) {
+                $.DialogBySHF.Alert({
+                    Width: 350,
+                    Height: 200,
+                    Title: "提示",
+                    Content: "请选择要评论的话题"
+                });
+                return;
+            }
+            $.ajax({
+                type: "POST",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/saveComments.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    terminalType: "pc",
+                    userId: userId,
+                    msgId: msgId,
+                    comments: encodeURI(msgContent)
+                },
+                success: function (data) {
+                    var status = data.code;
+                    if (data.code == 401) {
+                        if (confirm("是否进入登录？")) {
+                            window.location.href = "http://" + h5Base + "/pc/login.html?roomId=" + roomId;
+                        } else {
+                            $.DialogBySHF.Alert({
+                                Width: 350,
+                                Height: 200,
+                                Title: "提示",
+                                Content: data.message
+                            });
+                        }
+                    } else if (data.code == 402) {
+                        saveMessagerPhoneNumber();
+                    } else if (data.code == 403) {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: data.message
+                        });
+                    } else if (status == 1) {
+                        $("input[name=liveMsgType]").val(1);
+                        $("input[name=content]").attr("readonly", "readonly");
+                        $("#questionSpan").removeAttr("onclick");
+                        $(".sendBtn").removeAttr("onclick");
+                        $("input[name=content]").val("");
+                        msgId = 0;
+                        selectMessageLIVE();
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: data.message
+                        });
+                    }
+                }
+            });
+        } else {
+            alert(tablevalue);
+        }
+    }
+
+    var msgId = 0;
+
+    //评论
+    function saveComments(id) {
+        msgId = id;
+        $("input[name=content]").removeAttr("readonly");
+        $(".sendBtn").attr("onclick", "sendMessageBtn()");
+        $("input[name=liveMsgType]").val(1);//发送消息类型
+    }
+
+    //点赞
+    function saveILiveMessagePraise(id) {
+        var userId = $("input[name=userId]").val();//用户ID
+        if (userId == 0) {
+            $.DialogBySHF.Confirm({
+                Width: 350,
+                Height: 200,
+                Title: "确认登录",
+                Content: "是否进入登录？",
+                ConfirmFun: loginHtml,
+                CancelFun: loginHtmlError
+            });
+            return;
+        }
+        $.ajax({
+            type: "POST",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/praise/savePraise.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                terminalType: "pc",
+                userId: userId,
+                msgId: id
+            },
+            success: function (data) {
+                var status = data.code;
+                if (data.code == 401) {
+                    if (confirm("是否进入登录？")) {
+                        window.location.href = "http://" + h5Base + "/pc/login.html?roomId=" + roomId;
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: data.message
+                        });
+                    }
+                } else if (data.code == 402) {
+                    saveMessagerPhoneNumber();
+                } else if (data.code == 403) {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: data.message
+                    });
+                } else if (status == 1) {
+                    var roomId = $("input[name=roomId]").val();//直播间ID
+                    selectcommentsList(roomId);
+                } else {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: data.message
+                    });
+                }
+            }
+        });
+    }
+
+    //获取话题
+    function selectMessageLIVE() {
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        $.ajax({
+            type: "POST",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/message/selectMessageLIVE.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                roomId: roomId
+            },
+            success: function (data) {
+                var status = data.code;
+                if (status == 1) {
+                    var messageList = data.data;
+                    console.log(messageList);
+                    var topTopicDiv = "";
+                    var topicDiv = "";
+                    for (var i = 0; i < messageList.length; i++) {
+                        var iLiveMessage = messageList[i];
+                        if (iLiveMessage.top == 0) {
+                            //未置顶
+                            topicDiv += "<div id=\"msgId_" + iLiveMessage.msgId + "\">";
+                            topicDiv += "		<p class=\"sofa\">";
+                            topicDiv += "			<i class=\"btext\">" + iLiveMessage.senderName + "：</i>";
+                            if (iLiveMessage.msgType == 2) {
+                                topicDiv += "		<br/>";
+                            }
+                            topicDiv += iLiveMessage.webContent;
+                            topicDiv += "		</p><p>";
+                            if (iLiveMessage.msgType == 2 || iLiveMessage.msgType == 4) {
+                                var images = iLiveMessage.images;
+                                for (var j = 0; j < images.length; j++) {
+                                    topicDiv += "<img class=\"toBig\" data-src=\"" + images[j] + "\" src=\"" + images[j] + "\" />";
+                                }
+                            } else if (iLiveMessage.msgType == 5 || iLiveMessage.msgType == 3) {
+                                topicDiv += "<img class=\" toVideo\"  video=\"" + iLiveMessage.video + "\" src=\"http://pic.zb.tv189.com/img/defaultVedio.png\"/>";
+                            }
+                            topicDiv += "		</p>";
+                            topicDiv += "		<p class=\"handle\">";
+                            topicDiv += "			<span class=\"message\"><i onclick=\"saveComments(" + iLiveMessage.msgId + ")\"></i><span id=\"commentsNumber_" + iLiveMessage.msgId + "\">0</span></span>";
+                            topicDiv += "		 	<span class=\"thumbup\" id=\"messagePraise_" + iLiveMessage.msgId + "\"><i></i><span id=\"praiseNumber_" + iLiveMessage.msgId + "\">0</span></span>";
+                            topicDiv += "		</p>";
+                            topicDiv += "		<div class=\"reply\">";
+                            topicDiv += "			<div id=\"commentsList_" + iLiveMessage.msgId + "\"></div>";
+                            topicDiv += "		</div>";
+                            topicDiv += "</div>";
+                        } else {
+                            //置顶
+                            topTopicDiv += "<div id=\"msgId_" + iLiveMessage.msgId + "\">";
+                            topTopicDiv += "		<p class=\"sofa\">";
+                            topTopicDiv += "			<span class=\"spanTop\">顶</span><i class=\"btext\">" + iLiveMessage.senderName + "：</i>" + iLiveMessage.webContent;
+                            topTopicDiv += "		</p><p>";
+                            if (iLiveMessage.msgType == 2 || iLiveMessage.msgType == 4) {
+                                var images = iLiveMessage.images;
+                                for (var j = 0; j < images.length; j++) {
+                                    topTopicDiv += "<img class=\"toBig\" data-src=\"" + images[j] + "\" src=\"" + images[j] + "\" />";
+                                }
+                            } else if (iLiveMessage.msgType == 5 || iLiveMessage.msgType == 3) {
+                                topTopicDiv += "<img class=\" toVideo\"  video=\"" + iLiveMessage.video + "\" src=\"http://pic.zb.tv189.com/img/defaultVedio.png\"/>";
+                            }
+                            topTopicDiv += "		</p>";
+                            topTopicDiv += "		<p class=\"handle\">";
+                            topTopicDiv += "			<span class=\"message\"><i></i><span id=\"commentsNumber_" + iLiveMessage.msgId + "\">0</span></span>";
+                            topTopicDiv += "		 	<span class=\"thumbup\" id=\"messagePraise_" + iLiveMessage.msgId + "\"><i></i><span id=\"praiseNumber_" + iLiveMessage.msgId + "\">0</span></span>";
+                            topTopicDiv += "		</p>";
+                            topTopicDiv += "		<div class=\"reply\">";
+                            topTopicDiv += "			<div id=\"commentsList_" + iLiveMessage.msgId + "\"></div>";
+                            topTopicDiv += "		</div>";
+                            topTopicDiv += "</div>";
+                        }
+                    }
+                    $("#topicDiv").html(topicDiv);
+                    $("#topTopicDiv").html(topTopicDiv);
+                    selectcommentsList(roomId);//页面加载5秒执行一次
+                } else {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: data.message
+                    });
+                }
+            }
+        });
+    }
+
+    //企业关注  取消
+    function updateConcernStatus(enterpriseId, concernStatus) {
+        var userId = $("input[name=userId]").val();//用户ID
+        if (userId == 0) {
+            $.DialogBySHF.Confirm({
+                Width: 350,
+                Height: 200,
+                Title: "确认登录",
+                Content: "是否进入登录？",
+                ConfirmFun: loginHtml,
+                CancelFun: loginHtmlError
+            });
+            return;
+        }
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/room/enterprise/concern.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                terminalType: "pc",
+                enterpriseId: enterpriseId,
+                userId: userId,
+                type: concernStatus
+            },
+            success: function (data) {
+                console.log(data);
+                var status = data.code;
+                if (data.code == 401) {
+                    if (confirm("是否进入登录？")) {
+                        window.location.href = "http://" + h5Base + "/pc/login.html?roomId=" + roomId;
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "提示",
+                            Content: data.message
+                        });
+                    }
+                } else if (data.code == 402) {
+                    saveMessagerPhoneNumber();
+                } else if (data.code == 403) {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: data.message
+                    });
+                } else if (status == 1) {
+                    if (concernStatus == 0) {
+                        $("#yiguanzhu").css("display", "none");
+                        $("#guanzhu").css("display", "block");
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "关注提示",
+                            Content: data.message
+                        });
+                    } else {
+                        $("#yiguanzhu").css("display", "block");
+                        $("#guanzhu").css("display", "none");
+                        $.DialogBySHF.Confirm({
+                            Width: 350,
+                            Height: 200,
+                            Title: "关注提示",
+                            Content: data.message,
+                            ConfirmFun: openConfirm,
+                            CancelFun: temporaryCancel
+                        });
+                        $("#btnDialogBySHFConfirm").val("现在打开");
+                        $("#btnDialogBySHFCancel").val("暂时不用");
+                    }
+                } else {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "提示",
+                        Content: data.message
+                    });
+                }
+            }
+        });
+    }
+
+    //现在打开
+    function openConfirm() {
+        console.log("你确认了查看直播方更多直播内容");
+    }
+
+    //暂时不用
+    function temporaryCancel() {
+        console.log("你放弃查看直播方更多直播内容");
+    }
+
+    //倒计时
+    function selectTimer(liveStartTime) {
+        var tempStrs = liveStartTime.split(" ");  //截取时间
+        // 解析日期部分
+        var dateStrs = tempStrs[0].split("-");
+        var start_year = parseInt(dateStrs[0], 10);
+        var start_month = parseInt(dateStrs[1], 10) - 1;
+        var start_day = parseInt(dateStrs[2], 10);
+        // 解析时间部分
+        var timeStrs = tempStrs[1].split(":");
+        var start_hour = parseInt(timeStrs [0], 10);
+        var start_minute = parseInt(timeStrs[1], 10);
+        var start_second = parseInt(timeStrs[2], 10);
+        var date = new Date(start_year, start_month, start_day, start_hour, start_minute, start_second);
+        var newDate = new Date();   // 获取当前时间
+        var dateTime = date.getTime() - newDate.getTime();   //时间差的毫秒数
+        if (dateTime > 0) {
+            var days = Math.floor(dateTime / (24 * 3600 * 1000));   //计算出相差天数
+            var leave1 = dateTime % (24 * 3600 * 1000);   //计算天数后剩余的毫秒数
+            var hours = Math.floor(leave1 / (3600 * 1000));
+            //计算相差分钟数
+            var leave2 = leave1 % (3600 * 1000);      //计算小时数后剩余的毫秒数
+            var minutes = Math.floor(leave2 / (60 * 1000));
+            //计算相差秒数
+            var leave3 = leave2 % (60 * 1000);      //计算分钟数后剩余的毫秒数
+            var seconds = Math.round(leave3 / 1000);
+            var dataTime = days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒";
+            console.log(dataTime);
+            $("#startLiveTime").html("距离直播开始：<i>" + days + "</i>天<i>" + hours + "</i>小时<i>" + minutes + "</i>分<i>" + seconds + "</i>秒");
+            setTimeout(function () {
+                selectTimer(liveStartTime);
+            }, 1000);
+        } else {
+            $("#startLiveTime").html("距离直播开始：<i>0</i>天<i>0</i>小时<i>0</i>分<i>0</i>秒");
+        }
+    }
+
+    //回看
+    function selectMediaFile(fileId) {
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        var userId = $("input[name=userId]").val();//用户ID
+        window.location.href = "http://" + h5Base + "/pc/review.html?fileId=" + fileId + "&userId=" + userId + "&roomId=" + roomId;
+    }
+
+    function videoDiv(pushStreamAddr) {
+        console.log("pushStreamAddr：" + pushStreamAddr);
+        interfaceHttp = pushStreamAddr,
+            shareHtmlUrl = "",
+            shareStatu = '',
+            AddressSeparator = '#',
+            authUrl = 'true',
+            ifShowImageBtn = 'false',
+            ifAuthCDN_WS = 'false',
+            PlayVideoAspect = 'diaplasis',//mc43;mc169;diaplasis;bespread
+            ifShowLogo = 'false',
+            AudioPlayerType = '0',
+            AVPlayerType = '0',
+            ifShiftMove = 'true',
+
+
+            _playAuto = 'true';
+
+        var flashvars = "interfaceHttp=" + interfaceHttp +
+            "&AudioPlayerType=" + AudioPlayerType +
+            "&AVPlayerType=" + AVPlayerType +
+            "&authUrl=" + authUrl +
+            "&AddressSeparator=" + AddressSeparator +
+            "&ifShowLogo=" + ifShowLogo +
+            "&ifShiftMove=" + ifShiftMove +
+            "&ifAuthCDN_WS=" + ifAuthCDN_WS +
+            "&PlayVideoAspect=" + PlayVideoAspect +
+            "&ifShowTime=" + ifShowTime +
+            "&ifShowPoopBtn=" + ifShowPoopBtn +
+            "&ifShowImageBtn=" + ifShowImageBtn +
+            "&ifShowSetBtn=" + ifShowSetBtn +
+            "&playAuto=" + _playAuto +
+            "&ifShowStreamBtn=" + ifShowStream +
+            "&bufferLongTime=" + bufferLongTime +
+            "&streamType=" + streamType +
+            "&function_lamp_method=" + function_lamp_method +
+            "&small_video_window=" + small_video_window +
+            "&interfaceType=" + interfaceType +
+            "&function_stop_method=" + function_stop_method +
+            "&ifForbitSeek=" + ifForbitSeek +
+            "&shareStatu=" + shareStatu +
+            "&shareSwfUrl=" + shareSwfUrl +
+            "&shareHtmlUrl=" + shareHtmlUrl +
+            "&ifShowMenuItem=" + ifShowMenuItem;
+
+        var swfHtml = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="100%" height="100%" id="' + playerName + '" align="middle">\
+				<param name="movie" value="' + swfUrl + '" />\
+				<param name="quality" value="high" />\
+				<param name="bgcolor" value="#000000" />\
+				<param name="devicefont" value="false" />\
+				<param name="wmode" value="opaque" />\
+				<param name="allowScriptAccess" value="always" />\
+				<param name="allowFullscreen" value="true" />\
+				<param name="allownetworking" value="all" />\
+				<param name="salign" value="lt" />\
+				<param name="flashvars" value="' + flashvars + '"  />\
+					<a href="http://www.adobe.com/go/getflash">\
+						<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获得 Adobe Flash Player" />\
+					</a>\
+			</object>';
+        if (navigator.plugins && navigator.mimeTypes && navigator.mimeTypes.length) {
+            //alert(navigator.userAgent);
+            swfHtml = '<embed   src="' + swfUrl + '" id="' + playerName + '" name="' + playerName + '" type="application/x-shockwave-flash" data="' + swfUrl + '"  quality="high" allowScriptAccess="always" redirectUrl="http://www.adobe.com/shockwave/download/download.cgi?" swLiveConnect="true" menu="false" allowFullScreen="true" salign="lt"  width="100%" height="100%" flashvars="' + flashvars + '">\
+				</embed>';
+        }
+        var _id = 'flash';
+        document.getElementById(_id).innerHTML = swfHtml;
+    }
+</script>
+<script src="js/JWZT_Player.js?t=20120609" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        $("#myTabContent").height(460);
+        $(".chatBox").slimScroll({
+            height: '430px'
+        });
+        $(".topoicBox").slimScroll({
+            height: '430px'
+        });
+    })
+    window.onload = function () {
+        if (ws) {
+            ws.onclose();
+        }
+    }
+    window.onbeforeunload = function () {
+        if (ws) {
+            ws.onclose();
+        }
+    }
+    $(function () {
+        var roomId = $("input[name=roomId]").val();
+        /* $('#zbewmbox').qrcode({
+				render : "canvas", // 渲染方式有table方式和canvas方式
+				width : 90, //默认宽度
+				height : 105, //默认高度
+				text : "http://"+h5Base+"/phone/live.html?roomId="+roomId, //二维码内容
+				typeNumber : -1, //计算模式一般默认为-1
+				correctLevel : 2, //二维码纠错级别
+				background : "#ffffff", //背景颜色
+				foreground : "#000000" //二维码颜色
+		}); */
+        var qrcode = $('#zbewmbox').qrcode({
+            render: "canvas", //也可以替换为table
+            width: 90,
+            height: 90,
+            text: "http://" + h5Base + "/phone/live.html?roomId=" + roomId/*可以通过ajax请求动态设置*/
+        }).hide();
+        //将生成的二维码转换成图片格式
+        var canvas = qrcode.find('canvas').get(0);
+        $('#qrcodeImg').attr('src', canvas.toDataURL('image/jpg'));
+    });
+
+    //弹框
+    function errorfunction() {
+        window.location.href = "http://" + h5Base + "/pc/error.html";
+    }
+
+    function loginHtml() {
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        window.location.href = "http://" + h5Base + "/pc/login.html?roomId=" + roomId;
+    }
+
+    function loginHtmlError() {
+        $.DialogBySHF.Alert({
+            Width: 350,
+            Height: 200,
+            Title: "提示",
+            Content: "你放弃了登录、无法进行操作"
+        });
+    }
+
+    //滚屏消息
+    function selectAdvertising() {
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/selectAdvertising.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                roomId: roomId
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.code == 1) {
+                    var iLiveRollingAdvertising = data.data;
+                    var startType = iLiveRollingAdvertising.startType;
+                    if (startType == 1) {
+                        console.log("开启");
+                        var content = iLiveRollingAdvertising.content;
+                        $(".marqueeBox").removeClass("hide");
+                        $(".marqueeBox").text(content);
+                    } else {
+                        console.log("关闭");
+                        $(".marqueeBox").addClass("hide");
+                    }
+                } else {
+                    console.log("获取滚动消息失败：" + data.message);
+                }
+            }
+        });
+    }
+
+    //获取当前直播中文档直播信息
+    function selectDocument(documentId, documentDownload, documentPageNO, documentManual) {
+        if (documentId == -1) {
+            if (documentDownload == 0) {
+                $(".wdDownload").css("display", "none");
+            } else {
+                $(".wdDownload").removeClass("display", "block");
+            }
+            if (documentManual == 0) {
+                $(".pageDIV").css("display", "none");
+                openPage(documentPageNO);
+            } else {
+                $(".pageDIV").css("display", "block");
+            }
+        } else {
+            $.ajax({
+                type: "POST",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/document/getByd.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    docId: documentId
+                },
+                success: function (data) {
+                    if (data.code == 1) {
+                        //文档发送改变
+                        var documentManager = data.data;
+                        var documentPictures = documentManager.list;
+                        var HTML = "";
+                        for (var i = 0; i < documentPictures.length; i++) {
+                            var url = documentPictures[i].url;
+                            HTML += "<li><img src=\"" + url + "\"></li>";
+                        }
+                        //$("#ol").html(HTML);
+                        $("#ul").html(HTML);
+                        wendangJS();
+                        if (documentDownload == 0) {
+                            $(".wdDownload").css("display", "none");
+                        } else {
+                            $(".wdDownload").removeClass("display", "block");
+                        }
+                        if (documentManual == 0) {
+                            $(".pageDIV").css("display", "none");
+                            openPage(documentPageNO);
+                        } else {
+                            $(".pageDIV").css("display", "block");
+                            openPage(documentPageNO);
+                        }
+                    } else {
+                        $.DialogBySHF.Alert({
+                            Width: 350,
+                            Height: 200,
+                            Title: "警告",
+                            Content: "data.message"
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    //所有文档
+    function selectDocumentList(enterpriseId) {
+        $.ajax({
+            type: "POST",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/document/getByEnterpriseId.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                enterpriseId: enterpriseId
+            },
+            success: function (data) {
+                if (data.code == 1) {
+                    var documentList = data.data;
+                    var HTML = "";
+                    for (var i = 0; i < documentList.length; i++) {
+                        var document = documentList[i];
+                        var url = document.url;
+                        var name = document.name;
+                        var size = document.size;
+                        var type = document.type;
+                        HTML += "<tr>";
+                        HTML += "	<td><input type=\"checkbox\" style=\"vertical-align: middle;\" url=\"" + url + "\"/></td>";
+                        HTML += "	<td>";
+                        if (type == "doc" || type == "docx") {
+                            HTML += "		<img class=\"pptPic\" src=\"images/word.png\" alt=\"\" />" + name;
+                        } else {
+                            HTML += "		<img class=\"pptPic\" src=\"images/ppt.png\" alt=\"\" />" + name;
+                        }
+                        HTML += "	</td>";
+                        HTML += "	<td>" + size + "b</td>";
+                        HTML += "	<td onclick=\"downloadFile('" + url + "')\"><i class=\"fa fa-download\" style=\"font-size:14px;cursor: pointer;\"></i></td>";
+                        HTML += "</tr>";
+                    }
+                    $("#fileTbody").html(HTML);
+                } else {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "警告",
+                        Content: "data.message"
+                    });
+                }
+            }
+        });
+    }
+
+    var firstImg;
+    var num;
+    var imgW;
+    var timer;
+
+    function wendangJS() {
+        //获取第几张图片
+        $(".totle").html($('#ul li').length);
+        // 添加到最后的位置 并设置 ul 的宽度
+        num = 1;
+        $(".num").html(num);
+    }
+
+    function rightPageUL() {
+        firstImg = $('#ul li').first().clone();
+        imgW = $('#ul img').width();
+        // 下一张
+        num = num + 1;
+        if (num >= $('#ul li').length + 1) {
+            num = 1
+        }
+        moveImgUL(num);
+        $(".num").html(num);
+    }
+
+    function leftPageUL() {
+        firstImg = $('#ul li').first().clone();
+        imgW = $('#ul img').width();
+        // 上一张
+        num = num - 1;
+        if (num <= 0) {
+            num = $('#ul li').length;
+        }
+        moveImgUL(num);
+        $(".num").html(num);
+    }
+
+    function rightPageOL() {
+        firstImg = $('#ol li').first().clone();
+        imgW = $('#ol img').width();
+        // 下一张
+        num = num + 1;
+        if (num >= $('#ol li').length + 1) {
+            num = 1
+        }
+        moveImgOL();
+        $(".num").html(num);
+    }
+
+    function leftPageOL() {
+        firstImg = $('#ol li').first().clone();
+        imgW = $('#ol img').width();
+        // 上一张
+        num = num - 1;
+        if (num <= 0) {
+            num = $('#ol li').length;
+        }
+        moveImgOL();
+        $(".num").html(num);
+    }
+
+    function home() {
+        openPage(1);
+    }
+
+    function last() {
+        openPage($('#ul li').length);
+    }
+
+    function openPage(documentPageNO) {
+        firstImg = $('#ul li').first().clone();
+        imgW = $('#ul img').width();
+        if (documentPageNO >= $('#ul li').length + 1) {
+            documentPageNO = 1
+        } else if (documentPageNO <= 0) {
+            documentPageNO = $('#ul li').length;
+        }
+        num = documentPageNO
+        moveImgUL();
+        $(".num").html(documentPageNO);
+    }
+
+    //移动到指定的图片
+    function moveImgOL() {
+        console.log(num)
+        // 移动图片动画
+        $('#ol').stop().animate({left: (num - 1) * imgW * -1}, 400);
+    }
+
+    //移动到指定的图片
+    function moveImgUL() {
+        console.log(num)
+        // 移动图片动画
+        $('#ul').stop().animate({left: (num - 1) * imgW * -1}, 400);
+    }
+
+    function openVideo() {
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        window.location.href = "http://" + h5Base + "/pc/play.html?roomId=" + roomId;
+    }
+
+    //下载
+    function downloadFile(url) {
+        window.location.href = url;
+    }
+
+    //批量下载
+    function downloadAll() {
+        $("#fileTbody tr").each(function (index, item) {
+            if ($(item).find("input").is(':checked')) {
+                var url = $(item).find("input").attr("url");
+                console.log(url);
+                window.location.href = url;
+            }
+        });
+    }
+
+    function selectAll() {
+        if ($("#checkboxAll").is(':checked')) {
+            $("#fileTbody tr").each(function (index, item) {
+                $(item).find("input").prop("checked", true);
+            });
+        } else {
+            $("#fileTbody").each(function (index, item) {
+                $(item).find("input").prop("checked", false);
+            });
+        }
+    }
+</script>
+<script src="js/JWZT_Player.js"></script>
+</html>

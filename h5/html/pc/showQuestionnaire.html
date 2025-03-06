@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>问卷作答</title>
+    <link rel="stylesheet" href="css/agreePc.css"/>
+    <script src="js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header" style="display: block;margin:center">
+          	  问卷作答
+        </div>
+		<div class="wenjuantitle" id="title">
+		</div>
+        <div class="main" id="main">
+           </div>
+        <div class="footer" onclick="openLive()">作答完成</div>
+    </div>
+</body>
+<script src="js/base.js"></script>
+<script>
+    $(document).ready(function(){
+        var winHeight = $(window).height();
+        var headHeight = $(".header").height();
+        var footHeight = $(".footer").height();
+        $(".main").height(winHeight-headHeight-footHeight);
+		//执行获取数据方法
+    	getQuestionnaire();
+    });
+	
+    function GetQueryString(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+	    var r = decodeURI(window.location.search.substr(1)).match(reg);
+	    if (r != null)return unescape(r[2]);
+	    return null;
+	}
+   var userId  = GetQueryString("userId");
+   var roomId  = GetQueryString("roomId");
+   var identity=0;
+   var authentication=0;
+     function getQuestionnaire(){
+		$.ajax({
+    		url:"http://" + tomcatBase + "/ilive/questionnaire/getQuestionnaire.jspx?roomId="+roomId,
+    		method:"get",
+    		success:function(res){
+    			if(res.code==1){
+    				var data=res.data;
+					identity=data.identity;
+					authentication=data.authentication;
+    				var title=' <div class="row">'+
+    				'                <div class="col-lg-12">'+
+    				'                <div class="ibox">'+
+    				'                    <div class="ibox-content">'+
+    				'                        <div class="row">'+
+    				'                            <div class="col-lg-4 m-b-sm">'+
+    				'                            	<input type="hidden" id="questionnaireId" value="'+data.id+'"/>'+
+    				'                                <div class="selectedGroup m-l-lg pull-left">'+
+    				'                                    <div class="pull-left lh-40 font-content">活动名称：</div>'+
+    				'                                    <div class="dropdown pull-left m-t-xs m-r-lg ">'+
+    				'                                        <input id="questionnairename" class="giftInput" type="text" value="'+data.questionnaireName+'">'+
+    				'                                    </div>'+
+    				'                                </div>'+
+    				'                            </div>'+
+    				'                               <div class="selectedGroup m-l-lg pull-left">'+
+    				'                                    <div class="pull-left lh-40 font-content">问卷简介：</div>'+
+    				'                                    <div class="text-right lh-40 pull-left">'+
+    				'                                        <input class="giftInput" type="text" style="vertical-align: sub" id="questionnairedesc" value="'+data.questionnaireDesc+'"/>'+
+    				'                                    </div>'+
+    				'                                </div>'+
+    				'                                 <div class="selectedGroup m-l-lg pull-left">'+
+    				'                                    <div class="pull-left lh-40 font-content">备注：</div>'+
+    				'                                    <div class="text-right lh-40 pull-left">'+
+    				'                                        <input class="giftInput" type="text" style="vertical-align: sub" id="desc" value="'+data.msg+'"/>'+
+    				'                                    </div>'+
+    				'                                </div>  '+
+    				'                            </div>'+
+    				'                        </div>'+
+    				'                        <h3 class="wenjuansecondtitle">认证信息</h3>'+
+    				'                        <br><br>';
+    				if(data.identity==1){
+    					title +='                         <div class="wenjuandesc">'+
+        				'                                                                            手机号：<input class="m-r" type="text" style="vertical-align: sub" id="mobile"/>'+
+        				'                        </div>';
+    				}
+    				if(data.authentication==1){
+    					title +='                        <div class="wenjuandesc">'+
+        				'                                                                          身份证号：<input class="m-r" type="text" style="vertical-align: sub" id="IdCard"/>'+
+        				'                        </div>';
+    				}
+    				title +='                    </div>'+
+    				'                </div>'+
+    				'            </div>'+
+    				'            </div>';
+    				$("#title").append(title);
+    			    var msg="";
+    				var list=data.list;
+    				for(var i=0;i<list.length;i++){
+    						msg +='						<div class="wenjuanBox m-b">'+
+    						'						  <input type="hidden" name="problemId" value="'+list[i].id+'">'+
+    						'	                      <div class="wenjuanList">'+
+    						'	                          <div class="wenjuanName">问卷问题：</div>'+
+    						'	                          <div class="wenjuanRight">'+
+    						'	                              <input name="problemName" value="'+list[i].problemName+'" type="text"/>'+
+    						'	                          </div>'+
+    						'	                      </div>'+
+'	                              <input class="inputNum" name="maxNum" type="text" value="'+list[i].maxQuestionnaireNum+'" hidden="true"/>';
+    						var option=list[i].listOption;
+    						var maxNum=list[i].maxQuestionnaireNum;
+    					if(list[i].style==1){
+						    msg += '<input name="style" type="text" value="1" hidden="true"/>';
+    						if(maxNum==1){
+    							for(var j=0;j<option.length;j++){
+    								msg +='<input type="radio" name="'+list[i].problemName+'" value="'+option[j].id+'" >'+option[j].content+'<br>';
+    							}
+    						}else{
+								for(var j=0;j<option.length;j++){
+    								msg +='<input type="checkbox" name="'+list[i].problemName+'" value="'+option[j].id+'" >'+option[j].content+'<br>';
+    							}
+    						}
+    					}else if(list[i].style==2){
+						  msg += '<input name="style" type="text" value="2" hidden="true"/>';
+    						if(maxNum==1){
+    							for(var j=0;j<option.length;j++){
+    								msg +='<input type="radio" name="'+list[i].problemName+'" value="'+option[j].id+'" >'+option[j].content+'<br>'+
+    								' <img src="'+option[j].contentImg+'">';
+    								
+    							}
+    						}else{
+								for(var j=0;j<option.length;j++){
+    								msg +='<input type="checkbox" name="'+list[i].problemName+'" value="'+option[j].id+'" >'+option[j].content+'<br>'+
+    								' <img src="'+option[j].contentImg+'">';
+    							}
+    						}
+    					}else if(list[i].style==3){
+						        msg += '<input name="style" type="text" value="3" hidden="true"/>';
+    							msg +='	                        <div class="wenjuanList deleteList">'+
+    							'		                          <div class="wenjuanName">答案：</div>'+
+    							'		                          <div class="wenjuanRight">'+
+    							'		                              <input type="text"  name="content"/>'+
+    							'		                          </div></div>';
+    						
+    					}
+						msg += '</div>';
+    				}
+    				$("#main").append(msg);
+    			}else{
+    				alert(res.message);
+    			}
+    		}
+    	})
+  }
+   function openLive(){
+       //首先拿到问卷id
+	   var questionnaireId=$("#questionnaireId").val();
+	   var IdCard;
+	   var mobile;
+	   if(authentication==1){
+	    IdCard=$("#IdCard").val();
+			if(IdCard==""||IdCard.length==0){
+			alert("身份证号不能为空！");
+			}
+	   }
+	   if(identity==1){
+	    mobile=$("#mobile").val();
+			if(mobile==""||mobile.length==0||mobile>11){
+			  alert("手机号不能为空或格式不符合要求！");
+			}
+	   }
+	   //循环遍历main下面的div获取每个问题的答案
+	   var arr = [];
+	   $("#main .wenjuanBox").each(function(index,ele){
+	        var obj = {};
+			var problemId = $(ele).find("input[name=problemId]").val();
+    		var maxNum = $(ele).find("input[name=maxNum]").val();
+    		var style = $(ele).find("input[name=style]").val();
+			
+			obj.problemId = problemId;
+    		obj.maxNum = maxNum;
+    		obj.style = style;
+
+    		var optionArr = [];
+			
+			if(style == 1|| style == 2){
+        			 //首先判断是单选还是多选，然后获取用户的选择
+				var optionObj = {};
+				if(maxNum==1){
+				   optionObj.checkdId=$(ele).find("input[type=radio]:checked").val();
+				}else{
+				   optionObj.checkdId +=$(ele).find("input[type=checkbox]:checked").val()+"_";
+				}
+        			optionArr.push(optionObj);
+        		
+    		}else if(style==3){
+    		var optionArr = [];
+        			var optionObj = {};
+        			optionObj.answer = $(ele).find("input[name=content]").val();
+        			optionArr.push(optionObj);
+        		
+    		}
+			var list = JSON.stringify(optionArr);
+    		obj.list = list;
+    		arr.push(obj);
+	   })
+	   console.log(arr);
+	 //  var url="http://" + tomcatBase + "/ilive/questionnaire/saveQuestionnaireAnswer.jspx"
+	   var strList = JSON.stringify(arr);
+	   console.log(strList);
+	   if(userId==null){
+	   userId=0;
+	   }
+	   $.ajax({
+        type: "get",//请求方式 get/post
+        url: "http://" + tomcatBase + "/ilive/questionnaire/saveQuestionnaireAnswer.jspx",
+        //dataType: "jsonp",
+        jsonp: "callback",
+        cache: false,
+        data: {
+				questionnaireId:questionnaireId,
+    			strList:strList,
+				userId : userId,
+				identity:identity,
+				authentication:authentication,
+				IdCard:IdCard,
+				mobile:mobile
+        },
+        success: function (data) {
+            if (data.code == 1) {
+			    alert("答卷成功");
+                window.location.href = "http://" + h5Base + "/pc/play.html?roomId=" + roomId + "&userId=" + userId;
+            } else {
+                // $.DialogBySHF.Alert({
+                //     Width: 350,
+                //     Height: 200,
+                //     Title: "提示",
+                //     Content: data.message
+                // });
+                layerAlert(data.message)
+            }
+        }
+    });
+	   
+	 //  window.location.href="http://"+h5Base+"/pc/play.html?roomId="+roomId+"&userId="+userId;
+   }
+</script>
+</html>

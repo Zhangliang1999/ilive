@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>登陆</title>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.bootcss.com/normalize/8.0.0/normalize.min.css"/>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+<script src="js/base.js"></script>
+<link rel="stylesheet" href="css/dialog.css" />
+<script type="text/javascript" src="js/dialog.js"></script>
+<script type="text/javascript" src="js/layer/layer.js"></script>
+</head>
+<body class="login">
+	<div class="loginpage" id="inlogin">
+		<div class="logo text-center">
+			<img src="images/logo.png" />
+		</div>
+		<form class="form" style="height: 400px;">
+		     <div id="loginbox">
+			<div class="form-group">
+				<input type="text" class="form-control phonenum" placeholder="手机号" name="phoneNumber" maxlength="11">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control vcode" placeholder="请输入验证码" name="password">
+				<span class="send-sms font-normol" onclick="getAuthenticode()" id="spenTimer">获取验证码</span>
+			</div>
+			<div class="form-group">
+				<button type="button" class="btn loginbtn" onclick="loginSubmit()">登 录</button>
+				<button type="button" class="btn loginbtn" onclick="loginSubmit1()">手机号免密登录</button>
+
+			</div>
+			</div>
+			<iframe id= "iframe" width="350px" height="320px" src= ""  frameborder= "0 " hidden="true"> </iframe>
+			<div class="form-group">
+				<div class="checkbox">
+					<label> <input type="checkbox" checked="checked"><span> 用户协议</span>
+					</label>
+				</div>
+			</div>
+		</form>
+
+	</div>
+
+</body>
+<script type="text/javascript">
+var roomId=0;
+var fileId=0;
+var meet="";
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = decodeURI(window.location.search.substr(1)).match(reg);
+    if (r != null)return unescape(r[2]);
+    return null;
+}
+if(GetQueryString("roomId")!=null||GetQueryString("roomId")!=undefined){
+	roomId = GetQueryString("roomId");
+}
+if(GetQueryString("fileId")!=null||GetQueryString("fileId")!=undefined){
+	fileId = GetQueryString("fileId");
+}
+if(GetQueryString("meet")!=null||GetQueryString("meet")!=undefined){
+	meet = GetQueryString("meet");
+	fileId=1;fileId
+}
+
+	//登录
+	function loginSubmit(){
+		var phoneNumber = $("input[name=phoneNumber]").val();
+		var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+		if (!myreg.test(phoneNumber)) {
+			// $.DialogBySHF.Alert({
+			//       Width: 350,
+			//       Height: 200,
+			//       Title: "警告",
+			//       Content: "手机号输入不合法"
+			//  });
+			layerAlert('手机号格式不正确')
+			return false;
+		}
+
+		var password = $("input[name=password]").val();
+
+		if(password==undefined||password.replace("\s+", "")==""){
+			// $.DialogBySHF.Alert({
+			//       Width: 350,
+			//       Height: 200,
+			//       Title: "警告",
+			//       Content: "验证码不能为空"
+			//  });
+			layerAlert('验证码不能为空')
+			return;
+		}
+
+		if(fileId==0){
+			if(roomId==0){
+				// $.DialogBySHF.Alert({
+				//       Width: 350,
+				//       Height: 200,
+				//       Title: "警告",
+				//       Content: "直播间不存在",
+				//       ConfirmFun:errorfunction
+				//  });
+				layerAlert('直播间不存在')
+				return;
+			}else{
+				$.ajax({
+					type : "GET",//请求方式 get/post
+					url : "http://" + tomcatBase + "/ilive/appuser/reg.jspx?orginal=1",
+					dataType : "jsonp",
+					jsonp : "callback",
+					cache : false,
+					data : {
+						phoneNum : phoneNumber,
+						vpassword : password,
+						type : 2
+					},
+					success : function(data) {
+						var status = data.code;
+						if (status == 1) {
+							var userId = data.data.userId;
+							window.location.href="http://" +h5Base + "/pc/play.html?roomId="+roomId+"&userId="+userId ;
+						} else {
+							// $.DialogBySHF.Alert({
+							//       Width: 350,
+							//       Height: 200,
+							//       Title: "警告",
+							//       Content: "你输入的观看验证码有误，请重新输入"
+							//  });
+							layerAlert('你输入的观看验证码有误，请重新输入')
+						}
+					}
+				});
+			}
+		}else{
+			$.ajax({
+				type : "GET",//请求方式 get/post
+				url : "http://" + tomcatBase + "/ilive/appuser/reg.jspx?orginal=1",
+				dataType : "jsonp",
+				jsonp : "callback",
+				cache : false,
+				data : {
+					phoneNum : phoneNumber,
+					vpassword : password,
+					type : 2
+				},
+				success : function(data) {
+					var status = data.code;
+					if (status == 1) {
+						var userId = data.data.userId;
+						if(meet!=""&&meet!=null){
+							window.location.href="http://" +h5Base + "/pc/enterMeetPwd.html?userId="+userId+"&roomId="+GetQueryString("eventId");
+						}else{
+							window.location.href="http://" +h5Base + "/pc/review.html?roomId="+roomId+"&userId="+userId+"&fileId="+fileId;
+						}
+						
+					} else {
+						// alert("您输入的观看验证码有误，请重新输入");
+						// $.DialogBySHF.Alert({
+						//       Width: 350,
+						//       Height: 200,
+						//       Title: "警告",
+						//       Content: "你输入的观看验证码有误，请重新输入"
+						//  });
+                        layerAlert('你输入的观看验证码有误，请重新输入')
+					}
+				}
+			});
+		}
+	}
+	var countdown=60;
+	//获取验证码
+	function getAuthenticode(){
+		var phoneNumber = $("input[name=phoneNumber]").val();
+		var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+		if (!myreg.test(phoneNumber)) {
+			// $.DialogBySHF.Alert({
+			//       Width: 350,
+			//       Height: 200,
+			//       Title: "警告",
+			//       Content: "手机号输入不合法"
+			//  });
+            layerAlert('手机号格式不正确')
+			return false;
+		}
+		$.ajax({
+			type : "GET",//请求方式 get/post
+			url : "http://" + tomcatBase + "/ilive/appuser/sendmsg.jspx",
+			dataType : "jsonp",
+			jsonp : "callback",
+			cache : false,
+			data : {
+				phoneNum : phoneNumber,
+				type:"reg"
+			},
+			success : function(data) {
+				var status = data.code;
+				if (status == 1) {
+					selectTimer();
+				} else {
+					// $.DialogBySHF.Alert({
+					//       Width: 350,
+					//       Height: 200,
+					//       Title: "警告",
+					//       Content: data.message
+					//  });
+                    layerAlert(data.message)
+				}
+			}
+		});
+	}
+	function selectTimer(){
+		if (countdown == 0) {
+			$("#spenTimer").css("background","#0084ff");
+            $("#spenTimer").text("重新发送");
+            $("#spenTimer").attr("onclick","getAuthenticode()");
+            countdown = 60;
+        } else {
+        	$("#spenTimer").css("background","#656161");
+            $("#spenTimer").text("重新发送(" + countdown + "s)");
+            $("#spenTimer").removeAttr("onclick");
+            countdown--;
+           	setTimeout(function() {
+           		selectTimer();
+ 		   	},1000);
+        }
+	}
+	function errorfunction(){
+		window.location.href="http://"+h5Base+"/pc/error.html";
+	}
+	function loginSubmit1(){
+			//获取跳转地址
+			$.ajax({
+				type : "GET",//请求方式 get/post
+				url : "http://" + tomcatBase + "/ilive/appuser/getPcUrl.jspx",
+				dataType : "jsonp",
+				jsonp : "callback",
+				cache : false,
+				data : {
+					roomId : roomId,
+					fileId:fileId
+				},
+				success : function(data) {
+					var status = data.code;
+					if (status == 1) {
+						var url=data.url;
+						$("#iframe").attr("src",url);
+						$("#loginbox").attr("hidden","true");
+						$("#iframe").show();
+						/*  window.location.href=url; */
+					}else{
+						// $.DialogBySHF.Alert({
+						//       Width: 350,
+						//       Height: 200,
+						//       Title: "警告",
+						//       Content: data.message
+						//  });
+						layerAlert(data.message)
+					}
+				}
+			});
+		
+
+	}
+</script>
+</html>
