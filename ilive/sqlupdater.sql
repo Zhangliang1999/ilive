@@ -1,0 +1,1 @@
+UPDATE ilive_enterprise SET is_del=1 WHERE enterprise_id in (203,204,250,251,252,253,259,260,265,266,304,305,360,361);
