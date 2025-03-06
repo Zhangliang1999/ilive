@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人满</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            width: 570px;
+            height: 233px;
+            margin: 105px auto 0;
+        }
+        .imgCon{
+            width: 228px;
+            height: 233px;
+            float: left;
+            background: url("images/crammed.png") no-repeat;
+            background-size: 100% 100%;
+        }
+        .textCon{
+            width: 322px;
+            height: 233px;
+            margin-left: 20px;
+            float: left;
+        }
+        .textOne{
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            font-size: 18px;
+            color: #000;
+            margin-top: 65px;
+        }
+        .textTwo{
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+        .refreshBtn{
+            width: 100px;
+            height: 30px;
+            background: #0084ff;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+            font-size: 12px;
+            overflow: hidden;
+            border-radius: 50px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="imgCon"></div>
+        <div class="textCon">
+            <div class="textOne">直播间观看人数已满~</div>
+            <div class="textTwo">您可以返回或者重新刷新试试</div>
+            <div class="refreshBtn" onclick="openLive()">刷新</div>
+        </div>
+    </div>
+</body>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script>
+    window.onload=function(){
+        var winHeight = $(window).height();
+        var thisH = $(".container").height();
+        $(".container").css("margin-top",(winHeight-thisH)/2);
+    }
+    function GetQueryString(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+	    var r = decodeURI(window.location.search.substr(1)).match(reg);
+	    if (r != null)return unescape(r[2]);
+	    return null;
+	}
+	var roomId = GetQueryString("roomId");
+	function openLive(){
+		if(roomId==null||roomId==""){
+		}else{
+			window.location.href= "http://"+h5Base+"/pc/play.html?roomId="+roomId;
+		}
+	}
+</script>
+</html>

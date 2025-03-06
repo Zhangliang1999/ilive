@@ -1,0 +1,65 @@
+.mui-content{
+    background: #fff!important;
+    overflow: hidden;
+}
+.mui-card-content-inner{
+    position: relative;
+    padding: 0;
+}
+.mui-card-content-inner img{
+    width: 100%;
+}
+.mui-card {
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: none;
+}
+.mask{
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    background: rgba(0,0,0,0.5);
+    bottom: 0;
+    left: 0;
+    padding: 0 5px;
+    line-height: 40px;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.timeMask{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #FEEEEE;
+    text-align: center;
+    color: red;
+    font-size: 14px;
+}
+.no-borders{
+    border: 0 !important;
+}
+.confirmBtn{
+    width: 80%;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    font-size: 14px;
+    padding:0;
+    background: #0084ff;
+    margin-left: 10%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.mui-input-row textarea{
+    height: 100px;
+    resize: none;
+    border: none;
+}

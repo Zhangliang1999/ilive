@@ -1,0 +1,86 @@
+.pcLogo{
+    width:191px;
+    height: 31px;
+    margin: 10px auto;
+}
+.logoInfo{
+    width: 320px;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+}
+.phoneLogo{
+    float: left;
+    font-size: 15px;
+    color: #343434;
+}
+.passLink{
+    float: right;
+    color: #77767b;
+}
+.passLink:hover{
+    color: #0084ff;
+    text-decoration: none;
+}
+.logoInfo input{
+    width: 100%;
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding:0 10px;
+}
+.logoInfo .otp{
+    width: 200px!important;
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding:0 10px;
+    float: left;
+}
+.logoInfo .otpBtn{
+    width: 115px!important;
+    height: 34px;
+    line-height: 34px;
+    color: #fff;
+    border: none;
+    background: #0084ff;
+    border-radius: 3px;
+    margin-top: 1px;
+    float: left;
+    margin-left: 5px;
+}
+.m-b{
+    margin-bottom: 15px;
+}
+.m-t{
+    margin-top: 15px;
+}
+.logoButton{
+    width: 100%;
+    height: 34px;
+    line-height: 34px;
+    color: #fff;
+    border: none;
+    background: #0084ff;
+    border-radius: 3px;
+}
+.goRegister{
+    width: 320px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin-top: 30px;
+}
+.form{
+    box-shadow: 2px 2px 10px #333;
+}
+.forgetPass{
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    color: #0084ff;
+    text-decoration: underline;
+}
+.passInput{
+    padding-right: 70px!important;
+}
