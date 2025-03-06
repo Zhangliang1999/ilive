@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+
+    <title>天翼直播平台</title>
+    <link rel="stylesheet" href="css/newlogin.css"/>
+    <link rel="stylesheet" href="js/need/layer.css"/>
+    <link rel="stylesheet" href="css/2019style.css"/>
+</head>
+<body>
+<div class="container" id="mainContent">
+    <div class="main">
+        <div class="header">
+            <h2 class="text-center">绑定手机号</h2>
+        </div>
+        <div class="loginBox">
+            <div class="login-input-item">
+                <div class="inputBox phoneNumber">
+                    <label><span>+86</span></label>
+                    <input type="tel" placeholder="请输入您的手机号" maxlength="11" name="phoneNumber"
+                           onfocus="wchatHackInput()"/>
+                </div>
+                <div class="inputBox passInput">
+                    <label><span>验证码</span></label>
+                    <input type="tel" placeholder="动态密码" maxlength="6"
+                           name="vpassword" onfocus="wchatHackInput()"/>
+                    <span class="yzmBtn" onclick="getAuthenticode(this)" id="spenTimer">获取验证码</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="button" class="livebtn" onclick="savePhone1()">进入观看</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="newmask"></div>
+<footer>天翼直播提供全程技术支持</footer>
+</body>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/rem.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<script type="text/javascript" src="js/tysx2019.js"></script>
+<script type="text/javascript">
+
+    var roomId = GetQueryString("roomId")|| 0 ;
+    var userId = GetQueryString("userId")|| 0 ;
+    var fileId = GetQueryString("fileId")|| 0 ;
+    $(".container").height($(window).height());
+    $(".mask").height($(window).height());
+    function savePhone1() {
+        var phoneNumber = $("input[name=phoneNumber]").val();
+        var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+        if (!myreg.test(phoneNumber)) {
+            layerOpen('请输入正确的手机号')
+            return false;
+        }
+        var vpassword = $("input[name=vpassword]").val();
+        if (vpassword == null || vpassword == undefined) {
+            layerOpen('验证码不能为空')
+            return false;
+        }
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/personal/bindMobile.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                terminalType: "h5",
+                userId: userId,
+                phoneNum: phoneNumber,
+                vpassword: vpassword
+            },
+            success: function (data) {
+                if (data.code == 1) {
+                    if (fileId != 0) {
+                        window.location.href = "http://" + h5Base + "/phone/review.html?roomId=" + roomId + "&fileId=" + fileId + "&userId=" + userId;
+                        return
+                    }
+                    window.location.href = "http://" + h5Base + "/phone/live.html?roomId=" + roomId + "&userId=" + userId;
+                } else {
+                    layerOpen(data.message)
+                    return false;
+                }
+            }
+        });
+    }
+</script>
+</html>

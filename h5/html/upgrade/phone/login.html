@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+
+    <title>天翼直播平台</title>
+    <link rel="stylesheet" href="css/newlogin.css"/>
+    <link rel="stylesheet" href="js/need/layer.css"/>
+    <link rel="stylesheet" href="css/2019style.css"/>
+</head>
+<body>
+<div class="container" id="mainContent">
+    <div class="main">
+        <div class="header">
+            <div id="welcomeMsg" class="welcomeMsg"></div>
+            <div class="" id="roomName"></div>
+        </div>
+        <div class="loginBox">
+            <div class="login-input-item">
+                <div class="inputBox phoneNumber">
+                    <label><span>+86</span></label>
+                    <input type="tel" placeholder="请输入您的手机号" maxlength="11" name="phoneNumber" onfocus="wchatHackInput()"/>
+                </div>
+                <div class="inputBox">
+                    <label><span>验证码</span></label>
+                    <input type="tel" placeholder="动态密码" maxlength="6"
+                           name="password" onfocus="wchatHackInput()"/>
+                    <span class="yzmBtn" onclick="getAuthenticode(this)" id="spenTimer">获取验证码</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="button" class="livebtn" onclick="loginUser()">进入观看</button>
+                <a class="login-input-item" href="javascript:;" onclick="loginSubmit()">手机号免密登录</a>
+            </div>
+        </div>
+
+        <div class="permission" style="display: none">
+            <div class="welcomeMsg">您即将用以下手机号进行认证观看</div>
+            <div class="edit-phone">
+                <div class="userPhone"></div>
+                <a href="javascript:;" onclick="changes()">修改</a>
+            </div>
+            <div class="text-center loginpermissions" >
+                <button type="button" class="livebtn" onclick="loginpermissions()">进入直播</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="roomId" name="roomId" value="0">
+<input type="hidden" id="fileId" name="fileId" value="0">
+<div class="newmask"></div>
+<footer>天翼直播提供全程技术支持</footer>
+</body>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/rem.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<script type="text/javascript" src="js/tysx2019.js"></script>
+<script type="text/javascript">
+    var comment, permissionsjump, roomId, fileId, url, data;
+    $(function () {
+        comment = GetQueryString("comment") || 0;
+        permissions = GetQueryString("permissions") || 0;
+        roomId = GetQueryString("roomId") || 0;
+        fileId = GetQueryString("fileId") || 0;
+        $("input[name=roomId]").val(roomId);
+        $("input[name=fileId]").val(fileId);
+        if (GetQueryString("roomId") != null || GetQueryString("roomId") != undefined) {
+            if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+                window.location.href = "http://" + h5Base + "/pc/play.html?roomId=" + GetQueryString("roomId");//PC
+            }
+        }
+        //鉴权进来
+        permissionsjump = window.sessionStorage.getItem('permissionsjump')
+
+        if (permissionsjump == 'true') {
+            var plinfo = JSON.parse(window.sessionStorage.getItem('plinfo'))
+            $('.permission').show()
+            $('.loginBox').hide()
+            $('.userPhone').html(plinfo.userphone)
+        }
+
+
+        $(".container").height($(window).height());
+        $(".newmask").height($(window).height());
+
+
+        if (roomId != 0) {
+            url = "http://" + tomcatBase + "/ilive/selectRoom.jspx";
+            data = {
+                'roomId': roomId
+            }
+        } else {
+            url = "http://" + tomcatBase + "/ilive/app/room/vod/getVodMsg.jspx";
+            data = {
+                'fileId': fileId
+            }
+        }
+
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: url,
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: data,
+            success: function (data) {
+                console.log(data);
+                if (data.code == 1) {
+                    var iLiveLiveRoom = JSON.parse(data.iLiveLiveRoom);
+                    var liveEvent = iLiveLiveRoom.liveEvent;
+                    var liveTitle = liveEvent.liveTitle;
+                    if (liveTitle == undefined) {
+                        liveTitle = "天翼直播平台";
+                    }
+                    document.title = liveTitle;
+                    var welcomeMsg = liveEvent.welcomeMsg;
+                    if (welcomeMsg == undefined || welcomeMsg == '') {
+                        welcomeMsg = "欢迎观看";
+                    }
+                    $("#welcomeMsg").text(welcomeMsg);
+                    $("#roomName").text(liveTitle);
+                }
+            }
+        });
+
+
+        // var param = window.location.search;
+        // var newsidinfo = param.substr(param.indexOf("?") + 1, param.length)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+        // var split = newsidinfo.split("&")
+        // for (var i = 0; i < split.length; i++) {
+        //     var newsids = split[i].split("=");//对获得的参数字符串按照“=”进行分割
+        //     var newsid = newsids[1];//得到参数值
+        //     var newsname = newsids[0];
+        //     if (newsname == "roomId") {
+        //         $("input[name=roomId]").val(newsid);
+        //
+        //         //roomId = newsid;
+        //         // $.ajax({
+        //         //     type: "get",
+        //         //     url: "http://" + tomcatBase + "/ilive/appuser/getGuideUrl.jspx?roomId=" + roomId + "&orginal=1" + "&callback=?",
+        //         //     async: true,
+        //         //     dataType: "jsonp",
+        //         //     jsonp: "callback",
+        //         //     timeout: 10000,
+        //         //     success: function (data) {
+        //         //         if (data.code == 1) {
+        //         //             var imgUrl = data.data.imgUrl;
+        //         //             if (imgUrl != "") {
+        //         //                 $('#mainContent').css({
+        //         //                     "background": "url(" + imgUrl + ") no-repeat",
+        //         //                     "background-size": "100% 100%"
+        //         //                 });
+        //         //             }
+        //         //         }
+        //         //
+        //         //     },
+        //         //     error: function (xhr, type, errorThrown) {
+        //         //         // plus.nativeUI.toast(errorThrown);
+        //         //     }
+        //         // });
+        //     } else if (newsname == "fileId") {
+        //         $("input[name=fileId]").val(newsid);
+        //     }
+        // }
+    });
+    function loginpermissions() {
+        //鉴权进来
+        if (permissionsjump == 'true') {
+            window.sessionStorage.setItem('permissionsjump', false)
+            location.replace("http://" + h5Base + "/phone/live.html?roomId=" + roomId)
+            //window.location.href = "http://" + h5Base + "/phone/live.html?roomId=" + roomId
+        }
+    }
+    function loginUser() {
+        var roomId = $("input[name=roomId]").val();
+        var phoneNumber = $("input[name=phoneNumber]").val();
+        var password = $("input[name=password]").val();
+        var fileId = $("input[name=fileId]").val();
+
+
+
+
+        if (phoneNumber == undefined || phoneNumber.replace("\s+", "") == "") {
+            layerOpen('登录用户不能为空!')
+            return false
+        }
+        if (password == undefined || password.replace("\s+", "") == "") {
+            layerOpen('验证码不能为空!')
+            return false
+        }
+
+        if (fileId == 0) {
+            if (roomId == 0) {
+                layerOpen('直播间不存在!')
+                return false
+            } else {
+                $.ajax({
+                    type: "GET",//请求方式 get/post
+                    url: "http://" + tomcatBase + "/ilive/appuser/reg.jspx?orginal=1",
+                    dataType: "jsonp",
+                    jsonp: "callback",
+                    cache: false,
+                    data: {
+                        phoneNum: phoneNumber,
+                        vpassword: password,
+                        type: 2
+                    },
+                    success: function (data) {
+                        var status = data.code;
+                        if (status == 1) {
+                            var userId = data.data.userId;
+                            if (comment != 1) {
+                                location.replace("http://" + h5Base + "/phone/live.html?roomId=" + roomId + "&userId=" + userId)
+                                //window.location.href = "http://" + h5Base + "/phone/live.html?roomId=" + roomId + "&userId=" + userId
+                            } else {
+                                location.replace("http://" + h5Base + "/phone/comment.html?roomId=" + roomId)
+                                //window.location.href = "http://" + h5Base + "/phone/comment.html?roomId=" + roomId
+                            }
+                        } else {
+                            layerOpen(data.message)
+                        }
+                    }
+                });
+            }
+        } else {
+            $.ajax({
+                type: "GET",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/appuser/reg.jspx?orginal=1",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    phoneNum: phoneNumber,
+                    vpassword: password,
+                    type: 2
+                },
+                success: function (data) {
+                    var status = data.code;
+                    if (status == 1) {
+                        var userId = data.data.userId;
+                        window.location.replace =("http://" + h5Base + "/phone/review.html?roomId=" + roomId + "&userId=" + userId + "&fileId=" + fileId)
+                        //window.location.href = "http://" + h5Base + "/phone/review.html?roomId=" + roomId + "&userId=" + userId + "&fileId=" + fileId;
+                    } else {
+                        layerOpen('您输入的验证码有误，请重新输入!')
+                    }
+                }
+            });
+        }
+    }
+
+    function loginSubmit() {
+        var roomId = $("input[name=roomId]").val();
+        var fileId = $("input[name=fileId]").val();
+        //获取跳转地址
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/appuser/getPhoneUrl.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                roomId: roomId,
+                fileId: fileId
+            },
+            success: function (data) {
+                var status = data.code;
+                if (status == 1) {
+                    var url = data.url;
+                    window.location.replace(url)
+                } else {
+                    layerOpen(data.message)
+                }
+            }
+        });
+    }
+
+    function changes() {
+        window.sessionStorage.setItem('permissionsjump', false)
+        $('.permission').hide()
+        $('.loginBox').show()
+    }
+</script>
+<script src="http://sdk.bst.tv189.com/dc/bstdcins_100033v3.js"></script>
+</html>

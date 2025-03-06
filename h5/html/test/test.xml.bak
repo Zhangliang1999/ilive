@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<smil>
+<seq>
+	<media role="seq" srchigh="http://tv.sznews.com:9550/vod1/绿箭.flv" srclow="video" id="4" adseq="true" noSkip="false" begin="0" dur="6"  end="6" mediatype="flv" isshiftmove="false" returnInfo="AD_5225_F_551"> 
+    		<clientData title="片头广告" captionURL=""/>
+	</media>
+	<media role="seq" srchigh="http://tv.sznews.com:9550/vod1/237/1301030541309369_5159_0x0_500.mp4" srclow="http://www.asdsfsdf.com" id="5" videoHeadTime="-1" highLow="false"  videoEndTime="-1"  adseq="false"  noSkip="true" begin="0" dur="-1" end="0" isnextplay="false"   mediatype="flv" isshiftmove="false" returnInfo="PT_5078" > 
+		<clientData title="正片内容" captionURL=""/>
+	</media>
+</seq>
+</smil>
+</root>

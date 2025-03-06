@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no">
+    <title>天翼直播平台</title>
+    <script type="text/javascript" src="js/rem.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="js/videojs/video-js.min.css">
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_872913_5vqpxvyfqjx.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mescroll.js@1.4.1/mescroll.min.css">
+    <link rel="stylesheet" type="text/css" href="js/need/layer.css">
+    <link href="https://cdn.bootcss.com/Swiper/4.4.6/css/swiper.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/2019style.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/review/review.css"/>
+    <link rel="stylesheet" type="text/css" href="css/review/dcVideo.css"/>
+<body>
+<div class="pageloading" id="loding" style="display: block">
+    <img src="img/loding.png" alt=""  >
+    <img src="img/loading.svg" alt="" class="loadingsvg">
+</div>
+
+<div class="page" style="visibility: hidden">
+    <div class="videoBox">
+        <video id="video" controls preload="metadata" playsinline webkit-playsinline="true" x-webkit-airplay="allow"
+               class="video-js vjs-default-skin vjs-big-play-centered gu-media--video"
+               poster="http://pic.zb.tv189.com/img/livebg_default.png">
+        </video>
+    </div>
+    <div class="main">
+        <div class="menuBox">
+            <ul>
+                <li class="liactive zbjj"><span>直播简介</span></li>
+                <li class="talkLi"><span>聊天互动</span></li>
+            </ul>
+        </div>
+        <div class="contentBox">
+            <div class="mescroll" id="mescroll">
+                <div class="contentBox-all">
+                    <div class="cell showDesc" id="showDesc">
+                        <div class="title ellipsis liveTitle">天翼直播平台</div>
+                        <div class="play-num"><i class="iconfont icon-video"></i><span class="viewNum">0</span>次播放</div>
+                        <div class="links">简介<i class="iconfont icon-youjiantou"></i></div>
+                    </div>
+
+                    <div class="cell zbjcompany" id="zbjcompany">
+                        <div class="companyimg"></div>
+                        <div class="company">
+                            <div class="small-liveTitle"><span id="companyName">天翼直播平台</span>
+                                <span class="iconfont btn" id="concernStatus" style="display: none"></span>
+                                <span class="zhuye btn iconfont icon-jia1"></span>
+                            </div>
+                            <div class="small-fans" id="concernTotal">粉丝数: <span class="smallText">0</span> 人</div>
+                        </div>
+                        <div class="links" style="display: none">去主页<i class="iconfont icon-youjiantou"></i></div>
+                    </div>
+
+                    <div class="cell reviewsAll" id="reviewsAll" style="display: none">
+                        <div class="title">相关</div>
+                        <div class="links" id="showAllReview">全部<i class="iconfont icon-youjiantou"></i></div>
+                        <div class="swiper-container" id="reviews">
+                            <div class="swiper-wrapper"></div>
+                        </div>
+                    </div>
+
+                    <div class="cell fileDoc" id="fileDoc" style="display: none">
+                        <div class="title">文档</div>
+                        <div class="document" id="document"></div>
+                    </div>
+
+                    <div class="cell talkLi" id="talkLi">
+                        <div class="title">评论</div>
+                        <div class="no-comment" id="no_comment"></div>
+                        <div class="comment" id="comment"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="flexbox">
+                    <div class="flex flex5" id="chatipt">
+                        <div class="chatipt">
+                            <span>聊几句吧~</span>
+                        </div>
+                    </div>
+                    <div class="flex flex" id="dianzan">
+                        <div class="dianzan">
+                            <i class="iconfont icon-xin"></i>
+                            <span class="tag" id="dianzan-tag">0</span>
+                        </div>
+                    </div>
+                    <div class="flex" id="fenxiang">
+                        <div class="fenxiang">
+                            <i class="iconfont icon-fenxiang"></i>
+                        </div>
+                    </div>
+                    <div class="flex" id="wendang" style="display: none">
+                        <div class="">
+                            <i class="iconfont icon-wendang" style="font-size: .4rem"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <input type="hidden" id="roomId" name="roomId" value="0">
+            <input type="hidden" id="fileId" name="fileId" value="0">
+            <input type="hidden" id="userId" name="userId" value="0">
+        </div>
+    </div>
+</div>
+<!--黑色背景-->
+<div class="layui-m-layershade" id="customshade" style="z-index: 1000;display: none">
+    <img src="css/review/images/fenxiang.png" alt="" class="img-fenxiang">
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mescroll.js@1.4.1/mescroll.min.js" charset="utf-8"></script>
+<script src="https://cdn.bootcss.com/Swiper/4.4.6/js/swiper.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://tp.nty.tv189.com/h5/mainsite/lib/tv189/jclient.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/tysx2019.js"></script>
+<script type="text/javascript" src="js/A-emoji.js" charset="utf-8"></script>
+<script src="js/videojs/video.min.js"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<script type="text/javascript" src="js/review/apis.js"></script>
+<script type="text/javascript" src="js/review/reviewNew.js"></script>
+<script src="js/share_other.js"></script>
+<script></script>
+</body>
+</html>

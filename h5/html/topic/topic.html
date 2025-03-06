@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>专题</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/swiper-3.4.2.min.css"/>
+    <link rel="stylesheet" type="text/css" href="theme.css"/>
+	<style>
+        .bgc-fff{
+            background: no-repeat;
+            background-size: 100%;
+            position: relative;
+            padding: 0;
+        }
+        .bigPic{
+            width: 7rem;
+            height: 3.93rem;
+            margin: 0.1rem 0.25rem;
+        }
+        .oneColText{
+            width: 7rem;
+            margin: 0.3rem auto 0;
+            font-size:0.28rem;
+        }
+        /*单行内容状态 默认预告状态*/
+        .condition{
+            position: absolute;
+            width: 1rem;
+            background: url("images/000.png") no-repeat;
+            height: 0.37rem;
+            background-size: 100%;
+            right: 0.1rem;
+            top:0.1rem;
+            font-size: 0.2rem;
+            color: #fff;
+            text-align: center;
+            line-height: 0.37rem;
+        }
+        /*单行内容回看状态*/
+        .condition.status5{
+            background-image: url("images/555.png");
+        }
+		/*直播中*/
+        .condition.status1{
+            background-image: url("images/111.png");
+        }
+		/*暂停*/
+		.condition.status2{
+            background-image: url("images/222.png");
+        }
+		/*结束*/
+		.condition.status3{
+            background-image: url("images/333.png");
+        }
+        /*双行内容预告状态*/
+        .smallStatus{
+            position: absolute;
+            width: 0.8rem;
+            background: url("images/0000.png") no-repeat;
+            height: 0.31rem;
+            background-size: 100%;
+            right: 0.08rem;
+            top:0.08rem;
+            font-size: 0.12rem;
+            color: #fff;
+            text-align: center;
+            line-height: 0.31rem;
+        }
+        /*双行内容回看状态*/
+        .smallStatus.status5{
+            background-image: url("images/5555.png");
+        }
+		 /*双行内容直播中状态*/
+        .smallStatus.status1{
+            background-image: url("images/1111.png");
+        }
+		 /*双行内容暂停状态*/
+        .smallStatus.status2{
+            background-image: url("images/2222.png");
+        }
+		 /*双行内容结束状态*/
+        .smallStatus.status3{
+            background-image: url("images/3333.png");
+        }
+        .smallPicBox{
+            margin-top: 0;
+			height:1.94rem;
+        }
+        .smallPicTit{
+            font-size: 0.24rem;
+            height: 0.6rem;
+            line-height: 0.3rem;
+            margin-bottom: 0.2rem;
+        }
+    </style>
+</head>
+<body >
+    <div class="slimContent" id="content">
+        <div class="moblieHeader">
+            
+        </div>
+        <div class="swipeBox">
+            
+        </div>
+		<div class="text-line">
+               
+        </div>
+		
+		<div class="one-pic">
+            
+        </div>
+
+        </div>
+        </div>
+</body>
+<!-- Mainly scripts -->
+<script src="js/jquery-2.2.3.min.js"></script>
+<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/swiper-3.4.2.jquery.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/share_other.js"></script>
+<script src="topic.js"></script>
+</html>

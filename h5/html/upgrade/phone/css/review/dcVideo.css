@@ -1,0 +1,137 @@
+
+video {
+    width: 100%;
+    height: 100%;
+}
+.videoBox {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+.video-js{
+
+}
+#video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.videoPlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background-size: 100%;
+}
+
+#playBg {
+    width: 100%;
+    height: 100%;
+    background: url("http://pic.zb.tv189.com/img/livebg_default.png") #000;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#playBg:after,
+.videoPlay:after,
+#endLive:after {
+    position: absolute;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+}
+
+.videoPlay i {
+    font-size: 1.6rem;
+    color: #fff;
+    font-weight: 100;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -0.8rem;
+    margin-left: -0.8rem;
+    z-index: 10000;
+}
+
+.videoBox img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.videoBtn {
+    width: 100%;
+    height: 0.8rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    opacity: 1;
+}
+
+.playBox {
+    width: 0.4rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    float: left;
+    margin-left: 0.3rem;
+    color: #fff;
+}
+
+.playBox i {
+    font-size: 0.30rem;
+}
+
+.vjs-error-display {
+    /*display: none;*/
+}
+
+.vjs-resize-manager {
+    border: none;
+}
+.vjs-big-play-centered .vjs-big-play-button{
+    width: 100%;
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    border: none;
+    margin: 0;
+    padding: 0;
+    background: rgba(0,0,0,.5);
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    z-index: 1;
+}
+.video-js .vjs-tech{
+    position: relative;
+}
+.vjs-big-play-centered .vjs-big-play-button .vjs-icon-placeholder{
+    font-size: 1.6rem;
+    color: #fff;
+    position: absolute;
+    top: 31%;
+    left: 39%;
+    z-index: 1;
+    display: block;
+}
+
+.video-js .vjs-big-play-button .vjs-icon-placeholder:before{
+    font-family: iconfont;
+    content: "\e669";
+}
+

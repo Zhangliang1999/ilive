@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+
+    <title>天翼直播平台</title>
+    <link rel="stylesheet" href="css/newlogin.css"/>
+    <link rel="stylesheet" href="js/need/layer.css"/>
+    <link rel="stylesheet" href="css/2019style.css"/>
+</head>
+<body>
+<div class="container" id="mainContent">
+    <div class="main">
+        <div class="loginBox">
+            <div class="header">
+                <div id="welcomeMsg">欢迎观看欢迎观看欢迎观看欢迎观看</div>
+                <div class="" id="roomName">从的大的从的大的从的大的从的大的从的大的从的大的从的大的从的大的</div>
+            </div>
+            <div class="login-input-item">
+                <div class="inputBox phoneNumber">
+                    <input class="" type="text" onfocus="wchatHackInput()" placeholder="请输入您的观看码" name="codeEwm" maxlength="6"/>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="button" class="livebtn" onclick="checkRoomcodeEwm()">进入观看</button>
+            </div>
+        </div>
+        <div class="goback">我有已绑定观看的账户<br><a href="javascript:;" onclick="goback()">去登录</a></div>
+    </div>
+
+    <div class="newmask"></div>
+    <footer>天翼直播提供全程技术支持</footer>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/rem.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<script type="text/javascript" src="js/tysx2019.js"></script>
+<script type="text/javascript">
+    $(".container").height($(window).height());
+    $(".newmask").height($(window).height());
+
+    if (GetQueryString("roomId") != null || GetQueryString("roomId") != undefined) {
+        if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+        } else {
+            if (GetQueryString("fileId") != null || GetQueryString("fileId") != undefined) {
+                window.location.href = "http://" + h5Base + "/pc/review.html?roomId=" + GetQueryString("roomId") + "&fileId=" + GetQueryString("fileId");//PC
+            } else {
+                window.location.href = "http://" + h5Base + "/pc/play.html?roomId=" + GetQueryString("roomId");//PC
+            }
+        }
+    }
+
+    var roomId = GetQueryString("roomId") || 0;
+    var fileId = GetQueryString("fileId") || 0;
+    var userId = GetQueryString("userId") || 0;
+    $(function () {
+
+        if (roomId != 0) {
+            url = "http://" + tomcatBase + "/ilive/selectRoom.jspx";
+            data = {
+                'roomId': roomId
+            }
+        } else {
+            url = "http://" + tomcatBase + "/ilive/app/room/vod/getVodMsg.jspx";
+            data = {
+                'fileId': fileId
+            }
+        }
+
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: url,
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: data,
+            success: function (data) {
+                console.log(data);
+                if (data.code == 1) {
+                    var iLiveLiveRoom = JSON.parse(data.iLiveLiveRoom);
+                    var liveEvent = iLiveLiveRoom.liveEvent;
+                    var liveTitle = liveEvent.liveTitle;
+                    if (liveTitle == undefined) {
+                        liveTitle = "天翼直播平台";
+                    }
+                    document.title = liveTitle;
+                    var welcomeMsg = liveEvent.welcomeMsg;
+                    if (welcomeMsg == undefined || welcomeMsg == '') {
+                        welcomeMsg = "欢迎观看";
+                    }
+                    $("#welcomeMsg").text(welcomeMsg);
+                    $("#roomName").text(liveTitle);
+                }
+            }
+        });
+    });
+
+    function goback() {
+            window.location.replace("http://" + h5Base + "/phone/login.html?roomId=" + roomId + "&fileId=" + fileId);
+    }
+
+    function checkRoomcodeEwm() {
+        var codeEwm = $("input[name=codeEwm]").val();
+        if (codeEwm == null || codeEwm == undefined || codeEwm == "") {
+            layerOpen('观看码不能为空')
+        } else {
+            $.ajax({
+                type: "GET",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/app/room/userFCode.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    terminalType: "h5",
+                    roomId: roomId,
+                    fileId: fileId,
+                    code: codeEwm
+                },
+                success: function (data) {
+                    var code = data.code;
+                    if (code == 1) {
+                        if (fileId == 0) {
+                            layerConfim('观看码绑定成功', function () {
+                                location.replace("http://" + h5Base + "/phone/live.html?roomId=" + roomId)
+                            })
+                        } else {
+                            layerConfim('观看码绑定成功', function () {
+                                location.replace("http://" + h5Base +"/phone/review.html?fileId=" + fileId+"&roomId=" + roomId + "&userId=" + userId)
+                            })
+                        }
+                    } else if (code == 404) {//已被绑定
+                        window.location.href = "http://" + h5Base + "/phone/permissions2.html?roomId=" + roomId;
+                    } else {
+                        layerOpen(data.message);
+                    }
+                }
+            });
+        }
+
+    }
+</script>
+</html>

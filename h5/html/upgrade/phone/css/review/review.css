@@ -1,0 +1,478 @@
+html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.page {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.zbjcompany i.icon-youjiantou {
+    position: static;
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.menuBox {
+    background: rgba(0, 0, 0, .85);
+    position: relative;
+    width: 100%;
+    top: 0;
+    overflow: hidden;
+}
+
+.menuBox ul {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.menuBox ul li {
+    font-size: .26rem;
+    height: .88rem;
+    line-height: .88rem;
+    flex: 1;
+    color: rgba(130, 130, 130, 1);
+    text-align: center;
+    position: relative;
+}
+
+.menuBox ul li span {
+    position: relative;
+    display: inline-block !important;
+    height: 100%;
+
+}
+
+.menuBox ul li.liactive span {
+    color: #FFF;
+}
+
+.menuBox ul li.liactive span:after {
+    content: '';
+    position: absolute;
+    bottom: 1px;
+    width: 100%;
+    left: 0;
+    height: .1rem;
+    background: url("images/titletrue.png") center bottom no-repeat;
+    background-size: 100%;
+
+}
+
+.main {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    padding-top: 56.25%;
+}
+
+.contentBox {
+    position: relative;
+    height: 100%;
+    padding-bottom: 1.5rem;
+}
+
+.contentBox-all {
+
+    /*padding-bottom: 1rem;*/
+}
+
+.cells {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+}
+
+.cell {
+    position: relative;
+    padding: .3rem;
+    font-size: .22rem;
+    border-bottom: 1px solid rgba(234, 234, 234, 1);
+}
+
+.title {
+    width: 85%;
+    font-size: .3rem;
+    font-weight: bold;
+    color: rgba(40, 40, 40, 1);
+    margin-bottom: .3rem;
+}
+
+.play-num {
+    font-size: .25rem;
+    color: rgba(153, 153, 153, 1);
+    overflow: hidden;
+}
+
+.play-num span {
+    float: left;
+}
+
+.play-num i {
+    float: left;
+    margin-right: .1rem;
+}
+
+.cell .links {
+    top: .36rem;
+}
+
+.cell.zbjcompany {
+    border-top: 0;
+}
+
+.zbjcompany .links {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.links {
+    position: absolute;
+    top: 0;
+    right: .32rem;
+    font-size: .24rem;
+    color: rgba(153, 153, 153, 1);
+}
+
+.links i {
+    font-size: 12px;
+
+}
+
+.review-group .review-img {
+    position: relative;
+    height: 1.5rem;
+    text-align: center;
+}
+
+.review-group .review-img img {
+    height: 100%;
+}
+
+.review-group .review-img .reviewMask {
+    position: absolute;
+    bottom: 0;
+    text-align: left;
+}
+
+.review-group .review-title {
+    margin-top: .23rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: .25rem;
+}
+.talkLi{
+    border-bottom: 0;
+}
+.mescroll-upwarp{
+    margin-bottom: 15px;
+    border-top: 1px solid #eee;
+    padding-bottom: 0;
+    padding-top: 7px;
+}
+.no-comment {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.no-comment .mescroll-empty{
+    padding: 0;
+}
+.no-comment .mescroll-empty .empty-tip{
+    font-size: .25rem;
+}
+.no-comment .mescroll-empty img {
+    width: 30%;
+    margin-bottom: 5px;
+}
+
+.document {
+    /*height: .85rem;*/
+    border-bottom: 1px solid rgba(234, 234, 234, 1);
+    line-height: .85rem;
+}
+
+.document .document-name {
+    width: 95%;
+    font-size: .25rem;
+}
+
+.document dd img.ppt {
+    position: absolute;
+    left: 0;
+    top: .23rem;
+    width: .3rem;
+}
+
+.document dd {
+    position: relative;
+    padding-left: .5rem;
+    overflow: hidden;
+}
+
+.document dd .links {
+    top: 0;
+    right: 0;
+}
+
+.document:last-child {
+    border-bottom: none;
+}
+
+.topBox, .talkline {
+    padding: 3% 0;
+}
+
+.stickIcon {
+    display: none;
+    width: .76rem;
+    height: .32rem;
+    background: url(../../img/zhiding.png) no-repeat;
+    background-size: 100% 100%;
+    margin-right: .13rem;
+    vertical-align: middle;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: .9rem;
+    z-index: 1;
+    background: #fcfcfc;
+    border-top: 1px solid rgba(234, 234, 234, 1);
+}
+
+.footer .flexbox {
+    display: flex;
+    height: 100%;
+    padding: .18rem 0;
+    margin-left: .29rem;
+    align-items: center;
+
+}
+
+.footer .flex {
+    position: relative;
+    flex: 1;
+    height: .55rem;
+    line-height: .55rem;
+    text-align: center;
+}
+
+.footer .flex5 {
+    flex: 5;
+}
+
+.footer .flex2 {
+    flex: 2;
+}
+
+.footer .chatipt {
+    text-align: left;
+    padding-left: .2rem;
+    width: 100%;
+    border: 1px solid #dddddd;
+    background: #ededed;
+    border-radius: 25px;
+    color: rgba(153, 153, 153, 1);
+    font-size: 12px;
+}
+
+.footer .iconfont {
+    font-size: .35rem;
+}
+
+.footer .tag {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 9%;
+    color: #FFF;
+    width: auto;
+    padding: 0 5px;
+    height: 12px;
+    line-height: 12px;
+    border-radius: 24px;
+    background: red;
+    font-size: 9px;
+}
+
+.layui-m-layershade {
+    /*background-color: transparent!important;*/
+}
+
+.CB {
+    position: fixed !important;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border: none;
+    -webkit-animation-duration: .5s !important;
+    animation-duration: .5s !important;
+}
+
+.CB .layui-m-layercont {
+    height: 100%;
+}
+
+.showPopupContent {
+    position: relative;
+    height: 100%;
+}
+
+.showPopupContent .header {
+    position: relative;
+    height: .88rem;
+    line-height: .88rem;
+    padding: 0 5%;
+    border-bottom: 1px solid rgba(234, 234, 234, 1);
+    font-weight: bold;
+}
+
+.showPopupContent .header i {
+    position: absolute;
+    right: 5%;
+}
+
+.desc-content {
+    padding: 2% 5%;
+    margin-bottom: 1rem;
+}
+
+.showPopupContent .desc-content .content {
+    margin-top: .3rem;
+
+}
+.showPopupContent .document dd{
+    padding-left: 0;
+}
+.showPopupContent .document .document-name {
+    width: 80%;
+    margin: 0 auto;
+}
+.showPopupContent .document dd img.ppt{
+    left: .3rem;
+}
+.showPopupContent .document dd .links{
+    right: .3rem;
+}
+.fileImgs {
+    height: 0;
+}
+.showPopupContent .swiper-container{
+    min-height: auto;
+    margin: 0;
+}
+.showPopupContent .thumbs{
+    padding: 3%;
+    background: rgba(187, 187, 187, 1);
+    line-height: normal;
+}
+.showPopupContent .thumbs .swiper-slide img{
+    border: 3px solid #FFF;
+    float: left;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.showPopupContent .thumbs .swiper-slide span{
+    font-size: .25rem;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+.showPopupContent .thumbs .swiper-slide.swiper-slide-thumb-active{
+    color: #0084ff;
+}
+.showPopupContent .thumbs .swiper-slide.swiper-slide-thumb-active img{
+    border: 3px solid #0084ff;
+}
+.showPopupContent .open .fileImgs{
+    height: 100%;
+
+}
+.showPopupContent .open .links{
+    transform: rotate(90deg);
+}
+#review {
+    padding-bottom: 1rem;
+}
+
+.talkCon {
+    width: 95%;
+    margin: 2.5% auto;
+    overflow: hidden;
+}
+
+.talkCon .textarea {
+    width: 100%;
+    height: 1.3rem;
+    border: 1px solid #ddd;
+    resize: none;
+    background: #f7f7f7;
+    padding: .2rem;
+    margin-bottom: .2rem;
+    font-size: .28rem;
+    box-sizing: border-box;
+
+}
+
+.talkCon .biaoqing {
+    width: .53rem;
+    height: .53rem;
+    float: left;
+    background: url(../../img/newbiaoqing.png) no-repeat;
+    background-size: 100% 100%;
+    margin-right: .34rem;
+}
+
+.talkCon .sendMessage {
+    width: .98rem;
+    height: .52rem;
+    float: right;
+    outline: 0;
+    background: #b2daff;
+    border: 0;
+    color: #fff;
+    border-radius: 50px;
+}
+
+.talkCon .emojiBox {
+    /*bottom: 0;*/
+
+}
+.talkCon .emojiBox {
+    position: fixed;
+    left: 0;
+    bottom: 1rem;
+    background: #fff;
+    z-index: 9999;
+}
+
+#customshade .img-fenxiang{
+    width: 50%;
+    position: absolute;
+    right: 0;
+}
