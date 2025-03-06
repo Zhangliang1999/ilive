@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <script> function clicke(){ alert("事件");
+SetVolume(10); } </script>
+<script src="jquery.js"></script>
+     <link type="text/css" rel="stylesheet" href="gd.css"/>
+<!-- link href="common/css/style.css" rel="stylesheet" type="text/css"/ -->
+<title>player</title>
+
+
+</head>
+
+<body style="margin:0px; padding:0px;">
+ <table> <tr> <td><input type="button" onClick="clicke()" value="Button1"/></td> <td><input type="button" value="Button2"/></td> </tr> </table>
+<div id=flash style="width:720px;height:576px;z-index:100;position:fixed;"></div>
+ <!--wmv主播放器层id-->
+  <div id="oPlayer" ></div>
+  
+ <script language="javascript">
+ 	
+
+	//	interfaceHttp ='http://192.168.1.176:8585/function=GetVodProgramInfo|newsId=0|fileId=375',
+interfaceHttp ='<?xml version=##1.0\## encoding=##GBK##?>' +
+'<root>' +
+'<smil>' +
+'<seq>'+
+	'<media role=##seq## srchigh=##rtmp://ums.jnnews.tv:9600/vod1/209/16474/201410/16474_20141026_16474.mp4##  id=##5## videoHeadTime=##-1## highLow=##true##  videoEndTime=##-1##  adseq=##false##  noSkip=##false## begin=##300## dur=##600## end=##600## isnextplay=##false##   mediatype=##flv## isshiftmove=##false## returnInfo=##PT_85370379## > <clientData title=##正片1内容## captionURL=####/> <medaiTitle><![CDATA[##济宁##]]></medaiTitle></media>'+
+'</seq>'+
+'</smil>'+
+'</root>',
+		//ifForbitSeek='true';	  
+//	interfaceHttp ='http://livehttp.wasu.cn:18080/hubeisports.flv', 
+	//interfaceHttp ='http://127.0.0.1:10935/assistant_playservice.flv?fileId=12642&user=a&pwd=12',
+//interfaceHttp ='http://192.168.1.30:2935/vod1/ums/luo.flv',
+	//interfaceHttp ='http://192.168.1.30:1935/live/live211/live211_index.flv',
+	//interfaceHttp='http://live.aqbtv.cn/live/xwzhzb/xwzhzb_index.flv',
+	//interfaceHttp ='rtmp://www.jxgztv.cn:9600/vod2/mp4:/207/2013-8/12/1308121010285376_212_(2.72_28.72)_bvs.mp4',
+	//interfaceHttp ='http://tv.sznews.com:9550/vod1/视频广告/szsz05.flv',
+// interfaceHttp ='rtmp://192.168.1.112:1935/live/live211',
+	//	interfaceHttp ='http://vod.dltv.cn/vod22/vod/368/2331/201310/2331_20131017_2331_(804.52_917.52)_bvs.mp4', 
+//	interfaceHttp ='rtmp://122.141.177.164:1935/vod1/1120/wx5.flv',
+	//interfaceHttp ='http://www.quanyouwjt.com.cn/function=GetVodProgramInfo|newsId=981|fileId=1020',
+//interfaceHttp='http://www.134001.cn:8787/function=GetVodProgramInfo#newsId=59265#fileId=40633',
+	 interfaceHttp ='http://vod.jnnews.tv:1935/live/live201/500k/tzwj_video.m3u8'
+	//	shareSwfUrl="http://192.168.1.40:7575/live4/player.swf?interfaceHttp=http://192.168.1.40/aaa.mp4",
+		//interfaceHttp='rtmp://live.aqbtv.cn/live/xwzhzbv',
+	//	interfaceHttp='http://live.aqbtv.cn/live/xwzhzb/xwzhzb_index.flv'
+//	interfaceHttp='rtmp://192.168.1.30:1935/vod1/pd1.mp4'
+//	interfaceHttp='http://192.168.1.30:1935/relay/live4/live4_index.flv'
+//interfaceHttp ='rtmp://192.168.1.30:1935/vod1/mp4:ums/aq_audio.mp4',
+//interfaceHttp ='http://192.168.1.30:1935/vod1/ums/8.mp4',
+//interfaceHttp ='rtmp://192.168.1.30:1935/vod1/ys/2.mp4',
+//interfaceHttp ='rtmp://192.168.1.112:1935/vod/mp4:jwzt_audio.mp4',
+//interfaceHttp ='http://192.168.1.30:86/live1_index.flv',
+//interfaceHttp ='rtmp://192.168.1.30:1935/live/live211',
+//interfaceHttp ='http://192.168.1.30:1935/live/live211/live211_index.flv',
+//http://60.175.6.75:9600/vod2/1010/11672/201401/11672_20140101_11672_(63.64_962.96)_bvs.mp4
+//interfaceHttp ='http://60.175.6.75:9600/vod2/1010/11672/201401/11672_20140101_11672_(63.64_962.96)_bvs.mp4',
+//interfaceHttp ='http://www.iptv-soft.com/pd1.flv',
+//interfaceHttp ='http://192.168.1.30:1935/vod1/aq/20140104_1.mp4'
+//interfaceHttp ='http://60.175.6.75:9600/vod2/1010/11672/201312/11672_20131231_11672_(523.00_704.36)_bvs.mp4',
+//interfaceHttp ='http://xinwen.aqbtv.cn:8080/function=GetVodProgramInfo#newsId=174623#fileId=51485',
+//interfaceHttp ='rtmp://192.168.1.112:2935/live/ivss_282_low',
+//interfaceHttp ='http://www.iptv-soft.com/FlashInterfaceServlet_th.xml?function=GetLiveProgramInfo#channelId=100',
+//http://xinwen.aqbtv.cn:8080/soms4/servlet/FlashInterfaceServlet?function=GetVodProgramInfo&newsId=174623&fileId=51485
+//interfaceHttp ='http://192.168.1.35:9600/live/demo1/demo1_index.flv',
+
+
+//interfaceHttp ='http://www.iptv-soft.com/FlashInterfaceServlet_th.xml?function=GetLiveProgramInfo#channelId=100',
+//http://60.219.151.218:8787/soms4/servlet/FlashInterfaceServlet?function=GetLiveProgramInfo&channelId=103
+	//interfaceHttp='http://192.168.1.30:1935/vod1/umsflv/2.flv'
+	//interfaceHttp ='http://192.168.1.30:1935/vod1/ums/3.mp4',
+//interfaceHttp ='http://vod.cmstpx.com/vod/309/311/312/330/2014-3/5/140305084734227_1172.mp4',
+   //interfaceHttp ='rtmp://ums.sytv.net.cn:80/live/radiojt_11744',
+  // interfaceHttp ='http://ums.sytv.net.cn/vod1/1150/1406260836028768_41941_640x480_800_(0.00_47.40)_bvs.mp4',
+  //interfaceHttp ='rtmp://192.168.1.30:1935/live/live211',
+
+ //interfaceHttp ='http://192.168.1.30:1935/vod1/ys/1403050746349338_1112.mp4',
+ 
+ //interfaceHttp ='http://192.168.1.30:1935/vod1/1408150550293829_334_1106x622_1000.mp4',
+ //interfaceHttp ='rtmp://video.hznet.tv:1935/vod/mp4://菏泽金融/菏泽金融/201406/菏泽金融_20140602_332_(74.08_1268.68)_bvs.mp4',
+ 
+ 
+ //interfaceHttp ='http://192.168.1.112:1935/vod/素材02_MP4.mp4'
+  
+//interfaceHttp ='http://video.beelink.com:9600/vod1/136/1408150550293829_334_1106x622_1000.mp4',
+
+//interfaceHttp="http://video.beelink.com:9600/vod1/136/1408311042364928_593_854x480_800.mp4"
+//interfaceHttp ='rtmp://192.168.1.112:2935/live/live511',
+//interfaceHttp ='http://192.168.1.210:9600/live/livestream/livestream_index.flv',
+//interfaceHttp ='rtmp://192.168.1.112:2935/live/xwzh',
+
+//interfaceHttp ='rtmp://ums.sytv.net.cn/live/radioyy_11745',
+
+//interfaceHttp ='rtmp://192.168.1.112:2935/vod1/audio1.flv',
+   //interfaceHttp ='http://192.168.1.112:2935/vod1/luo.flv',
+ //interfaceHttp ='rtmp://video.beelink.com:9600/vod1/103/2014-8/1/1408010412067447_122.mp4'
+ //interfaceHttp ='1http://192.168.1.112:2935/live/xwzh/xwzh_index.flv',
+//interfaceHttp ='rtmp://ums.jnnews.tv:9600/vod2/1002/test.flv',
+//interfaceHttp ='http://ums.jnnews.tv:9600/live/xwzh/xwzh_index.flv',
+
+
+//interfaceHttp ='rtmp://192.168.1.30:1935/vod1/bad/bad_big.mp4',
+//interfaceHttp ='rtmp://192.168.1.112:1935/vod/mp4:bad_big.mp4'
+//interfaceHttp ='rtmp://192.168.1.30:1935/live/live'
+//interfaceHttp ='rtmp://192.168.1.112:1935/live/demo1',
+//interfaceHttp ='http://60.219.151.218:9600/live/live4_low/live4_low_index.flv'
+//interfaceHttp ='http://192.168.1.111/temp/flv.xml',
+//interfaceHttp ='rtmp://192.168.1.30:1935/vod1/luo.flv'
+//interfaceHttp ='rtmp://192.168.1.30:1935/vod1/bad/bad_数据包超大.mp4',
+//interfaceHttp ='http://192.168.1.112:2935/live/xwzh/xwzh_index.flv',
+//interfaceHttp ='http://192.168.1.30:86/vod1/12_mp4/500K/tzwj_video.m3u8'
+//interfaceHttp ='http://192.168.1.233:1935/live/live101/800K/live101_index.flv',
+//interfaceHttp ='http://192.168.1.30:1935/vod1/12_mp4/1000K/tzwj_video_30sec.m3u8'
+//interfaceHttp ='rtmp://192.168.1.30:1935/vod1/pd1.flv',
+//interfaceHttp ='http://192.168.1.233:1935/live/live201/500K/201412101250001200.m3u8',
+//interfaceHttp ='http://192.168.1.30:1935/vod1/12_mp4/500k/tzwj_video.m3u8'
+
+
+
+//interfaceHttp ='http://116.246.27.11:1935/live/live1/800K/tzwj_video.m3u8',
+//interfaceHttp ='rtmp://192.168.1.30:1935/vod1/luo.flv'
+
+//interfaceHttp ='http://58.83.195.177/vod1/u/cms/www/20150316/16135950fx1k_mp4/tzwj_video.m3u8',
+  //interfaceHttp ='http://192.168.1.30:1935/vod1/pd1122_mp4/tzwj_video.m3u8',
+
+//interfaceHttp ='http://192.168.1.30:1935/vod1/pd1122_mp4/tzwj_video.m3u8',
+//interfaceHttp ='http://192.168.1.233:1935/live/live201/500K/201412101250001200.m3u8',
+//interfaceHttp ='http://192.168.1.227:9600/vod/live201/20141211/1420002400_mp4/142000_2400_800K_mp4/tzwj_video.m3u8',
+//seachBegin=0#seachNum=3
+//http://web.jnnews.tv/soms4/servlet/FlashInterfaceServlet?function=GetLiveProgramInfo&channelId=201
+//interfaceHttp ='http://192.168.1.30:1935/live/live311/500k/tzwj_video.m3u8'
+
+
+//interfaceHttp ='http://192.168.1.30:1935/vod1/12_mp4/no/220000_900_500K_(93_20_445_88)_bvs_mp4/tzwj_video.m3u8'
+//interfaceHttp ='http://ums.jnnews.tv:1935/live/live201/800K/live201_index.flv',
+//interfaceHttp ='http://web.jnnews.tv/function=GetProgramInfoM3U8#programId=18563#curdate=20141220'
+//interfaceHttp ='http://192.168.1.30:1935/live/live211/live211_index.flv',
+	//interfaceHttp ='http://192.168.1.30:1935/live/live211/800k/tzwj_video.m3u8',
+	//interfaceHttp ='http://vod.jnnews.tv:1935/live/live220/800K/tzwj_video.m3u8',
+//interfaceHttp ='http://192.168.1.112:2935/live/demo211/800k/tzwj_audio.m3u8',
+//	interfaceHttp ='http://192.168.1.30:1935/vod1/12_mp4/200k/tzwj_video.m3u8',
+//interfaceHttp ='http://192.168.1.30:1935/vod1/180000_600_800K.mp4', 
+	//interfaceHttp ='rtmp://58.68.252.136:1935/live/virtual',
+	//interfaceHttp ='rtmp://192.168.1.30:1935/live/live2011',
+	//interfaceHttp ='http://192.168.1.30:1935/vod1/hs/11.mp4/tzwj_video.m3u8',
+	//interfaceHttp ='http://192.168.1.30:1935/vod1/1sp2_mp4/500k/tzwj_video.m3u8',
+	//	interfaceHttp ='rtmp://www.134001.net:1935/vod1/1206/2015-8/12/1508120425043511_64501.mp4',
+	//	interfaceHttp ='rtmp://live.ncntv.com.cn:9600/live/test',
+		//	interfaceHttp ='rtmp://live.ncntv.com.cn:9600/live/live1',
+		//interfaceHttp='http://192.168.1.112:2935/live/nc/100k/tzwj_video.m3u8',
+//	interfaceHttp='http://192.168.1.30:2935/vod1/内网文件保护系统使用培训V4.mp4',
+	//interfaceHttp='http://192.168.1.30:1935/live/nc/1000K/tzwj_video.m3u8?seachBegin=20160519_140000&seachNum=3',
+//interfaceHttp='http://192.168.1.30:1935/vod1/1sp2.mp4',
+
+//interfaceHttp='http://192.168.1.30:1935/live/nc/1000K/tzwj_video.m3u8',
+//interfaceHttp='http://192.168.1.30:1935/live/demo11/800K/tzwj_video.m3u8',
+//interfaceHttp='http://192.168.1.112:2935/live/nc//800k/tzwj_video.m3u8',
+//interfaceHttp='http://192.168.1.30:1935//live/live401/800k/tzwj_video.m3u8'
+//interfaceHttp='http://vod.jnnews.tv:1935/live/live201/500K/tzwj_video.m3u8'
+//interfaceHttp='http://192.168.1.30:1935/vod1/12_mp4/500K/tzwj_video3.m3u8',
+//interfaceHttp='http://192.168.1.30:1935/vod1/huashu.mp4',
+
+//interfaceHttp='rtmp://192.168.1.30:1935/vod1/第一册 (2)_3681.feelv',
+//interfaceHttp ='rtmp://192.168.1.30:1935/live/live601',
+//interfaceHttp ='http://192.168.1.30:1935/vod1/zzsp314.mp4',yiqi.mp4 桂林新闻身边130616.flv',
+//interfaceHttp ='rtmp://video.faw.cn:1935/vod1/mp4:/101/2018-1/2/1801020824065272_36518_mp4/1801020824065272_36518_720x576_1000.mp4',
+//interfaceHttp ='http://192.168.1.30:1935/vod1/13/12.mp4',
+//interfaceHttp ='http://192.168.1.30:1936/vod1/flv4.xml',
+//interfaceHttp ='http://vod.zjedu.tv:9500/vod/342/2017-9/30/1709300214304701_10117_mp4/1709300214304701_10117.mp4',
+//interfaceHttp ='http://172.16.226.128:1935/live/liv1/tzwj_video.m3u8',rtmp://172.16.226.128:1935/live/liv1
+//vlc :rtmp://192.168.1.30:1935/vod1/mp4:pd1.flv http://source.live01.zb.tv189.com:1935/live/live410/5000k/tzwj_video.m3u8 'rtmp://source.live01.zb.tv189.com:1935/live/live410_tzwj_5000k',
+interfaceHttp ='http://source.live01.zb.tv189.com:1935/live/live410/5000k/tzwj_video.m3u8',
+		shareHtmlUrl="案室著，按时投淳著",
+             	shareStatu='3',              					
+            AddressSeparator='#', 
+           // _playAuto='false',
+                //interfaceType  ='true';
+                authUrl='true',
+                  ifShowImageBtn='true',
+                  ifAuthCDN_WS='false',
+                  PlayVideoAspect='mc169',//mc43;mc169;diaplasis;bespread
+                  ifShowLogo='false',
+                  AudioPlayerType='2',
+                  AVPlayerType='1',
+                  StreamNameDefine='supper;high;low',
+           //               ifShowStream='false';
+            ifShiftMove='false',
+    
+          
+		_playAuto='true';
+                //ifShowSetBtn='false',
+              
+                //ifShowPoopBtn='false';
+                //ifShowStream='false';
+</script>
+
+<script src="common/js/JWZT_Player.js?t=20120609" type="text/javascript"></script>
+
+</body>
+
+</html>
