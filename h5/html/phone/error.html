@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>观看异常</title>
+<link rel="stylesheet" type="text/css" href="css/2019style.min.css?v=411" />
+<link rel="stylesheet" href="css/newlogin.css" />
+<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<style>
+	.nopower{
+		width:3.16rem;
+		height: 2.55rem;
+		margin: 4.1rem auto 0.45rem;
+		background: url("img/nopower.png") no-repeat;
+		background-size: 100% 100%;
+		position: relative;
+		z-index:9999;
+	}
+	.nopowerText{
+		position: relative;
+		z-index: 9999;
+		width: 100%;
+		height: 0.6rem;
+		line-height: 0.6rem;
+		color: #fff;
+		text-align: center;
+		font-size: 0.28rem;
+	}
+</style>
+</head>
+<body>
+	<div class="container" id="mainContent">
+		<div class="nopower"></div>
+		<div class="nopowerText">非常抱歉,您无权观看本直播</div>
+		<div class="mask"></div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(".container").height($(window).height());
+	$(".mask").height($(window).height());
+	function GetQueryString(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+	    var r = decodeURI(window.location.search.substr(1)).match(reg);
+	    if (r != null)return unescape(r[2]);
+	    return null;
+	}
+	var roomId = GetQueryString("roomId");
+	if(roomId!=null&&roomId!=""&&roomId!=undefined){
+		$(".nopowerText").html("非常抱歉,您无权观看本直播");
+		// $.ajax({
+	    //     type: "get",
+	    //     url: "http://"+tomcatBase+"/ilive/appuser/getGuideUrl.jspx?roomId="+roomId+"&orginal=1"+"&callback=?",
+	    //     async: true,
+	    //     dataType: "jsonp",
+	    //     jsonp: "callback",
+	    //     timeout: 10000,
+	    //     success: function(data) {
+	    //         if(data.code ==1){
+	    //             var imgUrl = data.data.imgUrl;
+	    //             var openGuideSwitch = data.data.openGuideSwitch;
+	    //             if(openGuideSwitch==1){
+	    //                 if(imgUrl!="") {
+	    //                     $('#mainContent').css({"background":"url("+imgUrl+") no-repeat","background-size":"100% 100%"});
+	    //                 }
+	    //             }
+	    //         }
+	    //
+	    //     },
+	    //     error: function(xhr, type, errorThrown) {
+	    //     }
+	    // });
+	}else{
+		$(".nopowerText").html("观看异常");
+	}
+</script>
+</html>
