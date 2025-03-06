@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.billing.entity">
+	<class name="PaymentLog" table="billing_payment_log">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+		<property name="packageId" type="java.lang.Integer">
+			<column name="package_id" />
+		</property>
+		<property name="vaildTime" type="java.sql.Timestamp">
+			<column name="vaild_time" />
+		</property>
+		<property name="paymentType" type="java.lang.Integer">
+            <column name="payment_type" />
+        </property>
+		<property name="channelType" type="java.lang.Integer">
+			<column name="channel_type" />
+		</property>
+		<property name="originalPayment" type="java.lang.String">
+			<column name="original_payment" />
+		</property>
+		<property name="paid" type="java.lang.Boolean">
+			<column name="is_paid" />
+		</property>
+		<property name="paymentWay" type="java.lang.Integer">
+            <column name="payment_way" />
+        </property>
+		<property name="paymentFlowId" type="java.lang.String">
+            <column name="payment_flow_id" />
+        </property>
+		<property name="paymentPrice" type="java.lang.Double">
+			<column name="payment_price" sql-type="decimal(23,2)" />
+		</property>
+		<property name="agentId" type="java.lang.Integer">
+            <column name="agent_id" />
+        </property>
+		<property name="agentDeductionRate" type="java.lang.Double">
+			<column name="agent_deduction_rate" sql-type="decimal(23,2)" />
+		</property>
+		<property name="paymentTime" type="java.sql.Timestamp">
+			<column name="payment_time" />
+		</property>
+		<property name="paymentDesc" type="java.lang.String">
+			<column name="payment_desc" />
+		</property>
+		<property name="refunded" type="java.lang.Boolean">
+			<column name="is_refunded" />
+		</property>
+		<property name="refundAmount" type="java.lang.Double">
+			<column name="refund_amount" sql-type="decimal(23,2)" />
+		</property>
+		<property name="status" type="java.lang.Integer">
+			<column name="status" />
+		</property>
+		<property name="contactName" type="java.lang.String">
+			<column name="contact_name" />
+		</property>
+		<property name="contactNumber" type="java.lang.String">
+			<column name="contact_number" />
+		</property>
+		<property name="sellUserId" type="java.lang.Long">
+            <column name="sell_user_id" />
+        </property>
+		<property name="cancelReason" type="java.lang.String">
+			<column name="cancel_reason" sql-type="varchar(2000)"/>
+		</property>
+		<property name="CustID" type="java.lang.String">
+			<column name="cust_id" />
+		</property>
+		<property name="vaildStartTime" type="java.sql.Timestamp">
+			<column name="vaildStart_time" />
+		</property>
+		<property name="vaildEndTime" type="java.sql.Timestamp">
+			<column name="vaildEnd_time" />
+		</property>
+		<property name="paymentAuto" type="java.lang.Integer">
+			<column name="payment_auto" />
+		</property>
+		<property name="discountRate" type="java.lang.Double">
+			<column name="discount_rate" sql-type="decimal(23,2)" />
+		</property>
+	</class>
+</hibernate-mapping>

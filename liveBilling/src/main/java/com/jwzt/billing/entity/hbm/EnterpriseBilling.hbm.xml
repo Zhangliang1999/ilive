@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.billing.entity">
+	<class name="EnterpriseBilling" table="billing_enterprise_billing">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="updateTime" type="java.sql.Timestamp">
+			<column name="update_time" />
+		</property>
+		<property name="enterpriseName" type="java.lang.String">
+			<column name="enterprise_name" />
+		</property>
+		<property name="enterpriseImg" type="java.lang.String">
+			<column name="enterprise_image" />
+		</property>
+		<property name="settleAmount" type="java.lang.Double">
+			<column name="settle_amount" sql-type="decimal(23,2)" />
+		</property>
+		<property name="totalAmount" type="java.lang.Double">
+			<column name="total_amount" sql-type="decimal(23,2)" />
+		</property>
+		<property name="platformAmount" type="java.lang.Double">
+			<column name="platform_amount" sql-type="decimal(23,2)" />
+		</property>
+		<property name="applyTime" type="java.sql.Timestamp">
+			<column name="apply_time" />
+		</property>
+		<property name="certTime" type="java.sql.Timestamp">
+			<column name="cert_time" />
+		</property>
+		<property name="certStatus" type="java.lang.Integer">
+			<column name="cert_status" />
+		</property>
+		<property name="openRevenueAccount" type="java.lang.Boolean">
+			<column name="open_revenue_account" />
+		</property>
+		<property name="openRedPackageAccount" type="java.lang.Boolean">
+			<column name="open_red_package_account" />
+		</property>
+		<property name="revenueAccountWorkOrderId" type="java.lang.Long">
+			<column name="revenue_account_work_order_Id" />
+		</property>
+		<property name="redPackageAccountWorkOrderId" type="java.lang.Long">
+			<column name="red_package_account_work_order_Id" />
+		</property>
+		<property name="userPhone" type="java.lang.String">
+			<column name="user_phone" />
+		</property>
+	</class>
+</hibernate-mapping>

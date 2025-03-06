@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="TotalStatisticResult" table="statistic_total_statistic_result">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="liveEventTotalNum" type="java.lang.Long">
+			<column name="live_event_total_num" />
+		</property>
+		<property name="liveEnterpriseTotalNum" type="java.lang.Long">
+			<column name="live_enterprise_total_num" />
+		</property>
+		<property name="liveTotalDuration" type="java.lang.Long">
+			<column name="live_total_duration" />
+		</property>
+		<property name="liveViewTotalNum" type="java.lang.Long">
+			<column name="live_view_total_num" />
+		</property>
+		<property name="liveViewUserTotalNum" type="java.lang.Long">
+			<column name="live_view_user_total_num" />
+		</property>
+		<property name="userTotalNum" type="java.lang.Long">
+			<column name="user_total_num" />
+		</property>
+		<property name="viewTotalDuration" type="java.lang.Long">
+			<column name="view_total_duration_num" />
+		</property>
+		<property name="viewTotalNum" type="java.lang.Long">
+			<column name="view_total_num" />
+		</property>
+		<property name="liveLikeTotalNum" type="java.lang.Long">
+			<column name="live_like_total_num" />
+		</property>
+		<property name="liveCommentTotalNum" type="java.lang.Long">
+			<column name="live_comment_total_num" />
+		</property>
+		<property name="liveShareTotalNum" type="java.lang.Long">
+			<column name="live_share_total_num" />
+		</property>
+		<property name="newRegisterUserNumAboutLive" type="java.lang.Long">
+			<column name="new_register_user_num_about_live" />
+		</property>
+		<property name="oldRegisterUserNumAboutLive" type="java.lang.Long">
+			<column name="old_register_user_num_about_live" />
+		</property>
+		<property name="newRegisterUserNumAboutDay" type="java.lang.Long">
+			<column name="new_register_user_num_about_day" />
+		</property>
+		<property name="oldRegisterUserNumAboutDay" type="java.lang.Long">
+			<column name="old_register_user_num_about_day" />
+		</property>
+		<property name="newRegisterEnterpriseNum" type="java.lang.Long">
+			<column name="new_register_enterprise_num" />
+		</property>
+		<property name="oldRegisterEnterpriseNum" type="java.lang.Long">
+			<column name="old_register_enterprise_num" />
+		</property>
+		<property name="durationLiveNum0To10" type="java.lang.Long">
+			<column name="duration_live_num_0_to_10" />
+		</property>
+		<property name="durationLiveNum10To100" type="java.lang.Long">
+			<column name="duration_live_num_10_to_100" />
+		</property>
+		<property name="durationLiveNum100To200" type="java.lang.Long">
+			<column name="duration_live_num_100_to_200" />
+		</property>
+		<property name="durationLiveNum200To300" type="java.lang.Long">
+			<column name="duration_live_num_200_to_300" />
+		</property>
+		<property name="durationLiveNum300To" type="java.lang.Long">
+			<column name="duration_live_num_300_to_end" />
+		</property>
+		<property name="durationViewUserNum0To5" type="java.lang.Long">
+			<column name="duration_view_user_num_0_to_5" />
+		</property>
+		<property name="durationViewUserNum5To10" type="java.lang.Long">
+			<column name="duration_view_user_num_5_to_10" />
+		</property>
+		<property name="durationViewUserNum10To30" type="java.lang.Long">
+			<column name="duration_view_user_num_10_to_30" />
+		</property>
+		<property name="durationViewUserNum30To60" type="java.lang.Long">
+			<column name="duration_view_user_num_30_to_60" />
+		</property>
+		<property name="durationViewUserNum60To" type="java.lang.Long">
+			<column name="duration_view_user_num_60_to_end" />
+		</property>
+		<property name="numOfMaxViewUserNumAboutLive" type="java.lang.Long">
+			<column name="num_of_max_view_user_num_about_live" />
+		</property>
+		<property name="timeOfMaxViewUserNumAboutLive" type="java.sql.Timestamp">
+			<column name="time_of_max_view_user_num_about_live" />
+		</property>
+		<property name="liveTitleOfMaxViewUserNumAboutLive" type="java.lang.String">
+			<column name="live_of_max_view_user_num_about_live" />
+		</property>
+		<property name="enterpriseNameOfMaxViewUserNumAboutLive" type="java.lang.String">
+			<column name="enterprise_name_of_max_view_user_num_about_live" />
+		</property>
+		<property name="numOfMaxNewRegisterUserNumAboutLive" type="java.lang.Long">
+			<column name="num_of_max_new_register_user_num_about_live" />
+		</property>
+		<property name="timeOfMaxNewRegisterUserNumAboutLive" type="java.sql.Timestamp">
+			<column name="time_of_max_new_register_user_num_about_live" />
+		</property>
+		<property name="liveTitleOfMaxNewRegisterUserNumAboutLive" type="java.lang.String">
+			<column name="live_of_max_new_register_user_num_about_live" />
+		</property>
+		<property name="enterpriseNameOfMaxNewRegisterUserNumAboutLive" type="java.lang.String">
+			<column name="enterprise_name_of_max_new_register_user_num_about_live" />
+		</property>
+		<property name="androidRegisterUserNum" type="java.lang.Long">
+			<column name="android_register_user_num" />
+		</property>
+		<property name="iosRegisterUserNum" type="java.lang.Long">
+			<column name="ios_register_user_num" />
+		</property>
+		<property name="pcRegisterUserNum" type="java.lang.Long">
+			<column name="pc_register_user_num" />
+		</property>
+		<property name="wapRegisterUserNum" type="java.lang.Long">
+			<column name="wap_register_user_num" />
+		</property>
+		<property name="otherRegisterUserNum" type="java.lang.Long">
+			<column name="other_register_user_num" />
+		</property>
+		<property name="androidViewUserNum" type="java.lang.Long">
+			<column name="android_view_user_num" />
+		</property>
+		<property name="iosViewUserNum" type="java.lang.Long">
+			<column name="ios_view_user_num" />
+		</property>
+		<property name="pcViewUserNum" type="java.lang.Long">
+			<column name="pc_view_user_num" />
+		</property>
+		<property name="wapViewUserNum" type="java.lang.Long">
+			<column name="wap_view_user_num" />
+		</property>
+		<property name="otherViewUserNum" type="java.lang.Long">
+			<column name="other_view_user_num" />
+		</property>
+		<property name="viewTimeHour0To3" type="java.lang.Long">
+			<column name="view_time_hour_0_to_3" />
+		</property>
+		<property name="viewTimeHour3To6" type="java.lang.Long">
+			<column name="view_time_hour_3_to_6" />
+		</property>
+		<property name="viewTimeHour6To9" type="java.lang.Long">
+			<column name="view_time_hour_6_to_9" />
+		</property>
+		<property name="viewTimeHour9To12" type="java.lang.Long">
+			<column name="view_time_hour_9_to_12" />
+		</property>
+		<property name="viewTimeHour12To15" type="java.lang.Long">
+			<column name="view_time_hour_12_to_15" />
+		</property>
+		<property name="viewTimeHour15To18" type="java.lang.Long">
+			<column name="view_time_hour_15_to_18" />
+		</property>
+		<property name="viewTimeHour18To21" type="java.lang.Long">
+			<column name="view_time_hour_18_to_21" />
+		</property>
+		<property name="viewTimeHour21To24" type="java.lang.Long">
+			<column name="view_time_hour_21_to_24" />
+		</property>
+		<property name="statisticTime" type="java.sql.Timestamp">
+			<column name="statistic_time" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+	</class>
+</hibernate-mapping>

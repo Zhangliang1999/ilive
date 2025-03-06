@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+<title></title>
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/html_eight.css" />
+<script src="js/common.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/rem.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/share_other.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="containerBg">
+			<div class="topNum">06</div>
+			<div class="topTitle">地区排名TOP10</div>
+			<table id="resultTable">
+			</table>
+		</div>
+		<!-- <div class="topArrow"></div> -->
+		<div class="pagebox">
+            <div class="pageUp">&#171上一页</div>
+            <div class="pageDown">下一页&#187</div>
+        </div>
+	</div>
+</body>
+<script>
+    $(function() {
+        if (/Android|chinanet_ilive_android|chinanet_ilive_ios|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            var winHeight = $(window).height();
+            $(".container").css("height", winHeight);
+            $(".containerBg").css("height", winHeight);
+        } else {
+            $(".container").css("height", "1100px");
+            $(".containerBg").css("height", "1100px");
+        }
+    });
+</script>
+<script>
+	var id = getQueryString("id");
+	/* $(".topArrow").on("click", function() {
+		window.location.href = "sourceStatistic.html?id=" + id;
+	}); */
+	$(".pageUp").on("click", function() {
+		window.location.href = "locationStatistic.html?id=" + id;
+    });
+    $(".pageDown").on("click", function() {
+        window.location.href = "sourceStatistic.html?id=" + id;
+    });
+	$.ajax({
+		url : "/statistic/wap/user/statistic/location?id=" + id,
+		type : "get",
+		async : false,
+		crossDomain : true,
+		dataType : "jsonp",
+		jsonp : 'jsoncallback',
+		success : function(data) {
+			const userData = [];
+			const locationList = data.data;
+			var totalNum = 0;
+			var hasProvinceName = [];
+			for (var i = 0; i < locationList.length; i++) {
+				const location = locationList[i];
+				var name = location.provinceName;
+				if (name == "黑龙江省" || name == "内蒙古自治区") {
+					name = name.substring(0, 3);
+				} else {
+					name = name.substring(0, 2);
+				}
+				const num = location.totalNum;
+				// 去重
+				var isExistedName = false;
+				for (var j = 0; j < hasProvinceName.length; j++) {
+					if (name === hasProvinceName[j]) {
+						isExistedName = true;
+						break;
+					}
+				}
+				if (!isExistedName) {
+					totalNum += num;
+					userData.push({
+						name : name,
+						value : num,
+					});
+				}
+				hasProvinceName.push(name);
+			}
+			$("#resultTable").append("<tr><th></th><th>IP（人）</th><th>占比</th></tr>");
+			for (var i = 0; i < userData.length && i < 10; i++) {
+				const data = userData[i];
+				const name = data.name;
+				const value = data.value;
+				var percent;
+				if (totalNum > 0) {
+					percent = (value * 100 / totalNum).toFixed(2);
+				} else {
+					percent = 0;
+				}
+				var html = "<tr>";
+				if (i == 0) {
+					html += "<td class=\"font-weight\" style=\"color: #f76d50;\">";
+				} else if (i == 1) {
+					html += "<td class=\"font-weight\" style=\"color: #ffae42;\">";
+				} else if (i == 2) {
+					html += "<td class=\"font-weight\" style=\"color: #ecd223;\">";
+				} else {
+					html += "<td>";
+				}
+				html += name + "</td>";
+				html += "<td>" + value + "</td>";
+				html += "<td>" + percent + "%</td>";
+				html += "</tr>";
+				$("#resultTable").append(html);
+			}
+		}
+	});
+</script>
+<!-- <script>
+    var startx, starty;
+    //获得角度  
+    function getAngle(angx, angy) {
+        return Math.atan2(angy, angx) * 180 / Math.PI;
+    };
+
+    //根据起点终点返回方向 1向上 2向下 3向左 4向右 0未滑动  
+    function getDirection(startx, starty, endx, endy) {
+        var angx = endx - startx;
+        var angy = endy - starty;
+        var result = 0;
+
+        //如果滑动距离太短  
+        if (Math.abs(angx) < 10 && Math.abs(angy) < 10) {
+            return result;
+        }
+
+        var angle = getAngle(angx, angy);
+        if (angle >= -135 && angle <= -45) {
+            result = 1;
+        } else if (angle > 45 && angle < 135) {
+            result = 2;
+        } else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
+            result = 3;
+        } else if (angle >= -45 && angle <= 45) {
+            result = 4;
+        }
+
+        return result;
+    }
+    //手指接触屏幕  
+    document.addEventListener("touchstart", function(e) {
+        startx = e.touches[0].pageX;
+        starty = e.touches[0].pageY;
+    }, false);
+    //手指离开屏幕  
+    document.addEventListener("touchend", function(e) {
+        var endx, endy;
+        endx = e.changedTouches[0].pageX;
+        endy = e.changedTouches[0].pageY;
+        var direction = getDirection(startx, starty, endx, endy);
+        switch (direction) {
+        case 0:
+            break;
+        case 1:
+            $(".topArrow").click();
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        default:
+        }
+    }, false);
+</script> -->
+</html>

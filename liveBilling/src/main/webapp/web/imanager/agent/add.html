@@ -1,0 +1,88 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">添加代理商</a>
+			</div>
+		</div>
+	</div>
+	<div class="row btn-box">
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName m-t-xs">代理商简称：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.agentName" />
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName m-t-xs">代理商扣率：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.deductionRate" />
+					%
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class="row btn-box">
+		<div class="col-lg-12">
+			<div class="mealBox">
+				<div class="mealName m-t-xs">公司全称：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.fullName" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">组织机构代码：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.organizationCode" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">法定代表人：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.legalRepresentative" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">注册地址：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.registeredAddress" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">银行开户行：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.bankName" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">银行账号：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.bankAccount" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">联系人：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.contactName" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">联系电话：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.contactNumber" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-sm">
+		<div class="col-lg-12 p-w-lg">
+			<div class="col-lg-12 text-center">
+				<button class="btn commonbtn" ng-click="saveAgent()">确认添加</button>
+			</div>
+		</div>
+	</div>
+</div>

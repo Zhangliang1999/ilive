@@ -1,0 +1,188 @@
+<nav class="navbar-default navbar-static-side navbar-width" role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav metismenu nav-left" id="side-menu">
+		
+			<!-- 企业管理 -->
+			
+			<li class="<#if leftActive??&&(leftActive?length>2)&&(leftActive?substring(0,2)='8_')>active</#if>"><a
+				href="###" ng_if="currentUser.enterPriseMessage==1||currentUser.sub==1||currentUser.figure==1"><i class="fa  fa-files-o"></i> <span
+					class="nav-label">企业管理</span><span class="fa arrow"></span></a>
+				<!-- 企业管理 -->
+				<ul class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&(leftActive?length>2)&&(leftActive?substring(0,2)='8_')>in</#if>">
+					
+					<li ng_if="currentUser.enterPriseMessage==1">
+						<a href="{{iliveHomeUrl+'/admin/account/accountmanager.do'}}"><i class="fa  fa-vcard "></i> 
+						企业信息</a>
+					</li>
+					<li >
+						<a href="{{iliveHomeUrl+'/admin/account/enterpriseSetup.do'}}"><i
+								class="fa  fa-user-o"></i> 企业关注设置</a>
+						</li>
+					   
+						<li >
+						<a href="{{iliveHomeUrl+'/admin/sub/pageSub.do'}}"><i
+								class="fa  fa-user-o"></i> 子账户管理</a>
+						</li>
+						<li >
+						<a href="{{iliveHomeUrl+'/admin/subAccount/submanagerPage.do'}}"><i
+								class="fa  fa-user-o"></i> 子账号申请审批</a>
+						</li>
+					
+					<li class="" ng_if="currentUser.figure==1">
+						<a href="{{iliveHomeUrl+'/admin/statistic/enterpriseDetail.do'}}"><i class="fa  fa-vcard "></i> 平台大数据</a>
+					</li>
+					
+				</ul>
+			</li>
+			
+			<!-- 企业管理 -->
+			
+			<li class="<#if leftActive??&&(leftActive?length>2)&&(leftActive?substring(0,2)='7_')>active</#if>"><a
+				href="###" ng_if="currentUser.vip==1"><i class="fa  fa-files-o"></i> <span
+					class="nav-label">企业会员</span><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&(leftActive?length>2)&&(leftActive?substring(0,2)='7_')>in</#if>">
+					
+					<li ng_if="currentUser.fans==1">
+						<a href="{{iliveHomeUrl+'/admin/terminal/usermanager.do'}}"><i class="fa fa-desktop"></i> 
+							粉丝用户管理
+						</a>
+					</li>
+					
+					<!-- <li ><a
+						href="{{iliveHomeUrl+'/admin/member/whitelist.do'}}"><i
+							class="fa  fa-user-circle"></i>白名单管理</a>
+					</li> -->
+					
+					<li><a href="{{iliveHomeUrl+'/admin/terminal/blacklist.do'}}"><i
+							class="fa  fa-user-times"></i>黑名单管理</a>
+					</li>
+					
+				</ul>
+			</li>
+			
+			<!-- 企业账户 -->
+			
+			<li class="<#if leftActive??&&(leftActive?length>2)&&(leftActive?substring(0,2)='9_')>active</#if>"><a
+				href="###" ng_if="currentUser.account==1||currentUser.level==0"><i class="fa  fa-files-o"></i> <span
+					class="nav-label">企业账户</span><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&(leftActive?length>2)&&(leftActive?substring(0,2)='9_')>in</#if>">
+					<!-- <li>
+		                <a ui-sref-active="active" ui-sref="enterpriseTotal" ui-sref-opts="{reload: true}">
+							<i class="fa fa-user"></i>
+							<span class="nav-label">账户总览</span>
+						</a>
+		            </li> -->
+		         
+		            <!-- <li ng_if="currentUser.certStatus==4" ui-sref-active="active" ui-sref="packageBasic" ui-sref-opts="{reload: true}"
+						ng-click="$event.stopPropagation();"
+					>
+						<a href="javascript:void(0);">套餐购买</a>
+					</li>
+					<li ng_if="currentUser.certStatus==4" ui-sref-active="active" ui-sref="packageIncrement" ui-sref-opts="{reload: true}"
+						ng-click="$event.stopPropagation();"
+					>
+						<a href="javascript:void(0);">资源包叠加</a>
+					</li> -->
+					<li ng_if="currentUser.certStatus==4">
+		                <a ui-sref-active="active" ui-sref="paymentList" ui-sref-opts="{reload: true}">
+							<i class="fa fa-user"></i>
+							<span class="nav-label">订单管理</span>
+						</a>
+		            </li>
+		           
+				</ul>
+			</li>
+			<!-- 收益账户 -->
+			
+			<!-- <li hidden="true" class="<#if leftActive??&&(leftActive?length>2)&&(leftActive?substring(0,2)='7_')>active</#if>"><a
+				href="###"><i class="fa  fa-files-o"></i> <span
+					class="nav-label">收益账户</span><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&(leftActive?length>2)&&(leftActive?substring(0,2)='7_')>in</#if>">
+					<li ui-sref-active="active" ui-sref="flowList" ui-sref-opts="{reload: true}" ng-click="$event.stopPropagation();">
+						<a href="javascript:void(0);">账户流水</a>
+					</li>
+					<li ui-sref-active="active" ui-sref="settlementList" ui-sref-opts="{reload: true}"
+						ng-click="$event.stopPropagation();"
+					>
+						<a href="javascript:void(0);">结算记录</a>
+					</li>
+				</ul>
+			</li> -->
+			 <!-- 服务订购 -->
+			<!-- <li hidden="true" class="<#if leftActive??&&(leftActive?length>2)&&(leftActive?substring(0,2)='1_')>active</#if>"><a
+				href="###"><i class="fa  fa-files-o"></i> <span class="nav-label">服务订购</span><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&(leftActive?length>2)&&(leftActive?substring(0,2)='1_')>in</#if>">
+					<li>
+                       <a href="{{iliveHomeUrl+'/admin/equipment/toliveserver.do'}}">
+							<i class="fa fa-vcard "></i>
+							<span class="nav-label">拍摄服务</span>
+						</a>
+                    </li>
+                    <li >
+                        <a href="{{iliveHomeUrl+'/admin/equipment/equiplist.do?rentOrSell=2'}}">
+							<i class="fa fa-vcard "></i>
+							<span class="nav-label">设备租赁</span>
+						</a>
+                    </li>
+                    <li >
+                       <a href="{{iliveHomeUrl+'/admin/equipment/equiplist.do?rentOrSell=1'}}">
+							<i class="fa fa-vcard "></i>
+							<span class="nav-label">设备购买</span>
+						</a>
+                    </li>
+                    <li>
+                       <a href="{{iliveHomeUrl+'/admin/equipment/orderList.do'}}">
+							<i class="fa fa-vcard "></i>
+							<span class="nav-label">我的订购单</span>
+						</a>
+                    </li>
+				</ul>
+			</li> -->
+			
+			<!--  <li>
+                       <a href="{{iliveHomeUrl+'/admin/account/accountmng.do'}}">
+							<i class="fa fa-vcard "></i>
+							<span class="nav-label">账号管理</span>
+						</a>
+                    </li> -->
+			
+            <li ng_if="currentUser.level!=3">
+                <a ui-sref-active="active" ui-sref="enterpriseTotal" ui-sref-opts="{reload: true}">
+					<i class="fa fa-user"></i>
+					<span class="nav-label">账户总览</span>
+				</a>
+            </li>
+         <li class="<#if leftActive??&&(leftActive?length>2)&&(leftActive?substring(0,2)='11')>active</#if>"><a
+				href="###"><i class="fa  fa-files-o"></i> <span
+					class="nav-label">开发者</span><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&(leftActive?length>2)&&(leftActive?substring(0,2)='7_')>in</#if>">
+					
+					<li >
+						<a href="{{iliveHomeUrl+'/admin/developer/info'}}"><i class="fa fa-desktop"></i> 
+							开发者信息
+						</a>
+					</li>
+					
+					<li><a href="{{iliveHomeUrl+'/admin/developer/doc'}}"><i
+							class="fa  fa-user-times"></i>开发者文档</a>
+					</li>
+					
+				</ul>
+			</li>
+			
+		</ul>
+	</div>
+</nav>
+<script>
+	function autoLeftHeight() {
+		var winH = $(window).height() - 70;
+		$(".navbar-static-side").height(winH);
+		$(".nav-left").slimScroll({
+			height : winH
+		});
+	}
+	autoLeftHeight();
+	$(window).resize(function() {
+		autoLeftHeight();
+	});
+</script>

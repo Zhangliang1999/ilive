@@ -1,0 +1,85 @@
+<div id="rightWrapper">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">代理商</a>
+			</div>
+		</div>
+	</div>
+	<div class="row btn-box">
+		<div class="col-lg-12">
+			<button class="income" type="button" ng-click="addAgent()">新增代理商</button>
+			<div class="pull-right m-r-sm">
+				<input type="text" class="serachinput" placeholder="ID/名称" ng-model="queryCondition.queryContent" />
+				<select class="commonSelect" ng-model="queryCondition.status" ng-change="searchList(1,false)"
+					ng-options="status.value as status.label for status in statusBeans"
+				>
+				    <option value="">全部状态</option>
+				</select>
+				<button class="btn commonbtn m-t-n-4" ng-click="searchList(1,false)">查询</button>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-xs">
+		<div class="col-md-12 p-w-lg ">
+			<table class="table newtable table-striped table-hover ScrollViewer table-responsive">
+				<thead class="gray-bg">
+					<tr>
+						<th style="width: 50px;">ID</th>
+						<th>代理商名称</th>
+						<th style="width: 70px;">基础扣率</th>
+						<th style="width: 70px;">状态</th>
+						<th style="width: 120px;">操作</th>
+					</tr>
+				</thead>
+				<tbody auto-height offset="275">
+					<tr ng-repeat="bean in page.list">
+						<td style="width: 50px;" ng-bind="bean.id"></td>
+						<td ng-bind="bean.agentName|blank:''"></td>
+						<td style="width: 70px;">
+							<span class="color-red" ng-bind="bean.deductionRate|blank:'0'"></span>
+						</td>
+						<td style="width: 70px;" ng-bind="bean.status|agentStatus:''"></td>
+						<td style="width: 120px;">
+							<a href="javascript:;" class="color-blue" ng-click="onlineAgent(bean.id)" ng-if="bean.status==3">生效</a>
+							<a href="javascript:;" class="color-blue" ng-click="offlineAgent(bean.id)" ng-if="bean.status==2">失效</a>
+							<a href="javascript:;" class="color-blue" ng-click="editAgent(bean.id)">查看</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12 pageBox m-b">
+			<!-- <button class="btn btn-default font-12 pull-left m-l bordered" ng-click="excelExport()">导出数据列表</button> -->
+			<div class="pull-right btn-group m-r">
+				<div class="pull-left m-t-xs m-r">
+					第
+					<span class="color-gold" ng-bind="page.pageNo"></span>
+					页/
+					<span class="color-gold" ng-bind="page.totalCount"></span>
+					条数据
+				</div>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.prePage,true)">
+					<i class="fa fa-chevron-left"></i>
+				</button>
+				<button ng-repeat="showPage in page.showPages track by $index" class="btn btn-white"
+					ng-class="{'active':showPage==page.pageNo}" ng-click="searchList(showPage,true)"
+				>
+					<span ng-if="showPage<=0" ng-bind="'...'"></span>
+					<span ng-if="showPage>0&&showPage==page.pageNo" ng-bind="showPage" id="currentPageNo"></span>
+					<span ng-if="showPage>0&&showPage!=page.pageNo" ng-bind="showPage"></span>
+				</button>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.nextPage,true)">
+					<i class="fa fa-chevron-right"></i>
+				</button>
+				<div class="pull-left m-t-xs m-l m-r">
+					跳至
+					<input class="m-l-xs m-r-xs" style="width: 33px; height: 23px; border: 1px solid #ddd;" type="text"
+						ng-keyup="($event.which === 13)?changePageNo($event.target.value):0"
+					/>
+					页
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,96 @@
+.container{
+    width: 7.5rem;
+    height: auto;
+    background: #0b92ff;
+    position: relative;
+}
+.containerBg{
+    width: 7.5rem;
+    height: auto;
+    background: url("../img/bgone.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+.bigCircle{
+    width: 7.25rem;
+    height: 7.25rem;
+    border-radius: 100%;
+    border: 1px dashed #fff;
+    margin: 1.25rem auto;
+}
+.smallCircle{
+    width: 5.96rem;
+    height: 5.96rem;
+    border-radius: 100%;
+    border: 1px dashed #fff;
+    margin: 0.63rem;
+    float: left;
+    background: #066eea;
+    overflow: hidden;
+}
+.circleTitle{
+    width: 5.05rem;
+    height: 0.44rem;
+    margin-top: 1.46rem;
+    text-align: center;
+    margin-left: 0.4rem;
+    font-size: 0.32rem;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.smallTitle{
+    width: 5.05rem;
+    height: 0.44rem;
+    text-align: center;
+    margin-left: 0.4rem;
+    font-size: 0.32rem;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.report{
+    width: 5.95rem;
+    height: 0.8rem;
+    margin: 0.45rem 0 0.5rem 0;
+    font-size: 0.77rem;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.time{
+    width: 4rem;
+    height: 0.45rem;
+    line-height: 0.45rem;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 50px;
+    font-size: 0.19rem;
+    color: #0084ff;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.logo{
+    width: 1.52rem;
+    height: 0.4rem;
+    background: url("../img/logo.png") no-repeat;
+    background-size: 100% 100%;
+    margin: 0.62rem auto 0;
+}
+.topArrow{
+    width: 0.32rem;
+    height: 0.3rem;
+    position: absolute;
+    bottom: 0.7rem;
+    left: 50%;
+    margin-left: -0.16rem;
+    background: url("../img/toparrow.png") no-repeat;
+    background-size: 100% 100%;
+}

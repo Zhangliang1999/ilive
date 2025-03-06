@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="UserInfo" table="statistic_user_info">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="nickName" type="java.lang.String">
+			<column name="nick_name" />
+		</property>
+		<property name="userImg" type="java.lang.String">
+			<column name="user_img" />
+		</property>
+		<property name="phoneNum" type="java.lang.String">
+			<column name="phone_num" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="registerTime" type="java.sql.Timestamp">
+			<column name="register_time" />
+		</property>
+		<property name="terminalType" type="java.lang.Integer">
+			<column name="terminal_type" />
+		</property>
+	</class>
+</hibernate-mapping>

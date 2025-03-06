@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="GBK"?>
+<root>
+<IODefine>
+        <AppType>1</AppType>
+<!--0live, 1 VOD ,2 RelayStream -->
+        <SourceAddr>rtmp://192.168.1.30:1935/live/live211</SourceAddr>
+ <!--流输入地址 -->
+        <OutputRTMP>1</OutputRTMP>
+ <!--是否支持RTMP输出 -->
+	<ShiftLong>0</ShiftLong>
+  <!-- 时移总时长；单位秒 时移总时长；单位秒； -->
+	<AllowOutputM3u8>1</AllowOutputM3u8>
+<!-- 是否支持M3u8； -->
+	<M3u8With64kAudio>1</M3u8With64kAudio>
+<!-- M3u8 需要带音频流 -->
+	<AllowOutputFLVShift>/</AllowOutputFLVShift>
+<!-- 是否支持FLV时移 -->
+	<AllowSmallVideo>1</AllowSmallVideo>
+ <!-- 是否支持小窗口视频 -->
+	<AllowGrabPic>1</AllowGrabPic>
+ <!-- 是否运行截图 -->
+	<AllowOutputUdp>1</AllowOutputUdp>
+<!-- 是否支持UDP的输出 -->
+	<OutputUdpAddr>224.1.1.111:5600</OutputUdpAddr>
+ <!-- UDP输出IP -->
+	<MAXConnect>4000</MAXConnect>
+ <!-- 最大并发数目 -->
+  	<VirtualDirectory>e:/vod/</VirtualDirectory>
+</IODefine>
+<RunTask>
+ <!--运行计划 -->
+	<TimeSeg>1-100</TimeSeg>
+<!--运行计划 0点为0秒，24小时为24*3600 -->
+	<TimeSeg>2-300</TimeSeg>
+</RunTask>
+<VisitRule>
+ <!--访问策略 -->
+	<IsURLAuthen>1</IsURLAuthen>
+ <!--防盗链 -->
+	<IsFileEncode>0</IsFileEncode>
+<!--是否支持文件加密 -->
+         <IsUseIPRule>0</IsUseIPRule>
+  <!--是否启用此策略 -->
+</VisitRule>
+<PushRule>
+<!--编码器推送策略 -->
+         <IsUseIPRule>0</IsUseIPRule>
+    <!--使用IP限制策略 -->
+            <IsUseLoginRule>0</IsUseLoginRule>
+  <!--要求登录 -->
+           <UserName>lwb</UserName>
+         <UserPwd>1234</UserPwd>
+</PushRule>
+</root>

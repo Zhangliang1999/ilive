@@ -1,0 +1,132 @@
+<div id="rightWrapper">
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">时长统计</a>
+			</div>
+		</div>
+	</div>
+	<div style="height: 380px;">
+	<div class="tongjiTit text-center">会议召开时长分布</div>
+	<div>
+	<div class="pull-left" style="width: 260px;margin-left: 10px">
+		<div class="meettongjiBox" style="background: #6666FF;">
+			<p class="topTit">
+				<span ng-bind="totalData.meetingSumTime|blank:'0'"></span>
+				小时
+			</p>
+			<p class="bottomTit">视频会议召开总时长</p>
+		</div>
+		<div class="meettongjiBox" style="background: #009933;margin-top: 5px">
+			<p class="topTit">
+				<span ng-bind="totalData.meetingAvgTime|blank:'0'"></span>
+				小时
+			</p>
+			<p class="bottomTit">视频会议召开平均时长</p>
+		</div>
+	</div>
+	<div class="pull-right" style="height:375px ;width:50%;">
+	 		
+			<div class="row col-md-12" donut-chart data="meetingTimeAreaData" style="height: 100%"></div>
+	</div>
+	</div>
+	</div>
+	
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">时段统计</a>
+			</div>
+		</div>
+		
+	</div>
+
+	<div class="row" style="height: 380px">
+	    <div class="tongjiTit text-center">会议召开时段分布</div>
+		<div class="col-md-12 m-t m-b" style="height: 90%" column-chart data="meetingStartData"></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">使用企业统计</a>
+			</div>
+		</div>
+	</div>
+	<div class="row border-bottom p-m" >
+		<div class="pull-left tongjiBox" style="background: #FF9900;">
+			<p class="topTit">
+				<span ng-bind="totalData.usedEnterpriseNum|blank:'0'"></span>
+				家
+			</p>
+			<p class="bottomTit">使用过视频会议的企业</p>
+		</div>
+		<div class="pull-left tongjiBox" style="background: #00FF00">
+			<p class="topTit">
+				<span ng-bind="totalData.enterpriseRate|blank:'0'"></span>
+				%
+			</p>
+			<p class="bottomTit">占比</p>
+		</div>
+		<div class="pull-left tongjiBox" style="background: #FF9900;">
+			<p class="topTit">
+				<span ng-bind="totalData.meetingTotalNum|blank:'0'"></span>
+				次
+			</p>
+			<p class="bottomTit">召开次数统计</p>
+		</div>
+		<div class="pull-left tongjiBox" style="background: #00FF00;">
+			<p class="topTit">
+				<span ng-bind="totalData.meetingRate|blank:'0'"></span>
+				次
+			</p>
+			<p class="bottomTit">平均使用频次</p>
+		</div>
+		<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" column-chart data="meetingEnterpriseTopData"></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">使用情况分析</a>
+			</div>
+		</div>
+	</div>
+	<div style="height: 385px;">
+	<div class="pull-left" style="height: 380px;width: 50%">
+		<div class="col-md-6 m-t m-b" style="height: 100%;width: 100%">
+			<div class="tongjiTit text-center">参会终端分析</div>
+			<div class="row col-md-12" donut-chart data="meetingLoginTypeData" style="height: 100%;width: 100%"></div>
+		</div>
+		
+	</div>
+	<div class="pull-left" style="height: 380px;width: 50%">
+		<div class="col-md-6 m-t m-b" style="height: 100%;width: 100%">
+			<div class="tongjiTit text-center">会议参会方数统计</div>
+			<div class="row col-md-10" column-chart data="meetingFigureData" style="height: 100%;width: 100%"></div>
+		</div>
+		
+	</div>
+	</div>
+	<div style="height: 385px;margin-top: 200px">
+	<div class="pull-left" style="height: 380px;width: 50%">
+		<div class="col-md-6 m-t m-b" style="height: 100%;width: 100%">
+			<div class="tongjiTit text-center">会议录制占比</div>
+			<div class="row col-md-12" donut-chart data="meetingRecordData" style="height: 100%;width: 100%"></div>
+		</div>
+		
+	</div>
+	<div class="pull-left" style="height: 380px;width: 50%">
+		<div class="col-md-6 m-t m-b" style="height: 100%;width: 100%">
+			<div class="tongjiTit text-center">会议转播占比</div>
+			<div class="row col-md-12" donut-chart data="meetingRedirectData" style="height: 100%;width: 100%"></div>
+		</div>
+		
+	</div>
+	</div>
+	</div>
+	
+	
+	
+	
+
+</div>

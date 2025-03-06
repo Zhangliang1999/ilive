@@ -1,0 +1,231 @@
+<div id="rightWrapper">
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">平台关键数据</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间" value="" />
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间" value="" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row border-bottom p-m">
+		<div class="pull-left tongjiBox" style="background: #6666FF;">
+			<p class="topTit">
+				<span ng-bind="totalData.liveEventTotalNum|blank:'0'"></span>
+				次
+			</p>
+			<p class="bottomTit">直播总场次</p>
+		</div>
+		<div class="pull-left tongjiBox" style="background: #009933;">
+			<p class="topTit">
+				<span ng-bind="totalData.fansNum|blank:'0'"></span>
+				个
+			</p>
+			<p class="bottomTit">企业粉丝数</p>
+		</div>
+		<div class="pull-left tongjiBox" style="background: #FF9900;">
+			<p class="topTit">
+				<span ng-bind="totalData.liveTotalAverageDuraion|hour|blank:'0'"></span>
+				小时
+			</p>
+			<p class="bottomTit">平台直播总时长</p>
+		</div>
+		<div class="pull-left tongjiBox" style="background: #663399;">
+			<p class="topTit">
+				<span ng-bind="totalData.liveViewUserTotalNum|blank:'0'"></span>
+				人
+			</p>
+			<p class="bottomTit">累计总观看人数</p>
+		</div>
+		<div class="pull-left tongjiBox" style="background: #FF7878;">
+			<p class="topTit">
+				<span ng-bind="totalData.liveViewTotalNum|blank:'0'"></span>
+				次
+			</p>
+			<p class="bottomTit">累计总观看次数</p>
+		</div>
+	</div>
+	<div class="row border-bottom p-w-m">
+		<div class="col-md-12 p-m">
+			<div class="tongjiTit">平台直播最多收看人数出现于</div>
+			<div class="tongjiCon">
+				<div class="col-md-4" ng-bind="maxData.viewTime"></div>
+				<div class="col-md-2">
+					<span class="color-gold" ng-bind="maxData.userNum|blank:'0'"></span>
+					人
+				</div>
+				<div class="col-md-2" style="font-size: 20px;" ng-bind="maxData.enterpriseName">南通税务局</div>
+				<div class="col-md-4" style="font-size: 20px;" ng-bind="maxData.liveTitle">《南通税务局第二次直播》</div>
+			</div>
+		</div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">直播其他数据</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间" value="" />
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间" value="" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row border-bottom p-w-m">
+		<div class="col-md-12">
+			<div class="col-md-3 border-right-dottod m-t m-b">
+				<div class="tongjiTit">总点赞数</div>
+				<div class="tongjiNum" ng-bind="totalData.liveLikeTotalNum|blank:'0'"></div>
+			</div>
+			<div class="col-md-3 border-right-dottod m-t m-b">
+				<div class="tongjiTit">总转发数</div>
+				<div class="tongjiNum" ng-bind="totalData.liveShareTotalNum|blank:'0'"></div>
+			</div>
+			<div class="col-md-3 border-right-dottod m-t m-b">
+				<div class="tongjiTit">总互动数</div>
+				<div class="tongjiNum" ng-bind="totalData.liveCommentTotalNum|blank:'0'"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">用户观看直播端口来源</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="viewSourceQueryCondition.startTime" ng-change="getViewSourceData()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="viewSourceQueryCondition.endTime" ng-change="getViewSourceData()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" donut-chart data="viewSourceData"></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">用户平均观看直播时长变化</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="viewTimeForLineQueryCondition.startTime" ng-change="getViewTimeDataForLine()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="viewTimeForLineQueryCondition.endTime" ng-change="getViewTimeDataForLine()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" basic-line-chart data="viewTimeDataForLine"
+			value-field="viewTimeFieldForLine" sort-field="viewTimeFieldForLine"
+		></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">用户观看直播时间点分布</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="viewTimeForColumnQueryCondition.startTime" ng-change="getViewTimeDataForColumn()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="viewTimeForColumnQueryCondition.endTime" ng-change="getViewTimeDataForColumn()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" column-chart data="viewTimeDataForColumn"></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">用户观看直播ip地域分布图</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="viewLocationQueryCondition.startTime" ng-change="getViewLocationData()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="viewLocationQueryCondition.endTime" ng-change="getViewLocationData()"
+					/>
+				</div>
+			</div>
+			<!-- <button class="btn btn-default font-12 pull-right m-t-sm m-r">导出数据</button> -->
+		</div>
+	</div>
+	<div class="row" style="height: 420px">
+		<div class="col-md-6 m-t m-b" style="height: 90%" china-map-chart data="viewLocationData" field="viewLocationField"></div>
+		<div class="col-md-6">
+			<div class="col-md-12 m-t">
+				<table class="table table-bordered table-responsive">
+					<thead>
+						<tr>
+							<th style="background: #F9FAFC !important;">排名</th>
+							<th style="background: #F9FAFC !important;">省份</th>
+							<th style="background: #F9FAFC !important;">观众人数</th>
+							<th style="background: #F9FAFC !important;">排名</th>
+							<th style="background: #F9FAFC !important;">省份</th>
+							<th style="background: #F9FAFC !important;">观众人数</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="i in [1,2,3,4,5,6,7,8,9,10] track by $index">
+							<td ng-bind="i"></td>
+							<td ng-bind="viewLocationData[i-1].provinceName"></td>
+							<td ng-bind="viewLocationData[i-1].totalNum"></td>
+							<td ng-bind="10+i"></td>
+							<td ng-bind="viewLocationData[9+i].provinceName"></td>
+							<td ng-bind="viewLocationData[9+i].totalNum"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">用户平均每场观看直播时长占比</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="viewTimeForPieQueryCondition.startTime" ng-change="getViewTimeDataForPie()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="viewTimeForPieQueryCondition.endTime" ng-change="getViewTimeDataForPie()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" donut-chart data="viewTimeDataForPie"></div>
+	</div>
+</div>

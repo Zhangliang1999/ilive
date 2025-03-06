@@ -1,0 +1,231 @@
+.title-header{
+    height: 50px;
+}
+.tabbox{
+    height: 50px;
+    width: 320px;
+    float: left;
+    margin-left: 30px;
+}
+.tabbox ul li{
+    float: left;
+    width: 80px;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    cursor: pointer;
+    position: relative;
+}
+.hdactive{
+    color: #0084ff;
+    border-bottom: 2px solid #0084ff;
+    font-size: 18px;
+}
+.serachinput{
+    width: 200px;
+    height: 30px!important;
+    border: 1px solid rgba(204, 204, 204, 1);
+    margin-top: 10px;
+    border-radius: 2px;
+    padding: 0 5px;
+    margin-right: 5px;
+}
+.userimg{
+    width: 51px;
+    height: 51px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin: 10px 20px;
+}
+.userimg img{
+    width: 100%;
+    height: 100%;
+}
+.usertext{
+    width: 100%;
+}
+.w-70{
+    width: 70px;
+}
+.w-160{
+    width: 160px;
+}
+.username{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+}
+.usercon{
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+}
+.delebtn{
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+}
+.ansbtn{
+    position: absolute;
+    bottom: 10px;
+    right: 75px;
+}
+.answer{
+    margin-left: 80px;
+    margin-right: 40px;
+}
+.tabbadge{
+    position: absolute;
+    right: -15px;
+    top: 0;
+    display: none;
+}
+.title-name {
+    margin-left: 10px;
+    float: left;
+    margin-right: 20px;
+    height: 50px;
+    line-height: 50px;
+}
+th,td{
+    text-align: center;
+}
+.scrollSwitchBox{
+    margin-left: 40px;
+}
+.hdactive .tabbadge{
+    display: block;
+}
+.canvasbox{
+    width: 1050px;
+    height: auto;
+    margin: 0 auto;
+}
+.canva{
+    width: 300px;
+    height: 200px;
+    margin-right: 50px;
+    margin-bottom: 30px;
+}
+.maxbox{
+    margin: 30px auto;
+    padding-left: 200px;
+}
+.cjzbinput {
+    height: 38px;
+    margin-bottom: 15px;
+}
+.cjzbinput .firstname {
+    width: 130px;
+    display: block;
+    float: left;
+    line-height: 38px;
+    font-size: 14px;
+    text-align: right;
+}
+.cjzbinput input {
+    width: 290px;
+    height: 36px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 12px;
+}
+.lh-38{
+    height: 38px;
+    line-height: 38px;
+}
+.m-t-100{
+    margin-top: 150px;
+    margin-left: 300px;
+}
+.file-box{
+    width: 220px;
+}
+.addadmin{
+    width: 200px;
+    height: 225px;
+    line-height: 225px;
+    background: url("../img/u11575.png") no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+}
+.addadmin img{
+    width: 100%;
+    height: 100%;
+}
+.bordered{
+    border: 1px solid #e7eaec;
+}
+.no-borders-table th,.no-borders-table td{
+    border: none!important;
+    background: #ffffff;
+}
+.ibox-title{
+    border-width: 0 0 3px 0;
+}
+.drawname{
+    font-weight: 500;
+}
+.text-left{
+    text-align: left!important;
+}
+.tdPic{
+    width: 71px;
+    height: 41px;
+    float: left;
+    margin: 5px;
+    background: #ccc;
+}
+.drawTable input{
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid rgba(204, 204, 204, 1);
+    border-radius: 5px;
+    text-align: center;
+}
+.ibox-content{
+    padding: 15px 20px 20px 0px;
+}
+.tishimask{
+    display: inline-block;
+    padding: 7px;
+    background-color: #D9EAF3;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(204, 204, 204, 1);
+    margin: 5px 0 0 15px;
+}
+.lh-35{
+    line-height: 35px;
+}
+.faIcon{
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    color: #e5e6e7;
+}
+.cq_content .rows2{
+    border: 1px solid #e5e6e7;
+    width: 600px!important;
+}
+.topic_type_con{
+    position: relative;
+}
+.bitian{
+    position: absolute;
+    right: 15px;
+    top: 45px;
+}
+.yzlabel{
+    margin: 0 0 0 15px;
+}
+.dragwen > li{
+    margin-bottom: 0!important;
+}
+.usertime{
+    margin-bottom: 15px;
+    float: right;
+}

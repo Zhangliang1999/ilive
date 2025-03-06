@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.billing.entity">
+	<class name="SettlementLog" table="billing_settlement_log">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+		<property name="enterpriseName" type="java.lang.String">
+			<column name="enterprise_name" />
+		</property>
+		<property name="status" type="java.lang.Integer">
+			<column name="status" />
+		</property>
+		<property name="settleAmount" type="java.lang.Double">
+			<column name="settle_amount" sql-type="decimal(23,2)"/>
+		</property>
+		<property name="actualAmount" type="java.lang.Double">
+			<column name="actual_amount" sql-type="decimal(23,2)"/>
+		</property>
+		<property name="platformAmount" type="java.lang.Double">
+			<column name="platform_amount" sql-type="decimal(23,2)"/>
+		</property>
+		<property name="invoiceStatus" type="java.lang.Integer">
+			<column name="invoice_status" />
+		</property>
+		<property name="transferAccount" type="java.lang.String">
+			<column name="transfer_account" />
+		</property>
+		<property name="transferId" type="java.lang.String">
+			<column name="transfer_id" />
+		</property>
+	</class>
+</hibernate-mapping>

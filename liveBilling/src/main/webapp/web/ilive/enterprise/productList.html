@@ -1,0 +1,22 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-content">资源账户明细</a>
+			</div>
+		</div>
+	</div>
+	<div class="row p-m font-content">
+		<div class="col-lg-12">
+			<div class="ibox  gray-bg m-b-sm" ng-repeat="enterpriseAndProduct in enterpriseAndProductList">
+				<div class="ibox-content gray-bg">
+					<div class="col-lg-2 font-title font-bold" ng-bind="enterpriseAndProduct.product.productName"></div>
+					<div class="col-lg-2" ng-bind="enterpriseAndProduct.product.productType|productType:''"></div>
+					<div class="col-lg-3" ng-bind="'购买日期:'+enterpriseAndProduct.createTime|date:'yyyy-MM-dd'"></div>
+					<div class="col-lg-3" ng-bind="'到期日期:'+enterpriseAndProduct.vaildEndTime|date:'yyyy-MM-dd'"></div>
+					<div class="col-lg-2"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

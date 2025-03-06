@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:36:15 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping package="com.jwzt.DB.cdn.mount">
+	<class name="MountInfo" table="ilive_server_mount">
+		<meta attribute="class-description">
+			@author 徐勤
+		</meta>
+
+		<id name="server_mount_id" type="java.lang.Integer" unsaved-value="0">
+			<meta attribute="field-description">发布点ID</meta>
+			<column name="server_mount_id" />
+			<generator class="assigned"></generator>
+		</id>
+
+		<property name="server_mount_name" type="java.lang.String"
+			not-null="true">
+			<meta attribute="field-description">发布点名称</meta>
+			<column name="server_mount_name" length="100" />
+		</property>
+
+		<many-to-one class="com.jwzt.DB.cdn.serverGroup.ILiveServerGroup"
+			name="server_group" column="server_group_id" lazy="false">
+			<meta attribute="field-description">服务器组ID</meta>
+		</many-to-one>
+
+		<property name="storage_space" type="java.lang.Integer">
+			<meta attribute="field-description">分配的存储空间（0:无限制）</meta>
+			<column name="storage_space" />
+		</property>
+
+		<property name="used_space" type="java.lang.Integer">
+			<meta attribute="field-description">已使用空间（单位：M）</meta>
+			<column name="used_space" />
+		</property>
+
+		<property name="base_path" type="java.lang.String" not-null="true">
+			<meta attribute="field-description">发布点对应真实路径</meta>
+			<column name="base_path" length="255" />
+		</property>
+
+		<property name="ftp_path" type="java.lang.String" not-null="true">
+			<meta attribute="field-description">FTP路径</meta>
+			<column name="ftp_path" length="255" />
+		</property>
+
+		<property name="mount_type" type="java.lang.Integer">
+			<meta attribute="field-description">发布点类型 0：存储发布点 1：分发发布点 2：镜像发布点 3：影子发布点</meta>
+			<column name="mount_type" />
+		</property>
+
+		<property name="mirror_mount_id" type="java.lang.Integer">
+			<meta attribute="field-description">镜像、影子发布点ID</meta>
+			<column name="mirror_mount_id" />
+		</property>
+
+		<property name="mount_desc" type="java.lang.String">
+			<meta attribute="field-description">发布点描述</meta>
+			<column name="mount_desc" length="1000" />
+		</property>
+
+		<property name="if_use" type="java.lang.Integer">
+			<meta attribute="field-description">是否正在使用 0：正在使用 1：作废</meta>
+			<column name="if_use" />
+		</property>
+
+		<property name="public_disk_space" type="java.lang.Integer">
+			<meta attribute="field-description">公共磁盘空间</meta>
+			<column name="public_disk_space" />
+		</property>
+
+		<property name="warning_space" type="java.lang.Integer">
+			<meta attribute="field-description">警戒磁盘空间</meta>
+			<column name="warning_space" />
+		</property>
+
+		<property name="left_space" type="java.lang.Integer">
+			<meta attribute="field-description">剩余磁盘空间</meta>
+			<column name="left_space" />
+		</property>
+		<property name="iscut" type="java.lang.Integer">
+			<meta attribute="field-description">是否切片</meta>
+			<column name="iscut" />
+		</property>
+
+		<property name="isDefault" type="java.lang.Integer">
+			<meta attribute="field-description">是否切片</meta>
+			<column name="is_default" />
+		</property>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.billing.entity">
+	<class name="FunctionInfo" table="billing_function">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="parentId" type="java.lang.Integer">
+			<column name="parent_id" />
+		</property>
+		<property name="functionName" type="java.lang.String">
+			<column name="function_name" />
+		</property>
+		<property name="functionCode" type="java.lang.Integer">
+			<column name="function_code" />
+		</property>
+	</class>
+</hibernate-mapping>

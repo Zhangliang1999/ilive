@@ -1,0 +1,117 @@
+<div id="rightWrapper">
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">商户关键数据</a>
+			</div>
+		</div>
+	</div>
+	<div class="row border-bottom p-w-m">
+		<div class="col-md-12 p-m" style="border-bottom: 1px dotted #ddd;">
+			<div class="col-md-3 border-right-dottod m-t m-b">
+				<div class="tongjiTit">平台总商户数</div>
+				<div class="tongjiNum">
+					<span class="color-gold" ng-bind="totalData.enterpriseTotalNum|blank:'0'"></span>
+					户
+				</div>
+			</div>
+			<div class="col-md-3 border-right-dottod m-t m-b">
+				<div class="tongjiTit">正式签约商户数</div>
+				<div class="tongjiNum">
+					<span class="color-gold" ng-bind="totalData.enterpriseFormalContractTotalNum|blank:'0'"></span>
+					户
+				</div>
+			</div>
+			<div class="col-md-3 border-right-dottod m-t m-b">
+				<div class="tongjiTit">平台近30天活跃商户数</div>
+				<div class="tongjiNum">
+					<span class="color-gold" ng-bind="totalData.liveEvent30DaysTotalNum|blank:'0'"></span>
+					户
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 p-m">
+			<div class="tongjiTit">发起直播最多的商户</div>
+			<div class="tongjiCon">
+				<div class="col-md-4" ng-bind="totalData.liveMostEnterpriseName|blank:''"></div>
+				<div class="col-md-2">
+					<span class="tongjiTit">发起直播</span>
+					<span class="color-gold" ng-bind="totalData.liveEventMostTotalNum|blank:'0'"></span>场
+				</div>
+				<div class="col-md-2" style="float: right;">
+					<span class="tongjiTit">总观看人数</span>
+					<span class="color-gold" ng-bind="totalData.liveViewTotalUser|blank:'0'"></span>人
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">企业直播推流时间点分布</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="beginLiveForColumnQueryCondition.startTime" ng-change="getBeginLiveDataForColumn()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="beginLiveForColumnQueryCondition.endTime" ng-change="getBeginLiveDataForColumn()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" column-chart data="beginLiveDataForColumn"></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">企业直播推流ip地域分布图</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="beginLocationQueryCondition.startTime" ng-change="getBeginLocationData()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="beginLocationQueryCondition.endTime" ng-change="getBeginLocationData()"
+					/>
+				</div>
+			</div>
+			<button class="btn btn-default font-12 pull-right m-t-sm m-r" ng-click="excelExportBeginLocationData()">导出数据</button>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-6 m-t m-b" style="height: 90%" china-map-chart data="beginLocationData" field="beginLocationField"></div>
+		<div class="col-md-6">
+			<div class="col-md-12 m-t">
+				<table class="table table-bordered table-responsive">
+					<thead>
+						<tr>
+							<th style="background: #F9FAFC !important;">排名</th>
+							<th style="background: #F9FAFC !important;">省份</th>
+							<th style="background: #F9FAFC !important;">观众人数</th>
+							<th style="background: #F9FAFC !important;">排名</th>
+							<th style="background: #F9FAFC !important;">省份</th>
+							<th style="background: #F9FAFC !important;">观众人数</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="i in [1,2,3,4,5,6,7,8,9,10] track by $index">
+							<td ng-bind="i"></td>
+							<td ng-bind="beginLocationData[i-1].provinceName"></td>
+							<td ng-bind="beginLocationData[i-1].totalNum"></td>
+							<td ng-bind="10+i"></td>
+							<td ng-bind="beginLocationData[9+i].provinceName"></td>
+							<td ng-bind="beginLocationData[9+i].totalNum"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

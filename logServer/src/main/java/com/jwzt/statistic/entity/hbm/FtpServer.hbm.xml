@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="FtpServer" table="ilive_ftp_server">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="serverId" type="java.lang.Integer">
+			<column name="server_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="serverName" type="java.lang.String">
+			<column name="server_name"></column>
+		</property>
+		
+		<property name="ftpIp" type="java.lang.String">
+			<column name="ftp_ip" not-null="true"></column>
+		</property>
+		
+		<property name="ftpPost" type="java.lang.Integer">
+			<column name="ftp_post" not-null="true"></column>
+		</property>
+		
+		<property name="ftpPath" type="java.lang.String">
+			<column name="ftp_path"></column>
+		</property>
+		
+		<property name="loginName" type="java.lang.String">
+			<column name="login_name" not-null="true"></column>
+		</property>
+		
+		<property name="loginPassword" type="java.lang.String">
+			<column name="login_password" not-null="true"></column>
+		</property>
+	</class>
+</hibernate-mapping>

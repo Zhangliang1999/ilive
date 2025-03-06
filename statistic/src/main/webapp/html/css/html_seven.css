@@ -1,0 +1,72 @@
+.container{
+    width: 7.5rem;
+    height: auto;
+    background: #fff;
+    position: relative;
+}
+.containerBg{
+    width: 7.5rem;
+    height: auto;
+    background: url("../img/bgfive.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+.topArrow{
+    width: 0.32rem;
+    height: 0.3rem;
+    position: absolute;
+    bottom: 0.7rem;
+    left: 50%;
+    margin-left: -0.16rem;
+    background: url("../img/grayarrow.png") no-repeat;
+    background-size: 100% 100%;
+    z-index: 9;
+}
+.topNum{
+    width: 0.6rem;
+    text-align: center;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    margin: 0.4rem auto 0.3rem;
+    background: url("../img/blueborder.png") no-repeat;
+    background-size: 100% 100%;
+    font-size: 0.24rem;
+    font-weight: bold;
+    color: #0b92ff;
+}
+.topTitle{
+    width: 7.5rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    text-align: center;
+    font-size: 0.56rem;
+    font-weight: bold;
+    color: #0b92ff;
+}
+.article{
+    width: 5.4rem;
+    margin: 0.75rem auto;
+    overflow: hidden;
+}
+.articleText{
+    font-size: 0.32rem;
+    color: #ccc;
+    margin-bottom: 0.45rem;
+}
+.whiteFont{
+    font-size: 0.48rem;
+    font-weight: bold;
+    color: #0b92ff;
+    margin-right: 0.1rem;
+}
+.whiteFont small{
+    font-size:0.37rem;
+}
+.text-right{
+    text-align: right;
+}
+.canvas{
+    height: 6.5rem;
+    width: 6.6rem;
+    margin: -0.3rem auto 0.7rem;
+}

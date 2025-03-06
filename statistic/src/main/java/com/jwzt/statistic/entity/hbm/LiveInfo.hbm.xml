@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="LiveInfo" table="statistic_live_info">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+		</property>
+		<property name="liveEventId" type="java.lang.Long">
+			<column name="live_event_id" not-null="true" unique="true" />
+		</property>
+		<property name="liveTitle" type="java.lang.String">
+			<column name="live_title" />
+		</property>
+		<property name="coverAddr" type="java.lang.String">
+			<column name="cover_addr" />
+		</property>
+		<property name="liveBeginTime" type="java.sql.Timestamp">
+			<column name="live_begin_time" />
+		</property>
+		<property name="liveEndTime" type="java.sql.Timestamp">
+			<column name="live_end_time" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="openDecorate" type="java.lang.Boolean">
+			<column name="open_decorate" />
+		</property>
+		<property name="baseNum" type="java.lang.Integer">
+			<column name="base_num" />
+		</property>
+		<property name="multipleNum" type="java.lang.Integer">
+			<column name="multiple_num" />
+		</property>
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+		<property name="enterpriseName" type="java.lang.String">
+			<column name="enterprise_name" />
+		</property>
+		<property name="enterpriseDesc" type="java.lang.String">
+			<column name="enterprise_desc" />
+		</property>
+		<property name="enterpriseImg" type="java.lang.String">
+			<column name="enterprise_img" />
+		</property>
+		<property name="lastStatisticTime" type="java.sql.Timestamp">
+			<column name="last_statistic_time" />
+		</property>
+		<property name="ipCode" type="java.lang.Long">
+			<column name="ip_code" />
+		</property>
+		<property name="statisticing" type="java.lang.Boolean">
+			<column name="is_statisticing" />
+		</property>
+		<property name="isFinshed" type="java.lang.Integer">
+			<column name="is_finshed" />
+		</property>
+	</class>
+</hibernate-mapping>

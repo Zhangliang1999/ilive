@@ -1,0 +1,219 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">添加资源套餐</a>
+			</div>
+		</div>
+	</div>
+	<div class="row btn-box">
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName m-t-xs">套餐名称：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" placeholder="(必填)" ng-model="bean.packageName" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">套餐类型：</div>
+				<div class="lh-40">
+					<select class="commonSelect" ng-model="bean.packageType"
+						ng-options="type.value as type.label for type in packageTypeBeans"
+					>
+					</select>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">套餐周期：</div>
+				<div class="lh-40">
+					<input type="text" class="serachinput" style="width: 40px;" ng-model="bean.vaildDurationValue" />
+					<select class="commonSelect" ng-model="bean.vaildDurationUnit"
+						ng-options="vaildDuration.value as vaildDuration.label for vaildDuration in vaildDurationBeans"
+					>
+					</select>
+					<span class="color-999">（必填，此周期用于计算套餐订购有效期时间）</span>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">套餐原价：</div>
+				<div class="mealCon" style="width: 60px;">
+					<input type="text" class="serachinput" placeholder="（必填）" style="width: 100%;" ng-model="bean.orginalPrice" />
+				</div>
+				<div class="mealName m-t-xs">成本价：</div>
+				<div class="mealCon" style="width: 60px;">
+					<input type="text" class="serachinput" placeholder="（必填）" style="width: 100%;" ng-model="bean.costPrice" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">并发上限：</div>
+				<div class="lh-40">
+					<input type="text" style="width: 100px;" class="serachinput gray-bg" readonly ng-model="bean.concurrenceProduct" />
+					<span class="color-999">（无需填写，会根据勾选的资源包关联，-1，表示不限量）</span>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">存储空间：</div>
+				<div class="lh-40">
+					<input type="text" style="width: 100px;" class="serachinput gray-bg" readonly ng-model="bean.storageProduct" />
+					<span class="color-999">（无需填写，会根据勾选的资源包关联）</span>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">短信条数：</div>
+				<div class="lh-40">
+					<input type="text" style="width: 100px;" class="serachinput gray-bg" readonly ng-model="bean.shortMessageProduct" />
+					<span class="color-999">（无需填写，会根据勾选的资源包关联）</span>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">直播时长：</div>
+				<div class="lh-40">
+					<input type="text" style="width: 100px;" class="serachinput gray-bg" readonly ng-model="bean.durationProduct" />
+					<span class="color-999">（无需填写，会根据勾选的资源包关联）</span>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">投放渠道：</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="checkbox" style="vertical-align: sub;" ng-model="bean.enableChannelOfOfficialPlatform" />
+					官网平台
+				</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="checkbox" style="vertical-align: sub;" ng-model="bean.enableChannelOfChannelAgent" />
+					渠道代理
+				</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="checkbox" style="vertical-align: sub;" ng-model="bean.enableChannelOfGroupProductLibrary" />
+					集团产品库
+				</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="checkbox" style="vertical-align: sub;" ng-model="bean.enableChannelOfinside" />
+					内部使用
+				</div>
+			</div>
+			<div class="mealBox" ng-if="bean.enableChannelOfOfficialPlatform">
+				<div class="mealName">平台销售价格：</div>
+				<div class="lh-40">
+					<input type="text" class="serachinput" placeholder="（必填）" ng-model="bean.officialPlatformPrice" />
+				</div>
+			</div>
+			<div class="mealBox" ng-if="bean.enableChannelOfChannelAgent">
+				<div class="mealName">渠道扣率基准价：</div>
+				<div class="lh-40">
+					<input type="text" class="serachinput" placeholder="（必填）" ng-model="bean.channelAgentPrice" />
+				</div>
+			</div>
+			<div class="mealBox" ng-if="bean.enableChannelOfGroupProductLibrary">
+				<div class="mealName">产品库销售价格：</div>
+				<div class="lh-40">
+					<input type="text" class="serachinput" placeholder="（必填）" ng-model="bean.groupProductLibraryPrice" />
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName m-t-xs">图片封面：</div>
+				<div class="mealCon">
+					<div ng-if="!hasImage" class="uploadPic" ngf-select="selectFiles($files)"
+						ngf-pattern="'image/gif,image/jpeg,image/jpg,image/png'" ngf-accept="'image/gif,image/jpeg,image/jpg,image/png'"
+					>上传图片</div>
+					<img ng-if="hasImage" class="uploadPic" ngf-thumbnail="bean.introduceImageFile" ngf-select="selectFiles($files)"
+						ngf-pattern="'image/gif,image/jpeg,image/jpg,image/png'" ngf-accept="'image/gif,image/jpeg,image/jpg,image/png'"
+					/>
+				</div>
+			</div>
+			<div class="mealBox m-t">
+				<div class="mealName m-t-xs">套餐简介：</div>
+				<div class="mealCon">
+					<textarea class="serachTextarea" placeholder="一句话描述（用于前端展示）" ng-model="bean.introduceContent"></textarea>
+				</div>
+			</div>
+			<div class="mealBox m-t">
+				<div class="mealName m-t-xs">介绍URL：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" style="width: 300px;" placeholder="（非必填）" ng-model="bean.introduceUrl" />
+					<small class="color-999">（用于套餐介绍外链跳转）</small>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-sm">
+		<div class="col-lg-12 p-w-lg">
+			<div class="title-name">
+				<span class="font-title">选择资源包</span>
+			</div>
+		</div>
+		<div class="col-lg-12 p-w-lg">
+			<div class="panel panel-default" ng-repeat="product in bean.productList">
+				<div class="panel-body no-padding">
+					<div class="mealBox col-lg-4 pull-left">
+						<div class="lh-40" ng-bind="product.id+'（'+product.productName+'）'"></div>
+					</div>
+					<div class="mealBox col-lg-4 pull-left">
+						<div class="pull-left lh-40">类型：</div>
+						<div class="mealCon" style="width: 60px;" ng-bind="product.productType|productType:''"></div>
+					</div>
+					<div class="mealBox col-lg-3 pull-left">
+						<div class="lh-40" ng-if="product.productType===2" ng-bind="product.incrementShowValue + 'G'"></div>
+						<div class="lh-40" ng-if="product.productType===3" ng-bind="product.incrementShowValue + '条'"></div>
+						<div class="lh-40" ng-if="product.productType===4" ng-bind="product.incrementShowValue + '小时'"></div>
+						<div class="lh-40" ng-if="product.productType===5" ng-bind="product.incrementShowValue + '人'"></div>
+					</div>
+					<div class="mealBox col-lg-1 pull-left">
+						<div class="lh-40" style="cursor: pointer;" ng-click="removeProduct(product)">删除</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12 p-w-lg">
+			<div class="panel panel-default">
+				<div class="panel-body text-center" style="cursor: pointer;" data-toggle="modal" data-target="#myModal">+添加选择资源包</div>
+			</div>
+			<div class="col-lg-12 text-center">
+				<button class="btn commonbtn" ng-click="savePackage()">确认添加</button>
+				<p class="m-t m-b">添加后套餐为暂存状态，需要选择发售后，才为实际可售状态。</p>
+			</div>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title pull-left m-t" id="myModalLabel">资源包选择</h4>
+					<div class="pull-right">
+						<input type="checkbox" style="vertical-align: sub;" ng-model="queryProductType1" ng-click="changeProductType()" />
+						功能权限
+						<input type="checkbox" style="vertical-align: sub;" ng-model="queryProductType2" ng-click="changeProductType()" />
+						存储空间
+						<input type="checkbox" style="vertical-align: sub;" ng-model="queryProductType3" ng-click="changeProductType()" />
+						短信
+						<input type="checkbox" style="vertical-align: sub;" ng-model="queryProductType4" ng-click="changeProductType()" />
+						时长
+						<input type="checkbox" style="vertical-align: sub;" ng-model="queryProductType5" ng-click="changeProductType()" />
+						并发
+						<input type="text" class="serachinput" placeholder="ID/名称" ng-model="queryCondition.queryContent">
+						<button class="btn commonbtn m-t-n-4" ng-click="searchProductList()">搜索</button>
+					</div>
+				</div>
+				<div class="modal-body" style="overflow: auto;" slim-scroll offset="250">
+					<div class="slimBox">
+						<div class="selectedBox" ng-repeat="product in productList" ng-click="product.isChecked=!product.isChecked">
+							<input type="checkbox" ng-model="product.isChecked" ng-click="product.isChecked=!product.isChecked" />
+							<p class="selectTit" ng-bind="product.id+'（'+product.productName+'）'"></p>
+							<p class="selectText" ng-bind="'类型：'+(product.productType|productType:'')"></p>
+							<p class="selectText">
+								<span ng-bind="'售价:'+product.productPrice+'元'"></span>
+								<span class="color-999">（参考价）</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-danger" ng-click="chooseProduct()">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

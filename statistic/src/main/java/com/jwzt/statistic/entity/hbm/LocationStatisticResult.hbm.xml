@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="LocationStatisticResult" table="statistic_location_statistic_result">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="flagId" type="java.lang.Long">
+			<column name="flag_id" />
+		</property>
+		<property name="flagType" type="java.lang.Integer">
+			<column name="flag_type" />
+		</property>
+		<property name="totalNum" type="java.lang.Long">
+			<column name="total_num" />
+		</property>
+		<property name="provinceName" type="java.lang.String">
+			<column name="province_name" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="statisticTime" type="java.sql.Timestamp">
+			<column name="statistic_time" />
+		</property>
+		<property name="city" type="java.lang.String">
+			<column name="city" />
+		</property>
+	</class>
+</hibernate-mapping>

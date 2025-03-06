@@ -1,0 +1,818 @@
+.fa-address-card{
+    color: #FFB510;
+}
+.fa-id-card-o{
+    color: #FFB510;
+}
+.yinyepic{
+    width: 80px;
+    height: 100px;
+}
+.shenfenimg{
+    width: 100px;
+    height: 60px;
+}
+.p-w-50{
+    padding: 0 50px;
+}
+.btn-danger{
+    background: #FFB510;
+    border: none;
+}
+.echartul{
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.echartul li{
+    width: 99px;
+    text-align: center;
+    float: left;
+    border-left: 1px solid #ccc;
+}
+.echartul li:first-child{
+    border-left: none;
+}
+.echartBox{
+    width: 90%;
+    height: 300px;
+    border: 1px solid #CCCCCC;
+    margin: 15px auto;
+}
+.echartulActive{
+    background:#FFB510;
+    color: #ffffff;
+}
+.w-200{
+    width: 200px;
+}
+.bgTitle{
+    font-size: 16px;
+    font-weight: bold;
+}
+.rzMessage{
+    padding: 5px;
+    background: rgba(242, 242, 242, 1);
+    margin-top: 10px;
+    font-size: 14px;
+}
+.rzMessageLeft{
+    width: 60px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+}
+.rzMessageRight{
+    min-width: 230px;
+    line-height: 25px;
+    width: calc(100% - 70px) !important;
+    float: left;
+}
+.bhResult{
+    width: 400px;
+    height: 110px;
+    margin: 20px auto;
+}
+.dhResultLeft{
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    float: left;
+}
+.dhResultRight{
+    width: 300px;
+    height: 110px;
+    float: left;
+}
+.dhResultRight textarea{
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    resize: none;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+.businessBox{
+    width: 24%;
+    height: 250px;
+    background: #F6F6F6;
+    overflow: hidden;
+    border: 1px solid rgb(204,204,204);
+    float: left;
+    margin-right: 1%;
+    margin-bottom: 15px;
+}
+.businessPic{
+    width: 80px;
+    height: 80px;
+    margin: 20px auto 10px;
+    background: #ccc;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.businessName{
+    width: 100%;
+    line-height: 25px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.businessIcon{
+    width: 100%;
+    line-height: 25px;
+    text-align: center;
+    margin-top: 5px;
+}
+.businessButton{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+.businessButton button{
+    border-radius: 50px;
+    width: 80px;
+}
+.businessContent{
+    overflow: hidden;
+    width: auto;
+    margin-left: 1%;
+}
+.businessTilLeft{
+    width: 80px;
+    height: 80px;
+    background: #ccc;
+    border-radius: 100%;
+    margin: 15px;
+    float: left;
+}
+.businessTilRight{
+    height: 110px;
+    float: left;
+    margin-top: 15px;
+}
+.businessTitName{
+    font-size: 16px;
+    color: #333;
+    line-height: 25px;
+}
+.businessTitID{
+    font-size: 14px;
+    color: #999;
+    line-height: 25px;
+}
+.manageGroup{
+    line-height: 30px;
+    font-size: 14px;
+    margin-top: 20px;
+}
+.manageName{
+    width: 120px;
+    line-height: 30px;
+    font-size: 14px;
+    float: left;
+}
+.manageRight{
+    width: 302px;
+    height: auto;
+    float: left;
+    overflow: hidden;
+}
+.manageInput{
+    width: 290px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    padding: 0 5px;
+}
+.manageRight select{
+    width: 143px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+.license{
+    width: 65px;
+    height: 95px;
+    background: #ccc;
+}
+.bodylic{
+    width: 90px;
+    height: 55px;
+    float: left;
+    margin-right: 5px;
+    background: #CCCCCC;
+}
+.btn-info{
+    background: rgba(228, 24, 21, 1);
+    border: none;
+}
+.btn-info:hover{
+    background: rgba(228, 24, 21, 1);
+    border: none;
+}
+.ddjlTitle{
+    width:100%;
+    height: 60px;
+    line-height: 60px;
+}
+.ddjlTitName{
+    float: left;
+    font-size: 14px;
+}
+.ddjlSelect{
+    background-color: #FFFFFF;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 149px;
+    font-size: 14px;
+}
+.buttonBox{
+    width: 280px;
+    margin-top: 15px;
+}
+.w-250{
+    width: 250px;
+}
+.buttonBox .dropdown-menu{
+    width: 260px;
+}
+.btn-danger:hover{
+    background: #FFB510;
+}
+.zhLeft{
+    width: 100px;
+    float: left;
+    height: 50px;
+}
+.zhRight{
+    width: 400px;
+    float: left;
+    margin-left: 20px;
+}
+.zhRightImg{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    overflow: hidden;
+    float: left;
+    background: #CCCCCC;
+}
+.zhRightText{
+    float: left;
+    margin-left: 15px;
+}
+.zhRightTop{
+    height: 50px;
+    line-height: 50px;
+}
+.zhRightInput{
+    width: 300px;
+    height: 30px;
+    background: inherit;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(204, 204, 204, 1);
+    border-radius: 5px;
+    padding: 0 5px;
+}
+.zhRight textarea{
+    width: 300px;
+    height: 100px;
+    background: inherit;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(204, 204, 204, 1);
+    border-radius: 5px;
+    resize: none;
+    padding: 5px;
+}
+.w-500{
+    width: 500px;
+}
+.modalResult{
+    width: 400px;
+    height: auto;
+    margin: 10px auto;
+    overflow: hidden;
+}
+.modalResultRight {
+    width: 300px;
+    float: left;
+}
+.cueMessage{
+    color: red;
+    display: inline-block;
+    margin: 5px 0 0 0;
+}
+.modalResultRight select{
+    width: 100%;
+    height: 30px;
+    border: 1px solid #ddd;
+}
+.modalResultRight input{
+    width: 100%;
+    height: 30px;
+    border: 1px solid #ddd;
+    padding: 0 5px;
+}
+.Sensitive{
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 14px;
+    color:#333;
+    float: left;
+    background: rgba(242, 242, 242, 1);
+    border-radius: 3px;
+    position: relative;
+    margin-top: 15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.Sensitive:hover{
+    background: #FFB510;
+    color: #fff;
+}
+.Sensitive i{
+    position: absolute;
+    top: -8px;
+    right: -6px;
+    font-size: 18px;
+    color: red;
+    display: none;
+}
+@media (min-width: 1367px) and (max-width: 1920px) {
+    .SensitiveContent{
+        margin-left: 25px;
+    }
+}
+@media (max-width: 1366px){
+    .SensitiveContent{
+        margin-left: 20px;
+    }
+}
+.commonbtn:focus{
+    color: #ffffff;
+}
+.tbodySet{
+    display: inline-block;
+    width: 60px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 50px;
+    background: #999999;
+    color: #fff;
+}
+.userInfoBox{
+    width: 500px;
+    height: auto;
+    margin-bottom: 20px;
+    overflow: hidden;
+    text-align: center;
+}
+.userInfoLeft{
+    width: 100px;
+    line-height: 30px;
+    font-size: 14px;
+    text-align: right;
+    float: left;
+    font-weight: bold;
+}
+.userInfoRight{
+    width: 350px;
+    float: left;
+    margin-left: 35px;
+}
+.userPhoto{
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background: #ccc;
+    float: left;
+    overflow: hidden;
+}
+.userPhoto img{
+    width: 100%;
+    height: 100%;
+}
+.userInfoRight input{
+    width: 100%;
+    height: 35px;
+    border: 1px solid #ddd;
+    padding: 0 5px;
+    border-radius: 3px;
+    outline: none;
+}
+.btn-success{
+    border: 0;
+}
+.m-l-n-150{
+    margin-left: -150px;
+}
+.powerSetLeft{
+    width: 300px;
+    /*height: 1000px;*/
+    /*background: red;*/
+    float: left;
+}
+.powerImg{
+    width: 200px;
+    height: 200px;
+    background: #ddd;
+    margin: 20px auto;
+    text-align: center;
+}
+.powerImg img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.powerInfo{
+    width: 200px;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 auto 5px;
+    overflow: hidden;
+    font-size: 16px;
+}
+.powerSetRight{
+    min-width: 800px;
+    width: 800px;
+    /*height: 1000px;*/
+    /*background:red;*/
+    float: left;
+}
+.bigPower{
+    margin-top: 20px;
+}
+.bigPower>li{
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.bigPower input{
+    vertical-align: inherit;
+    margin-right: 5px;
+}
+.smallPower{
+    padding-left: 50px;
+    overflow: hidden;
+}
+.smallPower>li{
+    float: left;
+    width: 150px;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 5px;
+    text-align: left;
+    margin-top: 10px;
+}
+.smallPower>li input{
+    vertical-align: sub;
+}
+.manageBox{
+    width: 100%;
+    margin-top: 50px;
+    overflow: hidden;
+}
+.manageTit i{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.manageBox .manageTit{
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+.manageList{
+    width: 180px;
+    height: 60px;
+    margin-top: 10px;
+    float: left;
+    margin-right: 15px;
+    border-radius: 3px;
+}
+.bgc-nrgl{
+    background: rgba(247, 247, 247, 1);
+}
+.bgc-swgl{
+    background: #FFB822;
+}
+.bgc-yygl{
+    background: #E47B21;
+}
+.manageListLeft{
+    width: 40px;
+    height: 40px;
+    line-height: 52px;
+    float: left;
+    margin-top: 10px;
+    margin-left: 20px;
+    text-align: center;
+    border-radius: 3px;
+}
+.bgc-0084ff{
+    background: #0084ff;
+}
+.manageListLeft i{
+    color: #ffffff;
+    font-size: 32px;
+}
+.manageListRight{
+    width: 80px;
+    height: 40px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.manageListRight p{
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    color: #333;
+}
+.color-blue{
+    color: #578BE5 !important;
+}
+.zbjk{
+    width: 32%;
+    margin-right: 1%;
+    margin-top: 10px;
+    height: 200px;
+    border: 1px solid #ddd;
+    float: left;
+    background: #ccc;
+}
+.picobox {
+    width: 800px;
+    height: auto;
+    margin:10px auto;
+    position:relative;
+    overflow:hidden;
+}
+.picobox #zbjkul {
+    width: 800px;
+    position:absolute;
+}
+.picobox #zbjkul li {
+    width: 800px;
+    float:left;
+}
+
+
+.left,
+.right {
+    height: auto;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    margin-top: 150px;
+}
+.Bar {
+    position: relative;
+    width: 200px;
+    border: 1px solid #ccc;
+    padding: 1px;
+}
+.Bar div{
+    display: block;
+    position: relative;
+    background:#0084ff;
+    color: #333333;
+    height: 15px;
+    line-height: 15px;
+}
+.Bar div span{
+    position: absolute;
+    width: 200px;
+    text-align: center;
+    font-weight: bold;
+}
+.selectedGroup .userInput{
+    width: 150px;
+    height: 30px;
+    border: 1px solid #ddd;
+    padding: 0 5px;
+}
+.modalarea{
+    width:320px;
+    height: 94px;
+    border: 1px solid #ddd;
+    resize: none;
+    margin-left: 90px;
+    padding: 5px;
+}
+.modalinput{
+    width:320px;
+    height: 30px;
+    border: 1px solid #ddd;
+    resize: none;
+    margin-left: 90px;
+    padding: 5px;
+}
+.modalBt{
+    color: red;
+}
+.userlist{
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+.userlist .userlistLeft{
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    float: left;
+    text-align: right;
+    margin-right: 10px;
+}
+.userlist .userlistRight{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    float: left;
+    text-align: right;
+    color: #000;
+    font-weight: bold;
+}
+.userlist .userlistTextarea{
+    float: left;
+    width: 350px;
+    height: 98px;
+    padding: 5px;
+    resize: none;
+}
+.userlist .userlistinput{
+    width: 150px;
+    height: 28px;
+    float: left;
+    border: 1px solid #ddd;
+}
+.shifangList{
+    width: 340px;
+    margin: 15px auto;
+    overflow: hidden;
+}
+.shifangList .sfLeft{
+    width:70px;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+}
+.shifangList .sfRight{
+    width:270px;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+}
+.sfResult{
+    width: 100%;
+    height: auto;
+    word-break: break-all;
+    float: left;
+    overflow: hidden;
+}
+.hmdList{
+    width: 85%;
+    margin: 15px auto;
+    overflow: hidden;
+}
+.hmdList .sfLeft{
+    width:70px;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+}
+.hmdList .sfRight{
+    width:60%;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+}
+.tongjiul{
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-right: 15px;
+}
+.tongjiul li{
+    width: 88px;
+    text-align: center;
+    float: left;
+    border-left: 1px solid #ccc;
+    cursor: pointer;
+}
+.tongjiul li:first-child{
+    border-left: none;
+}
+.tongjiulActive{
+    background:#FFB510;
+    color: #ffffff;
+    height: 28px;
+    line-height: 28px;
+}
+.selectInput{
+    width: 148px;
+    height: 28px;
+    border: 1px solid #ccc;
+    padding: 0 5px;
+}
+.tongjiBox{
+    width: 19%;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+    height: 96px;
+    color: #fff;
+    font-size: 14px;
+}
+.meettongjiBox{
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+    height: 96px;
+    color: #fff;
+    font-size: 14px;
+}
+.tongjiBox .topTit{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    margin-top: 20px;
+}
+.tongjiBox .topTit span{
+    font-size: 28px;
+    font-weight: bold;
+}
+.tongjiBox .bottomTit{
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+.tongjiTit{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    color: #999;
+    font-size: 14px;
+    font-weight: bold;
+}
+.tongjiCon{
+    width: 100%;
+    line-height: 50px;
+    font-size: 26px;
+}
+.tongjiNum{
+    width: 100%;
+    font-size: 26px;
+    color: #333;
+}
+.border-right-dottod{
+    border-right: 1px dotted #ddd;
+}
+.color-gold{
+    color: #FFA31B;
+}
+.darkgray-bg{
+    background: #999999;
+}
+.darkgray-bg .title-name a{
+    color: #fff !important;
+}
+.liveTit{
+    width: 100%;
+    text-align: center;
+    height: 25px;
+    font-size: 14px;
+    color: #fff;
+    font-family: 'Arial Negreta', 'Arial Normal', 'Arial';
+}
+.liveNum{
+    width: 100%;
+    text-align: center;
+    height: 30px;
+    font-size: 18px;
+    color: #FDDA4F;
+    font-weight: bold;
+}

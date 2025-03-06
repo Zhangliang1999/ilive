@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="VideoInfo" table="statistic_video_info">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+		</property>
+		<property name="liveEventId" type="java.lang.Long">
+			<column name="live_event_id" />
+		</property>
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id" />
+		</property>
+		<property name="title" type="java.lang.String">
+			<column name="title" />
+		</property>
+		<property name="fileImg" type="java.lang.String">
+			<column name="file_img" />
+		</property>
+		<property name="widthHeight" type="java.lang.String">
+			<column name="width_height" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="duration" type="java.lang.Long">
+			<column name="duration" />
+		</property>
+		<property name="fileSize" type="java.lang.Long">
+			<column name="file_size" />
+		</property>
+	</class>
+</hibernate-mapping>

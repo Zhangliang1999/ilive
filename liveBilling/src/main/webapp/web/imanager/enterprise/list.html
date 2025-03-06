@@ -1,0 +1,105 @@
+<div id="rightWrapper">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">收益账户</a>
+			</div>
+		</div>
+	</div>
+	<div class="row btn-box">
+		<div class="col-lg-12">
+			<div class="income">
+				累计收益：
+				<span class="color-red" ng-bind="totalBilling.totalAmount|blank:'0.00'"></span>
+				元
+			</div>
+			<div class="income">
+				收益余额：
+				<span class="color-red" ng-bind="totalBilling.unsettleAmount|blank:'0.00'"></span>
+				元
+			</div>
+			<div class="income">
+				已结算金额：
+				<span class="color-red" ng-bind="totalBilling.settleAmount|blank:'0.00'"></span>
+				元
+			</div>
+			<a class="incomeLink" href="javascript:;" ng-click="viewFlow()">查看收益流水</a>
+			<div class="pull-right m-r-sm">
+				<input type="text" class="serachinput" style="width: 150px" placeholder="企业ID/企业名称"
+					ng-model="queryCondition.queryContent"
+				/>
+				<button class="btn commonbtn m-t-n-4" ng-click="searchList(1,false)">查询</button>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-xs">
+		<div class="col-md-12 p-w-lg ">
+			<table class="table newtable table-striped table-hover ScrollViewer table-responsive">
+				<thead class="gray-bg">
+					<tr>
+						<th style="width: 120px;">企业ID</th>
+						<th>企业名称</th>
+						<th style="width: 120px;">收益余额</th>
+						<th style="width: 120px;">平台收益</th>
+						<th style="width: 120px;">已结算金额</th>
+						<th style="width: 120px;">累计收益</th>
+						<th style="width: 120px;">收益流水</th>
+					</tr>
+				</thead>
+				<tbody auto-height offset="275">
+					<tr ng-repeat="bean in page.list">
+						<td style="width: 120px;" ng-bind="bean.enterpriseId"></td>
+						<td ng-bind="bean.enterpriseName|blank:'未认证企业'"></td>
+						<td style="width: 120px;">
+							<span class="color-red font-bold" ng-bind="bean.unsettleAmount|blank:'0.0'"></span>
+						</td>
+						<td style="width: 120px;">
+							<span class="color-red font-bold" ng-bind="bean.platformAmount|blank:'0.0'"></span>
+						</td>
+						<td style="width: 120px;">
+							<span class="color-red font-bold" ng-bind="bean.settleAmount|blank:'0.0'"></span>
+						</td>
+						<td style="width: 120px;">
+							<span class="color-red font-bold" ng-bind="bean.totalAmount|blank:'0.0'"></span>
+						</td>
+						<td style="width: 120px;">
+							<a href="javascript:;" ng-click="viewFlow(bean.enterpriseId)">查看</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12 pageBox m-b">
+			<!-- <button class="btn btn-default font-12 pull-left m-l bordered" ng-click="excelExport()">导出数据列表</button> -->
+			<div class="pull-right btn-group m-r">
+				<div class="pull-left m-t-xs m-r">
+					第
+					<span class="color-gold" ng-bind="page.pageNo"></span>
+					页/
+					<span class="color-gold" ng-bind="page.totalCount"></span>
+					条数据
+				</div>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.prePage,true)">
+					<i class="fa fa-chevron-left"></i>
+				</button>
+				<button ng-repeat="showPage in page.showPages track by $index" class="btn btn-white"
+					ng-class="{'active':showPage==page.pageNo}" ng-click="searchList(showPage,true)"
+				>
+					<span ng-if="showPage<=0" ng-bind="'...'"></span>
+					<span ng-if="showPage>0&&showPage==page.pageNo" ng-bind="showPage" id="currentPageNo"></span>
+					<span ng-if="showPage>0&&showPage!=page.pageNo" ng-bind="showPage"></span>
+				</button>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.nextPage,true)">
+					<i class="fa fa-chevron-right"></i>
+				</button>
+				<div class="pull-left m-t-xs m-l m-r">
+					跳至
+					<input class="m-l-xs m-r-xs" style="width: 33px; height: 23px; border: 1px solid #ddd;" type="text"
+						ng-keyup="($event.which === 13)?changePageNo($event.target.value):0"
+					/>
+					页
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

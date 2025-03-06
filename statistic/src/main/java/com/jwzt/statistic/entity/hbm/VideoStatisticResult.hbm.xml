@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="VideoStatisticResult" table="statistic_video_statistic_result">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="videoId" type="java.lang.Long">
+			<column name="video_id" />
+		</property>
+		<property name="userTotalNum" type="java.lang.Long">
+			<column name="user_total_num" />
+		</property>
+		<property name="viewTotalNum" type="java.lang.Long">
+			<column name="view_total_num" />
+		</property>
+		<property name="shareTotalNum" type="java.lang.Long">
+			<column name="share_total_num" />
+		</property>
+		<property name="likeTotalNum" type="java.lang.Long">
+			<column name="like_total_num" />
+		</property>
+		<property name="commentTotalNum" type="java.lang.Long">
+			<column name="comment_total_num" />
+		</property>
+		<property name="androidUserNum" type="java.lang.Long">
+			<column name="android_user_num" />
+		</property>
+		<property name="iosUserNum" type="java.lang.Long">
+			<column name="ios_user_num" />
+		</property>
+		<property name="pcUserNum" type="java.lang.Long">
+			<column name="pc_user_num" />
+		</property>
+		<property name="wapUserNum" type="java.lang.Long">
+			<column name="wap_user_num" />
+		</property>
+		<property name="otherUserNum" type="java.lang.Long">
+			<column name="other_user_num" />
+		</property>
+		<property name="curDayNum" type="java.lang.Long">
+			<column name="cur_day_num" />
+		</property>
+		<property name="curDayView" type="java.lang.Long">
+			<column name="cur_day_view" />
+		</property>
+		<property name="newRegisterUserNum" type="java.lang.Long">
+			<column name="new_register_user_num" />
+		</property>
+		<property name="oldRegisterUserNum" type="java.lang.Long">
+			<column name="old_register_user_num" />
+		</property>
+		<property name="otherRegisterUserNum" type="java.lang.Long">
+			<column name="other_register_user_num" />
+		</property>
+		<property name="statisticTime" type="java.sql.Timestamp">
+			<column name="statistic_time" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+	</class>
+</hibernate-mapping>

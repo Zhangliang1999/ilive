@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="MeetingStatisticResult" table="statistic_meeting_statistic_result">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="meetingId" type="java.lang.Long">
+			<column name="meeting_id" />
+		</property>
+		<property name="enterpriseId" type="java.lang.Long">
+			<column name="enterprise_id" />
+		</property>
+		<property name="enterpriseName" type="java.lang.String">
+			<column name="enterprise_name" />
+		</property>
+		<property name="meetingStartTime" type="java.sql.Timestamp">
+			<column name="meeting_start_time" />
+		</property>
+		<property name="meetingEndTime" type="java.sql.Timestamp">
+			<column name="meeting_end_time" />
+		</property>
+		<property name="PCNum" type="java.lang.Long">
+			<column name="pc_num" />
+		</property>
+		<property name="APPNum" type="java.lang.Long">
+			<column name="app_num" />
+		</property>
+		<property name="meetingRecord" type="java.lang.Integer">
+			<column name="meeting_record" />
+		</property>
+		<property name="MeetingRedirect" type="java.lang.Integer">
+			<column name="meeting_redirect" />
+		</property>
+		<property name="MeetingFigure" type="java.lang.Long">
+			<column name="meeting_figure" />
+		</property>
+		<property name="MeetingTime" type="java.lang.Long">
+			<column name="meeting_time" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

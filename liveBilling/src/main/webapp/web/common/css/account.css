@@ -1,0 +1,343 @@
+/*账户样式*/
+.aborder{ border: 1px solid #ddd;}
+.ablue{ background: #418bf0;}
+.ayellow{ background: #f1af55;}
+.aorange{ background: #eb591e;}
+.a_redbtn{ background: #eb591e; font-size: 12px; padding: 4px 8px; margin-left: 5px;}
+.yellowtext{ color: #f7dd09;}
+.textgray{ color: #eee;}
+.textlight{ color: #ffef11;}
+.arecord a{ padding: 0px 5px;color: #fff;}
+.accountinfo .infolist{ height: 160px; width: 32%; margin-right:2%;}
+.accountinfo .infolist:last-child{ margin-right: 0;}
+.accountinfo .infolist p{ padding: 3px 0px;}
+.accountinfo .headimg{ width: 70px; height: 70px; position: relative; background: #fff;}
+.accountinfo .headimg img{ max-width:60px; position: absolute; top:0; left: 0; right: 0;bottom: 0; margin: auto;}
+.zpart{ width: 97%; margin: 10px auto; text-align: center; overflow: hidden}
+.zpart .zleft{ width: 10%; padding: 10px 0; float: left;}
+.zpart .zright{ width: 86%;float: right; margin-right: 3%;}
+.zpart .progress{ width: 90%; display: inline-block; float: left; height: 20px; margin-bottom: 0; margin-top: 15px; margin-left: 4%;}
+.zpart .sr-only{ width:auto; height: auto; clip: inherit; line-height: 20px;}
+.zpart .zright>span{ line-height: 30px; font-size: 16px; margin-top: 10px;}
+.a_hr{width: 90%; display: inline-block;padding-top: 10px; float: right; border-top: 0; border-bottom: 1px solid #ccc;}
+.buycase{ width: 97%; margin:30px auto; overflow: hidden;}
+.buylist{ width: 98%; margin: 0 auto;}
+.buylist li{ width: 30%; border: 1px solid #ccc; height: 150px;float: left; margin-right: 5%; margin-top: 20px; padding-top: 24px;}
+.buylist li:nth-child(3n){ margin-right: 0;}
+.buylist li .zleft{ width: 40%; float: left; height: 100%; text-align: center;}
+.buylist li .zleft img{ max-width: 100px;}
+.buylist li .zright{ width: 60%; float: right; height: 100%;}
+.buybtn{ padding: 5px 40px;}
+.buybtn:hover{ background: #418bf0;}
+
+.orderlist{ width: 94%; margin: 0 auto;}
+.orderlist th{ background: #ccc !important;}
+.orderlist td{ padding: 20px 0 !important;}
+.list-head{ font-size: 14px;}
+.list-head i{ font-style: normal;}
+.list-head select,.list-head input{ display: inline-block; height: 30px; width: 170px;line-height: 30px;text-indent: 8px; margin-right: 10px;}
+.z_demo input{ display: inline-block;border: 1px solid #ddd;line-height: 30px;text-indent: 8px;width: 320px;border-radius: 4px;font-size: 13px;padding: 0;}
+.z_demo{ position: relative;}
+.z_demo i{ position: absolute; right: 21px;}
+.accountlist{ width: 90%; margin: 0 auto;}
+.accountlist h3{ color: #333;}
+.accountlist .zlink{ height: 120px; width: 30%; margin-right: 5%; padding-top: 20px; font-size: 16px; margin-bottom: 30px;}
+.accountlist .zlink:nth-child(3n){ margin-right: 0;}
+.accountlist .zlink button{ padding: 2px 5px; border: 1px solid #ddd; font-size: 14px;}
+.accountlist .zlink button:hover{ background: #0084ff;}
+
+.enterpriseinfo{ width: 96%; margin: 20px auto; float: none;}
+.enterpriseinfo .listinfo>span{ display: inline-block; width: 100px; text-align: right;}
+.enterpriseinfo .listinfo input[type="text"],.enterpriseinfo .listinfo select{ border: 1px solid #ccc; width: 400px; text-indent: 8px; border-radius: 4px; height: 36px; line-height: 36px;}
+.packageInfo{
+    width: 90%;
+    line-height: 30px;
+    overflow: hidden;
+    margin: 10px auto 0;
+}
+.packageInfo>span{
+    display: inline-block;
+    float: left;
+    width: 80px;
+    font-weight: bold;
+}
+.packageInfo .rightInfo{
+    width: 670px;
+}
+.InfoBox{
+    border: 1px solid #ccc;
+    float: left;
+    height: 100px;
+    width: 315px;
+    position: relative;
+}
+.InfoBox .leftInfo{
+
+
+    float: left;
+}
+.InfoBox .rightBox{
+    float: right;
+    text-align: right;
+}
+.leftInfo span{
+    display: inline-block;
+    font-weight: bold;
+}
+.rightInfo span{
+    display: inline-block;
+    font-weight: bold;
+}
+.color-333399{
+    color: #333399;
+}
+.color-333{
+    color: #333;
+}
+.color-red{
+    color: #CC3300;
+}
+.modal-dialog {
+    width: 900px;
+    margin: 30px auto;
+}
+.m-t-50{
+    margin-top: 50px;
+}
+.modal-dialog input[type=checkbox]{
+    vertical-align: sub;
+}
+.selectedjiao{
+    width: 25px;
+    height: 25px;
+    background: url("../img/as.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 0;
+    bottom:0;
+}
+.InfoBoxActive{
+    border: 1px solid #0084ff;
+}
+.textareaBox{
+    width: 400px;
+    height: 100px;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 4px;
+    padding: 5px;
+}
+.listinfo{
+    clear: both;
+}
+.logoImg{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 85px;
+    color: #ccc;
+    margin-left: 4px;
+    font-size: 80px;
+    border: 1px dashed #ccc;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.accountLeft{
+    width:80px;
+    height: 80px;
+    background: #ccc;
+    border-radius: 5px;
+    float: left;
+}
+.ibox-content{
+    padding: 20px;
+    overflow: hidden;
+}
+.accountRight{
+    width:90%;
+    height: 80px;
+    float: left;
+    margin-left: 15px;
+}
+.accountTit{
+    font-size: 16px;
+    font-weight: bold;
+}
+.commitName{
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+.commitInput{
+    width: 200px;
+    height: 30px;
+    border: 1px solid #ddd;
+}
+.accRow{
+    overflow: hidden;
+}
+.accName{
+    width: 70px;
+    float: left;
+}
+.accText{
+    float: left;
+}
+.accTopimg{
+    width: 100%;
+    height: 50px;
+    background: #ccc;
+}
+.triangle_border_up{
+    width:0;
+    height:0;
+    border-width:0 15px 15px;
+    border-style:solid;
+    border-color:transparent transparent #fff;
+    position:absolute;
+    top: -15px;
+}
+.accCon{
+    position: relative;
+}
+.acctab .ibox{
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 0!important;
+}
+.acctab .ibox-content{
+    padding: 0!important;
+}
+.acctab img{
+    width:100%;
+    height: 100%;
+}
+.mealBing{
+    padding:3px 10px;
+    display:inline-block;
+    border: 1px solid #CC3300;
+    border-radius: 3px;
+    color: #CC3300;
+}
+.chooseMeal{
+    display: inline-block;
+    width: 80%;
+    height: 100px;
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+.chooseMealLeft{
+    width:50%;
+    height: 100px;
+    display: inline-block;
+}
+.chooseMealLeft .mealTit{
+    width: 100%;
+    font-weight: bold;
+    display: inline-block;
+}
+.chooseMealRight{
+    width:40%;
+    height: 100px;
+    display: inline-block;
+    float: right;
+}
+.price{
+    text-align: right;
+    font-size: 16px;
+    width: 100%;
+    display: inline-block;
+    color: #CC3300;
+    margin-top: 5px;
+}
+.important{
+    width: 100%;
+    padding: 15px;
+    color: #cc3300;
+    background: rgba(255, 204, 204, 0.509803921568627);
+}
+.diejiaPing{
+    padding: 3px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    display: inline-block;
+    cursor: pointer;
+}
+.djactive{
+    color: #fff;
+    background: #0084ff;
+}
+.messcircle{
+    margin: 5px auto;
+    width: 140px;
+    height: 140px;
+    line-height: 140px;
+    text-align: center;
+    background: #0084ff;
+    border-radius: 100%;
+    color: #fff;
+    font-size: 16px;
+}
+.messcirclenull{
+    margin: 5px auto;
+    width: 130px;
+    height: 130px;
+    text-align: center;
+    border: 10px solid #ddd;
+    border-radius: 100%;
+    position: relative;
+    font-size: 16px;
+}
+.messDiv{
+    width:150px;
+    height: 40px;
+    position: absolute;
+    line-height: 40px;
+    text-align: center;
+    top: 39px;
+    left: -18px;
+    background: #fff;
+}
+.font-30{
+    font-size: 30px;
+}
+.manageleft{
+    width:90px;
+    height: 90px;
+    float: left;
+    background: #ccc;
+    border-radius: 100%;
+}
+.manageright{
+    width: 69%;
+    height: 110px;
+    float: left;
+    margin-left: 1%;
+}
+.manageright p{
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.manageTime{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    color: red;
+}
+.addManage{
+    cursor: pointer;
+}
+.addMan{
+    text-align: center;
+    height: 110px;
+    line-height: 110px;
+}
+.manageInfo{
+    width: 400px;
+    margin: auto;
+}

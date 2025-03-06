@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.billing.entity">
+	<class name="RevenueFlow" table="billing_revenue_flow">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="flowId" type="java.lang.Long">
+			<column name="flow_id" />
+			<generator class="assigned" />
+		</id>
+		
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id"/>
+		</property>
+		
+		<property name="enterpriseName" type="java.lang.String">
+			<column name="enterprise_name"></column>
+		</property>
+		
+		<property name="evenId" type="java.lang.Long">
+			<column name="even_id"/>
+		</property>
+		
+		<property name="flowBalance" type="java.lang.Double">
+			<column name="flow_balance" sql-type="decimal(23,2)"/>
+		</property>
+		
+		<property name="flowDesc" type="java.lang.String">
+			<column name="flow_desc"/>
+		</property>
+		
+		<property name="flowPrice" type="java.lang.Double">
+			<column name="flow_price" sql-type="decimal(23,2)"/>
+		</property>
+		
+		<property name="flowTime" type="java.sql.Timestamp">
+			<column name="flow_time"/>
+		</property>
+		
+		<property name="flowType" type="java.lang.Integer">
+			<column name="flow_type"/>
+		</property>
+		
+		<property name="platformPrice" type="java.lang.String">
+			<column name="platform_price"/>
+		</property>
+		
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id"/>
+		</property>
+		
+		<property name="settlementStatus" type="java.lang.Integer">
+			<column name="settlement_status"/>
+		</property>
+		
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id"/>
+		</property>
+		
+		<property name="userName" type="java.lang.String">
+			<column name="user_name"/>
+		</property>
+		<property name="flagId" type="java.lang.Integer">
+            <column name="flag_id"/>
+        </property>
+		<property name="mobile" type="java.lang.String">
+			<column name="mobile"/>
+		</property>
+	</class>
+</hibernate-mapping>

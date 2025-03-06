@@ -1,0 +1,1 @@
+I:\android\VCspace\bin\BV_Cutter.exe I:\android\VCspace\bin\cmd\segcmd.txt

@@ -1,0 +1,6 @@
+获取数据库链接出错 --> java.lang.NullPointerException
+java.lang.NullPointerException
+	at com.jwzt.soms.sys.property.SysPropertyManager.selectAll(SysPropertyManager.java:287)
+	at com.jwzt.common.SomsConfigInfo.<clinit>(SomsConfigInfo.java:34)
+	at com.jwzt.livems.live.RecordLiveMgr.recordLive(RecordLiveMgr.java:45)
+	at com.jwzt.livems.live.RecordLiveMgr.main(RecordLiveMgr.java:30)

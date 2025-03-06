@@ -1,0 +1,171 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-content">套餐购买</a>
+			</div>
+		</div>
+	</div>
+	<div class="row p-m font-content">
+		<div class="col-lg-12">
+			<div class="ibox  gray-bg">
+				<div class="ibox-content gray-bg">
+					<div class="accRow">
+						<div class="accName">现有套餐：</div>
+						<div class="accText">
+							<span class="font-bold font-content" ng-bind="enterpriseProductInfo.packageName"></span>
+							<span class="font-12 color-999 m-l" ng-bind="'（有效期至'+(enterpriseProductInfo.vaildEndTime|date:'yyyy-MM-dd')+'）'"></span>
+						</div>
+					</div>
+					<div class="accRow m-t">
+						<div class="accName">套餐说明：</div>
+						<div class="accText">
+							<p>1）在套餐服务期间，您可以根据您的需要升级套餐，并按照实际差价收取套餐差额。</p>
+							<p>2）试用版功能，只提供有限功能，有效期为一个月。</p>
+							<p>3）您在任何时候后都可以加购资源包，但实际的功能使用，以您购买的功能套餐为准。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row p-m font-content">
+		<div class="col-lg-12">
+			<div class="ibox gray-bg">
+				<div class="ibox-content gray-bg">
+					<div class="col-lg-4 acctab" ng-repeat="package in packageList track by $index">
+						<div class="ibox" ng-click="showPackage(package,$index)">
+							<div class="ibox-content" style="height: 200px; background: #fff;">
+								<img ng-src="{{package.introduceImagePath}}" alt="" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12 accCon m-b-lg">
+			<div class="triangle_border_up" style="left: 16%;" ng-if="packageIndex==0"></div>
+			<div class="triangle_border_up" style="left: 49%;" ng-if="packageIndex==1"></div>
+			<div class="triangle_border_up" style="left: 80%;" ng-if="packageIndex==2"></div>
+			<p class="m-t-xs">
+				<span class="commitName">套餐名称：</span>
+				<span class="commitText" ng-bind="selectedPackage.packageName"></span>
+			</p>
+			<p class="m-t">
+				<span class="commitName">套餐介绍：</span>
+				<span class="commitText" ng-bind="selectedPackage.introduceContent"></span>
+			</p>
+			<p class="m-t">
+				<span class="commitName">并发上限：</span>
+				<span class="commitText" ng-bind="selectedPackage.concurrenceProduct+'人'"></span>
+			</p>
+			<p class="m-t">
+				<span class="commitName">有效期：</span>
+				<span class="commitText"
+					ng-bind="selectedPackage.vaildDurationValue+(selectedPackage.vaildDurationUnit|vaildDuration:'')"
+				></span>
+			</p>
+			<p class="m-t">
+				<span class="commitName">订购价格：</span>
+				<span class="commitText">
+					<span style="color: #FF6F0E; font-size: 24px;" ng-bind="'￥'+selectedPackage.officialPlatformPrice"></span>
+					<small style="text-decoration: line-through;" class="color-999 m-l-lg" ng-bind="'原价：'+selectedPackage.orginalPrice"></small>
+				</span>
+			</p>
+			<p class="m-t p-w-lg">
+				<a href="javascript:;" class="color-blue" ng-click="viewPackageDetail()">查看套餐详情</a>
+			</p>
+			<hr />
+			<p class="m-t text-center">
+				<button class="btn commonbtn" ng-cloak ng-show="selectedPackage.id>0" data-toggle="modal" data-target="#myModal">购买</button>
+			</p>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 600px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">套餐购买</h4>
+				</div>
+				<div class="modal-body">
+					<p class="m-t-xs">
+						<span class="commitName">购买类型：</span>
+						<span class="mealBing">订购套餐</span>
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">选择套餐包：</span>
+						<span class="chooseMeal">
+							<span class="chooseMealLeft">
+								<span class="mealTit" ng-bind="selectedPackage.packageName"></span>
+								<span class="" ng-bind="selectedPackage.packageDesc"></span>
+							</span>
+							<span class="chooseMealRight">
+								<span class="price" style="text-decoration: line-through;" ng-bind="'原价：'+selectedPackage.orginalPrice"></span>
+								<span class="price">
+									￥
+									<span class="font-24" ng-bind="selectedPackage.officialPlatformPrice">18999</span>
+								</span>
+							</span>
+						</span>
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">有效期：</span>
+						<span ng-bind="selectedPackage.vaildDurationValue+(selectedPackage.vaildDurationUnit|vaildDuration:'')"></span>
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">观看并发：</span>
+						<span ng-bind="selectedPackage.concurrenceProduct+'人'"></span>
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">支付金额：</span>
+						<span class="font-24" style="color: #CC3300;" ng-bind="'￥'+selectedPackage.officialPlatformPrice"></span>
+					</p>
+					<div class="important">重要提示：目前天翼直播只采取线下支付方式，给您造成的不便，我们非常抱歉。提交购买订单后，会有客户经理与您联系，请您留下您的联系方式。</div>
+					<p class="m-t-xs">
+						<span class="commitName">联系人：</span>
+						<input type="text" class="commitInput" ng-model="contactName" />
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">联系电话：</span>
+						<input type="text" class="commitInput" ng-model="contactNumber" />
+					</p>
+					<p class="m-t">
+						<input type="checkbox" style="vertical-align: sub;" ng-model="agreedClause" />
+						我已阅读并同意
+						<a href="javascript:;" class="color-blue">《天翼直播平台服务条款》</a>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px !important;">取消</button>
+					<button type="button" class="btn commonbtn" style="font-size: 12px !important;" ng-click="submitPayment()" >提交</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+	</div>
+	<!-- /.modal -->
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel"
+		aria-hidden="true"
+	>
+		<div class="modal-dialog" style="width: 600px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">套餐购买</h4>
+				</div>
+				<div class="modal-body">
+					<p class="m-t-xs">已提交申请成功，我们会在1个工作日内跟您电话联系，请您保持电话畅通</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px !important;">关闭</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</div>
+</div>

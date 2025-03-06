@@ -1,0 +1,533 @@
+.title-header{
+    height: 50px;
+}
+.tabbox{
+    height: 50px;
+    width: 320px;
+    float: left;
+    margin-left: 30px;
+}
+.tabbox ul li{
+    float: left;
+    width: 80px;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    cursor: pointer;
+    position: relative;
+}
+.hdactive{
+    color: #0084ff;
+    border-bottom: 2px solid #0084ff;
+    font-size: 18px;
+}
+.serachinput{
+    width: 200px;
+    height: 30px!important;
+    border: 1px solid rgba(204, 204, 204, 1);
+    margin-top: 10px;
+    border-radius: 2px;
+    padding: 0 5px;
+    margin-right: 5px;
+}
+.userimg{
+    width: 51px;
+    height: 51px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin: 10px 20px;
+}
+.userimg img{
+    width: 100%;
+    height: 100%;
+}
+.usertext{
+    width: 100%;
+}
+.w-70{
+    width: 70px;
+}
+.w-160{
+    width: 160px;
+}
+.username{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+}
+.usercon{
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+}
+.delebtn{
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+}
+.ansbtn{
+    position: absolute;
+    bottom: 10px;
+    right: 75px;
+}
+.answer{
+    margin-left: 80px;
+    margin-right: 40px;
+}
+.tabbadge{
+    position: absolute;
+    right: -15px;
+    top: 0;
+    display: none;
+}
+.title-name {
+    margin-left: 10px;
+    float: left;
+    margin-right: 25px;
+    height: 50px;
+    line-height: 50px;
+}
+th,td{
+    text-align: center;
+}
+.scrollSwitchBox{
+    margin-left: 40px;
+}
+.hdactive .tabbadge{
+    display: block;
+}
+.canvasbox{
+    width: 1050px;
+    height: auto;
+    margin: 0 auto;
+}
+.canva{
+    width: 300px;
+    height: 200px;
+    margin-right: 50px;
+    margin-bottom: 30px;
+}
+.maxbox{
+    margin: 30px auto;
+    padding-left: 200px;
+}
+.cjzbinput {
+    height: 38px;
+    margin-bottom: 15px;
+}
+.cjzbinput .firstname {
+    width: 130px;
+    display: block;
+    float: left;
+    line-height: 38px;
+    font-size: 14px;
+    text-align: right;
+}
+.cjzbinput input {
+    width: 290px;
+    height: 36px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 12px;
+}
+.lh-38{
+    height: 38px;
+    line-height: 38px;
+}
+.m-t-100{
+    margin-top: 150px;
+    margin-left: 300px;
+}
+.file-box{
+    width: 220px;
+}
+.addadmin{
+    width: 200px;
+    height: 225px;
+    line-height: 225px;
+    background: url("../img/u11575.png") no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+}
+.addadmin img{
+    width: 100%;
+    height: 100%;
+}
+.bordered{
+    border: 1px solid #e7eaec;
+}
+.no-borders-table th,.no-borders-table td{
+    border: none!important;
+    background: #ffffff;
+}
+.ibox-title{
+    border-width: 0 0 3px 0;
+}
+.drawname{
+    font-weight: 500;
+}
+.text-left{
+    text-align: left!important;
+}
+.tdPic{
+    width: 71px;
+    height: 41px;
+    text-align: center;
+    line-height: 41px;
+    float: left;
+    margin: 5px;
+    cursor: pointer;
+    background: #ccc;
+    margin-left: 25px;
+}
+.tdPic img{
+    max-width: 100%;
+}
+.drawTable input{
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid rgba(204, 204, 204, 1);
+    border-radius: 5px;
+    text-align: center;
+}
+.ibox-content{
+    padding: 15px 20px 20px 0px;
+    overflow: hidden;
+}
+.tishimask{
+    display: inline-block;
+    padding: 7px;
+    background-color: #D9EAF3;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(204, 204, 204, 1);
+    margin: 5px 0 0 15px;
+}
+.lh-35{
+    line-height: 35px;
+}
+.faIcon{
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    color: #e5e6e7;
+}
+.cq_content .rows2{
+    border: 1px solid #e5e6e7;
+    width: 600px!important;
+}
+.topic_type_con{
+    position: relative;
+}
+.bitian{
+    position: absolute;
+    right: 15px;
+    top: 45px;
+}
+.yzlabel{
+    margin: 0 0 0 15px;
+}
+.dragwen > li{
+    margin-bottom: 0!important;
+}
+.usertime{
+    margin-bottom: 15px;
+    float: right;
+}
+.selectedGroup .giftInput {
+    width: 200px;
+    height: 30px!important;
+    border: 1px solid #ddd;
+    padding: 0 5px;
+}
+.selectedGroup .checkInput{
+    width: 50px;
+    height: 30px!important;
+    border: 1px solid #ddd;
+    padding: 0 5px;
+}
+.selectedGroup .alink{
+    color: #0084ff!important;
+    text-decoration: underline;
+}
+.selectedGroup .alink a{
+    color: #0084ff;
+}
+.xiuMask{
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -100px;
+    display: none;
+}
+.toupiaoBox{
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-left: 5%;
+    position: relative;
+}
+.toupiaoList{
+    width: 80%;
+    line-height: 30px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.toupiaoName{
+    float: left;
+    font-size: 14px;
+}
+.toupiaoRight{
+    width: 60%;
+    line-height: 30px;
+    float: left;
+}
+.toupiaoRight>input[type=text]{
+    width: 100%;
+    height: 30px!important;
+    line-height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.toupiaoRight  input[type=radio]{
+    vertical-align: sub;
+    outline: none;
+}
+.toupiaoRight .reduce,.toupiaoRight .add{
+    width: 24px;
+    text-align: center;
+    height: 28px;
+    line-height: 26px;
+    border: 1px solid #ddd;
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+    color: #ddd;
+}
+.reduce>i,.add>i{
+    color: #999;
+}
+.toupiaoRight .inputNum{
+    width: 30px!important;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    float: left;
+    margin-right: 10px;
+}
+.deleteList>.btn{
+    display: none;
+    margin-top: -4px;
+    font-size: 12px!important;
+}
+.whiteButton{
+    vertical-align: middle!important;
+    padding: 4px 10px!important;
+    background: #fff!important;
+    position: relative!important;
+    overflow: hidden!important;
+    color: #999!important;
+    border-radius: 3px!important;
+    border: 1px solid #999;
+}
+.toupiaoRight textarea{
+    width:210px;
+    height: 60px;
+    border:1px solid #ddd;
+    resize: none;
+    padding: 0 5px;
+    float: left;
+}
+.toupiaoRight .toupiaoImg{
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border: 1px solid #ddd;
+    float: left;
+    margin-left: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+.addtoupiaoBox{
+    width: 90%;
+    border: 1px solid #ddd;
+    margin-left: 5%;
+}
+.addtoupiaoBox .addtoupiaoBtn{
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    text-align: center;
+}
+.removeQuestion{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: #0084ff;
+    text-decoration: underline;
+}
+.giftBox{
+    width: 227px;
+    height: 120px;
+    float: left;
+    margin-left: 15px;
+    border: 1px solid #CCCCCC;
+    margin-bottom: 15px;
+}
+.mygift{
+    position: relative;
+}
+.mygift .fa-close{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+    display: none;
+}
+.giftBoxLeft{
+    width: 90px;
+    height: 90px;
+    float: left;
+    margin: 15px;
+    background: #ccc;
+    margin-right: 0;
+}
+.giftBoxRight{
+    width: 90px;
+    height: 90px;
+    float: left;
+    margin: 15px;
+}
+.giftText{
+    width: 90px;
+    height: 35px;
+    line-height: 35px;
+    color: #333;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.giftMoney{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url("../img/mn.png") no-repeat;
+    background-size: 100% 100%;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.addgiftBox{
+    width: 227px;
+    height: 120px;
+    float: left;
+    margin-left: 15px;
+    border: 1px solid #CCCCCC;
+    margin-bottom: 15px;
+    text-align: center;
+    line-height: 120px;
+    cursor: pointer;
+}
+.giftPic{
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    background: #ccc;
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+.giftPicInput{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.broadcastinput{
+    width: 240px;
+    height: 25px!important;
+    border: 1px solid #ddd;
+}
+.broadcastinput[type="text"]{
+    height: 25px!important;
+}
+.broadcastsub{
+    width: 240px;
+    height: 25px!important;
+    text-align: center;
+    line-height: 25px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.broadcastsub input{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+}
+.boradcastMoney{
+    width: 100px;
+    height: 25px!important;
+    border: 1px solid #ddd;
+    vertical-align: middle;
+}
+.boradcastMoney[type="text"]{
+    height: 25px!important;
+}
+.boradNum[type="text"]{
+    width: 35px;
+    height:25px!important;
+    border: 1px solid #ddd;
+}
+.dropdown .fa-minus,.dropdown .fa-plus{
+    cursor: pointer;
+}
+.greenBorder{
+    border: 1px solid rgba(0, 153, 102, 1);
+    color: rgba(0, 153, 102, 1)!important;
+}
+.messageMain{
+    width: 512px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+.sendMain{
+    width: 512px;
+    margin: 0px auto 15px;
+    overflow: hidden;
+}
+.messageTit{
+    width: 512px;
+    margin: 0px auto 20px;
+    color: #999;
+    font-size: 12px;
+}
+.invitLink{
+    text-decoration: underline;
+    color: #0084ff;
+}
+.invitLink:hover{
+    text-decoration: underline;
+    color: #0084ff;
+}

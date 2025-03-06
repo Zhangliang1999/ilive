@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="IpAddress" table="statistic_ip_address">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="ipCode" type="java.lang.Long">
+			<column name="ip_code" length="50" />
+			<generator class="assigned" />
+		</id>
+		<property name="ip" type="java.lang.String">
+			<column name="ip" not-null="true" unique="true" />
+		</property>
+		<property name="country" type="java.lang.String">
+			<column name="country" length="50" />
+		</property>
+		<property name="countryId" type="java.lang.String">
+			<column name="country_id" length="50" />
+		</property>
+		<property name="area" type="java.lang.String">
+			<column name="area" length="50" />
+		</property>
+		<property name="areaId" type="java.lang.String">
+			<column name="area_id" length="50" />
+		</property>
+		<property name="region" type="java.lang.String">
+			<column name="region" length="50" />
+		</property>
+		<property name="regionId" type="java.lang.String">
+			<column name="region_id" length="50" />
+		</property>
+		<property name="city" type="java.lang.String">
+			<column name="city" length="50" />
+		</property>
+		<property name="cityId" type="java.lang.String">
+			<column name="city_id" length="50" />
+		</property>
+		<property name="county" type="java.lang.String">
+			<column name="county" length="50" />
+		</property>
+		<property name="countyId" type="java.lang.String">
+			<column name="county_id" length="50" />
+		</property>
+		<property name="isp" type="java.lang.String">
+			<column name="isp" length="50" />
+		</property>
+		<property name="ispId" type="java.lang.String">
+			<column name="isp_id" length="50" />
+		</property>
+		<property name="isSuccess" type="java.lang.Integer">
+			<column name="is_success" />
+		</property>
+	</class>
+</hibernate-mapping>

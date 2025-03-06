@@ -1,0 +1,177 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-content">资源包叠加</a>
+			</div>
+		</div>
+	</div>
+	<div class="row p-m font-content">
+		<div class="col-lg-12">
+			<div class="ibox gray-bg">
+				<div class="ibox-content gray-bg">
+					<div class="col-lg-4 acctab">
+						<div class="ibox" ng-click="changeIndex(1)">
+							<div class="ibox-content" style="height: 200px; background: #fff;">
+								<img ng-src="{{selectedStoragePackage.introduceImagePath}}" alt="" />
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 acctab">
+						<div class="ibox" ng-click="changeIndex(2)">
+							<div class="ibox-content" style="height: 200px; background: #fff;">
+								<img ng-src="{{selectedShortMessagePackage.introduceImagePath}}" alt="" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+
+		<div class="col-lg-12 accCon m-b-lg" ng-show="packageIndex==1">
+			<div class="triangle_border_up" style="left: 16%;"></div>
+			<p class="m-t-xs ">
+				<span class="commitName">叠加包名称：</span>
+				<span class="commitText" ng-bind="selectedPackage.packageName"></span>
+			</p>
+			<p class="m-t">
+				<span class="commitName">叠加包介绍：</span>
+				<span class="commitText packInfo">
+					<span class="diejiaPing m-r-xs" ng-class="{true:'djactive',false:''}[selectedPackage.id===storagePackage.id]"
+						ng-repeat="storagePackage in storagePackageList"
+						ng-click="$parent.selectedPackage=storagePackage;$parent.selectedStoragePackage=storagePackage"
+						ng-bind="storagePackage.storageProduct+'G'"
+					></span>
+				</span>
+			</p>
+			<p class="m-t">
+				<span class="commitName">有效期：</span>
+				<span class="commitText"
+					ng-bind="selectedPackage.vaildDurationValue+(selectedPackage.vaildDurationUnit|vaildDuration:'')"
+				></span>
+			</p>
+			<p class="m-t">
+				<span class="commitName">订购价格：</span>
+				<span class="commitText">
+					<span style="color: #FF6F0E; font-size: 24px;" ng-bind="'￥'+selectedPackage.officialPlatformPrice"></span>
+					<small style="text-decoration: line-through;" class="color-999 m-l-lg" ng-bind="'原价：'+selectedPackage.orginalPrice"></small>
+				</span>
+			</p>
+			<hr />
+			<p class="m-t text-center">
+				<button class="btn commonbtn" ng-cloak ng-show="selectedPackage.id>0" data-toggle="modal" data-target="#myModal">购买</button>
+			</p>
+					
+		</div>
+		
+	    
+		<div class="col-lg-12 accCon m-b-lg" ng-show="packageIndex==2">
+			<div class="triangle_border_up" style="left: 49%;"></div>
+			<p class="m-t-xs">
+				<span class="commitName">叠加包名称：</span>
+				<span class="commitText" ng-bind="selectedPackage.packageName"></span>
+			</p>
+			<p class="m-t">
+				<span class="commitName">叠加包介绍：</span>
+				<span class="commitText packInfo">
+					<span class="diejiaPing" ng-class="{'true':'djactive'}[selectedPackage.id==shortMessagePackage.id]"
+						ng-repeat="shortMessagePackage in shortMessagePackageList"
+						ng-click="$parent.selectedPackage=shortMessagePackage;$parent.selectedShortMessagePackage=shortMessagePackage"
+						ng-bind="shortMessagePackage.shortMessageProduct+'条'"
+					></span>
+				</span>
+			</p>
+			<p class="m-t">
+				<span class="commitName">有效期：</span>
+				<span class="commitText"
+					ng-bind="selectedPackage.vaildDurationValue+(selectedPackage.vaildDurationUnit|vaildDuration:'')"
+				></span>
+			</p>
+			<p class="m-t">
+				<span class="commitName">订购价格：</span>
+				<span class="commitText">
+					<span style="color: #FF6F0E; font-size: 24px;" ng-bind="'￥'+selectedPackage.officialPlatformPrice"></span>
+					<small style="text-decoration: line-through;" class="color-999 m-l-lg" ng-bind="'原价：'+selectedPackage.orginalPrice"></small>
+				</span>
+			</p>
+			<hr />
+			<p class="m-t text-center">
+				<button class="btn commonbtn" ng-cloak ng-show="selectedPackage.id>0" data-toggle="modal" data-target="#myModal">购买</button>
+			</p>
+		</div>
+		
+	</div>
+	
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 600px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">资源包叠加</h4>
+				</div>
+				<div class="modal-body">
+					<p class="m-t-xs">
+						<span class="commitName">选购资源包：</span>
+						<span ng-bind="selectedPackage.packageName"></span>
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">叠加包资源：</span>
+						<span ng-if="selectedPackage.packageType==2" ng-bind="selectedPackage.storageProduct+'G'"></span>
+						<span ng-if="selectedPackage.packageType==3" ng-bind="selectedPackage.shortMessageProduct+'条'"></span>
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">有效期：</span>
+						<span ng-bind="selectedPackage.vaildDurationValue+(selectedPackage.vaildDurationUnit|vaildDuration:'')"></span>
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">支付金额：</span>
+						<span class="font-24" style="color: #CC3300;" ng-bind="'￥'+selectedPackage.officialPlatformPrice"></span>
+					</p>
+					<div class="important">重要提示：目前天翼直播只采取线下支付方式，给您造成的不便，我们非常抱歉。提交购买订单后，会有客户经理与您联系，请您留下您的联系方式。</div>
+					<p class="m-t-xs">
+						<span class="commitName">联系人：</span>
+						<input type="text" class="commitInput" ng-model="contactName" />
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">联系电话：</span>
+						<input type="text" class="commitInput" ng-model="contactNumber" />
+					</p>
+					<p class="m-t">
+						<input type="checkbox" style="vertical-align: sub;" ng-model="agreedClause" />
+						我已阅读并同意
+						<a href="javascript:;" class="color-blue">《天翼直播平台服务条款》</a>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px !important;">取消</button>
+					<button type="button" class="btn commonbtn" style="font-size: 12px !important;" ng-click="submitPayment()">提交</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel"
+		aria-hidden="true"
+	>
+		<div class="modal-dialog" style="width: 600px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">资源包购买</h4>
+				</div>
+				<div class="modal-body">
+					<p class="m-t-xs">已提交申请成功，我们会在1个工作日内跟您电话联系，请您保持电话畅通</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px !important;">关闭</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</div>

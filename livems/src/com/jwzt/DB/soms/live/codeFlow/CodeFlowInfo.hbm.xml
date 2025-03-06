@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.soms.live.codeFlow.CodeFlowInfo" table="soms4_live_video_codeflow">
+    	<meta attribute="calss-description">
+			@author 徐勤
+		</meta>
+    
+        <id name="codeflow_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">唯一ID</meta>
+            <column name="codeflow_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="codeflow_name" type="java.lang.String">
+        	<meta attribute="field-description">视频码流名称</meta>
+            <column name="codeflow_name" length="100" not-null="true" />
+        </property>
+        <property name="bit_rate" type="java.lang.Integer">
+        	<meta attribute="field-description">比特率</meta>
+            <column name="bit_rate" />
+        </property>
+        <property name="fps" type="java.lang.Integer">
+        	<meta attribute="field-description">帧速率</meta>
+            <column name="fps" />
+        </property>
+        <property name="video_quality" type="java.lang.Integer">
+        	<meta attribute="field-description">图像质量</meta>
+            <column name="video_quality" />
+        </property>
+        <property name="second_per_key" type="java.lang.Integer">
+        	<meta attribute="field-description">关键帧间隔</meta>
+            <column name="second_per_key" />
+        </property>
+        <property name="site_id" type="java.lang.Integer">
+        	<meta attribute="field-description">站点id</meta>
+            <column name="site_id" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

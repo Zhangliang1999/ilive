@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.soms.live.tvInfo.TvInfo" table="soms4_live_TvProgram">
+    	<meta attribute="calss-description">
+			@author 李娜
+		</meta>
+    
+        <id name="pkid" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">唯一ID</meta>
+            <column name="pkid" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="tvid" type="java.lang.Integer">
+        	<meta attribute="field-description">频道tvid</meta>
+            <column name="tvid"/>
+        </property>
+        <property name="tvName" type="java.lang.String">
+        	<meta attribute="field-description">频道tv名称</meta>
+            <column name="tvName" length="100" not-null="true"/>
+        </property>
+        <property name="site_id" type="java.lang.Integer">
+        	<meta attribute="field-description">站点id</meta>
+            <column name="site_id" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

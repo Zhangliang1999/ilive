@@ -1,0 +1,4 @@
+<StreamSource>udp@://224.1.1.1:5000</StreamSource>
+<UMSAppPath>J:\bin2010_x64\UMS0531\</UMSAppPath>
+<MountName>relay1</MountName>
+<AppName>relay</AppName>

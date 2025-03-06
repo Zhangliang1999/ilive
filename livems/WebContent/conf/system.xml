@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<soms>
+	<rootProperties>
+		<parameters>
+			<para-name>database</para-name>
+			<para-value>SQL Server</para-value>
+			<!--para-value>Oracle</para-value -->
+		</parameters>
+		<parameters>
+			<para-name>vodServerGroupId</para-name>
+			<para-value>100</para-value>
+			<!--para-value>Oracle</para-value -->
+		</parameters>
+		<parameters>
+			<para-name>mstype</para-name>
+			<para-value>vod</para-value>
+		</parameters>
+		<parameters>
+			<para-name>VodFileLiveDays</para-name>
+			<para-value>6</para-value>
+			<!--para-value>Oracle</para-value -->
+		</parameters>
+
+		<parameters>
+			<para-name>linuxConfig</para-name>
+			<para-value>1</para-value>
+		</parameters>
+
+		<!-- 切片临时目录 -->
+		<parameters>
+			<para-name>liveDir</para-name>
+			<para-value>/home/logview/ums/ums4_linux_20180330/live</para-value>
+		</parameters>
+
+		<!-- 图片在存储上的根路径 -->
+		<parameters>
+			<para-name>BaseImgRealPath</para-name>
+			<para-value>/data/ftp/img/</para-value>
+		</parameters>
+
+		<!-- 视频在存储上的根路径 -->
+		<parameters>
+			<para-name>BaseVodRealPath</para-name>
+			<para-value>/data/ftp/vod</para-value>
+		</parameters>
+
+		<!-- HttpImgPath -->
+		<parameters>
+			<para-name>HttpImgPath</para-name>
+			<para-value>http://vod.zb.tv189.com/img/</para-value>
+		</parameters>
+
+		<!-- 是否切片 -->
+		<parameters>
+			<para-name>ifCUT</para-name>
+			<para-value>1</para-value>
+		</parameters>
+
+		<!-- 分割出FLV文件 ，FLV标准播放器使用 -->
+		<parameters>
+			<para-name>ifCUTFLV</para-name>
+			<para-value>0</para-value>
+		</parameters>
+
+		<!-- 是否开启ftp -->
+		<parameters>
+			<para-name>NeedFTP</para-name>
+			<para-value>1</para-value>
+		</parameters>
+		<!-- 强制切片，不检测是否在后台系统 -->
+		<parameters>
+			<para-name>forceCut</para-name>
+			<para-value>1</para-value>
+		</parameters>
+		<parameters>
+			<para-name>allow_vod_format</para-name>
+			<para-value>wmv|asf|rm|rmvb|mov|avi|dat|mpg|mpeg|flv|f4v|ts|mp4|WMV|ASF|RM|RMVB|MOV|AVI|DAT|MPG|MPEG|FLV|F4V|TS|MP4|m4a|M4A|amr|AMR|caf|CAF|wma|WMA|wav|WAV|
+			</para-value>
+		</parameters>
+		
+		<parameters>
+            <para-name>live_billing_get_product_info_url</para-name>
+            <para-value>http://192.168.21.56:8080/liveBilling/service/enterprise/getProductInfo.jspx</para-value>
+        </parameters>
+        <parameters>
+            <para-name>live_billing_update_product_info_url</para-name>
+            <para-value>http://192.168.21.56:8080/liveBilling/service/enterprise/updateProductInfo.jspx</para-value>
+        </parameters>
+	</rootProperties>
+</soms>

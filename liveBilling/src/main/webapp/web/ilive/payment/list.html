@@ -1,0 +1,103 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">订单管理</a>
+			</div>
+		</div>
+	</div>
+	<div class="row btn-box">
+		<div class="col-lg-12">
+			<div class="pull-right m-r-lg">
+				<div class="selectedGroup m-l-sm pull-left">
+					<select class="commonSelect" ng-model="queryCondition.paymentType" ng-change="searchList(1,false)"
+						ng-options="type.value as type.label for type in paymentTypeBeans"
+					>
+						<option value="">全部类型</option>
+					</select>
+					<select class="commonSelect" ng-model="queryCondition.status" ng-change="searchList(1,false)"
+						ng-options="status.value as status.label for status in statusBeans"
+					>
+						<option value="">全部状态</option>
+					</select>
+				</div>
+				<div class="selectedGroup m-t-sm m-l-sm pull-left">
+					<div class="pull-left lh-30 font-content">时间：</div>
+					<div class="input-daterange input-group pull-left" daterange>
+						<input type="text" class="input-sm form-control" style="width: 130px" name="start" placeholder="开始时间"
+							ng-model="queryCondition.startTime"
+						/>
+						<span class="input-group-addon">to</span>
+						<input type="text" class="input-sm form-control" style="width: 130px" name="end" placeholder="结束时间"
+							ng-model="queryCondition.endTime"
+						/>
+					</div>
+					<button class="btn commonbtn m-l-sm" ng-click="searchList(1,false)">查询</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-xs">
+		<div class="col-md-12 p-w-lg ">
+			<table class="table newtable table-striped table-hover ScrollViewer table-responsive">
+				<thead class="gray-bg">
+					<tr>
+						<th style="width: 100px;">订单号</th>
+						<th>套餐</th>
+						<th style="width: 100px;">类型</th>
+						<th style="width: 100px;">金额(元)</th>
+						<th style="width: 100px;">状态</th>
+						<th style="width: 140px;">订单时间</th>
+						<th style="width: 70px;">操作</th>
+					</tr>
+				</thead>
+				<tbody auto-height offset="315">
+					<tr ng-repeat="bean in page.list">
+						<td style="width: 100px;" ng-bind="bean.id"></td>
+						<td ng-bind="bean.packageName|blank:''"></td>
+						<td style="width: 100px;" ng-bind="bean.paymentType|paymentType:''"></td>
+						<td style="width: 100px;" ng-bind="bean.paymentPrice|blank:'0.00'"></td>
+						<td style="width: 100px;">
+							<span ng-class="{true:'color-red'}[bean.status==1]" ng-bind="bean.status|paymentStatus:''"></span>
+						</td>
+						<td style="width: 140px;" ng-bind="bean.createTime|date:'yyyy-MM-dd HH:mm:ss'|blank:''"></td>
+						<td style="width: 70px;">
+							<a href="javascript:;" class="color-blue" ng-click="viewPayment(bean.id)">查看</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12 pageBox m-b">
+			<div class="pull-right btn-group m-r">
+				<div class="pull-left m-t-xs m-r">
+					第
+					<span class="color-gold" ng-bind="page.pageNo"></span>
+					页/
+					<span class="color-gold" ng-bind="page.totalCount"></span>
+					条数据
+				</div>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.prePage,true)">
+					<i class="fa fa-chevron-left"></i>
+				</button>
+				<button ng-repeat="showPage in page.showPages track by $index" class="btn btn-white"
+					ng-class="{'active':showPage==page.pageNo}" ng-click="searchList(showPage,true)"
+				>
+					<span ng-if="showPage<=0" ng-bind="'...'"></span>
+					<span ng-if="showPage>0&&showPage==page.pageNo" ng-bind="showPage" id="currentPageNo"></span>
+					<span ng-if="showPage>0&&showPage!=page.pageNo" ng-bind="showPage"></span>
+				</button>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.nextPage,true)">
+					<i class="fa fa-chevron-right"></i>
+				</button>
+				<div class="pull-left m-t-xs m-l m-r">
+					跳至
+					<input class="m-l-xs m-r-xs" style="width: 33px; height: 23px; border: 1px solid #ddd;" type="text"
+						ng-keyup="($event.which === 13)?changePageNo($event.target.value):0"
+					/>
+					页
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

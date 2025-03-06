@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>天翼直播</title>
+<link rel="stylesheet" href="../common/css/bootstrap.min.css">
+<link rel="stylesheet" href="../common/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="../common/css/account.css">
+<link rel="stylesheet" href="../common/css/animate.css">
+<link rel="stylesheet" href="../common/css/style.css">
+<link rel="stylesheet" href="../common/css/myStyle.css" />
+<link rel="stylesheet" href="../common/css/jbxx.css" />
+<link rel="stylesheet" href="../common/css/public.css" />
+<link rel="stylesheet" href="../common/css/bgpt/shcommon.css" />
+<link rel="stylesheet" href="../common/css/newleft.css" />
+<link rel="stylesheet" href="../common/css/huiyuan.css" />
+<link rel="stylesheet" href="../common/css/newheader.css" />
+<link rel="stylesheet" href="../common/css/bgpt/bgpt.css" />
+<link rel="stylesheet" href="../common/css/bgpt/ad.css" />
+<link rel="stylesheet" href="../common/css/zbgl.css" />
+<link rel="stylesheet" href="../common/css/plugins/daterangepicker/daterangepicker-bs3.css">
+<link rel="stylesheet" href="../common/css/plugins/datapicker/datepicker3.css">
+<!-- Mainly scripts -->
+<script src="../common/js/jquery-2.1.1.js"></script>
+<script src="../common/js/jquery.qrcode.min.js"></script>
+<script src="../common/js/jquery-ui-1.10.4.min.js"></script>
+<script src="../common/js/bootstrap.min.js"></script>
+<script src="../common/js/inspinia.js"></script>
+<script src="../common/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../common/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../common/angular/angular.min.js"></script>
+<script src="../common/angular/angular-cookies.min.js"></script>
+<script src="../common/angular/angular-ui-router/angular-ui-router.min.js"></script>
+<script src="../common/angular/angular-ui-router/stateEvents.js"></script>
+<!-- ng-file-upload -->
+<script src="../common/angular/ng-file-upload/ng-file-upload.js"></script>
+<script src="../common/angular/ng-file-upload/ng-file-upload-shim.js"></script>
+<!-- common -->
+<script src="../common/angular/common.js"></script>
+<!-- plugin javascript -->
+<!-- bootstrap datepicker -->
+<script src="../common/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="../common/js/plugins/fullcalendar/moment.min.js"></script>
+<!-- bootstrap daterangepicker -->
+<script src="../common/js/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="../common/js/plugins/chosen/chosen.jquery.js"></script>
+<!-- 标签输入Bootstrap插件 -->
+<script src='../common/js/plugins/tokenfield/bootstrap-tokenfield.js'></script>
+<!-- 下拉框 -->
+<script src="../common/js/plugins/select2/select2.full.min.js"></script>
+<!-- G2图表 -->
+<script src="../common/js/plugins/g2/g2.min.js"></script>
+<script src="../common/js/plugins/g2/data-set.min.js"></script>
+<!-- Custom javascript -->
+<script src='js/app.js'></script>
+<script src='js/config-ui-router.js'></script>
+<script src="../common/angular/common.js"></script>
+<script src="js/common-contants.js"></script>
+<script src='js/app.js'></script>
+<script src='js/config-ui-router.js'></script>
+<!-- directive -->
+<script src="../common/angular/directive-common.js"></script>
+<script src='js/directive/directive-daterange.js'></script>
+<script src='js/directive/directive-i-checks.js'></script>
+<script src='js/directive/directive-qrcode.js'></script>
+<script src='js/directive/directive-g2.js'></script>
+<script src='js/directive/directive-height.js'></script>
+<script src='js/directive/directive-input-search.js'></script>
+<script src='js/directive/directive-slim-scroll.js'></script>
+<!-- filter -->
+<script src="js/filter/filter-common.js"></script>
+<script src="js/filter/filter-settlement.js"></script>
+<script src="js/filter/filter-flow.js"></script>
+<script src="js/filter/filter-package.js"></script>
+<script src="js/filter/filter-payment.js"></script>
+<script src="js/filter/filter-product.js"></script>
+<!-- service -->
+<script src='js/service/service-frame.js'></script>
+<script src='js/service/service-settlement.js'></script>
+<script src='js/service/service-flow.js'></script>
+<script src='js/service/service-enterprise.js'></script>
+<script src='js/service/service-package.js'></script>
+<script src='js/service/service-payment.js'></script>
+<script src='js/service/service-product.js'></script>
+<script src='js/service/service-work-order.js'></script>
+<!-- controller -->
+<script src='js/controller/controller-top.js'></script>
+<script src='js/controller/controller-flow-list.js'></script>
+<script src='js/controller/controller-settlement-list.js'></script>
+<script src='js/controller/controller-settlement-detail.js'></script>
+<script src='js/controller/controller-enterprise-total.js'></script>
+<script src='js/controller/controller-enterprise-product.js'></script>
+<script src='js/controller/controller-package-basic.js'></script>
+<script src='js/controller/controller-package-increment.js'></script>
+<script src='js/controller/controller-payment-list.js'></script>
+<script src='js/controller/controller-payment-detail.js'></script>
+</head>
+<body ng-app='myapp'>
+	<div id="wrapper">
+		<div id="page-wrapper" class="gray-bg">
+			<div ng-include="'top.html'" ng-cloak></div>
+			<div ng-include="'left.html'" ng-cloak></div>
+			<div class="wrapper border-left bgc-fff wrapper-content" ui-view></div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<div id="rightWrapper">
+	<div class="row title-header darkgray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12" ng-bind="'直播ID：'+info.liveEventId"></a>
+			</div>
+			<div class="title-name">
+				<a class="font-12" ng-bind="'直播名称：'+info.liveTitle"></a>
+			</div>
+			<button class="btn btn-default font-12 pull-right m-t-sm m-r" ng-click="returnPrevious()">返回直播数据列表</button>
+			<div class="title-name pull-right">
+				<a class="font-12" ng-bind="'直播推流IP地：'+info.provinceName"></a>
+			</div>
+			<div class="title-name pull-right">
+				<a class="font-12" ng-bind="'直播企业账号：'+info.enterpriseName"></a>
+			</div>
+		</div>
+	</div>
+	<div class="row p-sm" style="background: #B3B3B3;">
+		<div class="col-md-12">
+			<div class="col-md-2">
+				<p class="liveTit">直播时长</p>
+				<p class="liveNum" ng-bind="info.liveDuration|duration:''"></p>
+			</div>
+			<div class="col-md-2">
+				<p class="liveTit">总观看人数</p>
+				<p class="liveNum" ng-bind="info.statisticResult.userNum|blank:'0'"></p>
+			</div>
+			<div class="col-md-2">
+				<p class="liveTit">最高观看人数</p>
+				<p class="liveNum" ng-bind="info.statisticResult.maxMinuteUserNum|blank:'0'"></p>
+			</div>
+			<div class="col-md-2">
+				<p class="liveTit">总点赞数</p>
+				<p class="liveNum" ng-bind="info.statisticResult.likeNum|blank:'0'"></p>
+			</div>
+			<div class="col-md-2">
+				<p class="liveTit">总评论数</p>
+				<p class="liveNum" ng-bind="info.statisticResult.commentNum|blank:'0'"></p>
+			</div>
+			<div class="col-md-2">
+				<p class="liveTit">转发分享数</p>
+				<p class="liveNum" ng-bind="info.statisticResult.shareNum|blank:'0'"></p>
+			</div>
+		</div>
+		<div class="col-md-12 m-t-xs">
+			<a class="font-12 color-fff m-l" ng-bind="'直播开始：'+(info.liveBeginTime|date:'yyyy-MM-dd HH:mm:ss'|blank:'')"></a>
+		</div>
+		<div class="col-md-12 m-t-xs">
+			<a class="font-12 color-fff m-l" ng-bind="'直播结束：'+(info.liveEndTime|date:'yyyy-MM-dd HH:mm:ss'|blank:'未结束')">直播结束：未结束</a>
+		</div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">直播观看次数及人数变化统计</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="viewNumForLineQueryCondition.startTime" ng-change="getViewNumDataForLine()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="viewNumForLineQueryCondition.endTime" ng-change="getViewNumDataForLine()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" multi-line-chart data="viewNumDataForLine"></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">用户观看直播端口来源</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="viewSourceQueryCondition.startTime" ng-change="getViewSourceData()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="viewSourceQueryCondition.endTime" ng-change="getViewSourceData()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" donut-chart data="viewSourceData"></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">观看用户组成比例</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="registerSourceQueryCondition.startTime" ng-change="getRegisterSourceData()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="registerSourceQueryCondition.endTime" ng-change="getRegisterSourceData()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" donut-chart data="registerSourceData"></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">用户观看直播时长占比</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="viewTimeForPieQueryCondition.startTime" ng-change="getViewTimeDataForPie()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="viewTimeForPieQueryCondition.endTime" ng-change="getViewTimeDataForPie()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" donut-chart data="viewTimeDataForPie"></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">用户观看直播ip地域分布图</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="viewLocationQueryCondition.startTime" ng-change="getViewLocationData()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="viewLocationQueryCondition.endTime" ng-change="getViewLocationData()"
+					/>
+				</div>
+			</div>
+			<button class="btn btn-default font-12 pull-right m-t-sm m-r" ng-click="excelExportViewLocationData()">导出数据</button>
+		</div>
+	</div>
+	<div class="row" style="height: 420px">
+		<div class="col-md-6 m-t m-b" style="height: 90%" china-map-chart data="viewLocationData" field="viewLocationField"></div>
+		<div class="col-md-6">
+			<div class="col-md-12 m-t">
+				<table class="table table-bordered table-responsive">
+					<thead>
+						<tr>
+							<th style="background: #F9FAFC !important;">排名</th>
+							<th style="background: #F9FAFC !important;">省份</th>
+							<th style="background: #F9FAFC !important;">观众人数</th>
+							<th style="background: #F9FAFC !important;">排名</th>
+							<th style="background: #F9FAFC !important;">省份</th>
+							<th style="background: #F9FAFC !important;">观众人数</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="i in [1,2,3,4,5,6,7,8,9,10] track by $index">
+							<td ng-bind="i"></td>
+							<td ng-bind="viewLocationData[i-1].provinceName"></td>
+							<td ng-bind="viewLocationData[i-1].totalNum"></td>
+							<td ng-bind="10+i"></td>
+							<td ng-bind="viewLocationData[9+i].provinceName"></td>
+							<td ng-bind="viewLocationData[9+i].totalNum"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">直播排行</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="listQueryCondition.startTime" ng-change="getList()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="listQueryCondition.endTime" ng-change="getList()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<!-- <div class="row" style="height: 420px">
+		<div class="col-md-4">
+			<div class="col-md-12">
+				<div class="title-name">
+					<a class="font-12">直播转发排行</a>
+				</div>
+				<button class="btn btn-default font-12 pull-right m-t-sm m-r">导出数据</button>
+			</div>
+			<div class="col-md-12 m-t">
+				<table class="table table-bordered table-responsive">
+					<thead>
+						<tr>
+							<th style="background: #F9FAFC !important;">排名</th>
+							<th style="background: #F9FAFC !important;">用户账号</th>
+							<th style="background: #F9FAFC !important;">转发数</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="bean in shareList track by $index" ng-if="$index<10">
+							<td ng-bind="$index+1"></td>
+							<td ng-bind="bean.name"></td>
+							<td ng-bind="bean.num"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="col-md-12">
+				<div class="title-name">
+					<a class="font-12">礼物赠送排行</a>
+				</div>
+				<button class="btn btn-default font-12 pull-right m-t-sm m-r">导出数据</button>
+			</div>
+			<div class="col-md-12 m-t">
+				<table class="table table-bordered table-responsive">
+					<thead>
+						<tr>
+							<th style="background: #F9FAFC !important;">排名</th>
+							<th style="background: #F9FAFC !important;">用户账号</th>
+							<th style="background: #F9FAFC !important;">赠送次数</th>
+							<th style="background: #F9FAFC !important;">赠送金额（元）</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="bean in shareList track by $index" ng-if="$index<10">
+							<td ng-bind="$index+1"></td>
+							<td ng-bind="bean.name"></td>
+							<td ng-bind="bean.num"></td>
+							<td ng-bind="bean.num"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="col-md-12">
+				<div class="title-name">
+					<a class="font-12">红包收取排行</a>
+				</div>
+				<button class="btn btn-default font-12 pull-right m-t-sm m-r">导出数据</button>
+			</div>
+			<div class="col-md-12 m-t">
+				<table class="table table-bordered table-responsive">
+					<thead>
+						<tr>
+							<th style="background: #F9FAFC !important;">排名</th>
+							<th style="background: #F9FAFC !important;">用户账号</th>
+							<th style="background: #F9FAFC !important;">收取红包金额（元）</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="bean in shareList track by $index" ng-if="$index<10">
+							<td ng-bind="$index+1"></td>
+							<td ng-bind="bean.name"></td>
+							<td ng-bind="bean.num"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div> -->
+</div>

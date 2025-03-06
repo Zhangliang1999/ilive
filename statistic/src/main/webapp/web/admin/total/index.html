@@ -1,0 +1,133 @@
+<div id="rightWrapper">
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">平台关键数据</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="queryConditionOfTotalData.startTime" ng-change="refreshTotalData()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="queryConditionOfTotalData.endTime" ng-change="refreshTotalData()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row border-bottom p-m">
+		<div class="pull-left tongjiBox" style="background: #6666FF;">
+			<p class="topTit">
+				<span ng-bind="totalData.liveEventTotalNum|blank:'0'"></span>
+				次
+			</p>
+			<p class="bottomTit">直播总场次</p>
+		</div>
+		<div class="pull-left tongjiBox" style="background: #009933;">
+			<p class="topTit">
+				<span ng-bind="totalData.liveEnterpriseTotalNum|blank:'0'"></span>
+				个
+			</p>
+			<p class="bottomTit">发起直播商户数</p>
+		</div>
+		<div class="pull-left tongjiBox" style="background: #FF9900;">
+			<p class="topTit">
+				<span ng-bind="totalData.liveTotalAverageDuraion|hour|blank:'0'"></span>
+				小时
+			</p>
+			<p class="bottomTit">平台直播总时长</p>
+		</div>
+		<div class="pull-left tongjiBox" style="background: #663399;">
+			<p class="topTit">
+				<span ng-bind="totalData.liveViewUserTotalNum|blank:'0'"></span>
+				人
+			</p>
+			<p class="bottomTit">累计总观看人数</p>
+		</div>
+		<div class="pull-left tongjiBox" style="background: #FF7878;">
+			<p class="topTit">
+				<span ng-bind="totalData.liveViewTotalNum|blank:'0'"></span>
+				次
+			</p>
+			<p class="bottomTit">累计总观看次数</p>
+		</div>
+	</div>
+	<div class="row border-bottom p-w-m">
+		<div class="col-md-12 p-m">
+			<div class="tongjiTit">平台直播最多收看人数出现于</div>
+			<div class="tongjiCon">
+				<div class="col-md-4" ng-bind="maxData.viewTime"></div>
+				<div class="col-md-2">
+					<span class="color-gold" ng-bind="maxData.userNum|blank:'0'"></span>
+					人
+				</div>
+				<div class="col-md-2" style="font-size: 20px;" ng-bind="maxData.enterpriseName">南通税务局</div>
+				<div class="col-md-4" style="font-size: 20px;" ng-bind="maxData.liveTitle">《南通税务局第二次直播》</div>
+			</div>
+		</div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">直播其他数据</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="queryConditionOfOtherData.startTime" ng-change="refreshOtherData()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="queryConditionOfOtherData.endTime" ng-change="refreshOtherData()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row border-bottom p-w-m">
+		<div class="col-md-12">
+			<div class="col-md-3 border-right-dottod m-t m-b">
+				<div class="tongjiTit">总点赞数</div>
+				<div class="tongjiNum" ng-bind="otherData.liveLikeTotalNum|blank:'0'"></div>
+			</div>
+			<div class="col-md-3 border-right-dottod m-t m-b">
+				<div class="tongjiTit">总转发数</div>
+				<div class="tongjiNum" ng-bind="otherData.liveShareTotalNum|blank:'0'"></div>
+			</div>
+			<div class="col-md-3 border-right-dottod m-t m-b">
+				<div class="tongjiTit">总互动数</div>
+				<div class="tongjiNum" ng-bind="otherData.liveCommentTotalNum|blank:'0'"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">发起直播新老商户&观看直播新老用户占比</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="queryConditionOfRegisterSourceData.startTime" ng-change="refreshRegisterSourceData()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="queryConditionOfRegisterSourceData.endTime" ng-change="refreshRegisterSourceData()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-6 m-t m-b" style="height: 100%">
+			<div class="tongjiTit text-center">新老商户</div>
+			<div class="row col-md-12" donut-chart data="enterpriseRegisterData" style="height: 100%"></div>
+		</div>
+		<div class="col-md-6 m-t m-b" style="height: 100%">
+			<div class="tongjiTit text-center">新老用户</div>
+			<div class="row col-md-12" donut-chart data="userRegisterData" style="height: 100%"></div>
+		</div>
+	</div>
+</div>

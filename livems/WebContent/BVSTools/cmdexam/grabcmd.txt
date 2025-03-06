@@ -1,0 +1,12 @@
+<SRCFILE>I:\android\VCspace\bin\cmd\qindao_org.mp4</SRCFILE>
+<GrabPos>1</GrabPos> //时间(秒，如1.345)或者百分比
+<GrabPosType>1</GrabPosType>//0 表示时间，1表示百分比
+<GrabNUM>3</GrabNUM> //截图数量 
+<DESTFILE>I:\android\VCspace\bin\cmd\UUID_001.jpg</DESTFILE>
+<DESTFILE>I:\android\VCspace\bin\cmd\UUID_002.jpg</DESTFILE>
+<DESTFILE>I:\android\VCspace\bin\cmd\UUID_003.jpg</DESTFILE>
+
+//只要成功一张，就算成功。
+//对于百分比截图，如果失败，那就随机一张。
+
+

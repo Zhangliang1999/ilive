@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+	<bean id="WelcomeAct" class="com.jwzt.billing.action.admin.WelcomeAct" />
+	<bean id="LoginAct" class="com.jwzt.billing.action.admin.LoginAct" />
+	<!-- 收益流水 -->
+	<bean id="revenueFlowController" class="com.jwzt.billing.action.admin.RevenueFlowController" />
+	<!-- 收益结算 -->
+	<bean id="SettlementLogAct" class="com.jwzt.billing.action.admin.SettlementLogAct" />
+	<bean id="EnterpriseBillingAct" class="com.jwzt.billing.action.admin.EnterpriseBillingAct" />
+	<bean id="PackageInfoAct" class="com.jwzt.billing.action.admin.PackageInfoAct" />
+	<bean id="PaymentLogAct" class="com.jwzt.billing.action.admin.PaymentLogAct" />
+	<bean id="ProductInfoAct" class="com.jwzt.billing.action.admin.ProductInfoAct" />
+	<bean id="FunctionInfoAct" class="com.jwzt.billing.action.admin.FunctionInfoAct" />
+	<bean id="AgentInfoAct" class="com.jwzt.billing.action.admin.AgentInfoAct" />
+	<bean id="OperationUserAct" class="com.jwzt.billing.action.admin.OperationUserAct" />
+	<bean id="WorkOrderAct" class="com.jwzt.billing.action.admin.WorkOrderAct" />
+</beans>

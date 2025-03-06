@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+<title></title>
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/html_nine.css" />
+<script src="js/common.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/rem.js"></script>
+<script src="js/jquery.qrcode.js"></script>
+<script src="js/utf.js"></script>
+<script src="js/WebViewJavascriptBridge/WebViewJavascriptBridge.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/share_other.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="containerBg">
+			<div class="titleBox">
+				<div class="articleText" id="liveTitle"></div>
+				<div class="title">数据分析报表观看结束</div>
+			</div>
+			<div class="message">
+				<div class="littleMessage">了解更多讯息请关注</div>
+				<div class="littleMessage">天翼直播 公众号</div>
+			</div>
+			<div class="erweima">
+				<div class="ewmBox">
+					<div class="erwei" id="qrcodeCanvas">
+						<div class="erweiLogo"></div>
+					</div>
+				</div>
+			</div>
+			<div class="buttonBox">
+				<div class="again" style="margin: auto">再看一次</div>
+				<div class="share" style="display: none">我要分享</div>
+			</div>
+			<script>
+				var isApp = false;
+				var userAgent = navigator.userAgent;
+				console.log(userAgent);
+				if (userAgent.indexOf("chinanet_ilive_") != -1) {
+					isApp = true;
+				}
+				if (isApp) {
+					$(".again").css("float", "left");
+					$(".again").css("margin", "0 0.3rem 0 0");
+					$(".share").show();
+				}
+			</script>
+		</div>
+	</div>
+</body>
+<script>
+    $(function() {
+        if (/Android|chinanet_ilive_android|chinanet_ilive_ios|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            var winHeight = $(window).height();
+            $(".container").css("height", winHeight);
+            $(".containerBg").css("height", winHeight);
+        } else {
+            $(".container").css("height", "1100px");
+            $(".containerBg").css("height", "1100px");
+        }
+    });
+</script>
+<script>
+	var id = getQueryString("id");
+	$(".again").on("click", function() {
+		window.location.href = "index.html?id=" + id;
+	});
+	function connectWebViewJavascriptBridge(callback) {
+		if (window.WebViewJavascriptBridge) {
+			callback(WebViewJavascriptBridge)
+		} else {
+			document.addEventListener('WebViewJavascriptBridgeReady', function() {
+				callback(WebViewJavascriptBridge)
+			}, false)
+		}
+	}
+	var winHeight = $(window).height();
+	$(".container").css("height", winHeight);
+	$(".containerBg").css("height", winHeight);
+	$(".share").on("click",function(){
+		connectWebViewJavascriptBridge(function(bridge) {
+	        bridge.callHandler('shareButton', {
+	            'title' : encodeURIComponent($("#liveTitle").html() + "数据分析报表"),
+	            'description' : encodeURIComponent($("#liveTitle").html() + "数据分析报表"),
+	            'shareURL' : "http://statistics.zb.tv189.com/statistic/html/index.html?id="+id,
+	            'shareImage' : "http://statistics.zb.tv189.com/statistic/html/img/erweilogo.jpg"
+	        }, function(response) {
+	        })
+	    })
+	});
+
+	$('#qrcodeCanvas').qrcode({
+		render : "canvas",
+		width : $('#qrcodeCanvas').width(),
+		height : $('#qrcodeCanvas').height(),
+		text : "http://statistics.zb.tv189.com/statistic/html/index.html?id=" + id,
+		src : 'img/erweilogo.png'
+	});
+	$.ajax({
+		url : "/statistic/wap/live/info?id=" + id,
+		type : "get",
+		async : false,
+		crossDomain : true,
+		dataType : "jsonp",
+		jsonp : 'jsoncallback',
+		success : function(data) {
+			var bean = data.data;
+			$("#liveTitle").html(bean.liveTitle);
+		}
+	});
+</script>
+</html>

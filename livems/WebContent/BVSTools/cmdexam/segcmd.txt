@@ -1,0 +1,7 @@
+<SRCFILE>I:\android\VCspace\bin\cmd\1425624718989_640x480_500.mp4</SRCFILE>
+<SegTSVideoFile>0</SegTSVideoFile>
+<SegTSAudioFile>1</SegTSAudioFile>
+<SegFLVVideoFile>0</SegFLVVideoFile>
+<DESTFILE>I:\android\VCspace\bin\cmd\1425624718989_640x480_500\1000K\</DESTFILE>>
+
+

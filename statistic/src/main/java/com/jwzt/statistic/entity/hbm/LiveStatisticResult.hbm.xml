@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="LiveStatisticResult" table="statistic_live_statistic_result">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="userNum" type="java.lang.Long">
+			<column name="user_num" />
+		</property>
+		<property name="viewTotalDuration" type="java.lang.Long">
+			<column name="view_total_duration" />
+		</property>
+		<property name="shareNum" type="java.lang.Long">
+			<column name="share_num" />
+		</property>
+		<property name="likeNum" type="java.lang.Long">
+			<column name="like_num" />
+		</property>
+		<property name="commentNum" type="java.lang.Long">
+			<column name="comment_num" />
+		</property>
+		<property name="maxMinute" type="java.lang.Long">
+			<column name="max_minute" />
+		</property>
+		<property name="maxMinuteUserNum" type="java.lang.Long">
+			<column name="max_minute_user_num" />
+		</property>
+		<property name="androidUserNum" type="java.lang.Long">
+			<column name="android_user_num" />
+		</property>
+		<property name="iosUserNum" type="java.lang.Long">
+			<column name="ios_user_num" />
+		</property>
+		<property name="pcUserNum" type="java.lang.Long">
+			<column name="pc_user_num" />
+		</property>
+		<property name="wapUserNum" type="java.lang.Long">
+			<column name="wap_user_num" />
+		</property>
+		<property name="otherUserNum" type="java.lang.Long">
+			<column name="other_user_num" />
+		</property>
+		<property name="newRegisterUserNum" type="java.lang.Long">
+			<column name="new_register_user_num" />
+		</property>
+		<property name="oldRegisterUserNum" type="java.lang.Long">
+			<column name="old_register_user_num" />
+		</property>
+		<property name="otherRegisterUserNum" type="java.lang.Long">
+			<column name="other_register_user_num" />
+		</property>
+		<property name="viewDuraionUserNum0To5" type="java.lang.Long">
+			<column name="view_duraion_user_num_0_to_5" />
+		</property>
+		<property name="viewDuraionUserNum5To10" type="java.lang.Long">
+			<column name="view_duraion_user_num_5_to_10" />
+		</property>
+		<property name="viewDuraionUserNum10To30" type="java.lang.Long">
+			<column name="view_duraion_user_num_10_to_30" />
+		</property>
+		<property name="viewDuraionUserNum30To60" type="java.lang.Long">
+			<column name="view_duraion_user_num_30_to_60" />
+		</property>
+		<property name="viewDuraionUserNum60To" type="java.lang.Long">
+			<column name="view_duraion_user_num_60_to_end" />
+		</property>
+		<property name="viewNum" type="java.lang.Long">
+			<column name="view_num" />
+		</property>
+		<property name="signNum" type="java.lang.Long">
+			<column name="sign_num" />
+		</property>
+		<property name="redPacketMoney" type="java.lang.Double">
+			<column name="red_packet_money" />
+		</property>
+		<property name="giftNum" type="java.lang.Long">
+			<column name="gift_num" />
+		</property>
+	</class>
+</hibernate-mapping>

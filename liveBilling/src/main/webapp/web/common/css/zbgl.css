@@ -1,0 +1,455 @@
+.title-header{
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #eee;
+}
+.title-name{
+    margin-left: 10px;
+    float: left;
+    margin-right: 20px;
+}
+.inputcon{
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0 5px;
+    width: 200px;
+}
+.default-btn{
+    vertical-align: unset;
+    width:75px!important;
+    height: 32px!important;
+    border: none;
+}
+.live-box{
+    width: 290px;
+    height: 265px;
+    margin: 28px 10px 0 22px;
+    cursor: pointer;
+    border: 1px solid #cccccc;
+    float: left;
+}
+.add-live{
+    background: #eee;
+    text-align: center;
+    line-height: 265px;
+    font-size: 120px;
+    color:#0084ff;
+    font-weight: 100;
+}
+.live-box .img-box{
+    width: 270px;
+    height: 161px;
+    margin: 10px;
+    background: #ddd;
+    position: relative;
+}
+.live-box .content-box{
+    width: 270px;
+    margin: 0 10px;
+}
+.content-box .live-title{
+    font-size: 14px;
+    font-weight: bold;
+    max-height: 40px;
+    line-height: 20px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+}
+.bottom-left{
+    width: 200px;
+}
+.bottom-right{
+    width: 70px;
+    height: 34px;
+}
+.containe{
+    margin-left: 30px;
+}
+/*@media (min-width: 1366px) {*/
+    /*.live-box{*/
+        /*width: 290px;*/
+        /*height: 265px;*/
+        /*margin: 28px 10px 0 22px;*/
+        /*cursor: pointer;*/
+        /*border: 1px solid #cccccc;*/
+        /*float: left;*/
+    /*}*/
+    /*.add-live{*/
+        /*background: #eee;*/
+        /*text-align: center;*/
+        /*line-height: 265px;*/
+        /*font-size: 16px;*/
+    /*}*/
+    /*.live-box .img-box{*/
+        /*width: 270px;*/
+        /*height: 161px;*/
+        /*margin: 10px;*/
+        /*background: #ddd;*/
+        /*position: relative;*/
+    /*}*/
+    /*.live-box .content-box{*/
+        /*width: 270px;*/
+        /*margin: 0 10px;*/
+    /*}*/
+    /*.content-box .live-title{*/
+        /*font-size: 14px;*/
+        /*font-weight: bold;*/
+        /*max-height: 40px;*/
+        /*line-height: 20px;*/
+        /*overflow:hidden;*/
+        /*text-overflow:ellipsis;*/
+        /*display:-webkit-box;*/
+        /*-webkit-box-orient:vertical;*/
+        /*-webkit-line-clamp:2;*/
+    /*}*/
+    /*.bottom-left{*/
+        /*width: 200px;*/
+    /*}*/
+    /*.bottom-right{*/
+        /*width: 70px;*/
+        /*height: 34px;*/
+    /*}*/
+    /*.containe{*/
+        /*margin-left: 30px;*/
+    /*}*/
+
+/*}*/
+
+.live-bottombox:hover{
+    color: #eee!important;
+}
+.img-box img{
+    width: 100%;
+    height:100%;
+    position: absolute;
+    top:0;
+    left: 0;
+
+}
+
+.biaoqian{
+    padding: 3px 5px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 3px;
+    color: #ffffff;
+}
+.tryout{
+    padding: 3px 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 3px;
+    color: #ffffff;
+    background: #e41815;
+}
+.deletespan{
+    padding: 3px 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #fff;
+    /*background: #eee;*/
+}
+.wait-live .biaoqian{
+    background: #bcbcbc;
+}
+.on-live .biaoqian{
+    background: #1afa29;
+}
+.end-live .biaoqian{
+    background: #e41815;
+}
+.live-bottom{
+    position: absolute;
+    left: 0;
+    right: 0px;
+    bottom: 0;
+    width: 100%;
+    height: 37px;
+    line-height: 37px;
+    z-index: 999;
+    background-color: rgba(102, 102, 102, 0.8);
+}
+.live-bottombox{
+    display: block;
+    float: left;
+    color: #ffffff;
+    width: 67.5px;
+    height: 37px;
+    line-height: 37px;
+    /*text-align: center;*/
+}
+.live-bottombox i{
+    display: block;
+    width:16px;
+    height: 16px;
+    float: left;
+    margin: 10px 5px 0 6px;
+}
+.zbj i{
+    background: url("../img/zbj.png") no-repeat;
+    background-size: 100% 100%;
+}
+.sz i{
+    background: url("../img/set.png") no-repeat;
+    background-size: 100% 100%;
+}
+.tj i{
+    background: url("../img/tj.png") no-repeat;
+    background-size: 100% 100%;
+}
+.sl i{
+    background: url("../img/sl.png") no-repeat;
+    background-size: 100% 100%;
+}
+.live-bottombox:hover{
+    color: #ffffff;
+
+}
+.addbtn{
+    width: 90px!important;
+    height: 30px!important;
+    padding: 0px;
+    font-size: 14px;
+}
+.thirdbox{
+    width: 90%;
+    margin-left: 5%;
+}
+.thirdbox>div{
+    width: 19%;
+    float: left;
+    margin-left: 1%;
+    margin-top: 50px;
+    text-align: center;
+}
+.thirdbox>div img{
+    max-width: 100%;
+    height: 76px;
+}
+.thirdboxmodal{
+    width: 94%;
+    margin-left: 3%;
+}
+.thirdboxmodal>div{
+    width: 24%;
+    float: left;
+    margin-left: 1%;
+    margin-top: 50px;
+    text-align: left;
+}
+.thirdboxmodal>div img{
+    max-width: 88%;
+    height: 50px;
+}
+.thirdboxmodal input{
+    vertical-align: middle;
+}
+.btn-info{
+    background: #0084ff;
+}
+.cjzbinput {
+    height: 38px;
+    margin-bottom: 15px;
+}
+.cjzbinput .firstname {
+    width: 80px;
+    display: block;
+    float: left;
+    line-height: 38px;
+    font-size: 14px;
+    
+}
+.cjzbinput .bcszname {
+    width: 100px;
+    display: block;
+    float: left;
+    text-align: right;
+    line-height: 38px;
+    font-size: 14px;
+    margin-right: 30px;
+}
+.cjzbinput input {
+    width: 400px;
+    height: 36px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 12px;
+}
+.btntotop{
+    background: rgba(228, 24, 21, 1);
+}
+.toolbox{
+    width: 300px;
+    height: 400px;
+    margin-top: 30px;
+    margin-left: 30px;
+    float: left;
+    padding: 20px;
+}
+.toolimg{
+    width: 261px;
+    height: 223px;
+    margin: 10px auto;
+    background: url("../img/toolimg.png") no-repeat;
+    background-size:100% 100%;
+}
+.text-content {
+    width: 385px;
+    margin: 0px auto 20px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.erweimabox {
+    width: 360px;
+    margin: 0 auto;
+}
+.erweimaleft {
+    width: 91px;
+    height: 91px;
+}
+.erweimaleft img {
+    width: 100%;
+    height: 100%;
+}
+.erweimaright {
+    width: 140px;
+}
+.default-btnios {
+    width: 132px;
+    height: 34px;
+    background: #0084ff;
+    color: #fff;
+}
+.default-btngreen {
+    width: 132px;
+    height: 34px;
+    background: #1AFA29;
+    color: #fff;
+}
+.default-btnwindow {
+    width: 150px;
+    height: 34px;
+    background: #0084ff;
+    color: #fff;
+}
+.btn:hover{
+    color: #fff;
+}
+.toolcontent{
+    width: 960px;
+    height: auto;
+    margin:0 auto;
+}
+.toolcontent .toolbox:first-child{
+    margin-left: 0;
+}
+.selectedbtn{
+    width: auto!important;
+    height: auto!important;
+}
+.file-box {
+    float: left;
+    width: 320px;
+    position: relative;
+}
+.file-box .image{
+    margin: 10px;
+    height: 165px;
+}
+.file .fa-close{
+    position: absolute;
+    top: -10px;
+    right: -7px;
+    font-size: 16px;
+    color: red;
+}
+.file .graytitle{
+    padding: 5px;
+    color: #333;
+    border-radius: 3px;
+    background: #eee;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.lh-35{
+    line-height: 35px;
+    height: 35px;
+}
+.lunbpic{
+    width: 60px;
+    height: 40px;
+    margin-right: 10px;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 1px solid #e7eaec;
+    line-height: 1.42857;
+    padding: 8px;
+    vertical-align: middle;
+    font-size: 14px;
+}
+.content-box{
+    overflow: hidden;
+    float: left;
+    width: 322px;
+}
+.conBox{
+    overflow: hidden;
+    float: left;
+    position: relative;
+    clear: both;
+}
+.containe{
+    overflow: hidden;
+    float: left;
+    position: relative;
+}
+@media (min-width: 1024px){
+
+} /*>=1024的设备*/
+
+@media (min-width: 1100px) {
+
+} /*>=1100的设备*/
+@media (min-width: 1280px) {
+    .containe{
+        margin-left: -10px;
+    }
+} /*>=1280的设备*/
+
+@media (min-width: 1366px) {
+    .containe{
+        margin-left: 30px;
+    }
+
+}
+
+@media (min-width: 1440px) {
+    .containe{
+        margin-left: 63px;
+    }
+}
+
+@media (min-width: 1680px) {
+    .containe{
+        margin-left: 26px;
+    }
+}
+@media (min-width: 1920px) {
+    .containe{
+        /*margin-left: -12px;*/
+        margin-left: 135px;
+    }
+
+}

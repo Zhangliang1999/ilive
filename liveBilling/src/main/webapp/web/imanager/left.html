@@ -1,0 +1,78 @@
+<nav class="navbar-default navbar-static-side navbar-width" role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav metismenu nav-left" id="side-menu">
+			<li ui-sref-active="active">
+				<a href="javascript:void(0);">
+					<i class="fa fa-bookmark"></i>
+					<span class="nav-label">收益账户</span>
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level collapse">
+					<li ui-sref-active="active" ui-sref="enterpriseList" ui-sref-opts="{reload: true}"
+						ng-click="$event.stopPropagation();"
+					>
+						<a href="javascript:void(0);">企业收益</a>
+					</li>
+					<li ui-sref-active="active" ui-sref="flowList" ui-sref-opts="{reload: true}" ng-click="$event.stopPropagation();">
+						<a href="javascript:void(0);">收益流水</a>
+					</li>
+					<li ui-sref-active="active" ui-sref="settlementList" ui-sref-opts="{reload: true}"
+						ng-click="$event.stopPropagation();"
+					>
+						<a href="javascript:void(0);">收益结算单</a>
+					</li>
+				</ul>
+			</li>
+			<li ui-sref-active="active">
+				<a href="javascript:void(0);">
+					<i class="fa fa-bookmark"></i>
+					<span class="nav-label">代理商</span>
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level collapse">
+					<li ui-sref-active="active" ui-sref="agentList" ui-sref-opts="{reload: true}" ng-click="$event.stopPropagation();">
+						<a href="javascript:void(0);">代理商列表</a>
+					</li>
+				</ul>
+			</li>
+			<!-- ng_if="currentUser.id==21||currentUser.id==24||currentUser.id==30||currentUser.id==31" -->
+			<li ui-sref-active="active" >
+                <a href="javascript:void(0);" >
+                    <i class="fa fa-bookmark"></i>
+                    <span class="nav-label">套餐订单</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                    <li ui-sref-active="active" ui-sref="paymentList" ui-sref-opts="{reload: true}" ng-click="$event.stopPropagation();">
+                        <a href="javascript:void(0);">订单列表</a>
+                    </li>
+                </ul>
+            </li>
+			<li ui-sref-active="active">
+                <a href="javascript:void(0);">
+                    <i class="fa fa-bookmark"></i>
+                    <span class="nav-label">开通工单</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                    <li ui-sref-active="active" ui-sref="workOrderList" ui-sref-opts="{reload: true}" ng-click="$event.stopPropagation();">
+                        <a href="javascript:void(0);">工单列表</a>
+                    </li>
+                </ul>
+            </li>
+		</ul>
+	</div>
+</nav>
+<script>
+	function autoLeftHeight() {
+		var winH = $(window).height() - 70;
+		$(".navbar-static-side").height(winH);
+		$(".nav-left").slimScroll({
+			height : winH
+		});
+	}
+	autoLeftHeight();
+	$(window).resize(function() {
+		autoLeftHeight();
+	});
+</script>

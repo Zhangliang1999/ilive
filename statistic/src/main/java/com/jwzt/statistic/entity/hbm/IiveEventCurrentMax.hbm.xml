@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="IiveEventCurrentMax" table="iive_event_current_max">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="iLiveEvent" type="java.lang.Long">
+			<column name="ilive_event" />
+			<generator class="assigned" />
+		</id>
+		<property name="maxPeople" type="java.lang.Integer">
+			<column name="max_people" />
+		</property>
+		<property name="thisTime" type="java.lang.Long">
+			<column name="this_time" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,201 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">添加资源套餐</a>
+			</div>
+		</div>
+	</div>
+	<div class="row btn-box">
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName m-t-xs">套餐名称：</div>
+				<div class="mealCon" ng-if="bean.status!=2">
+					<input type="text" class="serachinput" placeholder="(必填)" ng-model="bean.packageName" />
+				</div>
+				<div class="mealCon" ng-if="bean.status==2" ng-bind="bean.packageName"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">套餐类型：</div>
+				<div class="mealCon" ng-bind="bean.packageType|packageType:''"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">套餐周期：</div>
+				<div class="mealCon" ng-bind="bean.vaildDurationValue+(bean.vaildDurationUnit|vaildDuration:'')"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">套餐原价：</div>
+				<div class="mealCon" style="width: 60px;" ng-bind="bean.orginalPrice|blank:'0'"></div>
+				<div class="mealName">成本价：</div>
+				<div class="mealCon" style="width: 60px;" ng-bind="bean.costPrice|blank:'0'"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">并发上限：</div>
+				<div class="mealCon" ng-bind="(bean.concurrenceProduct|blank:'0')+'人'"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">存储空间：</div>
+				<div class="mealCon" ng-bind="(bean.storageProductGB|blank:'0')+'G'"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">短信条数：</div>
+				<div class="mealCon" ng-bind="(bean.shortMessageProduct|blank:'0')+'条'"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">直播时长：</div>
+				<div class="mealCon" ng-bind="(bean.durationProductHour|blank:'0')+'小时'"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">投放渠道：</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="checkbox" style="vertical-align: sub;" ng-disabled="bean.status==2"
+						ng-model="bean.enableChannelOfOfficialPlatform"
+					/>
+					官网平台
+				</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="checkbox" style="vertical-align: sub;" ng-disabled="bean.status==2"
+						ng-model="bean.enableChannelOfChannelAgent"
+					/>
+					渠道代理
+				</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="checkbox" style="vertical-align: sub;" ng-disabled="bean.status==2"
+						ng-model="bean.enableChannelOfGroupProductLibrary"
+					/>
+					集团产品库
+				</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="checkbox" style="vertical-align: sub;" ng-disabled="bean.status==3"
+						ng-model="bean.enableChannelOfinside"
+					/>
+					内部使用
+				</div>
+			</div>
+			<div class="mealBox" ng-if="bean.enableChannelOfOfficialPlatform">
+				<div class="mealName">平台销售价格：</div>
+				<div class="lh-40" ng-if="bean.status!=2">
+					<input type="text" class="serachinput" placeholder="（非必填，不填即默认为原价）" ng-model="bean.officialPlatformPrice" />
+				</div>
+				<div class="lh-40" ng-if="bean.status==2" ng-bind="bean.officialPlatformPrice"></div>
+			</div>
+			<div class="mealBox" ng-if="bean.enableChannelOfChannelAgent">
+				<div class="mealName">渠道扣率基准价：</div>
+				<div class="lh-40" ng-if="bean.status!=2">
+					<input type="text" class="serachinput" placeholder="（非必填，不填即默认为原价）" ng-model="bean.channelAgentPrice" />
+				</div>
+				<div class="lh-40" ng-if="bean.status==2" ng-bind="bean.channelAgentPrice"></div>
+			</div>
+			<div class="mealBox" ng-if="bean.enableChannelOfGroupProductLibrary">
+				<div class="mealName">产品库销售价格：</div>
+				<div class="lh-40" ng-if="bean.status!=2">
+					<input type="text" class="serachinput" placeholder="（非必填，不填即默认为原价）" ng-model="bean.groupProductLibraryPrice" />
+				</div>
+				<div class="lh-40" ng-if="bean.status==2" ng-bind="bean.groupProductLibraryPrice"></div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName m-t-xs">图片封面：</div>
+				<div class="mealCon" ng-if="bean.status!=2">
+					<div ng-if="!hasImage" class="uploadPic" ngf-select="selectFiles($files)"
+						ngf-pattern="'image/gif,image/jpeg,image/jpg,image/png'" ngf-accept="'image/gif,image/jpeg,image/jpg,image/png'"
+					>上传图片</div>
+					<img ng-if="hasImage" class="uploadPic" ngf-thumbnail="bean.introduceImageFile||bean.introduceImagePath"
+						ngf-select="selectFiles($files)" ngf-pattern="'image/gif,image/jpeg,image/jpg,image/png'"
+						ngf-accept="'image/gif,image/jpeg,image/jpg,image/png'"
+					/>
+				</div>
+				<div class="mealCon" ng-if="bean.status==2">
+					<div ng-if="!hasImage" class="uploadPic">暂无图片</div>
+					<img ng-if="hasImage" class="uploadPic" ng-src="{{bean.introduceImagePath}}" />
+				</div>
+			</div>
+			<div class="mealBox m-t">
+				<div class="mealName m-t-xs">套餐简介：</div>
+				<div class="mealCon" ng-if="bean.status!=2">
+					<textarea class="serachTextarea" placeholder="一句话描述（用于前端展示）" ng-model="bean.introduceContent"></textarea>
+				</div>
+				<div class="mealCon" ng-if="bean.status==2" ng-bind="bean.introduceContent"></div>
+			</div>
+			<div class="mealBox m-t">
+				<div class="mealName m-t-xs">介绍URL：</div>
+				<div class="mealCon" ng-if="bean.status!=2">
+					<input type="text" class="serachinput" style="width: 300px;" placeholder="（非必填）" ng-model="bean.introduceUrl" />
+					<small class="color-999">（用于套餐介绍外链跳转）</small>
+				</div>
+				<div class="mealCon" ng-if="bean.status==2" ng-bind="bean.introduceUrl"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-sm">
+		<div class="col-lg-12 p-w-lg">
+			<div class="title-name">
+				<span class="font-title">选择资源包</span>
+			</div>
+		</div>
+		<div class="col-lg-12 p-w-lg">
+			<div class="panel panel-default" ng-repeat="product in bean.productList">
+				<div class="panel-body no-padding">
+					<div class="mealBox col-lg-4 pull-left">
+						<div class="lh-40" ng-bind="product.id+'（'+product.productName+'）'"></div>
+					</div>
+					<div class="mealBox col-lg-4 pull-left">
+						<div class="pull-left lh-40">类型：</div>
+						<div class="mealCon" style="width: 60px;" ng-bind="product.productType|productType:''"></div>
+					</div>
+					<div class="mealBox col-lg-4 pull-left">
+						<div class="lh-40" ng-if="product.productType===2" ng-bind="product.incrementShowValue + 'G'"></div>
+						<div class="lh-40" ng-if="product.productType===3" ng-bind="product.incrementShowValue + '条'"></div>
+						<div class="lh-40" ng-if="product.productType===4" ng-bind="product.incrementShowValue + '小时'"></div>
+						<div class="lh-40" ng-if="product.productType===5" ng-bind="product.incrementShowValue + '人'"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12 p-w-lg text-center">
+			<button class="btn commonbtn" ng-if="bean.status==1||bean.status==3" ng-click="updatePackage()">保存修改</button>
+			<button class="btn commonbtn" ng-if="bean.status==1||bean.status==3" data-toggle="modal" data-target="#myModal">发售</button>
+			<button class="btn commonbtn" ng-if="bean.status==2" ng-click="offlinePackage()">停售</button>
+		</div>
+	</div>
+	<div class="row m-t-sm">
+		<div class="col-lg-12 p-w-lg">
+			<span class="font-weight">操作记录</span>
+			<table class="table table-striped table-hover table-responsive newtable">
+				<thead class="gray-bg">
+					<tr>
+						<th>操作时间</th>
+						<th>操作账号</th>
+						<th>操作记录</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="worklog in bean.workLogList">
+						<td ng-bind="worklog.createTime|date:'yyyy-MM-dd HH:mm:ss'"></td>
+						<td ng-bind="worklog.userName"></td>
+						<td ng-bind="worklog.contentName"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">发售确认</h4>
+				</div>
+				<div class="modal-body">一经发售后，只能下线套餐，不可删除，不可修改套餐</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">提交暂存</button>
+					<button type="button" class="btn btn-danger" ng-click="onlinePackage()">确认发售</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</div>

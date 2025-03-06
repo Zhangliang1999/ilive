@@ -1,0 +1,60 @@
+.container{
+    width: 7.5rem;
+    height: auto;
+    background: #fff;
+    position: relative;
+}
+.containerBg{
+    width: 7.5rem;
+    height: auto;
+    background: url("../img/bgfour.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+.topArrow{
+    width: 0.32rem;
+    height: 0.3rem;
+    position: absolute;
+    bottom: 0.7rem;
+    left: 50%;
+    margin-left: -0.16rem;
+    background: url("../img/grayarrow.png") no-repeat;
+    background-size: 100% 100%;
+}
+.topNum{
+    width: 0.6rem;
+    text-align: center;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    margin: 0.4rem auto 0.3rem;
+    background: url("../img/blueborder.png") no-repeat;
+    background-size: 100% 100%;
+    font-size: 0.24rem;
+    font-weight: bold;
+    color: #0084ff;
+}
+.topTitle{
+    width: 7.5rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    text-align: center;
+    font-size: 0.56rem;
+    font-weight: bold;
+    color: #0084ff;
+}
+.article{
+    width: 5.4rem;
+    margin: 0.55rem auto;
+    overflow: hidden;
+}
+.articleText{
+    color: #888;
+    height: 0.6rem;
+    font-size: 0.32rem;
+}
+.blueFont{
+    font-size: 0.48rem;
+    font-weight: bold;
+    color: #0084ff;
+    margin-right: 0.1rem;
+}

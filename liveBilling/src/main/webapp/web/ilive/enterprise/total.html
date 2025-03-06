@@ -1,0 +1,313 @@
+<div id="rightWrapper" slim-scroll offset="72" class="gray-bg">
+	<div class="row title-header bgc-fff">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-content">账户总览</a>
+			</div>
+		</div>
+	</div>
+	<div class="row p-m font-content">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div class="ibox-content">
+					<div class="accountLeft">
+						<img style="width: 80px; height: 80px;"
+							ng-src="{{enterprise.enterpriseImg||'http://pic.zb.tv189.com/img/2018_05/15/1526375160786.png'}}"
+							onerror="http://pic.zb.tv189.com/img/2018_05/15/1526375160786.png"
+						/>
+					</div>
+					<div class="accountRight">
+						<div>
+							<span class="accountTit" ng-bind="enterprise.enterpriseName"></span>
+							<span class="color-red font-12" ng-if="currentUser.certStatus!=4"
+								ng-bind="'(试用天数剩余'+enterpriseProductInfo.remainingDays+'天)'"
+							></span>
+						</div>
+						<div class="font-12 m-t-sm" ng-bind="'注册日期：'+(enterprise.applyTime||enterprise.createTime|date:'yyyy-MM-dd HH:mm:ss')"></div>
+						<div class="font-12 m-t" ng-if="currentUser.certStatus==1||currentUser.certStatus==5">
+							<a href="{{iliveHomeUrl+'/admin/cert/enterprise.do'}}" class="color-blue font-12">去认证</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row p-m">
+		<div class="col-lg-12">
+			<span class="title-name font-title font-bold">资源管理</span>
+			<a href="javascript:;" class="color-blue m-t-xs" ui-sref="enterpriseProduct">查看</a>
+		</div>
+		<div class="col-lg-3">
+			<div class="ibox">
+				<div class="ibox-content" style="height: 237px;">
+					<p class="text-center" ng-bind="enterpriseProductInfo.packageName"></p>
+					<div class="text-center">
+						<div class="messcircle" ng-if="enterpriseProductInfo.remainingDays>0">
+							<span class="font-30" ng-bind="enterpriseProductInfo.remainingDays"></span>
+							天
+						</div>
+						<div class="messcircle" style="background-color: #FE4400" ng-if="enterpriseProductInfo.remainingDays<=0">
+							<span class="font-30">已到期</span>
+						</div>
+					</div>
+					<p class="text-center" ng-bind="'到期日期：'+(enterpriseProductInfo.vaildEndTime|date:'yyyy-MM-dd')"></p>
+					<!-- <p class="text-center m-t-xs">
+						<a href="javascript:;" class="color-blue" ng-if="currentUser.certStatus==4" ui-sref="packageBasic">订购套餐</a>
+					</p> -->
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-2">
+			<div class="ibox">
+				<div class="ibox-content" style="height: 237px;">
+					<p class="text-center">存储空间</p>
+					<div class="text-center">
+						<div donut-static-chart data="storageChartData" colors="storageChartColors" label="storageChartLabel"
+							style="display: inline-block; width: 140px; height: 140px; vertical-align: top;"
+						></div>
+					</div>
+					<p>
+						<span class="pull-left">
+							<span>存储空间</span>
+							<span class="color-blue m-l-xs" ng-bind="enterpriseProductInfo.storageProductGB+'G'"></span>
+						</span>
+						<!-- <span class="pull-right">
+							<a href="javascript:;" class="color-blue" ng-if="currentUser.certStatus==4" ui-sref="packageIncrement">扩展</a>
+						</span> -->
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-2">
+			<div class="ibox">
+				<div class="ibox-content" style="height: 237px;">
+					<p class="text-center">短信条数</p>
+					<div class="text-center">
+						<div donut-static-chart data="shortMessageChartData" colors="shortMessageChartColors"
+							label="shortMessageChartLabel" style="display: inline-block; width: 140px; height: 140px; vertical-align: top;"
+						></div>
+					</div>
+					<p>
+						<span class="pull-left">
+							<span>短信条数</span>
+							<span class="color-blue m-l-xs" ng-bind="enterpriseProductInfo.shortMessageProduct+'条'"></span>
+						</span>
+						<!-- <span class="pull-right">
+							<a class="color-blue m-l-xs">使用记录</a>
+						</span> -->
+						<!-- <span class="pull-right">
+							<a class="color-blue" ng-if="currentUser.certStatus==4" ui-sref="packageIncrement">扩展</a>
+						</span> -->
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-2">
+			<div class="ibox">
+				<div class="ibox-content" style="height: 237px;">
+					<p class="text-center">并发上限</p>
+					<div class="text-center">
+						<div class="messcirclenull">
+							<div class="messDiv">
+								<span class="font-30" ng-bind="enterpriseProductInfo.concurrenceProduct"></span>
+								人
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-2">
+			<div class="ibox">
+				<div class="ibox-content" style="height: 237px;">
+					<p class="text-center">直播时长</p>
+					<div class="text-center">
+						<div donut-static-chart data="durationProductChartData" colors="durationProductChartColors"
+							label="durationProductChartLabel" style="display: inline-block; width: 140px; height: 140px; vertical-align: top;"
+						></div>
+					</div>
+					<p>
+						<span class="pull-left">
+							<span>直播时长</span>
+							<span class="color-blue m-l-xs" ng-if="enterpriseProductInfo.durationProductHour==-1" ng-bind="'无限小时'"></span>
+						    <span class="color-blue m-l-xs" ng-if="enterpriseProductInfo.durationProductHour!=-1" ng-bind="enterpriseProductInfo.durationProductHour+'小时'"></span> 
+						</span>
+						<!-- <span class="pull-right">
+							<a class="color-blue m-l-xs">使用记录</a>
+						</span> -->
+						<!-- <span class="pull-right">
+							<a class="color-blue" ng-if="currentUser.certStatus==4" ui-sref="packageIncrement">扩展</a>
+						</span> -->
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row p-m" hidden="true">
+		<div class="col-lg-12">
+			<span class="title-name font-title font-bold">账户资金</span>
+			<a href="javascript:;" class="color-blue m-t-xs" data-toggle="modal" data-target="#infoModal">说明</a>
+		</div>
+		<div class="col-lg-6">
+			<div class="ibox">
+				<div class="ibox-content">
+					<p class="text-center">收益账户</p>
+					<p class="text-center m-t-lg" ng-if="currentUser.certStatus!=4">目前您是试用用户，请先完成认证后，才可开启</p>
+					<p class="text-center m-t-lg" ng-if="currentUser.certStatus==4&&!enterprise.revenueAccountWorkOrderId">未开通</p>
+					<p class="text-center m-t-lg" ng-if="currentUser.certStatus==4&&enterprise.revenueAccountWorkOrderId>0&&!enterprise.openRevenueAccount">开通处理中</p>
+					<p class="text-center m-t-lg" ng-if="currentUser.certStatus==4&&enterprise.revenueAccountWorkOrderId>0&&enterprise.openRevenueAccount">已开通</p>
+					<p class="text-center m-t-xs m-t-lg">
+						<a class="color-blue" ng-if="(currentUser.certStatus==1||currentUser.certStatus==5)&&currentUser.certStatus!=4"
+							href="{{iliveHomeUrl+'/admin/cert/enterprise.do'}}"
+						>立即认证</a>
+						<span ng-if="currentUser.certStatus!=1&&currentUser.certStatus!=5&&currentUser.certStatus!=4">认证中</span>
+						<a class="color-blue" data-toggle="modal" data-target="#revenueModal"
+							ng-if="currentUser.certStatus==4&&!enterprise.revenueAccountWorkOrderId" ng-click="$parent.agreedClause=false"
+						>申请开通账户</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6" hidden="true">
+			<div class="ibox">
+				<div class="ibox-content" hidden="true">
+					<p class="text-center">红包账户</p>
+					<p class="text-center m-t-lg" ng-if="currentUser.certStatus!=4">目前您是试用用户，请先完成认证后，才可开启</p>
+					<p class="text-center m-t-lg" ng-if="currentUser.certStatus==4&&!enterprise.redPackageAccountWorkOrderId">未开通</p>
+					<p class="text-center m-t-lg" ng-if="currentUser.certStatus==4&&enterprise.redPackageAccountWorkOrderId>0&&!enterprise.openRedPackageAccount">开通处理中</p>
+					<p class="text-center m-t-lg" ng-if="currentUser.certStatus==4&&enterprise.redPackageAccountWorkOrderId>0&&enterprise.openRedPackageAccount">已开通</p>
+					<p class="text-center m-t-xs m-t-lg">
+						<a class="color-blue" ng-if="(currentUser.certStatus==1||currentUser.certStatus==5)&&currentUser.certStatus!=4"
+							href="{{iliveHomeUrl+'/admin/cert/enterprise.do'}}"
+						>立即认证</a>
+						<span ng-if="currentUser.certStatus!=1&&currentUser.certStatus!=5&&currentUser.certStatus!=4">认证中</span>
+						<a class="color-blue" data-toggle="modal" data-target="#redPackageModal"
+							ng-if="currentUser.certStatus==4&&!enterprise.redPackageAccountWorkOrderId" ng-click="$parent.agreedClause=false"
+						>申请开通账户</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="redPackageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true"
+	>
+		<div class="modal-dialog" style="width: 500px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">账户开通申请</h4>
+				</div>
+				<div class="modal-body">
+					<h3>提示：</h3>
+					<p class="m-t-xs">1）开通收益账户后，您即可以使用平台的打赏、礼物功能。</p>
+					<p class="m-t-xs">2）请您留下您的联系方式，我们会有客服人员与您联系，请保持您的手机畅通。</p>
+					<p class="m-t-xs">
+						3）请您仔细阅读、并且同意
+						<a href="javascript:;" class="color-blue">《天翼直播收益账户管理办法》</a>
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">联系人：</span>
+						<input type="text" class="commitInput" ng-model="contactName"/>
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">联系电话：</span>
+						<input type="text" class="commitInput" ng-model="contactPhoneNumber"/>
+					</p>
+					<p class="m-t">
+						<input type="checkbox" style="vertical-align: sub;" ng-model="agreedClause" />
+						同意
+						<a href="javascript:;" class="color-blue">《天翼直播收益账户管理办法》</a>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px !important;">取消</button>
+					<button type="button" class="btn commonbtn" style="font-size: 12px !important;" ng-click="applyRedPackageAccount()">提交</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="revenueModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 500px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">账户开通申请</h4>
+				</div>
+				<div class="modal-body">
+					<h3>提示：</h3>
+					<p class="m-t-xs">1）开通收益账户后，您即可以使用平台的打赏、礼物功能。</p>
+					<p class="m-t-xs">2）请您留下您的联系方式，我们会有客服人员与您联系，请保持您的手机畅通。</p>
+					<p class="m-t-xs">
+						3）请您仔细阅读、并且同意
+						<a href="javascript:;" class="color-blue">《天翼直播收益账户管理办法》</a>
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">联系人：</span>
+						<input type="text" class="commitInput" ng-model="contactName"/>
+					</p>
+					<p class="m-t-xs">
+						<span class="commitName">联系电话：</span>
+						<input type="text" class="commitInput" ng-model="contactPhoneNumber"/>
+					</p>
+					<p class="m-t">
+						<input type="checkbox" style="vertical-align: sub;" ng-model="agreedClause" />
+						同意
+						<a href="javascript:;" class="color-blue">《天翼直播收益账户管理办法》</a>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px !important;">取消</button>
+					<button type="button" class="btn commonbtn" style="font-size: 12px !important;" ng-click="applyRevenueAccount()">提交</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<!-- 资金说明模态框（Modal） -->
+	<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 500px;">
+			<div class="modal-content" slim-scroll offset="72">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">账户资金说明</h4>
+				</div>
+				<div class="modal-body">
+					<h3>收益账户</h3>
+					<p class="m-t-xs font-bold">1）什么是收益？</p>
+					<p class="m-t-xs">组织在平台通过直播活动中，获取的打赏、礼物、付费观看的收益费用。</p>
+					<p class="m-t font-bold">2）如何开通收益账户？</p>
+					<p class="m-t-xs">打赏、礼物、付费观看为收益账户开启后具备的能力。您需要申请激活收益账户，并提交完成平台所需的资料后，即会开通收益账户。</p>
+					<p class="m-t font-bold">3）如何提取收益账户的余额?</p>
+					<p class="m-t-xs">在开通收益类服务时，需要配合提交您的转账银行账户。平台会在每月的月底完成上一月的平台收益结算后，将结算的金额打款到绑定的账户中。</p>
+					<p class="m-t font-bold">4）什么是平台手续费？</p>
+					<p class="m-t-xs">平台手续为平台在结算给您的收益中扣除的一部分费用，用于支付平台的转账手续费等费用。平台收取的手续费为5%。</p>
+					<!-- <h3 class="m-t">红包账户</h3>
+					<p class="m-t-xs font-bold">1）什么是红包账户？</p>
+					<p class="m-t-xs">直播活动中，主办方使用红包账户余额向观看用户发放红包。</p>
+					<p class="m-t font-bold">2）如何开通红包账户？</p>
+					<p class="m-t-xs">您需要申请激活红包账户，并提交完成平台所需的资料后，即会开通红包账户。</p>
+					<p class="m-t font-bold">3）红包账户能退款吗?</p>
+					<p class="m-t-xs">暂时不支持红包账户的退款</p>
+					<p class="m-t font-bold">4）红包账户的使用注意事项。</p>
+					<p class="m-t-xs">
+						单个红包未被领取部分，将退回至红包账户余额中。
+						<br />
+						只有通过微信观看的用户才可以收取红包。
+					</p> -->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn commonbtn" data-dismiss="modal" style="font-size: 12px !important;">好的，我知道了</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</div>

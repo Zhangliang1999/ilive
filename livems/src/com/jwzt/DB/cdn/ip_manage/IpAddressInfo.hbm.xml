@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.cdn.ip_manage.IpAddressInfo" table="soms4_ip_address">
+    	<meta attribute="calss-description">
+			@author 刘勇涛
+		</meta>
+    
+        <id name="address_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">唯一id</meta>
+            <column name="address_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="address_name" type="java.lang.String">
+        	<meta attribute="field-description">区域名称</meta>
+            <column name="address_name" length="50" />
+        </property>
+        <property name="if_use" type="java.lang.Integer">
+        	<meta attribute="field-description">该IP地址是否生效 0：不生效  1：生效</meta>
+            <column name="if_use" />
+        </property>
+        <property name="if_need_login" type="java.lang.Integer">
+        	<meta attribute="field-description">该IP地址是否需要登录 0：不需要  1：需要</meta>
+            <column name="if_need_login" />
+        </property>
+        <property name="type" type="java.lang.Integer">
+        	<meta attribute="field-description">该IP地址类型 0：禁止  1：允许</meta>
+            <column name="type" />
+        </property>
+        <property name="address_desc" type="java.lang.String">
+        	<meta attribute="field-description">地址描述</meta>
+            <column name="address_desc" length="512" />
+        </property>  
+        <property name="add_time" type="java.sql.Timestamp">
+        	<meta attribute="field-description">添加时间</meta>
+            <column name="add_time" />
+        </property>
+         <property name="rights_id" type="java.lang.Integer">
+        	<meta attribute="field-description">栏目绑定权限</meta>
+            <column name="rights_id" />
+        </property>
+    </class>
+</hibernate-mapping>

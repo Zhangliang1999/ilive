@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+<title></title>
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/html_five.css" />
+<script src="js/common.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/rem.js"></script>
+<script src="js/g2.min.js"></script>
+<script src="js/data-set.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/share_other.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="containerBg">
+			<div class="topNum">07</div>
+			<div class="topTitle">用户观看客户端来源统计</div>
+			<div class="canvas" id="mountNode"></div>
+			<table>
+				<tr>
+					<th></th>
+					<th>人数（人）</th>
+					<th>占比</th>
+				</tr>
+				<tr>
+					<td style="color: #f76d50;">APP端</td>
+					<td id="num1">0</td>
+					<td id="percent1">0%</td>
+				</tr>
+				<tr>
+					<td style="color: #ffae42;">H5端</td>
+					<td id="num2">0</td>
+					<td id="percent2">0%</td>
+				</tr>
+				<tr>
+					<td style="color: #ecd223;">PC浏览器端</td>
+					<td id="num3">0</td>
+					<td id="percent3">0%</td>
+				</tr>
+				<tr>
+					<td style="color: #6ef2ad;">其他客户端</td>
+					<td id="num4">0</td>
+					<td id="percent4">0%</td>
+				</tr>
+			</table>
+		</div>
+		<!-- <div class="topArrow"></div> -->
+		<div class="pagebox">
+            <div class="pageUp">&#171上一页</div>
+            <div class="pageDown">下一页&#187</div>
+        </div>
+	</div>
+</body>
+<script>
+    $(function() {
+        if (/Android|chinanet_ilive_android|chinanet_ilive_ios|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            var winHeight = $(window).height();
+            $(".container").css("height", winHeight);
+            $(".containerBg").css("height", winHeight);
+        } else {
+            $(".container").css("height", "1100px");
+            $(".containerBg").css("height", "1100px");
+        }
+    });
+</script>
+<script>
+	var id = getQueryString("id");
+	/* $(".topArrow").on("click", function() {
+		window.location.href = "end.html?id=" + id;
+	}); */
+	$(".pageUp").on("click", function() {
+		window.location.href = "locationListStatistic.html?id=" + id;
+    });
+    $(".pageDown").on("click", function() {
+        window.location.href = "end.html?id=" + id;
+    });
+	$.ajax({
+		url : "/statistic/wap/user/statistic/source?id=" + id,
+		type : "get",
+		async : false,
+		crossDomain : true,
+		dataType : "jsonp",
+		jsonp : 'jsoncallback',
+		success : function(data) {
+			const chartData = [];
+			const bean = data.data;
+			const androidUserNum = bean.androidUserNum;
+			const iosUserNum = bean.iosUserNum;
+			const wapUserNum = bean.wapUserNum;
+			const pcUserNum = bean.pcUserNum;
+			const otherUserNum = bean.otherUserNum;
+			const totalNum = androidUserNum + iosUserNum + wapUserNum + pcUserNum + otherUserNum;
+			if (androidUserNum + iosUserNum > 0) {
+				chartData.push({
+					item : "APP端",
+					count : androidUserNum + iosUserNum
+				});
+				var percent;
+				if (totalNum > 0) {
+					percent = ((androidUserNum + iosUserNum) * 100 / totalNum).toFixed(2);
+				} else {
+					percent = 0;
+				}
+				$("#num1").html(androidUserNum + iosUserNum);
+				$("#percent1").html(percent+"%");
+			}
+			if (wapUserNum > 0) {
+				chartData.push({
+					item : "H5端",
+					count : wapUserNum
+				});
+				var percent;
+				if (totalNum > 0) {
+					percent = ((wapUserNum) * 100 / totalNum).toFixed(2);
+				} else {
+					percent = 0;
+				}
+				$("#num2").html(wapUserNum);
+				$("#percent2").html(percent+"%");
+			}
+			if (pcUserNum > 0) {
+				chartData.push({
+					item : "PC浏览器端",
+					count : pcUserNum
+				});
+				var percent;
+				if (totalNum > 0) {
+					percent = ((pcUserNum) * 100 / totalNum).toFixed(2);
+				} else {
+					percent = 0;
+				}
+				$("#num3").html(pcUserNum);
+				$("#percent3").html(percent+"%");
+			}
+			if (otherUserNum > 0) {
+				chartData.push({
+					item : "其他客户端",
+					count : otherUserNum
+				});
+				var percent;
+				if (totalNum > 0) {
+					percent = ((otherUserNum) * 100 / totalNum).toFixed(2);
+				} else {
+					percent = 0;
+				}
+				$("#num4").html(otherUserNum);
+				$("#percent4").html(percent+"%");
+			}
+			var _DataSet = DataSet, DataView = _DataSet.DataView;
+
+			var data = chartData;
+
+			var dv = new DataView();
+			dv.source(data).transform({
+				type : 'percent',
+				field : 'count',
+				dimension : 'item',
+				as : 'percent'
+			});
+
+			var chart = new G2.Chart({
+				container : 'mountNode',
+				forceFit : true,
+				animate : false,
+				width : window.innerWidth,
+				height : window.innerWidth * 3 / 4,
+				padding : {
+					top : 0,
+					right : 80,
+					bottom : 0,
+					left : 80
+				}
+			});
+			chart.source(dv, {
+				percent : {
+					formatter : function formatter(val) {
+						val = val * 100 + '%';
+						return val;
+					}
+				}
+			});
+			chart.coord('theta', {
+				radius : 0.7,
+				innerRadius : 0.6
+			});
+			chart.legend(false);
+			chart.tooltip(false);
+
+			var interval = chart.intervalStack().position('percent').color('item',
+					[ '#f76d50', '#ffae42', '#ecd223', '#6ef2ad', '#eeeeee' ]).opacity(1).label('percent', {
+				formatter : function formatter(val, item) {
+					return item.point.item;
+				},
+				textStyle : {
+					fill : '#cccccc', // 文本的颜色
+				}
+			}).style({
+				lineWidth : 0,
+				opacity : 1
+			});
+			chart.render();
+		}
+	});
+</script>
+<!-- <script>
+    var startx, starty;
+    //获得角度  
+    function getAngle(angx, angy) {
+        return Math.atan2(angy, angx) * 180 / Math.PI;
+    };
+
+    //根据起点终点返回方向 1向上 2向下 3向左 4向右 0未滑动  
+    function getDirection(startx, starty, endx, endy) {
+        var angx = endx - startx;
+        var angy = endy - starty;
+        var result = 0;
+
+        //如果滑动距离太短  
+        if (Math.abs(angx) < 10 && Math.abs(angy) < 10) {
+            return result;
+        }
+
+        var angle = getAngle(angx, angy);
+        if (angle >= -135 && angle <= -45) {
+            result = 1;
+        } else if (angle > 45 && angle < 135) {
+            result = 2;
+        } else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
+            result = 3;
+        } else if (angle >= -45 && angle <= 45) {
+            result = 4;
+        }
+
+        return result;
+    }
+    //手指接触屏幕  
+    document.addEventListener("touchstart", function(e) {
+        startx = e.touches[0].pageX;
+        starty = e.touches[0].pageY;
+    }, false);
+    //手指离开屏幕  
+    document.addEventListener("touchend", function(e) {
+        var endx, endy;
+        endx = e.changedTouches[0].pageX;
+        endy = e.changedTouches[0].pageY;
+        var direction = getDirection(startx, starty, endx, endy);
+        switch (direction) {
+        case 0:
+            break;
+        case 1:
+            $(".topArrow").click();
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        default:
+        }
+    }, false);
+</script> -->
+</html>

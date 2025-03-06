@@ -1,0 +1,72 @@
+<div class="row">
+	<nav class="navbar navbar-static-top navbar-top-height" role="navigation" style="margin-bottom: 0"
+		ng-controller="topAct"
+	>
+		<div class="navbar-header">
+			<div class="logo">
+				<div class="header-logo">
+					<div class="logoimg">
+						<img alt="image" src="../common/img/newlogo.png" />
+					</div>
+				</div>
+				<ul class="logoul">
+					<li>
+						<a href="{{iliveHomeUrl+'/admin/room/list.do'}}">直播</a>
+					</li>
+					<li>
+						<a href="{{iliveHomeUrl+'/admin/mediafile/entervedio.do'}}">内容管理</a>
+					</li>
+					<!-- <li ng-show="currentUser.certStatus==4">
+						<a href="{{iliveHomeUrl+'/admin/terminal/terminaluser.do'}}">会员</a>
+					</li>
+					<li ng-show="currentUser.certStatus==4">
+						<a href="{{iliveHomeUrl+'/admin/thematic/thematicmain.do'}}">主页</a>
+					</li>
+					<li>
+						<a href="{{iliveHomeUrl+'/admin/statistic/enterpriseDetail.do'}}">数据</a>
+					</li> -->
+					<li class="headeractive">
+						<a href="{{iliveHomeUrl+'/admin/account/accountmng.do'}}">企业管理</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<ul class="nav navbar-top-links navbar-right navbar-top-right" style="float: right; min-width: 210px;">
+			<li class="nav-num">
+				<img ng-src="{{currentUser.userImg|blank:'../common/img/touxiang.png'}}" onerror="../common/img/touxiang.png" />
+			</li>
+			<li class="dropdown nav-sjgly">
+				<a aria-expanded="false" role="button" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+					<span ng-bind="currentUser.username"></span>
+					<span class="fa fa-angle-down"></span>
+				</a>
+				
+				<ul role="menu" class="dropdown-menu nav-dropdown-list">
+				<li>
+						<a href="{{iliveHomeUrl+'/admin/account/accountmng.do'}}">个人信息</a>
+					</li>
+					<li ng-click="logout()">
+						<a href="javascript:void(0)">退出登录</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<div class="renzhengBox m-r-sm" ng-show="currentUser.certStatus==2" ng-cloak
+			style="cursor: pointer;color:#f38b3e;" ng-click="goToCert()"
+		>
+            <img style="height:28px" src="../common/img/renzheng.png">
+			点击认证
+		</div>
+		<div class="renzhengBox" ng-show="currentUser.certStatus==3" ng-cloak>
+			<i class="fa fa-drivers-license-o m-r-sm"></i>认证中
+		</div>
+		<div class="renzhengBox" ng-show="currentUser.certStatus==4" ng-cloak>
+			<i class="fa fa-drivers-license-o m-r-sm"></i>已认证
+		</div>
+		<div class="renzhengBox fa fa-drivers-license m-r-sm" ng-show="currentUser.certStatus==5" ng-cloak
+			style="cursor: pointer;" ng-click="goToCert()"
+		>
+			认证失败 重新认证
+		</div>
+	</nav>
+</div>

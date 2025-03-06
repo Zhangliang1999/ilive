@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.billing.entity">
+	<class name="ProductInfo" table="billing_product">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="productName" type="java.lang.String">
+			<column name="product_name"></column>
+		</property>
+		<property name="productType" type="java.lang.Integer">
+			<column name="product_type" />
+		</property>
+		<property name="productPrice" type="java.lang.Double">
+			<column name="product_price" sql-type="decimal(23,2)" />
+		</property>
+		<property name="functionCodes" type="java.lang.String">
+			<column name="function_codes"></column>
+		</property>
+		<property name="incrementValue" type="java.lang.Long">
+			<column name="increment_value" />
+		</property>
+		<property name="productDesc" type="java.lang.String">
+			<column name="product_desc" sql-type="varchar(1000)"/>
+		</property>
+	</class>
+</hibernate-mapping>

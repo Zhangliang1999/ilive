@@ -1,0 +1,50 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-content">订单详情</a>
+			</div>
+		</div>
+	</div>
+	<div class="row p-m font-content">
+		<div class="col-lg-4 m-b">
+			<span class="commitName">订单编号：</span>
+			<span ng-bind="bean.id"></span>
+		</div>
+		<div class="col-lg-4 m-b">
+			<span class="commitName">预定时间：</span>
+			<span ng-bind="bean.createTime|date:'yyyy-MM-dd HH:mm:ss'|blank:''"></span>
+		</div>
+		<div class="col-lg-4 m-b">
+			<span class="commitName">订单状态：</span>
+			<span ng-bind="bean.status|paymentStatus:''"></span>
+		</div>
+		<div class="col-lg-4 m-b">
+			<span class="commitName">订单类型：</span>
+			<span ng-bind="bean.paymentType|paymentType:''"></span>
+		</div>
+		<div class="col-lg-4 m-b">
+			<span class="commitName">产品类型：</span>
+			<span ng-bind="bean.packageInfo.packageType|packageType:''"></span>
+		</div>
+		<div class="col-lg-12 m-b">
+			<span class="commitName">产品名称：</span>
+			<span ng-bind="bean.packageInfo.packageName">企业版</span>
+		</div>
+		<div class="col-lg-12 m-b">
+			<span class="commitName">产品介绍：</span>
+			<span ng-bind="bean.packageInfo.packageDesc"></span>
+		</div>
+		<div class="col-lg-12 m-b">
+			<span class="commitName">有效期：</span>
+			<span ng-bind="bean.packageInfo.vaildDurationValue+(bean.packageInfo.vaildDurationUnit|vaildDuration:'')"></span>
+		</div>
+		<div class="col-lg-12 m-b">
+			<span class="commitName">订单价格：</span>
+			<span class="color-red" ng-bind="bean.paymentPrice"></span>
+		</div>
+		<div class="col-lg-12 text-center">
+			<button class="btn btn-default" style="font-size: 12px !important;" ng-click="returnPrevious()">返回列表</button>
+		</div>
+	</div>
+</div>

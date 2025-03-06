@@ -1,0 +1,219 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">查看套餐订单</a>
+			</div>
+		</div>
+	</div>
+	<div class="row btn-box">
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName">订单号：</div>
+				<div class="mealCon" ng-bind="bean.id"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">企业名称：</div>
+				<div class="mealCon" ng-bind="bean.enterpriseName"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">企业电话：</div>
+				<div class="mealCon" ng-bind="bean.contactNumber"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">来源渠道：</div>
+				<div class="mealCon" ng-bind="bean.channelType|channelType:''"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">订购类型：</div>
+				<div class="mealCon" ng-bind="bean.paymentType|paymentType:''"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">创建日期：</div>
+				<div class="mealCon" ng-bind="bean.createTime|date:'yyyy-MM-dd HH:mm:ss'|blank:''"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">续订类型：</div>
+				<div class="mealCon">
+					<select class="commonSelect" ng-model="bean.paymentAuto"
+					ng-options="type.value as type.label for type in paymentAutoBeans"
+					>
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">有效开始日期：</div>
+				<div class="mealCon" ng-bind="bean.vaildStartTime|date:'yyyy-MM-dd'|blank:''"></div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName">企业ID：</div>
+				<div class="mealCon" ng-bind="bean.enterpriseId"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">订购状态：</div>
+				<div class="mealCon" ng-bind="bean.status|paymentStatus:''"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">代理商：</div>
+				<div class="lh-40">
+					<select class="commonSelect" ng-model="agentInfo" ng-options="agent as agent.agentName for agent in agentList">
+						<option value="">--请选择--</option>
+					</select>
+					<span class="color-999" ng-if="agentInfo.id>0" ng-bind="'（代理商扣点：'+agentInfo.deductionRate+'%）'"></span>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">销售：</div>
+				<div class="lh-40">
+					<select class="commonSelect" ng-model="userInfo" ng-options="user as user.userName for user in userList">
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">备注：</div>
+				<div class="mealCon">
+					<textarea ng-model="bean.paymentDesc"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-sm">
+		<div class="col-lg-12 p-w-lg">
+			<span class="font-weight">订购内容</span>
+			<table class="table table-striped table-hover table-responsive newtable">
+				<thead class="gray-bg">
+					<tr>
+						<th>套餐ID</th>
+						<th>套餐名称</th>
+						<th>原价</th>
+						<th>售价</th>
+						<th>实际售价</th>
+						<th>代理扣率%</th>
+						<th>代理费</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-if="bean.packageInfo.id>0">
+						<td ng-bind="bean.packageInfo.id"></td>
+						<td ng-bind="bean.packageInfo.packageName"></td>
+						<td ng-bind="bean.packageInfo.orginalPrice"></td>
+						<td>
+							<span ng-if="bean.channelType==1" ng-bind="bean.packageInfo.officialPlatformPrice"></span>
+							<span ng-if="bean.channelType==2" ng-bind="bean.packageInfo.channelAgentPrice"></span>
+							<span ng-if="bean.channelType==3" ng-bind="bean.packageInfo.groupProductLibraryPrice"></span>
+						</td>
+						<td class="text-center">
+							<input type="text" class="serachinput" style="width: 100px;" ng-model="bean.paymentPrice" />
+						</td>
+						<td class="text-center">
+							<input type="text" class="serachinput" style="width: 100px;" ng-model="bean.agentDeductionRate" />
+						</td>
+						<td ng-bind="bean.paymentPrice*bean.agentDeductionRate/100"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-lg-12">
+			<div class="mealBox">
+				<div class="mealName">订单金额：</div>
+				<div class="mealCon">
+					<span class="color-red" ng-if="bean.paymentPrice>0" ng-bind="bean.paymentPrice+'元'"></span>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">
+					<input type="checkbox" style="vertical-align: sub;" ng-model="bean.paid" />
+					支付标记
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">支付方式：</div>
+				<div class="mealCon">
+					<select class="commonSelect" ng-model="bean.paymentWay"
+						ng-options="paymentWay.value as paymentWay.label for paymentWay in paymentWayBeans"
+					>
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">流水ID：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.paymentFlowId" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">支付日期：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.paymentTime" />
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="mealBox">
+				<div class="mealName">联系方式：</div>
+				<div class="mealCon" ng-bind="bean.contactNumber"></div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">联系人：</div>
+				<div class="mealCon" ng-bind="bean.contactName"></div>
+			</div>
+			<div class="mealBox" ng-if="bean.status==4">
+				<div class="mealName">取消原因：</div>
+				<div class="mealCon" ng-bind="bean.cancelReason"></div>
+			</div>
+		</div>
+		<div class="col-lg-12 p-w-lg text-center">
+			<button class="btn commonbtn" ng-if="bean.status==1||bean.status==2" ng-click="updateAgent()">保存修改</button>
+			<button class="btn commonbtn" ng-if="bean.status==1" ng-click="processAgent()">正在处理</button>
+			<button class="btn commonbtn" ng-if="bean.status==2" ng-click="completeAgent()">订单完成</button>
+			<button class="btn commonbtn" ng-if="bean.status==1||bean.status==2" data-toggle="modal" data-target="#myModal">订单取消</button>
+		</div>
+	</div>
+	<div class="row m-t">
+		<div class="col-lg-12 p-w-lg">
+			<span class="font-weight">操作记录</span>
+			<table class="table table-striped table-hover table-responsive newtable">
+				<thead class="gray-bg">
+					<tr>
+						<th>操作时间</th>
+						<th>操作账号</th>
+						<th>操作记录</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="worklog in bean.workLogList">
+						<td ng-bind="worklog.createTime|date:'yyyy-MM-dd HH:mm:ss'"></td>
+						<td ng-bind="worklog.userName"></td>
+						<td ng-bind="worklog.contentName"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">取消确认</h4>
+				</div>
+				<div class="modal-body">
+					取消原因
+					<textarea style="margin: 0px; width: 540px; height: 109px;" ng-model="bean.cancelReason"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-danger" ng-click="cancelAgent()">确认</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</div>

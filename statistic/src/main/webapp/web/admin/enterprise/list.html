@@ -1,0 +1,175 @@
+<div id="rightWrapper">
+	<div class="row btn-box gray-bg">
+		<div class="col-md-12">
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">数据筛选：</div>
+				<div class="input-daterange input-group pull-left m-t-xs m-r-sm" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="queryCondition.startTime"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间" ng-model="queryCondition.endTime" />
+				</div>
+			</div>
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">企业ID：</div>
+				<div class="dropdown pull-left m-t-xs m-r-sm ">
+					<input class="userInput" type="text" ng-model="queryCondition.enterpriseId" />
+				</div>
+			</div>
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">企业名称：</div>
+				<div class="dropdown pull-left m-t-xs m-r-sm ">
+					<input class="userInput" type="text" ng-model="queryCondition.enterpriseName" />
+				</div>
+			</div>
+			
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">绑定手机号：</div>
+				<div class="dropdown pull-left m-t-xs m-r-sm ">
+					<input class="userInput" type="text" ng-model="queryCondition.bindPhone" />
+				</div>
+			</div>
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">企业状态：</div>
+				<div class="dropdown pull-left m-t-xs m-r-sm ">
+					<select id="u1133_input" class="userInput" ng-model="queryCondition.certStatus"  ng-init="queryCondition.certStatus='-1'">
+				          <option value="-1">不限</option>
+				          <option value="0">试用</option>
+				          <option value="4">已认证</option>
+			        </select>
+				</div>
+			</div>
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">企业类型：</div>
+				<div class="dropdown pull-left m-t-xs m-r-sm ">
+					<select id="u1133_input" class="userInput" ng-model="queryCondition.entype"  ng-init="queryCondition.entype='-1'">
+				          <option value="-1">不限</option>
+				          <option value="1">外部测试</option>
+				          <option value="2">内部测试</option>
+				          <option value="3">签约企业</option>
+			        </select>
+				</div>
+			</div>
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">认证类型：</div>
+				<div class="dropdown pull-left m-t-xs m-r-sm ">
+					<select id="u1133_input" class="userInput" ng-model="queryCondition.stamp"  ng-init="queryCondition.stamp='-1'">
+				          <option value="-1">不限</option>
+				          <option value="0">企业</option>
+				          <option value="1">个人</option>
+			        </select>
+				</div>
+			</div>
+			
+			
+			<button class="btn btn-white pull-right font-12 m-t m-r" ng-click="searchList(1,false)">查询</button>
+			<div class="dropdown pull-right m-t m-r font-12">
+				显示条数:
+				<button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" data-toggle="dropdown"
+					aria-expanded="false"
+				>
+					<span ng-bind="page.pageSize"></span>
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li ng-click="changePageSize(20)">
+						<a>20</a>
+					</li>
+					<li ng-click="changePageSize(50)">
+						<a>50</a>
+					</li>
+					<li ng-click="changePageSize(100)">
+						<a>100</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-xs" style="overflow:scroll">
+		<div class="col-md-12 p-w-lg " style="overflow: scroll;">
+			<table class="table newtable table-striped table-hover ScrollViewer table-responsive" style="width: 1600px;">
+				<thead class="gray-bg">
+					<tr>
+						<!-- <th style="width: 50px;"></th> -->
+						<th style="width: 50px;">企业ID</th>
+						<th >企业名称</th>
+						<th style="width: 100px;">绑定手机号</th>
+						<th style="width: 80px;">认证状态</th>
+						<th style="width: 80px;">认证类型</th>
+						<th style="width: 80px;">企业类型</th>
+						<th style="width: 100px;">联系电话</th>
+						<th style="width: 52px;">粉丝数</th>
+						<th style="width: 100px;">企业直播场次（次）</th>
+						<th style="width: 100px;">累计直播时长（小时）</th>
+						<th style="width: 100px;">观看累计次数（次）</th>
+						<th style="width: 100px;">观看累计人数（人）</th>
+						<th style="width: 100px;">被点赞累计数（次）</th>
+						<th style="width: 100px;">被评论累计数（次）</th>
+						<th style="width: 100px;">发出红包总金额（元）</th>
+						<th style="width: 100px;">收到礼物次数（次）</th>
+					</tr>
+				</thead>
+				<tbody auto-height offset="316">
+					<tr ng-repeat="bean in page.list" ng-click="bean.isChecked=!bean.isChecked">
+						<!-- <td style="width: 50px;">
+							<input type="checkbox" ng-model="bean.isChecked" ng-click="bean.isChecked=!bean.isChecked" ng-checked="isCheckAll" />
+						</td> -->
+						<td style="width: 50px;" ng-bind="bean.id"></td>
+						<td ng-bind="bean.enterpriseName|blank:'未认证企业'"></td>
+						<td style="width: 100px;" ng-bind="bean.bindPhone|blank:''"></td>
+						<td style="width: 80px;" ng-bind="bean.certStatusName|blank:''"></td>
+						<td style="width: 80px;" ng-bind="bean.stampName|blank:''"></td>
+						<td style="width: 80px;" ng-bind="bean.entypeName|blank:''"></td>
+						<td style="width: 100px;" ng-bind="bean.contactPhone|blank:''"></td>
+						<td style="width: 52px;" ng-bind="bean.statisticResult.fansNum|blank:'0'"></td>
+						<td style="width: 100px;" ng-bind="bean.statisticResult.liveEventTotalNum|blank:'0'"></td>
+						<td style="width: 100px;" ng-bind="bean.statisticResult.liveTotalDuration|hour|blank:'0'"></td>
+						<td style="width: 100px;" ng-bind="bean.statisticResult.liveViewTotalNum|blank:'0'"></td>
+						<td style="width: 100px;" ng-bind="bean.statisticResult.liveViewUserTotalNum|blank:'0'"></td>
+						<td style="width: 100px;" ng-bind="bean.statisticResult.liveLikeTotalNum|blank:'0'"></td>
+						<td style="width: 100px;" ng-bind="bean.statisticResult.liveCommentTotalNum|blank:'0'"></td>
+						<td style="width: 100px;" ng-bind="bean.statisticResult.hongbaoNum|blank:'0'"></td>
+						<td style="width: 100px;" ng-bind="bean.statisticResult.giftNum|blank:'0'"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12 pageBox m-b">
+			<!-- <div class="pull-left m-l-lg m-t-xs">
+				<input class="m-r-sm" type="checkbox" style="vertical-align: sub" ng-model="isCheckAll" ng-click="checkAll(isCheckAll)" />
+				全选
+			</div> -->
+			<button class="btn btn-default font-12 pull-left m-l bordered" ng-click="excelExport()">导出数据列表</button>
+			<div class="pull-right btn-group m-r">
+				<div class="pull-left m-t-xs m-r">
+					第
+					<span class="color-gold" ng-bind="page.pageNo"></span>
+					页/
+					<span class="color-gold" ng-bind="page.totalCount">100</span>
+					条数据
+				</div>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.prePage,true)">
+					<i class="fa fa-chevron-left"></i>
+				</button>
+				<button ng-repeat="showPage in page.showPages track by $index" class="btn btn-white"
+					ng-class="{'active':showPage==page.pageNo}" ng-click="searchList(showPage,true)"
+				>
+					<span ng-if="showPage<=0" ng-bind="'...'"></span>
+					<span ng-if="showPage>0&&showPage==page.pageNo" ng-bind="showPage" id="currentPageNo"></span>
+					<span ng-if="showPage>0&&showPage!=page.pageNo" ng-bind="showPage"></span>
+				</button>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.nextPage,true)">
+					<i class="fa fa-chevron-right"></i>
+				</button>
+				<div class="pull-left m-t-xs m-l m-r">
+					跳至
+					<input class="m-l-xs m-r-xs" style="width: 33px; height: 23px; border: 1px solid #ddd;" type="text"
+						ng-keyup="($event.which === 13)?changePageNo($event.target.value):0"
+					/>
+					页
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,76 @@
+<nav class="navbar-default navbar-static-side navbar-width" role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav metismenu nav-left" id="side-menu">
+			<li ui-sref-active="active">
+				<a href="javascript:void(0);" ui-sref="total" ui-sref-opts="{reload: true}">
+					<i class="fa fa-bookmark"></i>
+					<span class="nav-label">平台数据统计</span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a href="javascript:void(0);" ui-sref="user" ui-sref-opts="{reload: true}">
+					<i class="fa fa-bookmark"></i>
+					<span class="nav-label">用户数据统计</span>
+				</a>
+			</li>
+			<li ui-sref-active="active" ui-sref="enterprise" ui-sref-opts="{reload: true}">
+				<a href="javascript:void(0);">
+					<i class="fa fa-bookmark"></i>
+					<span class="nav-label">企业数据统计</span>
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level collapse">
+					<li ui-sref-active="active" ui-sref="enterpriseList" ui-sref-opts="{reload: true}"
+						ng-click="$event.stopPropagation();"
+					>
+						<a href="javascript:void(0);">企业数据列表</a>
+					</li>
+				</ul>
+			</li>
+			<li ui-sref-active="in" ui-sref="live" ui-sref-opts="{reload: true}">
+				<a href="javascript:void(0);">
+					<i class="fa fa-bookmark"></i>
+					<span class="nav-label">直播数据统计</span>
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level collapse">
+					<li ui-sref-active="active" ui-sref="liveList" ui-sref-opts="{reload: true}" ng-click="$event.stopPropagation();">
+						<a href="javascript:void(0);">直播数据列表</a>
+					</li>
+				</ul>
+			</li>
+			<li ui-sref-active="active" ui-sref="videoList" ui-sref-opts="{reload: true}">
+				<a href="javascript:void(0);">
+					<i class="fa fa-bookmark"></i>
+					<span class="nav-label">回看数据统计</span>
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level collapse">
+					<li ui-sref-active="active" ui-sref="videoList" ui-sref-opts="{reload: true}" ng-click="$event.stopPropagation();">
+						<a href="javascript:void(0);">回看数据列表</a>
+					</li>
+				</ul>
+			</li>
+			<li ui-sref-active="active">
+				<a href="javascript:void(0);" ui-sref="meetTotal" ui-sref-opts="{reload: true}">
+					<i class="fa fa-bookmark"></i>
+					<span class="nav-label">会议数据统计</span>
+				</a>
+			</li>
+		</ul>
+		<!--<button class="btn btn-success">退出直播间</button>-->
+	</div>
+</nav>
+<script>
+	function autoLeftHeight() {
+		var winH = $(window).height() - 70;
+		$(".navbar-static-side").height(winH);
+		$(".nav-left").slimScroll({
+			height : winH
+		});
+	}
+	autoLeftHeight();
+	$(window).resize(function() {
+		autoLeftHeight();
+	});
+</script>

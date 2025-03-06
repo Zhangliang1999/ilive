@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.billing.entity">
+	<class name="EnterpriseAndProduct" table="billing_enterprise_product">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="vaildStartTime" type="java.sql.Timestamp">
+			<column name="vaild_start_time" />
+		</property>
+		<property name="vaildEndTime" type="java.sql.Timestamp">
+			<column name="vaild_end_time" />
+		</property>
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+		<property name="packageId" type="java.lang.Integer">
+			<column name="package_id" />
+		</property>
+		<property name="productId" type="java.lang.Integer">
+			<column name="product_id" />
+		</property>
+		<property name="usedValue" type="java.lang.Long">
+			<column name="used_value" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	default-lazy-init="true">
+
+	<!-- DAO -->
+	<!-- 收益流水 -->
+	<bean id="revenueFlowDao" class="com.jwzt.billing.dao.impl.RevenueFlowDaoImpl"></bean>
+	<!-- 收益结算 -->
+	<bean id="SettlementLogDao" class="com.jwzt.billing.dao.impl.SettlementLogDaoImpl" />
+	<bean id="SettlementLogAndRevenueFlowDao" class="com.jwzt.billing.dao.impl.SettlementLogAndRevenueFlowDaoImpl" />
+	<bean id="EnterpriseBillingDao" class="com.jwzt.billing.dao.impl.EnterpriseBillingDaoImpl" />
+	<bean id="ProductInfoDao" class="com.jwzt.billing.dao.impl.ProductInfoDaoImpl" />
+	<bean id="PackageInfoDao" class="com.jwzt.billing.dao.impl.PackageInfoDaoImpl" />
+	<bean id="EnterpriseAndProductDao" class="com.jwzt.billing.dao.impl.EnterpriseAndProductDaoImpl" />
+	<bean id="PackageAndProductDao" class="com.jwzt.billing.dao.impl.PackageAndProductDaoImpl" />
+	<bean id="PaymentLogDao" class="com.jwzt.billing.dao.impl.PaymentLogDaoImpl" />
+	<bean id="FunctionInfoDao" class="com.jwzt.billing.dao.impl.FunctionInfoDaoImpl" />
+	<bean id="AgentInfoDao" class="com.jwzt.billing.dao.impl.AgentInfoDaoImpl" />
+	<bean id="WorkOrderDao" class="com.jwzt.billing.dao.impl.WorkOrderDaoImpl" />
+	<!-- MANAGER -->
+	<!-- 收益流水 -->
+	<bean id="revenueFlowManager" class="com.jwzt.billing.manager.impl.RevenueFlowManagerImpl"></bean>
+	<!-- 收益结算 -->
+	<bean id="SettlementLogMng" class="com.jwzt.billing.manager.impl.SettlementLogMngImpl" />
+	<bean id="SettlementLogAndRevenueFlowMng" class="com.jwzt.billing.manager.impl.SettlementLogAndRevenueFlowMngImpl" />
+	<bean id="EnterpriseBillingMng" class="com.jwzt.billing.manager.impl.EnterpriseBillingMngImpl" />
+	<bean id="ProductInfoMng" class="com.jwzt.billing.manager.impl.ProductInfoMngImpl" />
+	<bean id="PackageInfoMng" class="com.jwzt.billing.manager.impl.PackageInfoMngImpl" />
+	<bean id="EnterpriseAndProductMng" class="com.jwzt.billing.manager.impl.EnterpriseAndProductMngImpl" />
+	<bean id="PackageAndProductMng" class="com.jwzt.billing.manager.impl.PackageAndProductMngImpl" />
+	<bean id="PaymentLogMng" class="com.jwzt.billing.manager.impl.PaymentLogMngImpl" />
+	<bean id="FunctionInfoMng" class="com.jwzt.billing.manager.impl.FunctionInfoMngImpl" />
+	<bean id="AgentInfoMng" class="com.jwzt.billing.manager.impl.AgentInfoMngImpl" />
+	<bean id="WorkLogMng" class="com.jwzt.billing.manager.impl.WorkLogMngImpl" />
+	<bean id="OperationUserMng" class="com.jwzt.billing.manager.impl.OperationUserMngImpl" />
+	<bean id="WorkOrderMng" class="com.jwzt.billing.manager.impl.WorkOrderMngImpl" />
+
+</beans>

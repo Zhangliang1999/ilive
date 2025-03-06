@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:36:15 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping package="com.jwzt.DB.cdn.serverGroup">
+	<class name="ServerGroupInfo" table="soms4_cdn_server_group">
+		<meta attribute="calss-description">@author 徐勤</meta>
+
+		<id name="server_group_id" type="java.lang.Integer"
+			unsaved-value="0">
+			<meta attribute="field-description">服务器组ID</meta>
+			<column name="server_group_id" />
+			<generator class="assigned"></generator>
+		</id>		
+		<many-to-one class="com.jwzt.DB.cdn.region.RegionInfo"
+			name="server_region" column="server_region_id">
+			<meta attribute="field-description">服务器组区域ID</meta>
+		</many-to-one>
+		
+		<property name="server_group_name" type="java.lang.String">
+        	<meta attribute="field-description">服务器组名称</meta>
+            <column name="server_group_name" />
+        </property>
+        <property name="distribute_status" type="java.lang.Integer">
+        	<meta attribute="field-description">分发是否启动  0:关闭  1:启动</meta>
+            <column name="distribute_status" />
+        </property>        
+        <property name="server_group_type" type="java.lang.Integer">
+        	<meta attribute="field-description">分发服务器组类型  0:中心服务器组  1:分发服务器组</meta>
+            <column name="server_group_type" />
+        </property>
+               
+        <property name="virtual_ip" type="java.lang.String" not-null="true">
+        	<meta attribute="field-description">服务器组地址</meta>
+            <column name="virtual_ip"  length="255" />
+        </property>       
+        <property name="disk_space" type="java.lang.Integer">
+        	<meta attribute="field-description">磁盘空间  单位 G</meta>
+            <column name="disk_space" />
+        </property>       
+        <property name="public_disk_space" type="java.lang.Integer">
+        	<meta attribute="field-description">公共磁盘空间  单位 G</meta>
+            <column name="public_disk_space" />
+        </property>
+        <property name="warning_space" type="java.lang.Integer">
+        	<meta attribute="field-description">警戒磁盘空间  单位 M</meta>
+            <column name="warning_space" />
+        </property>
+        <property name="left_space" type="java.lang.Integer">
+        	<meta attribute="field-description">剩余磁盘空间  单位 M</meta>
+            <column name="left_space" />
+        </property>
+        
+        <property name="loadbalance_mode" type="java.lang.Integer">
+        	<meta attribute="field-description">负载均衡策略 1:软件智能  2:软件随机  3：网络负载均衡</meta>
+            <column name="loadbalance_mode" />
+        </property>
+                
+        <property name="if_monitor" type="java.lang.Integer">
+        	<meta attribute="field-description">是否监控 0:是  1:否</meta>
+            <column name="if_monitor" />
+        </property>     
+        <property name="monitor_frequency" type="java.lang.Integer">
+        	<meta attribute="field-description">监控频率 30s</meta>
+            <column name="monitor_frequency"  length="255" />
+        </property>       
+        <property name="logical_server_group_id" type="java.lang.Integer">
+        	<meta attribute="field-description">服务器组集群ID</meta>
+            <column name="logical_server_group_id" />
+        </property>       
+	</class>
+</hibernate-mapping>

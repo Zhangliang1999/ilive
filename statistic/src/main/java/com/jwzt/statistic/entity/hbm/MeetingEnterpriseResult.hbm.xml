@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity.vo">
+	<class name="MeetingEnterpriseResult" table="statistic_meeting_enterprise_result">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="enterpriseId" type="java.lang.Long">
+			<column name="enterprise_id" />
+		</property>
+		<property name="enterpriseName" type="java.lang.String">
+			<column name="enterprise_name" />
+		</property>
+		
+		<property name="useTime" type="java.lang.Long">
+			<column name="use_time" />
+		</property>
+	</class>
+</hibernate-mapping>

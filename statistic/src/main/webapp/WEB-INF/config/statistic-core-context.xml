@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	default-lazy-init="true">
+
+	<!-- DAO -->
+	<bean id="IpAddressDao" class="com.jwzt.statistic.dao.impl.IpAddressDaoImpl" />
+	<bean id="LiveInfoDao" class="com.jwzt.statistic.dao.impl.LiveInfoDaoImpl" />
+	<bean id="EnterpriseInfoDao" class="com.jwzt.statistic.dao.impl.EnterpriseInfoDaoImpl" />
+	<bean id="RequestLogDao" class="com.jwzt.statistic.dao.impl.RequestLogDaoImpl" />
+	<bean id="UserViewLogDao" class="com.jwzt.statistic.dao.impl.UserViewLogDaoImpl" />
+	<bean id="MinuteStatisticResultDao" class="com.jwzt.statistic.dao.impl.MinuteStatisticResultDaoImpl" />
+	<bean id="LocationStatisticResultDao" class="com.jwzt.statistic.dao.impl.LocationStatisticResultDaoImpl" />
+	<bean id="LiveStatisticResultDao" class="com.jwzt.statistic.dao.impl.LiveStatisticResultDaoImpl" />
+	<bean id="EnterpriseStatisticResultDao" class="com.jwzt.statistic.dao.impl.EnterpriseStatisticResultDaoImpl" />
+	<bean id="VideoStatisticResultDao" class="com.jwzt.statistic.dao.impl.VideoStatisticResultDaoImpl" />
+	<bean id="TotalStatisticResultDao" class="com.jwzt.statistic.dao.impl.TotalStatisticResultDaoImpl" />
+	<bean id="UserInfoDao" class="com.jwzt.statistic.dao.impl.UserInfoDaoImpl" />
+	<bean id="VideoInfoDao" class="com.jwzt.statistic.dao.impl.VideoInfoDaoImpl" />
+	<bean id="LoginRecordDao" class="com.jwzt.statistic.dao.impl.LoginRecordDaoImpl"></bean>
+	<bean id="liveEventCurrentMaxDao" class="com.jwzt.statistic.dao.impl.IiveEventCurrentMaxDaoImpl"></bean>
+	<bean id="MeetingStatisticResultDao" class="com.jwzt.statistic.dao.impl.MeetingStatisticResultDaoImpl" />
+	<bean id="MeetingUserRecordDao" class="com.jwzt.statistic.dao.impl.MeetingUserRecordDaoImpl" />
+	<bean id="MeetingEnterpriseRecordDao" class="com.jwzt.statistic.dao.impl.MeetingEnterpriseResultDaoImpl" />
+	<!-- MANAGER -->
+	<bean id="IpAddressMng" class="com.jwzt.statistic.manager.impl.IpAddressMngImpl" />
+	<bean id="LiveInfoMng" class="com.jwzt.statistic.manager.impl.LiveInfoMngImpl" />
+	<bean id="EnterpriseInfoMng" class="com.jwzt.statistic.manager.impl.EnterpriseInfoMngImpl" />
+	<bean id="RequestLogMng" class="com.jwzt.statistic.manager.impl.RequestLogMngImpl" />
+	<bean id="UserViewLogMng" class="com.jwzt.statistic.manager.impl.UserViewLogMngImpl" />
+	<bean id="MinuteStatisticResultMng" class="com.jwzt.statistic.manager.impl.MinuteStatisticResultMngImpl" />
+	<bean id="LocationStatisticResultMng" class="com.jwzt.statistic.manager.impl.LocationStatisticResultMngImpl" />
+	<bean id="LiveStatisticResultMng" class="com.jwzt.statistic.manager.impl.LiveStatisticResultMngImpl" />
+	<bean id="EnterpriseStatisticResultMng" class="com.jwzt.statistic.manager.impl.EnterpriseStatisticResultMngImpl" />
+	<bean id="VideoStatisticResultMng" class="com.jwzt.statistic.manager.impl.VideoStatisticResultMngImpl" />
+	<bean id="TotalStatisticResultMng" class="com.jwzt.statistic.manager.impl.TotalStatisticResultMngImpl" />
+	<bean id="UserInfoMng" class="com.jwzt.statistic.manager.impl.UserInfoMngImpl" />
+	<bean id="VideoInfoMng" class="com.jwzt.statistic.manager.impl.VideoInfoMngImpl" />
+	<bean id="LoginRecordMng" class="com.jwzt.statistic.manager.impl.LoginRecordMngImpl"></bean>
+	<bean id="liveEventCurrentMaxMng" class="com.jwzt.statistic.manager.impl.IiveEventCurrentMaxMngImpl"></bean>
+    <bean id="MeetingStatisticResultMng" class="com.jwzt.statistic.manager.impl.MeetingStatisticResultMngImpl" />
+	<bean id="MeetingUserRecordMng" class="com.jwzt.statistic.manager.impl.MeetingUserRecordMngImpl" />
+	<bean id="MeetingEnterpriseRecordMng" class="com.jwzt.statistic.manager.impl.MeetingEnterpriseResultMngImpl" />
+</beans>

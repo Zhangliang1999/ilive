@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="RequestLog" table="statistic_request_log">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+		</property>
+		<property name="liveEventId" type="java.lang.Long">
+			<column name="live_event_id" />
+		</property>
+		<property name="userId" type="java.lang.String">
+			<column name="user_id" />
+		</property>
+		<property name="userType" type="java.lang.Integer">
+			<column name="user_type" />
+		</property>
+		<property name="requestType" type="java.lang.Integer">
+			<column name="request_type" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="logType" type="java.lang.Integer">
+			<column name="log_type" />
+		</property>
+		<property name="ipCode" type="java.lang.Long">
+			<column name="ip_code" />
+		</property>
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+		<property name="videoId" type="java.lang.Long">
+			<column name="video_id" />
+		</property>
+		<property name="prop1" type="java.lang.String">
+			<column name="prop1" />
+		</property>
+		<property name="prop2" type="java.lang.String">
+			<column name="prop2" />
+		</property>
+		<property name="prop3" type="java.lang.String">
+			<column name="prop3" />
+		</property>
+		<property name="prop4" type="java.lang.String">
+			<column name="prop4" />
+		</property>
+		<property name="prop5" type="java.lang.String">
+			<column name="prop5" />
+		</property>
+	</class>
+</hibernate-mapping>

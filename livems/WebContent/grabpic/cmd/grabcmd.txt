@@ -1,0 +1,6 @@
+<SRCFILE>E:/≤‚ ‘/231000_2400_800K.mp4</SRCFILE>
+<GrabPos>45.22221</GrabPos>
+<GrabPosType>0</GrabPosType>
+<GrabNUM>1</GrabNUM>
+<IntervalSecond>50</IntervalSecond>
+<DESTFILE>E:\xdb\bin\grabpic\cmd\a.jpg</DESTFILE>

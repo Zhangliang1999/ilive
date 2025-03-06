@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="MeetingUserRecord" table="statistic_meeting_user_record">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id" />
+		</property>
+		<property name="meetingId" type="java.lang.Long">
+			<column name="meeting_id" />
+		</property>
+		<property name="role" type="java.lang.Integer">
+			<column name="role" />
+		</property>
+		<property name="enterTime" type="java.sql.Timestamp">
+			<column name="enter_time" />
+		</property>
+		<property name="outTime" type="java.sql.Timestamp">
+			<column name="out_time" />
+		</property>
+		<property name="loginType" type="java.lang.Integer">
+			<column name="login_type" />
+		</property>
+		<property name="nailName" type="java.lang.Integer">
+			<column name="nail_name" />
+		</property>
+	</class>
+</hibernate-mapping>

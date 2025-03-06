@@ -1,0 +1,55 @@
+<div class="row">
+	<nav class="navbar navbar-static-top navbar-top-height" role="navigation" style="margin-bottom: 0"
+		ng-controller="topAct"
+	>
+		<div class="navbar-header">
+			<div class="logo">
+				<div class="header-logo">
+					<div class="logoimg">
+						<img alt="image" src="../common/img/newlogo1.png" />
+					</div>
+				</div>
+				<ul class="logoul">
+					<li>
+						<a href="{{imanagerHomeUrl+'/operator/managercontrol/managercontrol.do'}}">管控</a>
+					</li>
+					<li>
+						<a href="/liveBilling/web/imanager/index.html">运营</a>
+					</li>
+					<li>
+						<a href="{{imanagerHomeUrl+'/operator/enterprise/overview.do'}}">企业</a>
+					</li>
+					
+					<li>
+						<a href="{{imanagerHomeUrl+'/operator/page/statistic.do'}}">数据</a>
+					</li>
+					<li>
+	                    <a href="{{imanagerHomeUrl+'/operator/userrecord/alluser.do">用户</a>
+	                </li>
+					<li class="headeractive">
+						<a href="{{imanagerHomeUrl+'/operator/platform/platform.do'}}">平台</a>
+					</li>
+					<li>
+                        <a href="{{imanagerHomeUrl+'/operator/equipment/equlplist.do?type=2'}}">工单</a>
+                    </li>
+				</ul>
+			</div>
+		</div>
+		<ul class="nav navbar-top-links navbar-right navbar-top-right" style="float: right; min-width: 210px;">
+			<li class="nav-num">
+				<img ng-src="{{currentUser.userImg|blank:'../common/img/touxiang.png'}}" onerror="../common/img/touxiang.png" />
+			</li>
+			<li class="dropdown nav-sjgly">
+				<a aria-expanded="false" role="button" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+					<span ng-bind="currentUser.username"></span>
+					<span class="fa fa-angle-down"></span>
+				</a>
+				<ul role="menu" class="dropdown-menu nav-dropdown-list">
+					<li ng-click="logout()">
+						<a href="javascript:void(0)">退出登录</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</div>

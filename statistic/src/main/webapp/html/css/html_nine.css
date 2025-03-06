@@ -1,0 +1,198 @@
+.container{
+    width: 7.5rem;
+    height: auto;
+    background: #0b92ff;
+    position: relative;
+}
+.containerBg{
+    width: 7.5rem;
+    height: auto;
+    background: url("../img/bgnine.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+.titleBox{
+    margin-top: 2.45rem;
+    overflow: hidden;
+}
+.articleText{
+    width: 100%;
+    line-height: 0.42rem;
+    font-size: 0.3rem;
+    text-align: center;
+    color: #fff;
+}
+.title{
+    width: 100%;
+    line-height: 0.47rem;
+    font-size: 0.46rem;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0.2rem;
+}
+.message{
+    margin-top: 0.7rem;
+    overflow: hidden;
+}
+.littleMessage{
+    width: 100%;
+    line-height: 0.35rem;
+    font-size: 0.25rem;
+    color: #fff;
+    text-align: center;
+}
+.erweima{
+    width: 3.23rem;
+    height: 3.23rem;
+    background: url("../img/ewmbg.png") no-repeat;
+    background-size:100% 100%;
+    margin: 0.35rem auto;
+}
+.ewmBox{
+    width: 2.62rem;
+    height: 2.62rem;
+    margin: 0.29rem;
+    float: left;
+    background: #fff;
+}
+.erwei{
+    width: 2.2rem;
+    height: 2.2rem;
+    margin: 0.21rem;
+    float: left;
+    background: #000;
+    position: relative;
+}
+.erweiLogo{
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 5px;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -0.31rem;
+    margin-left: -0.31rem;
+    background: url("../img/erweilogo.png") no-repeat #fff;
+    background-size: 100% 100%;
+}
+.buttonBox{
+    width: 6.3rem;
+    height: 0.85rem;
+    margin: 0.9rem auto;
+    overflow: hidden;
+    font-size: 0.28rem;
+}
+.again{
+    width: 3rem;
+    height: 0.8rem;
+    text-align: center;
+    line-height: 0.8rem;
+    background: #cfe7fd;
+    color: #333;
+    border-radius: 50px;
+}
+.share{
+    width: 3rem;
+    height: 0.8rem;
+    text-align: center;
+    line-height: 0.8rem;
+    background: #9eff05;
+    color: #333;
+    border-radius: 50px;
+    float: left;
+}
+.shareMask{
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+.shareBox{
+    width:100%;
+    height: 3.95rem;
+    position: absolute;
+    bottom: 0;
+    background: #f2f7f8;
+}
+.shareTop{
+    width: 100%;
+    height:1.15rem;
+    line-height: 1.15rem;
+    text-align: center;
+}
+.shareCon{
+    width: 6.7rem;
+    height: 1.8rem;
+    margin: 0 auto;
+}
+.weixin{
+    width: 1.675rem;
+    height: 1.8rem;
+    float: left;
+}
+.pyq{
+    width: 1.675rem;
+    height: 1.8rem;
+    float: left;
+}
+.qq{
+    width: 1.675rem;
+    height: 1.8rem;
+    float: left;
+}
+.weibo{
+    width: 1.675rem;
+    height: 1.8rem;
+    float: left;
+}
+.wxicon{
+    margin-left: 0.3375rem;
+    width: 1rem;
+    height: 1rem;
+    background: url("../img/wxicon.png") no-repeat;
+    background-size: 100% 100%;
+}
+.pyqicon{
+    margin-left: 0.3375rem;
+    width: 1rem;
+    height: 1rem;
+    background: url("../img/pyq.png") no-repeat;
+    background-size: 100% 100%;
+}
+.qqicon{
+    margin-left: 0.3375rem;
+    width: 1rem;
+    height: 1rem;
+    background: url("../img/qq.png") no-repeat;
+    background-size: 100% 100%;
+}
+.wbicon{
+    margin-left: 0.3375rem;
+    width: 1rem;
+    height: 1rem;
+    background: url("../img/weibo.png") no-repeat;
+    background-size: 100% 100%;
+}
+.wxText{
+    width: 100%;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+    color: #999;
+    font-size: 0.24rem;
+}
+.cancle{
+    width: 100%;
+    height: 0.9rem;
+    line-height: 0.9rem;
+    text-align: center;
+    color: #333;
+    font-size: 0.28rem;
+    border-top: 2px solid #eeeff1;
+}

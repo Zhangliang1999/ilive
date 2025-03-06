@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="GBK"?>
+<root>
+<RelayMap1>
+<MountName>relay1</MountName>
+<SrcAddr>udp@://224.1.1.1:5000</SrcAddr>
+</RelayMap1>
+<RelayMap1>
+<MountName>relay3</MountName>
+<SrcAddr>udp@://192.168.1.30:6000</SrcAddr>
+</RelayMap1>
+<RelayMap1>
+<MountName>relay2</MountName>
+<SrcAddr>udp@://224.1.1.2:5001</SrcAddr>
+</RelayMap1>
+</root>
+

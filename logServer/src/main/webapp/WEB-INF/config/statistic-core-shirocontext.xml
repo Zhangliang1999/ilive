@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/context 
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/util
+     http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+	default-lazy-init="true">
+
+	<!--Shiro 关键过滤器配置 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/admin/login.do" /> <!--请求 Url 为 get方式 -->
+		<property name="successUrl" value="/admin/room/list.do" />
+		<!-- <property name="filters"> -->
+		<!-- <map> -->
+		<!-- <entry key="authc" value-ref="formAuthenticationFilter"/> -->
+		<!-- </map> -->
+		<!-- </property> -->
+		<property name="filterChainDefinitions" ref="shiroFilterChainDefinitions" />
+	</bean>
+
+	<!-- Shiro 安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="systemAuthorizingRealm" />
+		<property name="cacheManager" ref="shiroCacheManager" />
+	</bean>
+
+	<!--自定义系统认证域 -->
+	<bean id="systemAuthorizingRealm" class="com.jwzt.iLive.realm.SystemAuthorizingRealm"
+		init-method="setCredentialMatcher" />
+
+	<!--shiro ehcache缓存 -->
+	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<!-- <property name="cacheManager" ref="cacheManagerFactory"/> -->
+		<property name="cacheManagerConfigFile" value="classpath:shirocache.xml" />
+	</bean>
+
+
+	<!-- 扩展表单认证过滤器 -->
+	<!-- <bean id="formAuthenticationFilter" class="com.rambo.spm.core.shiro.FormAuthenticationFilter"/> -->
+
+	<!--权限过滤链定义 -->
+	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
+		<constructor-arg>
+			<value>
+				/static/** = anon
+				/admin/registered.do = anon
+				/admin/login.do = anon
+				/admin/** = authc
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<!--借助 SpringAOP 扫描那些使用 Shiro 注解的类 -->
+	<aop:config proxy-target-class="true" />
+
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+
+	<!--用于在实现了Initializable/Destroyable接口的 Shiro bean 初始化时回调 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+</beans>

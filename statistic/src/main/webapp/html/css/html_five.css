@@ -1,0 +1,68 @@
+.container{
+    width: 7.5rem;
+    height: auto;
+    background: #fff;
+    position: relative;
+}
+.containerBg{
+    width: 7.5rem;
+    height: auto;
+    background: url("../img/bgfive.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+.topArrow{
+    width: 0.32rem;
+    height: 0.3rem;
+    position: absolute;
+    bottom: 0.7rem;
+    left: 50%;
+    margin-left: -0.16rem;
+    background: url("../img/grayarrow.png") no-repeat;
+    background-size: 100% 100%;
+}
+.topNum{
+    width: 0.6rem;
+    text-align: center;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    margin: 0.4rem auto 0.3rem;
+    background: url("../img/blueborder.png") no-repeat;
+    background-size: 100% 100%;
+    font-size: 0.24rem;
+    font-weight: bold;
+    color: #0b92ff;
+}
+.topTitle{
+    width: 7.5rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    text-align: center;
+    font-size: 0.56rem;
+    font-weight: bold;
+    color: #0b92ff;
+    margin-bottom: 0.75rem;
+}
+.canvas{
+    height: 3.5rem;
+    width: 6.6rem;
+    margin: 0.5rem auto;
+}
+table{
+    width: 6.6rem;
+    margin: 0 auto;
+    color: #cccccc;
+    font-size: 0.28rem;
+}
+table th{
+    font-weight: bold;
+}
+table tr{
+    height: 0.6rem;
+}
+table td{
+    text-align: center;
+}
+table td:first-child{
+    text-align: left;
+}

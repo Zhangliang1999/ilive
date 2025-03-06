@@ -1,0 +1,247 @@
+<div id="rightWrapper">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">收益结算单</a>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-sm">
+		<div class="col-lg-12">
+			<ul id="myTab" class="nav nav-tabs dcTab m-l">
+				<li ng-class="{'active':addType==1}" ng-click="changeType(1)">
+					<a href="javascript:void(0)">勾选方式 </a>
+				</li>
+				<li ng-class="{'active':addType==2}" ng-click="changeType(2)">
+					<a href="javascript:void(0)">导入方式</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade" ng-class="{'in active':addType==1}">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="m-l pull-left">
+								<div class="m-t-sm pull-left lh-30 font-content">选择企业：</div>
+								<input type="text" class="serachinput" placeholder="企业ID/企业名称" ng-model="queryContent" enterprise-input-search
+									datavalue="queryCondition.enterpriseId"
+								/>
+							</div>
+							<div class="selectedGroup m-t-sm m-l pull-left">
+								<div class="pull-left lh-30 font-content">发生日期：</div>
+								<div class="input-daterange input-group pull-left m-r-sm" daterange>
+									<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+										ng-model="queryCondition.startTime"
+									/>
+									<span class="input-group-addon">to</span>
+									<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+										ng-model="queryCondition.endTime"
+									/>
+								</div>
+							</div>
+							<div class="pull-right m-r-lg">
+								<button class="btn commonbtn m-t-sm" style="font-size: 12px !important;" ng-click="searchList();">查询未结算流水</button>
+							</div>
+						</div>
+					</div>
+					<div class="row btn-box">
+						<div class="col-lg-12">
+							<div class="income">
+								已选单据：
+								<span class="color-red" ng-bind="bean.flowNum|blank:'0'">0</span>
+								张
+							</div>
+							<div class="income">
+								结算金额：
+								<span class="color-red" ng-bind="bean.settleAmount|blank:'0.00'">0.00</span>
+								元
+							</div>
+							<div class="income">
+								平台收益：
+								<span class="color-red" ng-bind="bean.platformAmount|blank:'0.00'">0.00</span>
+								元
+							</div>
+							<div class="income">
+								实际金额：
+								<span class="color-red" ng-bind="bean.actualAmount|blank:'0.00'">0.00</span>
+								元
+							</div>
+							<div class="pull-right m-r-lg">
+								<button class="btn blueButton m-t-sm" style="font-size: 12px !important;" data-toggle="modal"
+									data-target="#myModal"
+								>确认生成</button>
+							</div>
+						</div>
+					</div>
+					<div class="row m-t-sm">
+						<div class="col-lg-12 p-w-lg">
+							<table class="table table-striped table-hover ScrollViewer table-responsive newtable">
+								<thead class="gray-bg">
+									<tr>
+										<th style="width: 30px">
+											<input type="checkbox" ng-model="isCheckAll" ng-click="checkAll(isCheckAll)">
+										</th>
+										<th style="width: 120px;">ID</th>
+										<th>企业名称</th>
+										<th style="width: 120px;">收益类型</th>
+										<th style="width: 120px;">用户</th>
+										<th style="width: 150px;">时间</th>
+										<th style="width: 120px;">收益金额</th>
+										<th style="width: 120px;">收益事项</th>
+										<th style="width: 120px;">直播ID</th>
+									</tr>
+								</thead>
+								<tbody auto-height offset="335">
+									<tr ng-repeat="bean in flowList" ng-click="changeCheck(bean)">
+										<td style="width: 30px">
+											<input type="checkbox" ng-model="bean.isChecked" ng-click="changeCheck(bean)" ng-checked="isCheckAll">
+										</td>
+										<td style="width: 120px;" ng-bind="bean.flowId"></td>
+										<td ng-bind="bean.enterpriseName|blank:'未认证企业'"></td>
+										<td style="width: 120px;" ng-bind="bean.flowType|flowType:''"></td>
+										<td style="width: 120px;" ng-bind="bean.userName|blank:''"></td>
+										<td style="width: 150px;" ng-bind="bean.flowTime|date:'yyyy-MM-dd HH:mm:ss'|blank:'未知'"></td>
+										<td style="width: 120px;">
+											<span class="color-red font-bold" ng-bind="'+' + bean.flowPrice|blank:'0.00'"></span>
+										</td>
+										<td style="width: 120px;" ng-bind="bean.flowDesc|blank:''"></td>
+										<td style="width: 120px;" ng-bind="bean.roomId|blank:''"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" ng-class="{'in active':addType==2}">
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="m-l pull-left">
+								<div class="m-t-sm pull-left lh-30 font-content">选择企业：</div>
+								<input type="text" class="serachinput" placeholder="企业ID/企业名称" ng-model="queryContent" enterprise-input-search
+                                    datavalue="queryCondition.enterpriseId"
+                                />
+							</div>
+							<div class="selectedGroup m-t-sm m-l-lg pull-left">
+								<div class="pull-left lh-30 font-content">批量黏贴收益流水ID：</div>
+								<div class="dropdown pull-left m-r">
+									<textarea class="incomeTextarea" ng-model="flowIds"></textarea>
+								</div>
+								<button class="btn commonbtn m-t" style="font-size: 12px !important;" ng-click="searchListByIds()">下一步</button>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="selectedGroup m-t-sm m-l-lg pull-left">
+								<p class="color-red" ng-bind="errorMessage"></p>
+								<p class="color-red" style="height: 35px; overflow: auto;" ng-if="errorFlowIdList.length>0">
+									<span class="color-red" ng-repeat="errorFlowId in errorFlowIdList" ng-bind="errorFlowId+','"></span>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row btn-box">
+						<div class="col-lg-12">
+							<div class="income">
+								符合单据：
+								<span class="color-red" ng-bind="bean.flowNum|blank:'0'">0</span>
+								张
+							</div>
+							<div class="income">
+								结算金额：
+								<span class="color-red" ng-bind="bean.settleAmount|blank:'0.00'">0.00</span>
+								元
+							</div>
+							<div class="income">
+								平台收益：
+								<span class="color-red" ng-bind="bean.platformAmount|blank:'0.00'">0.00</span>
+								元
+							</div>
+							<div class="income">
+								实际金额：
+								<span class="color-red" ng-bind="bean.actualAmount|blank:'0.00'">0.00</span>
+								元
+							</div>
+							<div class="pull-right m-r-lg">
+								<button class="btn blueButton m-t-sm" style="font-size: 12px !important;" data-toggle="modal"
+									data-target="#myModal"
+								>确认生成</button>
+							</div>
+						</div>
+					</div>
+					<div class="row m-t-sm">
+						<div class="col-lg-12 p-w-lg">
+							<table class="table table-striped table-hover ScrollViewer table-responsive newtable">
+								<thead class="gray-bg">
+									<tr>
+										<th style="width: 120px;">ID</th>
+										<th>企业名称</th>
+										<th style="width: 120px;">收益类型</th>
+										<th style="width: 120px;">用户</th>
+										<th style="width: 150px;">时间</th>
+										<th style="width: 120px;">收益金额</th>
+										<th style="width: 120px;">收益事项</th>
+										<th style="width: 120px;">直播ID</th>
+									</tr>
+								</thead>
+								<tbody auto-height offset="355">
+									<tr ng-repeat="bean in flowList">
+										<td style="width: 120px;" ng-bind="bean.flowId"></td>
+										<td ng-bind="bean.enterpriseName|blank:'未认证企业'"></td>
+										<td style="width: 120px;" ng-bind="bean.flowType|flowType:''"></td>
+										<td style="width: 120px;" ng-bind="bean.userName|blank:''"></td>
+										<td style="width: 150px;" ng-bind="bean.flowTime|date:'yyyy-MM-dd HH:mm:ss'|blank:'未知'"></td>
+										<td style="width: 120px;">
+											<span class="color-red font-bold" ng-bind="'+' + bean.flowPrice|blank:'0.00'"></span>
+										</td>
+										<td style="width: 120px;" ng-bind="bean.flowDesc|blank:''"></td>
+										<td style="width: 120px;" ng-bind="bean.roomId|blank:''"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">结算单确认</h4>
+				</div>
+				<div class="modal-body">
+					<div class="para">
+						<span class="paraLeft">企业名称：</span>
+						<span ng-bind="queryContent"></span>
+					</div>
+					<div class="para">
+						<span class="paraLeft">结算金额：</span>
+						<span>
+							<span class="color-red" ng-bind="bean.settleAmount|blank:'0.00'"></span>
+							元
+						</span>
+					</div>
+					<div class="para">
+						<span class="paraLeft">平台收益：</span>
+						<span>
+							<span class="color-red" ng-bind="bean.platformAmount|blank:'0.00'"></span>
+							元
+						</span>
+					</div>
+					<div class="para">
+						<span class="paraLeft">实际金额：</span>
+						<span>
+							<span class="color-red" ng-bind="bean.actualAmount|blank:'0.00'"></span>
+							元
+						</span>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn blueButton" ng-click="saveSettlement()">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

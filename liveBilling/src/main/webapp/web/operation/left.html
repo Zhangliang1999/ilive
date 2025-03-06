@@ -1,0 +1,62 @@
+<nav class="navbar-default navbar-static-side navbar-width" role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav metismenu nav-left" id="side-menu">
+			<li>
+				<a href="{{imanagerHomeUrl+'/operator/platform/platform.do'}}">
+					<i class="fa  fa-desktop"></i>
+					<span class="nav-label">敏感词管理</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{imanagerHomeUrl+'/operator/page/version.do'}}">
+					<i class="fa  fa-desktop"></i>
+					<span class="nav-label">版本管理</span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a href="javascript:void(0);">
+					<i class="fa fa-bookmark"></i>
+					<span class="nav-label">产品设置</span>
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level collapse" >
+					<li ui-sref-active="active" ui-sref="packageList" ui-sref-opts="{reload: true}"
+						ng-click="$event.stopPropagation();"
+					>
+						<a href="javascript:void(0);">资源套餐</a>
+					</li>
+					<li ui-sref-active="active" ui-sref="productList" ui-sref-opts="{reload: true}"
+						ng-click="$event.stopPropagation();"
+					>
+						<a href="javascript:void(0);">资源包</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="{{imanagerHomeUrl+'/operator/report/reportlist.do?type=1'}}">
+					<i class="fa  fa-desktop"></i>
+					<span class="nav-label">举报管理</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{imanagerHomeUrl+'/operator/report/reportlist.do?type=2'}}">
+					<i class="fa  fa-desktop"></i>
+					<span class="nav-label">投诉建议管理</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+<script>
+	function autoLeftHeight() {
+		var winH = $(window).height() - 70;
+		$(".navbar-static-side").height(winH);
+		$(".nav-left").slimScroll({
+			height : winH
+		});
+	}
+	autoLeftHeight();
+	$(window).resize(function() {
+		autoLeftHeight();
+	});
+</script>

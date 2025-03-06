@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.jwzt.DB.soms.vod.image.file.ImageFileInfo" table="soms4_image_file">
+    	<meta attribute="calss-description">分段截图 图片管理</meta>
+        <id name="img_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">图片ID</meta>
+            <column name="img_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="catalog_id" type="java.lang.Integer">
+        	<meta attribute="field-description">栏目ID</meta>
+            <column name="catalog_id" />
+        </property>
+        <property name="img_path" type="java.lang.String">
+        	<meta attribute="field-description">图片路径</meta>
+            <column name="img_path" length="500"/>
+        </property>
+        <property name="img_type" type="java.lang.String">
+        	<meta attribute="field-description">图片类型</meta>
+            <column name="img_type" length="100"/>
+        </property>
+        <property name="file_id" type="java.lang.Integer">
+        	<meta attribute="field-description">文件ID</meta>
+            <column name="file_id" />
+        </property>
+         <property name="img_name" type="java.lang.String">
+        	<meta attribute="field-description">图片名称</meta>
+            <column name="img_name" length="150"/>
+        </property>
+    </class>
+</hibernate-mapping>

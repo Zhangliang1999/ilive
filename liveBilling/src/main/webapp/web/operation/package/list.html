@@ -1,0 +1,126 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">产品套餐查看</a>
+			</div>
+		</div>
+	</div>
+	<div class="row btn-box">
+		<div class="col-lg-12">
+			<button class="income" type="button" ng-click="addPackage()">新增套餐</button>
+			<div class="pull-right m-r-sm">
+				<input type="text" class="serachinput" placeholder="ID/名称" ng-model="queryCondition.queryContent" />
+				<select class="commonSelect" ng-model="queryCondition.packageType" ng-change="searchList(1,false)"
+					ng-options="type.value as type.label for type in packageTypeBeans"
+				>
+					<option value="">全部类型</option>
+				</select>
+				<select class="commonSelect" ng-model="queryCondition.status" ng-change="searchList(1,false)"
+					ng-options="status.value as status.label for status in statusBeans"
+				>
+					<option value="">全部状态</option>
+				</select>
+				<button class="btn commonbtn m-t-n-4" ng-click="searchList(1,false)">查询</button>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-xs">
+		<div class="col-md-12 p-w-lg ">
+			<table class="table newtable table-striped table-hover ScrollViewer table-responsive">
+				<thead class="gray-bg">
+					<tr>
+						<th style="width: 50px;">ID</th>
+						<th>套餐名称</th>
+						<th style="width: 70px;">套餐类型</th>
+						<th style="width: 70px;">套餐周期</th>
+						<th style="width: 70px;">原价</th>
+						<th style="width: 70px;">投放渠道</th>
+						<th style="width: 70px;">并发上限</th>
+						<th style="width: 70px;">存储空间</th>
+						<th style="width: 70px;">短信条数</th>
+						<th style="width: 70px;">状态</th>
+						<th style="width: 50px;">顺序</th>
+						<th style="width: 140px;">操作</th>
+					</tr>
+				</thead>
+				<tbody auto-height offset="275">
+					<tr ng-repeat="bean in page.list">
+						<td style="width: 50px;" ng-bind="bean.id"></td>
+						<td ng-bind="bean.packageName|blank:''"></td>
+						<td style="width: 70px;" ng-bind="bean.packageType|packageType:''"></td>
+						<td style="width: 70px;" ng-bind="bean.vaildDurationValue+(bean.vaildDurationUnit|vaildDuration:'')"></td>
+						<td style="width: 70px;" ng-bind="bean.orginalPrice|blank:'0.00'"></td>
+						<td style="width: 70px;" ng-bind="bean.channelTypes|channelTypes:''"></td>
+						<td style="width: 70px;" ng-bind="(bean.concurrenceProduct|blank:'0')+'人'"></td>
+						<td style="width: 70px;" ng-bind="(bean.storageProductGB|blank:'0')+'G'"></td>
+						<td style="width: 70px;" ng-bind="(bean.shortMessageProduct|blank:'0')+'条'"></td>
+						<td style="width: 70px;">
+							<span ng-class="{true:'color-gold'}[bean.status==1]" ng-bind="bean.status|packageStatus:''"></span>
+						</td>
+						<td style="width: 50px;" ng-bind="bean.orderNum"></td>
+						<td style="width: 140px;">
+							<a href="javascript:;" class="color-blue" data-toggle="modal" data-target="#myModal"
+								ng-click="orderPackage(bean)"
+							>排序</a>
+							<a href="javascript:;" class="color-blue" ng-click="editPackage(bean.id)">查看</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12 pageBox m-b">
+			<!-- <button class="btn btn-default font-12 pull-left m-l bordered" ng-click="excelExport()">导出数据列表</button> -->
+			<div class="pull-right btn-group m-r">
+				<div class="pull-left m-t-xs m-r">
+					第
+					<span class="color-gold" ng-bind="page.pageNo"></span>
+					页/
+					<span class="color-gold" ng-bind="page.totalCount"></span>
+					条数据
+				</div>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.prePage,true)">
+					<i class="fa fa-chevron-left"></i>
+				</button>
+				<button ng-repeat="showPage in page.showPages track by $index" class="btn btn-white"
+					ng-class="{'active':showPage==page.pageNo}" ng-click="searchList(showPage,true)"
+				>
+					<span ng-if="showPage<=0" ng-bind="'...'"></span>
+					<span ng-if="showPage>0&&showPage==page.pageNo" ng-bind="showPage" id="currentPageNo"></span>
+					<span ng-if="showPage>0&&showPage!=page.pageNo" ng-bind="showPage"></span>
+				</button>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.nextPage,true)">
+					<i class="fa fa-chevron-right"></i>
+				</button>
+				<div class="pull-left m-t-xs m-l m-r">
+					跳至
+					<input class="m-l-xs m-r-xs" style="width: 33px; height: 23px; border: 1px solid #ddd;" type="text"
+						ng-keyup="($event.which === 13)?changePageNo($event.target.value):0"
+					/>
+					页
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">修改顺序</h4>
+				</div>
+				<div class="modal-body">
+					顺序：
+					<input type="text" ng-model="currentBean.orderNum">
+					（数字越小顺序越高）
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" ng-click="updateOrder()">保存顺序</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</div>

@@ -1,0 +1,316 @@
+/*默认*/
+.normal-font{ font-size: 14px;}
+input[type="text"]{border:1px solid #ddd; border-radius: 4px; line-height: 36px; text-indent: 8px;}
+.title-header{background: rgba(244, 244, 244, 1);}
+
+.recallmanage i{ font-style: normal;}
+.list-title span{ padding-right: 50px; }
+.recallmanage .recalllist{ width: 100%; height: 300px;}
+.recallmanage .recalllist li{ width: 32%; float: left; margin-right: 2%; border: 1px solid #ddd; padding: 10px; margin-bottom: 20px;}
+.recallmanage .recalllist li>a{ display: inline-block;}
+.recallmanage .recalllist li img{ width: 100%;height:100%;}
+.recallmanage .recalllist li:nth-child(3n){ margin-right: 0%;}
+.list_action{ position: relative;}
+.list_action p{ width: 100%; line-height: 40px; position: absolute; bottom: 0; background: rgba(102,102,102,.7);display: none;}
+.list_action p a{ color: #fff; font-size: 12px;}
+.recallmanage .recalllist li:hover .list_action p{ display: block;}
+.list-contain{ width: 96%; margin: 0 auto;}
+.list-title button{ width: auto; height: auto; padding: 2px 10px; color: #fff;}
+.list-title button:hover{ background: #000;}
+.list-title button:nth-child(1):hover{ background: #0065c4;}
+.playinfo{font-size: 14px;}
+.list_action .time{position:absolute; display:inline-block;top: 10px; left: 10px; padding: 2px 10px; background: rgba(255,255,255,.6); color: #fff; border-radius: 4px;}
+.list_action .curlabel{position:absolute; display:inline-block;top: 10px; right: 10px; padding: 0px 10px; color: #fff; background: #0084ff;}
+.recalllist .choose-label{ width: 30px; height: 15px;}
+.recalllist .choose-label:before{ width: 15px;height: 15px;}
+.recalllist .chooseBtn:checked + label.choose-label:before {left: 15px;}
+.list-contain .wset{color: #1c84c6;display: inline-block;margin-left: 30px;text-decoration: underline}
+.recallmdal .modal-dialog{ width: 60%;}
+.recallmdal .modal-dialog .modal-content{ height: 700px;}
+.recallmanage .recalllist.cutpic li{ width: 19%; margin-right: 1%;}
+.recalllist .storage{ padding-left: 15px;  background: url("../img/u9190.png") no-repeat 0px 3px; background-size: 14px;}
+.recalllist .pictype{ padding-left: 20px; background: url("../img/u10113.png") no-repeat 0px 3px; background-size: 16px;}
+
+.videomanage table th{ text-align: center; background: #ccc !important;}
+.videomanage table td{ line-height: 30px !important;}
+.videomanage .list-title button:hover{ color: #fff;}
+.videomanage .ztype{ width:28px;}
+
+.picmanage .cutpic .list_action{ width: 100%; height: 200px;}
+.picmanage .recalllist.cutpic li{ padding-top: 0!important;}
+.zimg{ position: absolute; top:0%; left: 0; right: 0; bottom: 0; margin: auto;}
+.videoCon{
+
+    height: 300px;
+    position: relative;
+}
+
+.videoCon img{
+    width: 100%;
+    height: 100%;
+}
+.video_box{
+    width: 49.5%;
+    height: 400px;
+    border: 1px solid #ddd;
+    padding: 0 15px;
+
+    margin-bottom: 15px;
+}
+.littleTit{
+    height: 30px;
+    line-height: 30px;
+}
+.videoTit{
+    height: 50px;
+    line-height: 50px;
+}
+.videoTit input[type=checkbox]{
+    margin-top: 15px;
+}
+.video_title{
+    font-size: 14px;
+    font-weight: bold;
+}
+.zancun{
+    float: right;
+    color: #FF0000;
+}
+.videoConTop{
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.redbiaoqian{
+    background: #f23622;
+    color: #fff;
+    display: inline-block;
+    width: 69px;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    border-radius: 5px;
+    margin: 5px 0 0 5px;
+}
+.timeBox{
+    float: right;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+}
+.videoConBottom{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    color: #ffffff;
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+}
+.video_boxAct{
+    box-shadow: 0 0 10px #0084ff;
+}
+.blueTag{
+    border: 1px solid #0084ff;
+    color: #0084ff;
+    padding: 4px 10px;
+    border-radius: 5px;
+}
+.videoId{
+    float: left;
+    margin-left: 10px;
+}
+.videoNum{
+    float: right;
+    margin-right: 10px;
+}
+.videoConCenter{
+    width: 100%;
+    height: 100px;
+    font-size: 60px;
+    color: #CCCCCC;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 100px;line-height: 100px;
+}
+.videotdLeft{
+    width: 160px;
+    height: 90px;
+    float: left;
+}
+.videotdLeft img{
+    width: 100%;
+    height: 100%;
+}
+.videotdright{
+    float: left;
+    width: auto;
+    margin-left: 10px;
+    height: 90px;
+}
+.modallist{
+    width:360px;
+    height: 150px;
+    float: left;
+    padding: 10px;
+    border: 1px solid #999;
+    position: relative;
+    margin-bottom: 15px;
+}
+.modallist:nth-child(odd){
+    margin-right: 15px;
+}
+.modallistLeft{
+    width: 168px;
+    height: 130px;
+    float: left;
+    position: relative;
+
+}
+.modallistLeft img{
+    width: 100%;
+    height: 100%;
+}
+.modallistmask{
+    width: 168px;
+    height: 20px;
+    padding: 0 5px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    text-align: right;
+}
+.modallistright{
+    width:160px;
+    height: 130px;
+    margin-left: 10px;
+    float: left;
+}
+.listrightTit{
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: bold;
+}
+.listText{
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #999;
+}
+.modalListActive{
+    border: 1px solid #0084ff;
+}
+.fa-check{
+    color: #0084ff;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 16px;
+}
+.title-serach{
+    width: 650px;
+    height: 50px;
+    float: right;
+}
+.titSerach{
+    width: 180px;
+    height: 50px;
+    float: left;
+}
+.titSerachName{
+    width: 70px;
+    height: 50px;
+}
+.titSerachInput{
+    width: 110px;
+    height: 50px;
+}
+.titSerachInput input{
+    width: 100%;
+}
+.titSerachInput select{
+    width: 100%;
+    height: 36px;
+    border-radius: 5px;
+}
+@media (min-width: 1280px) {
+    .video_box{
+        width: 49.5%;
+        height: 400px;
+        border: 1px solid #ddd;
+        padding: 0 15px;
+        margin-bottom: 15px;
+    }
+} /*>=1280的设备*/
+
+@media (min-width: 1366px) {
+    .video_box{
+        width: 49.5%;
+        height: 385px;
+        border: 1px solid #ddd;
+        padding: 0 15px;
+        margin-bottom: 15px;
+    }
+    .video_box:nth-child(odd){
+        margin-right: 1%;
+    }
+
+}
+
+@media (min-width: 1440px) {
+    .video_box{
+        width: 49.5%;
+        height: 410px;
+        border: 1px solid #ddd;
+        padding: 0 15px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 1680px) {
+    .video_box{
+        width: 32%;
+        height: 335px;
+        border: 1px solid #ddd;
+        padding: 0 15px;
+        margin-bottom: 15px;
+    }
+    .video_box{
+        margin-right: 1%;
+    }
+    .videoConCenter{
+        top: 55px;
+    }
+}
+@media (min-width: 1920px) {
+    .video_box{
+        width: 32%;
+        height: 375px;
+        border: 1px solid #ddd;
+        padding: 0 15px;
+        margin-bottom: 15px;
+    }
+    .video_box{
+        margin-right: 1%;
+    }
+    .videoConCenter{
+        top: 85px;
+    }
+}

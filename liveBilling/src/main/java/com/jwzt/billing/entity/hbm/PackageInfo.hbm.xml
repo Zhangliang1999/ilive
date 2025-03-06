@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.billing.entity">
+	<class name="PackageInfo" table="billing_package">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="packageName" type="java.lang.String">
+			<column name="package_name"></column>
+		</property>
+		<property name="packageType" type="java.lang.Integer">
+			<column name="package_type" />
+		</property>
+		<property name="orginalPrice" type="java.lang.Double">
+			<column name="orginal_price" sql-type="decimal(23,2)" />
+		</property>
+		<property name="costPrice" type="java.lang.Double">
+			<column name="cost_price" sql-type="decimal(23,2)" />
+		</property>
+		<property name="vaildDurationUnit" type="java.lang.Integer">
+			<column name="vaild_duration_unit" />
+		</property>
+		<property name="vaildDurationValue" type="java.lang.Integer">
+			<column name="vaild_duration_value" />
+		</property>
+		<property name="introduceImagePath" type="java.lang.String">
+			<column name="introduce_image_path" />
+		</property>
+		<property name="introduceContent" type="java.lang.String">
+			<column name="introduce_content" sql-type="varchar(2000)" />
+		</property>
+		<property name="introduceUrl" type="java.lang.String">
+			<column name="introduce_url" />
+		</property>
+		<property name="channelTypes" type="java.lang.String">
+			<column name="channel_types" />
+		</property>
+		<property name="officialPlatformPrice" type="java.lang.Double">
+			<column name="official_platform_price" sql-type="decimal(23,2)" />
+		</property>
+		<property name="channelAgentPrice" type="java.lang.Double">
+			<column name="channel_agent_price" sql-type="decimal(23,2)" />
+		</property>
+		<property name="groupProductLibraryPrice" type="java.lang.Double">
+			<column name="group_product_library_price" sql-type="decimal(23,2)" />
+		</property>
+		<property name="status" type="java.lang.Integer">
+			<column name="status" />
+		</property>
+		<property name="orderNum" type="java.lang.Integer">
+			<column name="order_num" />
+		</property>
+	</class>
+</hibernate-mapping>

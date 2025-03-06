@@ -1,0 +1,69 @@
+<div id="rightWrapper">
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">直播时长变化统计</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="totalDurationForLineQueryCondition.startTime" ng-change="getTotalDurationDataForLine()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="totalDurationForLineQueryCondition.endTime" ng-change="getTotalDurationDataForLine()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" basic-line-chart data="totalDurationDataForLine"
+			value-field="totalDurationFieldForLine"
+		></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">单场直播时长占比</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="singleDurationForPieQueryCondition.startTime" ng-change="getSingleDurationDataForPie()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="singleDurationForPieQueryCondition.endTime" ng-change="getSingleDurationDataForPie()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" donut-chart data="singleDurationDataForPie"></div>
+	</div>
+	<div class="row title-header gray-bg">
+		<div class="col-md-12">
+			<div class="title-name">
+				<a class="font-12">直播场数变化统计</a>
+			</div>
+			<div class="selectInputBox">
+				<div class="input-daterange input-group pull-right  m-t-sm m-r" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="eventNumForLineQueryCondition.startTime" ng-change="getEventNumDataForLine()"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间"
+						ng-model="eventNumForLineQueryCondition.endTime" ng-change="getEventNumDataForLine()"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height: 380px">
+		<div class="col-md-12 m-t m-b" style="height: 90%" basic-line-chart data="eventNumDataForLine"
+			value-field="eventNumFieldForLine"
+		></div>
+	</div>
+</div>

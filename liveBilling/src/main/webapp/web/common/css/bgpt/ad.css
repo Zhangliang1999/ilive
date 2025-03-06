@@ -1,0 +1,308 @@
+.addAd{
+    width: 200px;
+    height: 335px;
+    line-height: 335px;
+    text-align: center;
+    border: 1px solid rgba(204, 204, 204, 1);
+    background: #EBEBEB;
+    cursor: pointer;
+    float: left;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+.adBox{
+    width: 200px;
+    height: 335px;
+    float: left;
+    border: 1px solid rgba(204, 204, 204, 1);
+    margin-top: 10px;
+}
+.adBoxImg{
+    width: 188px;
+    height: 275px;
+    float: left;
+    margin: 5px;
+    background: #ccc;
+}
+.adBoxImg img{
+    width:100%;
+    height: 100%;
+}
+.adBoxLeft{
+    width: 140px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    margin-left: 5px;
+}
+.adBoxLeft p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+}
+.adBoxRight{
+    width: 45px;
+    height: 25px;
+    line-height: 25px;
+    float: right;
+    margin-right: 5px;
+}
+.adBoxTime{
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.scrollSwitchBoxad{
+    width: 30px;
+    height: 15px;
+    border-radius: 100px;
+    position: relative;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+@media (min-width: 1367px) and (max-width: 1920px) {
+    .adBox{
+        margin-right: 8px;
+    }
+    .adContent{
+        margin-left: 10px;
+    }
+}
+@media (max-width: 1366px){
+    .adBox{
+        margin-right: 15px;
+    }
+    .adContent{
+        margin-left: 25px;
+    }
+}
+#addAdModal .modal-dialog{
+    width: 905px;
+}
+.addModalone{
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    margin-right: 40px;
+}
+.addAdName{
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14px;
+    color: #666666;
+    width: 80px;
+    margin-right: 10px;
+}
+.addModalone input{
+    width: 235px;
+    height: 30px;
+    background: inherit;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(204, 204, 204, 1);
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-size: 12px;
+    color: #999999;
+    text-align: left;
+    padding: 0 5px;
+
+}
+.addModaltwo{
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    margin-right: 40px;
+}
+.addModaltwo select{
+    width: 130px;
+    height: 30px;
+    font-family: 'Arial Normal', 'Arial';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    text-decoration: none;
+    color: #000000;
+}
+.addModalthree{
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    margin-right: 40px;
+}
+.addModalthree input{
+    width: 393px;
+    height: 35px;
+    background: inherit;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(204, 204, 204, 1);
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-size: 12px;
+    color: #999999;
+    text-align: left;
+    padding: 0 5px;
+
+}
+.addModalthree button{
+    margin-top: -4px;
+}
+.scrollSwitchBoxmod{
+    width: 30px;
+    height: 15px;
+    border-radius: 100px;
+    position: relative;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+.mobileBox{
+    width: 400px;
+    height: 450px;
+}
+.mobileBoxLeft{
+    width: 100px;
+    height: 450px;
+    text-align: center;
+    float: left;
+}
+.mobileBoxright{
+    width: 218px;
+    height: 442px;
+    text-align: center;
+    float: left;
+    background: url("../../img/phone1.png") no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+.mobilerightCon{
+    width: 190px;
+    height: 332px;
+    background: #ccc;
+    position: absolute;
+    top: 54px;
+    left: 14px;
+}
+.addIcon{
+    font-size: 60px;
+    margin-top: 80px;
+}
+.scrollSwitchBoxbb{
+    width: 30px;
+    height: 15px;
+    border-radius: 100px;
+    position: relative;
+    margin-left: 30px;
+}
+.income{
+    padding: 5px 10px;
+    background: #F2F2F2;
+    float: left;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+.incomeLink{
+    float: left;
+    margin-top: 16px;
+    text-decoration: underline;
+    color: #0084ff;
+    margin-left: 10px;
+}
+.incomeTextarea{
+    width: 200px;
+    height: 50px;
+    resize: none;
+    border: 1px solid #ddd;
+}
+.incomeBox{
+    overflow: hidden;
+}
+.incomeName{
+    float: left;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+}
+.incomeCon{
+    float: left;
+    width: 300px;
+    height: 30px;
+    line-height: 30px;
+}
+.incomeBtn{
+    font-size: 12px;
+    padding: 3px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.para{
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+}
+.mealBox{
+    overflow: hidden;
+    font-size: 14px;
+}
+.mealName{
+    float: left;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+}
+.mealCon{
+    float: left;
+    width: 300px;
+    line-height: 40px;
+}
+.uploadPic{
+    width: 250px;
+    height: 150px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    text-align: center;
+    line-height: 150px;
+    cursor: pointer;
+}
+.serachTextarea{
+    width: 300px;
+    height: 70px;
+    resize: none;
+    border: 1px solid #ddd;
+}
+.selectedBox{
+    width: 250px;
+    height: 120px;
+    padding: 10px;
+    position: relative;
+    border: 1px solid #ddd;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.selectedBox input[type=checkbox]{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+.selectedBox p{
+    line-height: 25px;
+}
+.selectedBox .selectTit{
+    font-size: 14px;
+    font-weight: bold;
+}

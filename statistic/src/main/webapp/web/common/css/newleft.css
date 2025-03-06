@@ -1,0 +1,35 @@
+.nav-label{
+    font-weight: 600;
+    color: #eee;
+    font-size: 14px;
+}
+.navbar-default {
+    background-color: #29313E;
+    border-color: #2f4050;
+}
+.nav-left li a {
+    color: #eee;
+}
+.nav-second-level {
+    background: #29313E;
+    font-size: 14px;
+}
+.nav-second-level li a {
+    padding: 7px 10px 7px 10px;
+    padding-left: 65px;
+    color: #eee;
+}
+.metismenu>li {
+    border-bottom: 1px solid #29313E;
+}
+.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {
+    background-color: #1A202E;
+    color: #eee;
+}
+.nav-left > li.active {
+    border-left: 0px solid #19aa8d;
+    background: #1A202E;
+}
+.navbar-static-side{
+    height:600px;
+}

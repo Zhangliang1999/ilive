@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="MinuteStatisticResult" table="statistic_minute_statistic_result">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="liveEventId" type="java.lang.Long">
+			<column name="live_event_id" />
+		</property>
+		<property name="startTime" type="java.sql.Timestamp">
+			<column name="start_time" />
+		</property>
+		<property name="endTime" type="java.sql.Timestamp">
+			<column name="end_time" />
+		</property>
+		<property name="userNum" type="java.lang.Long">
+			<column name="user_num" />
+		</property>
+		<property name="viewNum" type="java.lang.Long">
+			<column name="view_num" />
+		</property>
+		<property name="viewTotalNum" type="java.lang.Long">
+			<column name="view_total_num" />
+		</property>
+		<property name="userTotalNum" type="java.lang.Long">
+			<column name="user_total_num" />
+		</property>
+	</class>
+</hibernate-mapping>

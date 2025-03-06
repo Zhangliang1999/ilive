@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+<title></title>
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/html_four.css" />
+<script src="js/common.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/rem.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/share_other.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="containerBg">
+			<div class="topNum">03</div>
+			<div class="topTitle">观看数据总览</div>
+			<div class="article">
+				<p class="articleText">本次直播总时长：</p>
+				<p class="blueFont" id="totalTime">0时0分0秒</p>
+			</div>
+			<div class="article">
+				<p class="articleText">平均每位用户观看：</p>
+				<p class="blueFont" id="averageTime">0时0分0秒</p>
+			</div>
+		</div>
+		<!-- <div class="topArrow"></div> -->
+		<div class="pagebox">
+            <div class="pageUp">&#171上一页</div>
+            <div class="pageDown">下一页&#187</div>
+        </div>
+	</div>
+</body>
+<script>
+    $(function() {
+        if (/Android|chinanet_ilive_android|chinanet_ilive_ios|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            var winHeight = $(window).height();
+            $(".container").css("height", winHeight);
+            $(".containerBg").css("height", winHeight);
+        } else {
+            $(".container").css("height", "1100px");
+            $(".containerBg").css("height", "1100px");
+        }
+    });
+</script>
+<script>
+	var id = getQueryString("id");
+	/* $(".topArrow").on("click", function() {
+		window.location.href = "viewTimeStatistic.html?id=" + id;
+	}); */
+	$(".pageUp").on("click", function() {
+		window.location.href = "minuteStatistic.html?id=" + id;
+    });
+    $(".pageDown").on("click", function() {
+        window.location.href = "viewTimeStatistic.html?id=" + id;
+    });
+	$.ajax({
+		url : "/statistic/wap/live/statistic/totalAndAverage?id=" + id,
+		type : "get",
+		async : false,
+		crossDomain : true,
+		dataType : "jsonp",
+		jsonp : 'jsoncallback',
+		success : function(data) {
+			var bean = data.data;
+			var totalTime = bean.totalTime;
+			var viewTotalDuration = bean.viewTotalDuration;
+			var userNum = bean.userNum;
+			var hours = parseInt(totalTime / 3600);
+			if (hours < 10) {
+				hours = "0" + hours;
+			}
+			var minutes = parseInt(totalTime % 3600 / 60);
+			if (minutes < 10) {
+				minutes = "0" + minutes;
+			}
+			var secounds = parseInt(totalTime % 60);
+			if (secounds < 10) {
+				secounds = "0" + secounds;
+			}
+			$("#totalTime").html(hours + "时" + minutes + "分" + secounds + "秒");
+			var averageTime;
+			if(userNum>0){
+				averageTime = viewTotalDuration / userNum;
+			}else{
+				averageTime = 0;
+			}
+			var averageHours = parseInt(averageTime / 3600);
+			if (averageHours < 10) {
+				averageHours = "0" + averageHours;
+			}
+			var averageMinutes = parseInt(averageTime % 3600 / 60);
+			if (averageMinutes < 10) {
+				averageMinutes = "0" + averageMinutes;
+			}
+			var averageSecounds = parseInt(averageTime % 60);
+			if (averageSecounds < 10) {
+				averageSecounds = "0" + averageSecounds;
+			}
+			$("#averageTime").html(averageHours + "时" + averageMinutes + "分" + averageSecounds + "秒");
+		}
+	});
+</script>
+<!-- <script>
+	var startx, starty;
+	//获得角度  
+	function getAngle(angx, angy) {
+		return Math.atan2(angy, angx) * 180 / Math.PI;
+	};
+
+	//根据起点终点返回方向 1向上 2向下 3向左 4向右 0未滑动  
+	function getDirection(startx, starty, endx, endy) {
+		var angx = endx - startx;
+		var angy = endy - starty;
+		var result = 0;
+
+		//如果滑动距离太短  
+		if (Math.abs(angx) < 10 && Math.abs(angy) < 10) {
+			return result;
+		}
+
+		var angle = getAngle(angx, angy);
+		if (angle >= -135 && angle <= -45) {
+			result = 1;
+		} else if (angle > 45 && angle < 135) {
+			result = 2;
+		} else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
+			result = 3;
+		} else if (angle >= -45 && angle <= 45) {
+			result = 4;
+		}
+
+		return result;
+	}
+	//手指接触屏幕  
+	document.addEventListener("touchstart", function(e) {
+		startx = e.touches[0].pageX;
+		starty = e.touches[0].pageY;
+	}, false);
+	//手指离开屏幕  
+	document.addEventListener("touchend", function(e) {
+		var endx, endy;
+		endx = e.changedTouches[0].pageX;
+		endy = e.changedTouches[0].pageY;
+		var direction = getDirection(startx, starty, endx, endy);
+		switch (direction) {
+		case 0:
+			break;
+		case 1:
+			$(".topArrow").click();
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		default:
+		}
+	}, false);
+</script> -->
+</html>

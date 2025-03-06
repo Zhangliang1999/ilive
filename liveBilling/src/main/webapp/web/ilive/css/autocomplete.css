@@ -1,0 +1,15 @@
+.autocomplete {
+	border: 1px solid #9ACCFB; background-color: white; text-align: left;
+}
+
+.autocomplete li {
+	list-style-type: none;
+}
+
+.autocomplete .clickable {
+	cursor: default;
+}
+
+.autocomplete .highlight {
+	background-color: #9ACCFB;
+}

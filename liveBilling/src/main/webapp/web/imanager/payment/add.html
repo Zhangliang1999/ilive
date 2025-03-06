@@ -1,0 +1,202 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">新增套餐订单</a>
+			</div>
+		</div>
+	</div>
+	<div class="row btn-box">
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName m-t-xs">企业名称：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" placeholder="企业ID/企业名称" ng-model="bean.enterprise"
+						enterprise-input-search datavalue="bean.enterpriseId"
+					/>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">来源渠道：</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="radio" name="channelType" style="vertical-align: sub;" value="1" ng-checked="true"
+						ng-model="bean.channelType"
+					/>
+					官网平台
+				</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="radio" name="channelType" style="vertical-align: sub;" value="2" ng-model="bean.channelType" />
+					渠道代理
+				</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="radio" name="channelType" style="vertical-align: sub;" value="3" ng-model="bean.channelType" />
+					集团产品库
+				</div>
+				<div class="mealCon" style="width: 90px;">
+					<input type="radio" name="channelType" style="vertical-align: sub;" value="4" ng-model="bean.channelType" />
+					内部使用
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">订购类型：</div>
+				<div class="mealCon">
+					<select class="commonSelect" ng-model="bean.paymentType"
+						ng-options="type.value as type.label for type in paymentTypeBeans"
+					>
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">套餐选择：</div>
+				<div class="lh-40">
+					<select class="commonSelect" ng-model="packageInfo"
+						ng-options="package as package.packageName for package in packageList"
+					>
+						<option value="">--请选择--</option>
+					</select>
+					<span class="color-999" ng-if="packageInfo.id>0"
+						ng-bind="'（套餐周期：'+packageInfo.vaildDurationValue+(packageInfo.vaildDurationUnit|vaildDuration:'')+'）'"
+					></span>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">续订类型：</div>
+				<div class="mealCon">
+					<select class="commonSelect" ng-model="bean.paymentAuto"
+					ng-options="type.value as type.label for type in paymentAutoBeans"
+					>
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">套餐生效时间：</div>
+				<div class="input-daterange input-group pull-left" daterange>
+					<input type="text" class="input-sm form-control" style="width: 130px" name="start" placeholder="订单生效时间"
+						ng-model="bean.vaildStartTime"
+					/>
+					<!-- <span class="input-group-addon">-</span>
+					<input type="text" class="input-sm form-control"  style="width: 130px" name="end" placeholder="订单结束时间"
+					  ng_bind="DateAdd(packageInfo.vaildDurationUnit,packageInfo.vaildDurationValue,bean.vaildStartTime)"	ng-model="bean.vaildEndTime"
+					 disabled/> -->
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">代理商：</div>
+				<div class="lh-40">
+					<select class="commonSelect" ng-model="agentInfo" ng-options="agent as agent.agentName for agent in agentList">
+						<option value="">--请选择--</option>
+					</select>
+					<span class="color-999" ng-if="agentInfo.id>0" ng-bind="'（代理商扣点：'+agentInfo.deductionRate+'%）'"></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName m-t-xs">销售：</div>
+				<div class="lh-40">
+					<select class="commonSelect" ng-model="userInfo" ng-options="user as user.userName for user in userList">
+						<option>--请选择--</option>
+					</select>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">原订单填写：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.originalPayment" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">备注：</div>
+				<div class="mealCon">
+					<textarea ng-model="bean.paymentDesc"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-sm">
+		<div class="col-lg-12 p-w-lg">
+			<span class="font-weight">订购内容</span>
+			<table class="table table-striped table-hover table-responsive newtable">
+				<thead class="gray-bg">
+					<tr>
+						<th>套餐ID</th>
+						<th>套餐名称</th>
+						<th>原价</th>
+						<th>售价</th>
+						<th>折扣率</th>
+						<th>实际售价</th>
+						<th>代理扣率%</th>
+						<th>代理费</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-if="packageInfo.id>0">
+						<td ng-bind="packageInfo.id"></td>
+						<td ng-bind="packageInfo.packageName"></td>
+						<td ng-bind="packageInfo.orginalPrice"></td>
+						<td>
+							<span ng-if="bean.channelType==1" ng-bind="packageInfo.officialPlatformPrice"></span>
+							<span ng-if="bean.channelType==2" ng-bind="packageInfo.channelAgentPrice"></span>
+							<span ng-if="bean.channelType==3" ng-bind="packageInfo.groupProductLibraryPrice"></span>
+							<span ng-if="bean.channelType==4" ng-bind="0"></span>
+						</td>
+						<td class="text-center">
+							<input type="text" class="serachinput" style="width: 100px;" ng-model="bean.DiscountRate+'%'" />
+						</td>
+						<td class="text-center">
+							<input type="text" ng-if="bean.channelType==1"  class="serachinput" style="width: 100px;" ng-bind="packageInfo.officialPlatformPrice*bean.DiscountRate/100"  ng-model="bean.paymentPrice" />
+							<input type="text" ng-if="bean.channelType==2"  class="serachinput" style="width: 100px;" ng-bind="packageInfo.channelAgentPrice*bean.DiscountRate/100"  ng-model="bean.paymentPrice" />
+							<input type="text" ng-if="bean.channelType==3"  class="serachinput" style="width: 100px;" ng-bind="packageInfo.groupProductLibraryPrice*bean.DiscountRate/100"  ng-model="bean.paymentPrice" />
+							<input type="text" ng-if="bean.channelType==4"  class="serachinput" style="width: 100px;" ng-bind="0"  ng-model="bean.paymentPrice" />
+						</td>
+						<td class="text-center">
+							<input type="text" class="serachinput" style="width: 100px;" ng-model="agentInfo.deductionRate+'%'" />
+						</td>
+						<td ng-bind="bean.paymentPrice*agentInfo.deductionRate/100"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName">订单金额：</div>
+				<div class="mealCon">
+					<span class="color-red" ng-if="bean.paymentPrice>0" ng-bind="bean.paymentPrice+'元'"></span>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">
+					<input type="checkbox" style="vertical-align: sub;" ng-model="bean.paid" />
+					支付标记
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">支付方式：</div>
+				<div class="mealCon">
+					<select class="commonSelect" ng-model="bean.paymentWay"
+						ng-options="paymentWay.value as paymentWay.label for paymentWay in paymentWayBeans"
+					>
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">流水ID：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.paymentFlowId" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">支付日期：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.paymentTime" />
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12 p-w-lg text-center">
+			<button class="btn commonbtn" ng-click="saveAgent()">新增订单</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+	<class name="com.jwzt.DB.soms.live.task.ILiveMakeScreenRetryTask"
+		table="ilive_file_retrytask">
+		<meta attribute="calss-description">
+			@author 徐勤
+		</meta>
+
+		<id name="fileId" type="java.lang.Long">
+			<meta attribute="field-description">文件ID</meta>
+			<column name="file_id" />
+			<generator class="assigned"></generator>
+		</id>
+
+		<property name="taskNode" type="java.lang.String">
+			<meta attribute="field-description">任务节点</meta>
+			<column name="task_node" />
+		</property>
+
+		<property name="taskCreateTime">
+			<meta attribute="field-description">任务构建时间</meta>
+			<column name="create_time" />
+		</property>
+
+		<property name="dealResult" type="java.lang.Integer">
+			<meta attribute="field-description">处理结果</meta>
+			<column name="deal_result" />
+		</property>
+
+		<property name="retryTime" type="java.lang.Integer">
+			<meta attribute="field-description">重试次数</meta>
+			<column name="retry_time" />
+		</property>
+	</class>
+</hibernate-mapping>

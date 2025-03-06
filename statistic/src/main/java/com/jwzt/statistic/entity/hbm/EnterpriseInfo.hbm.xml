@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="EnterpriseInfo" table="statistic_enterprise_info">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="enterpriseName" type="java.lang.String">
+			<column name="enterprise_name" />
+		</property>
+		<property name="enterpriseDesc" type="java.lang.String">
+			<column name="enterprise_desc" />
+		</property>
+		<property name="enterpriseImg" type="java.lang.String">
+			<column name="enterprise_img" />
+		</property>
+		<property name="homePageUrl" type="java.lang.String">
+			<column name="home_page_url" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="applyTime" type="java.sql.Timestamp">
+			<column name="apply_time" />
+		</property>
+		<property name="certStatus" type="java.lang.Integer">
+			<column name="cert_status" />
+		</property>
+		<property name="certTime" type="java.sql.Timestamp">
+			<column name="cert_time" />
+		</property>
+		<property name="contactPhone" type="java.lang.String">
+			<column name="contact_phone" />
+		</property>
+		<property name="bindPhone" type="java.lang.String">
+			<column name="bind_phone" />
+		</property>
+		<property name="entype" type="java.lang.Integer">
+			<column name="entype" />
+		</property>
+		<property name="stamp" type="java.lang.Integer">
+			<column name="stamp" />
+		</property>
+	</class>
+</hibernate-mapping>

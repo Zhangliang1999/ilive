@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.statistic.entity">
+	<class name="WorkingLog" table="ilive_work_log">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		
+		<property name="content" type="text">
+			<column name="content"></column>
+		</property>
+		
+		<property name="contentId" type="java.lang.String">
+			<column name="content_id"></column>
+		</property>
+		
+		<property name="contentName" type="java.lang.String">
+			<column name="content_name"></column>
+		</property>
+		
+		<property name="terminal" type="java.lang.String">
+			<column name="terminal"></column>
+		</property>
+		
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time"></column>
+		</property>
+		
+		<property name="modelId" type="java.lang.Integer">
+			<column name="mode_id"></column>		
+		</property>
+		
+		<property name="systemId" type="java.lang.Integer">
+			<column name="system_id"></column>
+		</property>
+		
+		<property name="userId" type="java.lang.Integer">
+			<column name="user_id"></column>
+		</property>
+		
+		<property name="userName" type="java.lang.String">
+			<column name="user_name"></column>
+		</property>
+		
+	</class>
+</hibernate-mapping>

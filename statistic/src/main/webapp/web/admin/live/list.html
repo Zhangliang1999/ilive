@@ -1,0 +1,168 @@
+<div id="rightWrapper">
+	<div class="row btn-box gray-bg">
+		<div class="col-lg-12" >
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">数据筛选范围：</div>
+				<div class="input-daterange input-group pull-left m-t-xs m-r-sm" daterange>
+					<input type="text" class="input-sm form-control" name="start" placeholder="开始时间"
+						ng-model="queryCondition.startTime"
+					/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" name="end" placeholder="结束时间" ng-model="queryCondition.endTime" />
+				</div>
+			</div>
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">直播ID：</div>
+				<div class="dropdown pull-left m-t-xs m-r-sm ">
+					<input class="userInput" type="text" ng-model="queryCondition.liveEventId" />
+				</div>
+			</div>
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">直播名称：</div>
+				<div class="dropdown pull-left m-t-xs m-r-sm ">
+					<input class="userInput" type="text" ng-model="queryCondition.liveTitle" />
+				</div>
+			</div>
+			<!-- <div class="selectedGroup m-t-sm m-l-sm pull-left" style="    margin-left: 30px;">
+				<div class="pull-left lh-40 font-content">企业ID：</div>
+				<div class="dropdown pull-left m-t-xs m-r-sm ">
+					<input class="userInput" type="text" ng-model="queryCondition.enterpriseId" />
+				</div>
+			</div>
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">企业名称：</div>
+				<div class="dropdown pull-left m-t-xs m-r-sm ">
+					<input class="userInput" type="text" ng-model="queryCondition.enterpriseName" />
+				</div>
+			</div> -->
+			<div class="selectedGroup m-t-sm m-l-sm pull-left">
+				<div class="pull-left lh-40 font-content">直播时长：</div>
+				<div class="dropdown pull-left m-t-xs m-r-sm ">
+					<select id="u1133_input" class="userInput" ng-model="queryCondition.liveLongTime"  ng-init="queryCondition.liveLongTime=''">
+				          <option value="">全部</option>
+				          <option value="0-15">0-15分钟</option>
+				          <option value="15-30">15-30分钟</option>
+				          <option value="30-60">30-60分钟</option>
+				          <option value="60-120">60-120分钟</option>
+				          <option value="120">120分钟以上</option>
+			        </select>
+				</div>
+			</div>
+			<button class="btn btn-white pull-right font-12 m-t m-r" ng-click="searchList(1,false)">查询</button>
+			<div class="dropdown pull-right m-t m-r font-12">
+				显示条数:
+				<button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" data-toggle="dropdown"
+					aria-expanded="false"
+				>
+					<span ng-bind="page.pageSize"></span>
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li ng-click="changePageSize(20)">
+						<a>20</a>
+					</li>
+					<li ng-click="changePageSize(50)">
+						<a>50</a>
+					</li>
+					<li ng-click="changePageSize(100)">
+						<a>100</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-xs">
+		<div class="col-lg-12 p-w-lg " style="overflow: scroll;">
+			<table class="table newtable table-striped table-hover ScrollViewer table-responsive" style="width: 1600px;">
+				<thead class="gray-bg">
+					<tr>
+						<!-- <th style="width: 80px;"></th> -->
+						<th style="width: 80px;">场次ID</th>
+						<th style="width: 100px;" style="">直播名称</th>
+						<th style="width: 70px;">操作</th>
+						<th style="width: 80px;">企业ID</th>
+						<th style="width: 80px;">企业名称</th>
+						<th style="width: 75px;">直播开始时间</th>
+						<th style="width: 75px;">直播结束时间</th>
+						<th style="width: 80px;">直播时长（小时）</th>
+						<th style="width: 80px;">累计观看次数（次）</th>
+						<th style="width: 80px;">累计观看人数（人）</th>
+						<th style="width: 80px;">最高并发（人）</th>
+						<th style="width: 80px;">人均观看时长（小时）</th>
+						<th style="width: 80px;">被点赞累计数（次）</th>
+						<!-- <th style="width: 80px;">签到次数</th> -->
+						<th style="width: 80px;">转发分享数（次）</th>
+						<th style="width: 80px;">被评论累计数（次）</th>
+						<!-- <th style="width: 80px;">红包发送金额（元）</th>
+						<th style="width: 80px;">礼物收取总数（次）</th> -->
+					</tr>
+				</thead>
+				<tbody auto-height offset="316">
+					<tr ng-repeat="bean in page.list" ng-click="bean.isChecked=!bean.isChecked">
+						<!-- <td style="width: 80px;">
+							<input type="checkbox" ng-model="bean.isChecked" ng-click="bean.isChecked=!bean.isChecked" ng-checked="isCheckAll" />
+						</td> -->
+						<td style="width: 80px;" ng-bind="bean.liveEventId"></td>
+						<td style="width: 100px;word-break:break-all;" ng-bind="bean.liveTitle|blank:'试用直播间'"></td>
+						<td style="width: 70px;">
+							<a href="javascript:;" class="m-r-xs color-999" ng-click="viewDetail(bean.liveEventId)">查看图表</a>
+						</td>
+						<td style="width: 80px;" ng-bind="bean.enterpriseId|blank:''"></td>
+						<td style="width: 80px;" ng-bind="bean.enterpriseName|blank:''"></td>
+						<td style="width: 75px;" ng-bind="bean.liveBeginTime|date:'yyyy-MM-dd HH:mm:ss'|blank:''"></td>
+						<td style="width: 75px;" ng-bind="bean.liveEndTime|date:'yyyy-MM-dd HH:mm:ss'|blank:''"></td>
+						<td style="width: 80px;" ng-bind="bean.liveDuration|hour:'0'"></td>
+						<td style="width: 80px;" ng-bind="bean.statisticResult.viewNum|blank:'0'"></td>
+						<td style="width: 80px;" ng-bind="bean.statisticResult.userNum|blank:'0'"></td>
+						<td style="width: 80px;" ng-bind="bean.statisticResult.maxMinuteUserNum|blank:'0'"></td>
+						<td style="width: 80px;"
+							ng-bind="bean.statisticResult.userNum>0?bean.liveDuration/bean.statisticResult.userNum:0|hour|blank:'0'"
+						></td>
+						<td style="width: 80px;" ng-bind="bean.statisticResult.likeNum|blank:'0'"></td>
+						<!-- <td style="width: 80px;" ng-bind="bean.statisticResult.signNum|blank:'0'"></td> -->
+						<td style="width: 80px;" ng-bind="bean.statisticResult.shareNum|blank:'0'"></td>
+						<td style="width: 80px;" ng-bind="bean.statisticResult.commentNum|blank:'0'"></td>
+						<!-- <td style="width: 80px;" ng-bind="bean.statisticResult.redPacketMoney|blank:'0'"></td>
+						<td style="width: 80px;" ng-bind="bean.statisticResult.giftNum|blank:'0'"></td> -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-lg-12 pageBox m-b">
+			<!-- <div class="pull-left m-l-lg m-t-xs">
+				<input class="m-r-sm" type="checkbox" style="vertical-align: sub" ng-model="isCheckAll" ng-click="checkAll(isCheckAll)" />
+				全选
+			</div> -->
+			<button class="btn btn-default font-12 pull-left m-l bordered" ng-click="excelExport()">导出数据列表</button>
+			<div class="pull-right btn-group m-r">
+				<div class="pull-left m-t-xs m-r">
+					第
+					<span class="color-gold" ng-bind="page.pageNo"></span>
+					页/
+					<span class="color-gold" ng-bind="page.totalCount">100</span>
+					条数据
+				</div>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.prePage,true)">
+					<i class="fa fa-chevron-left"></i>
+				</button>
+				<button ng-repeat="showPage in page.showPages track by $index" class="btn btn-white"
+					ng-class="{'active':showPage==page.pageNo}" ng-click="searchList(showPage,true)"
+				>
+					<span ng-if="showPage<=0" ng-bind="'...'"></span>
+					<span ng-if="showPage>0&&showPage==page.pageNo" ng-bind="showPage" id="currentPageNo"></span>
+					<span ng-if="showPage>0&&showPage!=page.pageNo" ng-bind="showPage"></span>
+				</button>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.nextPage,true)">
+					<i class="fa fa-chevron-right"></i>
+				</button>
+				<div class="pull-left m-t-xs m-l m-r">
+					跳至
+					<input class="m-l-xs m-r-xs" style="width: 33px; height: 23px; border: 1px solid #ddd;" type="text"
+						ng-keyup="($event.which === 13)?changePageNo($event.target.value):0"
+					/>
+					页
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

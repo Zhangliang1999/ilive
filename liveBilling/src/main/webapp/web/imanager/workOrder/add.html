@@ -1,0 +1,50 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">新增套餐订单</a>
+			</div>
+		</div>
+	</div>
+	<div class="row btn-box">
+		<div class="col-lg-6">
+			<div class="mealBox">
+				<div class="mealName m-t-xs">企业名称：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" placeholder="企业ID/企业名称" ng-model="bean.enterprise" enterprise-input-search
+						datavalue="bean.enterpriseId"
+					/>
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName m-t-xs">工单类型：</div>
+				<div class="mealCon">
+					<select class="commonSelect" ng-model="bean.workOrderType"
+						ng-options="type.value as type.label for type in workOrderTypeBeans"
+					>
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="mealBox">
+				<div class="mealName">联系方式：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.contactPhoneNumber" />
+				</div>
+			</div>
+			<div class="mealBox">
+				<div class="mealName">联系人：</div>
+				<div class="mealCon">
+					<input type="text" class="serachinput" ng-model="bean.contactName" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-sm">
+		<div class="col-lg-12 p-w-lg text-center">
+			<button class="btn commonbtn" ng-click="saveAgent()">新增订单</button>
+		</div>
+	</div>
+</div>

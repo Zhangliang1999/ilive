@@ -1,0 +1,106 @@
+<div id="rightWrapper" slim-scroll offset="72">
+    <div class="row title-header gray-bg">
+        <div class="col-lg-12">
+            <button class="btn commonbtn" style="font-size: 12px !important; margin-top: 12px;" ng-click="returnPrevious()">返回</button>
+            <div class="title-name">
+                <a class="font-title">资源包修改</a>
+            </div>
+        </div>
+    </div>
+    <div class="row btn-box">
+        <div class="col-lg-6">
+            <div class="mealBox">
+                <div class="mealName m-t-xs">资源包名称：</div>
+                <div class="mealCon">
+                    <input type="text" class="serachinput" placeholder="(必填)" ng-model="bean.productName" />
+                </div>
+            </div>
+            <div class="mealBox">
+                <div class="mealName">资源包类型：</div>
+                <div class="lh-40">
+                    <select class="commonSelect" ng-model="bean.productType"
+                        ng-options="type.value as type.label for type in productTypeBeans"
+                    >
+                    </select>
+                </div>
+            </div>
+            <div class="mealBox" ng-if="bean.productType==3">
+                <div class="mealName m-t-xs">短信数量：</div>
+                <div class="mealCon">
+                    <input type="text" class="serachinput" placeholder="(必填)" ng-model="bean.incrementShowValue" />
+                    <span>（单位：条）</span>
+                    </span>
+                </div>
+            </div>
+            <div class="mealBox" ng-if="bean.productType==2">
+                <div class="mealName m-t-xs">存储大小：</div>
+                <div class="mealCon">
+                    <input type="text" class="serachinput" placeholder="(必填)" ng-model="bean.incrementShowValue" />
+                    <span>（单位：G）</span>
+                    </span>
+                </div>
+            </div>
+            <div class="mealBox" ng-if="bean.productType==4">
+                <div class="mealName m-t-xs">直播时长：</div>
+                <div class="mealCon">
+                    <input type="text" class="serachinput" placeholder="(必填)" ng-model="bean.incrementShowValue" />
+                    <span>（单位：小时）</span>
+                    </span>
+                </div>
+            </div>
+            <div class="mealBox" ng-if="bean.productType==5">
+                <div class="mealName m-t-xs">并发上限：</div>
+                <div class="mealCon">
+                    <input type="text" class="serachinput" placeholder="(必填)" ng-model="bean.incrementShowValue" />
+                    <span>（单位：人）</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="mealBox" ng-if="bean.id>0">
+                <div class="mealName">资源包ID：</div>
+                <div class="mealCon">
+                    <span class="color-blue" ng-bind="bean.id"></span>
+                </div>
+            </div>
+            <div class="mealBox m-t">
+                <div class="mealName m-t-xs">资源包说明：</div>
+                <div class="mealCon">
+                    <textarea class="serachTextarea" placeholder="一句话描述（用于前端展示）" ng-model="bean.productDesc"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-t-sm">
+        <div class="col-lg-12 p-w-lg" ng-if="bean.productType==1">
+            <div class="title-name">
+                <span class="font-title">权限选择</span>
+            </div>
+        </div>
+        <div class="col-lg-12 p-w-lg" ng-if="bean.productType==1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div ng-repeat="function in functionList">
+                        <div class="panelTit">
+                            <input type="checkbox" style="vertical-align: sub;" ng-model="function.isChecked" ng-click="checkAll(function)" />
+                            <span ng-bind="function.functionName"></span>
+                        </div>
+                        <div class="panelText m-t-sm m-b-sm" style="overflow: hidden;">
+                            <div class="col-lg-2" ng-repeat="childFunction in function.childList">
+                                <input type="checkbox" style="vertical-align: sub;" ng-model="childFunction.isChecked"
+                                    ng-click="isCheckAll(function)"
+                                />
+                                <span ng-bind="childFunction.functionName"></span>
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 p-w-lg text-center">
+            <button class="btn commonbtn" ng-click="updateProduct()">保存修改</button>
+        </div>
+    </div>
+</div>

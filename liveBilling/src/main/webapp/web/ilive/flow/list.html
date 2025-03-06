@@ -1,0 +1,156 @@
+<div id="rightWrapper" slim-scroll offset="72">
+	<div class="row title-header gray-bg">
+		<div class="col-lg-12">
+			<div class="title-name">
+				<a class="font-title">收益账户流水</a>
+			</div>
+		</div>
+	</div>
+	<div class="row btn-box">
+		<div class="col-lg-12">
+			<div class="income">
+				累计收益：
+				<span class="color-red" ng-bind="enterpriseBilling.totalAmount|blank:'0.00'"></span>
+				元
+			</div>
+			<div class="income">
+				收益余额：
+				<span class="color-red" ng-bind="enterpriseBilling.unsettleAmount|blank:'0.00'"></span>
+				元
+			</div>
+			<div class="income">
+				已结算金额：
+				<span class="color-red" ng-bind="enterpriseBilling.settleAmount|blank:'0.00'"></span>
+				元
+			</div>
+			<i class="fa fa-question-circle pull-left m-t font-title m-l color-blue" title="每月25日，系统会自动结算上月的所有收益。"></i>
+			<a class="incomeLink" href="javascript:;" ng-click="viewSettlement()">结算记录</a>
+			<div class="pull-right m-r-lg">
+				<div class="selectedGroup m-t-sm m-l-sm pull-left">
+					<div class="pull-left lh-30 font-content">状态：</div>
+					<div class="dropdown pull-left  m-r">
+						<button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2"
+							data-toggle="dropdown" aria-expanded="false"
+						>
+							<span ng-bind="querySettlementStatusLabel"></span>
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+							<li role="presentation" ng-click="changeSettlementStatus()">
+								<a>全部</a>
+							</li>
+							<li role="presentation" ng-repeat="statusBean in settlementStatusBeans"
+								ng-click="changeSettlementStatus(statusBean)"
+							>
+								<a ng-bind="statusBean.label"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="selectedGroup m-t-sm pull-left">
+					<div class="pull-left lh-30 font-content">收益类型：</div>
+					<div class="dropdown pull-left  m-r">
+						<button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2"
+							data-toggle="dropdown" aria-expanded="false"
+						>
+							<span ng-bind="queryFlowTypeLabel"></span>
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+							<li role="presentation" ng-click="changeFlowType()">
+								<a>全部</a>
+							</li>
+							<li role="presentation" ng-repeat="typeBean in flowTypeBeans" ng-click="changeFlowType(typeBean)">
+								<a ng-bind="typeBean.label"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="selectedGroup m-t-sm m-l-sm pull-left">
+					<div class="pull-left lh-30 font-content">时间：</div>
+					<div class="input-daterange input-group pull-left" daterange>
+						<input type="text" class="input-sm form-control" style="width: 130px" name="start" placeholder="开始时间"
+							ng-model="queryCondition.startTime"
+						/>
+						<span class="input-group-addon">to</span>
+						<input type="text" class="input-sm form-control" style="width: 130px" name="end" placeholder="结束时间"
+							ng-model="queryCondition.endTime"
+						/>
+					</div>
+				</div>
+				<div class="pull-right m-r-sm m-l-sm">
+					<input type="text" class="serachinput" style="width: 150px" placeholder="用户ID/用户名称"
+						ng-model="queryCondition.userContent"
+					/>
+					<button class="btn commonbtn m-t-n-4" ng-click="searchList(1,false)">查询</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row m-t-xs">
+		<div class="col-md-12 p-w-lg ">
+			<table class="table newtable table-striped table-hover ScrollViewer table-responsive">
+				<thead class="gray-bg">
+					<tr>
+						<th style="width: 120px;">ID</th>
+						<th>企业名称</th>
+						<th style="width: 120px;">收益类型</th>
+						<th style="width: 120px;">用户</th>
+						<th style="width: 150px;">时间</th>
+						<th style="width: 120px;">收益金额</th>
+						<th style="width: 120px;">收益事项</th>
+						<th style="width: 120px;">直播ID</th>
+						<th style="width: 120px;">状态</th>
+					</tr>
+				</thead>
+				<tbody auto-height offset="315">
+					<tr ng-repeat="bean in page.list" ng-click="bean.isChecked=!bean.isChecked">
+						<td style="width: 120px;" ng-bind="bean.flowId"></td>
+						<td ng-bind="bean.enterpriseName|blank:'未认证企业'"></td>
+						<td style="width: 120px;" ng-bind="bean.flowType|flowType:''"></td>
+						<td style="width: 120px;" ng-bind="bean.userName|blank:''"></td>
+						<td style="width: 150px;" ng-bind="bean.flowTime|date:'yyyy-MM-dd HH:mm:ss'|blank:'未知'"></td>
+						<td style="width: 120px;">
+							<span class="color-red font-bold" ng-bind="'+' + bean.flowPrice|blank:'0.00'"></span>
+						</td>
+						<td style="width: 120px;" ng-bind="bean.flowDesc|blank:''"></td>
+						<td style="width: 120px;" ng-bind="bean.roomId|blank:''"></td>
+						<td style="width: 120px;" ng-bind="bean.settlementStatus|settlementStatus:''"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12 pageBox m-b">
+			<!-- <button class="btn btn-default font-12 pull-left m-l bordered" ng-click="excelExport()">导出数据列表</button> -->
+			<div class="pull-right btn-group m-r">
+				<div class="pull-left m-t-xs m-r">
+					第
+					<span class="color-gold" ng-bind="page.pageNo"></span>
+					页/
+					<span class="color-gold" ng-bind="page.totalCount"></span>
+					条数据
+				</div>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.prePage,true)">
+					<i class="fa fa-chevron-left"></i>
+				</button>
+				<button ng-repeat="showPage in page.showPages track by $index" class="btn btn-white"
+					ng-class="{'active':showPage==page.pageNo}" ng-click="searchList(showPage,true)"
+				>
+					<span ng-if="showPage<=0" ng-bind="'...'"></span>
+					<span ng-if="showPage>0&&showPage==page.pageNo" ng-bind="showPage" id="currentPageNo"></span>
+					<span ng-if="showPage>0&&showPage!=page.pageNo" ng-bind="showPage"></span>
+				</button>
+				<button type="button" class="btn btn-white" ng-click="searchList(page.nextPage,true)">
+					<i class="fa fa-chevron-right"></i>
+				</button>
+				<div class="pull-left m-t-xs m-l m-r">
+					跳至
+					<input class="m-l-xs m-r-xs" style="width: 33px; height: 23px; border: 1px solid #ddd;" type="text"
+						ng-keyup="($event.which === 13)?changePageNo($event.target.value):0"
+					/>
+					页
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
