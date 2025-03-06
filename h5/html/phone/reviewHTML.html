@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no">
+    <title>天翼直播平台</title>
+    <script type="text/javascript" src="js/rem.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="js/videojs/video-js.min.css">
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_872913_5vqpxvyfqjx.css"/>
+    <link rel="stylesheet" type="text/css" href="js/need/layer.css">
+    <link rel="stylesheet" type="text/css" href="css/mescroll.css"/>
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/2019style.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/review/review.css"/>
+    <link rel="stylesheet" type="text/css" href="css/review/dcVideo.css"/>
+    <script type="text/javascript" src="js/base.js"></script>
+    <script>
+        var url = window.location.search.substr(1),
+            searchParams = new URLSearchParams(url),
+            Params = {};
+        Params.roomId = searchParams.has('roomId') ? searchParams.get('roomId') : '';
+        Params.fileId = searchParams.has('fileId') ? searchParams.get('fileId') : '';
+
+        if (!/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+            window.location.href = "http://" + h5Base + "/pc/review.html?fileId=" + Params.fileId + "&roomId=" + Params.roomId;//PC
+        }
+    </script>
+<body>
+<div class="videoBox">
+    <video id="video" controls preload="auto" playsinline webkit-playsinline="true" x-webkit-airplay="allow"
+           class="video-js vjs-default-skin vjs-big-play-centered gu-media--video"
+           poster="http://pic.zb.tv189.com/img/livebg_default.png">
+    </video>
+</div>
+<div class="main">
+    <div class="menuBox">
+        <ul>
+            <li class="liactive"><span>直播简介</span></li>
+            <li><span>聊天互动</span></li>
+        </ul>
+    </div>
+    <div class="contentBox">
+        <div class="contentBox-all">
+            <div class="mescroll" id="mescroll">
+                <div class="cell">
+                    <div class="title ellipsis">号百集团培训直播54青年节表彰大会号百集团培训直播54青年节表彰大会</div>
+                    <div class="play-num"><i class="iconfont icon-video"></i><span>6.5w次播放</span></div>
+                    <div class="links">简介<i class="iconfont icon-youjiantou"></i></div>
+                </div>
+
+                <div class="cell zbjcompany" onclick="zbjcompany(390)" id="zbjcompany">
+                    <div class="companyimg"></div>
+                    <div class="company">
+                        <div class="small-liveTitle"><span>天翼直播-彬天翼直播-彬</span>
+                            <span class=" iconfont btn guanzhu icon-jia " id="concernStatus"
+                                  onclick="updateConcernStatus(390,1,event)"></span>
+                            <span class="zhuye btn iconfont icon-jia1"></span>
+                        </div>
+                        <div class="small-fans" id="concernTotal">粉丝数: <span class="smallText">16</span> 人</div>
+                    </div>
+                    <div class="links">去主页<i class="iconfont icon-youjiantou"></i></div>
+                </div>
+
+                <div class="cell">
+                    <div class="title">相关</div>
+                    <div class="links">全部<i class="iconfont icon-youjiantou"></i></div>
+                    <div class="swiper-container" id="reviews">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="review-group">
+                                    <div class="review-img">
+                                        <img src="http://pic.zb.tv189.com/img/2018-0614/1528971740996.jpg" alt="">
+                                        <div class="reviewMask"><span>00:5</span></div>
+                                    </div>
+                                    <div class="review-title">测试0614-20180614181935杯这简直就是难耐旧金山市继续继续继续那你想见见你</div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="review-group">
+                                    <div class="review-img">
+                                        <img src="http://pic.zb.tv189.com/img/2018-0530/1527646735186.jpg" alt="">
+                                        <div class="reviewMask"><span>00:5</span></div>
+                                    </div>
+                                    <div class="review-title">测试0614-20180614181935杯这简直就是难耐旧金山市继续继续继续那你想见见你</div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="review-group">
+                                    <div class="review-img">
+                                        <img src="http://pic.zb.tv189.com/img/2018-0614/1528971740996.jpg" alt="">
+                                        <div class="reviewMask"><span>00:5</span></div>
+                                    </div>
+                                    <div class="review-title">测试0614-20180614181935杯这简直就是难耐旧金山市继续继续继续那你想见见你</div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="review-group">
+                                    <div class="review-img">
+                                        <img src="http://pic.zb.tv189.com/img/2018-0614/1528971740996.jpg" alt="">
+                                        <div class="reviewMask"><span>00:5</span></div>
+                                    </div>
+                                    <div class="review-title">测试0614-20180614181935杯这简直就是难耐旧金山市继续继续继续那你想见见你</div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="review-group">
+                                    <div class="review-img">
+                                        <img src="http://pic.zb.tv189.com/img/2018-0614/1528971740996.jpg" alt="">
+                                        <div class="reviewMask"><span>00:5</span></div>
+                                    </div>
+                                    <div class="review-title">测试0614-20180614181935杯这简直就是难耐旧金山市继续继续继续那你想见见你</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cell">
+                    <div class="title">文档</div>
+                    <div class="document">
+                        <dl>
+                            <dd>
+                                <img src="css/review/images/icon-p.png" alt="">
+                                <div class="document-name ellipsis">高科技驾驶舱!以军未来战车设计科幻.ppt</div>
+                                <div class="links"><i class="iconfont icon-youjiantou"></i></div>
+
+                            </dd>
+                        </dl>
+
+
+                    </div>
+                </div>
+
+                <div class="cell talkLi">
+                    <div class="title">评论</div>
+                    <div class="no-comment">
+                        <img src="css/review/images/nocomment.png" alt="">
+                        <p style="color:#999">还没有讨论，快来聊几句吧~</p>
+                    </div>
+                    <div class="comment" style="display: none">
+                        <div class="topBox" id="msgId_977161">
+                            <div class="userImg"><img src="http://pic.zb.tv189.com/img/user_default.jpg"></div>
+                            <div class="commentText">
+                                <div class="inlineName">
+                                    <span class="senderName">139****5678 <i class="questionIcon stickIcon"></i></span>
+                                    <span class="createTime">2019-01-23 09:01:49</span>
+                                </div>
+                                <div class="comment"><img class="expressionImage"
+                                                          src="http://101.89.132.173:80/img/face/153.gif"
+                                                          style="position: relative;"></div>
+                            </div>
+                        </div>
+                        <div class="talkline commentBox" id="msgId_978073">
+                            <div class="userImg"><img src="http://pic.zb.tv189.com/img/user_default.jpg"></div>
+                            <div class="commentText">
+                                <div class="inlineName">
+                                    <span class="senderName">139****5678</span>
+                                    <span class="createTime">2019-02-26 13:32:28</span>
+                                </div>
+                                <div class="comment">撒发啊撒发撒发撒发多少分苏打粉撒地方撒大撒地方撒地方收到撒的苏打粉苏打粉苏打粉收到苏打粉发撒是</div>
+                            </div>
+                        </div>
+
+                        <div class="talkline commentBox" id="msgId_978073">
+                            <div class="userImg"><img src="http://pic.zb.tv189.com/img/user_default.jpg"></div>
+                            <div class="commentText">
+                                <div class="inlineName">
+                                    <span class="senderName">139****5678</span>
+                                    <span class="createTime">2019-02-26 13:32:28</span>
+                                </div>
+                                <div class="comment">撒发啊撒发撒发撒发多少分苏打粉撒地方撒大撒地方撒地方收到撒的苏打粉苏打粉苏打粉收到苏打粉发撒是</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="footer">
+        <div class="flexbox">
+            <div class="flex flex5">
+                <div class="chatipt">
+                    <span>聊几句吧~</span>
+                </div>
+
+            </div>
+            <div class="flex flex">
+                <i class="iconfont icon-xin"></i>
+                <span class="tag">0</span>
+            </div>
+            <div class="flex">
+                <div class="">
+                    <i class="iconfont icon-fenxiang"></i>
+                </div>
+
+            </div>
+            <div class="flex">
+                <div class="">
+                    <i class="iconfont icon-wendang" style="font-size: .4rem"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/mescroll.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/A-emoji.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/swiper.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<script type="text/javascript" src="js/tysx2019.js?version=2.0.0"></script>
+<script src="js/videojs/video.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://tp.nty.tv189.com/h5/mainsite/lib/tv189/jclient.js"></script>
+<script src="js/share_other.js"></script>
+
+<script>
+
+    var winHeight = $(window).height();
+    var VideoBox = $(".videoBox").height();
+    var menuBox = $(".menuBox").height();
+    var footer = $(".footer").height();
+    var talkLi_offsetTop = ""
+    talkLi_offsetTop = $(".talkLi").offset().top - VideoBox - menuBox
+    console.log(talkLi_offsetTop)
+    $(".talkLi").css("height", winHeight - VideoBox - footer - menuBox );
+
+
+    $(".mescroll").on('scroll',function () {
+        console.log(this.scrollTop)
+    })
+
+    new Swiper('#reviews', {
+        slidesPerView: 2.5,
+        spaceBetween: 5
+    })
+    var mescroll = new MeScroll("mescroll", {
+        up: {
+            use: true,
+            callback: getListData,
+            offset: 10,
+            noMoreSize: 4,
+            empty: {
+                icon: "../res/img/mescroll-empty.png", //图标,默认null
+                tip: "暂无相关数据~", //提示
+                btntext: "去逛逛 >", //按钮,默认""
+                btnClick: function () {//点击按钮的回调,默认null
+                    alert("点击了按钮,具体逻辑自行实现");
+                }
+            },
+        }
+    });
+
+    function getListData(page) {
+
+        //联网加载数据
+
+        // getListDataFromNet(pdType, page.num, page.size, function(curPageData){
+        //     //联网成功的回调,隐藏下拉刷新和上拉加载的状态;
+        //     //mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空;列表无下一页数据,则提示无更多数据;
+        //     console.log("pdType="+pdType+", page.num="+page.num+", page.size="+page.size+", curPageData.length="+curPageData.length);
+        //
+        //     //方法一(推荐): 后台接口有返回列表的总页数 totalPage
+        //     mescroll.endByPage(curPageData.length, totalPage); //必传参数(当前页的数据个数, 总页数)
+        //
+        //     //方法二(推荐): 后台接口有返回列表的总数据量 totalSize
+        //     //mescroll.endBySize(curPageData.length, totalSize); //必传参数(当前页的数据个数, 总数据量)
+        //
+        //     //方法三(推荐): 您有其他方式知道是否有下一页 hasNext
+        //     //mescroll.endSuccess(curPageData.length, hasNext); //必传参数(当前页的数据个数, 是否有下一页true/false)
+        //
+        //     //方法四 (不推荐),会存在一个小问题:比如列表共有20条数据,每页加载10条,共2页.如果只根据当前页的数据个数判断,则需翻到第三页才会知道无更多数据,如果传了hasNext,则翻到第二页即可显示无更多数据.
+        //     mescroll.endSuccess(curPageData.length);
+        //
+        //     //提示:curPageData.length必传的原因:
+        //     // 1.判断是否有下一页的首要依据: 当传的值小于page.size时,则一定会认为无更多数据.
+        //     // 2.比传入的totalPage, totalSize, hasNext具有更高的判断优先级
+        //     // 3.使配置的noMoreSize生效
+        //
+        //     //设置列表数据
+        //     setListData(curPageData);
+        // }, function(){
+        //     //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+        //     mescroll.endErr();
+        // });
+    }
+</script>
+</body>
+</html>

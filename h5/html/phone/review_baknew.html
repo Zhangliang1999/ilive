@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no">
+    <title>天翼直播平台</title>
+    <link rel="stylesheet" href="js/videojs/video-js.min.css">
+    <link rel="stylesheet" type="text/css" href="../iconfont/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mescroll.css"/>
+    <link rel="stylesheet" type="text/css" href="js/need/layer.css">
+    <link rel="stylesheet" type="text/css" href="css/review.min.css?version=2.0.0"/>
+    <link rel="stylesheet" type="text/css" href="css/2019style.min.css?version=2.0.6">
+    <link rel="stylesheet" type="text/css" href="css/dcVideo.min.css?version=2.0.6"/>
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/lightGallery.css"/>
+    <link rel="stylesheet" href="css/dialog.css"/>
+
+<body>
+<div class="videoBox">
+
+    <video id="video"  controls preload="auto" playsinline webkit-playsinline="true" x-webkit-airplay="allow" class="video-js vjs-default-skin vjs-big-play-centered gu-media--video"
+           poster="http://pic.zb.tv189.com/img/livebg_default.png"
+           controls="controls"  style="width:100%;height:100%;object-fit: contain;">
+    </video>
+    <!--<div class='videoPlay' onclick="videoPlay()"><i class='iconfont icon-ziyuan'></i></div>-->
+</div>
+<div class="mainBox">
+    <div class="firstBox">
+        <div class="menuBox">
+            <ul>
+                <li class="liactive one"><a href="#zbjj">详情</a></li>
+                <li class="two"><a href="#review">相关</a></li>
+                <li class="three"><a href="#talkLi">聊天</a></li>
+            </ul>
+        </div>
+        <div class="contentBox">
+            <div class="mescroll" id="mescroll">
+                <ul>
+                    <li id="zbjj" class="zbjj scroll"></li>
+                    <li class="review scroll">
+                        <div class="ListConTit">相关</div>
+                        <div id="review"></div>
+                    </li>
+                    <li id="talkLi" class="talkLi scroll">
+                        <div class="ListConTit">聊天</div>
+                        <div class="newtalkCon">
+                            <div class="jinyanBox hide"></div>
+                            <div class="talkConRight">
+                                <img src="img/talking.png" alt=""/>
+                                <div class="biaoqingBox"></div>
+                            </div>
+                        </div>
+                        <div id="talkBoxListDiv">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="newmask hide">
+                <div class="livemask"></div>
+                <div class="talkCon box">
+                    <input class="textarea" placeholder="聊几句吧" id="saytext" name="msgContent"></input>
+                    <div class="talkBottom">
+                        <div class="hiddenDiv" style="display: none;"></div>
+                        <div class="newhiddenDiv" style="display: none;"></div>
+                        <div class="biaoqing emotion" data="emoji"></div>
+                        <button class="sendMessage" onclick="saveComments()">发送</button>
+                        <div class="emojiBox">
+                            <section class="emoji_container"></section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹窗遮罩层-->
+<div class="passMask">
+    <div class="passBox">
+        <div class="passTit">请您完成手机验证</div>
+        <div class="passInput">
+            <input type="text" placeholder="手机号" name="phoneNumber"/>
+        </div>
+        <div class="passInput">
+            <input type="text" placeholder="动态密码" name="vpassword"/>
+            <span class="getPass" onclick="getAuthenticode()" id="spenTimer">获取动态密码</span>
+        </div>
+        <button class="confirmbutton" onclick="savePhone()">提交</button>
+    </div>
+    <div class="closepass"><i class="iconfont icon-close"></i></div>
+</div>
+
+<!--二维码支付遮罩层-->
+<div class="ewmMask hide" id="ewmDiv">
+    <div class="ewmBox">
+        <div class="ewmTit">请扫码付款</div>
+        <div class="ewm" id="ewmImage">
+            <!-- <img id="ewmImage" src="" alt=""/> -->
+        </div>
+    </div>
+</div>
+<!--二维码支付遮罩层end-->
+<!--确认支付遮罩层-->
+<div class="ewmMask hide" id="payDiv">
+    <div class="ewmBox" style="background: #E7E7E7;">
+        <div class="ewmTit">欢迎语，欢迎观看直播</div>
+        <div class="ewmMoney" id="ewmMoneyDiv"></div>
+        <div class="code hide" id="ewmCode" onclick="openJhm()">使用激活码</div>
+        <button class="submitBtn" id="submitBtnMoney">确认支付</button>
+        <div class="checkCon">
+            <input id="checkbox-1-1" checked="checked" class="regular-checkbox" type="checkbox"/><label
+                for="checkbox-1-1" onclick="selectCK()"></label>同意 <a id="ewmPayAgreement">《天翼直播观看支付协议》</a>
+        </div>
+    </div>
+</div>
+<!--确认支付遮罩层end-->
+<!--激活码遮罩层-->
+<div class="ewmMask hide" id="jhmDiv">
+    <div class="ewmBox" style="background: #E7E7E7;">
+        <div class="ewmTit">欢迎语，欢迎观看直播</div>
+        <div class="ewmMoney"><input type="text" name="codeEwm" class="ewmInput" placeholder="激活码"/></div>
+        <button class="submitBtn" onclick="openRoomActivationCode()" style="margin-top: 1rem;">进入直播</button>
+        <div class="tishi">(无需激活码,现在去<span class="color-blue" onclick="openPay()">付费观看</span>)</div>
+    </div>
+</div>
+<!--激活码遮罩层end-->
+<!-- Swiper -->
+<div class="swiper-container" id="origin-img">
+    <div class="swiper-wrapper"></div>
+    <div class="swiper-pagination"></div>
+    <div class="upload"></div>
+</div>
+<div class="videoMask hide"></div>
+<input type="hidden" id="roomId" name="roomId" value="0">
+<input type="hidden" id="fileId" name="fileId" value="0">
+<input type="hidden" id="userId" name="userId" value="0">
+
+</body>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/rem.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/lightGallery.js"></script>
+<script type="text/javascript" src="js/mescroll.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/A-emoji.js" charset="utf-8"></script>
+<!-- <script src="js/dcVideo.js"></script> -->
+<script type="text/javascript" src="js/swiper.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<!-- <script src="js/review.js"></script> -->
+<script type="text/javascript" src="js/tysx2019.js?version=2.0.0"></script>
+<script type="text/javascript" src="js/dialog.js?version=2.0.0"></script>
+
+<script type="text/javascript" src="js/viewer/krpano.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var roomId2 = GetQueryString("roomId");
+        var id = GetQueryString("fileId");
+        if (!/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+            window.location.href = "http://" + h5Base + "/pc/review.html?fileId=" + id + "&roomId=" + roomId2;//PC
+        }
+        if (isWeiXin()) {
+            // 执行操作
+            $.ajax({
+                type: "POST",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/app/wx/app.jspx?fileId=" + id + "&roomId=" + roomId2,
+                dataType: "jsonp",
+                jsonp: "callback",
+                async: false,
+                cache: false,
+                success: function (data) {
+                    var status = data.loginWx;
+                    if (status == 1) {
+                        window.stop();
+                        window.location.href = data.loginUrl;
+                        return false;
+                    }
+                }
+            });
+        }
+        getHeight();
+        var myPlayer
+        var nScrollHight = 0; //滚动距离总长(注意不是滚动条的长度)
+        var nScrollTop = 0; //滚动到的当前位置
+        var zbjj = $(".zbjj").height();
+        var review = $(".review").height();
+        var videoBox = $(".videoBox").height();
+        var menuBox = $(".menuBox").height();
+        var ListConTit = $(".ListConTit").outerHeight();
+        var newtalkCon = $(".newtalkCon").height();
+        $(".mescroll").scroll(
+            function () {
+                nScrollHight = $(this)[0].scrollHeight;
+                nScrollTop = $(this)[0].scrollTop;
+                if (nScrollTop >= 0 && nScrollTop < $(".zbjj").height() - 1) {
+                    $(".menuBox li").removeClass("liactive");
+                    $(".one").addClass("liactive");
+                    $(".newtalkCon").css({
+                        "position": "absolute",
+                        "top": ListConTit
+                    })
+                    $("#talkLi .ListConTit").show();
+                    $("#talkLi")
+                        .css("padding-top", ListConTit + newtalkCon);
+                } else if (nScrollTop >= $(".zbjj").height() - 1
+                    && nScrollTop < $(".zbjj").height() - 1
+                    + $(".review").height()) {
+                    $(".menuBox li").removeClass("liactive");
+                    $(".two").addClass("liactive");
+                    $(".newtalkCon").css({
+                        "position": "absolute",
+                        "top": ListConTit
+                    })
+                    $("#talkLi .ListConTit").show();
+                    $("#talkLi")
+                        .css("padding-top", ListConTit + newtalkCon);
+                    return false
+                } else if (nScrollTop >= $(".zbjj").height() - 1
+                    + $(".review").height()) {
+                    $(".menuBox li").removeClass("liactive");
+                    $(".three").addClass("liactive");
+                    $(".newtalkCon").css({
+                        "position": "fixed",
+                        "top": videoBox + menuBox
+                    })
+                    $("#talkLi .ListConTit").hide();
+                    $("#talkLi").css("padding-top", newtalkCon);
+                    return false
+                }
+
+            });
+        $(".menuBox>ul>li>a").on('click', function () {
+            var winHeight = $(window).height();
+            var VideoBox = $(".videoBox").height();
+            var menuBox = $(".menuBox").height();
+            $(".talkLi").css("min-height", winHeight - VideoBox - menuBox - 2);
+            nScrollTop = $(".mescroll")[0].scrollTop;
+            if (nScrollTop >= 0 && nScrollTop < $(".zbjj").height() - 1) {
+                $(".menuBox li").removeClass("liactive");
+                $(".one").addClass("liactive");
+                $(".newtalkCon").css({
+                    "position": "absolute",
+                    "top": ListConTit
+                })
+                $("#talkLi .ListConTit").show();
+                $("#talkLi")
+                    .css("padding-top", ListConTit + newtalkCon);
+            } else if (nScrollTop >= $(".zbjj").height() - 1
+                && nScrollTop < $(".zbjj").height() - 1
+                + $(".review").height()) {
+                $(".menuBox li").removeClass("liactive");
+                $(".two").addClass("liactive");
+                $(".newtalkCon").css({
+                    "position": "absolute",
+                    "top": ListConTit
+                })
+                $("#talkLi .ListConTit").show();
+                $("#talkLi")
+                    .css("padding-top", ListConTit + newtalkCon);
+            } else if (nScrollTop >= $(".zbjj").height() - 1
+                + $(".review").height()) {
+                $(".menuBox li").removeClass("liactive");
+                $(".three").addClass("liactive");
+                $(".newtalkCon").css({
+                    "position": "fixed",
+                    "top": videoBox + menuBox
+                })
+                $("#talkLi .ListConTit").hide();
+                $("#talkLi").css("padding-top", newtalkCon);
+            }
+        })
+        var e = A_Emoji($('.box'));
+        var emojiconfig;
+        var defaults;
+        var arr;
+
+        //点击图片变大
+        var swiperStatus = false;
+        var swiper = new Swiper('.swiper-container', {
+            zoom: true,
+            width: window.innerWidth,
+            virtual: true,
+            spaceBetween: 20,
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'fraction',
+            },
+            on: {
+                click: function () {
+                    $('#origin-img').fadeOut('fast');
+                    this.virtual.slides.length = 0;
+                    this.virtual.cache = [];
+                    swiperStatus = false;
+                },
+            },
+        });
+        $(document).delegate(
+            ".thumb img",
+            "click",
+            function () {
+                clickIndex = $(this).index();
+                var imglist = $(this).parent().find("img");
+                $(imglist)
+                    .each(
+                        function (i, v) {
+                            console.log($(v).attr("src"))
+                            var imgs = $(v).attr("src")
+                            swiper.virtual
+                                .appendSlide('<div class="swiper-zoom-container"><img src="' + imgs + '" /></div>');
+                        })
+                swiper.slideTo(clickIndex);
+                $('#origin-img').fadeIn('fast');
+                swiperStatus = true;
+            });
+        //切换图状态禁止页面缩放
+        document.addEventListener('touchstart', function (event) {
+            if (event.touches.length > 1 && swiperStatus) {
+                event.preventDefault();
+            }
+        });
+        var lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            var now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false)
+        document.addEventListener('touchmove', function (e) {
+            if (swiperStatus) {
+                e.preventDefault();
+            }
+        });
+        $(document).on("click", ".liveBtn", function () {
+            if ($(this).find("img").attr("src") == "img/yiguanzhu.png") {
+                $(this).find("img").attr("src", "img/guanzhu.png");
+            } else {
+                $(this).find("img").attr("src", "img/yiguanzhu.png");
+            }
+        });
+        $('input[type="text"],textarea').on("blur", function () {
+            $("video").show();
+        });
+        $('input[type="text"],textarea').on('focus', function () {
+            var target = this;
+            setTimeout(function () {
+                target.scrollIntoViewIfNeeded();
+                console.log('scrollIntoViewIfNeeded');
+            }, 400);
+        });
+        $('.textarea').bind('input propertychange', function () {
+            if ($('.textarea').val().length != 0) {
+                $(".sendMessage").css("background", "#0084ff");
+            } else {
+                $(".sendMessage").css("background", "#b2daff");
+            }
+        });
+        //监测输入框内有无文字输入变化发送按钮颜色
+        $('.replyInput').bind('input propertychange', function () {
+            if ($('.replyInput').val().length != 0) {
+                $(".replyMessage").css("background", "#0084ff");
+            } else {
+                $(".replyMessage").css("background", "#b2daff");
+            }
+        });
+
+        //点击遮罩层隐藏输入框
+        $(".livemask").click(function () {
+            $(this).parent().addClass("hide");
+        });
+        if (GetQueryString("roomId") == null) {
+            $("input[name=roomId]").val(0);
+        } else {
+            $("input[name=roomId]").val(GetQueryString("roomId"));
+        }
+        if (GetQueryString("userId") == null) {
+            $("input[name=userId]").val(0);
+        } else {
+            $("input[name=userId]").val(GetQueryString("userId"));
+        }
+        if (GetQueryString("fileId") == null) {
+            $("input[name=fileId]").val(0);
+        } else {
+            $("input[name=fileId]").val(GetQueryString("fileId"));
+        }
+        var fileId = $("input[name=fileId]").val();
+        if (fileId == 0) {
+            layerOpen('请确认你要查看的文件')
+            // $.DialogBySHF.Alert({
+            //     Width: 350,
+            //     Height: 200,
+            //     Title: "警告",
+            //     Content: "请确认你要查看的文件！"
+            // });
+        } else {
+            // 鉴定登录
+            var roomId = $("input[name=roomId]").val();//直播间ID
+            var userId = $("input[name=userId]").val();
+            $.ajax({
+                type: "GET",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/app/room/vod/checklogin.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    terminalType: "h5",
+                    fileId: fileId,
+                    roomId: roomId
+                },
+                success: function (data) {
+                    var code = data.code;
+                    if (code == 1) {
+                        var roomNeedLogin = JSON.parse(data.data).roomNeedLogin;
+                        if (roomNeedLogin == 1) {
+                            window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId + "&fileId=" + fileId + "&userId=" + userId;
+                        } else {
+                            var userInfo = JSON.parse(data.data).userInfo;
+                            console.log("userInfo+" + userInfo);
+                            if (userInfo != undefined || userInfo != null) {
+                                userId = userInfo.userId;
+                                if (userId != undefined || userId != null) {
+                                    $("input[name=userId]").val(userId);
+                                }
+                            }
+                            //引导鉴权
+                            $.ajax({
+                                type: "GET",//请求方式 get/post
+                                url: "http://" + tomcatBase + "/ilive/app/room/vod/guide.jspx",
+                                dataType: "jsonp",
+                                jsonp: "callback",
+                                cache: false,
+                                data: {
+                                    terminalType: "h5",
+                                    fileId: fileId,
+                                    roomId: roomId
+                                },
+                                success: function (data) {
+                                    console.log(data);
+                                    var status = data.code;
+                                    if (status == 1) {
+                                        var liveEvent = data.data.liveEvent;
+                                        var viewAuthorized = liveEvent.viewAuthorized;
+                                        if (viewAuthorized == 2) {
+                                            window.location.href = "http://" + h5Base + "/phone/password.html?roomId=" + roomId + "&fileId=" + fileId;
+                                            return;
+                                        } else if (viewAuthorized == 3) {
+                                            //付费观看
+                                            var viewMoney = liveEvent.viewMoney;
+                                            if (viewMoney == undefined || viewMoney == "" || viewMoney == null) {
+                                                viewMoney = 0.01;
+                                            }
+                                            var totalAmount = parseFloat(viewMoney) * 100;
+                                            var id = $("input[name=userId]").val();
+                                            var liveTitle = liveEvent.liveTitle;
+                                            if (liveTitle == undefined) {
+                                                liveTitle = "";
+                                            }
+                                            var welcomeMsg = liveEvent.welcomeMsg;
+                                            $(".ewmTit").text(welcomeMsg);
+                                            $("#ewmMoneyDiv").text("￥" + viewMoney);
+                                            $("#checkbox-1-1").attr("wechatSweepUnifyTheOrder", "wechatSweepUnifyTheOrder(4,'" + liveTitle + "'," + totalAmount + "," + fileId + ")");
+                                            $("#submitBtnMoney").attr("onclick", "wechatSweepUnifyTheOrder(4,'" + liveTitle + "'," + totalAmount + "," + fileId + ")");
+                                            $("#ewmPayAgreement").attr("href", "http://" + h5Base + "/phone/agree.html?fileId=" + fileId + "&roomId=" + roomId + "&userId=" + id);
+                                            var openFCodeSwitch = liveEvent.openFCodeSwitch;
+                                            if (openFCodeSwitch == 1) {
+                                                $("#ewmCode").removeClass("hide");
+                                            } else {
+                                                $("#ewmCode").addClass("hide");
+                                            }
+                                            $("#payDiv").removeClass("hide");
+                                        } else {
+                                            selectFileList(fileId);
+                                            //获取当前文件信息
+                                            selectMediaFile(fileId);
+                                            //获取回看评论
+                                            pageNo = 1;
+                                            mescroll = new MeScroll("mescroll", {
+                                                down: {
+                                                    use: false,
+                                                },
+                                                up: {
+                                                    use: true,
+                                                    isBounce: true,
+                                                    offset: 100,
+                                                    auto: true,
+                                                    callback: UpCallback,
+                                                    empty: {
+                                                        tip: "暂无相关数据~"
+                                                    },
+                                                }
+                                            });
+                                            //禁止PC浏览器拖拽图片,避免与下拉刷新冲突;如果仅在移动端使用,可删除此代码
+                                            document.ondragstart = function () {
+                                                return false;
+                                            }
+                                            selectComments(pageNo);
+                                        }
+                                    } else {
+                                        layer.open({
+                                            content: '引导鉴权失败'
+                                            , btn: '确定'
+                                            , yes: function (index) {
+                                                errorfunction()
+                                            }
+                                        });
+                                        return false
+                                        // $.DialogBySHF.Alert({
+                                        //     Width: 350,
+                                        //     Height: 200,
+                                        //     Title: "警告",
+                                        //     Content: "引导鉴权失败",
+                                        //     ConfirmFun: errorfunction
+                                        // });
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                        window.location.href = "404.html";
+                    }
+                }
+            });
+        }
+    });
+
+
+    // 更多回看
+    function selectFileList(fileId) {
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/room/getrelatedlist.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                terminalType: "h5",
+                fileId: fileId,
+                pageNo: 1,
+                pageSize: 20
+
+            },
+            success: function (data) {
+
+                if (data.code == 1) {
+                    getReviewList(data)
+                } else {
+                    layerOpen('获取更多回看失败')
+                    return false
+                    // $.DialogBySHF.Alert({
+                    //     Width: 350,
+                    //     Height: 200,
+                    //     Title: "警告",
+                    //     Content: "获取更多回看失败"
+                    // });
+                }
+            }
+        });
+    }
+
+    // function getHeight() {
+    //     var winHeight = $(window).height();
+    //     var VideoBox = $(".videoBox").height();
+    //     var menuBox = $(".menuBox").height();
+    //     var talkCon = $(".newtalkCon").height();
+    //     var replyHeader = $(".replyHeader").height();
+    //     $(".contentBox").css("height", winHeight - VideoBox - menuBox - 2);
+    //     $(".livemask").css("height", winHeight - VideoBox);
+    //     $(".replyBox").css("height", winHeight - VideoBox - menuBox);
+    //     $(".replyCon").css("height",
+    //         winHeight - VideoBox - menuBox - replyHeader);
+    //     $(".notheme").css("height", winHeight - VideoBox - menuBox);
+    //     $(".videoMask").css("height", winHeight);
+    // }
+
+    function sendFileComment() {
+        var userId = $("input[name=userId]").val();//用户ID
+        var fileId = $("input[name=fileId]").val();//文件ID
+        var roomId = $("input[name=roomId]").val();//文件ID
+        if (userId == 0) {
+            window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId + "&fileId=" + fileId + "&userId=" + userId;
+            // if (confirm("是否进入登录？")) {
+            //     var roomId = $("input[name=roomId]").val();//直播间ID
+            //     window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId + "&fileId=" + fileId + "&userId=" + userId;
+            // } else {
+            //     //alert("不登录无法发送消息");
+            //     layerOpen('不登录用户无法、发送消息')
+            //     return false
+            //     // $.DialogBySHF.Alert({
+            //     //     Width: 350,
+            //     //     Height: 200,
+            //     //     Title: "警告",
+            //     //     Content: "不登录用户无法、发送消息"
+            //     // });
+            // }
+        } else {
+            $(".newmask").removeClass("hide");
+            //$("video").hide();
+            $('input[type="text"],textarea').focus();
+        }
+    }
+
+    //当前文件信息
+    function selectMediaFile(fileId) {
+        //获得文件信息
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/room/vod/fileinfo.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                terminalType: "h5",
+                fileId: fileId
+            },
+            success: function (data) {
+                console.log("时长");
+                console.log(data);
+                var status = data.code;
+                if (status == 1) {
+                    var mediaFile = data.data;
+                    if (mediaFile != null && mediaFile != undefined) {
+                        var mediaFileName = mediaFile.mediaFileName;
+                        var mediaFileDesc = mediaFile.mediaFileDesc;
+                        var filePath = mediaFile.filePath;
+                        var fileId = mediaFile.fileId;
+                        var viewNum = mediaFile.viewNum;
+                        var allowComment = mediaFile.allowComment;
+                        var fileCover = mediaFile.fileCover;
+                        $(document).attr('title', mediaFileName);
+                        $(".liveTitle").html(mediaFileName);
+                        _shareTitle = mediaFileName;
+                        _shareImg = fileCover;
+                        _shareTitle2 = mediaFileName;
+                        _shareImg2 = fileCover;
+                        _shareDesc = mediaFileDesc
+                        options = {
+                            shareUrl: window.location.href,
+                            cover: _shareImg,
+                            title: _shareTitle,
+                            content: _shareDesc
+                        };
+                        sessionStorage.setItem('review', JSON.stringify(options))
+                        //$("video").attr("src", filePath);
+                        myPlayer = videojs('video')
+                        myPlayer.ready(function () {
+                            this.src({src: filePath})
+                        })
+                        //获取企业
+                        var fileDuration = mediaFile.fileDuration;
+                        selectFileEnterprise(fileDuration, viewNum);
+                        if (allowComment == 1) {
+                            //允许评论
+                            $(".talkConRight").attr("onclick", "sendFileComment()");
+                        } else {
+                            //不允许评论
+                            $(".talkConRight").removeAttr("onclick");
+                        }
+                        if (mediaFile.vrFile == 1) {
+                            $("#videoBox").html("<div id=\"vrPlayer\" style=\"width:100%;height:100%;z-index:100;\"></div>");
+                            videoVrDiv(fileId);
+                        }
+                    }
+                } else {
+                    layer.open({
+                        content: data.message
+                        , btn: '确定'
+                        , yes: function (index) {
+                            errorfunction()
+                        }
+                    });
+                    // $.DialogBySHF.Alert({
+                    //     Width: 350,
+                    //     Height: 200,
+                    //     Title: "警告",
+                    //     Content: "获取当前文件失败",
+                    //     ConfirmFun: errorfunction
+                    // });
+                }
+            }
+        });
+    }
+
+    function videoVrDiv(fileId) {
+        embedpano({
+            swf: "js/viewer/krpano.swf",
+            xml: "/ilive/app/room/vod/vrPlayerXml.jspx?fileId=" + fileId,
+            target: "vrPlayer",
+            html5: "auto",
+            mobilescale: 1.0,
+            passQueryParameters: false
+        });
+    }
+
+    var mescroll;
+    var pageNo = 1;
+
+    //上拉刷新的回调
+    function UpCallback(event) {
+        console.log("上拉加载");
+        selectCommentsPage(pageNo);
+        pageNo = pageNo + 1;
+    }
+
+    var ret = false;
+
+    function selectCommentsPage(pageNo) {
+        var fileId = $("input[name=fileId]").val();//文件ID
+        getListDataFromNet(fileId, pageNo, 20, function (curPageData) {
+            mescroll.endSuccess(curPageData.length, ret);
+            //设置列表数据
+            //setListData(curPageData);
+        }, function () {
+            //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+            mescroll.endErr();
+        });
+    }
+
+    function setListData(curPageData) {
+        var HTML = "";
+        for (var i = 0; i < curPageData.length; i++) {
+            var comments = curPageData[i];
+            console.log(comments)
+            HTML += "<div class=\"talkline commentBox \" id=\"commentsId_" + comments.commentsId + "\">";
+
+            HTML += "	<div class=\"userImg\"><img src=" + comments.userImg + "></div>";
+            HTML += "	<div class=\"commentText\"><div class=\"inlineName\">" + comments.commentsUser + "</div><div class=\"comment\">" + comments.comments + "</div> </div>";
+            HTML += "</div>";
+
+            HTML += "</div>";
+        }
+        $("#talkBoxListDiv").append(HTML);
+    }
+
+    function getListDataFromNet(fileId, pageNo, pageSize, successCallback, errorCallback) {
+        //延时一秒,模拟联网
+        setTimeout(function () {
+            $.ajax({
+                type: "GET",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/app/room/vod/getcomments.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    terminalType: "h5",
+                    fileId: fileId,
+                    pageNo: pageNo,
+                    pageSize: pageSize
+                },
+                success: function (data) {
+                    if (data.code == 1) {
+                        var list = data.data;
+                        successCallback(list);
+                        if (data.totalPage > pageNo) {
+                            ret = true;
+                        } else {
+                            ret = false;
+                        }
+                    } else {
+                        var listData = [];
+                        successCallback(listData);
+                    }
+                },
+                error: errorCallback
+            });
+        }, 1000)
+    }
+
+    //获取评论
+    function selectComments(pageNo) {
+        var fileId = $("input[name=fileId]").val();//文件ID
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/room/vod/getcomments.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                terminalType: "h5",
+                fileId: fileId,
+                pageNo: pageNo,
+                pageSize: 20
+            },
+            success: function (data) {
+            	console.log("带参数获取评论");
+                console.log(data);
+                var status = data.code;
+                if (status == 1) {
+                    var list = data.data;
+                    var HTML = "";
+                    for (var i = 0; i < list.length; i++) {
+                        var comments = list[i];
+                        HTML += "<div class=\"talkline commentBox\" id=\"commentsId_" + comments.commentsId + "\">";
+                        HTML += "	<div class=\"userImg\"><img src=" + comments.userImg + "></div>";
+                        HTML += "	<div class=\"commentText\"><div class=\"inlineName\">" + comments.commentsUser + "</div><div class=\"comment\">" + comments.comments + "</div> </div>";
+                        HTML += "</div>";
+                    }
+                    if (pageNo == 1) {
+                        $("#talkBoxListDiv").html(HTML);
+                    } else {
+                        $("#talkBoxListDiv").append(HTML);
+                    }
+                } else {
+                    layerOpen(data.message)
+                    return false
+                    // $.DialogBySHF.Alert({
+                    //     Width: 350,
+                    //     Height: 200,
+                    //     Title: "警告",
+                    //     Content: date.message
+                    // });
+                }
+            },
+            error: function (data) {
+            }
+        });
+    }
+
+    //发表评论
+    function saveComments() {
+        var userId = $("input[name=userId]").val();//用户ID
+        var fileId = $("input[name=fileId]").val();//文件ID
+
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/room/vod/AllowComment.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                fileId: fileId
+            },
+            success: function (data) {
+                console.log(data);
+                var status = data.code;
+                if (status == 1) {
+                	 if (userId == 0) {
+                         window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId + "&fileId=" + fileId + "&userId=" + userId;
+                         // if (confirm("是否进入登录？")) {
+                         //     var roomId = $("input[name=roomId]").val();//直播间ID
+                         //     window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId + "&fileId=" + fileId + "&userId=" + userId;
+                         // } else {
+                         //     alert("不登录无法发送消息");
+                         //     $.DialogBySHF.Alert({
+                         //         Width: 350,
+                         //         Height: 200,
+                         //         Title: "警告",
+                         //         Content: "不登录用户无法、发送消息"
+                         //     });
+                         // }
+                         return false;
+                     } else {
+                         var msgContent = $("input[name=msgContent]").val();//发送内容
+                         if (msgContent.replace("\s+", "") == "" || msgContent == undefined) {
+                             layerOpen('发送内容不能为空')
+                             // $.DialogBySHF.Alert({
+                             //     Width: 350,
+                             //     Height: 200,
+                             //     Title: "警告",
+                             //     Content: "发送内容不能为空"
+                             // });
+                             return false;
+                         } else {
+                             $.ajax({
+                                 type: "GET",//请求方式 get/post
+                                 url: "http://" + tomcatBase + "/ilive/app/room/vod/pushcomments.jspx",
+                                 dataType: "jsonp",
+                                 jsonp: "callback",
+                                 cache: false,
+                                 data: {
+                                     terminalType: "h5",
+                                     userId: userId,
+                                     fileId: fileId,
+                                     comments: encodeURI(msgContent)
+                                 },
+                                 success: function (data) {
+                                     console.log(data);
+                                     var status = data.code;
+                                     if (status == 1) {
+                                         var comments = data.data;
+                                         var HTML = "<div class=\"talkline commentBox\" id=\"commentsId_" + comments.commentsId + "\">";
+                                         HTML += "	<div class=\"userImg\"><img src=" + comments.userImg + "></div>";
+                                         HTML += "	<div class=\"commentText\"><div class=\"inlineName\">" + comments.commentsUser + "</div><div class=\"comment\">" + comments.comments + "</div> </div>";
+                                         HTML += "</div>";
+
+                                         $("#talkBoxListDiv").prepend(HTML);
+                                         $(".newmask").addClass("hide");
+                                         $("textarea[name=msgContent]").val("")
+                                     } else {
+                                         layerOpen(data.message)
+                                         setTimeout(function () {
+                                             window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId + "&fileId=" + fileId + "&userId=" + userId;
+                                         }, 3000)
+
+                                         return false
+                                         // $.DialogBySHF.Alert({
+                                         //     Width: 350,
+                                         //     Height: 200,
+                                         //     Title: "警告",
+                                         //     Content: data.message
+                                         // });
+                                     }
+                                 }
+                             });
+                         }
+                     }
+
+                } else {
+                	layerOpen('评论已关闭')
+                }
+            }
+        });
+
+
+
+    }
+
+    function selectFileEnterprise(fileTimer, viewNum) {
+        var userId = $("input[name=userId]").val();//用户ID
+        var fileId = $("input[name=fileId]").val();//文件ID
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/file/enterprise.jspx",
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                terminalType: "h5",
+                userId: userId,
+                fileId: fileId
+            },
+            success: function (data) {
+                if (data.code == 1) {
+                    var enterprise = data.data;
+                    if (enterprise != null || enterprise != undefined) {
+                        var enterpriseId = enterprise.enterpriseId;//企业ID
+                        var enterpriseImg = enterprise.enterpriseImg;//企业Logo
+                        var enterpriseName = enterprise.enterpriseName;//企业名称
+                        var enterpriseDesc = enterprise.enterpriseDesc;//企业描述
+                        //var concernTotal = enterprise.concernTotal;//粉丝数
+
+
+                        /**caibin**/
+                        var cbCount = 0
+                        if (enterpriseId == 1969){ //李曰
+                            cbCount = 15000
+                        }
+                        /**caibin**/
+                        var concernTotal = cbCount + enterprise.concernTotal;//粉丝数
+                        if (concernTotal > 9999) {
+                            concernTotal = (concernTotal / 10000).toFixed(1) / 1 + 'w'
+                        }
+
+
+                        concernTotalTemp = concernTotal;
+
+
+
+                        var concernStatus = enterprise.concernStatus;//是否关注
+
+                        var HTML = '<div class="zbjjHeader" id="enterpriseId_' + enterpriseId + '">';
+                        HTML += '       <div class="zbjjLeft">';
+                        HTML += '		    <div class="liveTitle"  id="liveTitle" title="' + _shareTitle + '">' + _shareTitle + '</div>';
+                        HTML += "		    <div class=\"small-liveTitle \"><i class='iconfont icon-shijian'></i>" + fileTimer + "</div>";
+                        HTML += "       </div>";
+                        HTML += '       <div class="zbjjdesc">';
+                        HTML += '           <div class="liveDesc">' + _shareDesc + '</div>';
+                        HTML += '       </div>'
+                        HTML += '       <div class="xmore hide"><i class="iconfont icon-youjiantou"></i></div>';
+                        if (viewNum > 9999) {
+                            viewNum = (viewNum / 10000).toFixed(1) / 1 + 'w'
+                        }
+                        HTML += "       <div class=\"zbjjHeaderCon\">";
+                        HTML += "           <div class=\"peopleNum\">";
+                        HTML += "               <i class=\"peopleIcon iconfont icon-video\"><span class=\"onlineNumberSpan\">" + viewNum + " 次播放</span></i>";
+                        HTML += "           </div>";
+                        HTML += "           <div class=\"shareCon\">";
+                        HTML += "               <i id=\"dianZan\" class=\"collIcon iconfont icon-dianzan\"  title=\"点赞\"><span class=\"onlineDianZan\">55.5w</span></i>";
+                        HTML += "           </div>";
+                        HTML += "       </div>";
+                        HTML += "</div>";
+                        HTML += '<div class="zbjcompany" onclick="zbjcompany(' + enterpriseId + ')" id="zbjcompany">';
+                        HTML += '<i class="iconfont icon-youjiantou"></i>';
+                        HTML += '<div class="companyimg"></div>';
+                        HTML += '<div class="company">';
+                        HTML += '<div class="small-liveTitle">';
+                        HTML += '<span>' + enterpriseName + '</span>';
+                        /**
+                         * 企业认证状态 0未提交认证 1认证中 4认证通过 5认证失败
+                         */
+                        var certStatus = enterprise.certStatus;
+                        if (certStatus == 4) {
+                            var guanzhu = {
+                                type: 1,
+                                className: 'guanzhu icon-jia',
+                            }
+                            var concernStatus = enterprise.concernStatus;//是否关注
+                            if (concernStatus != 0) {
+                                guanzhu = {
+                                    type: 0,
+                                    className: 'yiguanzhu',
+                                }
+                            }
+                            HTML += '<span class=" iconfont btn ' + guanzhu.className + ' " id="concernStatus" onclick="updateConcernStatus(' + enterpriseId + ',' + guanzhu.type + ',event)"></span>'
+                        }
+                        HTML += '<span class="zhuye btn iconfont icon-jia1"></span>'
+                        HTML += '</div>';
+                        HTML += '<div class="small-fans" id="concernTotal">粉丝数: <span class="smallText">' + concernTotal + '</span> 人</div>';
+                        HTML += '</div>';
+                        HTML += '</div>';
+                        $("#zbjj").html(HTML);
+                        getEnterprise(enterpriseId)
+
+                        var liveDescHeight = $('.liveDesc').height()
+                        var zbjjdescHeight = $('.zbjjdesc').height()
+
+                        if (zbjjdescHeight < liveDescHeight) {
+                            $('.xmore').removeClass('hide')
+                            $('.xmore').on('click', function () {
+                                $(this).addClass('hide').prev().addClass('toggle')
+                            })
+                        }
+
+
+                        var isReg = data.isReg;
+                        if (isReg == 0) {
+                            $("#dianZan").attr("onclick", "saveMediaFile()");
+                        } else {
+                            $("#dianZan").removeAttr("onclick").addClass('checked');
+                            // $("#shouchang").css({
+                            //     "background": "url(img/dianzan.png) no-repeat",
+                            //     "background-size": "100% 100%"
+                            // });
+                        }
+                    }
+                } else {
+                    layerOpen(data.message)
+                    return false
+                    // $.DialogBySHF.Alert({
+                    //     Width: 350,
+                    //     Height: 200,
+                    //     Title: "警告",
+                    //     Content: data.message
+                    // });
+                }
+            }
+        });
+    }
+
+    //点赞
+    function saveMediaFile() {
+        var userId = $("input[name=userId]").val();//用户ID
+        var fileId = $("input[name=fileId]").val();//文件ID
+        console.log(fileId);
+        if (true) {
+            /* if(confirm("是否进入登录？")){
+                var roomId = $("input[name=roomId]").val();//直播间ID
+                window.location.href="http://"+h5Base+"/phone/login.html?roomId="+roomId+"&fileId="+fileId+"&userId="+userId;
+            }else{
+                $.DialogBySHF.Alert({
+                      Width: 350,
+                      Height: 200,
+                      Title: "警告",
+                      Content: "不登录无法进行收藏"
+                 });
+            }
+        }else{ */
+            $.ajax({
+                type: "GET",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/register/registerMedia.jspx",
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    terminalType: "h5",
+                    fileId: fileId,
+                    userId: userId
+                },
+                success: function (data) {
+                    console.log(data);
+                    //$("#shouchang").removeAttr("onclick").addClass('checked');
+                    $("#dianZan").removeAttr("onclick").addClass('checked');
+                    // $("#shouchang").css({
+                    //     "background": "url(img/dianzan.png) no-repeat",
+                    //     "background-size": "100% 100%"
+                    // });
+                    /* if(data.code==1){
+                        $("#shouchang").removeAttr("onclick");
+                        $("#shouchang").css({"background":"url(img/dianzan.png) no-repeat","background-size": "100% 100%"});
+                    } */
+                    /*  else{
+                        $.DialogBySHF.Alert({
+                              Width: 350,
+                              Height: 200,
+                              Title: "警告",
+                              Content: data.message
+                         });
+                    } */
+                }
+            });
+
+        }
+    }
+
+
+    function selectMediaFileById(fileId) {
+        var roomId = $("input[name=roomId]").val();//直播间ID
+        var userId = $("input[name=userId]").val();//用户ID
+        if (userId == "" || userId == undefined) {
+            userId = 0;
+        }
+        window.location.href = "http://" + h5Base + "/phone/review.html?fileId=" + fileId + "&userId=" + userId + "&roomId=" + roomId;
+    }
+
+    //关注
+    // function updateConcernStatus(enterpriseId, concernStatus) {
+    //     var userId = $("input[name=userId]").val();//用户ID
+    //     if (userId == 0) {
+    //         var roomId = $("input[name=roomId]").val();//直播间ID
+    //         window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId;
+    //         return false;
+    //     }
+    //     $.ajax({
+    //         type: "GET",//请求方式 get/post
+    //         url: "http://" + tomcatBase + "/ilive/app/room/enterprise/concern.jspx",
+    //         dataType: "jsonp",
+    //         jsonp: "callback",
+    //         cache: false,
+    //         data: {
+    //             terminalType: "h5",
+    //             enterpriseId: enterpriseId,
+    //             userId: userId,
+    //             type: concernStatus
+    //         },
+    //         success: function (data) {
+    //             console.log(data);
+    //             var status = data.code;
+    //             //401 手机登录
+    //             //402     绑定手机号
+    //             //403    微信打开
+    //             if (status == 401) {
+    //                 if (confirm("是否进入登录？")) {
+    //                     window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId;
+    //                 } else {
+    //                     $.DialogBySHF.Alert({
+    //                         Width: 350,
+    //                         Height: 200,
+    //                         Title: "警告",
+    //                         Content: data.message
+    //                     });
+    //                 }
+    //             } else if (status == 402) {
+    //                 saveMessagerPhoneNumber();
+    //             } else if (status == 403) {
+    //
+    //             } else if (status == 1) {
+    //                 if (concernStatus == 0) {
+    //                     $("#concernStatus").attr("src", "img/guanzhu.png").attr("onclick", "updateConcernStatus(" + enterpriseId + ",1)");
+    //                     layerOpen(data.message)
+    //                     return false
+    //                     // $.DialogBySHF.Alert({
+    //                     //     Width: 350,
+    //                     //     Height: 200,
+    //                     //     Title: "关注提示",
+    //                     //     Content: data.message
+    //                     // });
+    //                 } else {
+    //                     $("#concernStatus").attr("src", "img/yiguanzhu.png").attr("onclick", "updateConcernStatus(" + enterpriseId + ",0)");
+    //                     layer.open({
+    //                         content: data.message
+    //                         ,btn: ['是', '否']
+    //                         ,yes: function(){
+    //                             openConfirmApp()
+    //                         }
+    //                         ,no: function (index) {
+    //                             layer.close(index)
+    //                             //temporaryCancelApp()
+    //                         }
+    //                     });
+    //                     // $("#btnDialogBySHFConfirm").val("现在打开");
+    //                     // $("#btnDialogBySHFCancel").val("暂时不用");
+    //                 }
+    //             } else {
+    //                 layerOpen('关注或取消关注失败')
+    //                 // $.DialogBySHF.Alert({
+    //                 //     Width: 350,
+    //                 //     Height: 200,
+    //                 //     Title: "警告",
+    //                 //     Content: "关注或取消关注失败"
+    //                 // });
+    //             }
+    //         }
+    //     });
+    // }
+
+    // //现在打开
+    // function openConfirm() {
+    //     console.log("你确认了查看直播方更多直播内容");
+    //     window.location.href = "http://apizb.tv189.com/version/wap/download/ios";
+    // }
+    //
+    // //暂时不用
+    // function temporaryCancel() {
+    //     console.log("你放弃查看直播方更多直播内容");
+    // }
+
+
+    $(".closepass .icon-close").click(function () {
+        $(".passMask").fadeOut();
+    });
+
+    function selectCK() {
+        console.log(window.navigator)
+        var checkbox = $("#checkbox-1-1").prop("checked");
+        if ($("#checkbox-1-1").prop("checked")) {
+            $("#submitBtnMoney").css("background", "#86929c");
+            $("#submitBtnMoney").removeAttr("onclick");
+        } else {
+            $("#submitBtnMoney").css("background", "#0084ff");
+            var wechatSweepUnifyTheOrder = $("#checkbox-1-1").attr("wechatSweepUnifyTheOrder");
+            $("#submitBtnMoney").attr("onclick", wechatSweepUnifyTheOrder);
+        }
+    }
+
+</script>
+<script src="js/videojs/video.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://tp.nty.tv189.com/h5/mainsite/lib/tv189/jclient.js"></script>
+<script src="js/share_other.js"></script>
+</html>

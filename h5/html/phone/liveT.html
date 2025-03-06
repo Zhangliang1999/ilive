@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+	<meta name="format-detection" content="telephone=no">
+	<meta name="description" content=""/>
+	<title>天翼直播平台</title>
+	<script type="text/javascript" src="js/rem.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="js/videojs/video-js.min.css">
+	<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_872913_nyh0svultme.css"/>
+	<link rel="stylesheet" href="js/cdn/mescroll.min.css">
+	<link rel="stylesheet" type="text/css" href="js/need/layer.css">
+	<link rel="stylesheet" href="js/cdn/swiper.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.countdown.css?v=411"/>
+	<link rel="stylesheet" type="text/css" href="css/lightGallery.css?v=411"/>
+	<link rel="stylesheet" type="text/css" href="css/live.min.css?v=411"/>
+	<link rel="stylesheet" type="text/css" href="css/live/live.min.css?v=411"/>
+	<link rel="stylesheet" type="text/css" href="css/review/dcVideo.css?v=411"/>
+	<link rel="stylesheet" type="text/css" href="css/2019style.min.css?v=411"/>
+	<link rel="stylesheet" type="text/css" href="css/newlogin.min.css"/>
+	<!--九宫格-->
+	<link rel="stylesheet" type="text/css" href="css/draw.css?v=411"/>
+	<!--砸金蛋-->
+	<link rel="stylesheet" type="text/css" href="css/goldeggs.css?v=411"/>
+	<!--摇一摇-->
+	<link rel="stylesheet" type="text/css" href="css/shake.css?v=411"/>
+</head>
+<body style="cursor: pointer; font-size: 16px;">
+<div class="videoBox" style="height: 231.188px;">
+    <div id="videoImg" style="width: 100%;height: 100%;position: relative;">
+    	<video id="video" src="" controls preload="auto" webkit-playsinline="webkit-playsinline" playsinline="playsinline" style="width:100%;height:100%;z-index:9999"></video>
+    </div>
+    <!-- <div class="danumuTit"></div>
+    <div class="videoBtn">
+        <div class="playBox"><i class="iconfont icon-play btnPlay"></i></div>
+        <div class="videoRight">
+            <div class="expandBox aaa">
+                <i class="iconfont icon-fangda" id="fullScreenBtn" aaa="0"></i>
+            </div>
+        </div>
+    </div>
+    <div class="barrage">
+        <div class='danmubox'>
+            <div class="mask">
+                内容在这里显示
+            </div>
+        </div>
+    </div>
+    <div class="no-strat hide" id="stratLive">
+        <div class="textMask hide" id="imageComtent">本场直播还未开始</div>
+        <div class="yuyueBox hide" id="liveStart">
+            <button class="yuyue appointment" onclick="saveAppointment()">我要预约</button>
+        </div>
+    </div>
+    <div class="no-ended hide" id="endLive">
+        <div class="textMask">本场直播已结束</div>
+    </div>
+    <div class="no-timeing hide" id="timeStart">
+        <div class="timeone">
+            <p id="customContent"></p>
+            <p>距离直播开始 <span id="startTimeDay">23</span> 天</p>
+        </div>
+        <div id="countdown"></div>
+        <div class="yuyueBox">
+            <button class="yuyue appointment" onclick="saveAppointment()">我要预约</button>
+        </div>
+    </div>
+    <div class="logo hide"></div>
+    <div class="videoPlay"><i class="iconfont icon-ziyuan"></i></div>
+    <div id="iLiveRollingAdvertising" class="marqueeBox hide" align="left"></div> -->
+</div>
+<div class="mainBox">
+    <div class="firstBox">
+        <div class="menuBox">
+            <ul id="menuBoxDIV">
+             <li class="liactive" livemsgtype="4">
+             	<span>直播简介</span>
+             </li>
+            </ul>
+        </div>
+        <div class="contentBox" style="height: 454px;">
+            <ul id="contentBoxDIV" style="width: 300%; left: 0%;">
+            	<li class="zbjj" id="enterpriseList" style="height: 456px;">
+            		<div class="zbjjHeader" id="enterpriseId_100">
+            			<div class="zbjjLeft">
+            			<div class="liveTitle" title="www;;;;kkkk" id="liveTitle">
+
+            			</div>
+	            		<div class="small-liveTitle">
+	            			天翼直播
+	            		</div>
+	            		<div class="small-liveTitle" id="startTime">
+
+	            		</div>	</div>
+					</div>
+
+					<div class="zbjjline"></div>
+					<div class="zbjjMain">
+						<div class="zbjjList">
+							<div class="ListConTit">
+								内容介绍
+							</div>
+						<div id="liveDesc_enterpriseId" class="ListCon">
+						</div>
+					</div>
+				</div>
+				</li>
+
+				<li class="talkLi" id="talkLi" style="height: 456px;">
+					<div id="topTalkBoxList2">
+					</div>
+					<div id="talkBoxList2" style="padding-bottom: 1rem;">
+					</div>
+				</li>
+
+				<li class="review" id="review" style="height: 456px;">
+					<div class="reviewList" id="fileId_3247" onclick="selectMediaFile(3247)">
+						<div class="reviewLeft">
+							<img src="http://vod.zbt.tv189.net/img/2018-1023/1540298044611.jpg" alt="">
+							<div class="reviewMask">
+								<span>00:04:11</span>
+							</div>
+						</div>
+						<div class="reviewRight">
+							<div class="reviewRightTop">
+								www;;;;kkkk-20181023202615
+							</div>
+							<div class="reviewRightBottom">
+								2018-10-23 20:32:19
+							</div>
+							<div class="reviewIcon">
+								<div class="reviewIcondiv">
+									<i class="reviewplayIcon iconfont icon-video reviewplay">
+										<span>0次</span>
+									</i>
+								</div>
+								<div class="reviewIcondiv">
+									<i class="reviewplayIcon iconfont icon-yan gongkai">
+										<span>公开观看</span>
+									</i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="reviewList" id="fileId_3246" onclick="selectMediaFile(3246)">
+						<div class="reviewLeft">
+							<img src="http://vod.zbt.tv189.net/img/2018-1023/1540297654610.jpg" alt="">
+							<div class="reviewMask">
+								<span>00:04:39</span>
+							</div>
+						</div>
+						<div class="reviewRight">
+							<div class="reviewRightTop">
+								www;;;;kkkk-20181023201807
+							</div>
+							<div class="reviewRightBottom">
+								2018-10-23 20:26:00
+							</div>
+							<div class="reviewIcon">
+								<div class="reviewIcondiv">
+									<i class="reviewplayIcon iconfont icon-video reviewplay"><span>0次</span></i>
+								</div>
+								<div class="reviewIcondiv">
+									<i class="reviewplayIcon iconfont icon-yan gongkai"><span>公开观看</span></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="reviewList" id="fileId_3245" onclick="selectMediaFile(3245)">
+						<div class="reviewLeft">
+							<img src="http://vod.zbt.tv189.net/img/2018-1023/1540297504610.jpg" alt="">
+							<div class="reviewMask">
+								<span>00:03:45</span>
+							</div>
+						</div>
+						<div class="reviewRight">
+							<div class="reviewRightTop">
+								www;;;;kkkk-20181023201807
+							</div>
+							<div class="reviewRightBottom">
+								2018-10-23 20:23:19
+							</div>
+							<div class="reviewIcon">
+								<div class="reviewIcondiv">
+									<i class="reviewplayIcon iconfont icon-video reviewplay"><span>0次</span></i>
+								</div>
+								<div class="reviewIcondiv">
+									<i class="reviewplayIcon iconfont icon-yan gongkai"><span>公开观看</span></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--下载遮罩层end-->
+<!-- Swiper -->
+<div class="swiper-container swiper-container-virtual swiper-container-horizontal swiper-container-android" id="origin-img">
+    <div class="swiper-wrapper"></div>
+    <div class="swiper-pagination swiper-pagination-fraction"><span class="swiper-pagination-current">1</span> / <span class="swiper-pagination-total">1</span></div>
+    <div class="upload"></div>
+</div>
+<input type="hidden" id="roomId" name="roomId" value="1861">
+<input type="hidden" id="userId" name="userId" value="131">
+<input type="hidden" id="liveEventId" name="liveEventId" value="4327">
+<input type="hidden" id="commentsMsgId" name="commentsMsgId" value="0">
+
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/rem.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/lightGallery.js"></script>
+<script type="text/javascript" src="js/A-emoji.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/swiper.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<!-- <script type="text/javascript" src="js/main.min.js"></script> -->
+<script type="text/javascript" src="js/tysx2019.js"></script>
+<script type="text/javascript" src="js/mescroll.js"></script>
+<script type="text/javascript" src="js/jquery.countdown.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/jQuery.Marquee/1.5.0/jquery.marquee.js"></script>
+<script type="text/javascript">
+    // var roomName = "";
+    //
+    // var roomId2 = GetQueryString("roomId");
+    if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+         window.location.href = "http://" + h5Base + "/pc/playT.html";//PC
+    }
+    console.log("isWx:" + isWeiXin());
+
+    if (isWeiXin()) {
+        // 执行操作
+        $.ajax({
+            type: "POST",//请求方式 get/post
+            url: "http://" + tomcatBase + "/ilive/app/wx/app.jspx?roomId=" + roomId2,
+            dataType: "jsonp",
+            jsonp: "callback",
+            async: false,
+            cache: false,
+            success: function (data) {
+                var status = data.loginWx;
+                if (status == 1) {
+                    window.stop();
+                    window.location.href = data.loginUrl;
+                    return;
+                }
+            }
+        });
+    }
+
+    function selectCK() {
+        console.log(window.navigator)
+        var checkbox = $("#checkbox-1-1").prop("checked");
+        if ($("#checkbox-1-1").prop("checked")) {
+            $("#submitBtnMoney").css("background", "#86929c");
+            $("#submitBtnMoney").removeAttr("onclick");
+        } else {
+            $("#submitBtnMoney").css("background", "#0084ff");
+            var wechatSweepUnifyTheOrder = $("#checkbox-1-1").attr("wechatSweepUnifyTheOrder");
+            $("#submitBtnMoney").attr("onclick", wechatSweepUnifyTheOrder);
+        }
+    }
+
+    function getHeight() {
+        var winHeight = $(window).height();
+        $(".videoBox").height($(window).width() * 9 / 16);
+        var VideoBox = $(".videoBox").height();
+        var menuBox = $(".menuBox").height();
+        var talkCon = $(".newtalkCon").height();
+        var replyHeader = $(".replyHeader").height();
+        var drawTit = $(".drawTitle").height() + 1;
+        var voteButton = $(".voteendButton").height();
+        var voteConBtn = $(".voteconButton").height();
+        $(".contentBox").css("height", winHeight - VideoBox - menuBox - 2);
+        $(".livemask").css("height", winHeight - VideoBox);
+        $(".giftMask").css("height", winHeight - VideoBox - menuBox - 2);
+        $(".rewardMask").css("height", winHeight - VideoBox - 2);
+        $(".giftmask").css("height", winHeight);
+        $(".passMask").css("height", winHeight);
+        $(".contentBox>ul>li").css("height", winHeight - VideoBox - menuBox);
+        $(".replyBox").css("height", winHeight - VideoBox - menuBox);
+        $(".replyCon").css("height", winHeight - VideoBox - menuBox - replyHeader);
+        $(".talkLi").css("height", winHeight - VideoBox - menuBox - talkCon);
+        $(".notheme").css("height", winHeight - VideoBox - menuBox);
+        $(".videoMask").css("height", winHeight);
+        $(".drawMask").css("height", winHeight - VideoBox);
+        $(".drawContent").css("height", winHeight - VideoBox - drawTit);
+        $(".voteMask").css("height", winHeight - VideoBox);
+        $(".voteContent").css("height", winHeight - VideoBox - drawTit);
+        $(".rewardContent").css("height", winHeight - VideoBox - drawTit);
+        $(".voteResult").css("height", winHeight - VideoBox - drawTit - voteButton);
+        $(".voteMain").css("height", winHeight - VideoBox - drawTit - voteConBtn);
+        $(".downloadMask").css("height", winHeight - VideoBox);
+        $(".downloadContent").css("height", winHeight - VideoBox - drawTit);
+        $(".downloadeResult").css("height", winHeight - VideoBox - drawTit - voteButton);
+        $(".downloadMain").css("height", winHeight - VideoBox - drawTit - voteConBtn);
+        $(".ewmMask").css("height", winHeight);
+    }
+
+
+</script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://sdk.bst.tv189.com/dc/bstdcins_100033v3.js"></script>
+<script type="text/javascript" src="http://tp.nty.tv189.com/h5/mainsite/lib/tv189/jclient.js"></script>
+<script type="text/javascript" src="js/share.js"></script>
+<!-- <script type="text/javascript" src="js/share_tyapp.js"></script> -->
+<script src="js/basetemp.js"></script>
+<script>
+
+	$("#liveTitle").text(tempRoomName);
+	$("#startTime").text(tempStartTime);
+	$("#roomNum").text(TempRoomNumber);
+	$("#video").attr("src",tempVideoAddr);
+</script>
+
+</body>
+</html>

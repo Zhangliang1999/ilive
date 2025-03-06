@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>直播</title>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/mescroll.css" />
+<link rel="stylesheet" type="text/css" href="css/lightGallery.css" />
+<link rel="stylesheet" href="css/live.css" />
+<link rel="stylesheet" href="css/dcVideo.css" />
+<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+	<div class="theme">
+		<div id="mescroll" class="mescroll">
+			<div class="hintBox hide">有一条新的内容，下拉刷新观看</div>
+			<div class="notheme hide">
+				<div class="nothemeBox"></div>
+				<p class="nothemeText">暂无话题发布...</p>
+			</div>
+			<div id="topTalkBoxList1"></div>
+			<div class="themeCon" id="themeDiv" ></div>
+			
+			<div class="replyBox hide">
+				<div class="replyHeader">
+					<div class="replyDiv"></div>
+					<div class="closeReply"></div>
+				</div>
+				<div class="replyCon">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="replymask hide">
+		<div class="livemask"></div>
+		<div class="talkCon box">
+			<input class="replyInput" type="text"
+				placeholder="回复:" name="topicContent"/>
+			<button class="replyMessage" onclick="saveTopicContent()">发送</button>
+		</div>
+	</div>
+
+	<!-- Swiper -->
+	<div class="swiper-container" id="origin-img">
+		<div class="swiper-wrapper"></div>
+		<div class="swiper-pagination"></div>
+		<div class="upload"></div>
+	</div>
+	<input type="hidden" id="commentsMsgId" name="commentsMsgId" value="0"> 
+</body>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lightGallery.js"></script>
+<script src="js/mescroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/A-emoji.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script src="js/dcVideo.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function() {
+		var winHeight = $(window).height();
+		var replyHeader = $(".replyHeader").height();
+		$(".livemask").css("height", winHeight);
+		$(".replyBox").css("height", winHeight);
+		$(".replyCon").css("height", winHeight - replyHeader);
+		$(".theme").css("height", winHeight);
+		var e = A_Emoji($('.box'));
+		var emojiconfig;
+		var defaults;
+		var arr;
+		var swiperStatus=false;
+		var swiper = new Swiper('.swiper-container', {
+			zoom : true,
+			width : window.innerWidth,
+			virtual : true,
+			spaceBetween : 20,
+			pagination : {
+				el : '.swiper-pagination',
+				type : 'fraction',
+			},
+			on : {
+				click : function() {
+					$('#origin-img').fadeOut('fast');
+					this.virtual.slides.length = 0;
+					this.virtual.cache = [];
+					swiperStatus = false;
+
+				},
+			},
+
+		});
+		$(document).delegate(".thumb img","click",function() {
+			clickIndex = $(this).index();
+			var imglist = $(this).parent().find("img");
+			$(imglist).each(function(i, v) {
+				console.log($(v).attr("src"))
+				var imgs = $(v).attr("src")
+				swiper.virtual.appendSlide('<div class="swiper-zoom-container"><img src="'+imgs+'" /></div>');
+			})					
+			swiper.slideTo(clickIndex);
+			$('#origin-img').fadeIn('fast');
+			swiperStatus = true;
+
+		})					
+		//切换图状态禁止页面缩放	
+		document.addEventListener('touchstart', function(event) {
+			if (event.touches.length > 1 && swiperStatus) {
+				event.preventDefault();
+			}
+		})
+		var lastTouchEnd = 0;
+		document.addEventListener('touchend', function(event) {
+			var now = (new Date()).getTime();
+			if (now - lastTouchEnd <= 300) {
+				event.preventDefault();
+			}
+			lastTouchEnd = now;
+		}, false)
+
+		document.addEventListener('touchmove', function(e) {
+			if (swiperStatus) {
+				e.preventDefault();
+			}
+		})
+
+	});
+</script>
+<script type="text/javascript" charset="utf-8">
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = decodeURI(window.location.search.substr(1)).match(reg);
+    if (r != null)return unescape(r[2]);
+    return null;
+}
+var roomId = 0;
+var userId = 0;
+if(GetQueryString("roomId")!=null){
+	roomId=GetQueryString("roomId");
+}
+if(GetQueryString("userId")!=null){
+	userId=GetQueryString("userId");
+}
+var mescroll;
+$(function() {
+	mescroll = new MeScroll("mescroll", { 
+		down: {
+			hardwareClass:"mescroll-hardware",
+			callback: selectMessageLIVE
+		},
+		up: {
+			use:false,
+		}
+	});
+	selectMessageLIVE();
+});
+var commentsAllow = 0;
+//获取话题
+function selectMessageLIVE(){
+	if(roomId==0){
+		alert("直播间不存在");
+	}else{
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "http://" + tomcatBase + "/ilive/message/selectMessageLIVE.jspx",
+			dataType : "jsonp",
+			jsonp : "callback",
+			cache : false,
+			data : {
+				roomId : roomId
+			},
+			success : function(data) {
+				var status = data.code;
+				console.log(data);
+				if(status==1){
+					if(mescroll){
+						mescroll.endSuccess();
+					}
+					var messageList = data.data;
+					commentsAllow = data.commentsAllow;
+					var themeDiv = "";
+					var topTalkBoxList1="";
+					if(messageList.length>0){
+						for (var i = 0; i < messageList.length; i++) {
+							var iLiveMessage = messageList[i];
+							if (iLiveMessage.top == 0) {
+								//未置顶
+								themeDiv += "<div class=\"themeBox\" id=\"msgId_"+iLiveMessage.msgId+"\">";
+								themeDiv += "	<div class=\"themeHeader\">";
+								themeDiv += "		<div class=\"themeName\">";
+								themeDiv += "			<span class=\"inlineName\">"+iLiveMessage.senderName+"：</span>";
+								themeDiv += "			<span class=\"hottheme\"><i class=\"fireIcon\"></i> "+iLiveMessage.senderImage+"</span>";
+								themeDiv += "		</div>";
+								themeDiv += "		<div class=\"themeTime\">"+iLiveMessage.createTime+"</div>";
+								themeDiv += "	</div>";
+								themeDiv += "	<div class=\"themeBody\">";
+								themeDiv += "		<div class=\"themeText\">"+iLiveMessage.webContent+"</div>";
+								themeDiv += "		<div class=\"themeText thumb\" thumblist=\"list1\">";
+								if(iLiveMessage.msgType==2||iLiveMessage.msgType==4){
+									var images = iLiveMessage.images;
+									for (var j = 0; j < images.length; j++) {
+										themeDiv += "<img class=\"toBig\" src=\""+images[j]+"\"/>";
+									}
+									
+								}else if(iLiveMessage.msgType==5||iLiveMessage.msgType==3){
+									themeDiv += "<video id=\"video_"+iLiveMessage.msgId+"\" class=\"toVideo\" src=\""+iLiveMessage.video+"\" controls></video>";
+								}
+								themeDiv += "		</div>"
+								themeDiv += " 		<div class=\"themeBottom\">";
+								themeDiv += " 			<div class=\"reply\"  onclick=\"commentsList("+iLiveMessage.msgId+")\">";
+								themeDiv += "				<i class=\"replyIcon\"><img src=\"img/commentBox.png\" alt=\"\"/></i><span class=\"inlineName\">回复</span>";
+								themeDiv += "			</div>";
+								themeDiv += " 			<div class=\"comment\" id=\"messagePraise_"+iLiveMessage.msgId+"\">";
+								themeDiv += " 				<i class=\"heartIcon\"><img src=\"img/collIcon.png\" alt=\"\" onclick=\"saveILiveMessagePraise("+iLiveMessage.msgId+")\"/></i><span class=\"inlineName\" id=\"praiseNumber_"+iLiveMessage.msgId+"\" >"+iLiveMessage.praiseNumber+"</span>";
+								themeDiv += " 			</div>";
+								themeDiv += " 		</div>";
+								themeDiv += " 	</div>";
+								themeDiv += " 	<div class=\"themeFooter\" id=\"commentsList_"+iLiveMessage.msgId+"\"><div class=\"arrow-up\"></div><div class=\"tishi\">暂无评论</div></div>";
+								themeDiv += "</div>";
+							}else{
+								//置顶
+								topTalkBoxList1 += "<div class=\"themeBox\" id=\"msgId_"+iLiveMessage.msgId+"\">";
+								topTalkBoxList1 += "	<div class=\"themeHeader\">";
+								topTalkBoxList1 += "		<div class=\"themeName\">";
+								topTalkBoxList1 += "			<span class=\"inlineName\">"+iLiveMessage.senderName+"：</span>";
+								topTalkBoxList1 += "			<span class=\"hottheme\"><i class=\"fireIcon\"></i> "+iLiveMessage.senderImage+"</span>";
+								topTalkBoxList1 += "			<span class=\"zdBox\">置顶</span>";
+								topTalkBoxList1 += "		</div>";
+								topTalkBoxList1 += "		<div class=\"themeTime\">"+iLiveMessage.createTime+"</div>";
+								topTalkBoxList1 += "	</div>";
+								topTalkBoxList1 += "	<div class=\"themeBody\">";
+								topTalkBoxList1 += "		<div class=\"themeText\">"+iLiveMessage.webContent+"</div>";
+								topTalkBoxList1 += "		<div class=\"themeText thumb\" thumblist=\"list1\">";
+								if(iLiveMessage.msgType==2||iLiveMessage.msgType==4){
+									var images = iLiveMessage.images;
+									for (var j = 0; j < images.length; j++) {
+										topTalkBoxList1 += "<img class=\"toBig\" src=\""+images[j]+"\"/>";
+									}
+									
+								}else if(iLiveMessage.msgType==5||iLiveMessage.msgType==3){
+									topTalkBoxList1 += "<video id=\"video_"+iLiveMessage.msgId+"\" class=\"toVideo\"  src=\""+iLiveMessage.video+"\" controls></video>";
+								}
+								topTalkBoxList1 += "		</div>"
+								topTalkBoxList1 += " 		<div class=\"themeBottom\">";
+								topTalkBoxList1 += " 			<div class=\"reply\"  onclick=\"commentsList("+iLiveMessage.msgId+")\">";
+								topTalkBoxList1 += "				<i class=\"replyIcon\"><img src=\"img/commentBox.png\" alt=\"\"/></i><span class=\"inlineName\">回复</span>";
+								topTalkBoxList1 += "			</div>";
+								topTalkBoxList1 += " 			<div class=\"comment\" id=\"messagePraise_"+iLiveMessage.msgId+"\">";
+								topTalkBoxList1 += " 				<i class=\"heartIcon\"><img src=\"img/collIcon.png\" alt=\"\" onclick=\"saveILiveMessagePraise("+iLiveMessage.msgId+")\"/></i><span class=\"inlineName\" id=\"praiseNumber_"+iLiveMessage.msgId+"\" >"+iLiveMessage.praiseNumber+"</span>";
+								topTalkBoxList1 += " 			</div>";
+								topTalkBoxList1 += " 		</div>";
+								topTalkBoxList1 += " 	</div>";
+								topTalkBoxList1 += " 	<div class=\"themeFooter\" id=\"commentsList_"+iLiveMessage.msgId+"\"><div class=\"arrow-up\"></div><div class=\"tishi\">暂无评论</div></div>";
+								topTalkBoxList1 += "</div>";
+							}
+						}
+					}
+					$("#topTalkBoxList1").html(topTalkBoxList1);
+					$("#themeDiv").html(themeDiv);
+					$(".redDot").css("display","none");
+					$("#newTopic").addClass("hide");
+					if(messageList.length==0){
+						$("#topicNull").removeClass("hide");
+					}else{
+						$("#topicNull").addClass("hide");
+						selectcommentsList(roomId);//页面加载5秒执行一次
+					}
+				}else{
+					console.log("失败");
+				}
+			},
+			error: function(data) {
+				if(mescroll){
+					mescroll.endErr();
+				}
+				
+			}
+		});	
+	}
+}	
+//获取话题评论
+function selectcommentsList(roomId){
+	$.ajax({
+		type : "POST",//请求方式 get/post
+		url : "http://" + tomcatBase + "/ilive/comments/selectList.jspx",
+		dataType : "jsonp",
+		jsonp : "callback",
+		cache : false,
+		data : {
+			roomId : roomId
+		},
+		success : function(data) {
+			var status = data.code;
+			if (status == 1) {
+				var iLiveCommentsMap = JSON.parse(data.iLiveCommentsMap);
+				for (var i = 0; i < iLiveCommentsMap.length; i++) {
+					var vo = iLiveCommentsMap[i];
+					var list = vo.list;
+					var HTMLTXT ="<div class=\"arrow-up\"></div>";
+					for (var j = 0; j < list.length; j++) {
+						if(j<5){
+							var comments = list[j];
+							HTMLTXT +="<div class=\"pinlun\">";
+							HTMLTXT +="		<span class=\"plname\">"+comments.commentsName+":</span>"+comments.comments;
+							HTMLTXT +="	</div>";
+						}
+					}
+					if(list.length==0){
+						HTMLTXT+="<div class=\"tishi\">暂无评论</div>";
+					}else if(list.length>5){
+						HTMLTXT +="<div class=\"tishi discuss\" onclick=\"selectCommentAll("+vo.msgId+")\">&laquo;查看全部"+list.length+"条评论</div>";
+					}
+					$("#commentsList_"+vo.msgId).html(HTMLTXT);
+				}
+				var praiseMap = JSON.parse(data.praiseMap);
+				console.log(praiseMap);
+				for(var key in praiseMap)  {
+					var  praiseNumber = praiseMap[key].length;
+					if(praiseNumber==undefined){
+						praiseNumber=0;
+					}
+					var ret = 0;
+					for (var i = 0; i < praiseNumber; i++) {
+						var praise =  praiseMap[key][i];
+						var id = praise.userId;
+						if(parseInt(userId)==parseInt(id)){
+							ret=1;
+						}
+					}
+					if(ret==0){
+						var HTML = "<i class=\"heartIcon\"  onclick=\"saveILiveMessagePraise("+key+")\"><img src=\"img/collIcon.png\"/></i>";
+						HTML += "<span  class=\"inlineName\" id=\"praiseNumber_"+key+"\">"+praiseNumber+"</span>";
+						$("#messagePraise_"+key).html(HTML);
+					} else{
+						var HTML = "<i class=\"heartIcon\"><img src=\"img/dianzan.png\"/></i>";
+						HTML += "<span  class=\"inlineName\" id=\"praiseNumber_"+key+"\">"+praiseNumber+"</span>";
+						$("#messagePraise_"+key).html(HTML);
+					}
+				} 
+			} else {
+				alert(data.message);
+			}
+		}
+	});
+}	
+//查看全部评论
+function selectCommentAll(msgId){
+	$.ajax({
+		type : "POST",//请求方式 get/post
+		url : "http://" + tomcatBase + "/ilive/comments/selectCommentsAllByMsgId.jspx",
+		dataType : "jsonp",
+		jsonp : "callback",
+		cache : false,
+		data : {
+			msgId : msgId
+		},
+		success : function(data) {
+			var status = data.code;
+			if (status == 1) {
+				var HTMLTXT ="";
+				var commentsList = JSON.parse(data.commentsList);
+				for (var j = 0; j < commentsList.length; j++) {
+					var comments = commentsList[j];
+					HTMLTXT +="<div class=\"pinlun\">";
+					HTMLTXT +="		<span class=\"plname\">"+comments.commentsName+":</span>"+comments.comments;
+					HTMLTXT +="	</div>";
+				}
+				console.log(commentsList);
+				 $(".replyBox").removeClass("hide");
+				 $(".replyCon").html(HTMLTXT);
+				$(".replyDiv").attr("onclick","commentsList("+msgId+")");
+			} else {
+				console.log(data.message);
+			}
+		}
+	});
+}
+//选择评论话题
+function commentsList(msgId){
+	if(userId==0){
+		alert("不登录无法发送消息");
+	}else{
+		if(commentsAllow==0){
+			alert("评论功能已关闭！");
+		}else{
+			$("input[name=commentsMsgId]").val(msgId);
+			$(".replymask").removeClass("hide");
+		    $('input[type="text"]').focus();
+		    $('input[type="text"]').attr("maxlength","40");
+		}
+	}
+}
+function saveTopicContent(){
+	if(commentsAllow==0){
+		alert("评论功能已关闭！");
+	}else{
+		if(userId==0){
+			alert("无法进行评论userId=0");
+		}else{
+			var msgId = $("input[name=commentsMsgId]").val();
+			if(msgId==0){
+				$(".livemask").parent().addClass("hide");
+				$(".replyBox").addClass("hide");
+		        $(".replyCon").html("");
+		        $("input[name=topicContent]").val("");
+		        $(".replyDiv").removeAttr("onclick");
+				alert("请选择评论的话题");
+				return;
+			}
+			var topicContent = $("input[name=topicContent]").val();//发送消息内容
+			if (topicContent.replace("\s+", "") == "" || topicContent == undefined) {
+				$(".livemask").parent().addClass("hide");
+				$(".replyBox").addClass("hide");
+		        $(".replyCon").html("");
+		        $("input[name=topicContent]").val("");
+		        $(".replyDiv").removeAttr("onclick");
+				alert("评论内容不能为空");
+				return;
+			}
+			$.ajax({
+				type : "POST",//请求方式 get/post
+				url : "http://" + tomcatBase + "/ilive/saveComments.jspx",
+				dataType : "jsonp",
+				jsonp : "callback",
+				cache : false,
+				data : {
+					userId : userId,
+					msgId : msgId,
+					comments : encodeURI(topicContent)
+				},
+				success : function(data) {
+					var status = data.code;
+					if (status == 1) {
+						$(".livemask").parent().addClass("hide");
+						$(".replyBox").addClass("hide");
+				        $(".replyCon").html("");
+				        $("input[name=topicContent]").val("");
+				        $(".replyDiv").removeAttr("onclick");
+				        selectMessageLIVE();
+					} else {
+						alert(data.message);
+					}
+				}
+			});	
+		}
+	}
+}
+//关闭评论
+$(".closeReply").click(function(){
+    $(".replyBox").addClass("hide");
+    $(".replyCon").html("");
+    $(".replyDiv").removeAttr("onclick");
+})
+//关闭输入框
+	 $(".livemask").click(function(){
+		 $(".wen").attr("msgValue","2");
+	     $(this).parent().addClass("hide");
+	     $('input[type="text"],textarea').attr("maxlength","40");
+	 });
+//隐藏话题全部评论
+	function hideMask(){
+	    $(".replymask").addClass("hide");
+	    $(".replyBox").addClass("hide");
+	    $(".newmask").addClass("hide");
+	}
+//监测输入框内有无文字输入变化发送按钮颜色
+$('.replyInput').bind('input propertychange', function() {
+    if($('.replyInput').val().length!=0){
+        $(".replyMessage").css("background","#0084ff");
+    }else{
+        $(".replyMessage").css("background","#b2daff");
+    }
+});	
+//点赞
+function saveILiveMessagePraise(msgId){
+		if(userId==0){
+			alert("不登录无法发送消息");
+			return;
+		}
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "http://"+tomcatBase+"/ilive/praise/savePraise.jspx",
+			dataType : "jsonp",
+			jsonp : "callback",
+			cache : false,
+			data : {
+				userId : userId,
+				msgId : msgId
+			},
+			success : function(data) {
+				var status = data.code;
+				if(status==1){
+					var praiseNumber = data.praiseNumber;
+					if(praiseNumber==0){
+						var number = $("#praiseNumber_").text();
+						var HTML = "<i class=\"heartIcon\"><img src=\"img/dianzan.png\"/></i>";
+						HTML += "<span  class=\"inlineName\" id=\"praiseNumber_"+msgId+"\">"+number+"</span>";
+						$("#messagePraise_"+msgId).html(HTML);
+					}else{
+						var HTML = "<i class=\"heartIcon\"><img src=\"img/dianzan.png\"/></i>";
+							HTML += "<span  class=\"inlineName\" id=\"praiseNumber_"+msgId+"\">"+praiseNumber+"</span>";
+						$("#messagePraise_"+msgId).html(HTML);
+					}
+					return;
+				}else{
+					alert("点赞失败");
+				}
+			}
+    	});
+		
+	}	
+</script>
+</html>

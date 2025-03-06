@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>天翼直播平台</title>
+    <link rel="stylesheet" type="text/css" href="css/2019style.css?v=411"/>
+    <link rel="stylesheet" type="text/css" href="css/newlogin.css"/>
+</head>
+<body>
+<div class="container" id="mainContent">
+    <div class="main">
+        <div class="nopermission">
+            <img src="img/nopermission.png" style="width: 50%;"/>
+            <div class="bigtitle">非常抱歉</div>
+            <div>您无权观看本场直播</div>
+        </div>
+    </div>
+</div>
+<div class="newmask"></div>
+</body>
+<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript">
+    $(".container").height($(window).height());
+    $(".newmask").height($(window).height());
+
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = decodeURI(window.location.search.substr(1)).match(reg);
+        if (r != null)
+            return unescape(r[2]);
+        return null;
+    }
+
+    var roomId = GetQueryString("roomId");
+    document.title = window.sessionStorage.getItem('roomName') || '天翼直播平台';
+
+    function backup() {
+        window.sessionStorage.setItem('permissionsjump', false)
+        window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId;
+    }
+
+    // function GetQueryString(name) {
+    //     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    //     var r = decodeURI(window.location.search.substr(1)).match(reg);
+    //     if (r != null)return unescape(r[2]);
+    //     return null;
+    // }
+    // var roomId = GetQueryString("roomId");
+    // if(roomId!=null&&roomId!=""&&roomId!=undefined){
+    // 	$.ajax({
+    //         type: "get",
+    //         url: "http://"+tomcatBase+"/ilive/appuser/getGuideUrl.jspx?roomId="+roomId+"&orginal=1"+"&callback=?",
+    //         async: true,
+    //         dataType: "jsonp",
+    //         jsonp: "callback",
+    //         timeout: 10000,
+    //         success: function(data) {
+    //             if(data.code ==1){
+    //                 var imgUrl = data.data.imgUrl;
+    //                 var openGuideSwitch = data.data.openGuideSwitch;
+    //                 if(openGuideSwitch==1){
+    //                     if(imgUrl!="") {
+    //                         $('#mainContent').css({"background":"url("+imgUrl+") no-repeat","background-size":"100% 100%"});
+    //                     }
+    //                 }
+    //             }
+    //
+    //         },
+    //         error: function(xhr, type, errorThrown) {
+    //         }
+    //     });
+    // }
+</script>
+</html>

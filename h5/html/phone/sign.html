@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://cloud.iptv-soft.com/qcloud/userLogin.jspx -->
+<html style="font-size: 55.2px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="../phone/css/sweetalert.css">
+    <link href="./userLogin/mui.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./userLogin/login.css">
+    <link rel="stylesheet" href="./css/sign.css">
+    <script type="application/javascript" src="./js/lib-flexible.min.js"></script>
+    <link rel="stylesheet" href="js/need/layer.css"/>
+    <!--<script type="text/javascript" src="./userLogin/allcontent.js"></script>-->
+    <!--<script type="text/javascript" src="./userLogin/public.js"></script>-->
+
+</head>
+<body class="mui-ios mui-ios-11 mui-ios-11-0" style="">
+<div class="page">
+    <header class="mui-bar mui-bar-nav login-header">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title" id="signTitle">活动签到</h1>
+
+    </header>
+    <div class="sign">
+        <div class="form_item">
+            <input type="number" placeholder="手机号" id="phoneNum" onblur="validate()"
+                   onKeyUp="if(this.value.length>11){this.value=this.value.substr(0,11)};this.value=this.value.replace(/[^\d]/g,'');"
+                   name="phoneNum" placeholder="手机号" autocomplete="off" data-input-clear="3"/>
+        </div>
+        <div class="form_item active_code">
+            <input type="number" id="vPassword" name="vPassword"
+                   onKeyUp="if(this.value.length>4){this.value=this.value.substr(0,4)};this.value=this.value.replace(/[^\d]/g,'');"
+                   placeholder="动态密码" data-input-clear="4" placeholder="动态密码"/>
+            <span id="settimeBtn" onclick="settime2(this)">获取动态密码</span>
+        </div>
+        <div class="form_item">
+            <input type="text" id="username" name="username" minlength="2" maxlength="10"
+                   placeholder="昵称 建议使用您的真实姓名签到，2-10个字">
+        </div>
+        <div class="form_item sign_btn">
+            <button id="input_check_tel">点击立即签到</button>
+        </div>
+    </div>
+</div>
+<script src="./userLogin/mui.min.js"></script>
+<script src="./userLogin/jquery.min.js"></script>
+<script type="text/javascript" src="js/tysx2019.min.js?version=2.0.1"></script>
+<!--<script type="text/javascript" src="js/sweetalert.min.js"></script>-->
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<!--<script type="text/javascript" src="js/tysx2019.js"></script>-->
+<script type="text/javascript">
+    var signId = GetQueryString("signId");
+    var name;
+
+    $.ajax({
+        type: "POST",//请求方式 get/post
+        url: "http://" + tomcatBase + "/ilive/prize/isOverSign.jspx?signId=" + signId,
+        dataType: "jsonp",
+        jsonp: "callback",
+        async: false,
+        cache: false,
+        success: function (data) {
+            console.log(data)
+            var code = data.code;
+             if (code == 1) {
+
+
+            } else {
+                window.location.href = "http://" + h5Base + "/phone/signOver.html?name=" + name;
+            } 
+        }
+    });
+
+
+    $.ajax({
+        type: "POST",//请求方式 get/post
+        url: "http://" + tomcatBase + "/ilive/prize/siginUserlist.jspx?signId=" + signId,
+        dataType: "jsonp",
+        jsonp: "callback",
+        async: false,
+        cache: false,
+        success: function (data) {
+            console.log(data)
+            var status = data.status;
+            if (status == 1) {
+                name = data.res.name;
+                $("#signTitle").text(data.res.name);
+                return;
+            } else {
+                layerOpen('获取信息出错')
+            }
+        }
+    });
+    var flag = true;
+
+    //验证手机号是否签到
+    function validate() {
+        var userPhone = $("#phoneNum").val();
+        if (userPhone != null && userPhone != "") {
+            $.ajax({
+                type: "POST",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/prize/siginPhone.jspx?userPhone=" + userPhone + "&signId=" + signId,
+                dataType: "jsonp",
+                jsonp: "callback",
+                async: false,
+                cache: false,
+                success: function (data) {
+                    console.log(data)
+                    var status = data.status;
+                    if (status == 1) {
+                        layerOpen('您已签到')
+                        flag = false;
+                    } else {
+                        flag = true;
+                    }
+                }
+            });
+        }
+
+    }
+
+    $.ajax({
+        type: "GET",//请求方式 get/post
+        url: "http://" + tomcatBase + "/ilive/prize/isLogin.jspx",
+        dataType: "jsonp",
+        jsonp: "callback",
+        cache: false,
+        data: {},
+        success: function (data) {
+            console.log(isWeiXin());
+            console.log(data);
+            if (data.code == 1) {
+                console.log(data.data);
+            } else {
+                if (isWeiXin()) {
+                    // 执行操作
+                    $.ajax({
+                        type: "POST",//请求方式 get/post
+                        url: "http://" + tomcatBase + "/ilive/app/wx/h5.jspx?isAjax=1&signId=" + signId,
+                        dataType: "jsonp",
+                        jsonp: "callback",
+                        async: false,
+                        cache: false,
+                        success: function (data) {
+                            var status = data.loginWx;
+                            if (status == 1) {
+                                window.stop();
+                                window.location.href = data.loginUrl;
+                                return;
+                            }
+                            if (status == -1) {
+                                layerOpen('获取信息出错')
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
+
+    function layerOpen(msg) {
+        layer.open({
+            content: msg
+            , skin: 'msg'
+            , time: 3
+        });
+    }
+
+    function settime() {
+        if (countdown == 0) {
+            $("#settimeBtn").text("重新获取");
+            $("#settimeBtn").css("color", '#333')
+            $("#settimeBtn").attr("onclick", "settime()");
+            countdown = 60;
+            return;
+        } else {
+            $("#settimeBtn").text("剩余时间(" + countdown + "s)");
+            $("#settimeBtn").css("color", '#999')
+            $("#settimeBtn").removeAttr("onclick");
+            countdown--;
+        }
+        setTimeout(function () {
+            settime()
+        }, 1000)
+    }
+
+
+    // 验证码事件
+    var countdown = 60;
+
+    function settime2() {
+        if ($.trim($('#phoneNum').val()) == "") {
+            // swal("请输入手机号", "", "error")
+            layerOpen('请输入手机号')
+        } else if (!isPoneAvailable($.trim($('#phoneNum').val()))) {
+            console.log(123);
+            // swal("手机号输入不合法", "", "error")
+            layerOpen('手机号格式不正确')
+        } else {
+            settime();
+            var url = "http://" + tomcatBase + "/ilive/appuser/sendmsg.jspx";
+            $.ajax({
+                type: "GET", //请求方式 get/post
+                url: url,
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    phoneNum: $.trim($('#phoneNum').val()),
+                    type: "reg"
+                },
+                success: function (data) {
+                    if (data.code == 1) {
+                        // swal(data.message, "", "success");
+                        layerOpen(data.message)
+                        settime();
+                    } else {
+                        // swal(data.message, "", "error");
+                        layerOpen(data.message)
+                    }
+                }
+            });
+        }
+    }
+
+    function checkRegexValid() {
+        if ($.trim($('#phoneNum').val()) == "") {
+            // swal("请输入手机号", "", "error");
+            layerOpen('请输入手机号')
+            return false;
+        } else if (!isPoneAvailable($.trim($('#phoneNum').val()))) {
+            // swal("手机号不合法", "", "error");
+            layerOpen('手机号格式不正确')
+            return false;
+        } else if ($.trim($.trim($('#vPassword').val())) == "") {
+            // swal("验证码不能为空", "", "error");
+            layerOpen('动态密码不能为空')
+            return false;
+        } else if ($.trim($.trim($('#username').val())) == "") {
+            // swal("昵称不能为空", "", "error");
+            layerOpen('昵称不能为空')
+            return false;
+        }
+
+        return true;
+    }
+
+    // 签到
+    $('#input_check_tel').on("click", function () {
+        if (flag) {
+            flag = false;
+            if (checkRegexValid()) {
+                var url = "http://" + tomcatBase + "/ilive/prize/userSign.jspx"
+
+                $.ajax({
+                    type: "POST", //请求方式 get/post
+                    url: url,
+                    dataType: "jsonp",
+                    jsonp: "callback",
+                    cache: false,
+                    data: {
+                        userphone: $.trim($('#phoneNum').val()),
+                        username: encodeURIComponent($.trim($('#username').val())),
+                        vPassword: $.trim($('#vPassword').val()),
+                        signId: signId
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        
+                        if(data.status == "0"){
+                        	flag=true
+                        	layerOpen('验证码错误')
+                        }
+                        if (data.status == 1000) {
+                            window.location.href = "http://" + h5Base + "/phone/signSuc.html?name=" + name;
+                        }
+                        if (data.status == 1001) {
+                            window.location.href = "http://" + h5Base + "/phone/signOver.html?name=" + name;
+
+                        }
+                        if (data.status == 1002) {
+                            window.location.href = "http://" + h5Base + "/phone/signLose.html?signId=" + signId + "&name=" + name;
+
+                        }
+                    }
+                });
+
+            }
+        }
+
+    });
+</script>
+
+
+</body>
+</html>

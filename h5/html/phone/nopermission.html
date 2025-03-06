@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>天翼直播平台</title>
+<link rel="stylesheet" href="css/newlogin.css" />
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="js/base.js"></script>
+</head>
+<body onclick="enterRoom()">
+	<div class="container" id="mainContent">
+		<div class="main newmain">
+			<div class="text-center">
+				<img src="img/nopermission.png" style="width: 50%;" />
+				<p class="text-center" style="color: #fff; margin-top: 0.2rem; font-size: 16px;">非常抱歉，您无权观看本直播</p>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" charset="utf-8">
+	$(".container").height($(window).height());
+	$(".mask").height($(window).height());
+	document.title = window.sessionStorage.getItem('roomName') || '天翼直播平台';
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		var r = decodeURI(window.location.search.substr(1)).match(reg);
+		if (r != null)
+			return unescape(r[2]);
+		return null;
+	}
+
+	var roomId = GetQueryString("roomId");
+
+	// $.ajax({
+	// 	type : "get",
+	// 	url : "http://" + tomcatBase + "/ilive/appuser/getGuideUrl.jspx?roomId=" + roomId + "&orginal=1" + "&callback=?",
+	// 	async : true,
+	// 	dataType : "jsonp",
+	// 	jsonp : "callback",
+	// 	timeout : 10000,
+	// 	success : function(data) {
+	// 		if (data.code == 1) {
+	// 			var imgUrl = data.data.imgUrl;
+	// 			var openGuideSwitch = data.data.openGuideSwitch;
+	// 			if (openGuideSwitch == 1) {
+	// 				if (imgUrl != "") {
+	// 					$('#mainContent').css({
+	// 						"background" : "url(" + imgUrl + ") no-repeat",
+	// 						"background-size" : "100% 100%"
+	// 					});
+	// 				}
+	// 			}
+	// 		}
+	// 	},
+	// 	error : function(xhr, type, errorThrown) {
+	// 		// plus.nativeUI.toast(errorThrown);
+	// 	}
+	// });
+</script>
+</html>
