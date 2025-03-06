@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.soms.live.liveProgram.ProgramInfo" table="soms4_live_program">
+    	<meta attribute="calss-description">
+			@author 徐勤
+		</meta>
+    
+        <id name="program_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">唯一id</meta>
+            <column name="program_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="program_name" type="java.lang.String">
+        	<meta attribute="field-description">节目名称</meta>
+            <column name="program_name" length="100" not-null="true" />
+        </property>
+        <many-to-one
+        		class="com.jwzt.DB.soms.live.liveChannel.ChannelInfo"
+        		name="channelInfo" column="channel_id" outer-join="false" lazy="false">
+        	<meta attribute="field-description">频道id</meta>
+        </many-to-one>
+        <property name="program_order" type="java.lang.Integer">
+        	<meta attribute="field-description">节目的顺序，数值大的排在前面</meta>
+            <column name="program_order" />
+        </property>
+        <property name="if_drm" type="java.lang.String">
+        	<meta attribute="field-description">是否加密（0：不加密  1：加密），继承表soms4_live_channel中的if_drm字段</meta>
+            <column name="if_drm" />
+        </property>
+        <many-to-one
+        		class="com.jwzt.DB.soms.live.proFile.ProFileInfo"
+        		name="proFileInfo" column="profile_id" outer-join="false" lazy="false">
+        	<meta attribute="field-description">配置文件id 继承表soms4_live_channel中的profile_id字段</meta>
+        </many-to-one>       
+        <property name="time_long" type="java.lang.Integer">
+        	<meta attribute="field-description">节目时长</meta>
+            <column name="time_long" />
+        </property>
+        <property name="start_time" type="java.sql.Timestamp">
+        	<meta attribute="field-description">开始时间</meta>
+            <column name="start_time" />
+        </property>
+        
+        <property name="play_type" type="java.lang.Integer">
+        	<meta attribute="field-description">0:文件直播 1:直播</meta>
+            <column name="play_type" />
+        </property>
+        <many-to-one
+        		class="com.jwzt.DB.soms.vod.file.FileInfo"
+        		name="fileInfo" column="record_id" outer-join="false" lazy="false">
+        	<meta attribute="field-description">文件直播：文件id</meta>
+        </many-to-one>
+
+        <property name="save_plan_id" type="java.lang.Integer">
+        	<meta attribute="field-description">文件存储计划id</meta>
+            <column name="save_plan_id" />
+        </property>
+        
+
+        <property name="cycle" type="java.lang.Integer">
+        	<meta attribute="field-description">播放周期 0:无周期 1:有周期</meta>
+            <column name="cycle" />
+        </property>
+        <property name="cycle_ids" type="java.lang.String">
+        	<meta attribute="field-description">星期的字符串</meta>
+            <column name="cycle_ids" />
+        </property>
+        
+        <property name="prog_desc" type="java.lang.String">
+        	<meta attribute="field-description">节目描述</meta>
+            <column name="prog_desc" />
+        </property>
+        
+        <property name="remote_address" type="java.lang.String">
+        	<meta attribute="field-description">远程流地址</meta>
+            <column name="remote_address" length="100"/>
+        </property>        
+        <property name="program_tvid" type="java.lang.String">
+        	<meta attribute="field-description">节目单所属的电台id</meta>
+            <column name="program_tvid" length="100"/>
+        </property>
+         <property name="end_time" type="java.sql.Timestamp">
+        	<meta attribute="field-description">结束时间</meta>
+            <column name="end_time" />
+        </property> 
+        <property name="tvName" type="java.lang.String">
+        	<meta attribute="field-description">节目单所属的电台</meta>
+            <column name="tvName" length="200"/>
+        </property>       
+    </class>
+</hibernate-mapping>

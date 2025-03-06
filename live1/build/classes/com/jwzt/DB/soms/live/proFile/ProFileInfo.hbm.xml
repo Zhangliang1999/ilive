@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.soms.live.proFile.ProFileInfo" table="soms4_live_profile">
+    	<meta attribute="calss-description">
+			@author 徐勤
+		</meta>
+    
+        <id name="profile_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">唯一ID</meta>
+            <column name="profile_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="profile_name" type="java.lang.String">
+        	<meta attribute="field-description">配置文件名称</meta>
+            <column name="profile_name" length="100" not-null="true" />
+        </property>
+        <property name="ifvideo" type="java.lang.Integer">
+        	<meta attribute="field-description">视频还是音频</meta>
+            <column name="ifvideo" />
+        </property>
+        <property name="audio_conf_id" type="java.lang.Integer">
+        	<meta attribute="field-description">音频配置id  可否与原vams_audio_conf关连</meta>
+            <column name="audio_conf_id" />
+        </property>
+        <property name="video_code_name" type="java.lang.String">
+        	<meta attribute="field-description">音频配置名称</meta>
+            <column name="video_code_name" />
+        </property>
+        <property name="win_id" type="java.lang.Integer">
+        	<meta attribute="field-description">窗口id</meta>
+            <column name="win_id" />
+        </property>
+        <property name="video_conf_ids" type="java.lang.String">
+        	<meta attribute="field-description">视频ids</meta>
+            <column name="video_conf_ids" />
+        </property>
+        <property name="profile_desc" type="java.lang.String">
+        	<meta attribute="field-description">配置文件描述</meta>
+            <column name="profile_desc" />
+        </property>
+        <property name="site_id" type="java.lang.Integer">
+        	<meta attribute="field-description">站点id</meta>
+            <column name="site_id" />
+        </property>
+    </class>
+    
+    <class name="com.jwzt.DB.soms.live.proFile.LiveAudioCodeInfo" table="soms4_live_audio_code">
+    	<meta attribute="calss-description">
+			@author 曲明志
+		</meta>
+    
+        <id name="audio_conf_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">唯一ID</meta>
+            <column name="audio_conf_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="audio_conf_name" type="java.lang.String">
+        	<meta attribute="field-description">音频编码配置名</meta>
+            <column name="audio_conf_name" length="100" />
+        </property>
+        <property name="audio_code_name" type="java.lang.String">
+        	<meta attribute="field-description">音频编码名</meta>
+            <column name="audio_code_name" length="100" />
+        </property>
+    </class>
+    
+    <class name="com.jwzt.DB.soms.live.proFile.LiveVideoWinInfo" table="soms4_live_video_win">
+    	<meta attribute="calss-description">
+			@author 曲明志
+		</meta>
+    
+        <id name="win_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">唯一ID</meta>
+            <column name="win_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="win_h" type="java.lang.Integer">
+        	<meta attribute="field-description">窗口的高</meta>
+            <column name="win_h" />
+        </property>
+        <property name="win_w" type="java.lang.Integer">
+        	<meta attribute="field-description">窗口的宽</meta>
+            <column name="win_w" />
+        </property>
+    </class>
+</hibernate-mapping>

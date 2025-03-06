@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.cdn.ip_manage.IpSegmentInfo" table="soms4_ip_segment">
+    	<meta attribute="calss-description">
+			@author 刘勇涛
+		</meta>
+    
+        <id name="ip_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">ip ID</meta>
+            <column name="ip_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <many-to-one
+        		class="com.jwzt.DB.cdn.ip_manage.IpAddressInfo"
+        		name="ipAddressInfo" column="address_id" outer-join="false" lazy="false">
+        	<meta attribute="field-description">IP地址表id</meta>
+        </many-to-one>      
+        <property name="ip_start" type="java.lang.String">
+        	<meta attribute="field-description">起始ip地址值</meta>
+            <column name="ip_start" length="16" />
+        </property>
+        <property name="ip_end" type="java.lang.String">
+        	<meta attribute="field-description">结束ip地址</meta>
+            <column name="ip_end" length="16" />
+        </property>
+        <property name="ip_start_value" type="java.lang.Long">
+        	<meta attribute="field-description">开始ip地址值</meta>
+            <column name="ip_start_value" />
+        </property>
+        <property name="ip_end_value" type="java.lang.Long">
+        	<meta attribute="field-description">结束ip地址值</meta>
+            <column name="ip_end_value" />
+        </property>
+    </class>
+</hibernate-mapping>

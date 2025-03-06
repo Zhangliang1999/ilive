@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="GBK"?>
+<root>
+    <LiveDelay>
+				<DelayTime>120</DelayTime>  <!--延迟时间单位秒，如果为0，表示不延迟 -->
+				<StreamName>live311</StreamName><!--发布点 -->
+				<ReplaceFile>j:/vod1/pd2.flv</ReplaceFile><!--替换文件，要求为FLV文件，不超过20秒 -->			
+    </LiveDelay>	
+  <LiveDelay>
+  			<DelayTime>120</DelayTime>
+				<StreamName>live211</StreamName>
+				<ReplaceFile>j:/vod1/pd1.flv</ReplaceFile>				
+    </LiveDelay>
+</root>
+

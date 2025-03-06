@@ -1,0 +1,4 @@
+<SRCFILE>I:\android\VCspace\bin\cmd\1.flv|5|10</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd\2.flv|-1|-1</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd\3.flv|-1|-1</SRCFILE>
+<DESTFILE>I:\android\VCspace\bin\cmd\appmp4.mp4</DESTFILE>

@@ -1,0 +1,11 @@
+<FileType>audio_video</FileType>
+<FileDuration>12.00</FileDuration>
+<FileSize>350576</FileSize>
+<VideoWidth>640</VideoWidth>
+<VideoHeight>480</VideoHeight>
+<VideoBitrate>524288</VideoBitrate>
+<VideoCodec>H264</VideoCodec>
+<AudioSamprate>44100</AudioSamprate>
+<AudioChannel>2</AudioChannel>
+<AudioBitrate>98304</AudioBitrate>
+<AudioCodec>AAC</AudioCodec>

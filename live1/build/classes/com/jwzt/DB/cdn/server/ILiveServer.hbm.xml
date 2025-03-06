@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jwzt.DB.cdn.server">
+	<class name="ILiveServer" table="ilive_server">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="server_id" type="java.lang.Integer">
+			<column name="server_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="server_name">
+			<column name="server_name"></column>
+		</property>
+
+		<!-- 主服务器还是伺服务器 -->
+		<property name="mode">
+			<column name="mode"></column>
+		</property>
+
+		<many-to-one name="server_group" column="group_id"></many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,1 @@
+<ExePath>J:\bin2010_x64\UMS_20130929_X64\BVUMServerADV_X64.exe</ExePath><ExeParam>RestartDay</ExeParam><RunPath>J:\bin2010_x64\UMS_20130929_X64\_umsapp_cmd\bvums.run</RunPath><QuitMonPath>J:\bin2010_x64\UMS_20130929_X64\BVAPP_Mon.exe.quit</QuitMonPath><DebugName>BVUMS4_201309</DebugName>

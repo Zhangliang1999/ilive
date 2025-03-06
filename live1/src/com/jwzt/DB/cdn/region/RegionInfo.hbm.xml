@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.cdn.region.RegionInfo" table="soms4_cdn_server_region" lazy="false">
+    	<meta attribute="calss-description">
+			@author xuqin
+		</meta>
+    
+        <id name="server_region_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">区域id</meta>
+            <column name="server_region_id" />
+            <generator class="assigned"></generator>
+        </id>
+        
+        <property name="server_region_name" type="java.lang.String">
+        	<meta attribute="field-description">区域名称</meta>
+            <column name="server_region_name" length="50" not-null="true" />
+        </property>
+        
+        <property name="parent_region_id" type="java.lang.Integer">
+        	<meta attribute="field-description">父亲区域id</meta>
+            <column name="parent_region_id" />
+        </property>
+        
+        <property name="if_visit" type="java.lang.Integer">
+        	<meta attribute="field-description">是否允许其他区域用户访问 0：允许 1：不允许</meta>
+            <column name="if_visit" />
+        </property>
+        
+        <property name="root_region_id" type="java.lang.Integer">
+        	<meta attribute="field-description">根区域id</meta>
+            <column name="root_region_id" />
+        </property>
+        
+        <property name="ip_address_id" type="java.lang.String">
+        	<meta attribute="field-description">ip段的id</meta>
+            <column name="ip_address_id" />
+        </property>
+        
+        <property name="layer" type="java.lang.Integer" >
+        	<meta attribute="field-description">区域所处的层</meta>
+            <column name="layer" />
+        </property>
+        
+        <property name="tree_images" type="java.lang.String">
+        	<meta attribute="field-description">图片路径</meta>
+            <column name="tree_images" />
+        </property>
+        
+        <property name="node_attr" type="java.lang.String">
+        	<meta attribute="field-description">栏目属性</meta>
+            <column name="node_attr" length="128" />
+        </property>
+        
+        <property name="region_desc" type="java.lang.String">
+        	<meta attribute="field-description">区域描述</meta>
+            <column name="region_desc" length="1024" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.soms.live.liveChannel.shift.ChannelInfoShift" table="soms4_live_channel_shift">
+    	<meta attribute="calss-description">
+			@author
+		</meta>
+    
+        <id name="channel_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">唯一ID</meta>
+            <column name="channel_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="LiveTypeHigh" type="java.lang.Integer">
+        	<meta attribute="field-description">高码流</meta>
+            <column name="LiveTypeHigh"/>
+        </property>
+        <property name="LiveTypeLow" type="java.lang.Integer">
+        	<meta attribute="field-description">低码流</meta>
+            <column name="LiveTypeLow" />
+        </property>       
+		<property name="channel_mount_id" type="java.lang.Integer">
+        	<meta attribute="field-description">发布点id</meta>
+            <column name="channel_mount_id" length="200" />
+        </property>
+        <property name="channel_mountPath" type="java.lang.String">
+        	<meta attribute="field-description">发布点路径</meta>
+            <column name="channel_mountPath" />
+        </property>
+ 
+        <property name="channel_programPathHigh" type="java.lang.String">
+        	<meta attribute="field-description">高码流地址</meta>
+            <column name="channel_programPathHigh" length="200" />
+        </property>
+        <property name="channel_programPathLow" type="java.lang.String">
+        	<meta attribute="field-description">低码流地址</meta>
+            <column name="channel_programPathLow" length="200" />
+        </property>
+        <property name="channel_durationHigh" type="java.lang.String">
+        	<meta attribute="field-description">高码流时长</meta>
+            <column name="channel_durationHigh" />
+        </property>
+        <property name="channel_durationLow" type="java.lang.String">
+        	<meta attribute="field-description">低码流时长</meta>
+            <column name="channel_durationLow" length="100" />
+        </property>
+        <property name="channel_create_time" type="java.lang.String">
+        	<meta attribute="field-description">时移创建时间</meta>
+            <column name="channel_create_time" length="100" />
+        </property>
+        <property name="record_time" type="java.lang.String">
+        	<meta attribute="field-description">时移接收时间</meta>
+            <column name="record_time" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

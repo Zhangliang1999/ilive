@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="GBK"?>
+<root>
+
+<UMSStreamPort>9600</UMSStreamPort> <!--流端口号： -->
+<UMSAdminPort>9601</UMSAdminPort> <!--流端口号： -->
+<AdminName>lwb</AdminName> <!--管理员账号 -->
+<AdminPWD>1234</AdminPWD> <!--管理员密码 -->
+<UMSTempDir>1234</UMSTempDir> <!--管理员密码 -->
+<SegmentLen>9</SegmentLen>//切片时长； 6-15秒之间；
+<SegmentNum>6</SegmentNum>//切片个数 不超过10个；
+
+
+</root>

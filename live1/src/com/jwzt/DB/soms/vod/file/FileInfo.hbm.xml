@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:36:15 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping package="com.jwzt.DB.soms.vod.file">
+    <class name="FileInfo" table="soms4_vod_file">
+    	<meta attribute="calss-description">
+			@author 曲明志
+		</meta>
+		
+        <id name="file_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">文件ID</meta>
+            <column name="file_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <many-to-one
+        		class="com.jwzt.DB.soms.vod.catalog.CatalogInfo"
+        		name="catalogInfo" column="catalog_id" outer-join="false" lazy="false">
+        	<meta attribute="field-description">栏目ID</meta>
+        </many-to-one>      
+        <many-to-one
+        		class="com.jwzt.DB.cdn.mount.MountInfo"
+        		name="mountInfo" column="mount_id" outer-join="false" lazy="false">
+        	<meta attribute="field-description">文件发布点</meta>
+        </many-to-one>        
+        <property name="file_name" type="java.lang.String">
+        	<meta attribute="field-description">文件名称</meta>
+            <column name="file_name" length="200" />
+        </property>
+        <property name="file_alias" type="java.lang.String">
+        	<meta attribute="field-description">文件别名</meta>
+            <column name="file_alias" length="255" />
+        </property>
+        <property name="cp_id" type="java.lang.Integer">
+        	<meta attribute="field-description">内容提供商ID</meta>
+            <column name="cp_id" />
+        </property>
+        
+        <property name="file_path" type="java.lang.String">
+        	<meta attribute="field-description">文件路径</meta>
+            <column name="file_path" length="255" />
+        </property>
+        <property name="local_path" type="java.lang.String">
+        	<meta attribute="field-description">本地文件路径</meta>
+            <column name="local_path" length="255" />
+        </property>
+        <property name="upload_state" type="java.lang.Integer">
+        	<meta attribute="field-description">上传状态  0：等待  1：正在上传  2：上传完成（已有文件） 3：上传失败</meta>
+            <column name="upload_state" />
+        </property>
+        <property name="if_drm" type="java.lang.Integer">
+        	<meta attribute="field-description">是否加密</meta>
+            <column name="if_drm" />
+        </property>
+        
+        <property name="file_type" type="java.lang.Integer">
+        	<meta attribute="field-description">栏目类型 点播(0) 广告(1)</meta>
+            <column name="file_type" />
+        </property>
+        <property name="file_state" type="java.lang.Integer">
+        	<meta attribute="field-description">栏目类型 使用状态(0) 预删除状态(1)</meta>
+            <column name="file_state" />
+        </property>
+        
+        <property name="if_segment" type="java.lang.Integer">
+        	<meta attribute="field-description">是否分段 0：主文件   1：分段文件</meta>
+            <column name="if_segment" />
+        </property>
+        <property name="parent_file_id" type="java.lang.Integer">
+        	<meta attribute="field-description">主文件ID</meta>
+            <column name="parent_file_id" />
+        </property>
+        <property name="start_time" type="java.lang.Integer">
+        	<meta attribute="field-description">分段文件的开始时间 （毫秒）</meta>
+            <column name="start_time" />
+        </property>
+        <property name="end_time" type="java.lang.Integer">
+        	<meta attribute="field-description">分段文件的结束时间 （毫秒）</meta>
+            <column name="end_time" />
+        </property>
+        
+        <property name="file_size" type="java.lang.Integer">
+        	<meta attribute="field-description">文件大小  单位 K</meta>
+            <column name="file_size" />
+        </property>
+        <property name="duration" type="java.lang.Integer">
+        	<meta attribute="field-description">文件时长，单位是秒</meta>
+            <column name="duration" />
+        </property>
+        <property name="band_width" type="java.lang.Integer">
+        	<meta attribute="field-description">带宽，单位是 Kbps</meta>
+            <column name="band_width" />
+        </property>
+        
+        <property name="record_time" type="java.sql.Timestamp">
+        	<meta attribute="field-description">入库时间</meta>
+            <column name="record_time" />
+        </property>
+        <property name="file_desc" type="java.lang.String">
+        	<meta attribute="field-description">文件描述</meta>
+            <column name="file_desc" length="2000" />
+        </property>
+        <property name="real_id" type="java.lang.Integer">
+        	<meta attribute="field-description">REAL_ID_洪波</meta>
+            <column name="real_id" />
+        </property>
+        <property name="p2p_id" type="java.lang.Integer">
+        	<meta attribute="field-description">P2P_ID_洪波</meta>
+            <column name="p2p_id" />
+        </property>
+        <property name="media_type" type="java.lang.String">
+        	<meta attribute="field-description">文件类型</meta>
+            <column name="media_type" length="200"/>
+        </property>
+        <property name="remote_path" type="java.lang.String">
+        	<meta attribute="field-description">远程路径_洪波</meta>
+            <column name="remote_path" length="200" />
+        </property>
+        <property name="language" type="java.lang.String">
+        	<meta attribute="field-description">语言</meta>
+            <column name="language" length="200" />
+        </property>
+        <property name="contentguid" type="java.lang.String">
+        	<meta attribute="field-description">REAL的POST信息_洪波</meta>
+            <column name="contentguid" length="50" />
+        </property>
+        <property name="contentkey" type="java.lang.String">
+        	<meta attribute="field-description">REAL的POST信息_洪波</meta>
+            <column name="contentkey" length="300" />
+        </property>
+        
+        <property name="preview_mount_id" type="java.lang.Integer">
+        	<meta attribute="field-description">预览短片的发布点ID</meta>
+            <column name="preview_mount_id" />
+        </property>
+        <property name="preview_file_path" type="java.lang.String">
+        	<meta attribute="field-description">预览短片的文件路径</meta>
+            <column name="preview_file_path" length="255" />
+        </property>
+        <property name="preview_local_path" type="java.lang.String">
+        	<meta attribute="field-description">预览短片的本地路径</meta>
+            <column name="preview_local_path" length="255" />
+        </property>
+        
+        
+        <property name="guid_1" type="java.lang.String">
+        	<meta attribute="field-description">扩展字段</meta>
+            <column name="guid_1" length="1024" />
+        </property>
+        <property name="guid_2" type="java.lang.String">
+        	<meta attribute="field-description">扩展字段</meta>
+            <column name="guid_2" length="1024" />
+        </property>
+        <property name="guid_3" type="java.lang.String">
+        	<meta attribute="field-description">扩展字段</meta>
+            <column name="guid_3" length="1024" />
+        </property>
+        <property name="guid_4" type="java.lang.String">
+        	<meta attribute="field-description">扩展字段</meta>
+            <column name="guid_4" length="1024" />
+        </property>
+        <property name="guid_5" type="java.lang.String">
+        	<meta attribute="field-description">扩展字段</meta>
+            <column name="guid_5" length="1024" />
+        </property>
+        <property name="director" type="java.lang.String">
+        	<meta attribute="field-description">导演</meta>
+            <column name="director" length="200" />
+        </property>
+        <property name="leadact" type="java.lang.String">
+        	<meta attribute="field-description">主演</meta>
+            <column name="leadact" length="500" />
+        </property>
+        <property name="actname" type="java.lang.String">
+        	<meta attribute="field-description">节目名称</meta>
+            <column name="actname" length="255" />
+        </property>
+        <property name="keywords" type="java.lang.String">
+        	<meta attribute="field-description">关键字</meta>
+            <column name="keywords" length="1024" />
+        </property>
+        <property name="guid_6" type="java.lang.String">
+        	<meta attribute="field-description">扩展字段</meta>
+            <column name="guid_6" length="1024" />
+        </property>
+        <property name="guid_7" type="java.lang.String">
+        	<meta attribute="field-description">扩展字段</meta>
+            <column name="guid_7" length="1024" />
+        </property>
+        <property name="guid_8" type="java.lang.String">
+        	<meta attribute="field-description">扩展字段</meta>
+            <column name="guid_8" length="1024" />
+        </property>
+        <property name="guid_9" type="java.lang.String">
+        	<meta attribute="field-description">扩展字段</meta>
+            <column name="guid_9" length="1024" />
+        </property>
+        <property name="is_checked" type="java.lang.Integer">
+        	<meta attribute="field-description">是否审核</meta>
+            <column name="is_checked" length="1024" />
+        </property>
+        <property name="is_flv" type="java.lang.String">
+        	<meta attribute="field-description">是否是flv文件</meta>
+            <column name="is_flv" length="1024" />
+        </property>
+        <property name="vod_format" type="java.lang.String">
+        	<meta attribute="field-description">文件格式</meta>
+            <column name="vod_format" length="1024" />
+        </property>
+        <property name="vod_width_height" type="java.lang.String">
+        	<meta attribute="field-description">文件分辨率</meta>
+            <column name="vod_width_height" length="1024" />
+        </property>
+         <property name="if_convert" type="java.lang.Integer">
+        	<meta attribute="field-description">是否通过转码入库</meta>
+            <column name="if_convert" length="1024" />
+        </property>
+        <property name="smallmagePath" type="java.lang.String">
+        	<meta attribute="field-description">客户端分辨率小图</meta>
+            <column name="small_image_path" length="1024" />
+        </property>
+        <property name="largeImagePath" type="java.lang.String">
+        	<meta attribute="field-description">客户端分辨率大图</meta>
+            <column name="large_image_path" length="1024" />
+        </property>
+        <property name="smallmageLocalPath" type="java.lang.String">
+        	<meta attribute="field-description">客户端分辨率小图本地</meta>
+            <column name="small_image_local_path" length="1024" />
+        </property>
+        <property name="largeImageLocalPath" type="java.lang.String">
+        	<meta attribute="field-description">客户端分辨率大图本地</meta>
+            <column name="large_image_local_path" length="1024" />
+        </property>
+        
+        <property name="file_owner" type="java.lang.String">
+        	<meta attribute="field-description">添加人id</meta>
+            <column name="file_owner" length="1024" />
+        </property>
+        <property name="file_owner_name" type="java.lang.String">
+        	<meta attribute="field-description">添加人名</meta>
+            <column name="file_owner_name" length="1024" />
+        </property>
+        
+        <property name="scheme_startTime" type="java.util.Date">
+        	<meta attribute="field-description">方案开始时间</meta>
+            <column name="scheme_start_time"  />
+        </property>
+        <property name="scheme_endTime" type="java.util.Date">
+        	<meta attribute="field-description">方案结束时间</meta>
+            <column name="scheme_end_time" />
+        </property>
+    </class>
+</hibernate-mapping>

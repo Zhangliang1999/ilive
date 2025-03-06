@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.datasource">
+			java:comp/env/jdbc/sqlsvr2k4LIVEMS
+		</property>
+
+		<property name="hibernate.current_session_context_class">
+			thread
+		</property>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.MySQL5Dialect
+		</property>
+		<!-- <property name="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</property> -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="connection.autoReconnect">true</property> 
+        <property name="connection.autoReconnectForPools">true</property> 
+        <property name="connection.is-connection-validation-required">true</property> 
+		<!-- PK MAPPING -->
+		<mapping resource="com/jwzt/DB/common/pk/PKInfo.hbm.xml" />
+		<mapping resource="com/jwzt/DB/soms/live/liveChannel/liveChannel.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/cdn/mount/MountInfo.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/cdn/region/RegionInfo.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/soms/vod/file/FileInfo.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/soms/vod/convert/task/ConvertTaskInfo.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/soms/vod/catalog/CatalogInfo.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/soms/vod/convert/codec/ConvertCodec.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/soms/vod/image/file/ImageFileInfo.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/cdn/ip_manage/IpSegmentInfo.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/cdn/ip_manage/IpAddressInfo.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/soms/live/liveProgram/liveProgram.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/soms/live/proFile/ProFileInfo.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/cdn/serverGroup/ILiveServerGroup.hbm.xml" />
+		<mapping resource="/com/jwzt/DB/cdn/server/ILiveServer.hbm.xml" />
+		<mapping
+			resource="/com/jwzt/DB/cdn/accessMethods/ILiveServerAccessMethod.hbm.xml" />
+		<mapping
+			resource="/com/jwzt/DB/soms/live/task/ILiveMakeScreenRetryTask.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>
+
+

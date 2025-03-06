@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jwzt.DB.cdn.serverGroup.ILiveServerGroup" table="ilive_server_group">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="server_group_id" type="java.lang.Integer">
+			<column name="server_group_id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="server_group_name">
+			<column name="server_group_name"></column>
+		</property>
+
+		<property name="distribute_status">
+			<column name="distribute_status"></column>
+		</property>
+
+		<set name="serverList">
+			<key column="group_id" />
+			<one-to-many class="com.jwzt.DB.cdn.server.ILiveServer" />
+		</set>
+
+		<set name="mountList">
+			<key column="group_id" />
+			<one-to-many class="com.jwzt.DB.cdn.mount.MountInfo" />
+		</set>
+
+	</class>
+</hibernate-mapping>

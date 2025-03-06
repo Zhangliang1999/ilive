@@ -1,0 +1,2 @@
+<SRCFILE>i:\android\VCspace\bin\cmd\174300_120_32K_720x576_800.mp4</SRCFILE>
+<DESTFILE>I:\android\VCspace\bin\cmd\bvinfoget_ret.txt</DESTFILE>

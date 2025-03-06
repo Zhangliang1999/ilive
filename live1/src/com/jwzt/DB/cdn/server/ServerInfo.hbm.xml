@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:36:15 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.cdn.server.ServerInfo" table="soms4_cdn_server">
+    	<meta attribute="calss-description"></meta>
+		<id name="server_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">服务器ID</meta>
+            <column name="server_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <many-to-one
+        		class="com.jwzt.DB.cdn.serverGroup.ServerGroupInfo"
+        		name="server_group" column="server_group_id">
+        	<meta attribute="field-description">服务器组ID</meta>
+        </many-to-one>
+        <many-to-one
+        		class="com.jwzt.DB.cdn.region.RegionInfo"
+        		name="server_region" column="server_region_id">
+        	<meta attribute="field-description">区域信息</meta>
+        </many-to-one>
+        <property name="server_name" type="java.lang.String" not-null="true">
+        	<meta attribute="field-description">服务器名称</meta>
+            <column name="server_name" length="100" />
+        </property>
+        <property name="address" type="java.lang.String" >
+        	<meta attribute="field-description">服务器地址</meta>
+            <column name="address" length="100" />
+        </property>
+        <property name="ftp_address" type="java.lang.String">
+        	<meta attribute="field-description">FTP地址</meta>
+            <column name="ftp_address" length="100" />
+        </property>
+        <property name="platform" type="java.lang.Integer">
+        	<meta attribute="field-description">服务器平台 0:windows  1:unix  2:linux</meta>
+            <column name="platform" />
+        </property>
+        <property name="type" type="java.lang.Integer">
+        	<meta attribute="field-description">服务器类型  1:Media  2:Real</meta>
+            <column name="type" />
+        </property>
+        <property name="mode" type="java.lang.Integer" not-null="true">
+        	<meta attribute="field-description">服务器模式</meta>
+            <column name="mode_tag" />
+        </property>
+        <property name="logPath" type="java.lang.String" not-null="true">
+        	<meta attribute="field-description">日志路径</meta>
+            <column name="logPath"  length="255" />
+        </property>
+        <property name="number_of_cpu" type="java.lang.Integer">
+        	<meta attribute="field-description">处理器数目</meta>
+            <column name="number_of_cpu" />
+        </property>
+        <property name="memory_size" type="java.lang.Integer">
+        	<meta attribute="field-description">内存大小(M)</meta>
+            <column name="memory_size" />
+        </property>
+        <property name="band_width" type="java.lang.Integer">
+        	<meta attribute="field-description">服务器的带宽(Kbps)</meta>
+            <column name="band_width" />
+        </property>
+        <property name="ftp_user" type="java.lang.String">
+        	<meta attribute="field-description">FTP用户名</meta>
+            <column name="ftp_user" length="255" />
+        </property>
+        <property name="ftp_pwd" type="java.lang.String">
+        	<meta attribute="field-description">FTP密码</meta>
+            <column name="ftp_pwd" length="255" />
+        </property>
+        <property name="loadbalance" type="java.lang.Integer">
+        	<meta attribute="field-description">服务器的最大连接数</meta>
+            <column name="loadbalance" />
+        </property>
+
+
+		<property name="monitor_cpu" type="java.lang.Float">
+        	<meta attribute="field-description">CPU使用情况</meta>
+            <column name="monitor_cpu" />
+        </property>
+        <property name="monitor_mem" type="java.lang.Float">
+        	<meta attribute="field-description">内存使用情况</meta>
+            <column name="monitor_mem" />
+        </property>
+        <property name="monitor_band_width" type="java.lang.Integer">
+        	<meta attribute="field-description">带宽情况(Kbps)</meta>
+            <column name="monitor_band_width" length="255" />
+        </property>
+        <property name="monitor_connections" type="java.lang.Integer">
+        	<meta attribute="field-description">连接数</meta>
+            <column name="monitor_connections" length="255" />
+        </property>
+        <property name="last_updated" type="java.util.Calendar">
+        	<meta attribute="field-description">最新更新</meta>
+            <column name="last_updated" />
+        </property>
+        <property name="disksinfo" type="java.lang.String">
+        	<meta attribute="field-description">磁盘使用情况</meta>
+            <column name="disksinfo" />
+        </property>
+        <property name="manage_port" type="java.lang.Integer">
+        	<meta attribute="field-description">管理端口</meta>
+            <column name="manage_port" />
+        </property>
+    </class>
+</hibernate-mapping>

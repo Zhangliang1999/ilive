@@ -1,0 +1,5 @@
+2015_11_19 18:50:51(INFO)-------Regdump
+2015_11_19 18:50:51(INFO)-------GetModuleHandle
+2015_11_19 18:50:51(INFO)-------GetModuleHandle 0
+2015_11_19 18:50:51(INFO)-------read argv
+2015_11_19 18:50:51(INFO)-------GetAVFileInfoCMD 0

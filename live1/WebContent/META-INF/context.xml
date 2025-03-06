@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Context crossContext="true" reloadable="true">
+  <Resource
+    auth="Container"
+    description="sqlsvr2k datasource"
+    name="jdbc/sqlsvr2k4LIVEMS"
+    type="javax.sql.DataSource"
+	driverClassName="com.mysql.jdbc.Driver" 
+	url="jdbc:mysql://172.18.2.34:3306/db_ilive"
+    username="root"
+    password="Jwzt@tysx2018"
+    maxIdle="5"
+    maxWait="5000"
+    maxActive="100"/>
+</Context>

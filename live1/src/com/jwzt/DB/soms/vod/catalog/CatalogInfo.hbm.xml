@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.soms.vod.catalog.CatalogInfo" table="soms4_vod_catalog">
+    	<meta attribute="calss-description">
+			@author 曲明志
+		</meta>
+    
+        <id name="catalog_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">栏目ID</meta>
+            <column name="catalog_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="catalog_name" type="java.lang.String">
+        	<meta attribute="field-description">栏目名称</meta>
+            <column name="catalog_name" length="100" not-null="true" />
+        </property>
+        <property name="catalog_type" type="java.lang.Integer">
+        	<meta attribute="field-description">栏目类型 点播(0) 广告(1)</meta>
+            <column name="catalog_type" />
+        </property>
+        <property name="catalog_state" type="java.lang.Integer">
+        	<meta attribute="field-description">栏目类型 使用状态(0) 预删除状态(1)</meta>
+            <column name="catalog_state" />
+        </property>
+        <property name="parent_id" type="java.lang.Integer">
+        	<meta attribute="field-description">父栏目ID 0表示一级栏目</meta>
+            <column name="parent_id" />
+        </property>
+		<!-- xhf 2009.10. begin -->
+		<property name="parent_id_temp" type="java.lang.Integer">
+        	<meta attribute="field-description">临时存放父栏目ID 0表示一级栏目</meta>
+            <column name="parent_id_temp" />
+        </property>
+        <property name="node_archive_day" type="java.lang.Integer">
+        	<meta attribute="field-description">该字段用来控制节点显示顺序</meta>
+            <column name="node_archive_day" />
+        </property>
+        <!-- xhf 2009.10. end -->
+        <property name="root_id" type="java.lang.Integer">
+        	<meta attribute="field-description">根栏目ID</meta>
+            <column name="root_id" />
+        </property>
+        <many-to-one
+        		class="com.jwzt.DB.cdn.mount.MountInfo"
+        		name="mountInfo" column="mount_id" outer-join="false" lazy="false"> 
+        	<meta attribute="field-description">发布点ID</meta>
+        </many-to-one>
+        
+        <property name="attr" type="java.lang.Integer">
+        	<meta attribute="field-description">栏目属性</meta>
+            <column name="attr" />
+        </property>
+        <property name="tree_images" type="java.lang.String">
+        	<meta attribute="field-description">图片路径</meta>
+            <column name="tree_images" length="128" />
+        </property>
+        
+        <property name="catalog_desc" type="java.lang.String">
+        	<meta attribute="field-description">栏目描述</meta>
+            <column name="catalog_desc" length="1024" />
+        </property>
+        
+        <property name="site_id" type="java.lang.Integer">
+        	<meta attribute="field-description">站点id</meta>
+            <column name="site_id" />
+        </property>
+    </class>
+</hibernate-mapping>

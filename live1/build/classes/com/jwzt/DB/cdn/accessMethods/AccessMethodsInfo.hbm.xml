@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2009-12-15 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.cdn.accessMethods.AccessMethodsInfo" table="soms4_cdn_accessMethods">
+    	<meta attribute="calss-description">
+		</meta>
+        <id name="method_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">访问方式id</meta>
+            <column name="method_id" />
+            <generator class="assigned"></generator>
+        </id>
+         <property name="server_id" type="java.lang.Integer">
+        	<meta attribute="field-description">服务器id</meta>
+            <column name="server_id" />
+        </property>
+        <property name="method_name" type="java.lang.String">
+        	<meta attribute="field-description">访问方式名称</meta>
+            <column name="method_name" length="50"/>
+        </property>
+         <property name="mms_address" type="java.lang.String">
+        	<meta attribute="field-description">流媒体mms地址</meta>
+            <column name="mms_address" length="100"  />
+        </property>
+        
+         <property name="ftp_address" type="java.lang.String">
+        	<meta attribute="field-description">ftp地址</meta>
+            <column name="ftp_address" length="100"/>
+        </property>
+         <property name="ftp_address_inner" type="java.lang.String">
+        	<meta attribute="field-description">ftp地址内网</meta>
+            <column name="ftp_address_inner" length="100"/>
+        </property>
+         <property name="ftp_user" type="java.lang.String">
+        	<meta attribute="field-description">ftp用户名</meta>
+            <column name="ftp_user" length="50" />
+        </property>
+         <property name="ftp_pwd" type="java.lang.String">
+        	<meta attribute="field-description">ftp 密码</meta>
+            <column name="ftp_pwd" length="50" />
+        </property>
+         <property name="http_address" type="java.lang.String">
+        	<meta attribute="field-description">http地址</meta>
+            <column name="http_address" length="50"  />
+        </property>
+        
+        <property name="default_url" type="java.lang.Integer">
+        	<meta attribute="field-description">是否绑定应用服务器url</meta>
+            <column name="default_url" />
+        </property>
+        
+        <property name="default_ip" type="java.lang.Integer">
+        	<meta attribute="field-description">是否绑定ip段</meta>
+            <column name="default_ip" />
+        </property>
+        
+        <property name="default_method" type="java.lang.Integer">
+        	<meta attribute="field-description">默认访问方式</meta>
+            <column name="default_method" />
+        </property>
+         <property name="url_address" type="java.lang.String">
+        	<meta attribute="field-description">绑定应用服务器URL</meta>
+            <column name="url_address" length="100"  />
+        </property>
+         <property name="ip_ids" type="java.lang.String">
+        	<meta attribute="field-description">选择IP段</meta>
+            <column name="ip_ids" length="100"  />
+        </property>
+         <property name="args_1" type="java.lang.String">
+        	<meta attribute="field-description">扩展字段1</meta>
+            <column name="args_1" length="50" />
+        </property>
+         <property name="args_2" type="java.lang.String">
+        	<meta attribute="field-description">扩展字段2</meta>
+            <column name="args_2" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,13 @@
+<FileFormat>MP4</FileFormat>
+<FileType>only_audio</FileType>
+<FileDuration>120.30</FileDuration>
+<FileSize>1637872</FileSize>
+<VideoWidth>0</VideoWidth>
+<VideoHeight>0</VideoHeight>
+<VideoBitrate>0</VideoBitrate>
+<VideoCodec>UnKnown</VideoCodec>
+<AudioSamprate>44100</AudioSamprate>
+<AudioChannel>2</AudioChannel>
+<AudioBitrate>96180</AudioBitrate>
+<AudioCodec>AAC</AudioCodec>
+<SrcFile>i:\android\VCspace\bin\cmd\174300_120_32K_720x576_800.mp4</SrcFile>

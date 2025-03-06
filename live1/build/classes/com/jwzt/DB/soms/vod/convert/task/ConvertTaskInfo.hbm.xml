@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.jwzt.DB.soms.vod.convert.task.ConvertTaskInfo" table="soms4_convert_task">
+    	<meta attribute="calss-description">转码任务</meta>
+        <id name="task_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">任务ID</meta>
+            <column name="task_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="file_id" type="java.lang.Integer">
+        	<meta attribute="field-description">视频文件ID</meta>
+            <column name="file_id" />
+        </property>
+        <property name="file_name" type="java.lang.String">
+        	<meta attribute="field-description">视频文件名称</meta>
+            <column name="file_name" />
+        </property>
+         <property name="task_code_id" type="java.lang.Integer">
+        	<meta attribute="field-description">任务内容ID</meta>
+            <column name="task_code_id" />
+        </property>
+          <property name="task_status" type="java.lang.Integer">
+        	<meta attribute="field-description">任务状态</meta>
+            <column name="task_status" />
+        </property>
+       
+         <property name="task_server_id" type="java.lang.Integer">
+        	<meta attribute="field-description">转码服务器id</meta>
+            <column name="task_server_id" />
+        </property>
+         <property name="task_node_id" type="java.lang.String">
+        	<meta attribute="field-description">原栏目</meta>
+            <column name="task_node_id" />
+        </property>
+         <property name="task_target_node_id" type="java.lang.String">
+        	<meta attribute="field-description">目标栏目</meta>
+            <column name="task_target_node_id" />
+        </property>
+        <property name="task_time" type="java.lang.String">
+        	<meta attribute="field-description">任务时间</meta>
+            <column name="task_time" length="100"/>
+        </property>
+         <property name="task_user" type="java.lang.String">
+        	<meta attribute="field-description">任务人</meta>
+            <column name="task_user" length="50"/>
+        </property>
+         <property name="progress" type="java.lang.Float">
+        	<meta attribute="field-description">任务状态</meta>
+            <column name="progress" />
+        </property>
+    </class>
+</hibernate-mapping>

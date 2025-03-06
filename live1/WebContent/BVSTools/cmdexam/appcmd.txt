@@ -1,0 +1,12 @@
+<SRCFILE>I:\android\VCspace\bin\cmd/1.flv|-1|-1</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd/2.flv|-1|-1</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd/3.flv|-1|-1</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd/4.flv|-1|-1</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd/5.flv|-1|-1</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd/6.flv|-1|-1</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd/7.flv|-1|-1</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd/8.flv|-1|-1</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd/9.flv|-1|-1</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd/10.flv|-1|-1</SRCFILE>
+<SRCFILE>I:\android\VCspace\bin\cmd/11.flv|-1|-1</SRCFILE>
+<DESTFILE>I:\android\VCspace\bin\cmd/appmp4.mp4</DESTFILE>>

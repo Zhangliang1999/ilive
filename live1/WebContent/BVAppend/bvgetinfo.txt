@@ -1,0 +1,2 @@
+<SRCFILE>I:\android\VCspace\bin\cmd\1.flv</SRCFILE>
+<DESTFILE>I:\android\VCspace\bin\cmd\bvinfoget_ret.txt</DESTFILE>

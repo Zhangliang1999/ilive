@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GBK"?>
+<root>
+
+<IPRule>
+      	<RangeName>西北地区</Range>   
+           <IPRange>192.168.1.30-192.1.68.1.99</IPRange>
+           <IPRange>192.168.1.30-192.1.68.1.99</IPRange>
+           <IPRange>192.168.1.30-192.1.68.1.99</IPRange>
+     </IPRule>
+
+</root>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2006-3-7 14:38:47 by Hibernate Tools 3.1.0 beta3 -->
+<hibernate-mapping>
+    <class name="com.jwzt.DB.soms.live.liveChannel.ChannelInfo" table="soms4_live_channel">
+        <meta attribute="calss-description">
+			@author 徐勤
+		</meta>
+    
+        <id name="channel_id" type="java.lang.Integer" unsaved-value="0">
+        	<meta attribute="field-description">唯一ID</meta>
+            <column name="channel_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="channel_name" type="java.lang.String">
+        	<meta attribute="field-description">频道名称</meta>
+            <column name="channel_name" length="100" not-null="true" />
+        </property>
+        <property name="channel_group_id" type="java.lang.Integer">
+        	<meta attribute="field-description">频道所属的电视台（备用）</meta>
+            <column name="channel_group_id" />
+        </property>
+        <property name="pub_server_group" type="java.lang.Integer">
+        	<meta attribute="field-description">直播发布点所在的服务器组ID</meta>
+            <column name="pub_server_group" />
+        </property>
+         <property name="pub_server_group_sy" type="java.lang.Integer">
+        	<meta attribute="field-description">时移-直播发布点所在的服务器组ID</meta>
+            <column name="pub_server_group_sy" />
+        </property>
+        <property name="pub_server_group_ts" type="java.lang.Integer">
+        	<meta attribute="field-description">m3u8-直播发布点所在的服务器组ID</meta>
+            <column name="pub_server_group_ts" />
+        </property>
+        <property name="channel_mount_name" type="java.lang.String">
+        	<meta attribute="field-description">直播发布点名称</meta>
+            <column name="channel_mount_name" />
+        </property>       
+		<property name="channel_type" type="java.lang.Integer">
+        	<meta attribute="field-description">频道类型  0：采集直播  1：虚拟直播  2：混和直播</meta>
+            <column name="channel_type" length="100" not-null="true" />
+        </property>
+        <property name="upload_mount_id" type="java.lang.Integer">
+        	<meta attribute="field-description">上传服务器地址（发布点ID）</meta>
+            <column name="upload_mount_id" />
+        </property>
+        <property name="profile_id" type="java.lang.Integer">
+        	<meta attribute="field-description">配置文件id （根据配置文件判断是视频还是音频）</meta>
+            <column name="profile_id" />
+        </property>
+        <property name="channel_desc" type="java.lang.String">
+        	<meta attribute="field-description">频道描述</meta>
+            <column name="channel_desc" />
+        </property>
+ 
+       
+        <property name="if_drm" type="java.lang.Integer">
+        	<meta attribute="field-description">是否加密（0：不加密  1：加密）</meta>
+            <column name="if_drm" />
+        </property>
+        <property name="drm_address" type="java.lang.String">
+        	<meta attribute="field-description">直播认证地址</meta>
+            <column name="drm_address" length="100" />
+        </property>
+        
+
+        <property name="isPost" type="java.lang.Integer">
+        	<meta attribute="field-description">0：推；1：拉</meta>
+            <column name="isPost" />
+        </property>
+        <property name="port" type="java.lang.Integer">
+        	<meta attribute="field-description">拉、推方式的端口</meta>
+            <column name="port" />
+        </property>
+        <property name="encoder_address" type="java.lang.String">
+        	<meta attribute="field-description">拉方式采集工作站的ip地址</meta>
+            <column name="encoder_address" />
+        </property>
+        <property name="remote_mount_url" type="java.lang.String">
+        	<meta attribute="field-description">远程发布点地址</meta>
+            <column name="remote_mount_url" />
+        </property>
+        <property name="user_name" type="java.lang.String">
+        	<meta attribute="field-description">用户名</meta>
+            <column name="user_name" length="100" not-null="true" />
+        </property>
+        <property name="user_pwd" type="java.lang.String">
+        	<meta attribute="field-description">密码</meta>
+            <column name="user_pwd" />
+        </property>
+        
+        
+        <property name="sub_server_groups" type="java.lang.String">
+        	<meta attribute="field-description">直播发布点的分发目标（服务器组ID串）</meta>
+            <column name="sub_server_groups" />
+        </property>
+        
+        
+        <property name="channel_author" type="java.lang.String">
+        	<meta attribute="field-description">采集时视频流中的作者</meta>
+            <column name="channel_author" />
+        </property>
+        <property name="channel_title" type="java.lang.String">
+        	<meta attribute="field-description">采集时视频流中的标题</meta>
+            <column name="channel_title" />
+        </property>
+        <property name="channel_bit" type="java.lang.String">
+        	<meta attribute="field-description">采集时视频流的比特率</meta>
+            <column name="channel_bit" />
+        </property>
+        <property name="channel_rights" type="java.lang.String">
+        	<meta attribute="field-description">采集时视频流的版权</meta>
+            <column name="channel_rights" />
+        </property> 
+        <property name="channel_tv_desc" type="java.lang.String">
+        	<meta attribute="field-description">采集时视频流中的描述</meta>
+            <column name="channel_tv_desc" />
+        </property>
+        
+        
+        
+        <property name="program_list_type" type="java.lang.Integer">
+        	<meta attribute="field-description">频道节目的展现方式 0：由节目生成节目单  1：静态节目单
+
+</meta>
+            <column name="program_list_type" />
+        </property>         
+        
+        <property name="channel_state" type="java.lang.Integer">
+        	<meta attribute="field-description">频道的直播状态 0：不正常  1：正常</meta>
+            <column name="channel_state" />
+        </property>
+        <property name="channel_switch" type="java.lang.Integer">
+        	<meta attribute="field-description">是否停止直播 0：停止   1：开启</meta>
+            <column name="channel_switch" />
+        </property> 
+        <property name="if_refresh" type="java.lang.Integer">
+        	<meta attribute="field-description">是否更新配置（和c交互时，用该字段判断频道是否更新）
+
+</meta>
+            <column name="if_refresh" />
+        </property>
+        
+        <property name="record_time" type="java.sql.Timestamp">
+        	<meta attribute="field-description">记录生成频道时间</meta>
+            <column name="record_time" />
+        </property>  
+	<property name="stream_type" type="java.lang.Integer">
+        	<meta attribute="field-description">直播流类型 </meta>
+            <column name="stream_type" />
+        </property>  
+        <property name="channel_show_name" type="java.lang.String">
+        	<meta attribute="field-description"></meta>
+            <column name="channel_show_name" />
+        </property>     
+        <property name="is_chat_button" type="java.lang.Integer">
+        	<meta attribute="field-description"></meta>
+            <column name="is_chat_button" />
+        </property>     
+        <property name="channel_logo_pic" type="java.lang.String">
+        	<meta attribute="field-description"></meta>
+            <column name="channel_logo_pic" />
+        </property> 
+        <property name="channel_if_checked" type="java.lang.Integer">
+        	<meta attribute="field-description"></meta>
+            <column name="channel_if_checked" />
+        </property>     
+        <property name="file_save_directory_sy" type="java.lang.String">
+        	<meta attribute="field-description">时移直播切片文件存储目录</meta>
+            <column name="file_save_directory_sy" />
+        </property>  
+         <property name="file_save_directory_ts" type="java.lang.String">
+        	<meta attribute="field-description">TS直播切片文件存储目录</meta>
+            <column name="file_save_directory_ts" />
+        </property>  
+        <property name="live_pub" type="java.lang.String">
+        	<meta attribute="field-description">直播发布前缀</meta>
+            <column name="live_pub" />
+        </property> 
+        <property name="chann_order" type="java.lang.Integer">
+        	<meta attribute="field-description">直播频道排序</meta>
+            <column name="chann_order" />
+        </property>
+        <property name="chann_pic" type="java.lang.String">
+        	<meta attribute="field-description">台标</meta>
+            <column name="chann_pic" length="200"/>
+        </property>
+        <property name="chann_streaming" type="java.lang.String">
+        	<meta attribute="field-description">直播地址HTTP</meta>
+            <column name="chann_streaming" length="200"/>
+        </property>
+        <property name="chann_streaming_rtmp" type="java.lang.String">
+        	<meta attribute="field-description">直播地址RTMP</meta>
+            <column name="chann_streaming_rtmp" length="200"/>
+        </property><property name="chann_streaming_hls" type="java.lang.String">
+        	<meta attribute="field-description">直播地址HLS</meta>
+            <column name="chann_streaming_hls" length="200"/>
+        </property>
+    </class>
+</hibernate-mapping>
