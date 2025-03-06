@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/mui.picker.css" />
+    <link rel="stylesheet" type="text/css" href="css/mui.poppicker.css" />
+	<link rel="stylesheet" href="css/mystyle.css"/>
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/base.js"></script>
+    <script src="js/mui.js"></script>
+    <script src="js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/city.data.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jsrender.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/formput.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    mui.init();
+    </script>
+	<style type="text/css">
+		.main{
+			width: 640px;
+			margin: 0 auto;
+		}
+		.mui-bar-nav{background: #0084ff;color: #fff;}
+		.mui-icon-left-nav{color: #fff;}
+		.mui-title{color: #fff;}
+		.mui-btn-block{margin-bottom: 0;}
+		input{margin-bottom: 0!important;font-size: 14px;border: none!important;color: #999;}
+		.selectBox{padding: 10px 10px;text-align: left;font-size: 14px;color: #999;}
+		.mui-card-content{color: #fff;}
+		.mui-name{color: #444;font-size: 16px;}
+		.border-top{
+			border-top: 1px solid #ddd;
+		}
+		.mui-checkbox input[type=checkbox], .mui-radio input[type=radio]{top: 8px;}
+		.mui-input-row label{padding: 16px 15px 12px;color: #999;}
+		.mybtn{
+			width: 33%;
+			height: 44px;
+			line-height: 44px;
+			background: #0084ff;
+			color: #fff;
+			padding: 0;
+			display: block;
+			margin-top: 9px;
+		}
+		.p-relative{
+			position: relative;
+		}
+		.mui-checkbox input[type=checkbox]:before {
+			content: '\e413';
+		}
+
+		.mui-checkbox input[type=checkbox]:checked:before {
+			content: '\e443';
+		}
+		.successMask{
+		   width: 164px;
+		   text-align: center;
+		   height: 35px;
+		   line-height: 35px;
+		   border-radius: 5px;
+		   background: rgba(0,0,0,0.5);
+		   color: #fff;
+		   position: fixed;
+		   left: 50%;
+		   margin-left: -100px;
+		   top: 400px;
+		   display: none;
+		   font-size: 25px;
+		   z-index: 99999999999999;
+		}
+
+	</style>
+</head>
+
+<body>
+<div class="main">
+	<div class="mui-card-content">
+		<div class="mui-card-content-inner">
+			<img class="coverImg" src="" alt=""/>
+			<div class="mask"></div>
+		</div>
+	</div>
+	<div class="timeMask">直播时间：</div>
+    <div class="mui-content">
+        <div class="mui-card-content" id="titleHeader">
+        </div>
+        <h4 class="mui-content-padded" style="margin-bottom: 15px;">报名观看</h4>
+        <div id="header">
+        </div>
+    </div>
+	<div style="background: #fff;">
+		<button id="subBtn" type="button" class="confirmBtn">提交报名</button>
+	</div>
+	<div class="successMask">报名成功</div>
+</div>
+</body>
+<script>
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = decodeURI(window.location.search.substr(1)).match(reg);
+    if (r != null)return unescape(r[2]);
+    return null;
+}
+var roomId = GetQueryString("roomId");
+var formId = 0;
+var userId = GetQueryString("userId");
+
+if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    window.location.href = "http://"+h5Base+"/phone/live.html?roomId="+roomId;//H5
+}
+</script>
+<script>
+(function($, jquery, doc) {
+    $.init();
+    jquery.ajax(webBaseUrl+'/ilive/selectRoom.jspx?roomId='+roomId, {
+		dataType: 'jsonp', //服务器返回json格式数据
+		type: 'post', //HTTP请求类型
+		timeout: 10000, //超时时间设置为10秒；
+		crossDomain: true,
+		headers: { 'Content-Type': 'application/json' },
+		success:function(data){
+			var first = JSON.parse(data.iLiveLiveRoom);
+			console.log(first)
+			var coverImg = first.liveEvent.converAddr;
+			jquery(".coverImg").prop("src",coverImg);
+			var titleText = first.liveEvent.liveTitle;
+			jquery(".mask").html(titleText);
+			var date = new Date(first.liveEvent.liveStartTime);
+			var day = date.getDate();
+			if(day<10){
+				day = date.getDate();
+			};
+			var hours = date.getHours();
+			if(hours<10){
+				hours = "0"+date.getHours();
+			};
+			var min = date.getMinutes();
+			if(min<10){
+				min = "0"+date.getMinutes();
+			}
+			var time = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+day+"   "+hours+":"+min;
+			var stratTime = "直播时间："+time;
+			jquery(".timeMask").html(stratTime);
+		},
+		error: function(xhr, type, errorThrown) {
+			//异常处理；
+			console.log(type);
+		}
+	});
+    jquery.ajax("http://"+tomcatBase+'/ilive/appuser/diyform.jspx?roomId='+roomId, {
+        dataType: 'jsonp', //服务器返回json格式数据
+        type: 'post', //HTTP请求类型
+        timeout: 10000, //超时时间设置为10秒；
+        crossDomain: true,
+        headers: { 'Content-Type': 'application/json' },
+        success: function(data) {
+            var innerHtml = "";
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            // console.log(data);
+            var diyformVo = data.diyformVo;
+            formId = data.diyformVo.formId;
+            var headRender = jquery.templates('#titleTemplate');
+            if(headRender) {
+                  var finaheadRender = headRender(diyformVo);
+                  jquery('#titleHeader').html(finaheadRender);
+            }
+            var modelList = data.modelList;
+            $(modelList).each(function(index, model) {
+                var jsRenderTpl = jquery.templates('#questionTmpl' + model.questionType);
+                if (jsRenderTpl) {
+                    //模板与数据结合
+                    var finalTpl = jsRenderTpl(model);
+                    innerHtml += finalTpl;
+                }
+            });
+            jquery('#header').append(innerHtml);
+        },
+        error: function(xhr, type, errorThrown) {
+            //异常处理；
+            console.log(type);
+        }
+    });
+})(mui, jQuery, document);
+$(document).delegate(".mui-popup-buttons","click",function(){
+	   $(".mui-popup").hide();
+	   $(".mui-popup-backdrop").hide();
+	})
+$('#subBtn').on("click",function(){
+	var pushData = new Array();
+	var pushArr = new Array();
+	var muiLength = $('.mui-card').length;
+	var isSub = true;
+	$('.mui-card').each(function(index,dom){
+		var retObj = fetchDataByQType(dom);
+		console.log(dom);
+		if(!retObj.retFlag) {
+			console.log(retObj.msg);
+			mui.alert(retObj.msg);
+			isSub=false;
+			return false;
+		}else {
+			pushArr.push(1);
+			delete retObj["retFlag"];
+			pushData.push(retObj);
+		}
+	});
+
+    if(isSub) {
+		 $.ajax({
+				type: "get",
+				url: "http://"+tomcatBase+"/ilive/appuser/postformdata.jspx?formId="+formId+"&callback=?&userId="+userId,
+				async: true,
+				data: {
+					diyFormData :  JSON.stringify(pushData)
+				},
+				dataType: "jsonp",
+				jsonp: "callback",
+				timeout: 10000,
+				success: function(data) {
+					if(data.code ==1){
+						$(".successMask").show();
+						setTimeout(function(){
+							window.location.href="http://"+h5Base+"/pc/play.html?roomId="+roomId ;
+						},2000);
+
+						return;
+					}else {
+						mui.alert(data.message);
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					// plus.nativeUI.toast(errorThrown);
+				}
+			});
+		}
+});
+
+
+</script>
+
+<script id="titleTemplate" type="text/x-jsrender">
+    <div class="mui-card-content-inner">
+              {{:formName}}
+     </div>
+</script>
+<script id="questionTmpl7" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	<span class="titleQ">
+	{{:questionName}}
+	</span>
+	{{if isNeed==1}}
+		<span style="margin-left: 10px;">(必填)</span>
+	{{/if}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <div class="mui-input-row">
+            <input type="text">
+        </div>
+    </div>
+</script>
+<script id="questionTmpl8" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	<span class="titleQ">
+	{{:questionName}}
+	</span>
+	{{if isNeed==1}}
+		<span style="margin-left: 10px;">(必填)</span>
+	{{/if}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        {{for optionName}}
+        <div class="mui-input-row mui-radio mui-left">
+            <label>{{: #data}}</label>
+             <input name="radio{{:#parent.parent.data.modelId}}" type="radio" type="radio">
+        </div>
+        {{/for}}
+    </div>
+</script>
+<script id="questionTmpl20" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	<span class="titleQ">
+	{{:questionName}}
+	</span>
+	{{if isNeed==1}}
+		<span style="margin-left: 10px;">(必填)</span>
+	{{/if}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <button id="showUserPicker" class="mui-btn mui-btn-block selectBox" type="button">13</button>
+    </div>
+</script>
+<script id="questionTmpl12" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	<span class="titleQ">
+	{{:questionName}}
+	</span>
+	{{if isNeed==1}}
+		<span style="margin-left: 10px;">(必填)</span>
+	{{/if}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <button id="showCityPicker3" class="mui-btn mui-btn-block selectBox" type="button">选择你所在的城市</button>
+    </div>
+</script>
+<script id="questionTmpl10" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	<span class="titleQ">
+	{{:questionName}}
+	</span>
+	{{if isNeed==1}}
+		<span style="margin-left: 10px;">(必填)</span>
+	{{/if}}
+	</p>
+    <div class="mui-card" modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <div class="mui-input-row ">
+            <input type="text">
+        </div>
+    </div>
+</script>
+<script id="questionTmpl11" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	<span class="titleQ">
+	{{:questionName}}
+	</span>
+	{{if isNeed==1}}
+		<span style="margin-left: 10px;">(必填)</span>
+	{{/if}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <div class="mui-input-row">
+            <input type="text">
+        </div>
+    </div>
+</script>
+<script id="questionTmpl9" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	<span class="titleQ">
+	{{:questionName}}
+	</span>
+	{{if isNeed==1}}
+		<span style="margin-left: 10px;">(必填)</span>
+	{{/if}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <div class="mui-input-row">
+            <input type="text">
+        </div>
+    </div>
+</script>
+<script id="questionTmpl5" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	<span class="titleQ">
+	{{:questionName}}
+	</span>
+	{{if isNeed==1}}
+		<span style="margin-left: 10px;">(必填)</span>
+	{{/if}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <div class="mui-input-row">
+            <input type="text">
+        </div>
+    </div>
+</script>
+<script id="questionTmpl6" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	<span class="titleQ">
+	{{:questionName}}
+	</span>
+	{{if isNeed==1}}
+		<span style="margin-left: 10px;">(必填)</span>
+	{{/if}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <div class="mui-input-row">
+            <textarea></textarea>
+        </div>
+    </div>
+</script>
+<script id="questionTmpl2" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	<span class="titleQ">
+	{{:questionName}}
+	</span>
+	{{if isNeed==1}}
+		<span style="margin-left: 10px;">(必填)</span>
+	{{/if}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        {{for optionName}}
+			<div class="mui-input-row mui-checkbox mui-left">
+							<label>{{: #data}}</label>
+							<input name="checkbox" value="" type="checkbox">
+			</div>
+        {{/for}}
+    </div>
+</script>
+<script id="questionTmpl1" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	<span class="titleQ">
+	{{:questionName}}
+	</span>
+	{{if isNeed==1}}
+		<span style="margin-left: 10px;">(必填)</span>
+	{{/if}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        {{for optionName}}
+        <div class="mui-input-row mui-radio mui-left">
+            <label>{{: #data}}</label>
+            <input name="radio{{:#parent.parent.data.modelId}}" type="radio" type="radio">
+        </div>
+        {{/for}}
+    </div>
+</script>
+<script id="questionTmpl27" type="text/x-jsrender">
+	 <p class="mui-content-padded mui-name">
+		<span class="titleQ">
+			{{:questionName}}
+		</span>
+		{{if isNeed==1}}
+				<span style="margin-left: 10px;">(必填)</span>
+			{{/if}}
+	</p>
+	<div class="mui-card" modelId="{{:modelId}}" isNeed={{:isNeed}} needMsgValid={{:needMsgValid}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+		<div class="mui-input-row ">
+			<input id="mob_{{:modelId}}" type="text">
+		</div>
+	</div>
+	{{if needMsgValid==1}}
+	<div  style="overflow: hidden;">
+	<div class="mui-card"  style="width: 60%;float: left" modelId="{{:modelId}}" qtype="271" isNeed={{:isNeed}}>
+		<div class="mui-input-row  p-relative" >
+				<input id="input_{{:modelId}}" type="text">
+
+		</div>
+	</div>
+	<button style="float: left;" id="msgBtn_{{:modelId}}" class="mybtn" onclick="getCode(this)">获取验证码</button>
+	</div>
+	{{/if}}
+</script>
+</html>
