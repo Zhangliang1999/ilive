@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>天翼直播平台</title>
+    <link rel="stylesheet" href="css/newlogin.css"/>
+    <link rel="stylesheet" href="js/need/layer.css"/>
+    <link rel="stylesheet" href="css/2019style.css"/>
+</head>
+<body>
+
+<div class="container" id="mainContent" onclick="enterRoom()">
+    <div class="main newmain">
+        <div class="text-center loginBox">
+            <!-- <a  class="loginBtn" onclick="enterRoom()">进入直播间》</a> -->
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/rem.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<script type="text/javascript" src="js/tysx2019.js"></script>
+<script>
+    if (GetQueryString("roomId") != null || GetQueryString("roomId") != undefined) {
+
+        if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            window.location.href = "http://" + h5Base + "/pc/play.html?roomId=" + GetQueryString("roomId") ;//PC
+        }
+    }
+    $(".container").height($(window).height());
+    $(".mask").height($(window).height());
+    var roomId = GetQueryString("roomId");
+
+    document.title = window.sessionStorage.getItem('roomName') || '天翼直播平台';
+
+    function enterRoom() {
+        $.ajax({
+            type: "get",
+            url: "http://" + tomcatBase + "/ilive/appuser/enterGuide.jspx?orginal=1&callback=?",
+            async: true,
+            dataType: "jsonp",
+            jsonp: "callback",
+            timeout: 10000,
+            success: function (data) {
+                if (data.code == 1) {
+                    window.location.href="http://" + h5Base + "/phone/live.html?roomId=" + roomId
+                    //window.location.href = "live.html?roomId=" + roomId;
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        });
+    };
+
+    $.ajax({
+        type: "get",
+        url: "http://" + tomcatBase + "/ilive/appuser/getGuideUrl.jspx?roomId=" + roomId + "&orginal=1" + "&callback=?",
+        async: true,
+        dataType: "jsonp",
+        jsonp: "callback",
+        timeout: 10000,
+        success: function (data) {
+            if (data.code == 1) {
+                var imgUrl = data.data.imgUrl;
+                var openGuideSwitch = data.data.openGuideSwitch;
+                if (openGuideSwitch == 1) {
+                    if (imgUrl != "") {
+                        $('#mainContent').css({
+                            "background": "url(" + imgUrl + ") no-repeat",
+                            "background-size": "100% 100%"
+                        });
+                    }
+                }
+            }
+
+        },
+        error: function (xhr, type, errorThrown) {
+            // plus.nativeUI.toast(errorThrown);
+        }
+    });
+    setTimeout(function () {
+        enterRoom()
+    }, 5000)
+</script>
+</html>

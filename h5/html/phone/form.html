@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_872913_nyh0svultme.css"/>
+    <link rel="stylesheet" href="js/need/layer.css"/>
+    <link rel="stylesheet" href="css/2019style.min.css"/>
+    <link rel="stylesheet" href="css/mystyle.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mescroll.js@1.4.1/mescroll.min.css">
+    <style>
+body{
+    position: relative;
+    overflow: initial;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <div class="content">
+        <div class="content-inner">
+            <img class="coverImg" src="" alt=""/>
+            <div class="mask"></div>
+        </div>
+    </div>
+    <div class="content" >
+
+            <div class="timeMask">直播时间：</div>
+            <h4 class="content-padded">报名观看</h4>
+            <div id="header"></div>
+            <button id="subBtn" type="button" class="confirmBtn">提交报名</button>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/rem.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<script type="text/javascript" src="js/base.js?v1"></script>
+<script type="text/javascript" src="js/apis.min.js?v=412"></script>
+<script type="text/javascript" src="js/tysx2019.min.js?V=412"></script>
+<!--<script type="text/javascript" src="js/mui.js"></script>-->
+<!--<script type="text/javascript" src="js/mui.picker.js" charset="utf-8"></script>-->
+<!--<script type="text/javascript" src="js/mui.poppicker.js" charset="utf-8"></script>-->
+<!--<script type="text/javascript" src="js/city.data.js" charset="utf-8"></script>-->
+<!--<script type="text/javascript" src="js/city.data-3.js" charset="utf-8"></script>-->
+<script type="text/javascript" src="js/jsrender.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/formput.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+    var roomId = GetQueryString("roomId") || 0;
+    var userId = GetQueryString("userId") || 0;
+    var formId = 0;
+    if (!/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+        window.location.href = "http://" + h5Base + "/pc/play.html?roomId=" + GetQueryString("roomId");//PC
+    }
+    $(function () {
+        $.ajax(webBaseUrl + '/ilive/selectRoom.jspx?roomId=' + roomId, {
+            dataType: 'jsonp', //服务器返回json格式数据
+            type: 'post', //HTTP请求类型
+            timeout: 10000, //超时时间设置为10秒；
+            crossDomain: true,
+            headers: {'Content-Type': 'application/json'},
+            success: function (data) {
+                var first = JSON.parse(data.iLiveLiveRoom);
+                console.log(first)
+                var coverImg = first.liveEvent.converAddr;
+                $(".coverImg").prop("src", coverImg);
+                var titleText = first.liveEvent.liveTitle;
+                $(".mask").html(titleText);
+                var date = new Date(first.liveEvent.liveStartTime);
+
+                var day = date.getDate();
+                if (day < 10) {
+                    day = "0" + date.getDate();
+                }
+
+                var hours = date.getHours();
+                if (hours < 10) {
+                    hours = "0" + date.getHours();
+                }
+
+                var min = date.getMinutes();
+                if (min < 10) {
+                    min = "0" + date.getMinutes();
+                }
+
+                var month = (date.getMonth() + 1)
+                if (month < 10) {
+                    month = "0" + (date.getMonth() + 1);
+                }
+
+                var time = date.getFullYear() + "-" + month + "-" + day + "   " + hours + ":" + min;
+                var stratTime = "直播时间：" + time;
+                $(".timeMask").html(stratTime);
+            },
+            error: function (xhr, type, errorThrown) {
+                //异常处理；
+                console.log(type);
+            }
+        });
+        $.ajax("http://" + tomcatBase + '/ilive/appuser/diyform.jspx?roomId=' + roomId, {
+            dataType: 'jsonp', //服务器返回json格式数据
+            type: 'post', //HTTP请求类型
+            timeout: 10000, //超时时间设置为10秒；
+            crossDomain: true,
+            headers: {'Content-Type': 'application/json'},
+            success: function (data) {
+                var innerHtml = "";
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                // console.log(data);
+                var diyformVo = data.diyformVo;
+                formId = data.diyformVo.formId;
+                var headRender = $.templates('#titleTemplate');
+                if (headRender) {
+                    var finaheadRender = headRender(diyformVo);
+                    $('#titleHeader').html(finaheadRender);
+                }
+                var modelList = data.modelList;
+                $(modelList).each(function (index, model) {
+                    var jsRenderTpl = $.templates('#questionTmpl' + model.questionType);
+                    if (jsRenderTpl) {
+                        //模板与数据结合
+                        var finalTpl = jsRenderTpl(model);
+                        innerHtml += finalTpl;
+                    }
+                });
+                $('#header').append(innerHtml);
+            },
+            error: function (xhr, type, errorThrown) {
+                //异常处理；
+                console.log(type);
+            }
+        });
+        $('#subBtn').on("click", function () {
+            var pushData = new Array();
+            var pushArr = new Array();
+            var muiLength = $('.card').length;
+            var isSub = true;
+            $('.card').each(function (index, dom) {
+                var retObj = fetchDataByQType(dom);
+                if (!retObj.retFlag) {
+                    console.log(retObj.msg);
+                    layerOpen(retObj.msg, 6)
+                    isSub = false;
+                    return false;
+                } else {
+                    pushArr.push(1);
+                    delete retObj["retFlag"];
+                    pushData.push(retObj);
+                }
+            });
+
+            // console.log(pushData);
+            if (isSub) {
+                $.ajax({
+                    type: "get",
+                    url: "http://" + tomcatBase + "/ilive/appuser/postformdata.jspx?orginal=1&formId=" + formId + "&callback=?&userId=" + userId,
+                    async: true,
+                    data: {
+                        diyFormData: JSON.stringify(pushData)
+                    },
+                    dataType: "jsonp",
+                    jsonp: "callback",
+                    timeout: 10000,
+                    success: function (data) {
+                        if (data.code == 1) {
+                            layerOpen('报名成功')
+                        
+                            setTimeout(function () {
+                                window.location.replace("http://" + h5Base + "/phone/live.html?roomId=" + roomId)
+                            }, 2000)
+                            return false;
+                        } else {
+                            layerOpen(data.message, 6)
+                        }
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        // plus.nativeUI.toast(errorThrown);
+                    }
+                });
+            }
+        });
+    })
+
+</script>
+<!--<script id="titleTemplate" type="text/x-jsrender">-->
+<!--<div class="card-content-inner">-->
+<!--{{:formName}}-->
+<!--</div>-->
+<!--</script>-->
+<script id="questionTmpl7" type="text/x-jsrender">
+    <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+            <div class="card" data-name="{{:questionName}}"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+                <div class="input-row">
+                    <input type="text" maxlength="10">
+                </div>
+            </div>
+        </div>
+	</div>
+
+
+
+</script>
+<script id="questionTmpl8" type="text/x-jsrender">
+    <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+        </div>
+        <div class="card" data-name="{{:questionName}}"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+            {{for optionName}}
+            <div class="input-row">
+                <label><span>{{: #data}}</span><input name="radio{{:#parent.parent.data.modelId}}" type="radio" type="radio"></label>
+            </div>
+            {{/for}}
+        </div>
+	</div>
+
+
+</script>
+<script id="questionTmpl20" type="text/x-jsrender">
+    <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+        </div>
+        <div class="card"  data-name="{{:questionName}}"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+            <button id="showUserPicker" class="btn btn-block selectBox" type="button">13</button>
+        </div>
+	</div>
+
+
+</script>
+<script id="questionTmpl12" type="text/x-jsrender">
+     <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+        </div>
+        <div class="card"  data-name="{{:questionName}}"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+            <button id="showCityPicker3" class="btn btn-block selectBox" type="button">选择你所在的城市</button>
+        </div>
+	</div>
+
+
+</script>
+<script id="questionTmpl10" type="text/x-jsrender">
+    <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+        </div>
+        <div class="card" data-name="{{:questionName}}"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+            <div class="input-row "><input type="text"></div>
+        </div>
+	</div>
+
+
+</script>
+<script id="questionTmpl11" type="text/x-jsrender">
+    <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+        </div>
+        <div class="card" data-name="{{:questionName}}"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+            <div class="input-row">
+                <input type="text">
+            </div>
+        </div>
+	</div>
+
+
+</script>
+<script id="questionTmpl9" type="text/x-jsrender">
+    <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+        </div>
+        <div class="card" data-name="{{:questionName}}"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+            <div class="input-row">
+                <input type="text">
+            </div>
+        </div>
+	</div>
+
+
+
+</script>
+<script id="questionTmpl5" type="text/x-jsrender">
+    <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+        </div>
+        <div class="card" data-name="{{:questionName}}"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+            <div class="input-row">
+                <input type="text" maxlength="40">
+            </div>
+        </div>
+	</div>
+
+
+</script>
+<script id="questionTmpl6" type="text/x-jsrender">
+   <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+        </div>
+        <div class="card" data-name="{{:questionName}}"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+            <div class="input-row">
+                <textarea maxlength="100"></textarea>
+            </div>
+        </div>
+	</div>
+
+
+
+</script>
+<script id="questionTmpl2" type="text/x-jsrender">
+    <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+        </div>
+        <div class="card" data-name="{{:questionName}}"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+           {{for optionName}}
+                <div class="input-row">
+                    <label><span>{{: #data}}</span><input name="checkbox" value="" type="checkbox"></label>
+                </div>
+            {{/for}}
+        </div>
+	</div>
+
+
+</script>
+<script id="questionTmpl1" type="text/x-jsrender">
+    <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+        </div>
+        <div class="card" data-name="{{:questionName}}"  modelId="{{:modelId}}" isNeed={{:isNeed}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+            {{for optionName}}
+            <div class="input-row">
+                <label><span>{{: #data}}</span><input name="radio{{:#parent.parent.data.modelId}}" value="" type="radio"></label>
+            </div>
+            {{/for}}
+        </div>
+	</div>
+
+
+</script>
+<script id="questionTmpl27" type="text/x-jsrender">
+	 <div class="content-padded">
+        <div class="titleQ">
+            {{:questionName}} {{if isNeed==1}}<span class="request">*</span>{{/if}}
+        </div>
+        <div class="card" data-name="{{:questionName}}" modelId="{{:modelId}}" isNeed={{:isNeed}} needMsgValid={{:needMsgValid}} qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+            <div class="input-row ">
+                <input id="mob_{{:modelId}}" type="text" maxlength="11" name="phoneNumber">
+            </div>
+	    </div>
+	</div>
+
+	 {{if needMsgValid==1}}
+	 <div class="content-padded">
+            <div  style="overflow: hidden;">
+                <div class="card" data-name="{{:questionName}}"  style="width: 60%;float: left" modelId="{{:modelId}}" qtype="271" isNeed={{:isNeed}}>
+                    <div class="input-row" >
+                        <input id="input_{{:modelId}}" type="text" maxlength="6" ">
+                    </div>
+                </div>
+                <button style="float: left;" id="msgBtn_{{:modelId}}" class="mybtn" onclick="getAuthenticode(this, 'form')">获取验证码</button>
+            </div>
+     </div>
+	 {{/if}}
+
+
+</script>
+</html>

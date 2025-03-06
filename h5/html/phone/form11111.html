@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/mui.picker.css" />
+    <link rel="stylesheet" type="text/css" href="css/mui.poppicker.css" />
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/mui.js"></script>
+    <script src="js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/city.data.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jsrender.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/formput.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    mui.init();
+    </script>
+    <style type="text/css">
+    .mui-bar-nav {
+        background: #0084ff;
+        color: #fff;
+    }
+
+    .mui-icon-left-nav {
+        color: #fff;
+    }
+
+    .mui-title {
+        color: #fff;
+    }
+
+    .mui-btn-block {
+        margin-bottom: 0;
+    }
+
+    input {
+        margin-bottom: 0!important;
+        font-size: 14px;
+        border: none!important;
+        color: #999;
+    }
+
+    .selectBox {
+        padding: 10px 10px;
+        text-align: left;
+        font-size: 14px;
+        color: #999;
+    }
+
+    .mui-card-content {
+        background: #0084ff;
+        color: #fff;
+    }
+
+    .mui-name {
+        color: #444;
+        font-size: 16px;
+    }
+
+    .border-top {
+        border-top: 1px solid #ccc;
+    }
+
+    .mui-checkbox input[type=checkbox],
+    .mui-radio input[type=radio] {
+        top: 8px;
+    }
+
+    .mui-input-row label {
+        padding: 16px 15px 12px;
+        color: #999;
+    }
+	.warnTitle {
+		color:red;
+		margin-right:5px;
+		font-size:14px;
+	}
+    </style>
+</head>
+
+<body>
+    <div class="mui-content">
+        <div class="mui-card-content" id="titleHeader">
+        </div>
+        <div id="header">
+        </div>
+    </div>
+    <button id="subBtn" type="button" class="mui-btn mui-btn-primary mui-btn-block" style="font-size: 18px;">提交</button>
+</body>
+<script>
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = decodeURI(window.location.search.substr(1)).match(reg);
+    if (r != null)return unescape(r[2]);
+    return null;
+}
+var h5Base="zb.tv189.com";
+var webBaseUrl = "http://apizb.tv189.com";
+var roomId = GetQueryString("roomId");
+var formId = 0;
+</script>
+<script>
+(function($, jquery, doc) {
+    $.init();
+    jquery.ajax(webBaseUrl+'/ilive/appuser/diyform.jspx?roomId='+roomId, {
+        dataType: 'jsonp', //服务器返回json格式数据
+        type: 'post', //HTTP请求类型
+        timeout: 10000, //超时时间设置为10秒；
+        crossDomain: true,
+        headers: { 'Content-Type': 'application/json' },
+        success: function(data) {
+			// console.log(data);
+            var innerHtml = "";
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            // console.log(data);
+            var diyformVo = data.diyformVo;
+            formId = data.diyformVo.formId;
+            var headRender = jquery.templates('#titleTemplate');
+            if(headRender) {
+                  var finaheadRender = headRender(diyformVo);
+                  jquery('#titleHeader').html(finaheadRender);
+            }
+            var modelList = data.modelList;
+            $(modelList).each(function(index, model) {
+                var jsRenderTpl = jquery.templates('#questionTmpl' + model.questionType);
+                if (jsRenderTpl) {
+                    //模板与数据结合
+                    var finalTpl = jsRenderTpl(model);
+                    innerHtml += finalTpl;
+                }
+            });
+            jquery('#header').append(innerHtml);
+            $.ready(function() {
+                /**
+                 * 获取对象属性的值
+                 * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+                 * @param {Object} obj 对象
+                 * @param {String} param 属性名
+                 */
+                var _getParam = function(obj, param) {
+                    return obj[param] || '';
+                };
+                //普通示例
+                var userPicker = new $.PopPicker();
+					userPicker.setData([{
+						value: 'ywj',
+						text: 13
+					}, {
+						value: 'aaa',
+						text: 14
+					}, {
+						value: 'lj',
+						text: 15
+					}, {
+						value: 'ymt',
+						text: 15
+					}, {
+						value: 'shq',
+						text: 15
+					}, {
+						value: 'zhbh',
+						text: 15
+					}, {
+						value: 'zhy',
+						text: 15
+					}, {
+						value: 'gyf',
+						text: 15
+					}, {
+						value: 'zhz',
+						text: 15
+					}, {
+						value: 'gezh',
+						text: 15
+					}]);
+                var showUserPickerButton = doc.getElementById('showUserPicker');
+				if(showUserPickerButton) {
+						var userResult = doc.getElementById('userResult');
+						showUserPickerButton.addEventListener('tap', function(event) {
+							userPicker.show(function(items) {
+								showUserPickerButton.innerText = JSON.stringify(items[0].text);
+								//返回 false 可以阻止选择框的关闭
+								//return false;
+							});
+						}, false);
+				}
+                
+                //-----------------------------------------
+                //级联示例
+				 var showCityPickerButton1 = doc.getElementById('showCityPicker3');
+				 if(showCityPickerButton1){
+					var cityPicker3 = new $.PopPicker({
+						layer: 3
+					});
+					cityPicker3.setData(cityData3);
+					var cityResult3 = doc.getElementById('cityResult3');
+					showCityPickerButton1.addEventListener('tap', function(event) {
+						cityPicker3.show(function(items) {
+							showCityPickerButton1.innerText = _getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text');
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+				}
+            });
+        },
+        error: function(xhr, type, errorThrown) {
+            //异常处理；
+            console.log(type);
+        }
+    });
+})(mui, jQuery, document);
+
+$('#subBtn').on("click",function(){
+	var pushData = new Array();
+	$('.mui-card').each(function(index,dom){
+		var retObj = fetchDataByQType(dom);
+		if(!retObj.retFlag) {
+			mui.alert(retObj.msg);
+			return;
+		}else {
+			pushData.push(retObj);
+		}
+		
+});
+	
+	 $.ajax({
+			type: "get",
+			url: webBaseUrl+"/ilive/appuser/postformdata.jspx?formId="+formId+"&orginal=1&callback=?",
+			async: true,
+			data: {
+				diyFormData :  JSON.stringify(pushData)
+			},
+			dataType: "jsonp",
+			jsonp: "callback",
+			timeout: 10000,
+			success: function(data) {
+				if(data.code ==1){
+					window.location.href="http://"+h5Base+"/phone/live.html?roomId="+roomId;
+					return;
+                }
+			},
+			error: function(xhr, type, errorThrown) {
+				// plus.nativeUI.toast(errorThrown);
+			}
+		});
+});
+
+</script>
+
+<script id="titleTemplate" type="text/x-jsrender">
+    <div class="mui-card-content-inner">
+              {{:formName}}
+     </div>
+</script>
+<script id="questionTmpl7" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	    {{if isNeed}}
+            <i class="warnTitle">*</i>
+        {{/if}}
+		{{:questionName}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed="{{:isNeed}}" qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <div class="mui-input-row">
+            <input type="text">
+        </div>
+    </div>
+</script>
+<script id="questionTmpl8" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	 {{if isNeed}}
+            <i class="warnTitle">*</i>
+        {{/if}}
+		{{:questionName}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed="{{:isNeed}}" qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        {{for optionName}}
+        <div class="mui-input-row mui-radio mui-left">
+            <label>{{: #data}}</label>
+            <input name="radio1" type="radio">
+        </div>
+        {{/for}}
+    </div>
+</script>
+<script id="questionTmpl20" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+		{{if isNeed}}
+            <i class="warnTitle">*</i>
+        {{/if}}
+		{{:questionName}} 
+		</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed="{{:isNeed}}" qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <button id="showUserPicker" class="mui-btn mui-btn-block selectBox" type="button">13</button>
+    </div>
+</script>
+<script id="questionTmpl12" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+		 {{if isNeed}}
+            <i class="warnTitle">*</i>
+        {{/if}}
+		{{:questionName}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed="{{:isNeed}}" qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <button id="showCityPicker3" class="mui-btn mui-btn-block selectBox" type="button">选择你所在的城市</button>
+    </div>
+</script>
+<script id="questionTmpl10" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	 {{if isNeed}}
+            <i class="warnTitle">*</i>
+        {{/if}}
+		{{:questionName}}
+	</p>
+    <div class="mui-card" modelId="{{:modelId}}" isNeed="{{:isNeed}}" qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <div class="mui-input-row ">
+            <input type="text">
+        </div>
+    </div>
+</script>
+<script id="questionTmpl5" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	 {{if isNeed}}
+            <i class="warnTitle">*</i>
+      {{/if}}
+	  {{:questionName}}
+	</p>
+    <div class="mui-card" modelId="{{:modelId}}" isNeed="{{:isNeed}}" qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <div class="mui-input-row ">
+            <input type="text">
+        </div>
+    </div>
+</script>
+<script id="questionTmpl11" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	  {{if isNeed}}
+            <i class="warnTitle">*</i>
+      {{/if}}
+	  {{:questionName}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed="{{:isNeed}}" qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <div class="mui-input-row">
+            <input type="text">
+        </div>
+    </div>
+</script>
+<script id="questionTmpl9" type="text/x-jsrender">
+    <p class="mui-content-padded mui-name">
+	 {{if isNeed}}
+            <i class="warnTitle">*</i>
+      {{/if}}
+	  {{:questionName}}
+	</p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed="{{:isNeed}}" qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        <div class="mui-input-row">
+            <input type="text">
+        </div>
+    </div>
+</script>
+<script id="questionTmpl1" type="text/x-jsrender">
+     <p class="mui-content-padded mui-name">
+	  {{if isNeed}}
+            <i class="warnTitle">*</i>
+      {{/if}}
+	  {{:questionName}}
+	 </p>
+    <div class="mui-card"  modelId="{{:modelId}}" isNeed="{{:isNeed}}" qtype="{{:questionType}}" qorder="{{:questionOrder}}">
+        {{for optionName}}
+        <div class="mui-input-row mui-radio mui-left">
+            <label>{{: #data}}</label>
+            <input name="radio1" type="radio">
+        </div>
+        {{/for}}
+    </div>
+</script>
+
+</html>
