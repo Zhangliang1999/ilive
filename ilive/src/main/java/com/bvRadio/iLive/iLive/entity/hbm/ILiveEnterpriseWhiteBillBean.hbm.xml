@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveEnterpriseWhiteBill" table="ilive_enterprise_whitebill">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="whitebillId" type="java.lang.Integer">
+			<column name="whitebill_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="enterpriseId" column="enterprise_id"></property>
+		<property name="phoneNum" column="phone_num"></property>
+		<property name="userName" column="user_name"></property>
+		<property name="exportPerson" column="export_person"></property>
+		<property name="exportTime" column="export_time"></property>
+		<property name="isDel" column="is_del"></property>
+	</class>
+</hibernate-mapping>

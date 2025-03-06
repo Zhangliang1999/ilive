@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveCertTopic" table="imanager_cert_topic">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="topicId" type="java.lang.Long">
+			<column name="topic_id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="topicComment" type="java.lang.String">
+			<column name="topic_comment" />
+		</property>
+
+		<property name="commentTime" type="java.sql.Timestamp">
+			<column name="comment_time" />
+		</property>
+
+		<property name="managerId" type="java.lang.Long">
+			<column name="manager_id" />
+		</property>
+
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+
+		<property name="certStatus" type="java.lang.Integer">
+			<column name="cert_status" />
+		</property>
+
+		<property name="managerName" type="java.lang.String">
+			<column name="manager_name" />
+		</property>
+
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id" />
+		</property>
+
+		<property name="userPhone" type="java.lang.String">
+			<column name="user_Phone" />
+		</property>
+
+	</class>
+</hibernate-mapping>

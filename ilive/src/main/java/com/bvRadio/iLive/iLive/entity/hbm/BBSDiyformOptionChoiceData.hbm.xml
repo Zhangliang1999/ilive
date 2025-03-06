@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="BBSDiyformOptionChoiceData" table="bbs_diyform_option_choice">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="choiceId" type="java.lang.Long">
+			<column name="choice_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<many-to-one name="bbsDiyformOption" class="BBSDiyformOption" column="option_id"></many-to-one>
+		<many-to-one name="iLiveIpAddress" class="ILiveIpAddress" column="ipaddr_id"></many-to-one> 
+		<many-to-one name="user" class="ILiveUserEntity" column="user_id"></many-to-one>
+	</class>
+</hibernate-mapping>

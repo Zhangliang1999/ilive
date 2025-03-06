@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveHomepageStructure" table="ilive_homepage_structure">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="structureId" type="java.lang.Integer">
+			<column name="structure_id" />
+		</property>
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+
+		<property name="orders" type="java.lang.Integer">
+			<column name="orders" />
+		</property>
+
+		<property name="showNum" type="java.lang.Integer">
+			<column name="show_num" />
+		</property>
+
+		<property name="type" type="java.lang.Integer">
+			<column name="type" />
+		</property>
+
+		<property name="policy" type="java.lang.Integer">
+			<column name="policy" />
+		</property>
+
+		<property name="showContentType" type="java.lang.Integer">
+			<column name="show_content_type" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="DocumentManager" table="document_manager">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="name">
+			<column name="name"></column>
+		</property>
+
+		<property name="url">
+			<column name="url"></column>
+		</property>
+
+		<property name="type">
+			<column name="type"></column>
+		</property>
+
+		<property name="size">
+			<column name="size"></column>
+		</property>
+
+		<property name="userName">
+			<column name="user_name"></column>
+		</property>
+
+		<property name="updateUserName">
+			<column name="update_user_name"></column>
+		</property>
+
+		<property name="enterpriseId">
+			<column name="enterprise_id"></column>
+		</property>
+
+		<property name="createTime">
+			<column name="create_time"></column>
+		</property>
+
+		<property name="updateTime">
+			<column name="update_time"></column>
+		</property>
+        <property name="stampTime">
+			<column name="stamp_time"></column>
+		</property>
+		<property name="state">
+			<column name="state"></column>
+		</property>
+		<property name="isAllow">
+			<column name="is_allow"></column>
+		</property>
+
+		<property name="userId">
+			<column name="user_id"></column>
+		</property>
+	</class>
+</hibernate-mapping>

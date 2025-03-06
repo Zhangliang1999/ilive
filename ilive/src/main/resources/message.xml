@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<message>
+		<!-- 预约 start -->
+		<reservation_app>您已预约成功，直播开始前，您将收到直播观看的提醒短信。</reservation_app>
+		<reservation_h5>
+			您已预约成功，直播开始前，您将收到直播观看的提醒短信。打开天翼直播APP，将获得更多更优质的服务哦！
+		</reservation_h5>
+		<reservation_pc>
+			您已预约成功，直播开始前，您将收到直播观看的提醒短信。打开天翼直播APP，将获得更多更优质的服务哦！
+		</reservation_pc>
+		<!-- 预约 end -->
+		
+		<!-- 关注 start -->
+		<concern_app>关注成功，您可以前往主页查看它的更多直播。</concern_app>
+		<concern_h5>关注成功，您可以在天翼直播APP中获得更多该直播方的直播内容哦！现在就去看看吧~</concern_h5>
+		<concern_pc>关注成功，您可以在天翼直播APP中获得更多该直播方的直播内容哦！现在就去看看吧~ </concern_pc>
+		<!-- 关注 end -->
+		
+	</message>
+</root>

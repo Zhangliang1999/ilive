@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="DocumentPicture" table="document_picture">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="docId">
+			<column name="doc_id"></column>
+		</property>
+
+		<property name="name">
+			<column name="name"></column>
+		</property>
+
+		<property name="url">
+			<column name="url"></column>
+		</property>
+
+		<property name="descript">
+			<column name="descript"></column>
+		</property>
+
+		<property name="width">
+			<column name="width"></column>
+		</property>
+
+		<property name="height">
+			<column name="height"></column>
+		</property>
+
+		<property name="type">
+			<column name="type"></column>
+		</property>
+
+		<property name="size">
+			<column name="size"></column>
+		</property>
+
+		<property name="createTime">
+			<column name="create_time"></column>
+		</property>
+
+	</class>
+</hibernate-mapping>

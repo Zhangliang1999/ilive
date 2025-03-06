@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ContentSelectPublish" table="content_select_publish">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+		<property name="contentType" type="java.lang.Integer">
+			<column name="content_type" />
+		</property>
+
+		<property name="contentId" type="java.lang.Integer">
+			<column name="content_id" />
+		</property>
+
+		<property name="contentName" type="java.lang.String">
+			<column name="content_name" />
+		</property>
+
+		<property name="contentImg" type="java.lang.String">
+			<column name="content_img" />
+		</property>
+
+		<property name="indexs" type="java.lang.Integer">
+			<column name="indexs" />
+		</property>
+
+		<property name="structureId" type="java.lang.Integer">
+			<column name="structureId" />
+		</property>
+
+		<property name="contentBrief" type="java.lang.String">
+			<column name="content_brief" />
+		</property>
+
+		<property name="liveStatus" type="java.lang.Integer">
+			<column name="live_status" />
+		</property>
+
+		<property name="contentUrl" type="java.lang.String">
+			<column name="content_url" />
+		</property>
+
+		<property name="urlName" type="java.lang.String">
+			<column name="url_name" />
+		</property>
+
+		<property name="defindName" type="java.lang.String">
+			<column name="defind_name" />
+		</property>
+
+	</class>
+</hibernate-mapping>

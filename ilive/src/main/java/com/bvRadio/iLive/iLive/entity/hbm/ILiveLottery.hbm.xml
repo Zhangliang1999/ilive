@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveLottery" table="ilive_lottery">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="name">
+			<column name="name"></column>
+		</property>
+
+		<property name="lotteryType">
+			<column name="lottery_type"></column>
+		</property>
+
+		<property name="isRepeat">
+			<column name="is_repeat"></column>
+		</property>
+
+		<property name="lotteryNum">
+			<column name="lottery_num"></column>
+		</property>
+
+		<property name="isLotteryRulePhone">
+			<column name="is_lottery_rule_phone"></column>
+		</property>
+
+		<property name="isLotteryRuleShare">
+			<column name="is_lottery_rule_share"></column>
+		</property>
+
+		<property name="startTime">
+			<column name="start_time"></column>
+		</property>
+
+		<property name="endTime">
+			<column name="end_time"></column>
+		</property>
+
+		<property name="createTime">
+			<column name="create_time"></column>
+		</property>
+
+		<property name="updateTime">
+			<column name="update_time"></column>
+		</property>
+
+		<property name="roomId">
+			<column name="room_id"></column>
+		</property>
+
+		<property name="isEnd">
+			<column name="is_end"></column>
+		</property>
+
+		<property name="number">
+			<column name="number"></column>
+		</property>
+
+		<property name="isOpen">
+			<column name="is_open"></column>
+		</property>
+
+		<property name="enterpriseId">
+			<column name="enterprise_id"></column>
+		</property>
+
+		<property name="userId">
+			<column name="user_id"></column>
+		</property>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="TopicInnerContent" table="topic_inner_content">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="innerTypeId">
+			<column name="inner_type_id"></column>
+		</property>
+
+		<property name="name">
+			<column name="name"></column>
+		</property>
+
+		<property name="descript">
+			<column name="descript"></column>
+		</property>
+
+		<property name="backgroundUrl">
+			<column name="background_url"></column>
+		</property>
+
+		<property name="contentUrl">
+			<column name="content_url"></column>
+		</property>
+
+		<property name="contentType">
+			<column name="content_type"></column>
+		</property>
+
+		<property name="fontColor">
+			<column name="font_color"></column>
+		</property>
+
+		<property name="fontSize">
+			<column name="font_size"></column>
+		</property>
+
+		<property name="backgroundColor">
+			<column name="background_color"></column>
+		</property>
+
+		<property name="orderN">
+			<column name="ordern"></column>
+		</property>
+
+		<property name="contentBackgroundUrl">
+			<column name="content_background_url"></column>
+		</property>
+		
+		<property name="isSave">
+			<column name="is_save"></column>
+		</property>
+		
+		<property name="overStriking">
+			<column name="over_striking"></column>
+		</property>
+		
+		<property name="tilt">
+			<column name="tilt"></column>
+		</property>
+		
+		<property name="align">
+			<column name="align"></column>
+		</property>
+		
+		<property name="contentId">
+			<column name="content_id"></column>
+		</property>
+		
+		<property name="paddingSize">
+			<column name="padding_size"></column>
+		</property>
+
+	</class>
+</hibernate-mapping>

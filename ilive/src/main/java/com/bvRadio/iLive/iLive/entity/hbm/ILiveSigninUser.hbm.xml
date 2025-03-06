@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveSigninUser" table="ilive_sign_in_user">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="signUserId" type="java.lang.String">
+			<column name="sign_user_id" />
+			<generator class="assigned" />
+		</id>
+
+		
+        <property name="createTime">
+			<column name="create_time"></column>
+		</property>
+		
+		<property name="status">
+			<column name="status"></column>
+		</property>
+		<property name="userId">
+			<column name="user_id"></column>
+		</property>
+		<property name="userPhone">
+			<column name="user_phone"></column>
+		</property>
+		<property name="userPhoto">
+			<column name="user_photo"></column>
+		</property>
+		<property name="userName">
+			<column name="user_name"></column>
+		</property>
+		
+		
+			<many-to-one name="room" column="ilive_room_id"
+			lazy="false" cascade="save-update"></many-to-one>
+			<many-to-one name="sign" column="sign_id"
+			lazy="false" cascade="save-update"></many-to-one>
+		
+	</class>
+</hibernate-mapping>

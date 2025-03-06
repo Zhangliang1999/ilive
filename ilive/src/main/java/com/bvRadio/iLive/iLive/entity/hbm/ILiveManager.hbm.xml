@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveManager" table="ilive_manager">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="userId" type="java.lang.Long">
+			<column name="user_id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="userName">
+			<column name="user_name"></column>
+		</property>
+
+		<property name="userPwd">
+			<column name="user_pwd"></column>
+		</property>
+
+		<property name="salt">
+			<column name="salt"></column>
+		</property>
+
+		<property name="level">
+			<column name="level"></column>
+		</property>
+
+		<property name="mobile">
+			<column name="mobile"></column>
+		</property>
+
+		<property name="parentId">
+			<column name="parent_id"></column>
+		</property>
+
+		<property name="rootId">
+			<column name="root_id"></column>
+		</property>
+
+		<property name="jpushId">
+			<column name="jpush_id"></column>
+		</property>
+
+		<property name="email">
+			<column name="email"></column>
+		</property>
+
+		<property name="nailName">
+			<column name="nail_name"></column>
+		</property>
+
+		<property name="loginToken">
+			<column name="login_token"></column>
+		</property>
+
+		<property name="userImg">
+			<column name="user_img"></column>
+		</property>
+
+		<property name="loginType">
+			<column name="login_type"></column>
+		</property>
+
+		<property name="createTime">
+			<column name="create_time"></column>
+		</property>
+
+		<property name="lastLoginTime">
+			<column name="last_login_time"></column>
+		</property>
+
+		<property name="isDel">
+			<column name="is_del"></column>
+		</property>
+
+		<property name="birthday">
+			<column name="birthday"></column>
+		</property>
+
+		<property name="constellatory">
+			<column name="constellatory"></column>
+		</property>
+
+		<property name="sex">
+			<column name="sex"></column>
+		</property>
+
+		<property name="eduLevel">
+			<column name="edu_level"></column>
+		</property>
+
+		<property name="incomeLevel">
+			<column name="income_level"></column>
+		</property>
+
+		<property name="occupation">
+			<column name="occupation"></column>
+		</property>
+
+		<property name="simpleEnterpriseName">
+			<column name="simple_enterpriseName"></column>
+		</property>
+
+		<property name="certStatus">
+			<column name="cert_status"></column>
+		</property>
+
+		<property name="terminalType" column="terminal_type"></property>
+
+		<many-to-one name="enterPrise" column="enterprise_id"
+			lazy="false" cascade="save-update"></many-to-one>
+
+		<property name="wxOpenId" column="wx_open_id"></property>
+
+		<property name="wxUnionId" column="wx_union_id"></property>
+
+		<property name="appSecret" column="app_secret"></property>
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id"/>
+		</property>
+		<property name="saltPwd" type="java.lang.String">
+			<column name="salt_pwd"/>
+		</property>
+		
+		<property name="editUserNameIdentify" type="java.lang.Integer">
+			<column name="edit_user_name_identify"/>
+		</property>
+		
+		<property name="calendar">
+			<column name="calendar"></column>
+		</property>
+		
+		<property name="errorNum">
+			<column name="error_num"></column>
+		</property>
+		
+		<property name="updatePasswordTime">
+			<column name="update_password_time"></column>
+		</property>
+		
+		<property name="lockCalendar">
+			<column name="lock_calendar"></column>
+		</property>
+		
+		<property name="lastIP">
+			<column name="last_ip"></column>
+		</property>
+		
+		<property name="lastRegion">
+			<column name="last_region"></column>
+		</property>
+		<property name="subType" type="java.lang.Integer">
+			<column name="sub_type"/>
+		</property>
+		<property name="wxMobile" type="java.lang.String">
+			<column name="wx_mobile"/>
+		</property>
+		<property name="realName" type="java.lang.String">
+			<column name="real_name"></column>
+		</property>
+		<property name="subTop" type="java.lang.String">
+			<column name="sub_top"/>
+		</property>
+		<property name="subLeft" type="java.lang.String">
+			<column name="sub_left"></column>
+		</property>
+		<property name="subRoomIds" type="java.lang.String">
+			<column name="sub_roomIds"></column>
+		</property>
+		<property name="dxzyappId" type="java.lang.String">
+			<column name="dxzyapp_id"></column>
+		</property>
+		<property name="platformId" type="java.lang.String">
+			<column name="platform_id"></column>
+		</property>
+		<property name="zhxyappId" type="java.lang.String">
+			<column name="zhxyapp_id"></column>
+		</property>
+		<property name="zhxyuserId" type="java.lang.String">
+			<column name="zhxyuser_id"></column>
+		</property>
+		<property name="userInfoUrl" type="java.lang.String">
+			<column name="user_infoUrl"></column>
+		</property>
+		<property name="checkIfCanUrl" type="java.lang.String">
+			<column name="check_ifCanUrl"></column>
+		</property>
+	</class>
+</hibernate-mapping>

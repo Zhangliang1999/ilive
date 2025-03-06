@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveHomepageLink" table="ilive_homepage_link">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="linkName" type="java.lang.String">
+			<column name="link_name"/>
+		</property>
+		<property name="linkImg" type="java.lang.String">
+			<column name="link_img"/>
+		</property>
+		<property name="link" type="java.lang.String">
+			<column name="link"/>
+		</property>
+		<property name="linkDesc" type="java.lang.String">
+			<column name="link_desc"/>
+		</property>
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id"/>
+		</property>
+		<property name="createTime">
+			<column name="create_time"/>
+		</property>
+		<property name="createName">
+			<column name="create_name"/>
+		</property>
+	</class>
+</hibernate-mapping>

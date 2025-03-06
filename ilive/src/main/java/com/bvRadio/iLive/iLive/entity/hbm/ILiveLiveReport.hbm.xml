@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveLiveReport" table="ilive_live_report">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="reporter" type="java.lang.String">
+			<column name="reporter" />
+		</property>
+		<property name="reported" type="java.lang.String">
+			<column name="reported" />
+		</property>
+		<property name="content" type="java.lang.String">
+			<column name="content" />
+		</property>
+		<property name="statu" type="java.lang.Integer">
+			<column name="statu" />
+		</property>
+		<property name="submitTime" type="java.sql.Timestamp">
+			<column name="submit_time" />
+		</property>
+		<property name="dealTime" type="java.sql.Timestamp">
+			<column name="deal_time" />
+		</property>
+			</class>
+</hibernate-mapping>

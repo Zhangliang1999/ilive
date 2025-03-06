@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveEnterpriseTerminalUser" table="ilive_enterprise_terminaluser">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="enterpriseId">
+			<column name="enterprise_id" />
+		</property>
+
+		<property name="userId">
+			<column name="user_id"></column>
+		</property>
+		<property name="userName">
+			<column name="user_name"></column>
+		</property>
+
+		<property name="userImg">
+			<column name="user_img"></column>
+		</property>
+
+		<property name="nailName">
+			<column name="nail_name"></column>
+		</property>
+
+		<property name="lastLoginTime">
+			<column name="last_login_time"></column>
+		</property>
+
+		<property name="loginType">
+			<column name="login_type"></column>
+		</property>
+
+		<property name="isDel">
+			<column name="is_del"></column>
+		</property>
+
+		<property name="fansType">
+			<column name="fans_type"></column>
+		</property>
+
+		<property name="isBlacklist">
+			<column name="is_blacklist"></column>
+		</property>
+
+		<property name="mobile">
+			<column name="mobile"></column>
+		</property>
+	</class>
+</hibernate-mapping>

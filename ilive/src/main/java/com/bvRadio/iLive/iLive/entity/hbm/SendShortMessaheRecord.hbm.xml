@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="SendShortMessaheRecord" table="send_shortmessahe_record">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="recordId">
+			<column name="record_id"></column>
+		</property>
+
+		<property name="sendUserId">
+			<column name="send_user_id"></column>
+		</property>
+
+		<property name="sendUserName">
+			<column name="send_user_name"></column>
+		</property>
+
+		<property name="receiveUserName">
+			<column name="receive_user_name"></column>
+		</property>
+
+		<property name="receiveUserPhone">
+			<column name="receive_user_phone"></column>
+		</property>
+
+		<property name="enterpriseId">
+			<column name="enterprise_id"></column>
+		</property>
+
+		<property name="createTime">
+			<column name="create_time"></column>
+		</property>
+	</class>
+</hibernate-mapping>

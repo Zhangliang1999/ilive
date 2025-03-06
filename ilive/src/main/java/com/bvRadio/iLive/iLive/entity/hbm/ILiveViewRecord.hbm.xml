@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveViewRecord" table="ilive_view_record">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="recordId" type="java.lang.Long">
+			<column name="record_id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="managerId">
+			<column name="manager_id" />
+		</property>
+
+		<property name="recordTime">
+			<column name="record_time"></column>
+		</property>
+
+		<property name="viewType">
+			<column name="view_type"></column>
+		</property>
+
+		<property name="outerId">
+			<column name="outer_id"></column>
+		</property>
+
+		<property name="viewOrigin" column="view_origin"></property>
+		
+		<property name="deleteStatus" column="delete_status"></property>
+	</class>
+</hibernate-mapping>

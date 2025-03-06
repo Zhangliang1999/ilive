@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveFileAuthentication" table="ilive_file_authentication">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="fileId" type="java.lang.Long">
+			<column name="file_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="authType" type="java.lang.Integer">
+			<column name="auth_type" />
+		</property>
+
+		<property name="viewPassword" type="java.lang.String">
+			<column name="view_password" />
+		</property>
+		<property name="welcomeMsg" type="java.lang.String">
+			<column name="welcome_msg" />
+		</property>
+		<property name="viewMoney" type="java.lang.Double">
+			<column name="view_money" />
+		</property>
+		<property name="openFCodeSwitch" type="java.lang.Integer">
+			<column name="open_fcode_switch" />
+		</property>
+		<property name="needLogin" type="java.lang.Integer">
+			<column name="need_login" />
+		</property>
+		<property name="outLinkUrl" type="java.lang.String">
+			<column name="out_linkUrl" />
+		</property>
+		<property name="fopenStatus" type="java.lang.Integer">
+			<column name="fopenStatus" />
+		</property>
+	</class>
+</hibernate-mapping>

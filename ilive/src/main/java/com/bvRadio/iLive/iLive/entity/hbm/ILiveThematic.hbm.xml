@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveThematic" table="ilive_thematic">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="thematicId" type="java.lang.Long">
+			<column name="thematic_id" />
+			<generator class="assigned" />
+		</id>
+		
+		<property name="createName" type="java.lang.String">
+			<column name="create_name"/>
+		</property>
+		
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time"/>
+		</property>
+		
+		<property name="isChecked" type="java.lang.Integer">
+			<column name="is_checked"/>
+		</property>
+		
+		<property name="isDelete" type="java.lang.Boolean">
+			<column name="is_delete"/>
+		</property>
+		
+		<property name="templateId" type="java.lang.Integer">
+			<column name="template_id"/>
+		</property>
+		
+		<property name="thematicDesc" type="java.lang.String">
+			<column name="thematic_desc"/>
+		</property>
+		
+		<property name="thematicImage" type="java.lang.String">
+			<column name="thematic_image"/>
+		</property>
+		
+		<property name="thematicName" type="java.lang.String">
+			<column name="thematic_name"/>
+		</property>
+		
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterpriseId"/>
+		</property>
+			
+	</class>
+</hibernate-mapping>

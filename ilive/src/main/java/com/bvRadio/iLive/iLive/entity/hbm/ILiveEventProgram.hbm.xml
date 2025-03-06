@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveEventProgram" table="ilive_event_program">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="programId" type="java.lang.Long">
+			<column name="program_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="fileId" type="java.lang.Long">
+			<column name="file_id" />
+		</property>
+		<property name="order" type="java.lang.Integer">
+			<column name="order_seq" />
+		</property>
+		<property name="packageId" type="java.lang.Long">
+			<column name="package_id" />
+		</property>
+	</class>
+</hibernate-mapping>

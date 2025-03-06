@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveQAMessage" table="ilive_qa_message">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="msgId" type="java.lang.Long">
+			<column name="msg_id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="question" type="java.lang.String">
+			<column name="question"></column>
+		</property>
+
+		<property name="answer" type="java.lang.String">
+			<column name="answer"></column>
+		</property>
+
+		<property name="answerStatus" type="java.lang.Integer">
+			<column name="answer_status"></column>
+		</property>
+
+		<property name="answerPerson" type="java.lang.String">
+			<column name="answerPerson"></column>
+		</property>
+
+		<property name="questionPerson" type="java.lang.String">
+			<column name="question_person"></column>
+		</property>
+	</class>
+</hibernate-mapping>

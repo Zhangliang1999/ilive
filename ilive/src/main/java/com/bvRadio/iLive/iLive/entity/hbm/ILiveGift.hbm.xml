@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveGift" table="ilive_gift">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="giftId" type="java.lang.Long">
+			<column name="gift_id" />
+			<generator class="assigned" />
+		</id>
+		
+		<property name="giftImage" type="java.lang.String">
+			<column name="gift_image"/>
+		</property>
+		
+		<property name="giftName" type="java.lang.String">
+			<column name="gift_name"/>
+		</property>
+		
+		<property name="giftPrice" type="java.lang.String">
+			<column name="gift_price"></column>
+		</property>
+		
+		<property name="giftType" type="java.lang.Integer">
+			<column name="gift_type"/>
+		</property>
+		
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id"/>
+		</property>
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id"/>
+		</property>
+	</class>
+</hibernate-mapping>

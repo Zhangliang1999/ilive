@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveLiveRoom" table="ilive_live_room">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="openStatus" type="java.lang.Integer">
+			<column name="open_status" />
+		</property>
+		<property name="useState" type="java.lang.Integer">
+			<column name="use_status" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+
+		<property name="createPerson" type="java.lang.String">
+			<column name="create_person" />
+		</property>
+
+		<property name="affordMoney" type="java.lang.Double">
+			<column name="afford_money" />
+		</property>
+
+		<property name="liveViewNum" type="java.lang.Long">
+			<column name="live_view_num" />
+		</property>
+
+		<property name="managerId" type="java.lang.Long">
+			<column name="manager_id" />
+		</property>
+
+		<many-to-one name="liveEvent" fetch="join">
+			<column name="live_event_id"></column>
+		</many-to-one>
+
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+
+		<property name="serverGroupId" type="java.lang.Integer">
+			<column name="server_groupId" />
+		</property>
+
+		<property name="deleteStatus" type="java.lang.Integer">
+			<column name="delete_status" />
+		</property>
+
+		<property name="moneyLimitSwitch" type="java.lang.Boolean">
+			<column name="money_limit_switch" />
+		</property>
+
+		<property name="affordLimit" type="java.lang.Double">
+			<column name="afford_limit" />
+		</property>
+
+		<property name="disabled" type="java.lang.Integer">
+			<column name="disabled" />
+		</property>
+		
+		<property name="isSystemGift" type="java.lang.Integer">
+			<column name="is_system_gift"/>
+		</property>
+		<property name="isUserGift" type="java.lang.Integer">
+			<column name="is_user_gift"/>
+		</property>
+		<property name="liveType" type="java.lang.Integer">
+			<column name="live_type" />
+		</property>
+		<property name="isAssistant" type="java.lang.Integer">
+			<column name="is_assistant"/>
+		</property>
+		<property name="liveDelay" type="java.lang.Integer">
+			<column name="liveDelay"/>
+		</property>
+		<property name="relateSlimFileUrl" type="java.lang.String">
+			<column name="relate_slimfile_url"/>
+		</property>
+		<property name="subAccountId" type="java.lang.String">
+			<column name="subAccount_id" />
+		</property>
+		<property name="relateSlimFileLocalUrl" type="java.lang.String">
+			<column name="relate_slim_file_local_url" />
+		</property>
+		<property name="pullAddr" type="java.lang.String">
+			<column name="pull_addr" />
+		</property>
+		<property name="logoImg" type="java.lang.String">
+			<column name="logo_img" />
+		</property>
+		<property name="bgdImg" type="java.lang.String">
+			<column name="bgd_img" />
+		</property>
+		<property name="convertTaskIp" type="java.lang.String">
+			<column name="convert_task_ip" />
+		</property>
+		<property name="convertTaskId" type="java.lang.Integer">
+			<column name="convert_task_id" />
+		</property>
+		<property name="convertLogo" type="java.lang.String">
+			<column name="convert_logo" />
+		</property>
+		<property name="converLogoFtp" type="java.lang.String">
+			<column name="conver_logo_ftp" />
+		</property>
+		<property name="logoClass" type="java.lang.String">
+			<column name="logo_class" />
+		</property>
+		<property name="openLogoSwitch" type="java.lang.Integer">
+			<column name="open_logo_switch" />
+		</property>
+		<property name="logoPosition" type="java.lang.Integer">
+			<column name="logo_position" />
+		</property>
+		<property name="logoWidth" type="java.lang.Integer">
+			<column name="logo_width" />
+		</property>
+		<property name="logoHight" type="java.lang.Integer">
+			<column name="logo_hight" />
+		</property>
+		<property name="openSlimModel">
+			<column name="open_slim_model"/>
+		</property>
+		<property name="isNowInsert" type="java.lang.Integer">
+			<column name="is_now_insert"></column>
+		</property>
+		<property name="openBackupStream" type="java.lang.Integer">
+			<column name="open_backup_stream"></column>
+		</property>
+		<property name="streamStatus" type="java.lang.Integer">
+			<column name="stream_status"></column>
+		</property>
+		<property name="roomType" type="java.lang.Integer">
+			<column name="room_type"></column>
+		</property>
+		<property name="meetId" type="java.lang.String">
+			<column name="meet_id"></column>
+		</property>
+		<property name="meetPushRoomId" type="java.lang.Integer">
+			<column name="meet_push_roomId"></column>
+		</property>
+		<property name="relatedVideo" type="java.lang.Integer">
+			<column name="related_video"></column>
+		</property>
+	</class>
+</hibernate-mapping>

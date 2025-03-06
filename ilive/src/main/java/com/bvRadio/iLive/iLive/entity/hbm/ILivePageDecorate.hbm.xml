@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="PageDecorate" table="ilive_page_decorate">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="liveEventId" type="java.lang.Long">
+			<column name="live_event_id" />
+		</property>
+		<property name="menuOrder" type="java.lang.Integer">
+			<column name="menu_order" />
+		</property>
+		<property name="menuName" type="java.lang.String">
+			<column name="menu_name" />
+		</property>
+		<property name="menuName1" type="java.lang.String">
+			<column name="menu_name1" />
+		</property>
+		<property name="menuType" type="java.lang.Integer">
+			<column name="menu_type" />
+		</property>
+		<property name="richContent" type="java.lang.String">
+			<column name="rich_content" />
+		</property>
+		<property name="hrefValue" type="java.lang.String">
+			<column name="href_value"/>
+		</property>
+		<property name="relatedVideo" type="java.lang.Integer">
+			<column name="related_video" />
+		</property>
+	</class>
+</hibernate-mapping>

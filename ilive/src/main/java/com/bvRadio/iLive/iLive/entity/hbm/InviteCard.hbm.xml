@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="InviteCard" table="invite_card">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+			<generator class="assigned" />
+		</id>
+
+		<!-- <property name="roomId">
+			<column name="room_id"></column>
+		</property> -->
+
+		<property name="isOpen">
+			<column name="is_open"></column>
+		</property>
+
+		<property name="coverUrl">
+			<column name="cover_url"></column>
+		</property>
+
+		<property name="liveTitle">
+			<column name="live_title"></column>
+		</property>
+
+		<property name="sponser">
+			<column name="sponser"></column>
+		</property>
+
+		<property name="startTime">
+			<column name="startTime"></column>
+		</property>
+
+		<property name="liveUrl">
+			<column name="live_url"></column>
+		</property>
+
+		<property name="h5Live">
+			<column name="h5_live"></column>
+		</property>
+
+		<property name="isPublish">
+			<column name="is_publish"></column>
+		</property>
+
+	</class>
+</hibernate-mapping>

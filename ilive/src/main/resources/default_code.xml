@@ -1,0 +1,18 @@
+<CodecInfo>
+		<VideoWidth>1280</VideoWidth>
+		<VideoHeight>720</VideoHeight>
+		<VideoFPS>25</VideoFPS>
+		<VideoBitrateKB>1500</VideoBitrateKB>
+		<VideoCodec>H264</VideoCodec>
+		<Profile>Main</Profile>
+		<videoquality>middle</videoquality>
+		<IsCBR>1</IsCBR>
+		<GOPLen>0</GOPLen>
+		<BFrameNum>0</BFrameNum>
+		<QMax>50</QMax>
+		<Qmin>2</Qmin>
+		<AudioSamprate>48000</AudioSamprate>
+		<AudioChannel>2</AudioChannel>
+		<AudioBitrateKB>96</AudioBitrateKB>
+		<AudioCodec>aac</AudioCodec>
+</CodecInfo>

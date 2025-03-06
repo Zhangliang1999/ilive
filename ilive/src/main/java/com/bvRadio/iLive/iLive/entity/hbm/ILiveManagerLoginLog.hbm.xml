@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveManagerLoginLog" table="ilive_manager_loginlog">
+		<meta attribute="sync-DAO">false</meta>
+			<id name="logId" type="java.lang.Long">
+			<column name="log_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="logTime" column="log_time"></property>
+		<property name="loginUser" column="login_user"></property>
+		<property name="managerId" column="manager_id"></property>
+		<property name="loginType" column="login_type"></property>
+	</class>
+</hibernate-mapping>

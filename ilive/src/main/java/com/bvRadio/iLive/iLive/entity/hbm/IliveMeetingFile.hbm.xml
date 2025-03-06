@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="IliveMeetingFile" table="ilive_meeting_file">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="fileId" type="java.lang.Long">
+			<column name="file_id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="mediaFileName" type="java.lang.String">
+			<column name="file_name" />
+		</property>
+
+
+		<property name="mediaCreateTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+
+		<property name="mediaUpdateTime" type="java.sql.Timestamp">
+			<column name="update_time" />
+		</property>
+
+		<property name="createId" type="java.lang.String">
+			<column name="create_by" />
+		</property>
+
+		<property name="updateId" type="java.lang.String">
+			<column name="update_by" />
+		</property>
+
+		<property name="fileSize" type="java.lang.Long">
+			<column name="file_size" />
+		</property>
+
+		<property name="filePath" type="java.lang.String">
+			<column name="file_path" />
+		</property>
+
+		<property name="fileUrl" type="java.lang.String">
+			<column name="file_url" />
+		</property>
+
+		<property name="fileType" type="java.lang.Integer">
+			<column name="file_type" />
+		</property>
+
+		<property name="liveEventId" type="java.lang.Long">
+			<column name="live_eventId" />
+		</property>
+
+		<property name="delFlag" type="java.lang.Integer">
+			<column name="del_flag" />
+		</property>
+
+		<property name="liveRoomId" type="java.lang.Integer">
+			<column name="liveroom_id" />
+		</property>
+
+		<property name="fileExtension" type="java.lang.String">
+			<column name="file_extension" />
+		</property>
+
+		<property name="fileCover" type="java.lang.String">
+			<column name="file_cover" />
+		</property>
+
+		<property name="docDealState" type="java.lang.Integer">
+			<column name="process_flag" />
+		</property>
+	</class>
+</hibernate-mapping>

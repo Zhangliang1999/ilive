@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveEnterpriseConvert" table="ilive_enterprise_convert">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="enterpriseId" type="java.lang.Long">
+			<column name="enterprise_id" />
+			<generator class="assigned" />
+		</id>
+
+		
+		<property name="templetId" type="java.lang.Integer">
+			<column name="templet_id"></column>
+		</property>
+
+	</class>
+</hibernate-mapping>

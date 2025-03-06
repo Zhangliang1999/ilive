@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="BBSDiyformOption" table="bbs_diyform_option">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="optionId" type="java.lang.Long">
+			<column name="option_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="optionName" column="option_name"></property>
+		<property name="optionOrder" column="option_order"></property>
+		<many-to-one name="bbsDiymodel" class="BBSDiymodel" fetch="select">
+			<column name="model_id" />
+		</many-to-one>
+		<set name="bbsDiyformOptionChoiceDatas" inverse="true">
+			<key>
+				<column name="option_id" not-null="true" />
+			</key>
+			<one-to-many class="BBSDiyformOptionChoiceData" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

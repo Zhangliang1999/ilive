@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveSensitiveWord" table="ilive_sensitive_word">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="sensitiveName" type="java.lang.String">
+			<column name="sensitive_name" length="100" />
+		</property>
+		<property name="sensitiveDesc" type="java.lang.String">
+			<column name="sensitive_desc" length="100" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" length="23" />
+		</property>
+		<property name="disabled" type="java.lang.Boolean">
+			<column name="is_disabled" />
+		</property>
+		<property name="type" type="java.lang.Integer">
+			<column name="type" />
+		</property>
+	</class>
+</hibernate-mapping>

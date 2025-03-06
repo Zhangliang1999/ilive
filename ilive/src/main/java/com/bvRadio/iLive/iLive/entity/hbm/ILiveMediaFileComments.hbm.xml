@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveMediaFileComments" table="ilive_media_file_comments">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="commentsId" type="java.lang.Long">
+			<column name="comments_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="comments" type="java.lang.String">
+			<column name="comments" />
+		</property>
+		<property name="commentsUser" type="java.lang.String">
+			<column name="comments_user" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+		<property name="updateTime" type="java.sql.Timestamp">
+			<column name="update_time" />
+		</property>
+		<property name="appreciateCount" type="java.lang.Long">
+			<column name="appreciate_count" />
+		</property>
+		<property name="objectionCount" type="java.lang.Long">
+			<column name="objection_count" />
+		</property>
+
+		<many-to-one name="iLiveMediaFile" class="ILiveMediaFile"
+			column="file_id"></many-to-one>
+
+		<property name="checkState" type="java.lang.Integer">
+			<column name="check_state" />
+		</property>
+
+		<property name="delFlag" type="java.lang.Integer">
+			<column name="del_flag" />
+		</property>
+
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id" />
+		</property>
+		
+		<property name="userImg" type="java.lang.String">
+			<column name="user_img"/>
+		</property>
+		
+		<property name="userMobile" type="java.lang.String">
+			<column name="user_mobile"/>
+		</property>
+		<property name="topFlagNum" type="java.lang.Integer">
+			<column name="top_flag_num" />
+		</property>
+		<property name="topTime" type="java.sql.Timestamp">
+			<column name="top_time" />
+		</property>
+		<property name="sendType" type="java.lang.Integer">
+			<column name="send_type" />
+		</property>
+	</class>
+</hibernate-mapping>

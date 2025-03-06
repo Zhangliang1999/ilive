@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveConvertTask" table="ilive_convert_task">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="taskId" type="java.lang.Long">
+			<column name="task_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="convertServerId" type="java.lang.Integer">
+			<column name="convert_server_id" />
+		</property>
+		<property name="fileSourceTable" type="java.lang.Integer">
+			<column name="file_source_table" />
+		</property>
+		<property name="callBackId" type="java.lang.Integer">
+			<column name="call_back_id" />
+		</property>
+		<property name="templetId" type="java.lang.Integer">
+			<column name="templet_id" />
+		</property>
+		<property name="fileId" type="java.lang.Long">
+			<column name="file_id" />
+		</property>
+		<property name="state" type="java.lang.Integer">
+			<column name="state" />
+		</property>
+		<property name="sFtpPath" type="java.lang.String">
+			<column name="s_ftp_path" />
+		</property>
+		<property name="dFtpPath" type="java.lang.String">
+			<column name="d_ftp_path" />
+		</property>
+		<property name="sPath" type="java.lang.String">
+			<column name="s_path" />
+		</property>
+		<property name="dPath" type="java.lang.String">
+			<column name="d_path" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ProgressStatusPoJo" table="soms4_quickedit_status">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="taskId" type="java.lang.Long"
+			unsaved-value="0">
+			<meta attribute="field-description">流ID</meta>
+			<column name="task_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="taskUUID" type="java.lang.String">
+			<meta attribute="field-description">远程主流</meta>
+			<column name="task_uuid" length="250" not-null="false" />
+		</property>
+
+		<property name="localFileId" type="java.lang.String">
+			<meta attribute="field-description">远程备流</meta>
+			<column name="local_file_id" length="250" not-null="false" />
+		</property>
+		<property name="statusDesc" type="java.lang.String">
+			<meta attribute="field-description">远程垫流</meta>
+			<column name="status_desc" length="250" not-null="false" />
+		</property>
+		
+		<property name="statusCode" >
+			<meta attribute="field-description">远程垫流</meta>
+			<column name="status_code"/>
+		</property>
+		<property name="targetFileId" >
+			<meta attribute="field-description">目标文件ID</meta>
+			<column name="target_file_id"/>
+		</property>
+		<property name="targetFtpIp" >
+			<meta attribute="field-description">目标文件FTP信息</meta>
+			<column name="target_ftp_ip"/>
+		</property>
+		<property name="targetFtpPort" >
+			<meta attribute="field-description">目标文件FTP信息</meta>
+			<column name="target_ftp_port"/>
+		</property>
+		<property name="targetFtpUsername" >
+			<meta attribute="field-description">目标文件FTP信息</meta>
+			<column name="target_ftp_username"/>
+		</property>
+		<property name="targetFtppassword" >
+			<meta attribute="field-description">目标文件FTP信息</meta>
+			<column name="target_ftp_password"/>
+		</property>
+		<property name="targetFtpPath" >
+			<meta attribute="field-description">目标文件FTP文件路径</meta>
+			<column name="target_ftp_path"/>
+		</property>
+		
+		
+		
+	</class>
+</hibernate-mapping>

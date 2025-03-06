@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveUserGift" table="ilive_gift_user">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id"/>
+		</property>
+		<property name="evenId" type="java.lang.Long">
+			<column name="even_id"/>
+		</property>
+		<property name="giftId" type="java.lang.Long">
+			<column name="gift_id"/>
+		</property>
+		<property name="giftName" type="java.lang.String">
+			<column name="gift_name"/>
+		</property>
+		<property name="giftNumber" type="java.lang.Integer">
+			<column name="gift_number"/>
+		</property>
+		<property name="giftImage" type="java.lang.String">
+			<column name="gift_image"></column>
+		</property>
+		<property name="giftPrice" type="java.lang.String">
+			<column name="gift_price"></column>
+		</property>
+		
+		<property name="giveTime" type="java.sql.Timestamp">
+			<column name="give_time"/>
+		</property>
+		
+		<property name="roomTitle" type="java.lang.String">
+			<column name="room_title"/>
+		</property>
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id"/>
+		</property>
+		<property name="userName" type="java.lang.String">
+			<column name="user_name"/>
+		</property>
+	</class>
+</hibernate-mapping>

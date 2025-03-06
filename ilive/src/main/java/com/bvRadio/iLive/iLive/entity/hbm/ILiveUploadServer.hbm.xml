@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveUploadServer" table="ilive_upload_server">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="ftpIp" type="java.lang.String">
+			<column name="ftp_ip" length="50" />
+		</property>
+		<property name="ftpPort" type="java.lang.Integer">
+			<column name="ftp_port" />
+		</property>
+		<property name="ftpUsername" type="java.lang.String">
+			<column name="ftp_username" length="50" />
+		</property>
+		<property name="ftpPassword" type="java.lang.String">
+			<column name="ftp_password" length="50" />
+		</property>
+		<property name="ftpPath" type="java.lang.String">
+			<column name="ftp_path" length="50" />
+		</property>
+		<property name="ftpEncoding" type="java.lang.String">
+			<column name="ftp_encoding" length="50" />
+		</property>
+		<property name="httpUrl" type="java.lang.String">
+			<column name="http_url" length="50" />
+		</property>
+		<property name="downloadUrl" type="java.lang.String">
+			<column name="download_url" length="50" />
+		</property>
+		<property name="httpMount" type="java.lang.String">
+			<column name="http_mount" length="50" />
+		</property>
+		<property name="convertTaskAddr" type="java.lang.String">
+			<column name="convert_task_addr" length="255" />
+		</property>
+		<property name="isDefault" type="java.lang.Boolean">
+			<column name="is_default"/>
+		</property>
+	</class>
+</hibernate-mapping>

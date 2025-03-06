@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveRoomShareConfig" table="ilive_roomshare_config">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="shareId" type="java.lang.Long">
+			<column name="share_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+		</property>
+
+		<property name="liveTitle" type="java.lang.String">
+			<column name="live_title" />
+		</property>
+
+		<property name="liveDesc" type="java.lang.String">
+			<column name="live_desc" />
+		</property>
+
+		<property name="liveImg" type="java.lang.String">
+			<column name="live_img" />
+		</property>
+
+		<property name="shareType" type="java.lang.Integer">
+			<column name="share_type" />
+		</property>
+
+		<property name="shareUrl" type="java.lang.String">
+			<column name="share_url" />
+		</property>
+
+		<property name="openStatus" type="java.lang.Integer">
+			<column name="open_status" />
+		</property>
+
+	</class>
+</hibernate-mapping>

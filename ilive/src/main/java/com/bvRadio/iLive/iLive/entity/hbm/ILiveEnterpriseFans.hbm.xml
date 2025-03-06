@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveEnterpriseFans" table="ilive_enterprise_fans">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="enterpriseId">
+			<column name="enterprise_id" />
+		</property>
+
+		<property name="userId">
+			<column name="user_id"></column>
+		</property>
+
+		<property name="isDel">
+			<column name="is_del"></column>
+		</property>
+
+		<property name="topFlag">
+			<column name="top_flag"></column>
+		</property>
+
+		<property name="forbidState">
+			<column name="forbid_state"></column>
+		</property>
+
+		<property name="concernTime" column="concern_time"></property>
+
+		<property name="isBlacklist">
+			<column name="is_blacklist"></column>
+		</property>
+	</class>
+</hibernate-mapping>

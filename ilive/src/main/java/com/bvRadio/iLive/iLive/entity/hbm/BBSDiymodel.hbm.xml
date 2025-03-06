@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="BBSDiymodel" table="bbs_diymodel">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write" />
+		<id name="diymodelId" type="java.lang.Integer">
+			<column name="diymodel_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="diymodelName" type="java.lang.String">
+			<column name="diymodel_name" length="100" />
+		</property>
+		<property name="diymodelType" type="java.lang.Short">
+			<column name="diymodel_type" />
+		</property>
+		<property name="diymodelTitle" type="java.lang.String">
+			<column name="diymodel_title" length="50" />
+		</property>
+		<property name="diymodelKey" type="java.lang.String">
+			<column name="diymodel_key" length="50" />
+		</property>
+		<property name="defValue" type="java.lang.String">
+			<column name="def_value" length="200" />
+		</property>
+		<property name="optValue" type="java.lang.String">
+			<column name="opt_value" length="200" />
+		</property>
+		<property name="optImgUrl" type="java.lang.String">
+			<column name="opt_img_url" length="200" />
+		</property>
+		<property name="textSize" type="java.lang.Integer">
+			<column name="text_size" />
+		</property>
+		<property name="areaRows" type="java.lang.Integer">
+			<column name="area_rows" />
+		</property>
+		<property name="areaCols" type="java.lang.Integer">
+			<column name="area_cols" />
+		</property>
+		<property name="helpTxt" type="java.lang.String">
+			<column name="help_txt" length="100" />
+		</property>
+		<property name="helpPosition" type="java.lang.Integer">
+			<column name="help_position" />
+		</property>
+		<property name="updateMark" type="java.lang.Integer">
+			<column name="update_mark" />
+		</property>
+		<property name="isDisplay" type="java.lang.Boolean">
+			<column name="is_display" />
+		</property>
+		<many-to-one name="bbsDiyform" class="BBSDiyform" fetch="select">
+			<column name="diyform_id" />
+		</many-to-one>
+
+		<set name="options" inverse="true">
+			<key>
+				<column name="model_id" not-null="true" />
+			</key>
+			<one-to-many class="BBSDiyformOption" />
+		</set>
+
+		<property name="diyOrder" type="java.lang.Integer">
+			<column name="diy_order" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" length="23" />
+		</property>
+		
+		<property name="needAnswer" column="need_answer"></property>
+		<property name="needMsgValid" column="need_msg_valid"></property>
+	</class>
+</hibernate-mapping>

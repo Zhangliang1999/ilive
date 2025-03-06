@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveAPIGateWayRouter" table="ilive_api_router">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="routerId" type="java.lang.Long">
+			<column name="router_id" />
+			<generator class="assigned" />
+		</id>
+		
+		<property name="routerUrl" type="java.lang.String">
+			<column name="router_url" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

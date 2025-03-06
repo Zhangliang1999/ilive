@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILivePlayRewards" table="ilive_play_rewards">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+			<generator class="assigned" />
+		</id>
+		
+		<property name="maxRewardsAmount" type="java.lang.String">
+			<column name="max_rewards_amount"/>
+		</property>
+		
+		<property name="minRewardsAmount" type="java.lang.String">
+			<column name="min_rewards_amount"/>
+		</property>
+		
+		<property name="promotionalImage" type="java.lang.String">
+			<column name="promotional_image"/>
+		</property>
+		
+		<property name="promotionalLanguage" type="java.lang.String">
+			<column name="promotional_language"/>
+		</property>
+		
+		<property name="rewardsSwitch" type="java.lang.Integer">
+			<column name="rewards_switch"/>
+		</property>
+		
+		<property name="rewardsTitleType" type="java.lang.Integer">
+			<column name="rewards_title_type"/>
+		</property>
+	</class>
+</hibernate-mapping>

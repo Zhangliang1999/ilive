@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILivePayOrder" table="ilive_pay_order">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		
+		<property name="amount" type="java.lang.Long">
+			<column name="amount"/>
+		</property>
+		
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time"/>
+		</property>
+		
+		<property name="endTime" type="java.sql.Timestamp">
+			<column name="end_time"/>
+		</property>
+		
+		<property name="orderNumber" type="java.lang.String">
+			<column name="order_number"/>
+		</property>
+		
+		<property name="payStatus" type="java.lang.Integer">
+			<column name="pay_status"/>
+		</property>
+		
+		<property name="tradeNo" type="java.lang.String">
+			<column name="trade_no"/>
+		</property>
+		
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id"/>
+		</property>
+		
+		<property name="userName" type="java.lang.String">
+			<column name="user_name"/>
+		</property>
+		
+		<property name="payDesc" type="java.lang.String">
+			<column name="pay_desc"/>
+		</property>
+		
+		<property name="orderType" type="java.lang.Integer">
+			<column name="order_type"/>
+		</property>
+		
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id"/>
+		</property>
+		
+		<property name="evenId" type="java.lang.Long">
+			<column name="even_id"></column>
+		</property>
+		<property name="contentId" type="java.lang.Long">
+			<column name="content_id"></column>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="TopicInnerType" table="topic_inner_type">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="topicId">
+			<column name="topic_id"></column>
+		</property>
+
+		<property name="orderN">
+			<column name="ordern"></column>
+		</property>
+
+		<property name="type">
+			<column name="type"></column>
+		</property>
+
+		<property name="num">
+			<column name="num"></column>
+		</property>
+
+		<property name="isSave">
+			<column name="is_save"></column>
+		</property>
+
+		<!-- <property name="name">
+			<column name="name"></column>
+		</property>
+
+		<property name="descript">
+			<column name="descript"></column>
+		</property>
+
+		<property name="contentType">
+			<column name="content_type"></column>
+		</property>
+
+		<property name="backgroundUrl">
+			<column name="background_url"></column>
+		</property>
+
+		<property name="status">
+			<column name="status"></column>
+		</property>
+
+		<property name="contentUrl">
+			<column name="content_url"></column>
+		</property> -->
+
+	</class>
+</hibernate-mapping>

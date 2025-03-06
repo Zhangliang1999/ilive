@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveHistoryVideo" table="ilive_history_video">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="historyId" type="java.lang.Long">
+			<column name="history_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="fileId" type="java.lang.Long">
+			<column name="file_id" />
+		</property>
+
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+		</property>
+
+		<property name="fileOrder" type="java.lang.Double">
+			<column name="file_order" />
+		</property>
+
+		<property name="delFlag" type="java.lang.Integer">
+			<column name="del_flag" />
+		</property>
+		
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

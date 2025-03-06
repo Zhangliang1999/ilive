@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="IliveRoomThird" table="ilive_room_third">
+	<meta attribute="sync-DAO">false</meta>
+	<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+		</property>
+		<property name="thirdName" type="java.lang.String">
+			<column name="third_name" />
+		</property>
+		<property name="rtmpAddr" type="java.lang.String">
+			<column name="rtmp_addr" />
+		</property>
+		<property name="liveCode" type="java.lang.String">
+			<column name="live_code" />
+		</property>
+		<property name="tstatus" type="java.lang.Integer">
+			<column name="tstatus" />
+		</property>
+	</class>
+</hibernate-mapping>

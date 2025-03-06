@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="MeetingInvitationInfo" table="ilive_meeting_invitation">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="native" />
+		</id>
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+		</property>
+
+		<property name="logo" type="java.lang.String">
+			<column name="logo" />
+		</property>
+
+		<property name="backImage" type="java.lang.String">
+			<column name="back_image" />
+		</property>
+
+		<property name="processImage" type="java.lang.String" length="1000">
+			<column name="process_image" />
+		</property>
+
+		<property name="processFlag" type="java.lang.Integer">
+			<column name="process_flag" />
+		</property>
+
+		<property name="hostQR" type="java.lang.String">
+			<column name="host_qr" />
+		</property>
+
+		<property name="participantQR" type="java.lang.String">
+			<column name="participant_qr" />
+		</property>
+
+	</class>
+</hibernate-mapping>

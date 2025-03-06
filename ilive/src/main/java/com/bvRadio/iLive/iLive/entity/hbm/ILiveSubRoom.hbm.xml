@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="IliveSubRoom" table="ilive_subroom">
+	<meta attribute="sync-DAO">false</meta>
+	<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="subAccountId" type="java.lang.Long">
+			<column name="subaccount_id" />
+		</property>
+		<property name="liveRoomId" type="java.lang.Integer">
+			<column name="liveroom_id" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

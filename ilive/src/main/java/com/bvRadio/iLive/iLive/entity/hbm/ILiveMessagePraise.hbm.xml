@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveMessagePraise" table="ilive_message_praise">
+		<meta attribute="sync-DAO">false</meta>
+		<composite-id>
+			<key-property name="msgId" column="msg_id" type="java.lang.Long" />
+			<key-property name="userId" column="user_id" type="java.lang.Long" />
+		</composite-id>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time"></column>
+		</property>
+		<property name="userName" type="java.lang.String">
+			<column name="user_name"></column>
+		</property>
+	</class>
+</hibernate-mapping>

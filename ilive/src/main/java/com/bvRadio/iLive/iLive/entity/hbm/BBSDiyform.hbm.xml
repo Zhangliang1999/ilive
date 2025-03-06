@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="BBSDiyform" table="bbs_diyform">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write" />
+		<id name="diyformId" type="java.lang.Integer">
+			<column name="diyform_id" />
+			<generator class="assigned" />
+		</id>
+		<many-to-one name="iLiveManager" class="ILiveManager"
+			fetch="select">
+			<column name="create_user_id" />
+		</many-to-one>
+		<property name="diyformName" type="java.lang.String">
+			<column name="diyform_name" />
+		</property>
+		<property name="formType" type="java.lang.String">
+			<column name="form_type" />
+		</property>
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+		</property>
+		<property name="mark" type="java.lang.Integer">
+			<column name="mark" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" length="23" />
+		</property>
+		<property name="updateTime" type="java.sql.Timestamp">
+			<column name="update_time" length="23" />
+		</property>
+
+		<property name="diyformDesc" column="diyform_desc"></property>
+		
+		<property name="maxOption" column="max_option" type="java.lang.Integer"  length="20"/>
+		
+		<property name="allowSeeResult" column="allow_SeeResult" type="java.lang.Integer"  length="20"/>
+		
+		<property name="voteCount" column="vote_count" type="java.lang.Integer"  length="20"/>
+		
+		<property name="voteStartTime" column="vote_start_time" type="java.sql.Timestamp"  length="20"/>
+		
+		<property name="voteEndTime" column="vote_end_time" type="java.sql.Timestamp" length="20"/>
+		
+		<property name="delFlag" column="del_Flag"></property>
+
+		<set name="bbsDiymodels" inverse="true">
+			<key>
+				<column name="diyform_id" />
+			</key>
+			<one-to-many class="BBSDiymodel" />
+		</set>
+		<set name="bbsDiyformDatas" inverse="true">
+			<key>
+				<column name="diyform_id" not-null="true" />
+			</key>
+			<one-to-many class="BBSDiyformData" />
+		</set>
+	</class>
+</hibernate-mapping>

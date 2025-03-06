@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveLotteryPrize" table="ilive_lottery_prize">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="lotteryId">
+			<column name="lottery_id"></column>
+		</property>
+
+		<property name="prizeTypeName">
+			<column name="prize_type_name"></column>
+		</property>
+
+		<property name="prizeName">
+			<column name="prize_name"></column>
+		</property>
+
+		<property name="num">
+			<column name="num"></column>
+		</property>
+
+		<property name="probability">
+			<column name="probability"></column>
+		</property>
+
+		<property name="prizeImg">
+			<column name="prize_img"></column>
+		</property>
+
+		<property name="createTime">
+			<column name="create_time"></column>
+		</property>
+
+	</class>
+</hibernate-mapping>

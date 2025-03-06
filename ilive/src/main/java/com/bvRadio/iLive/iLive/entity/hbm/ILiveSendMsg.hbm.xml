@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveSendMsg" table="ilive_sengmsg">
+	<meta attribute="sync-DAO">false</meta>
+	<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="roomId" type="java.lang.Long">
+			<column name="room_id" />
+		</property>
+		<property name="mobile" type="java.lang.String">
+			<column name="mobile" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="remark" />
+		</property>
+		<property name="loadManager" type="java.lang.String">
+			<column name="load_manager" />
+		</property>
+		<property name="creatTime" >
+			<column name="creat_time" />
+		</property>
+	</class>
+</hibernate-mapping>

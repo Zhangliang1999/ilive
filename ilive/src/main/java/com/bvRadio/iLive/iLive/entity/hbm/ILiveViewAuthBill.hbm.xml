@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveViewAuthBill" table="ilive_room_authbill">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="authId" type="java.lang.Long">
+			<column name="auth_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="java.lang.String">
+			<column name="user_id" />
+		</property>
+
+		<property name="liveRoomId" type="java.lang.Integer">
+			<column name="live_roomId" />
+		</property>
+
+		<property name="liveEventId" type="java.lang.Long">
+			<column name="live_eventId" />
+		</property>
+
+		<property name="authType" type="java.lang.Integer">
+			<column name="auth_type" />
+		</property>
+
+		<property name="authPassTime" type="java.sql.Timestamp">
+			<column name="auth_passTime" />
+		</property>
+
+		<property name="deleteStatus" type="java.lang.Integer">
+			<column name="delete_status" />
+		</property>
+
+		<property name="versionNum" type="java.lang.Long">
+			<column name="version_num" />
+		</property>
+		<property name="fileId" type="java.lang.Long">
+			<column name="file_id" />
+		</property>
+	</class>
+</hibernate-mapping>

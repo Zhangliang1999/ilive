@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveRoomSuggest" table="ilive_room_suggest">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="suggestId" type="java.lang.Long">
+			<column name="suggest_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="roomId" column="room_id"></property>
+		<property name="liveEventId" column="live_eventId"></property>
+		<property name="userId" column="user_id"></property>
+		<property name="content" column="suggest_content"></property>
+	</class>
+</hibernate-mapping>

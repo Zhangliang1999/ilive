@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveEvent" table="ilive_event">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="liveEventId" type="java.lang.Long">
+			<column name="live_event_id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="liveTitle" type="java.lang.String">
+			<column name="live_title" not-null="true" />
+		</property>
+
+		<property name="liveDesc" type="java.lang.String" length="800">
+			<column name="live_desc" />
+		</property>
+
+		<property name="liveStartTime" type="java.sql.Timestamp">
+			<column name="live_start_time" />
+		</property>
+
+		<property name="liveEndTime" type="java.sql.Timestamp">
+			<column name="live_end_time" />
+		</property>
+
+		<property name="hostName" type="java.lang.String">
+			<column name="host_name" />
+		</property>
+
+		<property name="liveStatus" type="java.lang.Integer">
+			<column name="live_status" />
+		</property>
+
+		<property name="openFormSwitch" type="java.lang.Integer">
+			<column name="open_form_switch" />
+		</property>
+
+		<property name="openGuideSwitch" type="java.lang.Integer">
+			<column name="guide_switch" />
+		</property>
+
+		<property name="openCountdownSwitch" type="java.lang.Integer">
+			<column name="countdown_switch" />
+		</property>
+
+		<property name="openViewNumSwitch" type="java.lang.Integer">
+			<column name="view_num_switch" />
+		</property>
+
+		<property name="autoCheckSecond" type="java.lang.Integer">
+			<column name="auto_check_second" />
+		</property>
+
+
+		<property name="openSensitivewordSwitch" type="java.lang.Integer">
+			<column name="enable_sensitiveword" />
+		</property>
+
+		<property name="openForbidTalkSwitch" type="java.lang.Integer">
+			<column name="forbid_talk_switch" />
+		</property>
+
+		<property name="openFCodeSwitch" type="java.lang.Integer">
+			<column name="open_fCode" />
+		</property>
+
+		<property name="playType" type="java.lang.Integer">
+			<column name="play_type" />
+		</property>
+
+		<property name="viewAuthorized" type="java.lang.Integer">
+			<column name="view_authorized" />
+		</property>
+
+		<property name="logoPosition" type="java.lang.Integer">
+			<column name="logo_position" />
+		</property>
+
+
+		<property name="countdownTitle" type="java.lang.String">
+			<column name="countdown_title" />
+		</property>
+
+		<property name="guideAddr" type="java.lang.String">
+			<column name="guide_addr" />
+		</property>
+
+		<property name="converAddr" type="java.lang.String">
+			<column name="conver_addr" />
+		</property>
+
+		<property name="viewAddr" type="java.lang.String">
+			<column name="view_addr" />
+		</property>
+
+		<property name="playerAddr" type="java.lang.String">
+			<column name="player_addr" />
+		</property>
+
+		<property name="playBgAddr" type="java.lang.String">
+			<column name="playBg_addr" />
+		</property>
+
+
+		<property name="pollStreamAddr" type="java.lang.String">
+			<column name="poll_stream_addr" />
+		</property>
+
+		<property name="viewPassword" type="java.lang.String">
+			<column name="view_password" />
+		</property>
+
+		<property name="welcomeMsg" type="java.lang.String">
+			<column name="welcome_msg" />
+		</property>
+
+		<property name="docLivePicAddr" type="java.lang.String">
+			<column name="doc_livePic_addr" />
+		</property>
+
+		<property name="logoUrl" type="java.lang.String">
+			<column name="logo_url" />
+		</property>
+
+		<property name="whiteBillPackageId" type="java.lang.Long">
+			<column name="whiteBill_packageId" />
+		</property>
+
+		<property name="viewAuthPackageId" type="java.lang.Long">
+			<column name="viewAuth_packageId" />
+		</property>
+
+		<property name="pushStreamAddr" type="java.lang.String">
+			<column name="push_streamAddr" />
+		</property>
+
+		<property name="openCheckSwitch" column="opencheck_switch"></property>
+
+		<property name="openBarrageSwitch" column="open_barrage_switch"></property>
+
+		<!-- 开启报名 -->
+		<property name="openSignupSwitch" column="open_signup_switch"></property>
+
+		<property name="estoppelType" type="java.lang.Integer">
+			<column name="estoppel_type"></column>
+		</property>
+
+		<property name="viewMoney" type="java.lang.Double">
+			<column name="view_money" />
+		</property>
+
+		<property name="baseNum" type="java.lang.Integer">
+			<column name="base_num" />
+		</property>
+		<property name="multiple" type="java.lang.Integer">
+			<column name="multiple" />
+		</property>
+		<property name="showNum" type="java.lang.Long">
+			<column name="show_num" />
+		</property>
+		<property name="currentNum" type="java.lang.Long">
+			<column name="current_num" />
+		</property>
+		<property name="openLogoSwitch" type="java.lang.Integer">
+			<column name="open_logo_switch" />
+		</property>
+		<property name="openDataBeautifySwitch" type="java.lang.Integer">
+			<column name="open_databeautify_switch" />
+		</property>
+
+		<property name="formId" type="java.lang.Integer">
+			<column name="form_id" />
+		</property>
+
+		<property name="readyPlayAddress" type="java.lang.String">
+			<column name="ready_play_address" />
+		</property>
+		<property name="openReadyPlayAddressSwitch" type="java.lang.Integer">
+			<column name="open_ready_play_address_switch" />
+		</property>
+		<property name="logoClass" type="java.lang.String">
+			<column name="logo_class" />
+		</property>
+
+		<property name="recordStartTime">
+			<column name="record_startTime" />
+		</property>
+
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+		</property>
+
+		<property name="isDelete" type="java.lang.Boolean">
+			<column name="is_delete" />
+		</property>
+
+		<property name="pushMsgSwitch" type="java.lang.Integer">
+			<column name="pushMsg_switch" />
+		</property>
+
+		<property name="realStartTime" type="java.sql.Timestamp">
+			<column name="real_start_time"></column>
+		</property>
+
+		<property name="realEndTime" type="java.sql.Timestamp">
+			<column name="real_end_time"></column>
+		</property>
+		
+		<property name="commentsAudit" type="java.lang.Integer">
+			<column name="comments_audit"/>
+		</property>
+		<property name="commentsAllow" type="java.lang.Integer">
+			<column name="comments_allow"/>
+		</property>
+		<property name="isNotify" type="java.lang.Integer">
+			<column name="is_notify"/>
+		</property>
+		<property name="notifyToken" type="java.lang.String">
+			<column name="notify_token"/>
+		</property>
+		
+		<property name="randomRecordStartTime" column="random_start_time"></property>
+
+		<property name="randomRecordEndTime" column="random_end_time"></property>
+		<property name="isSign" type="java.lang.Integer">
+			<column name="is_sign"/>
+		</property>
+		
+		<property name="documentId" type="java.lang.Long">
+			<column name="document_id"></column>
+		</property>
+		<property name="documentPageNO" type="java.lang.Integer">
+			<column name="document_page_no"></column>
+		</property>
+		<property name="documentDownload" type="java.lang.Integer">
+			<column name="document_download"></column>
+		</property>
+		<property name="documentManual" type="java.lang.Integer">
+			<column name="document_manual"></column>
+		</property>
+		<property name="needLogin" type="java.lang.Integer">
+			<column name="need_login"></column>
+		</property>
+		<property name="nowInsertFile" type="java.lang.Integer">
+			<column name="now_insert_file"></column>
+		</property>
+		<property name="fcodeMsg" type="java.lang.String">
+			<column name="fcode_msg"/>
+		</property>
+		<property name="outLinkUrl" type="java.lang.String">
+			<column name="outLink_url"/>
+		</property>
+		<property name="lastPauseStopTime" type="java.sql.Timestamp">
+			<column name="last_pause_stop_time" />
+		</property>
+		<property name="lastPauseStartTime" type="java.sql.Timestamp">
+			<column name="last_pause_start_time" />
+		</property>
+	</class>
+</hibernate-mapping>

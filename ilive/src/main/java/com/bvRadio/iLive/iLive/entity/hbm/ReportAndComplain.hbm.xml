@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ReportAndComplain" table="report_and_complain">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="roomId">
+			<column name="room_id" />
+		</property>
+
+		<property name="curRoomId">
+			<column name="cur_room_id" />
+		</property>
+
+		<property name="nowRoomName">
+			<column name="now_room_name" />
+		</property>
+
+		<property name="submitUser">
+			<column name="submit_user" />
+		</property>
+		
+		<property name="createTime">
+			<column name="create_time" />
+		</property>
+		
+		<property name="replyStatus">
+			<column name="reply_status" />
+		</property>
+		
+		<property name="userContact">
+			<column name="user_contact" />
+		</property>
+		
+		<property name="type">
+			<column name="type" />
+		</property>
+		
+		<property name="userId">
+			<column name="userId" />
+		</property>
+		
+		<property name="reportReason">
+			<column name="report_reason" />
+		</property>
+		
+		<property name="reportImg">
+			<column name="report_img" />
+		</property>
+		
+		<property name="suggest">
+			<column name="suggest" />
+		</property>
+		
+		<property name="isDel">
+			<column name="is_del" />
+		</property>
+
+	</class>
+</hibernate-mapping>

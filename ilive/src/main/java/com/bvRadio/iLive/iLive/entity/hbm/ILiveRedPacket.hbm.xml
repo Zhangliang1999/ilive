@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveRedPacket" table="ilive_red_packet">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="packetId" type="java.lang.Long">
+			<column name="packet_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="userName">
+			<column name="user_name"></column>
+		</property>
+		<property name="name">
+			<column name="name"></column>
+		</property>
+		
+
+
+		<property name="createTime">
+			<column name="create_time"></column>
+		</property>
+
+		
+        <property name="startTime">
+			<column name="start_time"></column>
+		</property>
+		<property name="endTime">
+			<column name="end_time"></column>
+		</property>
+		
+		<property name="isAllow">
+			<column name="is_allow"></column>
+		</property>
+
+		<property name="userId">
+			<column name="user_id"></column>
+		</property>
+		
+		<property name="command">
+			<column name="command"></column>
+		</property>
+		<many-to-one name="room" column="room_id"
+			lazy="false" cascade="save-update"></many-to-one>
+	</class>
+</hibernate-mapping>

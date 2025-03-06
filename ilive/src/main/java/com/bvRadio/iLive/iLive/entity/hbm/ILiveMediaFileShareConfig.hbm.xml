@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveMediaFileShareConfig" table="ilive_mediaFileshare_config">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="shareId" type="java.lang.Long">
+			<column name="share_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="fileId" type="java.lang.Integer">
+			<column name="file_id" />
+		</property>
+
+		<property name="mediaFileName" type="java.lang.String">
+			<column name="mediaFile_name" />
+		</property>
+
+		<property name="mediaFileDesc" type="java.lang.String">
+			<column name="mediaFile_desc" />
+		</property>
+
+		<property name="shareImg" type="java.lang.String">
+			<column name="share_img" />
+		</property>
+
+		<property name="shareType" type="java.lang.Integer">
+			<column name="share_type" />
+		</property>
+
+		<property name="shareUrl" type="java.lang.String">
+			<column name="share_url" />
+		</property>
+
+		<property name="openStatus" type="java.lang.Integer">
+			<column name="open_status" />
+		</property>
+
+		<property name="ifEdit" type="java.lang.Integer">
+			<column name="if_edit" />
+		</property>
+	</class>
+</hibernate-mapping>

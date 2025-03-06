@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveRandomRecordTask" table="ilive_record_random_task">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="taskId" type="java.lang.Long">
+			<column name="task_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id" />
+		</property>
+
+		<property name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+		</property>
+
+		<property name="liveEventId" type="java.lang.Long">
+			<column name="live_eventId" />
+		</property>
+
+		<property name="startTime" type="java.lang.Long">
+			<column name="start_time" />
+		</property>
+
+		<property name="endTime" type="java.lang.Long">
+			<column name="end_time" />
+		</property>
+
+		<property name="phoneNum">
+			<column name="phone_num" />
+		</property>
+		
+		<property name="liveStatus" type="java.lang.Integer">
+			<column name="live_status" />
+		</property>
+		
+	</class>
+</hibernate-mapping>
