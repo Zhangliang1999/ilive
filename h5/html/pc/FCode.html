@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>观看码</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/normalize/8.0.0/normalize.min.css"/>
+    <link rel="stylesheet" href="css/style.min.css?version=2.0.3">
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/base.js"></script>
+    <link rel="stylesheet" href="css/dialog.css"/>
+    <script type="text/javascript" src="js/dialog.js"></script>
+    <link rel="stylesheet" href="css/NewStyle.css">
+    <script type="text/javascript" src="js/layer/layer.js"></script>
+</head>
+<body class="login">
+<div class="loginpage codepage Ncode">
+    <div class="logo text-center">
+        <img src="images/logo.png"/>
+    </div>
+    <div class="code-content rad-border text-center">
+        <div>
+            <span id="roomName">当前直播间需要观看码</span>
+            <span id="welcomeMsg"></span>
+        </div>
+
+        <div class="form-group codeinput" id="code" style="border: 0;margin: 0">
+            <input type="text" class="border" name="codeEwm" placeholder="请输入6位观看码">
+        </div>
+        <button type="submit" class="btn loginbtn" onclick="checkRoomcodeEwm()">进入观看</button>
+        <div class="z_tip">我有已绑定的账号，<span onclick="gotoLogin()">去登录</span></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = decodeURI(window.location.search.substr(1)).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+
+    // var roomId = 0;
+    // var fileId = 0;
+    // var userId = 0;
+    var roomId = GetQueryString("roomId") || 0
+    var fileId = GetQueryString("fileId") || 0
+    var userId = GetQueryString("userId") || 0
+    $(function () {
+        // var param = window.location.search;
+        // var newsidinfo = param.substr(param.indexOf("?") + 1, param.length)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+        // var split = newsidinfo.split("&")
+        if (fileId != null || fileId != undefined) {
+            var url = "http://" + tomcatBase + "/ilive/app/room/vod/getVodMsg.jspx"
+        } else {
+            var url = "http://" + tomcatBase + "/ilive/selectRoom.jspx"
+        }
+
+        $.ajax({
+            type: "GET",//请求方式 get/post
+            url: url,
+            dataType: "jsonp",
+            jsonp: "callback",
+            cache: false,
+            data: {
+                fileId: fileId,
+                roomId: roomId
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.code == 1) {
+                    var iLiveLiveRoom = JSON.parse(data.iLiveLiveRoom);
+                    var liveEvent = iLiveLiveRoom.liveEvent;
+                    var liveTitle = liveEvent.liveTitle;
+                    var welcomeMsg = liveEvent.welcomeMsg;
+                    if (welcomeMsg == null || welcomeMsg == undefined || welcomeMsg == "") {
+                        welcomeMsg = "";
+                    }
+                    $("#roomName").text(liveTitle);
+                    $("#welcomeMsg").text(welcomeMsg);
+                }
+            }
+        });
+        // } else {
+        //     // for (var i = 0; i < split.length; i++) {
+        //     // var newsids = split[i].split("=");//对获得的参数字符串按照“=”进行分割
+        //     // var newsid = newsids[1];//得到参数值
+        //     // var newsname = newsids[0];
+        //     // if (newsname == "roomId") {
+        //     if (roomId) {
+        //         // roomId = newsid;
+        //         $.ajax({
+        //             type: "GET",//请求方式 get/post
+        //             url: "http://" + tomcatBase + "/ilive/selectRoom.jspx",
+        //             dataType: "jsonp",
+        //             jsonp: "callback",
+        //             cache: false,
+        //             data: {
+        //                 roomId: roomId
+        //             },
+        //             success: function (data) {
+        //                 console.log(data);
+        //                 if (data.code == 1) {
+        //                     var iLiveLiveRoom = JSON.parse(data.iLiveLiveRoom);
+        //                     var liveEvent = iLiveLiveRoom.liveEvent;
+        //                     var liveTitle = liveEvent.liveTitle;
+        //                     var welcomeMsg = liveEvent.welcomeMsg;
+        //                     if (welcomeMsg == null || welcomeMsg == undefined || welcomeMsg == "") {
+        //                         welcomeMsg = "";
+        //                     }
+        //                     $("#roomName").text(liveTitle);
+        //                     $("#welcomeMsg").text(welcomeMsg);
+        //                 }
+        //             }
+        //         });
+        //     }
+        // else if (newsname == "fileId") {
+        //     fileId = newsid;
+        // } else if (newsname == "userId") {
+        //     userId = newsid;
+        // }
+        // }
+        // }
+    })
+    ;
+
+    function checkRoomcodeEwm() {
+        var codeEwm = $("input[name=codeEwm]").val();
+        if (codeEwm == null || codeEwm == undefined || codeEwm == "") {
+            // $.DialogBySHF.Alert({
+            //       Width: 350,
+            //       Height: 200,
+            //       Title: "警告",
+            //       Content: "观看码不能为空"
+            //  });
+            layerAlert('观看码不能为空')
+        } else {
+            $.ajax({
+                type: "GET",//请求方式 get/post
+                url: "http://" + tomcatBase + "/ilive/app/room/userFCode.jspx?roomId" + roomId,
+                dataType: "jsonp",
+                jsonp: "callback",
+                cache: false,
+                data: {
+                    terminalType: "h5",
+                    roomId: roomId,
+                    fileId: fileId,
+                    code: codeEwm
+                },
+                success: function (data) {
+                    console.log(data)
+                    var code = data.code;
+                    if (code == 1) {
+                        if (fileId == 0) {
+                            if (roomId == 0) {
+                                // $.DialogBySHF.Alert({
+                                //     Width: 350,
+                                //     Height: 200,
+                                //     Title: "警告",
+                                //     Content: "直播间错误",
+                                //     ConfirmFun: errorfunction
+                                // });
+                                layerAlert('直播间错误')
+                                return;
+                            } else {
+                                // alert("观看码绑定成功！");
+                                window.location.href = "http://" + h5Base
+                                    + "/pc/play.html?roomId=" + roomId;
+                            }
+                        } else {
+                            // alert("观看码绑定成功！");
+                            window.location.href = "http://" + h5Base
+                                + "/pc/review.html?fileId=" + fileId
+                                + "&roomId=" + roomId + "&userId=" + userId;
+                        }
+                    } else if (code == 404) {//已被绑定
+                        window.location.href = "http://" + h5Base + "/pc/permissions2.html?roomId=" + roomId;
+                    } else {
+                        // $.DialogBySHF.Alert({
+                        //       Width: 350,
+                        //       Height: 200,
+                        //       Title: "警告",
+                        //       Content: data.message
+                        //  });
+                        layerAlert(data.message)
+                    }
+                }
+            });
+        }
+        /*     if (fileId == 0) {
+                if (roomId == 0) {
+                    $.DialogBySHF.Alert({
+                        Width: 350,
+                        Height: 200,
+                        Title: "警告",
+                        Content: "直播间错误",
+                        ConfirmFun: errorfunction
+                    });
+                    return;
+                } else {
+                    $
+                        .ajax({
+                            type: "GET",//请求方式 get/post
+                            url: "http://"
+                                + tomcatBase
+                                + "/ilive/app/room/checkRoomPassword.jspx?orginal=1",
+                            dataType: "jsonp",
+                            jsonp: "callback",
+                            cache: false,
+                            data: {
+                                roomId: roomId,
+                                roomPassword: roomPassword
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                if (data.code == 1) {
+                                    window.location.href = "http://" + h5Base
+                                        + "/pc/play.html?roomId=" + roomId;
+                                } else {
+                                    $.DialogBySHF.Alert({
+                                        Width: 350,
+                                        Height: 200,
+                                        Title: "警告",
+                                        Content: "密码错误"
+                                    });
+                                }
+                            }
+                        });
+                }
+            } else {
+                $.ajax({
+                    type: "GET",//请求方式 get/post
+                    url: "http://" + tomcatBase
+                        + "/ilive/app/room/vod/checkFilePassword.jspx",
+                    dataType: "jsonp",
+                    jsonp: "callback",
+                    cache: false,
+                    data: {
+                        fileId: fileId,
+                        passWord: roomPassword
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        if (data.code == 1) {
+                            window.location.href = "http://" + h5Base
+                                + "/pc/review.html?fileId=" + fileId
+                                + "&roomId=" + roomId + "&userId=" + userId;
+                        } else {
+                            alert("您输入的观看验证码有误，请重新输入");
+                            $.DialogBySHF.Alert({
+                                Width: 350,
+                                Height: 200,
+                                Title: "警告",
+                                Content: "你输入的观看验证码，请重新输入"
+                            });
+                        }
+                    }
+                });
+            } */
+    }
+</script>
+<script>
+    // onload = function () {
+    //     var wrap = document.getElementById("code");
+    //     var txts = wrap.getElementsByTagName("input");
+    //     for (var i = 0; i < txts.length; i++) {
+    //         var t = txts[i];
+    //         t.index = i;
+    //         t.setAttribute("readonly", "readonly");
+    //         t.onkeyup = function (event) {
+    //             this.value = this.value.replace(/\D/g, '');
+    //             var event = event || window.event;
+    //             if (event.keyCode == 8) {
+    //                 this.value = "";
+    //                 var next = this.index - 1;
+    //                 var last = this.index;
+    //                 if (next < 0)
+    //                     return;
+    //                 txts[next].removeAttribute("readonly");
+    //                 txts[next].focus();
+    //                 txts[last].setAttribute("readonly", "readonly");
+    //                 txts[next].className = "border";
+    //                 txts[last].classList.remove("border");
+    //             } else {
+    //                 if (this.value == "") {
+    //                     return false;
+    //                 }
+    //                 var next = this.index + 1;
+    //                 var last = this.index;
+    //                 if (next > txts.length - 1)
+    //                     return;
+    //                 txts[next].removeAttribute("readonly");
+    //                 txts[next].focus();
+    //                 txts[last].setAttribute("readonly", "readonly");
+    //                 txts[next].className = "border";
+    //                 txts[last].classList.remove("border");
+    //             }
+    //         };
+    //     }
+    //     txts[0].removeAttribute("readonly");
+    // }
+    function gotoLogin() {
+        window.location.href = "http://" + h5Base + "/pc/login.html?roomId=" + roomId + "&fileId=" + fileId + "&userId=" + userId;
+    }
+
+    function errorfunction() {
+        window.location.href = "http://" + h5Base + "/pc/error.html";
+    }
+</script>
+</html>

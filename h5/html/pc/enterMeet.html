@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>参加会议/直播</title>
+</head>
+<body>
+<h2>参加会议/直播</h2>
+<input id="roomId" name="roomId"  />
+<button onclick="next()">下一步</button>
+</body>
+<script src="js/base.js"></script>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript">
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = decodeURI(window.location.search.substr(1)).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+}
+		
+		function next(){
+			var roomId=$("#roomId").val();
+			$.ajax({
+				type: "GET",//请求方式 get/post
+		        url: "http://" + tomcatBase + "/ilive/liveevent/live/getRoomInfo.jspx",
+		        dataType: "jsonp",
+		        jsonp: "callback",
+		        cache: false,
+		        data: {
+		        	roomId: roomId
+		        },
+		        success: function (data) {
+		        	console.log(data)
+		            if(data.code==1){
+		            	if(data.room.roomType==1){
+		            		 window.location.href = "http://" + h5Base + "/pc/enterMeetPwd.html?roomId="+data.room.roomId;
+		            	}else{
+		            		 window.location.href = "http://" + h5Base + "/pc/play.html?roomId="+data.room.roomId;
+		            	}
+		            	
+		            }else if(data.code==0){
+		            	 //window.location.href = "http://" + h5Base + "/phone/signOver.html?name=" + name;
+		            }
+		        }
+		    });
+		}
+</script>
+</html>
