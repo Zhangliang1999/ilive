@@ -1,0 +1,521 @@
+
+.drawList {
+    width: 100%;
+    height: 425px;
+    text-align: center;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.drawMain {
+    width: 100%;
+    margin: 10px auto;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.draw {
+    width: 350px;
+    height: 350px;
+    background-image: url(../draw/images/bg.png);
+    background-size: 100% 100%;
+    padding: 20px;
+    margin: 0 auto;
+
+}
+
+.drawnostartImg {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    margin: 0 auto;
+    background: url(../../phone/img/draw.png) no-repeat center;
+    background-size: 30%;
+}
+
+.drawEndImg {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    margin: 0 auto;
+    background: url(../../phone/img/drawend.png) no-repeat center;
+    background-size: 30%;
+
+}
+
+.drawList .nodrawText {
+    color: #282828;
+    font-size: 16px;
+    position: relative;
+    font-weight: bold;
+}
+
+.drawList .nodrawText span {
+    display: block;
+    font-weight: normal;
+}
+
+.drawList .drawImg {
+    position: relative;
+    margin: 10px 0;
+    height: 300px;
+}
+
+.drawList .drawImg img {
+    width: 45%;
+}
+
+.drawList .drawImg .startText {
+    bottom: 0;
+}
+
+.endText {
+    position: absolute;
+    color: #999;
+    font-size: 16px;
+    bottom: 50px;
+    width: 100%;
+}
+
+.startText {
+    color: #282828;
+    position: absolute;
+    font-size: 16px;
+    bottom: 20px;
+    width: 100%;
+}
+
+.startText span,
+.voteText span time {
+    color: #F56467;
+}
+
+.draw table {
+    text-align: center;
+    display: inline-block;
+}
+
+.draw .item {
+    width: 102px;
+    height: 100px;
+    background-image: url(../draw/images/bg1.png);
+    background-size: 100% 100%;
+}
+
+.draw .item.active {
+    background-image: url(../draw/images/bg2.png);
+}
+
+.draw .img {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+}
+
+.draw .img img {
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+}
+
+.draw .gap {
+    width: 2px;
+}
+
+.draw .gap-2 {
+    height: 2px;
+}
+
+.draw .name {
+    display: block;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+.draw .draw-btn {
+    background-color: #FFDC44;
+}
+
+.draw-btn {
+    font-size: 25px;
+    color: #FE7576;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.draw-btn:hover {
+    background-color: #fe8d85;
+    color: #FFF;
+}
+
+.guize {
+    font-size: 14px;
+}
+
+.drawListCon {
+    position: relative;
+    padding: 13px 0;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.drawListCon {
+    overflow: hidden;
+}
+
+.drawListAll .media {
+    border-bottom: 1px solid #EAEAEA;
+    padding-bottom: 15px;
+}
+
+.drawListAll .media-left img {
+    width: 100px;
+    height: 100px
+}
+
+.drawListAll .media-body {
+    text-align: left;
+}
+
+.drawListCon .drawInfo {
+    float: left;
+    overflow: hidden;
+    text-align: left;
+    width: 70%;
+    margin: 0 0 20px 20px;
+}
+
+.drawInfo .prizeName {
+    color: #282828;
+    height: 20px;
+    overflow: hidden;
+}
+
+.draw .lottery-unit.drawactive {
+    background-image: url("../draw/images/bg2.png");
+}
+
+#choujiangNumber {
+    padding: 0 2px;
+}
+
+/*金蛋*/
+
+.egg {
+    width: 450px;
+    height: 300px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.hammer {
+    position: absolute;
+    top: 30px;
+    right: 65px;
+    width: 120px;
+    height: 124px;
+
+}
+
+#jindan {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: url(../draw/images/egg_1.png) no-repeat 95px bottom;
+    width: 100%;
+    height: 100%;
+
+    background-size: 65%;
+    z-index: 100;
+
+}
+
+.hammer.active .imgChuiZi {
+    width: 100%;
+    height: 100%;
+    -moz-transform-origin: bottom right;
+    -webkit-transform-origin: bottom right;
+    -moz-animation: chuizi .75s;
+    -webkit-animation: chuizi .75s;
+    animation: chuizi .75s;
+}
+
+#jindan.curr {
+    background: url(../draw/images/egg_2.png) no-repeat 95px bottom;
+    background-size: 60%;
+}
+
+@keyframes chuizi {
+    0% {
+        -moz-transform: rotate(34deg);
+        -ms-transform: rotate(34deg);
+        -webkit-transform: rotate(34deg);
+        transform: rotate(34deg);
+    }
+    100% {
+        -moz-transform: rotate(-15deg);
+        -ms-transform: rotate(-15deg);
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+    }
+}
+
+@-webkit-keyframes chuizi {
+    0% {
+        -moz-transform: rotate(34deg);
+        -ms-transform: rotate(34deg);
+        -webkit-transform: rotate(34deg);
+        transform: rotate(34deg);
+    }
+    100% {
+        -moz-transform: rotate(-15deg);
+        -ms-transform: rotate(-15deg);
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+    }
+}
+
+@-moz-keyframes chuizi {
+    0% {
+        -moz-transform: rotate(34deg);
+        -ms-transform: rotate(34deg);
+        -webkit-transform: rotate(34deg);
+        transform: rotate(34deg);
+    }
+    100% {
+        -moz-transform: rotate(-15deg);
+        -ms-transform: rotate(-15deg);
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+    }
+}
+
+.red_bg {
+    position: relative;
+    width: 100%;
+}
+
+.red_bg > div.red-ss-bg {
+    height: 260px;
+    width: 260px;
+    margin: 20px auto;
+    background: #fff;
+    position: relative;
+    border-radius: 100%;
+}
+
+.red_bg > div.red-ss-bg > div {
+    background: url(../draw/images/red-ss.png) no-repeat 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: 60%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    transform: rotate(0deg);
+    left: 52px;
+    top: 23px;
+}
+
+.red_bg > div.red-ss-bg::after {
+    content: ' ';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url(../draw/images/red-ss-bg.png) no-repeat center;
+    background-size: 100%;
+}
+
+.red-ss.active {
+    width: 100%;
+    height: 100%;
+    -moz-transform-origin: bottom right;
+    -webkit-transform-origin: bottom right;
+    -moz-animation: shake .75s infinite;
+    -webkit-animation: shake .75s infinite;
+    animation: shake .75s infinite;
+}
+
+@keyframes shake {
+    0% {
+        -moz-transform: rotate(-1deg);
+        -ms-transform: rotate(-1deg);
+        -webkit-transform: rotate(-1deg);
+        transform: rotate(-1deg);
+    }
+    100% {
+        -moz-transform: rotate(1deg);
+        -ms-transform: rotate(1deg);
+        -webkit-transform: rotate(1deg);
+        transform: rotate(1deg);
+    }
+}
+
+@-webkit-keyframes shake {
+    0% {
+        -moz-transform: rotate(-1deg);
+        -ms-transform: rotate(-1deg);
+        -webkit-transform: rotate(-1deg);
+        transform: rotate(-1deg);
+    }
+    100% {
+        -moz-transform: rotate(1deg);
+        -ms-transform: rotate(1deg);
+        -webkit-transform: rotate(1deg);
+        transform: rotate(1deg);
+    }
+}
+
+@-moz-keyframes shake {
+    0% {
+        -moz-transform: rotate(-1deg);
+        -ms-transform: rotate(-1deg);
+        -webkit-transform: rotate(-1deg);
+        transform: rotate(-1deg);
+    }
+    100% {
+        -moz-transform: rotate(1deg);
+        -ms-transform: rotate(1deg);
+        -webkit-transform: rotate(1deg);
+        transform: rotate(1deg);
+    }
+}
+
+/*投票*/
+.voteMain {
+    width: 100%;
+    height: 430px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+}
+
+.NostartPic {
+
+    position: relative;
+    width: 100%;
+    height: 350px;
+    margin: 0 auto;
+    background: url(../../phone/img/voteNo.png) no-repeat center;
+    background-size: 30%;
+}
+.endPic {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    margin: 0 auto;
+    background: url(../../phone/img/voteend.png) no-repeat center;
+    background-size: 30%;
+}
+
+.voteText {
+    font-size: 14px;
+    position: absolute;
+    color: #999;
+    bottom: 40px;
+    width: 100%;
+}
+
+.voteText span {
+    width: 100%;
+    display: block;
+}
+
+.voteList {
+    text-align: left;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.voteList .voteQuestion {
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #EAEAEA;
+    margin: 0;
+    padding: 0;
+
+
+}
+
+.voteList .MainUl {
+    padding: 0;
+}
+
+.voteList .MainUl .checkbox {
+    margin: 0;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.voteList .MainUl .checkbox label {
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.voteList .MainUl .checkbox .choseText {
+    margin-left: 20px;
+    margin-top: -20px;
+}
+
+.voteList .MainUl .checkbox .choseText span {
+    display: block;
+}
+
+.voteList .MainUl .checkbox .choseText .Img {
+    margin: 5px 0;
+    width: 90px;
+}
+
+.voteList .MainUl .checkbox .choseText .Img img {
+    width: 100%;
+}
+
+.voteList .MainUl .choose-way {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    outline: 0;
+    display: inline-block;
+    border: 0;
+    -webkit-appearance: none;
+    background: 0;
+    font-family: iconfont;
+}
+
+.voteList .MainUl .choose-way:before {
+    font-size: 20px;
+    content: "\e66d";
+    text-decoration: none;
+    color: #eaeaea;
+    -webkit-font-smoothing: antialiased;
+}
+
+.voteList .MainUl .choose-way:checked:before {
+    color: #00c90d;
+    content: '\e66d';
+}
+.voteList .voteListCon {
+    margin: 0 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #EAEAEA;
+}
+.voteList .bar{
+
+    margin: 5px 0;
+}
+.voteList .bar div{
+    display: inline-block;
+}
+.voteList .progress{
+    height: 8px;
+    margin: 0;
+    width: 40%;
+    margin-right: 5%;
+
+}
+.voteList .progress .progress-bar{
+    line-height: 8px;
+    background-color:#EDBA2D
+}

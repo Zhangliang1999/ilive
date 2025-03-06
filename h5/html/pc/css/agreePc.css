@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    width: 640px;
+    margin: 0 auto;
+}
+.header{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background: #0084ff;
+    text-align: center;
+    color:#fff;
+    font-size: 15px;
+    position: relative;
+}
+.header i{
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    font-size: 20px;
+}
+.main{
+    padding: 0 20px 45px;
+    overflow: auto;
+}
+.title{
+    width: 600px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 14px;
+}
+.wenjuantitle{
+    width: 600px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 14px;
+}
+.para{
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 25px;
+    text-indent: 2em;
+}
+.footer{
+    width: 640px;
+    height: 45px;
+    position: fixed;
+    bottom: 0;
+    background: #0084ff;
+    text-align: center;
+    line-height: 45px;
+    color: #fff;
+    font-size: 16px;
+}
