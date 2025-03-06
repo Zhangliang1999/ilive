@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	default-lazy-init="true">
+	<!--COOKIE登录 -->
+	<bean id="rememberMeService"
+		class="com.bvRadio.iLive.common.security.rememberme.TokenBasedRememberMeServices">
+		<property name="key" value="bvRadio" />
+		<!--<property name="alwaysRemember" value="true"/> -->
+		<property name="userDetailsService" ref="memberMng" />
+	</bean>
+
+	<!--HttpSession -->
+	<bean id="sessionProvider"
+		class="com.bvRadio.iLive.common.web.session.HttpSessionProvider" />
+	<!--缓存Session <bean id="sessionProvider" class="com.bvRadio.iLive.common.web.session.CacheSessionProvider"> 
+		<property name="sessionCache" ref="sessionCache"/> <property name="sessionIdGenerator" 
+		ref="sessionIdGenerator"/> </bean> -->
+	<!--Memcached缓存 <bean id="sessionCache" class="com.bvRadio.iLive.common.web.session.cache.MemcachedDangaCache"> 
+		<property name="servers"> <list> <value>127.0.0.1:11211</value> </list> </property> 
+		<property name="weights"> <list> <value>1</value> </list> </property> </bean> -->
+	<!--Ehcache缓存 <bean id="sessionCache" class="com.bvRadio.iLive.common.web.session.cache.EhcacheSessionCache"> 
+		<property name="cache" ref="ehSessionCache"/> </bean> -->
+	<!--SessionId生成器 <bean id="sessionIdGenerator" class="com.bvRadio.iLive.common.web.session.id.JdkUUIDGenerator"/> -->
+	<!--密码加密器 -->
+	<bean id="pwdEncoder" class="com.bvRadio.iLive.common.security.encoder.Md5PwdEncoder" />
+
+	<!--执行时间标签 -->
+	<bean id="uuid" class="com.bvRadio.iLive.common.web.freemarker.UUIDDirective" />
+	<bean id="process_time"
+		class="com.bvRadio.iLive.common.web.freemarker.ProcessTimeDirective" />
+	<bean id="text_cut"
+		class="com.bvRadio.iLive.common.web.freemarker.TextCutDirective" />
+	<bean id="html_cut"
+		class="com.bvRadio.iLive.common.web.freemarker.HtmlCutDirective" />
+	<bean id="realPathResolver"
+		class="com.bvRadio.iLive.common.web.springmvc.ServletContextRealPathResolver" />
+
+	<bean id="authenticationDao" class="com.bvRadio.iLive.core.dao.impl.AuthenticationDaoImpl"></bean>
+	<bean id="unifiedUserDao" class="com.bvRadio.iLive.core.dao.impl.UnifiedUserDaoImpl"></bean>
+	<bean id="configDao" class="com.bvRadio.iLive.core.dao.impl.ConfigDaoImpl"/>
+
+	<bean id="authenticationMng"
+		class="com.bvRadio.iLive.core.manager.impl.AuthenticationMngImpl"></bean>
+	<bean id="unifiedUserMng" class="com.bvRadio.iLive.core.manager.impl.UnifiedUserMngImpl"></bean>
+	<bean id="configMng" class="com.bvRadio.iLive.core.manager.impl.ConfigMngImpl" />
+</beans>

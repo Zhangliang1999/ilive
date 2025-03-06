@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<#include "/bvRadio/head.html"/>
+		<title>视频管理</title>
+	</head>
+	<body >
+		<div id="wrapper" class="bgc-fff">
+			<div id="page-wrapper">
+				<!--右侧内容的区域-->
+				<#include "/bvRadio/admin/top.html"/>
+				<#include "/bvRadio/admin/medialeft.html" />
+				<!--下面内容部分-->
+				<div class="wrapper wrapper-content bgc-fff videomanage">
+					<div class="row title-header">
+						<div class="col-lg-12">
+							<div class="title-name">
+								<a class="font-title">视频管理</a>
+							</div>
+						</div>
+					</div>
+					<div class="row list-contain">
+						<div class="col-lg-12 list-title p-w-lg space-20">
+							<button class="btn btn-success  m-r" >
+								上传视频
+							</button>
+							<!--
+							<button class="btn btn-success glyphicon glyphicon-edit"> 剪辑 </button>
+							<button class="btn glyphicon glyphicon-transfer btn-success"> 合并 </button>
+							-->
+							<button class="btn btn-success glyphicon glyphicon-circle-arrow-up" onclick="updateLineState(1)">
+								上线
+							</button>
+							<button class="btn btn-success glyphicon glyphicon-circle-arrow-down" onclick="updateLineState(0)">
+								下线
+							</button>
+							<button class="btn glyphicon glyphicon-trash btn-success" onclick="deleteVediosByIds()">
+								删除
+							</button>
+							<div class="col-lg-4 pull-right text-right no-padding">
+								<input type="text" class="serachinput" id="vedio_name_id" value="${mediaName!}" placeholder="按资源搜索"/>
+								<button onclick="searchVedio();" class="btn btn-success ">
+									搜索
+								</button>
+							</div>
+						</div>
+						<div class='tabbable'>
+							<@p.pageList value=liveMediaPage
+							listAction="entervedio.do";vedio,i,has_next>
+							<@p.column class="text-center mr5 w15"
+							style="text-align: center; width:15px" title="
+							<input
+							type='checkbox' onclick='checkAll(this)'>
+							">
+							<input type="checkbox" name="ids" value="${vedio.fileId!''}">
+							</@p.column>
+							<@p.column class="text-center" style="width:40px;"
+							title="id">
+							${vedio.fileId!}
+							</@p.column>
+							<@p.column class="text-left" style=""
+							title="视频名称">
+							<img src="${vedio.fileCover!}" width="65" height="65" />${vedio.mediaFileName!'未知'} <!--${liveMediaPage.fileCover!}-->
+							</@p.column>
+							<@p.column class="text-center" style="width:60px;"
+							title="时长">
+							${vedio.durationTime!''}
+							</@p.column>
+							<@p.column class="text-center" style="width:60px;"
+							title="大小">
+							${vedio.fileSizeMb!'0'}Mb
+							</@p.column>
+							<@p.column class="text-center" style="width:60px;"
+							title="播放量">
+							${vedio.viewNum!''}
+							</@p.column>
+							<@p.column class="text-center" style="width:160px;"
+							title="上传时间">
+							${vedio.mediaCreateTime!''}
+							</@p.column>
+							<@p.column class="text-center" style="width:60px;"
+							title="在线状态">
+							<#if vedio.onlineFlag??>
+							<#if vedio.onlineFlag==1>
+							在线
+							<#else>
+							下线
+							</#if>
+							<#else>
+							下线
+							</#if>
+							</@p.column>
+							<@p.column class="text-center" style="width:120px;"
+							title="操作">
+							<a href="${base}/admin/mediafile/entermediaedit.do?id=${vedio.fileId!}&&menuType=1">编辑</a>
+							<a href="javascript:void(0);" onclick="deleteVedio(${vedio.fileId!''})">删除</a>
+							</@p.column>
+							</@p.pageList>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script>
+		$(".live-bottom").hide();
+		$("#_page_form").append($("<input type='hidden' id='vedio_name_hidden' name='mediaName'/>"));
+		wid = $('.blcen').width()
+		$('.textbl').css('width', wid - 300)
+		$('.textbl2').css('width', wid - 300)
+
+		$(window).resize(function() {//当浏览器大小变化时
+
+			wid = $('.blcen').width()
+			$('.textbl').css('width', wid - 300)
+			$('.textbl2').css('width', wid - 300)
+
+		});
+
+		$(".img-box").hover(function() {
+			$(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+		}, function() {
+			$(this).find(".live-bottom").stop(true, false).slideUp(300)
+		})
+		function searchVedio() {
+			var vedioName = $("#vedio_name_id").val();
+			$("#vedio_name_hidden").val(vedioName);
+			$("#_page_form").submit();
+		}
+
+		function deleteVedio(id) {
+			if (confirm("确定要删除吗？")) {
+				$.ajax({
+					type : 'POST',
+					url : "delete.do",
+					data : {
+						id : id
+					},
+					dataType : "json",
+					success : function(data, textStatus) {
+						searchVedio();
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert("delete出错>>" + errorThrown);
+					}
+				});
+			}
+		}
+
+		var ids = "ids";
+		function deleteVediosByIds() {
+			if (PL.checkedCount(ids) == 0) {
+				alert("您还没有选择！");
+			} else {
+				if (confirm("确定要删除吗？")) {
+					$.ajax({
+						type : 'POST',
+						url : "deletes.do",
+						data : {
+							ids : PL.getCheckedIds(ids)
+						},
+						dataType : "json",
+						success : function(data, textStatus) {
+							searchVedio();
+						},
+						error : function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("delete出错>>" + errorThrown);
+						}
+					});
+
+				}
+			}
+		}
+
+		function checkAll(ele) {
+			$("input[type=checkbox][name=ids]").each(function() {
+				if ($(ele).is(":checked")) {
+					if (!$(this).is(":checked")) {
+						$(this).click();
+					}
+				} else {
+					if ($(this).is(":checked")) {
+						$(this).click();
+					}
+				}
+			});
+
+		}
+
+		function updateLineState(state) {
+			if (PL.checkedCount(ids) == 0) {
+				alert("您还没有选择！");
+			} else {
+				if (confirm("确定要修改在线状态吗？")) {
+					$.ajax({
+						type : 'POST',
+						url : "updatelinestate.do",
+						data : {
+							ids : PL.getCheckedIds(ids),
+							state : state
+						},
+						dataType : "json",
+						success : function(data, textStatus) {
+							searchVedio();
+						},
+						error : function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("delete出错>>" + errorThrown);
+						}
+					});
+				}
+			}
+		}
+	</script>
+</html>

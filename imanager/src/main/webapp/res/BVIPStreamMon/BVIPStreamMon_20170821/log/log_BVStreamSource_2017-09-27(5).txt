@@ -1,0 +1,24 @@
+2017/09/27 15:09:17(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 http://192.68.1.98
+ ret=-1
+2017/09/27 15:09:17(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 rtmp:192.168.1.97
+ ret=-1
+2017/09/27 15:09:22(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 http://192.68.1.98
+ ret=-1
+2017/09/27 15:09:22(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 rtmp:192.168.1.97
+ ret=-1
+2017/09/27 15:09:27(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 http://192.68.1.98
+ ret=-1
+2017/09/27 15:09:27(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 rtmp:192.168.1.97
+ ret=-1
+2017/09/27 15:09:32(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 http://192.68.1.98
+ ret=-1
+2017/09/27 15:09:32(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 rtmp:192.168.1.97
+ ret=-1
+2017/09/27 15:09:37(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 http://192.68.1.98
+ ret=-1
+2017/09/27 15:09:37(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 rtmp:192.168.1.97
+ ret=-1
+2017/09/27 15:09:42(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 http://192.68.1.98
+ ret=-1
+2017/09/27 15:09:42(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 rtmp:192.168.1.97
+ ret=-1

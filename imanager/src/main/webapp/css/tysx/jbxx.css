@@ -1,0 +1,175 @@
+.fanhui a{
+	margin-right: 25px;
+	font-size: 18px;
+	font-weight: 100;
+	line-height: 50px;
+}
+.jb{
+	background: #fff;
+	padding: 20px 30px 20px 30px;
+	height: 350px;
+}
+.zl{
+	padding-left: 40px;
+}
+.zl span{
+	display: block;
+	    color: #333333;
+	    font-weight: 400;
+	    font-size: 16px;
+	   height: 42px;
+	   line-height: 42px;
+}
+.ljrz{
+	    width: 74px;
+    height: 30px;
+    color: #3399FF;
+        border-width: 1px;
+    border-style: solid;
+    border-color: rgba(51, 153, 255, 1);
+    border-radius: 2px;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 30px;
+    margin-top: 5px;
+}
+.rz{
+	width: 100%;
+	height: 45px;
+}
+.tx img{
+ width: 120px;
+ height: 100px;
+ margin-top: 10px;
+}
+.jbfa {
+    min-height: 50px;
+    background: #fff;
+    overflow: hidden;
+}
+.jbfa a {
+    font-size: 18px;
+    padding-left: 20px;
+    line-height: 50px;
+}
+
+
+
+
+
+
+
+.w0{
+	margin-right: 10px !important;
+}
+.t1380{
+	top: -6.77143px !important;left: 81.0156px !important;
+}
+.uz{
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: 0.1rem;
+}
+.uz img{
+	width: 0.8rem;
+    height: 0.8rem;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-left: -0.5rem;
+    margin-top: -0.5rem;
+    z-index: 999;
+	
+}
+.ua span{
+	display: block;
+	font-size: 0.25rem;
+	
+	
+}
+.ua span:nth-child(1){
+	line-height: 0.8rem;
+}
+.uz2{
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: 0.1rem;
+}
+.uz2 img{
+	width: 0.8rem;
+    height: 0.8rem;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-left: -0.5rem;
+    margin-top: -0.5rem;
+    z-index: 999;
+	
+}
+.uz3{
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: 0.1rem;
+}
+.uz3 img{
+	width: 0.8rem;
+    height: 0.8rem;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-left: -0.5rem;
+    margin-top: -0.5rem;
+    z-index: 999;
+	
+}
+.zhi{
+	height:2.5rem;
+	background: #fff;
+	border-bottom: 1px solid #eee;
+	padding-left: 7px;
+}
+.zhi>div{
+	position: relative;
+	top: 50%;
+	margin-top: -0.75rem;
+	
+}
+.text{
+	width: 6.79rem;
+	height: 0.7rem;
+    position: absolute;
+    bottom: 0rem;
+    background: rgba(0, 0, 0, 0.5);
+}
+.xg{
+	    width: 90px;
+    height: 30px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(215, 215, 215, 1);
+    text-align: center;
+    line-height: 30px;
+    cursor:pointer;
+}
+
+.bac{
+	padding-top: 50px;
+	padding-bottom: 30px;
+	height: 120px;
+	position: relative;
+}
+.bac button{
+	float: left;
+	margin-left: 30px;
+	    width: 116px;
+    height: 40px;
+    font-size: 16px;
+    background: #169BD5;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+    
+}

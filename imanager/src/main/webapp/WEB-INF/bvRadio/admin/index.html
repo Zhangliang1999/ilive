@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>社区概览 - 社区互动管理系统</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/>
+<script
+	src="${base}/res/bvRadio/assets/javascripts/echarts/echarts-all.js"></script>
+<script>
+	$.ajax({
+		type : "get",
+		url : "${smgIP!}/bvRadioSMG/vod/getWholeDataMsg.jsps",
+		crossDomain : true,
+		dataType : "jsonp",
+		jsonp : 'jsoncallback',
+		success : function(data) {
+			document.getElementById("vodNew").innerHTML = data.addnews; 
+			document.getElementById("vodDown").innerHTML = data.down; 
+			document.getElementById("vodWhole").innerHTML = data.whole; 
+		}
+	});
+	$.ajax({
+		type : "get",
+		url : "${base}/common/SMG/getTotalStatistic.do",
+		async : false,
+		crossDomain : true,
+		dataType : "jsonp",
+		jsonp : 'jsoncallback',
+		success : function(data) {
+			if(data.commentNum>9999){
+				document.getElementById("commentNum").innerHTML = (data.commentNum/10000.0).toFixed(1)+"W";
+			}else{
+				document.getElementById("commentNum").innerHTML = data.commentNum;
+			}
+			document.getElementById("newComment").innerHTML = data.newCommentNum;
+			document.getElementById("newCollect").innerHTML = data.newCollectNum;
+		}
+	});
+	$.ajax({
+		type : "get",
+		url : "${smgIP!}/bvRadioSMG/live/getLiveBarConn.jsps",
+		async : false,
+		crossDomain : true,
+		dataType : "jsonp",
+		jsonp : 'jsoncallback',
+		success : function(data) {
+			document.getElementById("nowConn").innerHTML = data.totleNum; 
+		 	document.getElementById("maxConn").innerHTML = data.maxNum; 
+		}
+	});
+	$.ajax({
+		type : "get",
+		url : "${smgIP!}/bvRadioSMG/live/getLiveItemData.jsps",
+		async : false,
+		crossDomain : true,
+		dataType : "jsonp",
+		jsonp : 'jsoncallback',
+		success : function(data) {
+			document.getElementById("bandWidth").innerHTML = data.data[data.data.length - 1].bandwidth.toFixed(1) + "G";
+		}
+	});
+</script>
+</head>
+<body class="contrast-dark fixed-header">
+	<!--顶部开始-->
+	<#include "/bvRadio/admin/top.html"/>
+	<!--顶部结束-->
+	<!--主体开始-->
+	<div id="wrapper">
+		<!--左侧导航开始-->
+		<#include "/bvRadio/admin/left.html"/>
+		<!--左侧导航结束-->
+		<!--右侧框架开始-->
+		<section id='content' class="no-padding">
+			<div class="box eee-background no-margin">
+				<div class="box-content">
+					<div class='row-fluid'>
+						<div class="pull-left">
+							<div class="control-group pull-left mt5 mr10">
+								<i class=' icon-circle mr10'
+									style="color: #4d83ff; margin-left: 20px;"></i>社区概览
+							</div>
+						</div>
+					</div>
+					<div class='row-fluid'>
+						<div class='span8 box mt5'>
+							<div id="echartsContainer" style="height: 530px"></div>
+							<script type="text/javascript">
+								var markPointData = [];
+								$.ajax({
+									url : "${base}/common/SMG/getMapData.do",
+									type : "get",
+									crossDomain : true,
+									dataType : "jsonp",
+									jsonp : 'jsoncallback',
+									success : function(data) {
+										for ( var i in data.dataList) {
+											markPointData[i] = {
+												name : data.dataList[i].cityName,
+												value : data.dataList[i].accessNum
+											};
+										}
+										democ();
+									}
+								});
+								function democ() {
+									var dom = document.getElementById("echartsContainer");
+									var myChart = echarts.init(dom, 'macarons');
+
+									var echartsOption = {
+										backgroundColor : '#1b1b1b',
+										color : [ 'gold', 'aqua', 'lime' ],
+										title : {
+											text : '',
+											subtext : '',
+											x : 'center',
+											textStyle : {
+												color : '#fff'
+											}
+										},
+										tooltip : {
+											trigger : 'item',
+											formatter : '{b}'
+										},
+										dataRange : {
+											min : 0,
+											max : 300,
+											calculable : true,
+											color : [ '#ff3333', 'orange', 'yellow', 'lime', 'aqua' ],
+											textStyle : {
+												color : '#fff'
+											}
+										},
+										series : [ {
+											name : '全国',
+											type : 'map',
+											roam : true,
+											hoverable : false,
+											mapType : 'china',
+											itemStyle : {
+												normal : {
+													borderColor : 'rgba(100,149,237,1)',
+													borderWidth : 0.5,
+													areaStyle : {
+														color : '#1b1b1b'
+													}
+												}
+											},
+											data : [],
+											geoCoord : {
+												'北京市' : [ 116.46, 39.92 ],
+												'天津市' : [ 117.2, 39.13 ],
+												'河北省' : [ 114.48, 38.03 ],
+												'山西省' : [ 112.53, 37.87 ],
+												'内蒙古自治区' : [ 111.65, 40.82 ],
+												'辽宁省' : [ 123.38, 41.8 ],
+												'吉林省' : [ 125.35, 43.88 ],
+												'黑龙江省' : [ 126.63, 45.75 ],
+												'上海市' : [ 121.48, 31.22 ],
+												'江苏省' : [ 118.78, 32.04 ],
+												'浙江省' : [ 120.19, 30.26 ],
+												'安徽省' : [ 117.27, 31.86 ],
+												'福建省' : [ 119.3, 26.08 ],
+												'江西省' : [ 115.89, 28.68 ],
+												'山东省' : [ 117, 36.65 ],
+												'河南省' : [ 113.65, 34.76 ],
+												'湖北省' : [ 114.31, 30.52 ],
+												'湖南省' : [ 113, 28.21 ],
+												'广东省' : [ 113.23, 23.16 ],
+												'广西壮族自治区' : [ 108.33, 22.84 ],
+												'海南省' : [ 110.35, 20.02 ],
+												'重庆市' : [ 106.54, 29.59 ],
+												'四川省' : [ 104.06, 30.67 ],
+												'贵州省' : [ 106.71, 26.57 ],
+												'云南省' : [ 102.73, 25.04 ],
+												'西藏自治区' : [ 91.11, 29.97 ],
+												'陕西省' : [ 108.95, 34.27 ],
+												'甘肃省' : [ 103.73, 36.03 ],
+												'青海省' : [ 101.74, 36.56 ],
+												'宁夏回族自治区' : [ 106.27, 38.47 ],
+												'香港特别行政区' : [ 114.17, 22.28 ],
+												'澳门特别行政区' : [ 113.54, 22.19 ],
+												'台湾省' : [ 121.55, 25.04 ],
+								                '新疆维吾尔自治区': [87.9236,43.5883]
+											}
+										}, {
+											name : '',
+											type : 'map',
+											mapType : 'china',
+											data : [],
+
+											markPoint : {
+												symbol : 'emptyCircle',
+												symbolSize : function(v) {
+													return 10 + v / 10
+												},
+												effect : {
+													show : true,
+													shadowBlur : 0
+												},
+												itemStyle : {
+													normal : {
+														label : {
+															show : false
+														}
+													},
+													emphasis : {
+														label : {
+															position : 'top'
+														}
+													}
+												},
+												data : markPointData
+											}
+										} ]
+									};
+									if (echartsOption && typeof echartsOption === "object") {
+										myChart.setOption(echartsOption, true);
+									}
+								}
+							</script>
+							<!-- <img src="${base}/res/bvRadio/images/cache/map.png" height="530"> -->
+						</div>
+						<div class='span4 box mt5' style="padding-top: 2px;">
+							<div class="row-fluid">
+								<div class="span12 box-quick-link ">
+									<div class="header">
+										<div class="row-fluid"
+											style="background: #f1f1f1; height: 90px; padding-top: 28px;">
+											<div class="span4">
+												<h1 class="title text-center" style="color: #e7ce29"
+													id="newCollect">0</h1>
+												<small>昨日关注</small>
+											</div>
+											<div class="span4">
+												<h1 class="title text-center" style="color: #e67c47"
+													id="newComment">0</h1>
+												<small>昨日评论</small>
+											</div>
+											<div class="span4">
+												<h1 class="title text-center" style="color: #8294e3"
+													id="commentNum">0</h1>
+												<small>参与互动</small>
+											</div>
+										</div>
+									</div>
+									<a href="javascript:void(0)">
+										<div class="content box-header">
+											<div class="box-header">
+												<h5>社区互动统计</h5>
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="row-fluid mt10">
+								<div class="span12 box-quick-link ">
+
+									<div class="header">
+
+										<div class="row-fluid"
+											style="background: #f1f1f1; height: 90px; padding-top: 28px;">
+											<div class="span4">
+												<h1 class="title text-center" style="color: #8dc93f"
+													id="vodNew"></h1>
+												<small>新增节目</small>
+											</div>
+											<div class="span4">
+												<h1 class="title text-center" style="color: #66ccbc"
+													id="vodDown"></h1>
+												<small>节目下载</small>
+											</div>
+											<div class="span4">
+												<h1 class="title text-center" style="color: #cfaece"
+													id="vodWhole"></h1>
+												<small>节目收听</small>
+											</div>
+										</div>
+									</div>
+									<a href="javascript:void(0)">
+										<div class="content box-header">
+											<div class="box-header">
+												<h5>节目统计</h5>
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="row-fluid mt10">
+								<div class="span12 box-quick-link ">
+
+									<div class="header">
+
+										<div class="row-fluid"
+											style="background: #f1f1f1; height: 90px; padding-top: 28px;">
+											<div class="span4">
+												<h1 class="title text-center" style="color: #58b0e8"
+													id="nowConn">0</h1>
+												<small>实时连接数</small>
+											</div>
+											<div class="span4">
+												<h1 class="title text-center" style="color: #ffd445"
+													id="maxConn">0</h1>
+												<small>最大连接数</small>
+											</div>
+											<div class="span4">
+												<h1 class="title text-center" style="color: #947fe2"
+													id="bandWidth">0</h1>
+												<small>出口带宽</small>
+											</div>
+										</div>
+									</div>
+									<a href="javascript:void(0)">
+										<div class="content box-header">
+											<div class="box-header">
+												<h5>播出统计</h5>
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mt10"><#include "/bvRadio/bottom.html"/></div>
+			</div>
+		</section>
+		<!--右侧框架结束-->
+	</div>
+	<!--主体结束-->
+</body>
+</html>

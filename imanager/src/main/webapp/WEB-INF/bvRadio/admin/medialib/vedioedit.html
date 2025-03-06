@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频详情</title>
+    <link rel="stylesheet" href="${base}/tysx/css/newzbj.css"/>
+    <#include "/bvRadio/head.html"/>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper">
+	    <!--右侧内容的区域-->
+	    <#include "/bvRadio/admin/top.html"/>
+		<#include "/bvRadio/admin/medialeft.html" />
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content bgc-fff">
+            <div class="row title-header">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                       <a class="font-content">直播录制视频名称:${iLiveMediaFile.mediaFileName!'未命名'}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-5" style="padding:0 40px;">
+                        <div class="videotop">
+                        </div>
+                       <div class="videobox">
+						<div id="flash" style="width:100%;height:100%;z-index:100;"></div>
+						 <!--wmv主播放器层id-->
+						 <div id="oPlayer" ></div>
+						</div>
+                        <div class="p-xs no-top-border" style="border: 1px solid #ddd;">
+                            <button class="btn">上传</button>
+                            <button class="btn pull-right">剪辑</button>
+                        </div>
+                        <div class="mainbox">
+                            <div style="border:1px solid #ddd;" class="no-top-border p-xs">
+                                <h3 class="p-xs">视频信息：</h3>
+                                <ol class="font-content">
+                                    <li class="m-sm">创建时间：${iLiveMediaFile.createStartTime!''}</li>
+                                    <li class="m-sm">创建人：${iLiveMediaFile.createStartTime!''}</li>
+                                    <li class="m-sm">视频类型：
+                                    		<#if iLiveMediaFile.createType==3>手动上传 
+                                    		<#else>直播收录</#if>
+                                    </li>
+                                    <li class="m-sm">视频大小：${iLiveMediaFile.fileSize!0}kb</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 p-lg">
+                        <div class="row white-bg">
+                            <div class="col-lg-12 cjzbinput">
+                                <span class="firstname"><b class="text-danger">*</b>视频名称：</span>
+                                <input class="col-lg-10" type="text" placeholder="活动名称" value="${iLiveMediaFile.mediaFileName!'未命名'}">
+                            </div>
+                            <div class="col-lg-12 cjzbinput" style="height: auto;">
+                                <span class="firstname">视频简介：</span>
+                                <textarea name="liveDesc" placeholder="2018天安门广场，升国旗仪式，将由解放军第一次负责。">${iLiveMediaFile.mediaFileName!'未命名'}</textarea>
+                            </div>
+                            <div class="col-lg-12 cjzbinput">
+                                <span class="firstname">视频地址：</span>
+                                <input class="col-lg-10" type="text" placeholder="视频地址" value="${iLiveMediaFile.filePath!}">
+                                <button class="btn btn-default">复制</button>
+                            </div>
+                            <div class="col-lg-12 cjzbinput">
+                                <span class="firstname">播放地址：</span>
+                                <input class="col-lg-10" type="text" placeholder="播放地址" value="${iLiveMediaFile.docDealFinishAddr!}">
+                                <button class="btn btn-default">复制</button>
+                            </div>
+                            <div class="col-lg-12 cjzbinput" style="height: auto;">
+                                <span class="firstname">手机预览：</span>
+                                <div class="ewmbox pull-left">
+                                    <img src="../img/ptqrshow.png" alt=""/>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 cjzbinput" style="height: auto;">
+                                <button class="btn red-btn">确定</button>
+                                <button class="btn yellow-bg m-l-lg" onclick="javascript:history.back(1);">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    //获取视频的宽度
+    $(".videobox").css("width","100%");
+    var videoWidth = $(".videobox").width();
+    $(".videobox").css("height",videoWidth*9/16);
+</script>
+<script language="javascript">
+interfaceHttp ='<?xml version=##1.0\## encoding=##GBK##?>' +
+'<root>' +
+'<smil>' +
+'<seq>'+
+	'<media role=##seq## srchigh=##C:/Users/useradmin/Videos/20180105193431680431000.mp4##  id=##5## videoHeadTime=##-1## highLow=##true##  videoEndTime=##-1##  adseq=##false##  noSkip=##false## begin=##300## dur=##600## end=##600## isnextplay=##false##   mediatype=##flv## isshiftmove=##false## returnInfo=##PT_85370379## > <clientData title=##正片1内容## captionURL=####/> <medaiTitle><![CDATA[##济宁##]]></medaiTitle></media>'+
+'</seq>'+
+'</smil>'+
+'</root>',
+interfaceHttp ='${pushStreamAddr!}',
+		shareHtmlUrl="案室著，按时投淳著",
+             	shareStatu='3',              					
+            AddressSeparator='#', 
+           // _playAuto='false',
+                //interfaceType  ='true';
+                authUrl='true',
+                  ifShowImageBtn='true',
+                  ifAuthCDN_WS='true',
+                  PlayVideoAspect='mc169',//mc43;mc169;diaplasis;bespread
+                  ifShowLogo='false',
+                  AudioPlayerType='2',
+                  AVPlayerType='0',
+           //               ifShowStream='false';
+            ifShiftMove='false',
+		_playAuto='true';
+                //ifShowSetBtn='false',
+                //ifShowPoopBtn='false';
+                //ifShowStream='false';
+</script>
+<script src="${base}/common/js/JWZT_Player.js?t=20120609" type="text/javascript"></script>
+</html>

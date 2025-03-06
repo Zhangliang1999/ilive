@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?> 
+<ADI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" BizDomain="520" Priority="5">
+	<USERS>
+		<USER>
+			<userId>90</userId><!-- ID必须是100以下的 -->
+			<userName>逗比的路飞</userName>
+			<userImage>http://192.168.222.156:80/yxl.jpg</userImage>
+			<userLevel>0</userLevel>
+		</USER>
+		<USER>
+			<userId>91</userId>
+			<userName>缺水的兔子</userName>
+			<userImage>http://192.168.222.156:80/dc.jpg</userImage>
+			<userLevel>0</userLevel>
+		</USER>
+		<USER>
+			<userId>92</userId>
+			<userName>孤独的小羊</userName>
+			<userImage>http://192.168.222.156:80/yxl.jpg</userImage>
+			<userLevel>0</userLevel>
+		</USER>
+		<USER>
+			<userId>93</userId>
+			<userName>带球的小孩</userName>
+			<userImage>http://192.168.222.156:80/wq.jpg</userImage>
+			<userLevel>0</userLevel>
+		</USER>
+		<USER>
+			<userId>94</userId>
+			<userName>知识的海洋</userName>
+			<userImage>http://192.168.222.156:80/zmm.png</userImage>
+			<userLevel>0</userLevel>
+		</USER>
+		<USER>
+			<userId>95</userId>
+			<userName>可爱的小狗</userName>
+			<userImage>http://192.168.222.156:80/zpn.jpg</userImage>
+			<userLevel>0</userLevel>
+		</USER>
+	</USERS>
+</ADI>

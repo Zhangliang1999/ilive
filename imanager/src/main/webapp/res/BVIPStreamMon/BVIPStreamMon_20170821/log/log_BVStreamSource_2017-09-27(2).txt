@@ -1,0 +1,46 @@
+2017/09/27 14:44:13(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/gaoqing/9_d大象标清2_a41fps.ts
+ ret=-1
+2017/09/27 14:44:13(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/pd2.mp4
+ ret=-1
+2017/09/27 14:44:16(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:44:16(INFO)-------readthread audio wait vnum=0 anum=0 udp://224.1.1.1:9207
+2017/09/27 14:44:16(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:44:16(INFO)-------readthread audio wait vnum=0 anum=0 udp://224.1.1.1:9207
+2017/09/27 14:44:18(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/gaoqing/9_d大象标清2_a41fps.ts
+ ret=-1
+2017/09/27 14:44:18(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/pd2.mp4
+ ret=-1
+2017/09/27 14:44:18(INFO)-------threadquit:CUDPStreamImpl:VideoDecodeThreadFunc
+2017/09/27 14:44:18(INFO)-------threadquit:CUDPStreamImpl:AudioDecodeThreadFunc
+2017/09/27 14:44:18(INFO)-------threadquit:CUDPStreamImpl:VideoDecodeThreadFunc
+2017/09/27 14:44:18(INFO)-------threadquit:CUDPStreamImpl:AudioDecodeThreadFunc
+2017/09/27 14:44:19(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:44:19(INFO)-------func=CUDPStreamImpl::ReadThreadFunc msg=need quit ret=0 udp://224.1.1.1:9207
+2017/09/27 14:44:19(INFO)-------threadquit:CUDPStreamImpl:ReadThread
+2017/09/27 14:44:19(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:44:19(INFO)-------func=CUDPStreamImpl::ReadThreadFunc msg=need quit ret=0 udp://224.1.1.1:9207
+2017/09/27 14:44:19(INFO)-------threadquit:CUDPStreamImpl:ReadThread
+2017/09/27 14:44:21(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:44:21(INFO)-------readthread audio wait vnum=0 anum=0 udp://224.1.1.1:9207
+2017/09/27 14:44:21(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:44:21(INFO)-------readthread audio wait vnum=0 anum=0 udp://224.1.1.1:9207
+2017/09/27 14:44:23(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/gaoqing/9_d大象标清2_a41fps.ts
+ ret=-1
+2017/09/27 14:44:23(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/pd2.mp4
+ ret=-1
+2017/09/27 14:44:23(INFO)-------threadquit:CUDPStreamImpl:AudioDecodeThreadFunc
+2017/09/27 14:44:23(INFO)-------threadquit:CUDPStreamImpl:VideoDecodeThreadFunc
+2017/09/27 14:44:23(INFO)-------threadquit:CUDPStreamImpl:AudioDecodeThreadFunc
+2017/09/27 14:44:23(INFO)-------threadquit:CUDPStreamImpl:VideoDecodeThreadFunc
+2017/09/27 14:44:24(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:44:24(INFO)-------func=CUDPStreamImpl::ReadThreadFunc msg=need quit ret=0 udp://224.1.1.1:9207
+2017/09/27 14:44:24(INFO)-------threadquit:CUDPStreamImpl:ReadThread
+2017/09/27 14:44:24(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:44:24(INFO)-------func=CUDPStreamImpl::ReadThreadFunc msg=need quit ret=0 udp://224.1.1.1:9207
+2017/09/27 14:44:24(INFO)-------threadquit:CUDPStreamImpl:ReadThread
+2017/09/27 14:44:24(INFO)-------threadquit:CUDPStreamImpl:VideoDecodeThreadFunc
+2017/09/27 14:44:24(INFO)-------threadquit:CUDPStreamImpl:AudioDecodeThreadFunc
+2017/09/27 14:44:24(INFO)-------threadquit:CUDPStreamImpl:VideoDecodeThreadFunc
+2017/09/27 14:44:24(INFO)-------threadquit:CUDPStreamImpl:AudioDecodeThreadFunc
+2017/09/27 14:44:24(INFO)-------CBVMonDlg::WaitQuit Time out.num=3
+2017/09/27 14:44:24(INFO)-------CBVMonDlg::WaitQuit Time out.num=1

@@ -1,0 +1,59 @@
+<ul>
+	<#if pageNow?? && totalPage?? && (pageNow>0) && (pageNow<=totalPage) >
+	<#if (pageNow<=1)>
+	<li class="prev disabled"><a href="#"><<</a></li>
+	<li class="prev disabled"><a href="#"><</a></li> <#else>
+	<li class="prev"><a href="?pageNow=1&${params!}"><<</a></li>
+	<li class="prev"><a href="?pageNow=${pageNow - 1}&${params!}"><</a>
+	</li> </#if> <#if (pageNow-4 >1)> <#if (pageNow
+	<totalPage-2)>
+	<li><a href="?pageNow=1&${params!}">1</a></li>
+	<li class="disabled"><a href="#">...</a></li>
+	<#list pageNow-2..pageNow-1 as i>
+	<li><a href="?pageNow=${i}&${params!}">${i}</a></li>
+	</#list> <#elseif (pageNow-6 > 1)>
+	<li><a href="?pageNow=1&${params!}">1</a></li>
+	<li class="disabled"><a href="#">...</a></li>
+	<#list pageNow-4..pageNow-1 as i>
+	<li><a href="?pageNow=${i}&${params!}">${i}</a></li>
+	</#list> <#else> <#list 1..pageNow-1 as i>
+	<li><a href="?pageNow=${i}&${params!}">${i}</a></li>
+	</#list> </#if> <#elseif (pageNow=1)> <#else> <#list 1..pageNow-1 as i>
+	<li><a href="?pageNow=${i}&${params!}">${i}</a></li>
+	</#list> </#if>
+	<li class="active"><a href="?pageNow=${pageNow!}&${params!}">${pageNow!}</a>
+	</li>
+	<#if (pageNow+4 < totalPage)> <#if (pageNow>2)> <#list
+	pageNow+1..pageNow+2 as i>
+	<li><a href="?pageNow=${i}&${params!}">${i}</a></li>
+	</#list>
+	<li class="disabled"><a href="#">...</a></li>
+	<li><a href="?pageNow=${totalPage!}&${params!}">${totalPage!}</a>
+	</li>
+	<#elseif (pageNow+6 < totalPage)> <#list pageNow+1..pageNow+4 as i>
+	<li><a href="?pageNow=${i}&${params!}">${i}</a></li>
+	</#list>
+	<li class="disabled"><a href="#">...</a></li>
+	<li><a href="?pageNow=${totalPage!}&${params!}">${totalPage!}</a>
+	</li>
+	<#else> <#list pageNow+1..totalPage as i>
+	<li><a href="?pageNow=${i}&${params!}">${i}</a></li>
+	</#list> </#if> <#elseif (pageNow=totalPage)> <#else> <#list
+	pageNow+1..totalPage as i>
+	<li><a href="?pageNow=${i}&${params!}">${i}</a></li>
+	</#list> </#if> <#if (pageNow>=totalPage)>
+	<li class="next disabled"><a href="#">></a></li>
+	<li class="next disabled"><a href="#">>></a></li>
+	<#else>
+	<li class="next"><a href="?pageNow=${pageNow + 1}&${params!}">></a>
+	</li>
+	<li class="next"><a href="?pageNow=${totalPage}&${params!}">>></a>
+	</li>
+	</#if> <#else>
+	<li class="prev disabled"><a href="#"><<</a></li>
+	<li class="prev disabled"><a href="#"><</a></li>
+	<li><a href="?pageNow=1&${params!}">1</a></li>
+	<li class="next disabled"><a href="#">></a></li>
+	<li class="next disabled"><a href="#">>></a></li>
+	</#if> 
+</ul>

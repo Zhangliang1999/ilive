@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<!--     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+	<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/> <#include
+"/bvRadio/lightGallery.html"/> <#assign noCss=1/> <#include
+"/bvRadio/uploadHead.html"/> <#include "/bvRadio/colorPickerHead.html"/>
+    <title>创建直播</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css"/>
+    <link rel="stylesheet" href="../css/myStyle.css"/>
+    <!--<link rel="stylesheet" href="../css/mtgailan.css"/>-->
+    <link rel="stylesheet" type="text/css" href="../css/public.css"/>
+    <link rel="stylesheet" href="../css/newheader.css"/>
+    <link rel="stylesheet" href="../css/plugins/datapicker/datepicker3.css"/>
+
+    <link rel="stylesheet" href="../css/newleft.css"/>
+    <link rel="stylesheet" href="../css/zbj.css"/>
+    <link rel="stylesheet" href="${base}/res/bvRadio/css/newheader.css" />
+	<link rel="stylesheet" href="${base}/res/bvRadio/css/newleft.css" />
+	<link rel="stylesheet" href="${base}/res/bvRadio/css/zbj.css" />
+	<link rel="stylesheet" href="${base}/res/bvRadio/css/bootstrap.min.css" />
+	<link href='${base}/res/bvRadio/css/chats.css' media='all'
+	rel='stylesheet' type='text/css' />
+	
+	
+    <style>
+        .btn-switch {
+            width:36px;
+            height:18px;
+            border-radius:100px;
+            position:relative;
+            float:  left;
+            margin-top: 8px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .btn-switch2 {
+            width:18px;
+            height:18px;
+            border-radius:50px;
+            position:absolute;
+        }
+        .open1 {
+            background: #bfbfbf;
+        }
+        .open2 {
+            background:#f6f6f6;
+        }
+        .open2 {
+            right:0px;
+        }
+        .close1 {
+            background:#d81e06;
+            border:2px solid #ddd;
+        }
+        .close2 {
+            left:0px;
+            top: -2px;
+            background:#f6f6f6;
+            border:1px solid #f6f6f6;
+        }
+    </style>
+    <script>
+function getUploadUrl() {
+	var locationUrl = window.location.href;
+	var hostname = window.location.hostname;
+	var uploadUrl = "/bvRadioILive/admin/o_uploadFile.do";
+	if (locationUrl.toLocaleLowerCase().indexOf("https://")!=-1) {
+		uploadUrl = "http://"+hostname+":8787//bvRadioILive/admin/o_uploadFile.do";
+	}
+	return uploadUrl;
+}
+$(document).ready(function() {
+	var upload_url = getUploadUrl();
+	var jsessionid = $.cookie("JSESSIONID");
+	if (jsessionid) {
+		upload_url += ";jsessionid=" + jsessionid;
+	}
+	var fileSizeLimit = "5MB";
+	var fileTypeDesc = "图片文件";
+	var fileTypeExts = "*.jpeg; *.jpg; *.png";
+	$('#reviewImageUpload').uploadify({
+		'queueID' : 'reviewImageUploadProgressWrap',
+		'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+		'uploader' : upload_url, //指定服务器端上传处理文件
+		'auto' : true,
+		'buttonCursor' : 'hand',
+		'fileObjName' : 'Filedata',
+		'fileSizeLimit' : fileSizeLimit,
+		'fileTypeExts' : fileTypeExts,
+		'formData' : {
+			'fileType' : 'image'
+		},
+		'width' : 74,
+		'height' : 30,
+		'buttonText' : '上传图片',
+		'removeCompleted' : true,
+		'removeTimeout' : 0,
+		'multi' : false,
+		'onUploadSuccess' : function(file, data, response) {
+			var jsonObj = eval('(' + data + ')');
+			var imgPath =jsonObj.httpUrl +jsonObj.fileRootUrl + jsonObj.filePath;
+			$("#reviewImageView").attr("src", imgPath);
+			$("#reviewImage").val(imgPath);
+			$("#surface").attr("src", imgPath);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+			alert("上传失败。" + errorMsg);
+		}
+	});
+	$('#bannerImageUpload').uploadify({
+		'queueID' : 'bannerImageUploadProgressWrap',
+		'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+		'uploader' : upload_url, //指定服务器端上传处理文件
+		'auto' : true,
+		'buttonCursor' : 'hand',
+		'fileObjName' : 'Filedata',
+		'fileSizeLimit' : fileSizeLimit,
+		'fileTypeExts' : fileTypeExts,
+		'formData' : {
+			'fileType' : 'image'
+		},
+		'width' : 74,
+		'height' : 30,
+		'buttonText' : '上传图片',
+		'removeCompleted' : true,
+		'removeTimeout' : 0,
+		'multi' : false,
+		'onUploadSuccess' : function(file, data, response) {
+			var jsonObj = eval('(' + data + ')');
+			var imgPath =jsonObj.httpUrl +jsonObj.fileRootUrl + jsonObj.filePath;
+			$("#bannerImageView").attr("src", imgPath);
+			$("#bannerImage").val(imgPath);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+			alert("上传失败。" + errorMsg);
+		}
+	});
+	$('#indexImageUpload').uploadify({
+		'queueID' : 'indexImageUploadProgressWrap',
+		'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+		'uploader' : upload_url, //指定服务器端上传处理文件
+		'auto' : true,
+		'buttonCursor' : 'hand',
+		'fileObjName' : 'Filedata',
+		'fileSizeLimit' : fileSizeLimit,
+		'fileTypeExts' : fileTypeExts,
+		'formData' : {
+			'fileType' : 'image'
+		},
+		'width' : 74,
+		'height' : 30,
+		'buttonText' : '上传图片',
+		'removeCompleted' : true,
+		'removeTimeout' : 0,
+		'multi' : false,
+		'onUploadSuccess' : function(file, data, response) {
+			var jsonObj = eval('(' + data + ')');
+			var imgPath =jsonObj.httpUrl +jsonObj.fileRootUrl + jsonObj.filePath;
+			$("#indexImageView").attr("src", imgPath);
+			$("#indexImage").val(imgPath);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+			alert("上传失败。" + errorMsg);
+		}
+	});
+	$('#recommendImageUpload').uploadify({
+		'queueID' : 'recommendImageUploadProgressWrap',
+		'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+		'uploader' : upload_url, //指定服务器端上传处理文件
+		'auto' : true,
+		'buttonCursor' : 'hand',
+		'fileObjName' : 'Filedata',
+		'fileSizeLimit' : fileSizeLimit,
+		'fileTypeExts' : fileTypeExts,
+		'formData' : {
+			'fileType' : 'image'
+		},
+		'width' : 74,
+		'height' : 30,
+		'buttonText' : '上传图片',
+		'removeCompleted' : true,
+		'removeTimeout' : 0,
+		'multi' : false,
+		'onUploadSuccess' : function(file, data, response) {
+			var jsonObj = eval('(' + data + ')');
+			var imgPath =jsonObj.httpUrl +jsonObj.fileRootUrl + jsonObj.filePath;
+			$("#recommendImageView").attr("src", imgPath);
+			$("#recommendImage").val(imgPath);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+			alert("上传失败。" + errorMsg);
+		}
+	});
+		$('#logoImageUpload').uploadify({
+		'queueID' : 'logoImageUploadProgressWrap',
+		'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+		'uploader' : upload_url, //指定服务器端上传处理文件
+		'auto' : true,
+		'buttonCursor' : 'hand',
+		'fileObjName' : 'Filedata',
+		'fileSizeLimit' : fileSizeLimit,
+		'fileTypeExts' : fileTypeExts,
+		'formData' : {
+			'fileType' : 'image'
+		},
+		'width' : 74,
+		'height' : 30,
+		'buttonText' : '上传图片',
+		'removeCompleted' : true,
+		'removeTimeout' : 0,
+		'multi' : false,
+		'onUploadSuccess' : function(file, data, response) {
+			var jsonObj = eval('(' + data + ')');
+			var imgPath =jsonObj.httpUrl +jsonObj.fileRootUrl + jsonObj.filePath;
+			$("#logoImageView").attr("src", imgPath);
+			$("#logoImage").val(imgPath);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+			alert("上传失败。" + errorMsg);
+		}
+	});
+});
+
+</script>
+</head>
+<body >
+<div id="wrapper">
+
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <div class="row border-bottom m-b">
+ 			<#include "/bvRadio/admin/top.html"/>
+        </div>
+        
+            <!--左侧部分-->
+    <nav class="navbar-default navbar-static-side navbar-width" role="navigation">
+        <div class="sidebar-collapse">
+				            <ul class="nav metismenu nav-left" id="side-menu">
+                
+                <li>
+                     <a href="##"><i class="fa icon-cogs"></i> 
+                        <span class="nav-label">直播管理</span> 
+                        <span class="fa arrow"></span>
+                     </a>
+                    <ul class="nav collapse nav-second-level2 <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='1_'>in</#if>">
+						<li class="<#if leftActive??&&leftActive='7_1'>active</#if>">
+							<a href="${base}/admin/live/v_active_list.do">
+								<i class="icon-caret-right"></i>
+								<span>活动直播</span>
+							</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='7_5'>active</#if>">
+							<a href="${base}/admin/live/v_user_list.do">
+								<i class="icon-caret-right"></i>
+								<span>主播直播</span>
+							</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='7_2'>active</#if>">
+							<a href="${base}/admin/verify/v_list.do">
+								<i class="icon-caret-right"></i>
+								<span>直播审核</span>
+							</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='7_3'>active</#if>">
+							<a href="${base}/admin/report/v_list.do"> <i
+								class="icon-caret-right"></i> <span>直播举报</span>
+						</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='7_4'>active</#if>">
+							<a href="${base}/admin/interact/v_list.do">
+								<i class="icon-caret-right"></i>
+								<span>直播统计</span>
+							</a>
+						</li>
+					
+                    </ul>
+                </li>
+                
+				<!--  -->
+                <li>
+                    <a class="dropdown-collapse <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='3_'>in</#if>" href="#">
+                    <i class="fa  icon-comments-alt"></i> 
+                    <span class="nav-label">系统管理</span>
+                    <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level2 collapse  <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='3_'>in</#if>">
+                      
+						<li class="<#if leftActive??&&leftActive='3_1'>active</#if>">
+							<a href="${base}/admin/sensitiveWord/v_list.do">
+								<i class="icon-caret-right"></i>
+								<span>敏感字</span>
+							</a>
+						</li>
+						
+						<li class="<#if leftActive??&&leftActive='3_2'>active</#if>">
+							<a href="${base}/admin/uploadServer/v_list.do">
+								<i class="icon-caret-right"></i>
+								<span>上传设置</span>
+							</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='3_3'>active</#if>">
+							<a href="${base}/admin/point/v_list.do">
+								<i class="icon-caret-right"></i>
+								<span>发布点设置</span>
+							</a>
+						</li>
+						
+                    </ul>
+                </li>
+				<!--  -->
+                <li>
+                    <a class="" href="${base}/admin/monitor/monitor_list.do">
+                    <i class="fa icon-eye-open"></i> 
+                    <span class="nav-label">监控管理</span>
+                  <!--   <span class="fa arrow"></span> -->
+                    </a>
+                   
+                </li>
+				
+				
+                <li>
+                <a class="dropdown-collapse <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='5_'>in</#if>"  href="#">
+                <i class="fa icon-briefcase"></i> 
+                <span class="nav-label">财务管理</span>
+                <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level2 collapse  <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='5_'>in</#if>">
+					
+					
+					<li class="<#if leftActive??&&leftActive='5_1'>active</#if>">
+						<a href="${base}/admin/finan/getRecharge.do">
+							<i class="icon-caret-right"></i>
+							<span>充值记录</span>
+						</a>
+					</li>
+					<li class="<#if leftActive??&&leftActive='5_2'>active</#if>">
+							<a href="${base}/admin/finan/getPresent.do"> <i
+								class="icon-caret-right"></i> <span>提现记录</span>
+						</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='5_3'>active</#if>">
+							<a href="${base}/admin/finan/getConsumption.do"> <i
+								class="icon-caret-right"></i> <span>消费记录</span>
+						</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='5_9'>active</#if>">
+							<a href="${base}/admin/finan/getRedPage.do"> <i
+								class="icon-caret-right"></i> <span>红包记录</span>
+							</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='5_4'>active</#if>">
+							<a href="${base}/admin/finan/getUserPage.do"> <i
+								class="icon-caret-right"></i> <span>账户财务</span>
+							</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='5_5'>active</#if>">
+							<a href="${base}/admin/finan/getRulesPage.do"> <i
+								class="icon-caret-right"></i> <span>充值规则</span>
+							</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='5_7'>active</#if>">
+							<a href="${base}/admin/finan/getCommission.do"> <i
+								class="icon-caret-right"></i> <span>佣金等级</span>
+							</a>
+						</li>
+						<!-- <li class="<#if leftActive??&&leftActive='5_6'>active</#if>">
+							<a href="${base}/admin/recharge/getCreateType.do"> <i
+								class="icon-caret-right"></i> <span>充值</span>
+							</a>
+						</li> -->
+						<li class="<#if leftActive??&&leftActive='5_8'>active</#if>">
+						<a href="${base}/admin/iLiveGift/list.do">
+							<i class="icon-caret-right"></i>
+							<span>礼物管理</span>
+						</a>
+					</li>
+				</ul>
+                   
+                </li>
+           
+             
+            </ul>
+        </div>
+    </nav>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content">
+           <div class="row border-bottom-ccc">
+               <div class="col-lg-12 zbjtitle">
+                   <div class="pull-left">
+                       <a href="${base}/admin/live/v_active_list.do"><i class="fa fa-angle-left"></i>返回</a>
+                   </div>
+                   <div class="col-lg-4 text-overflow">
+                   </div>
+               </div>
+           </div>
+           <div class="row zbjbody border-bottom-ccc">
+               <div class="col-lg-4 white-bg">
+                   <div class="videobox">
+                    <!--    <img id="surface" class="img " 
+						src="${base}/res/bvRadio/img/u596.png"> -->
+                   </div>
+					<form id="addForm" action="o_save.do"
+					class="form form-horizontal" method="post"
+					style="margin-bottom: 0;" />
+                   <div class="mainbox">
+                       <ul id="myTab" class="nav nav-tabs">
+                           <li class="active">
+                               <a href="#tab1" data-toggle="tab">
+                                   封面图
+                               </a>
+                           </li>
+                           <li><a href="#tab2" data-toggle="tab">引导图</a></li>
+                           <li><a href="#tab3" data-toggle="tab">背景图</a></li>
+                           <li><a href="#LOGO" data-toggle="tab">LOGO</a></li>
+                       </ul>
+                       <div id="myTabContent" class="tab-content">
+                           <div class="tab-pane fade in active" id="tab1">
+                               
+                                
+									<img src="${base}/res/bvRadio/images/zanwu1.png"
+									width="150px" height="150px" id="reviewImageView">
+									<input type="hidden" name="reviewImage"
+									id="reviewImage" value="">
+									<div id="" class="del"></div>
+
+									<div class="">
+									<input id="reviewImageUpload" type="hidden">
+									<div id="reviewImageUploadProgressWrap"
+									style="display: none"></div>
+									</div>                                    
+                                    
+                                    
+                               
+                               <div class="tishi pull-left"><span class="redfont">*</span>建议使用750px*560px,大小不超过2M</div>
+                           </div>
+                           <div class="tab-pane fade" id="tab2">
+                               <div class="row">
+                                   <div class="col-lg-6">
+                                   
+                                   
+							<img src="${base}/res/bvRadio/images/zanwu1.png"
+							width="150px" height="150px" id="bannerImageView">
+							<input type="hidden" name="bannerImage"
+							id="bannerImage" value="">
+							<div id="" class="del"></div>
+
+							<div class="">
+							<input id="bannerImageUpload" type="hidden">
+							<div id="bannerImageUploadProgressWrap"
+							style="display: none"></div>
+							</div>
+                                       <div class="ydtishi pull-left m-t-lg"><span class="redfont">*</span>建议使用750px*1334px,大小不超过4M</div>
+                                       <div class="ydtishi pull-left m-t"><span class="redfont">*</span>支持JPG、PNG、JEPG格式</div>
+                                   </div>
+                                   <div class="col-lg-6">
+                                       <div class="erwei"><img src="${base}/res/bvRadio/images/erwei.png" alt=""/></div>
+                                       <p class="erweitext">(扫一扫)</p>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="tab-pane fade" id="tab3">
+                               <div class="addimg pull-left">
+									<img src="${base}/res/bvRadio/images/zanwu1.png"
+									width="150px" height="150px" id="indexImageView">
+									<input type="hidden" name="indexImage"
+									id="indexImage" value="">
+									<div id="" class="del"></div>
+
+									<div class="col-lg-6">
+									<input id="indexImageUpload" type="hidden">
+									<div id="indexImageUploadProgressWrap"
+									style="display: none"></div>
+									</div>
+                               </div>
+                               <div class="tishi pull-left">建议使用750px*1334px,大小不超过4M</div>
+                           </div>
+                           <div class="tab-pane fade" id="LOGO">
+                               <div class="col-lg-12 cjzbinput">
+                                   <span class="firstname">直播logo：</span>
+                                   <div class="pull-left h-35 m-r-md" style="overflow: hidden">
+                                       <input type="radio" value="1" checked="">启用
+                                   </div>
+                                   <div class="pull-left h-35" style="overflow: hidden">
+                                       <input type="radio" value="0">关闭
+                                   </div>
+                               </div>
+                               <div class="col-lg-12 cjzbinput">
+                                   <span class="firstname">显示logo：</span>
+                                   <div class="pull-left h-35 m-r-md" style="overflow: hidden">
+                                       <input type="radio" name="2"  value="0" checked="">左上角
+                                   </div>
+                                   <div class="pull-left h-35 m-r-md" style="overflow: hidden">
+                                       <input type="radio" name="2" value="1" >左下角
+                                   </div>
+                                   <div class="pull-left h-35 m-r-md" style="overflow: hidden">
+                                       <input type="radio" name="2" value="2" >右下角
+                                   </div>
+                                   <div class="pull-left h-35" style="overflow: hidden">
+                                       <input type="radio" name="2" value="3" >右下角
+                                   </div>
+                               </div>
+                               <div class="col-lg-12 cjzbinput fulldiv">
+                                   <span class="firstname">添加logo：</span>
+                                   <div class="pull-left m-r-md addlogo" style="overflow: hidden">
+                                       <div class="addimg-xs pull-left m-r-md">
+                                       			<img src="<!-- ${base}/res/bvRadio/images/zanwu1.png -->"
+												width="200px" height="200px" id="logoImageView">
+												<input type="hidden" name="logoImage"
+												id="logoImage" value="">
+												<div id="" class="del"></div>
+
+												<div class="">
+												<input id="logoImageUpload" type="hidden">
+												<div id="logoImageUploadProgressWrap"
+												style="display: none"></div>
+												</div> 
+                                       
+                                          <!--  <div class="add-xs"></div>
+                                           <input type="file" name="file" class="element" accept="image/*"/> -->
+
+                                       </div>
+                                       <div class="ydtishi pull-left m-t-xs"><span class="redfont">*</span>建议使用750px*1334px,大小不超过4M</div>
+                                       <div class="ydtishi pull-left m-t"><span class="redfont">*</span>支持JPG、PNG、JEPG格式</div>                                   </div>
+									
+                               </div>
+
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-lg-8">
+                   <div class="row white-bg">
+                       <div class="col-lg-12 cjzbinput">
+                           <span class="firstname">直播名称：</span>
+                           <input class="col-lg-10" name="liveName" id="liveName" type="text" placeholder="http://live.iptv-soft.com/live/">
+                       </div>
+                       <div class="col-lg-12 cjzbinput">
+                           <span class="firstname">直播时间：</span>
+                           <div class="col-lg-10 " style="margin-left: -15px;">
+                               <div class="input-daterange input-group no-margins" id="datepicker" style="width: 450px;height:41px!important;">
+                                   <!-- <input type="text" class="input-sm form-control" data-format="yyyy-MM-dd hh:mm:ss" id="liveStartTime"
+									name="liveStartTime"  value="05/14/2014">  -->
+									  <input type="text" class="Wdate input" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true,highLineWeekDay:true})" id="liveStartTime" name="liveStartTime"  style="height:40px;width:210px;"/>
+									  <span class="input-group-addon" >至</span>
+									  <input type="text" class="Wdate input" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true,highLineWeekDay:true})" id="liveEndTime" name="liveEndTime"  style="height:40px;width:210px;"/>
+
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-lg-12 cjzbinput h-98">
+                           <span class="firstname">直播简介：</span>
+                           <textarea name="liveDesc" placeholder="2018天安门广场，升国旗仪式，将由解放军第一次负责。"></textarea>
+                       </div>
+                       <div class="col-lg-12 cjzbinput">
+                       <!--     <span class="firstname" id="leixing" mame="leixing">直播类型：</span>
+                           <select>
+                               <option value="0" name="leixing">--请选择--</option>
+                               <option value="1" >会议活动</option>
+                           </select> -->
+                       </div>
+                       <div class="col-lg-12 cjzbinput">
+                           <span class="firstname">直播打赏：</span>
+                           <div class="pull-left h-35 m-r-md" style="overflow: hidden">
+                               <input  value="1" type="radio" name="zbds" checked>启用
+                           </div>
+                           <div class="pull-left h-35" style="overflow: hidden">
+                                <input value="0" type="radio" name="zbds">关闭
+                           </div>
+                       </div>
+                       <div class="col-lg-12 cjzbinput">
+                           <span class="firstname">直播地址：</span>
+                           <input class="col-lg-10" type="text" name="playName" id="playName"  value="${playName!}"  placeholder="http://live.iptv-soft.com/live/">
+                           <button class="btn btn-default copybtn">复制</button>
+                       </div>
+                       <div class="col-lg-12 cjzbinput">
+                           <span class="firstname">播放地址：</span>
+                           <input class="col-lg-10" type="text" name="playUrl" id="playUrl" type='text'
+							value="${playUrl!}" placeholder="http://live.iptv-soft.com/live/">
+                           <button class="btn btn-default copybtn">复制</button>
+                       </div>
+                       <div class="col-lg-12 cjzbinput h-98">
+                           <span class="firstname">直播设置：</span>
+                           <div class="checkmain">
+                               <div class="col-lg-12">
+                                   <div class="col-lg-4 h-35">
+                                       <input  name="enableCountdown"
+										value="1" type="checkbox" checked="checked"type="checkbox"/>启用倒计时
+                                   </div>
+                                   <div class="col-lg-4 h-35">
+                                       <input name="enableCommunity"
+										value="1" type="checkbox" checked="checked"/>启用互动交流
+                                   </div>
+                                   <div class="col-lg-4 h-35">
+                                       <input
+										name="lianmai" value="1" type="checkbox"
+										checked="checked"/>启用连麦
+                                   </div>
+                                   <div class="col-lg-4 h-35">
+                                       <input  name="enableSensitiveword"
+										value="1" type="checkbox" checked="checked" />启用敏感字过滤
+                                   </div>
+                                   <div class="col-lg-4 h-35">
+                                       <input  name="enableLive" value="1"
+										type="checkbox" checked="checked"/>启用图文直播
+                                   </div>
+                                   <div class="col-lg-4 h-35">
+                                       <input 
+										name="enableEndCloseCommunity" value="1" type="checkbox"
+										checked="checked"/>直播结束后关闭互动
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-lg-12 cjzbinput h-80" style="margin-bottom: 11px;">
+                           <div class="videoshare">
+                               <div class="pull-left">
+                                   <span class="pull-left m-t-3">分享至：</span>
+                                   <div class="circleimg full-20"><img src="${base}/res/bvRadio/img/WX.png" alt=""/></div>
+                                   <div class="circleimg full-20"><img src="${base}/res/bvRadio/img/QQ.png" alt=""/></div>
+                                   <div class="circleimg full-20"><img src="${base}/res/bvRadio/img/WB.png" alt=""/></div>
+                                   <div class="circleimg full-20"><img src="${base}/res/bvRadio/img/kj.png" alt=""/></div>
+                                   <div class="circleimg full-20"><img src="${base}/res/bvRadio/img/pyq.png" alt=""/></div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <input type="hidden" name="liveId" id="liveId"
+			value="${nextId!-1}"> <input type="hidden"
+			name="channelId" id="channelId" value="1"> <input
+			type="hidden" name="liveType" id="liveType" value="1">
+            <div class="row zbjfooter white-bg">
+                <div class="col-lg-12">
+                    <button class="btn btn-danger m-r" type='submit'>
+                    	<i class='icon-save'></i> 
+                    	确定</button>
+                    <button class="btn btn-default m-r" type='button' id="cancel-button">取消</button>
+                   <!--  <button class="btn btn-default m-r">存草稿</button> -->
+                </div>
+            </div>
+           </form>
+        </div>
+
+     	
+</body>
+<!-- Mainly scripts -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".list").mouseenter(function(){
+  $(this).children(".text").show();
+   $(this).children(".del").show();
+    $(this).children(".listcen").children("img").show();
+  $(this).children(".listright").children("a").children(".lisa").children(".list-time").hide();
+ 
+  });
+  $(".list").mouseleave(function(){
+  $(this).children(".text").hide();
+  $(this).children(".del").hide();
+   $(this).children(".listcen").children("img").hide();
+  $(this).children(".listright").children("a").children(".lisa").children(".list-time").show();
+
+  });
+    setTimeout(function(){
+        var w =  $(".tab-pane").width();
+        $(".addlogo").width(w-150)
+    },60)
+
+});
+
+
+/* $('.input-daterange').datepicker({ 
+    keyboardNavigation: false,
+    forceParse: false,
+    autoclose: true
+      dateFormat: "yy-mm-dd",    
+     showSecond: true,    
+     timeFormat: 'hh:mm:ss',    
+     stepHour: 1,    
+     stepMinute: 1,    
+     stepSecond: 1  
+    
+}); */
+</script>
+
+<script>
+
+$(".listleft span input").mouseenter(function(){
+	 $(this).css("border","1px solid #39f");
+})
+$(".listleft span input").mouseleave(function(){
+	 $(this).css("border","none");
+})
+
+
+
+</script>
+<script>
+		$(document).ready(function() {
+			$("#addForm").validate({
+				errorPlacement: function(error, element) {
+					$(element).parent().find(".errorMsg").append(error);
+				},
+				rules : {
+					liveName : {
+						required : true
+					},
+					channelId : {
+						required : true
+					},
+					liveType : {
+						required : true,
+					},
+					liveOneWord : {
+						required : true,
+					},
+					liveStartTime : {
+						required : true,
+					},
+					liveEndTime : {
+						required : true,
+					}
+				},
+				messages : {
+					liveName : {
+						required : "直播名称不能为空"
+					},
+					channelId : {
+						required : "必须选择一个所属频道"
+					},
+					liveType : {
+						required : "必须选择一个直播类型",
+					},
+					liveOneWord : {
+						required : "一句话简介不能为空",
+					},
+					liveStartTime : {
+						required : "直播开始时间不能为空",
+					},
+					liveEndTime : {
+						required : "直播结束时间不能为空",
+					}
+				}
+			});
+			$("#cancel-button").click(function() {
+				window.location.href = "v_active_list.do?queryUsername=${queryUsername!}";
+			});
+		});
+	</script>
+	<script>
+   $(".nav-left>li").each(function(i,v){
+   		if($(v).find("li").hasClass("active")){
+   			$(v).addClass("active").addClass("bigactive");
+   		}
+   })
+    $(".nav-left li").each(function(a,b){	
+     var location = window.location.pathname;
+     	
+     		if($(b).find("a").attr("href")==location){
+     			$(b).addClass("active")
+     		}
+     }) 
+    	
+    </script>
+</html>

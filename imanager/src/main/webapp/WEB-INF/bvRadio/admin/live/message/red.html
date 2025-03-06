@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>体头条管理平台</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/>
+<script src="${base}/res/bvRadio/js/jquery.dragsort-0.5.2.min.js"
+	type="text/javascript"></script>
+
+</head>
+<body>
+	<div class="container-fluid" style="margin-top: 50px;">
+		<from id="sendRed" action="">
+			<div class='control-group'>
+				<label class='control-label'>红包金额：</label>
+				<div class='controls'>
+				<input class='input-xlarge span8' style="width: 385px"
+				name="money" type='text' id="money"
+				value="" /> 
+			</div>
+			<div class='control-group'>
+				<label class='control-label'>红包数目：</label>
+				<div class='controls'>
+				<input class='input-xlarge span8' style="width: 385px"
+				name="num" type='text' id="num"
+				value="" /> 
+			</div>
+		</div>
+
+		</from>
+		<input type="hidden" name="userId" id="userId" value="${userId}">
+		<input type="hidden" name="username" id="username" value="${username}">
+		<input type="hidden" name="userimage" id="userimage" value="${userimage}">
+		<input type="hidden" name="liveId" id="liveId" value="${liveId}">
+	</div>
+	<div class='actions position-absolute-b10'>
+		<button class='btn btn-success btn-next ml5 mr5' id="save-button" onclick="save()">
+			确认 <i class='icon-check'></i>
+		</button>
+	</div>
+	<script>
+			var money=$("#money").val();
+			var num = $("#num").val();
+			var liveId=$("#liveId").val();
+			var username=$("#username").val();
+			var userImg=$("#userimage").val();
+			var userId=$("#userId").val();
+			var balance=0
+			
+$(function(){
+	
+	$.ajax({
+		type:"get",
+		url:"/bvRadioILive/recharge/getUserBalances.jspx",
+		cache : false,
+		async: true,
+		data:{
+			user_id : userId ,
+			userName : username
+				},
+		success : function(data) {
+			balance=data.user_balances
+		},
+		 error: function(msg) {//ajax请求失败后触发的方法
+            alert(msg); //弹出错误信息
+        }
+	})
+	
+	
+})
+			
+			
+			function save() {
+			var num = $("#num").val();
+			var liveId=$("#liveId").val();
+			var username=$("#username").val();
+			var userImg=$("#userimage").val();
+			var userId=$("#userId").val();
+				var money1=$("#money").val();
+				 	alert(balance);
+				 	if(balance<money1){
+				 		alert("余额不足，不能够发送");
+				 		return;
+				 	}else{
+				 			$.ajax({
+						url : "/bvRadioILive/red/outRed.jspx",
+						type : "get",
+						cache : false,
+						async: true,
+						data : {
+							userId : userId,
+							userName : username,
+							redAmount : money1,
+							redNumber : num,
+							liveId : liveId,
+							userImg : userImg
+						},
+						success : function(data, textStatus) {
+						//账户扣除红包金额
+						
+						$(window.parent.document).find(".close").click();
+						
+						},
+						 error: function(msg) {//ajax请求失败后触发的方法
+           					 alert(msg); //弹出错误信息
+        				}
+					});
+				 	
+				 	}
+			
+					
+
+				};
+			
+	
+		
+	
+	</script>
+
+</body>
+</html>

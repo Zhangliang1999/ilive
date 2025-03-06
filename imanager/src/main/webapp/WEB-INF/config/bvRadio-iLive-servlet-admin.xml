@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="webBindingInitializer">
+			<bean class="com.bvRadio.iLive.common.web.springmvc.BindingInitializer" />
+		</property>
+	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="2147483648"></property>
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="adminContextInterceptor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="adminContextInterceptor" class="com.bvRadio.iLive.iLive.web.AdminContextInterceptor">
+		<property name="excludeUrls">
+				<list>
+					<value>/login.do</value>
+					<value>/registered.do</value>
+					<value>/opentrial.do</value>
+					<value>/tryuse.do</value>
+					<value>/dataList.do</value>
+					<value>/isEnterpriseRem.do</value>
+				</list>
+		</property>
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="cookieName" value="clientlanguage" />
+		<property name="cookieMaxAge" value="-1" />
+	</bean>
+<!-- 	<bean -->
+<!-- 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> -->
+<!-- 		<property name="exceptionMappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop -->
+<!-- 					key="org.springframework.web.bind.MissingServletRequestParameterException">/error/requiredParameter</prop> -->
+<!-- 				<prop key="org.springframework.beans.TypeMismatchException">/error/mismatchParameter</prop> -->
+<!-- 				<prop key="org.springframework.web.bind.ServletRequestBindingException">/error/bindException</prop> -->
+<!-- 				<prop key="org.springframework.dao.DataIntegrityViolationException">/error/integrityViolation</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	<bean id="freemarkerViewResolver"
+		class="com.bvRadio.iLive.common.web.springmvc.RichFreeMarkerViewResolver">
+		<property name="prefix" value="/bvRadio/admin/" />
+		<property name="suffix" value=".html" />
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<property name="exposeRequestAttributes" value="false" />
+		<property name="exposeSessionAttributes" value="false" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+	</bean>
+	<bean id="freemarkerConfig"
+		class="com.bvRadio.iLive.iLive.freemarker.FreeMarkerConfigExtend">
+		<property name="templateLoaderPath" value="/WEB-INF" />
+		<property name="freemarkerVariables">
+			<map>
+				<!--后台管理权限控制 -->
+				<entry key="text_cut" value-ref="text_cut" />
+				<entry key="html_cut" value-ref="html_cut" />
+<!-- 				<entry key="xml_escape" value-ref="fmXmlEscape" /> -->
+<!-- 				<entry key="api" value-ref="api" /> -->
+			</map>
+		</property>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">0</prop>
+				<prop key="defaultEncoding">UTF-8</prop>
+				<prop key="url_escaping_charset">UTF-8</prop>
+				<prop key="locale">zh_CN</prop>
+				<prop key="boolean_format">true,false</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="time_format">HH:mm:ss</prop>
+				<prop key="number_format">0.######</prop>
+				<prop key="whitespace_stripping">true</prop>
+				<prop key="auto_import">/ftl/bvRadio/index.ftl as p</prop>
+			</props>
+		</property>
+	</bean>
+
+	<context:annotation-config />
+	<!--包含action -->
+	<import resource="bvRadio-iLive-servlet-admin-action.xml" />
+</beans>

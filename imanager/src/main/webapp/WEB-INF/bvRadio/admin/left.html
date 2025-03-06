@@ -1,0 +1,118 @@
+<!--左侧部分-->
+<#assign baseIliveRoomId=iLiveLiveRoom.roomId! />
+<nav class="navbar-default navbar-static-side navbar-width"
+	role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav metismenu nav-left" id="side-menu">
+			<li
+				class="<#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='1_'>active</#if>"><a><i
+					class="fa fa-bookmark"></i> <span class="nav-label">直播控制</span> <span
+					class="fa arrow"></span></a>
+				<ul
+					class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='1_'>in</#if>">
+					<li class="<#if leftActive??&&leftActive='1_1'>active</#if>"><a
+						href="${base}/admin/room/selectRoom.do?roomId=${baseIliveRoomId}">直播间</a></li>
+					<li class="<#if leftActive??&&leftActive='1_2'>active</#if>"><a
+						href="${base}/admin/liveevent/thirdstream.do?roomId=${baseIliveRoomId}">第三方推流</a></li>
+					<li class="<#if leftActive??&&leftActive='1_3'>active</#if>"><a
+						href="${base}/admin/liveevent/cyclefile.do?roomId=${baseIliveRoomId}">轮播列表设置</a></li>
+					<li class="<#if leftActive??&&leftActive='1_4'>active</#if>"><a
+						href="${base}/admin/liveevent/toolkit.do?roomId=${baseIliveRoomId}">直播工具包</a></li>
+					<li class="<#if leftActive??&&leftActive='1_5'>active</#if>"><a
+						href="${base}/admin/liveevent/playconfig.do?roomId=${baseIliveRoomId}">备播设置</a></li>
+				</ul></li>
+			<li
+				class="<#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='2_'>active</#if>"><a
+				href="###"><i class="fa  fa-edit"></i> <span
+					class="nav-label">直播设置</span><span class="fa arrow"></span></a>
+				<ul
+					class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='2_'>in</#if>">
+					<li class="<#if leftActive??&&leftActive='2_1'>active</#if>"><a
+						href="${base}/admin/room/edit.do?roomId=${baseIliveRoomId}">直播属性</a></li>
+					<li class="<#if leftActive??&&leftActive='2_2'>active</#if>"><a
+						href="${base}/admin/config/logoset.do?roomId=${baseIliveRoomId}">LOGO设置</a></li>
+					<li class="<#if leftActive??&&leftActive='2_3'>active</#if>"><a
+						href="${base}/admin/config/livelim.do?roomId=${baseIliveRoomId}">观看授权</a></li>
+					<li class="<#if leftActive??&&leftActive='2_4'>active</#if>"><a
+						href="${base}/admin/diyform/v_edit.do?roomId=${baseIliveRoomId}">报名观看</a></li>
+					<li class="<#if leftActive??&&leftActive='2_5'>active</#if>"><a
+						href="${base}/admin/config/rewardset.do?roomId=${baseIliveRoomId}">打赏设置</a></li>
+					<li class="<#if leftActive??&&leftActive='2_6'>active</#if>"><a
+						href="${base}/admin/config/countdownset.do?roomId=${baseIliveRoomId}">直播倒计时</a></li>
+					<li class="<#if leftActive??&&leftActive='2_7'>active</#if>"><a
+						href="${base}/admin/config/datadisplaybeautify.do?roomId=${baseIliveRoomId}">数据显示美化</a></li>
+					<li class="<#if leftActive??&&leftActive='2_8'>active</#if>"><a
+						href="${base}/admin/config/spreadshare.do?roomId=${baseIliveRoomId}">推广分享</a></li>
+				</ul></li>
+			<li
+				class="<#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='3_'>active</#if>"><a
+				href="###"><i class="fa  fa-files-o"></i> <span
+					class="nav-label">页面装修</span><span class="fa arrow"></span></a>
+				<ul
+					class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='3_'>in</#if>">
+					<li class="<#if leftActive??&&leftActive='3_1'>active</#if>"><a
+						href="${base}/admin/pagedecorate/mobilepage.do?roomId=${baseIliveRoomId}">移动端页面</a></li>
+					<li class="<#if leftActive??&&leftActive='3_2'>active</#if>"><a
+						href="${base}/admin/pagedecorate/pcpage.do?roomId=${baseIliveRoomId}">PC端页面</a></li>
+					<li class="<#if leftActive??&&leftActive='3_3'>active</#if>"><a
+						href="${base}/admin/pagedecorate/liveleader.do?roomId=${baseIliveRoomId}">直播引导页</a></li>
+					<li><a href="##">邀请函</a></li>
+					<li><a href="##">现场签到</a></li>
+				</ul></li>
+			<li
+				class="<#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='4_'>active</#if>"><a
+				href="###"><i class="fa  fa-comments-o"></i> <span
+					class="nav-label">互动管理</span><span class="fa arrow"></span></a>
+				<ul
+					class="nav nav-second-level collapse  <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='4_'>in</#if>">
+					<li class="<#if leftActive??&&leftActive='4_1'>active</#if>"><a
+						href="${base}/admin/interactmanager/interact.do?roomId=${baseIliveRoomId}">互动</a></li>
+					<li><a href="##">抽奖</a></li>
+					<li  class="<#if leftActive??&&leftActive='4_3'>active</#if>"><a
+						href="${base}/admin/interactmanager/entervote.do?roomId=${baseIliveRoomId}">投票</a></li>
+					<li><a href="##">红包</a></li>
+				</ul></li>
+			<li
+				class="<#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='5_'>active</#if>"><a><i
+					class="fa  fa-desktop"></i> <span class="nav-label">内容管理</span><span
+					class="fa arrow"></span></a>
+				<ul
+					class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='5_'>in</#if>"">
+					<li class="<#if leftActive??&&leftActive='5_1'>active</#if>"><a
+						href="${base}/admin/content/events.do?roomId=${baseIliveRoomId}">直播场次</a></li>
+					<li class="<#if leftActive??&&leftActive='5_2'>active</#if>"><a
+						href="${base}/admin/content/image/list.do?roomId=${baseIliveRoomId}">精彩截图</a></li>
+				</ul></li>
+			<li><a><i class="fa  fa-bar-chart-o "></i> <span
+					class="nav-label">直播数据</span><span class="fa arrow"></span></a>
+				<ul
+					class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='6_'>in</#if>"">
+					<li><a href="##">直播数据统计</a></li>
+					<li><a href="##">报名记录</a></li>
+					<li><a href="##">收益记录</a></li>
+					<li><a href="##">用户记录</a></li>
+				</ul></li>
+			<li
+				class="<#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='7_'>active</#if>"><a><i
+					class="fa  fa-desktop"></i> <span class="nav-label">直播间管理</span><span
+					class="fa arrow"></span></a>
+				<ul
+					class="nav nav-second-level collapse <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='7_'>in</#if>"">
+					<li class="<#if leftActive??&&leftActive='7_1'>active</#if>"><a
+						href="${base}/admin/room/banlist.do?roomId=${baseIliveRoomId}">直播禁言</a></li>
+					<li class="<#if leftActive??&&leftActive='7_2'>active</#if>"><a
+						href="${base}/admin/room/consumption_limit.do?roomId=${baseIliveRoomId}">消费上限</a></li>
+					<li class="<#if leftActive??&&leftActive='7_3'>active</#if>"><a
+						href="${base}/admin/room/cooperation_mgr.do?roomId=${baseIliveRoomId}">协同管理</a></li>
+				</ul></li>
+			<li class="m-t-xl m-b-xl text-center">
+				<button class="btn btn-success" onclick="leaveroom()">退出直播间</button>
+			</li>
+			<script>
+				function leaveroom(){
+					window.location.href="${base}/admin/room/list.do";
+				}
+			</script>
+		</ul>
+	</div>
+</nav>

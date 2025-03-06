@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.manager.entity">
+	<class name="InstationMessageUser" table="instation_message_user">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="messageId" type="java.lang.Long">
+			<column name="message_id" />
+		</property>
+
+		<property name="recUserId" type="java.lang.Long">
+			<column name="rec_user_id" />
+		</property>
+
+		<property name="mobile" type="java.lang.String">
+			<column name="mobile" />
+		</property>
+
+		<property name="type">
+			<column name="type" />
+		</property>
+
+		<property name="title">
+			<column name="title" />
+		</property>
+
+		<property name="content">
+			<column name="content" />
+		</property>
+
+		<property name="enterpriseName">
+			<column name="enterprise_name" />
+		</property>
+
+		<property name="enterpriseId">
+			<column name="enterprise_id" />
+		</property>
+
+		<property name="enterpriseImg">
+			<column name="enterprise_img" />
+		</property>
+
+	</class>
+</hibernate-mapping>

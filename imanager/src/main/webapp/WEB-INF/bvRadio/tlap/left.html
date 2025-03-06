@@ -1,0 +1,118 @@
+        <!--左侧部分-->
+  
+  <nav class="navbar-default navbar-static-side navbar-width" role="navigation" style="width:155px;">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu nav-left" id="side-menu">
+                
+                <li>
+                     <a class="dropdown-collapse <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='7_'>in</#if>" href="##">
+                     <i class="fa icon-cogs"></i> 
+                        <span class="nav-label">直播管理</span> 
+                        <span class="fa arrow"></span>
+                     </a>
+                    <ul class="nav collapse nav-second-level2 <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='7_'>in</#if>">
+						<li class="<#if leftActive??&&leftActive='7_1'>active</#if>">
+							<a href="${base}/tlap/live/v_active_list.do">
+								<i class="icon-caret-right"></i>
+								<span>活动直播</span>
+							</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='7_5'>active</#if>">
+							<a href="${base}/tlap/live/v_user_list.do">
+								<i class="icon-caret-right"></i>
+								<span>主播直播</span>
+							</a>
+						</li>
+					
+                    </ul>
+                </li>
+                <li>
+                <!-- <a class="" href="${base}/tlap/interact/v_list.do"> <i
+						class="icon-comments-alt"></i> <span>互动管理</span>
+				</a> -->
+				   <a class="dropdown-collapse <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='2_'>in</#if>" href="##">
+                     <i class="fa icon-cogs"></i> 
+                        <span class="nav-label">互动管理</span> 
+                        <span class="fa arrow"></span>
+                     </a>
+                       <ul class="nav collapse nav-second-level2 <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='2_'>in</#if>">
+						<li class="<#if leftActive??&&leftActive='2_1'>active</#if>">
+							<a href="${base}/tlap/interact/v_list.do">
+								<i class="icon-caret-right"></i>
+								<span>互动记录</span>
+							</a>
+						</li>
+                    </ul>
+				</li>
+				<!--  -->
+                
+				<!--  -->
+				
+                <li>
+                <a class="dropdown-collapse <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='5_'>in</#if>"  href="#">
+                <i class="fa icon-briefcase"></i> 
+                <span class="nav-label">财务管理</span>
+                <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level2 collapse  <#if leftActive??&&(leftActive?length>2)&&leftActive?substring(0,2)='5_'>in</#if>">
+					
+				
+					
+					<li class="<#if leftActive??&&leftActive='5_1'>active</#if>">
+						<a href="${base}/tlap/finan/getRecharge.do">
+							<i class="icon-caret-right"></i>
+							<span>充值记录</span>
+						</a>
+					</li>
+					<li class="<#if leftActive??&&leftActive='5_2'>active</#if>">
+							<a href="${base}/tlap/finan/getPresent.do"> <i
+								class="icon-caret-right"></i> <span>提现记录</span>
+						</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='5_3'>active</#if>">
+							<a href="${base}/tlap/finan/getConsumption.do"> <i
+								class="icon-caret-right"></i> <span>消费记录</span>
+						</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='5_9'>active</#if>">
+							<a href="${base}/tlap/finan/getRedPage.do"> <i
+								class="icon-caret-right"></i> <span>红包记录</span>
+							</a>
+						</li>
+						<li class="<#if leftActive??&&leftActive='5_4'>active</#if>">
+							<a href="${base}/tlap/finan/getUserPage.do"> <i
+								class="icon-caret-right"></i> <span>账户财务</span>
+							</a>
+						</li>
+						
+						<li class="<#if leftActive??&&leftActive='5_6'>active</#if>">
+							<a href="${base}/tlap/recharge/getCreateType.do"> <i
+								class="icon-caret-right"></i> <span>充值</span>
+							</a>
+						</li>
+				</ul>
+                   
+                </li>
+           
+             
+            </ul>
+
+        </div>
+    </nav>
+    <script>
+    $(".nav-left>li").each(function(i,v){
+   		if($(v).find("li").hasClass("active")){
+   			$(v).addClass("active").addClass("bigactive");
+   		}
+   })
+    $(".nav-left li").each(function(a,b){	
+     var location = window.location.pathname;
+     	
+     		if($(b).find("a").attr("href")==location){
+     			$(b).addClass("active")
+     		}
+     })
+    </script>
+
+
+<!--aaaaaaaaaaaaaaaaaaaaaaaaaaaa  -->

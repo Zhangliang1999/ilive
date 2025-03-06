@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>打赏设置</title>
+	<#include "/bvRadio/head.html"/>
+    <!--直播设置模块样式-->
+    <link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css"/>
+</head>
+<body >
+<div id="wrapper" class="bgc-fff normal-font">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/admin/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/admin/left.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content bgc-fff rewardset">
+            <div class="row title-header">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title"> 打赏设置</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row rewardinfo">
+                <div class="col-lg-12 m-t-lg">
+                    <div class="col-lg-2">
+                        <span>功能开关:</span>
+                        <input type="checkbox" id="switchbutton" class="chooseBtn" checked/>
+                        <label for="switchbutton" class="choose-label"></label>
+                    </div>
+                    <div class="col-lg-2">
+                        <span>启用我的礼物</span>
+                        <input type="checkbox" id="mygift" class="chooseBtn" checked/>
+                        <label for="mygift" class="choose-label"></label>
+                    </div>
+                </div>
+                <div class="col-lg-12 common_nav m-t-md">
+                    <ul id="myTab" class="nav nav-tabs p-w-lg">
+                        <li class="active"><a href="#myprop" data-toggle="tab">我的道具</a></li>
+                        <li><a href="#systemprop" data-toggle="tab">系统道具</a></li>
+                    </ul>
+                    <div class="tab-content proplist">
+                        <div class="tab-pane fade in active" id="myprop">
+                            <ul>
+                                <li>
+                                    <img src="${base}/tysx/img/prop1.png" width="80px;"/>
+                                    <span class="prop-name">道具名称</span>
+                                    <p class="propscores">80</p>
+                                </li>
+                                <li>
+                                    <img src="${base}/tysx/img/prop2.png" width="80px;"/>
+                                    <span class="prop-name">道具名称</span>
+                                    <p class="propscores">100</p>
+                                </li>
+                                <li class="z_add gray-bg"><a href="##">+ 添加道具</a></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane fade" id="systemprop">
+                            <ul>
+                                <li>
+                                    <img src="${base}/tysx/img/prop1.png" width="80px;"/>
+                                    <span class="prop-name">道具名称</span>
+                                    <p class="propscores">80</p>
+                                </li>
+                                <li>
+                                    <img src="${base}/tysx/img/prop2.png" width="80px;"/>
+                                    <span class="prop-name">道具名称</span>
+                                    <p class="propscores">100</p>
+                                </li>
+                                <li class="z_add gray-bg"><a href="##">+ 添加道具</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+
+</body>
+<script>
+    $(".live-bottom").hide()
+
+    wid=$('.blcen').width()
+    $('.textbl').css('width',wid-300)
+    $('.textbl2').css('width',wid-300)
+
+    $(window).resize(function () {          //当浏览器大小变化时
+
+        wid=$('.blcen').width()
+        $('.textbl').css('width',wid-300)
+        $('.textbl2').css('width',wid-300)
+
+    });
+
+    $(".img-box").hover(function(){
+        $(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+    },function(){
+        $(this).find(".live-bottom").stop(true, false).slideUp(300)
+    })
+
+</script>
+</html>

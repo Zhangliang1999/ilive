@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <#include "/bvRadio/head.html"/>
+    <title>文档管理</title>
+</head>
+<body>
+<!--上面的导航栏部分-->
+<div id="wrapper" class="bgc-fff">
+    <div id="page-wrapper" class="gray-bg">
+  		<#include "/bvRadio/admin/top.html"/>
+		<#include "/bvRadio/admin/medialeft.html" />
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content bgc-fff normal-font videomanage">
+            <div class="row title-header">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">文档管理</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row list-contain">
+                <div class="col-lg-12 list-title p-w-lg space-20">
+                    <button class="btn blue-bg m-r">上传文档</button>
+                    <button class="btn black-bg glyphicon glyphicon-circle-arrow-up" onclick="updateLineState(1)">上线 </button>
+                    <button class="btn black-bg glyphicon glyphicon-circle-arrow-down"  onclick="updateLineState(0)"> 下线 </button>
+                    <button class="btn glyphicon glyphicon-trash black-bg" onclick="deleteDocumentsByIds()"> 删除 </button>
+                    <div class="col-lg-4 pull-right text-right no-padding">
+                        <input type="text" id="document_id" class="serachinput" value="${mediaName!}" placeholder="按资源搜索"/>
+                        <button class="btn blue-bg" onclick="searchDocument();">搜索</button>
+                    </div>
+                </div>
+                <div class='tabbable'>
+					<@p.pageList value=liveMediaPage 
+					listAction="enterdocument.do";document,i,has_next> 
+					<@p.column class="text-center mr5 w15"
+					style="text-align: center; width:15px" title="<input
+						type='checkbox' onclick='checkAll(this)'>">
+					<input type="checkbox" name="ids" value="${document.fileId!}">
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="id">
+					${document.fileId!}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="文档名称">
+					<img src="../img/pdf.png"/>${document.mediaFileName!'未知'}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="大小">
+					${document.fileSizeMb!''}Mb
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="状态">
+					<#if document.onlineFlag??&&document.onlineFlag==1>
+					已上线
+					<#else>
+					已下线
+					</#if>
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="上传时间">
+					${document.mediaCreateTime!''}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="操作">
+                        <a class="glyphicon glyphicon-edit m-r-sm" title="编辑" href="${base}/admin/mediafile/entermediaedit.do?id=${document.fileId!}&&menuType=3"></a>
+                        <a class="glyphicon glyphicon-trash" title="删除" href="javascript:void(0);" onclick="deleteDocument(${document.fileId!''})"></a>
+					</@p.column> 
+					</@p.pageList>
+				</div>
+<!--                 <table class="table table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox"/></th>
+                            <th>id</th>
+                            <th>名称</th>
+                            <th>大小</th>
+                            <th>状态</th>
+                            <th>上传时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td>5378598</td>
+                            <td class="zype pdf"><img src="../img/pdf.png"/> 文档名称文档名称文档名称文档</td>
+                            <td>36Mb</td>
+                            <td>已发布</td>
+                            <td>2018-03-01 16:36</td>
+                            <td>
+                                <a class="glyphicon glyphicon-edit m-r-sm" title="编辑"></a>
+                                <a class="glyphicon glyphicon-trash" title="删除"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td>5378598</td>
+                            <td class="zype ppt"><img src="../img/ppt.png"/> 文档名称文档名称文档名称文档</td>
+                            <td>36Mb</td>
+                            <td>已发布</td>
+                            <td>2018-03-01 16:36</td>
+                            <td>
+                                <a class="glyphicon glyphicon-edit m-r-sm" title="编辑"></a>
+                                <a class="glyphicon glyphicon-trash" title="删除"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td>5378598</td>
+                            <td class="zype doc"><img src="../img/doc.png"/> 文档名称文档名称文档名称文档</td>
+                            <td>36Mb</td>
+                            <td>已发布</td>
+                            <td>2018-03-01 16:36</td>
+                            <td>
+                                <a class="glyphicon glyphicon-edit m-r-sm" title="编辑"></a>
+                                <a class="glyphicon glyphicon-trash" title="删除"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td>5378598</td>
+                            <td class="zype pdf"><img src="../img/pdf.png"/> 文档名称文档名称文档名称文档</td>
+                            <td>36Mb</td>
+                            <td>已发布</td>
+                            <td>2018-03-01 16:36</td>
+                            <td>
+                                <a class="glyphicon glyphicon-edit m-r-sm" title="编辑"></a>
+                                <a class="glyphicon glyphicon-trash" title="删除"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td>5378598</td>
+                            <td class="zype ppt"><img src="../img/ppt.png"/> 文档名称文档名称文档名称文档</td>
+                            <td>36Mb</td>
+                            <td>已发布</td>
+                            <td>2018-03-01 16:36</td>
+                            <td>
+                                <a class="glyphicon glyphicon-edit m-r-sm" title="编辑"></a>
+                                <a class="glyphicon glyphicon-trash" title="删除"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td>5378598</td>
+                            <td class="zype doc"><img src="../img/doc.png"/> 文档名称文档名称文档名称文档</td>
+                            <td>36Mb</td>
+                            <td>已发布</td>
+                            <td>2018-03-01 16:36</td>
+                            <td>
+                                <a class="glyphicon glyphicon-edit m-r-sm" title="编辑"></a>
+                                <a class="glyphicon glyphicon-trash" title="删除"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td>5378598</td>
+                            <td class="zype pdf"><img src="../img/pdf.png"/> 文档名称文档名称文档名称文档</td>
+                            <td>36Mb</td>
+                            <td>已发布</td>
+                            <td>2018-03-01 16:36</td>
+                            <td>
+                                <a class="glyphicon glyphicon-edit m-r-sm" title="编辑"></a>
+                                <a class="glyphicon glyphicon-trash" title="删除"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td>5378598</td>
+                            <td class="zype ppt"><img src="../img/ppt.png"/> 文档名称文档名称文档名称文档</td>
+                            <td>36Mb</td>
+                            <td>已发布</td>
+                            <td>2018-03-01 16:36</td>
+                            <td>
+                                <a class="glyphicon glyphicon-edit m-r-sm" title="编辑"></a>
+                                <a class="glyphicon glyphicon-trash" title="删除"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td>5378598</td>
+                            <td class="zype doc"><img src="../img/doc.png"/> 文档名称文档名称文档名称文档</td>
+                            <td>36Mb</td>
+                            <td>已发布</td>
+                            <td>2018-03-01 16:36</td>
+                            <td>
+                                <a class="glyphicon glyphicon-edit m-r-sm" title="编辑"></a>
+                                <a class="glyphicon glyphicon-trash" title="删除"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="col-lg-4 pull-right m-t-md" style="border:1px solid #ccc;">分页(引用公用分页样式)</div>
+ -->            
+ 			</div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script>
+	$("#_page_form").append($("<input type='hidden' id='document_hidden' name='mediaName'/>"));
+    $(".live-bottom").hide()
+    wid=$('.blcen').width()
+    $('.textbl').css('width',wid-300)
+    $('.textbl2').css('width',wid-300)
+
+    $(window).resize(function () {          //当浏览器大小变化时
+
+        wid=$('.blcen').width()
+        $('.textbl').css('width',wid-300)
+        $('.textbl2').css('width',wid-300)
+
+    });
+
+    $(".img-box").hover(function(){
+        $(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+    },function(){
+        $(this).find(".live-bottom").stop(true, false).slideUp(300)
+    })
+    
+    
+    function searchDocument(){
+    	var documentName = $("#document_id").val();
+    	$("#document_hidden").val(documentName);
+    	$("#_page_form").submit();
+    }
+    
+    function deleteDocument(id){
+    	if (confirm("确定要删除吗？")){
+    		$.ajax({
+				type : 'POST',
+				url : "delete.do",
+				data : {
+					id : id
+				},
+				dataType : "json",
+				success : function(data, textStatus) {
+					searchDocument();
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("delete出错>>" + errorThrown);
+				}
+			});
+    	}
+    }
+    
+    var ids = "ids";
+    function deleteDocumentsByIds(){
+		if (PL.checkedCount(ids) == 0) {
+			alert("您还没有选择！");
+		} else {
+			if (confirm("确定要删除吗？")) {
+				$.ajax({
+					type : 'POST',
+					url : "deletes.do",
+					data : {
+						ids : PL.getCheckedIds(ids)
+					},
+					dataType : "json",
+					success : function(data, textStatus) {
+						searchDocument();
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert("delete出错>>" + errorThrown);
+					}
+				});
+
+			}
+		}
+    }
+    
+    function checkAll(ele){
+    	$("input[type=checkbox][name=ids]").each(function() {
+    		if($(ele).is(":checked")){
+    			if(!$(this).is(":checked")){
+    				$(this).click();
+    			}
+    		}else{
+    			if($(this).is(":checked")){
+    				$(this).click();
+    			}
+    		}	
+    	});
+
+    }
+    
+    function updateLineState(state){
+		if (PL.checkedCount(ids) == 0) {
+			alert("您还没有选择！");
+		} else {
+			if (confirm("确定要修改在线状态吗？")) {
+				$.ajax({
+					type : 'POST',
+					url : "updatelinestate.do",
+					data : {
+						ids : PL.getCheckedIds(ids),
+						state:state
+					},
+					dataType : "json",
+					success : function(data, textStatus) {
+						searchDocument();
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert("delete出错>>" + errorThrown);
+					}
+				});
+			}
+		}
+    }
+
+</script>
+</html>

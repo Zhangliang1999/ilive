@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>白名单管理</title>
+	<#include "/bvRadio/head.html"/>
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/newhdgl.css"/>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+		<!--上面的导航栏部分-->
+		<#include "/bvRadio/admin/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/admin/userleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">白名单管理</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                    <a href="javascript:;" class="btn btn-success m-t-sm m-l" data-toggle="modal" data-target="#myModal">添加用户</a>
+                    <a href="javascript:;" class="btn btn-success m-t-sm m-l">导入</a>
+                    <a href="javascript:;" class="btn btn-success m-t-sm">下载模板</a>
+                    <div class="pull-right m-r-lg m-t-xs">
+                        <input type="text" class="serachinput" placeholder="按号码搜索" id="num"/>
+                        <button class="btn commonbtn m-t-n-4" id="search">搜索</button>
+                        <button class="btn commonbtn m-t-n-4"><i class="fa fa-external-link m-r-xs"></i>导出</button>
+                    </div>
+                </div>
+            </div>
+					<@p.pageList value=page 
+					listAction="whitelist.do";item,i,has_next> 
+					<@p.column class="text-center" style="width:80px;"
+					title="ID">
+					${item.whitebillId}
+					</@p.column>
+					<@p.column class="text-center" style="width:80px;"
+					title="用户">
+					<#if item.phoneNum??>${item.phoneNum}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:60px;"
+					title="姓名">
+					<#if item.userName??>${item.userName}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:80px;"
+					title="操作">
+                        <!-- <a href="##" class="m-r-xs color-999">查看</a>| -->
+                        <a onclick="remove(${item.enterpriseId})" href="javascript:;" class="m-l-xs color-999" id="remove">删除</a>
+					</@p.column> 
+					</@p.pageList>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">添加用户</h4>
+      </div>
+      <div class="modal-body">
+      	<form method="post" action="${base}/admin/member/addwhite.do" id="addWhite">
+      		<div class="form-group">
+      			<label for="phoneNum">手机号</label>
+      			<input type="text" class="form-control" name="phoneNum" id="phoneNum"/>
+      		</div>
+      		<div class="form-group">
+      			<label for="userName">姓名</label>
+      			<input type="text" class="form-control" name="userName" id="userName"/>
+      		</div>
+      	</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="submit">添加</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75
+    });
+    var div1 =  $('.scrollSwitchBox');
+    var div2 =  $('.scrollSwitch');
+    $('.scrollSwitchBox').click(function(){
+        if($("#div1").hasClass("open1")){
+            $("#div1").addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+            $("#div2").addClass("scrollSwitch").addClass("close2").removeClass("open2");
+            $("#div1 input").attr("checked",false);
+            return
+        }else{
+            $("#div1").addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+            $("#div2").addClass("scrollSwitch").addClass("open2").removeClass("close2");
+            $("#div1 input").attr("checked",true);
+            return
+        }
+    })
+    
+    $("#_page_form").append("<input type='hidden' name='queryNum' id='queryNum'/>");
+    
+    function remove(enterpriseId){
+    	$.ajax({
+    		url:"${base}/admin/member/deletewhite.do",
+    		method:"post",
+    		data:{
+    			enterpriseId:enterpriseId
+    		},
+    		success:function(){
+    			location.reload();
+    			console.log("修改成功");
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    }
+
+    $("#submit").on("click",function(){
+    	$("#addWhite").submit();
+    });
+    
+    $("#search").on("click",function(){
+    	var num = $("#num").val();
+    	$("#queryNum").val(num);
+    	$("#_page_form").submit();
+    });
+</script>
+</html>

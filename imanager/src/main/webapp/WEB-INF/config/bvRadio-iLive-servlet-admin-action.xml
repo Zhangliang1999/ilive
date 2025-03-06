@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+	<bean id="welcomeAct" class="com.bvRadio.iLive.iLive.action.admin.WelcomeAct" />
+	<!-- 	直播间  YanXL -->
+	<bean id="iLiveRoomController" class="com.bvRadio.iLive.iLive.action.admin.ILiveRoomController" />
+	<bean id="iLiveEventAct" class="com.bvRadio.iLive.iLive.action.admin.ILiveEventAct" />
+	<bean id="iLiveMessageController" class="com.bvRadio.iLive.iLive.action.admin.ILiveMessageController"/>
+	<bean id="fileUploadController" class="com.bvRadio.iLive.iLive.action.admin.FileUploadController"/>
+	<bean id="iLiveRoomConfigController" class="com.bvRadio.iLive.iLive.action.admin.ILiveRoomConfigController" />
+	<bean id="iLiveLoginAct" class="com.bvRadio.iLive.iLive.action.admin.ILiveLoginAct" />
+	<bean id="iLivefileUploadAct" class="com.bvRadio.iLive.iLive.action.admin.FileUploadAct" />
+	<bean id="iLiveEnterpriseController" class="com.bvRadio.iLive.iLive.action.admin.ILiveEnterpriseController"></bean>
+	<bean id="bbsDiyformAct" class="com.bvRadio.iLive.iLive.action.admin.BBSDiyformAct"></bean>
+	<bean id="iLiveGuestsController" class="com.bvRadio.iLive.iLive.action.admin.ILiveGuestsController"/>
+	<bean id="iLiveRoomTypeController" class="com.bvRadio.iLive.iLive.action.admin.ILiveRoomTypeController"/>
+	<bean id="iLiveRoomInteractController" class="com.bvRadio.iLive.iLive.action.admin.ILiveRoomInteractController"></bean>
+	<bean id="iLivePageDecorateController" class="com.bvRadio.iLive.iLive.action.admin.ILivePageDecorateController"></bean>
+	<bean id="iLiveMediaFileController" class="com.bvRadio.iLive.iLive.action.admin.ILiveMediaFileController"></bean>
+	<bean id="contentManagementController" class="com.bvRadio.iLive.iLive.action.admin.ContentManagementController"></bean>
+	<bean id="iLiveEnterpriseMemberAct" class="com.bvRadio.iLive.iLive.action.admin.ILiveEnterpriseMemberAct"></bean>
+	<bean id="terminalUserController" class="com.bvRadio.iLive.iLive.action.admin.TerminalUserController"></bean>
+	<bean id="iLiveThematicController" class="com.bvRadio.iLive.iLive.action.admin.ILiveThematicController"/>
+	<bean id="accountController" class="com.bvRadio.iLive.iLive.action.admin.AccountController"></bean>
+	<bean id="imageUploadFileController" class="com.bvRadio.iLive.iLive.action.admin.ImageUploadFileController"></bean>
+</beans>

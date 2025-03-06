@@ -1,0 +1,80 @@
+2017/09/27 15:09:17(INFO)-------参数有错误log:
+2017/09/27 15:09:17(INFO)-------监控本地路径=f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/bvmonaddr.xml
+2017/09/27 15:09:17(INFO)-------func=CBVAVStreamMonDlg::ParsetMonAddr msg=monitor_lunxun num<=0 ret=-1
+2017/09/27 15:09:19(INFO)-------虚拟内存使用=19 M
+2017/09/27 15:09:19(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:19(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:20(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:20(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:21(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:21(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:22(INFO)-------ShowThread ,Addr=http://192.68.1.98 s loop num=2598 avg=519.6000 fps
+
+2017/09/27 15:09:22(INFO)-------func=CBVMonDlg::AddAVErrLog msg=检测到视频错误 id=9,addr=http://192.68.1.98,类型=断流 ret=-1
+2017/09/27 15:09:22(INFO)-------ShowThread ,Addr=rtmp:192.168.1.97 s loop num=2596 avg=519.2000 fps
+
+2017/09/27 15:09:22(INFO)-------func=CBVMonDlg::AddAVErrLog msg=检测到视频错误 id=8,addr=rtmp:192.168.1.97,类型=断流 ret=-1
+2017/09/27 15:09:22(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:22(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:23(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:23(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:24(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:24(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:25(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:25(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:26(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:26(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:27(INFO)-------ShowThread ,Addr=http://192.68.1.98 s loop num=2585 avg=516.8966 fps
+
+2017/09/27 15:09:27(INFO)-------ShowThread ,Addr=rtmp:192.168.1.97 s loop num=2584 avg=516.6967 fps
+
+2017/09/27 15:09:27(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:27(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:28(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:28(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:29(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:29(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:30(INFO)-------虚拟内存使用=20 M
+2017/09/27 15:09:30(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:30(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:31(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:31(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:32(INFO)-------ShowThread ,Addr=http://192.68.1.98 s loop num=2593 avg=518.4963 fps
+
+2017/09/27 15:09:32(INFO)-------ShowThread ,Addr=rtmp:192.168.1.97 s loop num=2587 avg=517.4000 fps
+
+2017/09/27 15:09:32(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:32(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:33(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:33(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:34(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:34(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:35(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:35(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:36(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:36(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:37(INFO)-------ShowThread ,Addr=http://192.68.1.98 s loop num=2590 avg=518.0000 fps
+
+2017/09/27 15:09:37(INFO)-------func=CBVMonDlg::AddAVErrLog msg=检测到视频错误 id=9,addr=http://192.68.1.98,类型=断流 ret=-1
+2017/09/27 15:09:37(INFO)-------func=CBVMonDlg::HandleException msg=play timeout , restart url=http://192.68.1.98 ret=0
+2017/09/27 15:09:37(INFO)-------ShowThread ,Addr=rtmp:192.168.1.97 s loop num=2591 avg=518.2000 fps
+
+2017/09/27 15:09:37(INFO)-------func=CBVMonDlg::AddAVErrLog msg=检测到视频错误 id=8,addr=rtmp:192.168.1.97,类型=断流 ret=-1
+2017/09/27 15:09:37(INFO)-------func=CBVMonDlg::HandleException msg=play timeout , restart url=rtmp:192.168.1.97 ret=0
+2017/09/27 15:09:37(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:37(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:38(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:38(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:39(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:39(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:40(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:40(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:41(INFO)-------虚拟内存使用=20 M
+2017/09/27 15:09:41(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:41(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 15:09:42(INFO)-------ShowThread ,Addr=http://192.68.1.98 s loop num=2593 avg=518.4963 fps
+
+2017/09/27 15:09:42(INFO)-------ShowThread ,Addr=rtmp:192.168.1.97 s loop num=2585 avg=517.0000 fps
+
+2017/09/27 15:09:42(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 15:09:42(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>体头条管理平台</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/>
+<script type="text/javascript">
+var checkboxName = "ids";
+function addGift(jsid){
+  window.location.href="add.do?jsessionId="+jsid;
+}
+function editGift(id,jsid){
+ window.location.href="update.do?giftId="+id+"&jsessionId="+jsid;
+}
+function deleteGift(id){
+ window.location.href="delete.do?giftId="+id;
+ alert("删除成功");
+}
+
+function doDelete(giftId) {
+		if (giftId) {
+			if (confirm("确定要删除吗？")) {
+				var ids = new Array();
+				ids.push(giftId);
+				$.ajax({
+					type : 'POST',
+					url : "deletes.do",
+					data : {
+						ids: ids
+					},
+					success : function(data, textStatus) {
+						window.location.reload(true);
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert("doDelete出错>>" + errorThrown);
+					},
+					dataType : "json"
+				});
+			}
+		} else {
+			if (PL.checkedCount(checkboxName) == 0) {
+				alert("您还没有选择！");
+			} else {
+				if (confirm("确定要删除吗？")) {
+					$.ajax({
+						type : 'POST',
+						url : "deletes.do",
+						data : {
+							ids : PL.getCheckedIds(checkboxName)
+						},
+						success : function(data, textStatus) {
+							window.location.reload(true);
+						},
+						error : function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("doDelete出错>>" + errorThrown);
+						},
+						dataType : "json"
+					});
+				}
+			}
+		}
+	}
+</script>
+</head>
+<body class="contrast-dark fixed-header">
+	<!--顶部开始-->
+	<#include "/bvRadio/admin/top.html"/>
+	<!--顶部结束-->
+	<!--主体开始-->
+	<div id="wrapper">
+		<!--左侧导航开始-->
+		<#include "/bvRadio/admin/left.html"/>
+		<!--左侧导航结束-->
+		<!--右侧框架开始-->
+		<section id="content">
+			<div class="container-fluid">
+				<hr>
+				<div class="row-fluid box-header box-header-small"
+					style="height: 35px; overflow: hidden;">
+					<div class="pull-left">
+						<button class="btn btn-primary" type="button" id="addGiftButton"
+							onclick="addGift('${jsessionId!}')">添加礼物</button>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class='box-content'>
+						<div class='tabbable'>
+							<@p.pageList value=pagination
+							listAction="list.do";gift,i,has_next> 
+							<@p.column class="text-center mr5 w15"
+							style="text-align: center; width:15px" title="<input
+								type='checkbox' onclick='PL.checkbox(\"ids\",this.checked)'>">
+							<input type="checkbox" name="ids" value="${gift.id!}">
+							</@p.column>
+						   <@p.column class="text-center" style="width:40px;"
+							title="ID">${gift.id!}</@p.column>
+							 <@p.column
+							class="text-left" style=""
+							title="礼物名称">${gift.name!'未知'}</@p.column> 
+							 <@p.column
+							class="text-center" style="width:60px;"
+							title="所需金币">${gift.num!'未知'}</@p.column>
+							 <@p.column
+							class="text-center" style="width:100px;"
+							title="礼物图片"><img src="${gift.pic!}"></@p.column>
+							<!--<@p.column
+							class="text-center" style="width:90px;" title="礼物类型"> <#if
+							gift.type??&&gift.type==0>普通礼物<#elseif
+							gift.type??&&gift.type==1>可连送礼物 <#else>未知类型 </#if>
+							</@p.column> 
+							<@p.column
+							class="text-center" style="width:60px;" title="礼物分类"> <#if
+							gift.liveType??&&gift.liveType==0>默认分类 <#else>未知类型 </#if>
+							</@p.column> -->
+							<@p.column class="text-center" style="width:110px;" title="创建时间">
+							<small style="color: #6B7C98;">${((gift.creatTime)?string("yyyy-MM-dd
+								HH:mm"))!}</small> <br /> </@p.column> 
+								 <@p.column class="text-center"
+							style="width:230px" title="操作">
+							<button class="btn btn-link" type="button"
+								style="margin-bottom: 5px" onclick="editGift('${gift.id!}','${jsessionId!}')">编辑</button>
+							<button class="btn btn-link" type="button"
+								style="margin-bottom: 5px" onclick="doDelete(${gift.id!})">删除</button>
+							</@p.column>
+							<@p.buttons>
+							<div class="pull-left w30">
+								<input type="checkbox"
+									onclick='PL.checkbox(\"ids\",this.checked)'>
+							</div>
+							<button class="btn" type="button" onclick="doDelete()">删除</button>
+							</@p.buttons> </@p.pageList>
+						</div>
+					</div>
+				</div>
+				<hr />
+			</div>
+			<#include "/bvRadio/bottom.html"/>
+		</section>
+		<!--右侧框架结束-->
+	</div>
+	<!--主体结束-->
+</body>
+</html>

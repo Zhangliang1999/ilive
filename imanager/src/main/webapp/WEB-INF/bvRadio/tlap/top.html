@@ -1,0 +1,51 @@
+<header>
+	<div class="row border-bottom">
+            <nav class="navbar navbar-static-top navbar-top-height" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                   <div class="logo">
+                   	<div class="logoimg">
+                   			 <img alt="image" class="img-circle" src="${base}/res/bvRadio/img_top/logocai.png"/>
+                   	</div>
+                   <div class="logoname">
+                   	<span style="font-size: 22px;color: #df3931!important;font-weight: 700;">媒体头条</span><b>|</b><span>直播平台</span>
+                   
+                   </div>
+                       <ul class="logoul">
+                      
+					   
+					    <!-- <li class="bg-w"><a class="col-w" href="">首页</a></li> -->
+					    <li><a  href="${base}/tlap/BBS.do">媒体管理</a></li>
+					  
+                       	
+                       	<li><a  class="border-thead"   href="${base}/tlap/live/v_active_list.do">直播管理</a></li>
+                       	<li><a href="${base}/tlap/live/v_media_list.do">媒体库</a></li>
+                      			 	
+                       </ul> 
+                   </div>
+                </div>
+                <ul class="nav navbar-top-links navbar-right navbar-top-right" style="float: right;">
+                    <li class="nav-num">
+                       <img alt="Mila Kunis" height="23" src="<#if topUser.userThumbImg??&&topUser.userThumbImg!=''>${topUser.userThumbImg!}<#else>${base}/res/bvRadio/assets/images/touxiang.png</#if>"/>
+                    </li>
+                    <li class="dropdown nav-sjgly" style="margin-top: 10px;">
+                        <a aria-expanded="false" role="button" href="###" class="dropdown-toggle" data-toggle="dropdown"
+                           style="color: #fff">${topUser.nickname!}&nbsp;&nbsp;
+                           <span class="fa fa-angle-down"></span></a>
+                        <ul role="menu" class="dropdown-menu nav-dropdown-list">
+                            <li>
+								<a href="${base}/tlap/personal/v_pwd_edit.do">
+									<i class="icon-user"></i> 账号管理
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="${base}/tlap/logout.do">
+									<i class="icon-signout"></i> 退出登录
+								</a>
+							</li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+</header>

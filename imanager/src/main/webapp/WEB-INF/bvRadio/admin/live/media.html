@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>体头条管理平台</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/>
+<script src="${base}/res/bvRadio/js/jquery.dragsort-0.5.2.min.js"
+	type="text/javascript"></script>
+
+</head>
+<body>
+	<div class="container-fluid" style="margin-top: 50px;">
+
+		<table border="1">
+			<tbody id="mediaList">
+
+				<tr>
+
+					<td style="width: 10px;"></td>
+					<td style="width: 250px;">视频名称:</td>
+					<td style="width: 150px;">创建时间：</td>
+					<td style="width: 250px;">预览图：</td>
+				</tr>
+			</tbody>
+		</table>
+		<input type="hidden" name="userId" id="userId" value="${userId}">
+		<input type="hidden" name="type" id="type" value="${type}">
+		<hr />
+	</div>
+	<div class='actions position-absolute-b10'>
+		<!-- <button class="btn btn-success btn-next ml5 mr5" type="button"
+			style="margin-bottom: 1px; margin-left: 1px;" data-toggle='modal'
+			href='#modal-wrap' id="open-button">
+			创建活动<i class='icon-check'></i>
+		</button> -->
+		<button class='btn btn-success btn-next ml5 mr5' id="save-button">
+			保存 <i class='icon-check'></i>
+		</button>
+	</div>
+	<script>
+		$(function() {
+			var userId = $("#userId").val();
+			var type = $("#type").val();
+			$.ajax({
+						url : "http://47.100.62.168:8484/bvRadioBBS/madie/madieList.jspx",
+						type : "get",
+						cache : false,
+						dataType : "jsonp",
+						jsonp : "callback", //这里定义了callback的参数名称，以便服务获取callback的函数名即getMessage  
+						data : {
+							userId : userId,
+							fileType : type
+						},
+						success : function(data, textStatus) {
+							var html = "";
+							$.each(
+											data,
+											function(index, dom) {
+												html += "<tr>";
+												html += "<td style=\"width: 10px;\"><input name=\"active\" type=\"radio\" value=\""+dom.resourceFilePath+"\" /></td>";
+												html += "<td style=\"width: 550px;\">"
+														+ dom.resourceTitle
+														+ "</td>";
+												html += "<td style=\"width: 150px;\">"
+														+ dom.resourceCreateTime
+														+ "</td>";
+												html += "<td style=\"width: 150px;\"><img width=\"60px\" height=\"60px\" src="+dom.resourcePic+"></td>";
+												html += "</tr>";
+											})
+
+							$("#mediaList").append(html);
+
+						}
+					})
+
+		})
+	</script>
+	<script>
+		$(function() {
+			$("#save-button").click(
+					function() {
+						var type = $("#type").val();
+						var url = $("input[name='active']:checked").val();
+						if (type == 6) {
+							$(window.parent.document).find("#textContent1").val(url);
+							$(window.parent.document).find("#msgType").val(3);
+							$(window.parent)[0].sendMessage1();
+						}
+						if (type == 5) {
+							$(window.parent.document).find(
+									"#textContent1").val(url);
+							$(window.parent.document).find("#msgType").val(4);
+							$(window.parent)[0].sendMessage1();
+						}
+
+						$(window.parent.document).find(".close").click();
+					});
+		});
+	</script>
+
+	<hr />
+</body>
+</html>

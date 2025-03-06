@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>直播场次管理</title> <#include "/bvRadio/head.html"/>
+<link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css" />
+<link rel="stylesheet" href="${base}/tysx/css/ContentManage.css" />
+</head>
+<body>
+	<div id="wrapper" class="bgc-fff">
+		<!--右侧内容的区域-->
+		<div id="page-wrapper">
+			<!--上面的导航栏部分-->
+			<#include "/bvRadio/admin/top.html"/>
+			<!--左侧部分-->
+			<#include "/bvRadio/admin/left.html"/>
+			<!--下面内容部分-->
+			<div class="wrapper wrapper-content bgc-fff normal-font recallmanage">
+				<div class="row title-header">
+					<div class="col-lg-12">
+						<div class="title-name">
+							<a class="font-title">直播场次名称：${iLiveEvent.liveTitle!"未命名"}</a>
+						</div>
+					</div>
+				</div>
+				<div class="row list-contain">
+					<div class="col-lg-12 list-title space-20">
+						<button class="btn btn-success m-r"
+							onclick="javascript:history.back(1);">返回</button>
+						<button class="btn blue-bg m-r">上传视频</button>
+						<button class="btn glyphicon glyphicon-transfer black-bg">
+							合并</button>
+						<button class="btn glyphicon glyphicon-trash black-bg">
+							删除</button>
+						<span class="pull-right no-padding"> <img
+							src="${base}/tysx/img/u9439.png" />观看授权方式：<i>密码观看</i> <a
+							href="#" data-toggle="modal" data-target="#myModal" class="wset"><small>观看授权设置</small></a>
+						</span>
+					</div>
+					<div class="col-lg-12">
+						<ul class="recalllist">
+							<#list pagination.list as medias>
+							<li>
+								<div class="list_action text-center">
+									<a href="${base}/admin/content/events/details.do?roomId=${baseIliveRoomId!}&fileId=${medias.fileId!}">
+										<img src="${medias.fileCover!}" style="max-width: 100%;max-height: 100%;" />
+									</a> 
+									<span class="time" style="background-color: #29313e;">${medias.duration!0}</span> 
+									<#if medias.createType==0> <span class="btn curlabel">原片</span>
+									<#elseif medias.createType == 1> <span class="btn curlabel">剪辑</span>
+									<#elseif medias.createType==2> <span class="btn curlabel">合并</span>
+									<#elseif medias.createType==3> <span class="btn curlabel">上传</span>
+									</#if>
+
+
+									<p class="p-w-m col-lg-12 text-center">
+										<a
+											href="${base}/admin/content/events/details.do?roomId=${baseIliveRoomId!}&fileId=${medias.fileId!}"
+											class="col-lg-4 pull-left" title="编辑"> <span
+											class="glyphicon glyphicon-pencil">编辑</span>
+										</a> <a href="#" class="col-lg-4 pull-left" title="剪辑"> <span
+											class="glyphicon glyphicon-edit">剪辑</span>
+										</a> <a href="${base}/admin/content/events/delete.do?roomId=${baseIliveRoomId!}&fileId=${medias.fileId!}&liveEventId=${iLiveEvent.liveEventId!}&pageNo=${pagination.pageNo!1}" class="col-lg-4 delete pull-right" title="删除">
+											<span class="glyphicon glyphicon-trash">删除</span>
+										</a>
+									</p>
+								</div>
+								<p class="font-bold m-t-sm">${medias.mediaFileName!"未命名"}</p>
+								<p class="m-t-sm">
+									录制时间：${medias.createEndTime!} <span class="pull-right">
+										<!-- <input type="checkbox" id="switchbutton1"
+										class="chooseBtn no-margins" checked /> <label
+										for="switchbutton1" class="choose-label no-margins"></label> -->
+										<div style="margin: -18px 0px 0px 320px;" onclick="updateonlineFlag(${medias.fileId!0})"  class="<#if medias.onlineFlag == 1>open1<#else>close1</#if> onlineFlagSwitchBox_${medias.fileId!0} scrollSwitchBox pull-left m-t-12">
+											<input id="onlineFlag_${medias.fileId!0}" name="onlineFlag" type="hidden" value="${medias.onlineFlag!0}">
+											<div  class="<#if medias.onlineFlag == 1>open2<#else>close2</#if> onlineFlagSwitch_${medias.fileId!0}  scrollSwitch"></div>
+										</div>
+									</span>
+								</p>
+								<p class="col-lg-12 no-padding playinfo m-t-sm">
+									<span class="col-lg-4 pull-left storage"> <i>
+											${medias.fileSize!0} kb</i>
+									</span> <span class="col-lg-4 no-padding text-center"> <img
+										src="${base}/tysx/img/u9245.png" /><i>${medias.viewNum!0}</i>
+									</span> <span href="#"
+										class="col-lg-4 no-padding delete pull-right text-right">
+										<img src="${base}/tysx/img/u9421.png" /><i>1.2k</i>
+									</span>
+								</p>
+							</li> </#list>
+						</ul>
+					</div>
+				</div>
+				
+				<form id="_page_form"
+						action="${base}/admin/content/events/file.do?roomId=${baseIliveRoomId!}&liveEventId=${iLiveEvent.liveEventId!}"
+						method="post">
+						<div
+							class="dataTables_paginate paging_simple_numbers pull-right m-r-lg"
+							id="DataTables_Table_0_paginate">
+							<#if !pagination?is_sequence> <#assign pageNow=pagination.pageNo
+							totalPage=pagination.totalPage > <input type="hidden"
+								name="pageNo" value="${pagination.pageNo}"> <#if
+							(pageNow>0) && (pageNow<=totalPage) > <#if (pageNow<=1)>
+							<button type="button" class="btn btn-sm btn-white disabled">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							<#else>
+							<button type="button" onclick="PL.gotoPage(${pageNow - 1})"
+								class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							</#if> <#if (pageNow-4 >1)> <#if (pageNow
+							<totalPage-2)>
+							<button type="button" onclick="PL.gotoPage(1)"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<#list pageNow-2..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> <#elseif (pageNow-6 > 1)>
+							<button onclick="PL.gotoPage(1)" type="button"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<#list pageNow-4..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> <#else> <#list 1..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#elseif (pageNow=1)> <#else> <#list 1..pageNow-1
+							as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if>
+							<button type="button" onclick="PL.gotoPage(${pageNow})"
+								class="active btn btn-sm btn-white">
+								<a>${pageNow}</a>
+							</button>
+							<#if (pageNow+4 < totalPage)> <#if (pageNow>2)> <#list
+							pageNow+1..pageNow+2 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(${totalPage})"
+								class="btn btn-sm btn-white">
+								<a>${totalPage}</a>
+							</button>
+							<#elseif (pageNow+6 < totalPage)> <#list pageNow+1..pageNow+4 as
+							i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(${totalPage})"
+								class="btn btn-sm btn-white">
+								<a>${totalPage}</a>
+							</button>
+							<#else> <#list pageNow+1..totalPage as i>
+							<button onclick="PL.gotoPage(${i})" type="button"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#elseif (pageNow=totalPage)> <#else> <#list
+							pageNow+1..totalPage as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#if (pageNow>=totalPage)>
+							<button type="button" class="btn btn-sm btn-white disabled">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							<#else>
+							<button type="button" onclick="PL.gotoPage(${pageNow + 1})"
+								class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							</#if> <#else>
+							<button type="button" class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(1)"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							</#if> </#if> 
+						</div>
+					</form>
+				
+				
+				<!--弹出层（观看授权设置）-->
+				<div class="modal fade recallmdal" id="myModal" tabindex="-1"
+					role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">回看设置</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="watchlist p-m common_nav">
+										<ul id="myTab" class="col-lg-12 nav nav-tabs p-w-lg">
+											<!-- 观看授权方式 1公开观看 2密码观看 3付费观看 4白名单 5登录观看 -->
+											<li viewAuthorized="1" class="<#if iLiveEvent.viewAuthorized==1 || iLiveEvent.viewAuthorized==5 >active</#if>"><a href="#freewatch"
+												data-toggle="tab">免费观看</a></li>
+											<li viewAuthorized="2" class="<#if iLiveEvent.viewAuthorized==2>active</#if>" ><a href="#codewatch" data-toggle="tab">密码观看</a></li>
+											<li viewAuthorized="3" class="<#if iLiveEvent.viewAuthorized==3>active</#if>" ><a href="#paywatch" data-toggle="tab">付费观看</a></li>
+											<li viewAuthorized="4" class="<#if iLiveEvent.viewAuthorized==4>active</#if>" ><a href="#listwatch" data-toggle="tab">白名单观看</a></li>
+										</ul>
+										<div id="myTabContent" class=" col-lg-12 tab-content p-m">
+											<div viewAuthorized="1" class="tab-pane fade <#if iLiveEvent.viewAuthorized==1 || iLiveEvent.viewAuthorized==5 >in active</#if>" id="freewatch">
+												<form class="watchset">
+													<div class="setlist">
+														<label>用户可免费观看</label> <span class=""> 
+															<input type="checkbox" name="viewCheckbox"  <#if iLiveEvent.viewAuthorized==5>checked="checked"</#if>  >
+															
+															<label>启用登录观看</label>
+														</span>
+													</div>
+												</form>
+											</div>
+											<div viewAuthorized="2" class="tab-pane fade <#if iLiveEvent.viewAuthorized==2>in active</#if>" id="codewatch">
+												<form class="watchset">
+													<div class="setlist">
+														<p class="m-b">
+															<span>观看密码：</span><input type="text" name="viewPassword" id="viewPassword" value="${iLiveEvent.viewPassword!}"/>
+														</p>
+														<p>
+															<span>欢迎语</span><input type="text" name="welcomeMsg" id="welcomeMsg" placeholder="欢迎观看该直播" value="${iLiveEvent.welcomeMsg!}">
+														</p>
+													</div>
+												</form>
+											</div>
+											<div viewAuthorized="3" class="tab-pane fade <#if iLiveEvent.viewAuthorized==3>in active</#if>" id="paywatch">
+												<form class="watchset">
+													<div class="setlist">
+														<p class="m-b-sm">
+															<span>付费金额：</span> <input type="text" /> &nbsp;&nbsp;元<br>
+															<small class="w_tips">天翼直播收取总收益5%的手续费，此费用为第三方支付平台手续费</small>
+															<small><a href="##">查看付费记录</a></small>
+														</p>
+														<p class="m-b-sm">
+															<span>欢迎语</span><input type="text" placeholder="欢迎观看该直播">
+														</p>
+														<p>
+															<span><input type="checkbox" />启用F码</span> <small>F码用于无需付款者进入观看使用，每个F码只能使用一次，成功使用1次后，即为已使用。<a
+																href="F码设置.html">F码管理</a></small>
+														</p>
+													</div>
+												</form>
+											</div>
+											<div viewAuthorized="4" class="tab-pane fade <#if iLiveEvent.viewAuthorized==4>in active</#if>" id="listwatch">
+												<form class="watchset">
+													<div class="setlist set_list">
+														<p>
+															<span class="m-r-xl"><input type="checkbox" />向被邀请人员发送观看短信通知</span>
+															<span>直播开始前:&nbsp;&nbsp;<input type="text">&nbsp;分钟
+															</span>
+														</p>
+														<p>
+															<small>开启功能后，每发送一条短信，将从您的账号中扣除一条短信通讯费用，开启过程中，若账户余额不足，短信开关将自动关闭。<a
+																href="##">短信套餐</a></small>
+														</p>
+														<div class="row m-t-md p-w-m">
+															<p class="m-b-sm">
+																<input type="text" />
+																<button class="btn default-btn m-r m-l">搜索</button>
+																<small><a href="##">白名单管理</a></small>
+															</p>
+															<div class="col-lg-5 pull-left whitelist"></div>
+															<div class="col-lg-5 pull-right whitelist"></div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary red-bg z-sure" onclick="eventAuthorized()">确定</button>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">取消</button>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal -->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+//修改权限
+function eventAuthorized(){
+	var viewAuthorized = $("#myTab").find(".active").attr("viewAuthorized");
+	var  liveEventId = '${iLiveEvent.liveEventId}';
+	//1公开观看 2密码观看 3付费观看 4白名单 5登录观看
+	if(viewAuthorized==1){
+		//公开观看
+		var checked = $("input[name=viewCheckbox]").prop("checked");
+		if(checked){
+			viewAuthorized = 5
+		}
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/content/events/permissions/free.do",
+			dataType : "json",
+			data : {
+				liveEventId : liveEventId,
+				viewAuthorized : viewAuthorized
+				},
+			success : function(data) {
+				var status = data.status;
+				if(status==1){
+					$("#myModal").modal('hide');
+				}else{
+					alert(data.message);
+				}
+			}
+		});
+	}else if(viewAuthorized==2){
+		//密码观看
+		var viewPassword = $("input[name=viewPassword]").val();
+		if(viewPassword.replace("\s+", "") ==""||viewPassword == undefined){
+			alert("请输入密码！");
+			return;
+		}
+		var welcomeMsg = $("input[name=welcomeMsg]").val();
+		if(welcomeMsg.replace("\s+", "") ==""||welcomeMsg == undefined){
+			alert("请输入设置欢迎语！");
+			return;
+		}
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/content/events/permissions/password.do",
+			dataType : "json",
+			data : {
+				liveEventId : liveEventId,
+				viewAuthorized : viewAuthorized,
+				viewPassword : viewPassword,
+				welcomeMsg : welcomeMsg
+				},
+			success : function(data) {
+				var status = data.status;
+				if(status==1){
+					$("#myModal").modal('hide');
+				}else{
+					alert(data.message);
+				}
+			}
+		});
+	}else if(viewAuthorized==3){
+		//付费观看 
+	}else if(viewAuthorized==4){
+		//白名单
+	}
+}
+//是否上线
+function updateonlineFlag(fileId){
+	if(fileId==0){
+		alert("文件回去失败");
+		return;
+	}
+	var onlineFlag = $("#onlineFlag_"+fileId).val();
+	if(onlineFlag==0){
+		onlineFlag=1;
+	}else{
+		onlineFlag=0;
+	}
+	$.ajax({
+		type : "POST",//请求方式 get/post
+		url : "${base}/admin/content/events/online.do",
+		dataType : "json",
+		data : {
+			fileId : fileId,
+			onlineFlag : onlineFlag
+			},
+		success : function(data) {
+			var status = data.status;
+			if(status==1){
+				if(onlineFlag==1){
+					//开启
+					$(".onlineFlagSwitchBox_"+fileId).removeClass("close1").addClass("open1");
+					$(".onlineFlagSwitchBox_"+fileId).find(".onlineFlagSwitch_"+fileId).eq(0).removeClass("close2").addClass("open2");
+					$("#onlineFlag_"+fileId).val(1);
+				}else{
+					//关闭
+					$(".onlineFlagSwitchBox_"+fileId).removeClass("open1").addClass("close1");
+					$(".onlineFlagSwitchBox_"+fileId).find(".onlineFlagSwitch_"+fileId).eq(0).removeClass("open2").addClass("close2");
+					$("#onlineFlag_"+fileId).val(0);
+				}
+			}else{
+				alert(data.message);
+			}
+		}
+	});
+	
+}
+</script>
+<script>
+	$(".live-bottom").hide()
+	wid = $('.blcen').width()
+	$('.textbl').css('width', wid - 300)
+	$('.textbl2').css('width', wid - 300)
+	$(window).resize(function() { //当浏览器大小变化时
+
+		wid = $('.blcen').width()
+		$('.textbl').css('width', wid - 300)
+		$('.textbl2').css('width', wid - 300)
+
+	});
+	$(".img-box").hover(function() {
+		$(this).find(".live-bottom").stop(true, false).slideDown(300)
+	}, function() {
+		$(this).find(".live-bottom").stop(true, false).slideUp(300)
+	})
+</script>
+</html>

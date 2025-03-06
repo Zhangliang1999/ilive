@@ -1,0 +1,184 @@
+.companyBox{
+    width: 95%;
+    height:auto;
+    margin: 15px auto;
+    background: #F5F5F5;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    padding: 30px 0;
+}
+.qyrzTit{
+    width: 890px;
+    overflow: hidden;
+    margin: 30px auto;
+}
+.tagBox{
+    width: 60px;
+    float: left;
+    text-align: center;
+}
+.tagBox .pactive{
+    color: #1A97D7;
+    font-size: 14px;
+    margin-top: 15px;
+}
+.pnormal{
+    color: #D9EAF3;
+    font-size: 14px;
+    margin-top: 15px;
+}
+.tagactive{
+    width: 35px;
+    height: 35px;
+    background: url("../img/tagactive.png") no-repeat;
+    background-size: 100% 100%;
+    margin-left: 12px;
+    text-align: center;
+    line-height: 35px;
+    color: #ffffff;
+}
+.tag{
+    width: 35px;
+    height: 35px;
+    background: url("../img/tag.png") no-repeat;
+    background-size: 100% 100%;
+    margin-left: 12px;
+    text-align: center;
+    line-height: 35px;
+    color: #ffffff;
+}
+.taglineactive{
+    width: 355px;
+    height: 6px;
+    background: #1A97D7;
+    float: left;
+    margin-top: 15px;
+}
+.tagline{
+    width: 355px;
+    height: 6px;
+    background: #D9EAF3;
+    float: left;
+    margin-top: 15px;
+}
+.qyrzContent{
+    width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+.rzGroup{
+    width: 650px;
+    height: 50px;
+}
+.rzname{
+    width: 180px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 16px;
+    text-align: right;
+    float: left;
+}
+.redFont{
+    color: red;
+    margin-right: 10px;
+}
+.rzRight{
+    width: 300px;
+    float: left;
+    margin-left: 20px;
+    position: relative;
+    margin-bottom: 15px;
+}
+.rzRight input{
+    width: 298px;
+    padding:  0 10px;
+    height: 33px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+.yzmBtn{
+    width: 80px;
+    height: 30px;
+    background: #0084ff;
+    border-radius: 3px;
+    color: #fff;
+    position: absolute;
+    top: 1px;
+    right: 2px;
+    border: none;
+}
+.btnGroup{
+    width: 700px;
+    height: 40px;
+    overflow: hidden;
+    margin-top: 20px;
+    text-align: center;
+}
+.bigSelect{
+    width: 298px;
+    padding:  0 10px;
+    height: 33px;
+    border: 1px solid #ddd;
+
+}
+.smallSelect{
+    width: 90px;
+    padding:  0 10px;
+    height: 33px;
+    border: 1px solid #ddd;
+}
+.rzRight textarea{
+    width: 298px;
+    padding:  5px 10px;
+    height: 52px;
+    border: 1px solid #ddd;
+    resize: none;
+    margin-top: 15px;
+}
+
+.warn{
+	line-height:33px;
+	margin-left:15px;
+	color:red;
+}
+
+.fjtext{
+    position: absolute;
+    top: 8px;
+    right: -150px;
+    color: #999;
+}
+.fjtextres{
+    position: absolute;
+    top: 8px;
+    right: -250px;
+    color: #999;
+}
+.rzRight span{
+    display: inline-block;
+    color: #999;
+    margin-top: 5px;
+}
+input[type=checkbox]{
+    width: 14px;
+    height: 14px;
+    vertical-align: sub;
+}
+.companyBox{
+    text-align: center;
+}
+.partone{
+    font-size: 16px;
+    color: #333;
+}
+.parttwo{
+    font-size: 20px;
+    color: #333;
+}
+.partthree{
+    font-size: 12px;
+    color: #999;
+}
+.font-blue{
+    color: #0084ff;
+}

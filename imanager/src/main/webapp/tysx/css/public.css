@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+body{  font-family:"Microsoft YaHei"; font-size:12px;}
+div,ul,li,dl,dt,dd,p,span,a,label,input,body,h3,h4,table,tr,td,select,option{ margin:0px ; padding:0px;}
+ul{list-style:none; }
+a{ text-decoration:none;color: #000}
+a:hover{ ;text-decoration:none;}
+a:visited{ text-decoration:none;}
+img,input{ border:0;}
+.c{width: 1000px;margin: 0 auto}
+.l{float: left}
+.r{float: right;}
+*{margin: 0px;padding: 0}
+
+
+/*媒体库*/
+.nav-wyglxt span{
+	font-size: 14px;
+	color: #a7b1c2;
+}
+.logo{
+	
+	margin-left: 30px;
+	
+	
+}
+.logo span{
+	font-size: 18px;
+	line-height: 64px;
+	color: #fff;
+}
+.logo b{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.logoimg{
+	float: left;
+	margin-top: 20px;
+	padding-right: 20px;
+}
+.logoname{
+	float: left;
+}
+.logoul{
+	float: left;
+	padding-left: 50px;
+		color: #fff;
+
+}
+.logoul li{
+	float: left;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.logoul li a{
+	font-size: 18px;
+	line-height: 64px;
+	color: #fff
+}
+.nav-num{
+	width: 35px;
+    height: 35px;
+    float: left;
+    margin-top: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.nav-num img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+ .bg-w{
+ 	background: #fff !important;
+ 	height: 65px;
+ 	color: #000 !important;
+ }
+.col-w{
+	color: #000 !important;
+}

@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<title>登录页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<!-- CSS -->
+		<!-- <link rel="stylesheet" href="css/reset.css"> -->
+		<link rel="stylesheet" href="${base}/tysx/login/css/supersized.css">
+		<link rel="stylesheet" href="${base}/tysx/login/css/login.css">
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+	</head>
+	<body oncontextmenu="return false">
+		<div class="page-container">
+			<h1>天翼播管平台</h1>
+			<div class="form">
+				<div>
+					<input type="text" name="username" class="username" placeholder="用户账号" autocomplete="off" />
+				</div>
+				<div>
+					<input type="password" name="password" class="password" placeholder="密码" autocomplete="off" oncontextmenu="return false" onpaste="return false" />
+					<input type="hidden" name="validType" value="2" />
+					<input type="hidden" name="type" value="1" />
+				</div>
+				<div class="yzm">
+					<input type="vpassword" name="vpassword" class="password" placeholder="验证码" autocomplete="off" oncontextmenu="return false" onpaste="return false" />
+					<canvas id="canvas" width="120" height="40"></canvas>
+				</div>
+				<button id="submit" type="button">
+					提交
+				</button>
+			</div>
+		</div>
+		<div class="alert" style="display:none">
+			<h2>消息</h2>
+			<div class="alert_con">
+				<p id="ts"></p>
+				<p style="line-height:70px">
+					<a class="btn">确定</a>
+				</p>
+			</div>
+		</div>
+		<!-- Javascript -->
+		<script src="${base}/js/jquery-2.1.1.js" type="text/javascript"></script>
+		<script src="${base}/tysx/login/js/supersized.3.2.7.min.js"></script>
+		<script src="${base}/tysx/login/js/supersized-init.js"></script>
+		<script src="${base}/tysx/js/base64.js"></script>
+		<script>
+			var checkCode = "";
+
+			window.keyPress
+
+			$(".btn").click(function() {
+				is_hide();
+			})
+			var u = $("input[name=username]");
+			var p = $("input[name=password]");
+			var vp = $("input[name=vpassword]");
+			$("#submit").on('click', function() {
+				if (u.val() == '' || p.val() == '') {
+					$("#ts").html("用户名或密码不能为空~");
+					is_show();
+					return false;
+				} else {
+					var reg = /^[0-9A-Za-z]+$/;
+					if (!reg.exec(u.val())) {
+						$("#ts").html("用户名格式输入错误");
+						is_show();
+						return false;
+					}
+
+					if (vp.val() == '') {
+						$("#ts").html("验证码输入不能为空");
+						is_show();
+						return false;
+					}
+
+					if (vp.val().toLowerCase() != checkCode.toLowerCase()) {
+						$("#ts").html("验证码输入不正确");
+						is_show();
+						return false;
+					}
+					var url = "${base}/operator/login.do";
+					var password = base64Encoder(p.val());
+					$.post(url, {
+						username : u.val(),
+						password : password,
+						validType : 2,
+						type : "1"
+					}, function(data) {
+						if (data.status == 1) {
+							window.location.href = "${base}/operator/enterprise/overview.do";
+						} else {
+							$("#ts").html(data.msg);
+							is_show();
+							return false;
+						}
+					}, "json");
+				}
+			});
+
+
+			document.onkeydown = function(event) {
+				var e = event || window.event || arguments.callee.caller.arguments[0];
+				if (e && e.keyCode == 13) {// enter 键
+					//要做的事情
+					$("#submit").click();
+				}
+			};
+
+			window.onload = function() {
+				$(".connect p").eq(0).animate({
+					"left" : "0%"
+				}, 600);
+				$(".connect p").eq(1).animate({
+					"left" : "0%"
+				}, 400);
+
+				/**生成一个随机数**/
+				function randomNum(min, max) {
+					return Math.floor(Math.random() * (max - min) + min);
+
+				}
+
+				/**生成一个随机色**/
+				function randomColor(min, max) {
+					var r = randomNum(min, max);
+					var g = randomNum(min, max);
+					var b = randomNum(min, max);
+					return "rgb(" + r + "," + g + "," + b + ")";
+				}
+
+				drawPic();
+				document.getElementById("canvas").onclick = function(e) {
+					e.preventDefault();
+					drawPic();
+				}
+				/**绘制验证码图片**/
+				function drawPic() {
+					checkCode = "";
+					var canvas = document.getElementById("canvas");
+					var width = canvas.width;
+					var height = canvas.height;
+					var ctx = canvas.getContext('2d');
+					ctx.textBaseline = 'bottom';
+
+					/**绘制背景色**/
+					ctx.fillStyle = randomColor(200, 240);
+					//颜色若太深可能导致看不清
+					ctx.fillRect(0, 0, width, height);
+					/**绘制文字**/
+					var str = 'ABCEFGHJKLMNPQRSTWXY123456789';
+					for (var i = 0; i < 4; i++) {
+						var txt = str[randomNum(0, str.length)];
+						ctx.fillStyle = randomColor(50, 70);
+						//随机生成字体颜色
+						ctx.font = randomNum(25, 40) + 'px SimHei';
+						//随机生成字体大小
+						var x = 10 + i * 25;
+						var y = randomNum(30, 40);
+						var deg = randomNum(-45, 45);
+						//修改坐标原点和旋转角度
+						ctx.translate(x, y);
+						ctx.rotate(deg * Math.PI / 180);
+						ctx.fillText(txt, 0, 0);
+						//恢复坐标原点和旋转角度
+						ctx.rotate(-deg * Math.PI / 180);
+						ctx.translate(-x, -y);
+						checkCode = checkCode + txt;
+					}
+
+					/**绘制干扰线**/
+					for (var i = 0; i < 4; i++) {
+						ctx.strokeStyle = randomColor(40, 180);
+						ctx.beginPath();
+						ctx.moveTo(randomNum(0, width), randomNum(0, height));
+						ctx.lineTo(randomNum(0, width), randomNum(0, height));
+						ctx.stroke();
+					}
+					/**绘制干扰点**/
+					for (var i = 0; i < 30; i++) {
+						ctx.fillStyle = randomColor(0, 255);
+						ctx.beginPath();
+						ctx.arc(randomNum(0, width), randomNum(0, height), 1, 0, 2 * Math.PI);
+						ctx.fill();
+					}
+				}
+
+			}
+			function is_hide() {
+				$(".alert").animate({
+					"top" : "-40%"
+				}, 300)
+			}
+
+			function is_show() {
+				$(".alert").show().animate({
+					"top" : "45%"
+				}, 300)
+			}
+		</script>
+	</body>
+
+</html>
+

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveMediaFile" table="ilive_media_file">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="fileId" type="java.lang.Long">
+			<column name="file_id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="mediaFileName" type="java.lang.String">
+			<column name="file_name" />
+		</property>
+
+
+		<property name="mediaCreateTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+
+		<property name="createStartTime" type="java.sql.Timestamp">
+			<column name="record_start_time" />
+		</property>
+
+		<property name="createEndTime" type="java.sql.Timestamp">
+			<column name="record_end_time" />
+		</property>
+
+
+		<property name="createType" type="java.lang.Integer">
+			<column name="create_type" />
+		</property>
+
+		<property name="duration" type="java.lang.Integer">
+			<column name="duration" />
+		</property>
+
+		<property name="fileRate" type="java.lang.Double">
+			<column name="file_rate" />
+		</property>
+
+		<property name="widthHeight" type="java.lang.String">
+			<column name="width_height" />
+		</property>
+
+		<property name="fileSize" type="java.lang.Long">
+			<column name="file_size" />
+		</property>
+
+		<property name="viewNum" type="java.lang.Long">
+			<column name="view_num" />
+		</property>
+
+		<property name="filePath" type="java.lang.String">
+			<column name="file_path" />
+		</property>
+
+		<property name="fileType" type="java.lang.Integer">
+			<column name="file_type" />
+		</property>
+
+		<property name="allowDownload" type="java.lang.Boolean">
+			<column name="allow_download" />
+		</property>
+
+		<property name="docDealState" type="java.lang.Integer">
+			<column name="docDealState" />
+		</property>
+
+
+		<property name="docDealFinishAddr" type="java.lang.String">
+			<column name="doc_deal_finishAddr" />
+		</property>
+
+		<property name="docDealFinishPicCount" type="java.lang.String">
+			<column name="doc_deal_finishPicCount" />
+		</property>
+
+		<property name="liveEventId" column="live_eventId"></property>
+
+		<property name="delFlag" type="java.lang.Integer">
+			<column name="del_flag" />
+		</property>
+		<property name="onlineFlag" type="java.lang.Integer">
+			<column name="online_flag" />
+		</property>
+		<property name="userName" type="java.lang.String">
+			<column name="user_name" />
+		</property>
+		<property name="userId" type="java.lang.Long">
+			<column name="user_Id" />
+		</property>
+		<property name="liveRoomId" type="java.lang.Integer">
+			<column name="liveroom_id" />
+		</property>
+		<property name="enterpriseId" type="java.lang.Long">
+			<column name="enterprise_id" />
+		</property>
+
+		<property name="fileCover" type="java.lang.String">
+			<column name="file_cover" />
+		</property>
+
+		<property name="mediaFileDesc" type="java.lang.String">
+			<column name="media_file_desc" />
+		</property>
+
+		<property name="serverMountId" type="java.lang.Integer">
+			<column name="server_mountId" />
+		</property>
+
+		<property name="fileExtension" type="java.lang.String">
+			<column name="file_extension" />
+		</property>
+
+		<set name="iLiveMediaFileCommentsSet" table="ilive_media_file_comments">
+			<key column="file_id"></key>
+			<one-to-many class="ILiveMediaFileComments"></one-to-many>
+		</set>
+
+		<property name="mediaInfoStatus" column="fetch_info_result"></property>
+
+		<property name="mediaInfoDealState" column="media_info_dealState"></property>
+
+	</class>
+</hibernate-mapping>

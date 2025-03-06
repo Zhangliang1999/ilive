@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>直播倒计时设置</title>
+	<#include "/bvRadio/head.html"/>
+    <!--直播设置模块样式-->
+    <link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css"/>
+
+</head>
+<body >
+<div id="wrapper" class="bgc-fff normal-font">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/admin/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/admin/left.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content bgc-fff countdownset">
+            <div class="row title-header">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title"> 直播倒计时设置</a>
+                    </div>
+                </div>
+            </div>
+            <!-- roomId -->
+            <input type="hidden" value="${roomId}" id="roomId"/>
+            <div class="row">
+                <div class="col-lg-12 space-30">
+                    <div class="col-lg-4" style="padding-left:60px;">
+                        <img src="${base}/tysx/img/phone.png" width="320px"/>
+                    </div>
+                    <div class="col-lg-8 cright">
+                        <p>
+                            <span>功能开关:</span>
+                            <input type="checkbox" id="switchbutton" class="chooseBtn" <#if liveEvent.openCountdownSwitch??><#if liveEvent.openCountdownSwitch == 1>checked</#if></#if> />
+                            <label for="switchbutton" class="choose-label"></label>
+                            <small class="m-l">倒计时功能开启时，会以倒计时形式（xx天xx时xx分xx秒）显示在直播页面</small>
+                        </p>
+                        <p>
+                            <span>直播提示文字：</span>
+                            <input type="text" placeholder="最长10个字" id="countdownTitle" <#if liveEvent.countdownTitle??>value="${liveEvent.countdownTitle}"</#if>>
+                            <small>5/10</small>
+                        </p>
+                        <p class="z_demo">
+                            <span>直播开始时间：
+                            <input type="text" id="config-demo" class="form-control" value="${liveEvent.liveStartTime}">
+                            </span>
+                        </p>
+                        <p><span>直播倒计时剩余：</span><span id="countdown"></span></p>
+                        <button class="btn red-bg m-t-md z-sure" type="submit" id="sub">确定</button>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+
+</body>
+<!-- Mainly scripts -->
+<script src="${base}/tysx/js/jquery-2.1.1.js"></script>
+<script src="${base}/tysx/js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="${base}/tysx/js/bootstrap.min.js"></script>
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${base}/tysx/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="${base}/tysx/js/inspinia.js"></script>
+<script src="${base}/tysx/js/plugins/pace/pace.min.js"></script>
+
+<!-- Chosen -->
+<script src="${base}/tysx/js/plugins/chosen/chosen.jquery.js"></script>
+
+<!-- JSKnob -->
+<script src="${base}/tysx/js/plugins/jsKnob/jquery.knob.js"></script>
+
+<!-- Input Mask -->
+<script src="${base}/tysx/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+<!-- Data picker -->
+<script src="${base}/tysx/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<!-- NouSlider -->
+<script src="${base}/tysx/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+<!-- Switchery -->
+<script src="${base}/tysx/js/plugins/switchery/switchery.js"></script>
+
+<!-- IonRangeSlider -->
+<script src="${base}/tysx/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+<!-- iCheck -->
+<script src="${base}/tysx/${base}/tysx/js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- MENU -->
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- Color picker -->
+<script src="${base}/tysx/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+<!-- Clock picker -->
+<script src="${base}/tysx/js/plugins/clockpicker/clockpicker.js"></script>
+
+<!-- Image cropper -->
+
+<script src="${base}/tysx/js/plugins/cropper/cropper.min.js"></script>
+
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="${base}/tysx/js/plugins/fullcalendar/moment.min.js"></script>
+
+<!-- Date range picker -->
+<script src="${base}/tysx/js/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="${base}/tysx/js/myJs.js"></script>
+<script src="${base}/tysx/js/video.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+</script>
+
+<!--时间控件-->
+<link href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/moment.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.js"></script>
+
+<script>
+	if(!($("#switchbutton").get(0).checked)){
+		$("input").attr("disabled","disabled");
+		$("#switchbutton").attr("disabled",false);
+	}
+
+    $(".live-bottom").hide()
+
+    wid=$('.blcen').width()
+    $('.textbl').css('width',wid-300)
+    $('.textbl2').css('width',wid-300)
+
+    $(window).resize(function () {          //当浏览器大小变化时
+
+        wid=$('.blcen').width()
+        $('.textbl').css('width',wid-300)
+        $('.textbl2').css('width',wid-300)
+
+    });
+
+    $(".img-box").hover(function(){
+        $(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+    },function(){
+        $(this).find(".live-bottom").stop(true, false).slideUp(300)
+    })
+
+    // 时间控件设置
+    var beginTimeTake;
+
+    $('#config-demo').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            autoUpdateInput: false,
+            timePicker24Hour : true,
+            timePicker : true,
+            "locale": {
+                format: 'YYYY-MM-DD HH:mm',
+                applyLabel: "应用",
+                cancelLabel: "取消",
+                resetLabel: "重置",
+            }
+        },
+        function(start, end, label) {
+            beginTimeTake = start;
+            if(!this.startDate){
+                this.element.val('');
+            }else{
+                this.element.val(this.startDate.format(this.locale.format));
+            }
+        });
+    
+  	//倒计时循环
+    var t = setInterval(countDown,1000);
+    
+    //功能开关
+    $("#switchbutton").on("click",function(){
+    	if($(this).get(0).checked){
+    		t = setInterval(countDown,1000);
+    		$("#countdownTitle").attr("disabled",false);
+    		$("#config-demo").attr("disabled",false);
+    	}else{
+    		clearInterval(t);
+    		$("#countdownTitle").attr("disabled","disabled");
+    		$("#config-demo").attr("disabled","disabled");
+    		$("#switchbutton").attr("disabled",false);
+    	}
+    });
+    
+    //
+    $("#config-demo").on("change",function(){
+    	countDown();
+    	t = setInterval(countDown,1000);
+    });
+    
+    //倒计时函数
+    function countDown(){
+    	var nowtime = new Date().getTime();
+        var starttime = $("#config-demo").val();
+        var arr = starttime.split(" ");
+        var arr1 = arr[0].split("-");
+        var arr2 = arr[1].split(":");
+        var s = 0;
+        if(arr2.length == 2){
+        	s = 0;
+        }else{
+        	s = arr2[2];
+        }
+        var start = new Date();
+        start.setFullYear(parseInt(arr1[0]),parseInt(arr1[1]-1),parseInt(arr1[2]));
+        start.setHours(parseInt(arr2[0]),parseInt(arr2[1]),parseInt(s));
+        var time = start.getTime() - nowtime;
+        if(time<=0){
+        	$("#countdown").html("直播时间已过");
+        	clearInterval(t);
+        }else{
+        	var day = Math.floor(time / (1000 * 60 * 60 *24));
+            var hours = Math.floor(time % (1000 * 60 * 60 *24) / (1000 * 60 *60));
+            var minutes = Math.floor(time % (1000 * 60 *60) /(1000 * 60));
+            var seconds = Math.floor(time % (1000 * 60) / 1000);
+            $("#countdown").html(day +" 天 "+hours+" 小时 "+minutes+" 分钟 "+seconds+" 秒");
+        }
+    }
+  
+    //确认按钮
+    $("#sub").on("click",function(){
+    	var openCountdownSwitch;
+    	if($("#switchbutton").get(0).checked){
+    		openCountdownSwitch = 1;
+    	}else{
+    		openCountdownSwitch = 0;
+    	}
+    	var stime = $("#config-demo").val();
+    	var roomId = $("#roomId").val();
+    	var title = $("#countdownTitle").val();
+    	$.ajax({
+    		url:"${base}/admin/config/countdownsetEdit.do",
+    		method:"post",
+    		data:{
+    			roomId:roomId,
+    			time:stime,
+    			countdownTitle:title,
+    			openCountdownSwitch:openCountdownSwitch
+    		},
+    		success:function(){
+    			alert("修改成功");
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    });
+    
+    
+</script>
+</html>

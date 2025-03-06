@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveMessage" table="ilive_message">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="msgId" type="java.lang.Long">
+			<column name="msg_id" />
+			<generator class="assigned" />
+		</id>
+		<many-to-one name="live" class="ILiveEvent" fetch="select">
+			<column name="live_id" not-null="true" />
+		</many-to-one>
+		<many-to-one name="iLiveIpAddress" class="ILiveIpAddress"
+			fetch="select">
+			<column name="ip" />
+		</many-to-one>
+		<property name="senderName" type="java.lang.String">
+			<column name="sender_name" not-null="true" />
+		</property>
+		<property name="liveRoomId" type="java.lang.Integer">
+			<column name="room_id" not-null="true" />
+		</property>
+		<property name="senderImage" type="java.lang.String">
+			<column name="sender_image" />
+		</property>
+		<property name="senderLevel" type="java.lang.Integer">
+			<column name="sender_level" />
+		</property>
+		<property name="msgOrginContent" type="text">
+			<column name="msg_orginal_content" />
+		</property>
+		<property name="msgContent" type="text">
+			<column name="msg_content" />
+		</property>
+		<property name="msgType" type="java.lang.Integer">
+			<column name="msg_type" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" length="23" />
+		</property>
+		<property name="status" type="java.lang.Integer">
+			<column name="status" />
+		</property>
+		<property name="deleted" type="java.lang.Boolean">
+			<column name="is_deleted" />
+		</property>
+		<property name="checked" type="java.lang.Boolean">
+			<column name="is_checked" />
+		</property>
+		<property name="liveMsgType" type="java.lang.Integer">
+			<column name="live_msg_type" />
+		</property>
+		<property name="fontColor" type="java.lang.String">
+			<column name="font_color" />
+		</property>
+		<property name="IMEI" type="java.lang.String">
+			<column name="IMEI" />
+		</property>
+		<property name="width" type="java.lang.Integer">
+			<column name="width"/>
+		</property>
+		<property name="height" type="java.lang.Integer">
+			<column name="height" length="23" />
+		</property>
+		<property name="extra" type="java.lang.String">
+			<column name="extra" />
+		</property>
+		<property name="top" type="java.lang.Integer">
+			<column name="top"/>
+		</property>
+		<!-- <property name="opType" type="java.lang.Integer">
+			<column name="op_type"/>
+		</property> -->
+		<property name="senderId" type="java.lang.Long">
+			<column name="sender_id"/>
+		</property>
+		<property name="senderType" type="java.lang.Integer">
+			<column name="sender_type"></column>
+		</property>
+		<property name="replyType" type="java.lang.Integer">
+			<column name="reply_type"/>
+		</property>
+		<property name="replyContent" type="java.lang.String">
+			<column name="reply_content"/>
+		</property>
+		<property name="replyName" type="java.lang.String">
+			<column name="reply_name"/>
+		</property>
+		<property name="praiseNumber" type="java.lang.Long">
+			<column name="praise_number"/>
+		</property>
+	</class>
+</hibernate-mapping>

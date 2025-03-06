@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F码设置</title>
+<#include "/bvRadio/head.html"/>
+  <link href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.css" rel="stylesheet">
+</head>
+<body>
+	<div id="wrapper" class="bgc-fff normal-font">
+		<!--右侧内容的区域-->
+		<div id="page-wrapper">
+			<!--上面的导航栏部分-->
+			<#include "/bvRadio/admin/top.html"/>
+			<!--左侧部分-->
+			<#include "/bvRadio/admin/left.html"/>
+			<!--下面内容部分-->
+			<!-- roomId -->
+			<input type="hidden" id="roomId" value="${roomId}" />
+			<div class="wrapper wrapper-content bgc-fff">
+				<div class="modal fade alertcode" id="myModal" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h3 class="modal-title" id="myModalLabel">添加F码</h3>
+								</div>
+								<div class="modal-body">
+									<p class="m-b">
+										<label>F码名称：</label> <input type="text" placeholder="xx公司FM码"
+											id="codeName" />
+									</p>
+									<p class="m-b">
+										<label>F码数量：</label> <input type="text" placeholder="xx公司FM码"
+											id="codeNum" />
+									</p>
+									<div class="z_demo">
+										<label>有效日期：</label> <input type="text" id="config-demo"
+											class="form-control"> <i
+											class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary red-bg z-sure"
+										id="addFCode">确定</button>
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal" id="cancel">取消</button>
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="row title-header">
+					<div class="col-lg-12">
+						<div class="title-name">
+							<a class="font-title">F码设置</a>
+						</div>
+					</div>
+				</div>
+				<div class="row codeset">
+					<div class="col-lg-12 m-t">
+						<div class="pull-left">
+							<div class="input-group">
+								<button class="btn default-btn m-r m-l" data-toggle="modal"
+									data-target="#myModal">添加F码</button>
+							</div>
+						</div>
+						<div class="pull-right">
+							<div class="input-group">
+								<input class="inputcon" type="text" placeholder="按用户搜索" />
+								<button class="btn default-btn m-r m-l">搜索</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<@p.pageList value=pagination
+							listAction="${base}/admin/config/fset.do?roomId=${roomId}";live,i,has_next>
+				<@p.column class="text-center mr5 w15"
+							style="text-align: center; width:15px" title="<input
+								type='checkbox' onclick='PL.checkbox(\"ids\",this.checked)'>">
+							<input type="checkbox" name="ids" value="${live.liveId!}">
+				</@p.column>
+				<@p.column class="text-center" style="width:40px;"
+							title="序号">${live.codeId!}
+							</@p.column>
+							 <@p.column
+							class="text-left" style="width:50px"
+							title="F码名称">${live.codeName!'未知'}
+							</@p.column> 
+							 <@p.column class="text-center" style="width:60px;"
+							title="数量"> 
+								${live.codeNum!}
+							 </@p.column> 
+							 	 <@p.column class="text-center" style="width:60px;"
+							title="已使用数量"> 
+								${live.useNum!}
+							 </@p.column> 
+							<@p.column class="text-center" style="width:180px;" title="有效时间">
+							<small style="color: #6B7C98;">${live.startTime!}
+							</@p.column> 
+							<@p.column class="text-center" style="width:180px;" title="操作">
+							<a href="${base}/admin/config/fdetail.do?roomId=${roomId}&codeId=${live.codeId}">详情</a>
+							</@p.column> 
+				</@p.pageList>
+			</div>
+		</div>
+
+</body>
+<script>
+	$(".live-bottom").hide()
+
+	wid = $('.blcen').width()
+	$('.textbl').css('width', wid - 300)
+	$('.textbl2').css('width', wid - 300)
+
+	$(window).resize(function() { //当浏览器大小变化时
+
+		wid = $('.blcen').width()
+		$('.textbl').css('width', wid - 300)
+		$('.textbl2').css('width', wid - 300)
+
+	});
+
+	$(".img-box").hover(function() {
+		$(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+	}, function() {
+		$(this).find(".live-bottom").stop(true, false).slideUp(300)
+	})
+
+	// 时间控件设置
+	var beginTimeStore = '';
+	var endTimeStore = '';
+	$('#config-demo').daterangepicker(
+			{
+				"timePicker" : true,
+				"timePicker24Hour" : false,
+				"linkedCalendars" : false,
+				"autoUpdateInput" : false,
+				"locale" : {
+					format : 'YYYY-MM-DD',
+					separator : ' ~ ',
+					applyLabel : "应用",
+					cancelLabel : "取消",
+					resetLabel : "重置",
+				},
+				"showDropdowns" : true
+			},
+			function(start, end, label) {
+				beginTimeStore = start;
+				endTimeStore = end;
+// 				console.log(this.startDate.format(this.locale.format));
+// 				console.log(this.endDate.format(this.locale.format));
+				if (!this.startDate) {
+					this.element.val('');
+				} else {
+					this.element.val(this.startDate.format(this.locale.format)
+							+ this.locale.separator
+							+ this.endDate.format(this.locale.format));
+				}
+			});
+
+	//F码添加功能
+	$("#addFCode").on("click",function() {
+						var name = $("#codeName").val();
+						var num = $("#codeNum").val();
+						$.ajax({
+									url : "${base}/admin/config/addFCode.do",
+									method : "post",
+									data : {
+										codeName : name,
+										codeNum : num
+									},
+									success : function(res) {
+										console.log(res);
+										var n = $("#tabBody").children().length;
+										var tr = $("<tr></tr>");
+										var td = "<td data-mycodeid ="+res+">"
+												+ (n + 1) + "</td>";
+										td += "<td>" + name + "</td><td>" + num
+												+ "</td><td>0</td>";
+										td += "<td>2018-03-17 15:44:32 ~ 2018-03-17 15:44:32</td>";
+										td += "<td><a href='${base}/admin/config/fdetail.do?roomId=${roomId}&codeId="
+												+ res
+												+ "' class='f-check' title='查看'>";
+										td += "<span class='glyphicon glyphicon-eye-open'></span></a><a href='#' class='f-delete removeFCode' title='删除'>";
+										td += "<span class='glyphicon glyphicon-trash'></span></a></td>";
+										tr.append(td);
+										$("#tabBody").append(tr);
+										$("#cancel").trigger("click");
+									},
+									error : function() {
+										console.log("添加失败");
+									}
+								});
+					});
+		$("#tabBody").on("click",".removeFCode",function() {
+				var codeId = $(this).closest("tr").find("td").first().attr(
+						"data-mycodeid");
+				var that = this;
+				$.ajax({
+					url : "${base}/admin/config/removeFCode.do",
+					method : "post",
+					data : {
+						codeId : codeId
+					},
+					success : function(res) {
+						window.location.reload();
+					},
+					error : function() {
+
+					}
+				});
+			});
+</script>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="BBSDiyformData" table="bbs_diyform_data">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write" />
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="dataId" type="java.lang.Integer">
+			<column name="data_id" />
+		</property>
+		<many-to-one name="bbsDiyform" class="BBSDiyform" fetch="select">
+			<column name="diyform_id" not-null="true" />
+		</many-to-one>
+		<property name="dataTitle" type="java.lang.String">
+			<column name="data_title" length="50" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" length="23" />
+		</property>
+		<property name="dataValue" type="java.lang.String">
+			<column name="data_value" length="500"/>
+		</property>
+		<property name="dataOrder" type="java.lang.Integer">
+			<column name="data_order" />
+		</property>
+		<property name="managerId" type="java.lang.Long">
+			<column name="manager_id" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

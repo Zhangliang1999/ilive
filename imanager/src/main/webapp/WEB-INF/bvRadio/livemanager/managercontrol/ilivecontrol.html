@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>直播管控</title>
+	<#include "/bvRadio/livemanager/head.html" />
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+    <style>
+
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/livemanager/top.html" />
+        <!--左侧部分-->
+        <#include "/bvRadio/livemanager/managercontrolleft.html" />
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">直播管控</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                    <ul class="liveall">
+                        <li>全部直播:【${livenum!}】</li>
+                        <li>待审核直播:【${livewaitnum!}】</li>
+                        <li>直播中:【${roomlivenum!}】</li>
+                        <li>预告:【${liveadvannum!}】</li>
+                    </ul>
+                    <a class="btn btn-success pull-right m-t-sm m-r" onclick="check()" 
+                    	href="${base}/operator/managercontrol/monitor.do">开启矩阵监控</a>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                    <div class="pull-left m-l">
+                        <div class="selectBox m-t-xs">
+                            <span class="m-r-sm">类型:</span>
+                            <select id="roomtype">
+                                <option value="">全部</option>
+                                <option value="0" <#if formroomtype??><#if formroomtype == 0>selected="selected"</#if></#if>>试用</option>
+                                <option value="1" <#if formroomtype??><#if formroomtype == 1>selected="selected"</#if></#if>>正式</option>
+                            </select>
+                        </div>
+                        <div class="selectBox m-t-xs">
+                            <span class="m-r-sm">审核:</span>
+                            <select id="examine">
+                                <option value="">全部</option>
+                                <option value="4" <#if formexamine??><#if formexamine == 4>selected="selected"</#if></#if>>待审核</option>
+                                <option value="5" <#if formexamine??><#if formexamine == 5>selected="selected"</#if></#if>>审核通过</option>
+                                <option value="6" <#if formexamine??><#if formexamine == 6>selected="selected"</#if></#if>>审核不通过</option>
+                            </select>
+                        </div>
+                        <div class="selectBox m-t-xs">
+                            <span class="m-r-sm">直播:</span>
+                            <select id="livestate">
+                                <option value="">全部</option>
+                                <option value="0" <#if formlivestate??><#if formlivestate == 0>selected</#if></#if>>预告</option>
+                                <option value="1" <#if formlivestate??><#if formlivestate == 1>selected</#if></#if>>直播中</option>
+                                <option value="3" <#if formlivestate??><#if formlivestate == 3>selected</#if></#if>>已结束</option>
+                            </select>
+                        </div>
+                        <div class="selectBox m-t-xs">
+                            <span class="m-r-sm">状态:</span>
+                            <select id="roomstate">
+                                <option value="">全部</option>
+                                <option value="1" <#if formroomstate??><#if formroomstate == 1>selected</#if></#if>>正常</option>
+                                <option value="0" <#if formroomstate??><#if formroomstate == 0>selected</#if></#if>>已关闭</option>
+                                <option value="2" <#if formroomstate??><#if formroomstate == 2>selected</#if></#if>>删除</option>
+                                <option value="3" <#if formroomstate??><#if formroomstate == 3>selected</#if></#if>>禁用</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="pull-right m-r-lg">
+                        <input type="text" class="serachinput" placeholder="直播名称" id="queryName" <#if queryName??>value="${queryName}"</#if>/>
+                        <button class="btn blueButton m-t-n-4" id="searchbtn">搜索</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            <@p.pageList value=page 
+					listAction="managercontrol.do";item,i,has_next> 
+					<@p.column class="text-center" style="width:40px;"
+					title="<button type='button' class='btn btn-primary btn-sm' id='allselect'>全选</button>">
+					<input type="checkbox" id="${item.roomId}"/></th>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="ID">
+					${item.roomId}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="类型">
+					<#if item.useState??><#if item.useState == 0>试用</#if></#if>
+					<#if item.useState??><#if item.useState == 1>正式</#if></#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="直播活动名称">
+					<#if item.liveEvent.liveTitle??>${item.liveEvent.liveTitle}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="企业名称">
+					<#if item.enterpriseName??>${item.enterpriseName}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="审核">
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 0>已审核</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 1>已审核</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 2>已审核</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 3>已审核</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 4>待审核</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 5>已审核</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 6>审核未通过</#if></#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="直播">
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 0>预告</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 1>直播中</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 2>暂停中</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 3>直播结束</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 4>待审核</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 5>预告</#if></#if>
+					<#if item.liveEvent.liveStatus??><#if item.liveEvent.liveStatus == 6>审核未通过</#if></#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="直播时间">
+					<#if item.liveEvent.liveStartTime??>${item.liveEvent.liveStartTime}</#if><br>
+					<#if item.liveEvent.liveEndTime??>${item.liveEvent.liveEndTime}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="状态">
+					<#if item.liveEvent.liveStartTime??>${item.liveEvent.liveStartTime}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="操作">
+                        <a href="${base}/operator/managercontrol/roomdetial.do?roomId=${item.roomId}" class="m-r-xs color-999">查看</a>
+					</@p.column> 
+					</@p.pageList>
+					<div class="col-lg-4 m-t-sm pageBox" style="margin-top:-32px;">
+						<div class="pull-left m-l">
+                       	 	<button class="btn btn-default m-r" id="btnpass">审核通过</button>
+                        	<button class="btn btn-default" id="btnnotpass">审核不通过</button>
+                    	</div>
+                    </div>
+            </div>
+
+
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+<script src="${base}/tysx/js/zbj.js"></script>
+<script>
+	
+	$(function(){
+		$("#_page_form").append("<input type='hidden' id='formroomtype' name='formroomtype'>")
+		.append("<input type='hidden' id='formexamine' name='formexamine'>")
+		.append("<input type='hidden' id='formlivestate' name='formlivestate'>")
+		.append("<input type='hidden' id='formroomstate' name='formroomstate'>")
+		.append("<input type='hidden' id='formqueryName' name='formqueryName'>");
+	});
+
+	function selectchange(){
+		$("#formroomtype").val($("#roomtype").val());
+		$("#formexamine").val($("#examine").val());
+		$("#formlivestate").val($("#livestate").val());
+		$("#formroomstate").val($("#roomstate").val());
+		$("#formqueryName").val($("#queryName").val());
+		$("#_page_form").submit();
+	}
+
+	$("#roomtype").on("change",function(){selectchange();});
+	$("#examine").on("change",function(){selectchange();});
+	$("#livestate").on("change",function(){selectchange();});
+	$("#roomstate").on("change",function(){selectchange();});
+	$("#searchbtn").on("click",function(){selectchange();});
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75
+    });
+  
+   window.onload=function(){
+	   $("tbody").height(winHeight-navHeight-titleHeight-215)
+   }
+   
+   $(function(){
+	   $("#allselect").on("click",function(){
+		   $("#_page_form tbody input[type=checkbox]").prop("checked",true);
+	   });
+	   $("#btnpass").on("click",function(){
+		   iliveroomexamine(0)
+	   });
+	   $("#btnnotpass").on("click",function(){
+		   iliveroomexamine(6)
+	   });
+	   
+	   function iliveroomexamine(state){
+		   var check = $("#_page_form tbody input[type=checkbox]:checked");
+		   var arr=[];
+		   check.each(function(index,ele){
+			   arr.push({id:ele.id});
+		   });
+		   console.log(arr);
+		   var str = JSON.stringify(arr);
+		   console.log(str);
+		   $.ajax({
+			   url:"${base}/operator/managercontrol/"+state+"/iliveroomexampass.do",
+			   method:"post",
+			   data:{
+				   ids:str
+			   },
+			   success:function(res){
+				   console.log("修改成功");
+				   selectchange();
+			   },
+			   error:function(){
+				   console.log("失败");
+			   }
+		   });
+	   }
+   })
+   
+   //检查是否开启直播监控
+   function check(){
+	   
+   }
+    
+</script>

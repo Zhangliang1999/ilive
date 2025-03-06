@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图片管理</title>
+<#include "/bvRadio/head.html"/>
+<#include "/bvRadio/lightGallery.html"/> 
+<link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css" />
+<link rel="stylesheet" href="${base}/tysx/css/ContentManage.css" />
+<style type="text/css">
+.lg-backdrop{
+	z-index:9999;
+}
+.lg-outer{
+	z-index:9999;
+}
+</style>
+</head>
+<body >
+<div id="wrapper" class="bgc-fff">
+    <!--右侧内容的区域-->
+    		<div id="page-wrapper">
+	    <#include "/bvRadio/admin/top.html"/>
+		<#include "/bvRadio/admin/medialeft.html" />
+
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content bgc-fff normal-font recallmanage picmanage">
+            <div class="row title-header">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title"> 图片管理</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row list-contain">
+                <div class="col-lg-12 list-title space-20">
+                    <button class="btn blue-bg m-r">上传图片</button>
+                    <button class="btn glyphicon glyphicon-trash black-bg"> 删除 </button>
+                    <div class="col-lg-5 pull-right text-right no-padding">
+<!--                         <select class="m-r-md" style="line-height: 36px; height: 36px;">
+                            <option>全部图片</option>
+                            <option>视频截图</option>
+                            <option>图文直播</option>
+                            <option>手动上传</option>
+                        </select>
+ -->                        <input type="text" id="picture_name_id" class="serachinput" value="${mediaName!}" placeholder="按资源搜索"/>
+                        <button class="btn blue-bg" onclick="searchPicture();">搜索</button>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <ul class="recalllist cutpic lightgallery">
+                      <#list pagination.list as picture>
+			           <li data-responsive="${base}/${picture.filePath!}" data-src="${base}/${picture.filePath!}">
+                            <div class="list_action text-center">
+                                <div >
+                                   	<a href=""> <img src="${base}/${picture.filePath!}" class="zimg"/></a>
+                                 <p class="p-w-m col-lg-12 text-center" onclick="event.cancelBubble = true">
+								  <a href="#" class="pull-left" title="下载">
+                                     <span class="glyphicon glyphicon-download-alt">下载</span>
+                                  </a>
+                                  <a href="#" class="delete pull-right" title="删除">
+                                      <span class="glyphicon glyphicon-trash" onclick="deletePiture(${picture.fileId!})">删除</span>
+                                  </a>
+								</p>
+                            </div>
+                            </div>
+                            <p class="m-t-sm">${picture.mediaFileName!}</p>
+                            <p class="m-t-sm">
+                                <span class="storage">
+                                    <i>${picture.fileSizeMb!}Mb</i></span>
+                                <span class="pictype pull-right"><i>${picture.fileExtension!'无'}</i></span>
+                            </p>
+                        </li>
+					    </#list>
+                    </ul>
+                </div>
+					<form id="_page_form"
+						action="enterpicture.do"
+						method="post">
+						<div
+							class="dataTables_paginate paging_simple_numbers pull-right m-r-lg"
+							id="DataTables_Table_0_paginate">
+							<#if !pagination?is_sequence> <#assign pageNow=pagination.pageNo
+							totalPage=pagination.totalPage > <input type="hidden"
+								name="pageNo" value="${pagination.pageNo}"> <#if
+							(pageNow>0) && (pageNow<=totalPage) > <#if (pageNow<=1)>
+							<button type="button" class="btn btn-sm btn-white disabled">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							<#else>
+							<button type="button" onclick="PL.gotoPage(${pageNow - 1})"
+								class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							</#if> <#if (pageNow-4 >1)> <#if (pageNow
+							<totalPage-2)>
+							<button type="button" onclick="PL.gotoPage(1)"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<#list pageNow-2..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> <#elseif (pageNow-6 > 1)>
+							<button onclick="PL.gotoPage(1)" type="button"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<#list pageNow-4..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> <#else> <#list 1..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#elseif (pageNow=1)> <#else> <#list 1..pageNow-1
+							as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if>
+							<button type="button" onclick="PL.gotoPage(${pageNow})"
+								class="active btn btn-sm btn-white">
+								<a>${pageNow}</a>
+							</button>
+							<#if (pageNow+4 < totalPage)> <#if (pageNow>2)> <#list
+							pageNow+1..pageNow+2 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(${totalPage})"
+								class="btn btn-sm btn-white">
+								<a>${totalPage}</a>
+							</button>
+							<#elseif (pageNow+6 < totalPage)> <#list pageNow+1..pageNow+4 as
+							i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(${totalPage})"
+								class="btn btn-sm btn-white">
+								<a>${totalPage}</a>
+							</button>
+							<#else> <#list pageNow+1..totalPage as i>
+							<button onclick="PL.gotoPage(${i})" type="button"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#elseif (pageNow=totalPage)> <#else> <#list
+							pageNow+1..totalPage as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#if (pageNow>=totalPage)>
+							<button type="button" class="btn btn-sm btn-white disabled">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							<#else>
+							<button type="button" onclick="PL.gotoPage(${pageNow + 1})"
+								class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							</#if> <#else>
+							<button type="button" class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(1)"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							</#if> </#if> 
+						</div>
+					</form>
+            </div>
+         </div>
+    </div>
+</div>
+
+
+</body>
+<!-- Mainly scripts -->
+<script src="../js/jquery-2.1.1.js"></script>
+<script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="../js/inspinia.js"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
+
+<!-- Chosen -->
+<script src="../js/plugins/chosen/chosen.jquery.js"></script>
+
+<!-- JSKnob -->
+<script src="../js/plugins/jsKnob/jquery.knob.js"></script>
+
+<!-- Input Mask-->
+<script src="../js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+<!-- Data picker -->
+<script src="../js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<!-- NouSlider -->
+<script src="../js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+<!-- Switchery -->
+<script src="../js/plugins/switchery/switchery.js"></script>
+
+<!-- IonRangeSlider -->
+<script src="../js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+<!-- iCheck -->
+<script src="../../js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- MENU -->
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- Color picker -->
+<script src="../js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+<!-- Clock picker -->
+<script src="../js/plugins/clockpicker/clockpicker.js"></script>
+
+<!-- Image cropper -->
+
+<script src="../js/plugins/cropper/cropper.min.js"></script>
+
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="../js/plugins/fullcalendar/moment.min.js"></script>
+
+<!-- Date range picker -->
+<script src="../js/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="../js/myJs.js"></script>
+<script src="../js/video.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+</script>
+
+<script>
+	$("#_page_form").append($("<input type='hidden' id='picture_name_hidden' name='mediaName'/>"));
+
+    // 鼠标经过图片出现操作栏
+    $(function() {
+        $(".picmanage .recalllist.cutpic li").hover(function () {
+            var zwid = $(this).find('.zimg').width();
+            console.log($('.zimg').width());
+            var zbottom = $(this).find('.zimg').prop("offsetTop");
+            var zleft = $(this).find('.zimg').prop("offsetLeft");
+            console.log(zleft);
+            $(this).find('.actionp').css({'width': zwid, 'bottom': zbottom, 'left': zleft, 'display': 'block'});
+        }, function () {
+            $(this).find('.actionp').css('display','none');
+        })
+
+    })
+    
+    function searchPicture(){
+    	var pictureName = $("#picture_name_id").val();
+    	$("#picture_name_hidden").val(pictureName);
+    	$("#_page_form").submit();
+    }
+    
+    function deletePiture(id){
+		if (confirm("确定要删除吗？")){
+    		$.ajax({
+				type : 'POST',
+				url : "${base}/admin/mediafile/delete.do",
+				data : {
+					id : id
+				},
+				dataType : "json",
+				success : function(data, textStatus) {
+					searchPicture();
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("delete出错>>" + errorThrown);
+				}
+			});
+    	}
+	}
+
+	$('.lightgallery').lightGallery();
+</script>
+</html>

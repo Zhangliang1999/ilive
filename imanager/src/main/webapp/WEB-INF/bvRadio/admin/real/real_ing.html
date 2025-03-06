@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人认证信息</title>
+	<link href="${base}/tysx/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/tysx/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="${base}/tysx/css/animate.css" rel="stylesheet">
+    <link href="${base}/tysx/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="${base}/tysx/css/myStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/public.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/newheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/newleft.css"/>
+    <link rel="stylesheet" href="${base}/css/shiming.css"/>
+</head>
+<body >
+<div id="wrapper">
+
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <div class="row border-bottom m-b">
+            <nav class="navbar navbar-static-top navbar-top-height" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                   <div class="logo">
+                        <div class="logoimg">
+                            <img alt="image" class="img-circle" src="${base}/tysx/img_top/logocai.png"/>
+                        </div>
+                        <div class="logoname">
+                            <span>媒体头条</span>
+                        </div>
+                   </div>
+                </div>
+            </nav>
+        </div>
+
+        <!--下面内容部分-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 p-60 white-bg " style="height:auto;">
+                    <div class="col-lg-10 col-lg-offset-1  no-padding">
+                        <div class="red-line no-padding"></div>
+                        <div class="red-line no-padding"></div>
+                        <div class="redtit firsttit pull-left">1</div>
+                        <div class="redtit secondtit">2</div>
+                        <div class="redtit lasttit">3</div>
+                        <div class="first redfont">选择身份</div>
+                        <div class="second redfont">认证信息</div>
+                        <div class="last redfont">认证提交</div>
+                    </div>
+                    <div class="row m-t-lg">
+                    </div>
+                    <div class="row m-50">
+                        <div class="input-group text-center">
+                            <button class="btn">信息认证中。。。<span id="myspan" style="color: red;font-size: 20px;">30</span>秒后返回登录页</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="footer footerrz gray-bg no-borders">
+                    <a href="javascript:;">关于我们</a>
+                    <a href="javascript:;">入驻条款</a>
+                    <a href="javascript:;">法律声明</a>
+                    <a href="javascript:;">联系我们</a>
+                    <div class="footer-right">
+                        &copy 2018Media headline.com All Right Reserved
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<!-- Mainly scripts -->
+<script src="${base}/tysx/js/jquery-2.1.1.js"></script>
+<script src="${base}/tysx/assets/javascripts/bootstrap/bootstrap.min.js"></script>
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${base}/tysx/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="${base}/tysx/js/inspinia.js"></script>
+<script src="${base}/tysx/js/plugins/pace/pace.min.js"></script>
+<!-- Chosen -->
+<script src="${base}/tysx/js/plugins/chosen/chosen.jquery.js"></script>
+<!-- JSKnob -->
+<script src="${base}/tysx/js/plugins/jsKnob/jquery.knob.js"></script>
+<!-- Input Mask-->
+<script src="${base}/tysx/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+<!-- Data picker -->
+<script src="${base}/tysx/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<!-- NouSlider -->
+<script src="${base}/tysx/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+<!-- Switchery -->
+<script src="${base}/tysx/js/plugins/switchery/switchery.js"></script>
+<!-- IonRangeSlider -->
+<script src="${base}/tysx/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+<!-- iCheck -->
+<script src="${base}/tysx/js/plugins/iCheck/icheck.min.js"></script>
+<!-- MENU -->
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<!-- Color picker -->
+<script src="${base}/tysx/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<!-- Clock picker -->
+<script src="${base}/tysx/js/plugins/clockpicker/clockpicker.js"></script>
+<!-- Image cropper -->
+<script src="${base}/tysx/js/plugins/cropper/cropper.min.js"></script>
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="${base}/tysx/js/plugins/fullcalendar/moment.min.js"></script>
+<!-- Date range picker -->
+<script src="${base}/tysx/js/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="${base}/tysx/js/myJs.js"></script>
+<script src="${base}/js/video.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+function countDown(number,url){
+	 var myspan=document.getElementById('myspan');
+	 myspan.innerHTML=number;
+	 number--;
+	 if(number>0){
+	    setTimeout("countDown("+number+",'"+url+"')",1000);
+	 }else{
+	    window.location.href=url; 
+	 }
+	}
+//函数调用
+countDown(30,"${base}/bbs/tlap/login.do");
+</script>
+</html>

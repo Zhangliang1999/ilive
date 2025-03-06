@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>回看管理</title> <#include "/bvRadio/head.html"/>
+<link rel="stylesheet" href="${base}/tysx/css/ContentManage.css" />
+</head>
+<body>
+	<div id="wrapper" class="bgc-fff">
+		<!--右侧内容的区域-->
+		<div id="page-wrapper">
+			<!--上面的导航栏部分-->
+			<#include "/bvRadio/admin/top.html"/>
+			<!--左侧部分-->
+			<#include "/bvRadio/admin/left.html"/>
+			<!--下面内容部分-->
+			<div class="wrapper wrapper-content bgc-fff normal-font recallmanage">
+				<div class="row title-header">
+					<div class="col-lg-12">
+						<div class="title-name">
+							<a class="font-title"> 回看管理</a>
+						</div>
+					</div>
+				</div>
+				<div class="row list-contain">
+					<div class="col-lg-12 list-title space-20">
+						<span>直播场次:<i class="text-danger">${pagination.totalCount!0}</i></span>
+						<span><img src="${base}/tysx/img/u9186.png" /> 节目录制：<i
+							class="text-danger">${fileNumber!0}</i>个</span> <span><img
+							src="${base}/tysx/img/u9190.png" width="20px;" /> 储存空间：<i
+							class="text-danger">${fileSize!0}</i>Mb</span>
+					</div>
+					<div class="col-lg-12">
+						<ul class="recalllist">
+							<#list pagination.list as events>
+							<li>
+								<div class="list_action text-center">
+									<a href="${base}/admin/content/events/file.do?roomId=${baseIliveRoomId!}&liveEventId=${events.liveEventId!}">
+										<img src="${events.converAddr!}" style="max-width: 100%;max-height: 100%;"/>
+									</a>
+									<p class="p-w-m">
+										<a href="${base}/admin/content/events/file.do?roomId=${baseIliveRoomId!}&liveEventId=${events.liveEventId!}" class="pull-left" title="管理"> <span
+											class="glyphicon glyphicon-edit">管理</span>
+										</a> <a href="${base}/admin/content/delete.do?liveEventId=${events.liveEventId!}&roomId=${baseIliveRoomId!}&pageNo=${pagination.pageNo!1}" class="delete pull-right" title="删除"> <span
+											class="glyphicon glyphicon-trash">删除</span>
+										</a>
+									</p>
+								</div>
+								<p class="font-bold m-t-sm"
+									style="height:30px;line-height:30px;overflow:hidden;">${events.liveTitle!"未命名"}</p>
+								<p class="m-t-sm">
+									结束时间：${events.liveEndTime!} <span
+										class="glyphicon glyphicon-expand pull-right">${events.fileSize!0}</span>
+								</p>
+							</li> </#list>
+						</ul>
+					</div>
+					<form id="_page_form"
+						action="${base}/admin/content/events.do?roomId=${baseIliveRoomId}"
+						method="post">
+						<div
+							class="dataTables_paginate paging_simple_numbers pull-right m-r-lg"
+							id="DataTables_Table_0_paginate">
+							<#if !pagination?is_sequence> <#assign pageNow=pagination.pageNo
+							totalPage=pagination.totalPage > <input type="hidden"
+								name="pageNo" value="${pagination.pageNo}"> <#if
+							(pageNow>0) && (pageNow<=totalPage) > <#if (pageNow<=1)>
+							<button type="button" class="btn btn-sm btn-white disabled">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							<#else>
+							<button type="button" onclick="PL.gotoPage(${pageNow - 1})"
+								class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							</#if> <#if (pageNow-4 >1)> <#if (pageNow
+							<totalPage-2)>
+							<button type="button" onclick="PL.gotoPage(1)"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<#list pageNow-2..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> <#elseif (pageNow-6 > 1)>
+							<button onclick="PL.gotoPage(1)" type="button"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<#list pageNow-4..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> <#else> <#list 1..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#elseif (pageNow=1)> <#else> <#list 1..pageNow-1
+							as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if>
+							<button type="button" onclick="PL.gotoPage(${pageNow})"
+								class="active btn btn-sm btn-white">
+								<a>${pageNow}</a>
+							</button>
+							<#if (pageNow+4 < totalPage)> <#if (pageNow>2)> <#list
+							pageNow+1..pageNow+2 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(${totalPage})"
+								class="btn btn-sm btn-white">
+								<a>${totalPage}</a>
+							</button>
+							<#elseif (pageNow+6 < totalPage)> <#list pageNow+1..pageNow+4 as
+							i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(${totalPage})"
+								class="btn btn-sm btn-white">
+								<a>${totalPage}</a>
+							</button>
+							<#else> <#list pageNow+1..totalPage as i>
+							<button onclick="PL.gotoPage(${i})" type="button"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#elseif (pageNow=totalPage)> <#else> <#list
+							pageNow+1..totalPage as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#if (pageNow>=totalPage)>
+							<button type="button" class="btn btn-sm btn-white disabled">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							<#else>
+							<button type="button" onclick="PL.gotoPage(${pageNow + 1})"
+								class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							</#if> <#else>
+							<button type="button" class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(1)"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							</#if> </#if> 
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+<script>
+	$(".live-bottom").hide()
+	wid = $('.blcen').width()
+	$('.textbl').css('width', wid - 300)
+	$('.textbl2').css('width', wid - 300)
+	$(window).resize(function() { //当浏览器大小变化时
+
+		wid = $('.blcen').width()
+		$('.textbl').css('width', wid - 300)
+		$('.textbl2').css('width', wid - 300)
+
+	});
+	$(".img-box").hover(function() {
+		$(this).find(".live-bottom").stop(true, false).slideDown(300)
+	}, function() {
+		$(this).find(".live-bottom").stop(true, false).slideUp(300)
+	})
+	$(".list_action").height($(".list_action").width() / 16 * 10)
+</script>
+</html>

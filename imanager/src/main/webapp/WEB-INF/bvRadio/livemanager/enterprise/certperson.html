@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>企业认证</title>
+		<#include "/bvRadio/head.html"/>
+
+		<!--新加css-->
+		<link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+		<link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+		<link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+		<style>
+		</style>
+		  <#include "/bvRadio/livemanager/head.html" />
+	</head>
+	<body >
+		<div id="wrapper">
+			<!--右侧内容的区域-->
+			<div id="page-wrapper" class="gray-bg">
+				<!--上面的导航栏部分-->
+				<#include "/bvRadio/livemanager/top.html" />
+				<!--左侧部分-->
+				<#include "/bvRadio/livemanager/left.html" />
+				<!--下面内容部分-->
+				<div class="wrapper wrapper-content border-left bgc-fff">
+					<div class="row title-header gray-bg">
+						<div class="col-lg-12">
+							<div class="title-name">
+								<a class="font-title">个人详情</a>
+							</div>
+						</div>
+					</div>
+					<div class="row m-t">
+						<div class="col-lg-8 border-right">
+							<div class="col-lg-12 p-w-50">
+								<input id="enterpriseId" type="hidden" value="${enterprise.enterpriseId}">
+								<table class="table table-bordered font-content">
+									<tbody>
+										<tr>
+											<td class="font-weight text-right w-200">类型</td>
+											<td class="text-left">个人</td>
+										</tr>
+										<tr>
+											<td class="font-weight text-right w-200">直播方名称</td>
+											<td class="text-left">${enterprise.enterpriseName!}</td>
+										</tr>
+										<tr>
+											<td class="font-weight text-right w-200">真实姓名</td>
+											<td class="text-left">${enterprise.contactName!}</td>
+										</tr>
+										<tr>
+											<td class="font-weight text-right w-200">身份证号</td>
+											<td class="text-left">${enterprise.idCard!}</td>
+										</tr>
+										<tr>
+											<td class="font-weight text-right w-200">身份证扫描件</td>
+											<td class="text-left"><img class="shenfenimg m-r" src="${enterprise.idCardImg!}" alt=""/></td>
+										</tr>
+										<tr>
+											<td class="font-weight text-right w-200">联系方式</td>
+											<td class="text-left">${enterprise.contactPhone!}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-lg-12 p-w-50 text-center m-t m-b">
+								<button type="button" class="btn btn-success" id="pass" data-toggle="modal" data-target="#myModalEnType">
+									通过
+								</button>
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">不通过</button>
+								<button type="button" class="btn btn-default" id="cancel" onclick="returnList()">
+									返回
+								</button>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<p class="bgTitle">
+								操作认证
+							</p>
+							<#if certTopicList??>
+									<#list certTopicList as checkinfo>
+									<div class="col-lg-11 rzMessage">
+									<div class="col-lg-12">
+										<div class="rzMessageLeft">
+											操作状态:
+										</div>
+										<div class="rzMessageRight">
+											<#if checkinfo.certStatus??>
+												<#if checkinfo.certStatus==4>
+													审核通过
+												<#elseif checkinfo.certStatus==5>
+													审核不通过
+												</#if>
+											</#if>
+										</div>
+									</div>
+									<div class="col-lg-12">
+										<div class="rzMessageLeft">
+											操作明细:
+										</div>
+										<div class="rzMessageRight">
+											${checkinfo.topicComment!}
+										</div>
+									</div>
+									<div class="col-lg-12">
+										<div class="rzMessageLeft">
+											操作时间:
+										</div>
+										<div class="rzMessageRight">
+											${checkinfo.commentTime!}
+										</div>
+									</div>
+									<div class="col-lg-12">
+										<div class="rzMessageLeft">
+											操作账号:
+										</div>
+										<div class="rzMessageRight">
+											${checkinfo.managerName!}
+										</div>
+									</div>
+								</div>
+								</#list>
+							</#if>
+						</div>
+					</div>
+					
+			<!-- 模态框（Modal） -->
+           	 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">审核意见</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="bhResult">
+                                <div class="dhResultLeft">驳回理由:</div>
+                                <div class="dhResultRight">
+                                    <textarea id="messageReason" placeholder="请输入审核不通过理由"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="nopass" class="btn btn-success">确定</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+	</body>
+	<!-- Mainly scripts -->
+	
+	<!-- 企业类型model -->
+<div class="modal fade" id="myModalEnType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">认证类型</h4>
+      </div>
+      <div class="modal-body">
+        <input type="radio" name="entype" value="1" checked>外部测试
+        <input type="radio" name="entype" value="2">内部测试
+        <input type="radio" name="entype" value="3">签约用户
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="subtype">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
+		<!-- 图片放大 -->
+		<div id="imageEnlarge">
+			<div id="outerdiv"></div>
+			<div id="innerdiv"><img id="bigimg" src="" /></div>
+		</div>
+		<script type="text/javascript">
+		$(function(){
+	        $(".shenfenimg").click(function(){  
+	            var _this = $(this);//将当前的pimg元素作为_this传入函数  
+	            imgShow(_this);  
+           	 	$("#imageEnlarge").fadeIn("fast");  
+	        });  
+	        $("#outerdiv").click(function(){//再次点击淡出消失弹出层  
+	            $(this).parent("#imageEnlarge").fadeOut("fast");  
+	        });  
+	    });  
+
+	    function imgShow(_this){
+	        var src = _this.attr("src");//获取当前点击的pimg元素中的src属性  
+	        $("#bigimg").attr("src", src);//设置#bigimg元素的src属性  
+	      
+	            /*获取当前点击图片的真实大小，并显示弹出层及大图*/  
+	        $("<img/>").attr("src", src).load(function(){
+	            var windowW = $(window).width();//获取当前窗口宽度  
+	            var windowH = $(window).height();//获取当前窗口高度  
+	            var realWidth = this.width;//获取图片真实宽度  
+	            var realHeight = this.height;//获取图片真实高度  
+	            var imgWidth, imgHeight;  
+	            var scale = 0.8;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放  
+	              
+	            if(realHeight>windowH*scale) {//判断图片高度  
+	                imgHeight = windowH*scale;//如大于窗口高度，图片高度进行缩放  
+	                imgWidth = imgHeight/realHeight*realWidth;//等比例缩放宽度  
+	                if(imgWidth>windowW*scale) {//如宽度扔大于窗口宽度  
+	                    imgWidth = windowW*scale;//再对宽度进行缩放  
+	                }  
+	            } else if(realWidth>windowW*scale) {//如图片高度合适，判断图片宽度  
+	                imgWidth = windowW*scale;//如大于窗口宽度，图片宽度进行缩放  
+	                            imgHeight = imgWidth/realWidth*realHeight;//等比例缩放高度  
+	            } else {//如果图片真实高度和宽度都符合要求，高宽不变  
+	                imgWidth = realWidth;  
+	                imgHeight = realHeight;  
+	            }  
+	            $("#bigimg").css("width",imgWidth);//以最终的宽度对图片缩放  
+	            
+	            var w = (windowW-imgWidth)/2;//计算图片与窗口左边距  
+	            var h = (windowH-imgHeight)/2;//计算图片与窗口上边距  
+	            $("#innerdiv").css({"top":h, "left":w});//设置#innerdiv的top和left属性  
+	            $("#outerdiv").fadeIn("fast");//淡入显示#outerdiv及.pimg  
+	        });  
+	    }
+		</script>
+	<script>
+		var winHeight;
+		//获取页面高度
+		winHeight = $(window).height();
+		//导航栏高度
+		var navHeight = $(".navbar").height();
+		//标题栏高度加边线
+		var titleHeight = $(".title-header").height() + 2;
+		$(".tablebox").slimScroll({
+			height : winHeight - navHeight - titleHeight - 75
+		});
+		var div1 = $('.scrollSwitchBox');
+		var div2 = $('.scrollSwitch');
+		$('.scrollSwitchBox').click(function() {
+			if ($("#div1").hasClass("open1")) {
+				$("#div1").addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+				$("#div2").addClass("scrollSwitch").addClass("close2").removeClass("open2");
+				$("#div1 input").attr("checked", false);
+				return
+			} else {
+				$("#div1").addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+				$("#div2").addClass("scrollSwitch").addClass("open2").removeClass("close2");
+				$("#div1 input").attr("checked", true);
+				return
+			}
+		})
+
+		$("#subtype").on("click", function() {
+			if (confirm("确认让该企业通过认证吗?")) {
+				var id = $("#enterpriseId").val();
+				var type = $("input[name=entype]:checked").val();
+				$.ajax({
+					url : "${base}/operator/enterprise/validate.do",
+					method : "post",
+					data : {
+						enterpriseId : id,
+						pass : 4,
+						type:type
+					},
+					success : function() {
+						alert("审核成功");
+						window.location.href = "${base}/operator/enterprise/uncheck/listperson.do";
+					},
+					error : function() {
+						console.log("修改失败");
+					}
+				});
+			}
+		});
+		$("#nopass").on("click", function() {
+			if (confirm("确认不让该企业通过认证吗?")) {
+				var id = $("#enterpriseId").val();
+				$.ajax({
+					url : "${base}/operator/enterprise/validate.do",
+					method : "post",
+					data : {
+						enterpriseId : id,
+						pass : 5,
+						message:$('#messageReason').val()
+					},
+					success : function() {
+						// window.location.href = "";
+						swal("企业审核不过操作成功");
+						window.location.href = "${base}/operator/enterprise/uncheck/listperson.do";
+						//location.reload();
+					},
+					error : function() {
+					}
+				});
+			}
+		});
+
+		function returnList() {
+			window.location.href = "${base}/operator/enterprise/uncheck/listperson.do";
+		}
+	</script>
+</html>

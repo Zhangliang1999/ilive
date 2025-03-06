@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no"">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<title>付款成功</title>
+<link href="${base}/res/bvRadio/css/bootstrap.css" rel="stylesheet">
+<link href="${base}/res/bvRadio/css/public.css" rel="stylesheet">
+<script src="${base}/res/bvRadio/js/jquery-1.12.1.js"></script>
+<script src="${base}/res/bvRadio/js/bootstrap.min.js"></script>
+<!-- 百度统计 --><script type="text/javascript" src="${base}/res/bvRadio/js/statistics.js"></script><!-- 百度统计 -->
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="img-circle bgc2 text-center" style="width: 65px; height: 65px; margin: 40px auto 10px;">
+			<h2>
+				<i class="glyphicon glyphicon-usd" style="margin-top: 18px; color: #fff;"></i>
+			</h2>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<h3 class="text-center">报名缴费成功</h3>
+		<h5 class="text-center">${(applyPayActivity.notifierproPlus)!'感谢报名。'}</h5>
+	</div>
+	<div class="container-fluid mtrbl0">
+		<h5>报名缴费信息</h5>
+	</div>
+	<table class="table table-condensed">
+		<tr>
+			<td class="col-xs-3">活动名称</td>
+			<td class="col-xs-9">${(bbsActivity.activityName)!"报名缴费"}</td>
+		</tr>
+		<tr>
+			<td class="col-xs-3">缴费时间</td>
+			<td class="col-xs-9">${applyPayTime!}</td>
+		</tr>
+		<tr>
+			<td class="col-xs-3">缴费金额</td>
+			<td class="col-xs-9">${(applyPayActivity.money)!}元</td>
+		</tr>
+	</table>
+</body>
+</html>

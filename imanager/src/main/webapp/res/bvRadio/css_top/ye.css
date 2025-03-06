@@ -1,0 +1,78 @@
+.ye{
+	padding: 0px !important;
+}
+.ye span{
+	text-align:left;
+	float: left;
+	padding-left: 20px;
+	height:50px;
+	line-height: 50px;
+	font-size: 21px !important;
+}
+.close{
+	margin-right: 10px;
+}
+.ba{
+	font-size: 18px;
+}
+.mone{
+	width: 70%;
+}
+.mone .on-10{
+	width: 100px;
+	height: 40px;
+	color: #888888;
+	line-height: 40px;
+	text-align: center;
+	border: 1px solid #ccc;
+	margin: 10px;
+	margin-right: 10px;
+}
+.mone input{
+		border: 1px solid #ccc;
+		height: 40px;
+		width: 200px;
+		margin: 10px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		padding-left: 5px;
+}
+.modal-body{
+	height: 210px;
+	background: #fff !important;
+
+}
+.huo{
+	margin-left: 20px;
+	color: #888;
+	font-size:14px ;
+}
+.act{
+	color: #39f;
+}
+.er{
+	padding-right: 30px;
+}
+.modal-footer button{
+	width: 100px;
+}
+.modal-footer button:nth-child(1){
+	background:#39f;
+	margin-left: 25px;
+}
+.modal-footer{
+	border:0
+}
+.active{
+	    border: 1px solid #39f !important;
+    color: #39f !important;
+    background: url(../img/as.png) no-repeat;
+    background-position: 80px 20px;
+    background-size: 20px;
+}
+b{
+	font-weight: 500;
+}
+.blue{
+	border: 1px solid #39f !important;
+}

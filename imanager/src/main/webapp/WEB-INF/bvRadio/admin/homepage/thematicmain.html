@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>主页管理</title>
+	<#include "/bvRadio/head.html"/>
+    <link href="${base}/tysx/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/tysx/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="${base}/tysx/css/animate.css" rel="stylesheet">
+    <link href="${base}/tysx/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="${base}/tysx/css/myStyle.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/jbxx.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/public.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/zbgl.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/shcommon.css"/>
+
+    <!--直播设置模块样式-->
+    <link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/newheader.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/newleft.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/zhuye.css"/>
+    <style>
+		.iframe{
+			width:100%;
+			height:100%;
+			border:0;
+		}
+    </style>
+</head>
+<body >
+<div id="wrapper" class="bgc-fff normal-font">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="bgc-fff normal-font">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/admin/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/admin/mainleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content bgc-fff countdownset">
+            <div class="row title-header">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">移动端主页设置</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="leftBox  m-t col-lg-6">
+                        <div class="moblieBox">
+                            <div class="moblieContent">
+                                <div class="slimContent">
+                                    <div class="moblieHeader">
+                                        <img src="${base}/tysx/img/u1207.jpg" alt=""/>
+                                    </div>
+                                    <div class="moblieTit">
+                                        <img src="${base}/tysx/img/u208.jpg" alt=""/>
+                                        <span class="titName">经纬中天</span>
+                                        <a class="guanzhu" href="javascript:;">+&nbsp;关注</a>
+                                        <span class="fans">16w粉丝</span>
+                                        <p class="titText">热情欢迎各位盆友关注，敬请提出宝贵意见建议，我们将竭诚为您服务。</p>
+                                    </div>
+                                    <p class="moblieTitle">
+                                        <span class="font-bold">直播预告</span>
+                                    </p>
+                                    
+                                    <div id="yugao">
+                                    <#list list1 as item>
+                                    <#if item_index lt policy.num>
+                                    <div data-id="${item.contentId}" class="bigPic col-lg-12 mobileActive">
+                                        <span class="yugao">预告</span>
+                                        <p class="bigPicMask">${item.contentName}</p>
+                                    </div>
+                                    </#if>
+                                    </#list>
+                                    </div>
+                                    <p class="moblieTitle">
+                                        <span class="font-bold">精彩回顾</span>
+                                        <a class="pull-right font-12" href="javascript:;">更多</a>
+                                    </p>
+                                    
+                                    <div id="huigu" class="mobileList">
+                                    <#list list2 as item>
+                                    <#if item_index lt policy.num>
+                                    	<#if item_index%2==0>
+                                    		<div class="listBox">
+                                    	</#if>
+                                    		<div  data-id="${item.contentId}" class="smallPic pull-left">
+                                                <div class="smallPicBox"></div>
+                                                <p class="smallPicTit">${item.contentName}</p>
+                                                <p class="smallPicText">活动简介活动简介活动简介活动简介</p>
+                                            </div>
+                                    	<#if item_index%2==0>
+                                    		</div>
+                                    	</#if>
+                                    </#if>
+                                    </#list>
+                                        <!-- <div class="listBox">
+                                            <div class="smallPic pull-left">
+                                                <div class="smallPicBox"></div>
+                                                <p class="smallPicTit">标题标题标题标题标题标题</p>
+                                                <p class="smallPicText">活动简介活动简介活动简介活动简介</p>
+                                            </div>
+                                            <div class="smallPic pull-right">
+                                                <div class="smallPicBox"></div>
+                                                <p class="smallPicTit">标题标题标题标题标题标题</p>
+                                                <p class="smallPicText">活动简介活动简介活动简介活动简介</p>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--左侧头部管理-->
+                    <div class="rigBox col-lg-6 border-left no-padding hide">
+                        <div class="rigBoxTitle border-bottom">
+                            <span class="font-content font-weight m-l">内容管理</span>
+                            <ul class="TitleUl">
+                                <li><i class="fa fa-eye m-r-xs"></i>预览</li>
+                                <li><i class="fa fa-send m-r-xs"></i>发布页面</li>
+                            </ul>
+                        </div>
+                        <!--右侧下方内容-->
+                        <div class="rightBoxCon">
+                            <div class="rightBoxTab">
+                                <div class="bannerBox">
+                                    <img src="${base}/tysx/img/u1207.jpg" alt=""/>
+                                    <ul class="bannerMask">
+                                        <li><i class="fa fa-refresh m-r-sm"></i> 替换</li>
+                                        <li><i class="fa fa-trash m-r-sm"></i> 删除</li>
+                                    </ul>
+                                </div>
+                                <p class="tishiP m-t">最大1M</p>
+                                <p class="tishiP m-t">建议865*486像素</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--左侧内容选择-->
+                    <div class="rigBox col-lg-6 border-left no-padding">
+                        <div class="rigBoxTitle border-bottom">
+                            <span class="font-content font-weight m-l">内容管理</span>
+                            <ul class="TitleUl">
+                                <li><i class="fa fa-trash m-r-xs"></i>删除</li>
+                                <li><i class="fa fa-eye m-r-xs"></i>预览</li>
+                                <li><i class="fa fa-send m-r-xs"></i>发布页面</li>
+                            </ul>
+                        </div>
+                        <!--右侧下方内容-->
+                        <div class="rightBoxCon">
+                            <div class="rightBoxTab">
+                                <div class="col-lg-5 m-t col-lg-offset-1">
+                                    <span>发布策略:</span>
+                                    <select id="policy">
+                                        <option value="1" <#if policy.policy??><#if policy.policy==1>selected</#if></#if>>手动选择</option>
+                                        <option value="2" <#if policy.policy??><#if policy.policy==2>selected</#if></#if>>自动选择</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-5 m-t">
+                                    <span>内容数量:</span>
+                                    <select id="connum">
+                                        <option <#if policy.num??><#if policy.num==2>selected</#if></#if>  value="2">2</option>
+                                        <option <#if policy.num??><#if policy.num==4>selected</#if></#if>  value="4">4</option>
+                                        <option <#if policy.num??><#if policy.num==6>selected</#if></#if>  value="6">6</option>
+                                        <option <#if policy.num??><#if policy.num==8>selected</#if></#if>  value="8">8</option>
+                                        <option <#if policy.num??><#if policy.num==10>selected</#if></#if> value="10">10</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6  col-lg-offset-1 m-t">
+                                    <button id="selectcons" class="btn btn-success"  data-toggle="modal" data-target="#contentSelected">选择内容</button>
+                                    <!-- 模态框（Modal） -->
+                                    <div class="modal fade" id="contentSelected" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">内容选择</h4>
+                                                </div>
+                                                <div class="modal-body" style="padding: 10px 30px 10px 30px;">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="tabs-container">
+                                                                <ul class="nav nav-tabs">
+                                                                    <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">直播间</a></li>
+                                                                    <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">视频</a></li>
+                                                                    <li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">专题</a></li>
+                                                                    <li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">图片</a></li>
+                                                                </ul>
+                                                                <div class="tab-content">
+                                                                    <div id="tab-1" class="tab-pane active" style="min-height:400px">
+                                                                    <iframe class="iframe" src="${base}/admin/thematic/liveroom.do" style="min-height:400px;height:400px"></iframe>
+                                                                   </div>
+                                                                    <div id="tab-2" class="tab-pane">
+                                                                    <iframe class="iframe" src="${base}/admin/thematic/media.do" style="min-height:400px;height:400px"></iframe>
+                                                                    </div>
+                                                                    <div id="tab-3" class="tab-pane">
+                                                                    <iframe class="iframe" src="${base}/admin/thematic/special.do" style="min-height:400px;height:400px"></iframe>
+                                                                    </div>
+                                                                    <div id="tab-4" class="tab-pane">
+                                                                    <iframe class="iframe" src="${base}/admin/thematic/img.do" style="min-height:400px;height:400px"></iframe>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" id="model_sub">确定</button>
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal">取消</button>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal -->
+                                    </div>
+                                </div>
+                                <div id="selectconz" class="col-lg-11  col-lg-offset-1 m-t">
+                                    <span class="m-r-lg">选择内容:</span>
+                                    <span class="m-r-lg"><input <#if policy.radios??><#if policy.radios == 1>checked</#if><#else>checked</#if> value="1" type="radio" name="seletetype" class="m-r-xs" />直播</span>
+                                    <span class="m-r-lg"><input <#if policy.radios??><#if policy.radios == 2>checked</#if></#if> value="2" type="radio" name="seletetype" class="m-r-xs"/>回顾</span>
+                                    <span class="m-r-lg"><input <#if policy.radios??><#if policy.radios == 3>checked</#if></#if> value="3" type="radio" name="seletetype" class="m-r-xs"/>专题</span>
+                                </div>
+                                <div class="col-lg-12 m-t" style="padding-bottom:70px">
+                                
+                                <div id="table0">
+                                <@p.pageList value=page listAction="thematicmain.do";item,i,has_next>
+								<@p.column class="index" style="width:40px;" title="顺序">
+									${i+1} 
+								</@p.column> 
+								<@p.column class="text-center" style="width:40px;" title="内容名称">
+									${item.contentName}
+									<div class="delBox hide">
+                                        <i class="fa fa-edit"></i>
+                                        <i onclick="remove(this)" class="fa fa-trash"></i>
+                                    </div>
+								</@p.column>
+                                </@p.pageList>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--左侧菜单选择-->
+                    <div class="rigBox col-lg-6 border-left no-padding hide">
+                        <div class="rigBoxTitle border-bottom">
+                            <span class="font-content font-weight m-l">内容管理</span>
+                            <ul class="TitleUl">
+                                <li><i class="fa fa-trash m-r-xs"></i>删除</li>
+                                <li><i class="fa fa-eye m-r-xs"></i>预览</li>
+                                <li><i class="fa fa-send m-r-xs"></i>发布页面</li>
+                            </ul>
+                        </div>
+                        <!--右侧下方内容-->
+                        <div class="rightBoxCon">
+                            <div class="rightBoxTab">
+                                <div class="col-lg-12 m-t m-l">
+                                    <span>标题内容：</span>
+                                    <input type="text" placeholder="精彩回顾"/>
+                                </div>
+                                <div class="col-lg-12 m-t m-l">
+                                    <span>链接到：</span>
+                                    <a href="javascript:;" class="addLink" data-toggle="modal" data-target="#linkModal">+添加链接</a>
+                                    <div class="modal fade" id="linkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">添加链接</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <a class="btn btn-success">页面</a>
+                                                            <a class="btn btn-default">专题</a>
+                                                        </div>
+                                                        <div class="col-lg-12 m-t">
+                                                            <span class="font-content">选择页面：</span>
+                                                            <select>
+                                                                <option value="">直播活动列表</option>
+                                                                <option value="">视频回顾列表</option>
+                                                            </select>                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+
+                                                    <button type="button" class="btn btn-danger">确定</button>
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal">取消</button>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 m-t m-l">
+                                    <span>链接到：</span>
+                                    <a href="javascript:;" class="btn btn-default m-l" >直播回顾列表</a>
+                                    <a href="javascript:;" class="addLink m-l" >修改</a>
+                                    <a href="javascript:;" class="addLink m-l" >删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+
+</body>
+<!-- Mainly scripts -->
+<script src="${base}/tysx/js/jquery-2.1.1.js"></script>
+<script src="${base}/tysx/js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="${base}/tysx/js/bootstrap.min.js"></script>
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${base}/tysx/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="${base}/tysx/js/inspinia.js"></script>
+<script src="${base}/tysx/js/plugins/pace/pace.min.js"></script>
+
+<!-- Chosen -->
+<script src="${base}/tysx/js/plugins/chosen/chosen.jquery.js"></script>
+
+<!-- JSKnob -->
+<script src="${base}/tysx/js/plugins/jsKnob/jquery.knob.js"></script>
+
+<!-- Input Mask-->
+<script src="${base}/tysx/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+<!-- Data picker -->
+<script src="${base}/tysx/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<!-- NouSlider -->
+<script src="${base}/tysx/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+<!-- Switchery -->
+<script src="${base}/tysx/js/plugins/switchery/switchery.js"></script>
+
+<!-- IonRangeSlider -->
+<script src="${base}/tysx/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+<!-- iCheck -->
+<script src="${base}/tysx/${base}/tysx/js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- MENU -->
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- Color picker -->
+<script src="${base}/tysx/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+<!-- Clock picker -->
+<script src="${base}/tysx/js/plugins/clockpicker/clockpicker.js"></script>
+
+<!-- Image cropper -->
+
+<script src="${base}/tysx/js/plugins/cropper/cropper.min.js"></script>
+
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="${base}/tysx/js/plugins/fullcalendar/moment.min.js"></script>
+
+<!-- Date range picker -->
+<script src="${base}/tysx/js/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="${base}/tysx/js/myJs.js"></script>
+<script src="${base}/tysx/js/video.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+</script>
+
+<!--时间控件-->
+<link href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/moment.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+
+<!--表格拖拽-->
+<script src="http://www.jq22.com/jquery/jquery-ui-1.11.0.js"></script>
+<script src="http://cdn.bootcss.com/jqueryui/1.11.0/jquery-ui.min.js"></script>
+
+
+<script>
+	$("#_page_form").find("table").attr("id","sort");
+	$("#_page_form").append("<input type='hidden' name='contentType' id='contentType'/>");
+	$("#_page_form").append("<input type='hidden' name='type' id='type'/>");
+	$("#_page_form").append("<input type='hidden' name='radios1' id='radios1'/>");
+    $(".live-bottom").hide()
+
+    wid=$('.blcen').width()
+    $('.textbl').css('width',wid-300)
+    $('.textbl2').css('width',wid-300)
+
+    $(window).resize(function () {          //当浏览器大小变化时
+
+        wid=$('.blcen').width()
+        $('.textbl').css('width',wid-300)
+        $('.textbl2').css('width',wid-300)
+
+    });
+
+    $(".img-box").hover(function(){
+        $(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+    },function(){
+        $(this).find(".live-bottom").stop(true, false).slideUp(300)
+    })
+
+
+    // 时间控件设置
+    var beginTimeTake;
+
+    $('#config-demo').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            autoUpdateInput: false,
+            timePicker24Hour : true,
+            timePicker : true,
+            "locale": {
+                format: 'YYYY-MM-DD HH:mm',
+                applyLabel: "应用",
+                cancelLabel: "取消",
+                resetLabel: "重置",
+            }
+        },
+        function(start, end, label) {
+            beginTimeTake = start;
+            if(!this.startDate){
+                this.element.val('');
+            }else{
+                this.element.val(this.startDate.format(this.locale.format));
+            }
+        });
+    //左侧手机图片内div宽高计算
+    var winHeight = $(window).height()-70-51-30;
+    $(".moblieBox").css({"height":winHeight,"width":winHeight*0.548});
+    $(".moblieContent").css({"height":winHeight*0.899,"width":winHeight*0.548*0.95,"left":winHeight*0.54*0.03,"top":winHeight*0.9*0.058})
+    $(".slimContent").slimScroll({
+        height:winHeight*0.894,
+        opacity:0
+    });
+    $(".rigBox").height($(window).height()-70-61-8);
+    $(".rightBoxCon").slimScroll({
+        height:winHeight-20
+    });
+    $(".bannerBox").height($(".bannerBox").width()*9/16);
+    //表格拖拽实现
+    var fixHelperModified = function(e, tr) {
+                var $originals = tr.children();
+                var $helper = tr.clone();
+                $helper.children().each(function(index) {
+                    $(this).width($originals.eq(index).width())
+                });
+                return $helper;
+            },
+            updateIndex = function(e, ui) {
+                $('td.index', ui.item.parent()).each(function(i) {
+                    $(this).html(i + 1);
+                });
+            };
+    $("#sort tbody").sortable({
+        helper: fixHelperModified,
+        stop: updateIndex
+    }).disableSelection();
+    $("#sort tbody .p-relative").hover(function(){
+        $(this).find(".delBox").removeClass("hide");
+    },function(){
+        $(this).find(".delBox").addClass("hide");
+    })
+    $(".index").click(function(){
+        alert($(this).index())
+    })
+    //模态框内的删除按键显示隐藏
+    $(".ulSelect li").find(".fa-close").hide();
+    $(".ulSelect li").hover(function(){
+        $(this).find(".fa-close").show();
+    },function(){
+        $(this).find(".fa-close").hide();
+    });
+    
+    function remove(i){
+    	var tr = $(i).closest("tr")
+    	var id = tr.attr("data-id");
+    	$.ajax({
+    		url:"${base}/admin/thematic/removeselect.do",
+    		method:"post",
+    		data:{id:id},
+    		success:function(){
+    			location.reload();
+    			tr.remove();
+    		},
+    		error:function(){
+    			alert("删除失败");
+    		}
+    	});
+    }
+    if($("#policy").val() == 2){
+    	if($("input[name='seletetype']").val()=="1"){
+    		console.log("直播");
+    		$("#body1").show();
+    		$("#body2").hide();
+    		$("#body3").hide();
+    	}else if($("input[name='seletetype']").val()=="2"){
+    		console.log("回顾");
+    		$("#body2").show();
+    		$("#body1").hide();
+    		$("#body3").hide();
+    	}else if($("input[name='seletetype']").val()=="3"){
+    		console.log("专题");
+    		$("#body3").show();
+    		$("#body1").hide();
+    		$("#body2").hide();
+    	}
+    }
+    
+    $("input[name='seletetype']").on("change",function(){
+    	console.log($(this).val()+"         ffffffffffffffff");
+    	if($(this).val()=="1"){
+			$("#contentType").val("1");
+			$("#type").val("1");
+			$("#radios1").attr("value","1");
+			console.log($("#radios1").val());
+			$("#_page_form").submit();
+    		console.log("直播");
+    	}else if($(this).val()=="2"){
+    		$("#contentType").val("1");
+			$("#type").val("2");
+			$("#radios1").attr("value","2");
+			console.log($("#radios1").val());
+			$("#_page_form").submit();
+    		console.log("回顾");
+    	}else if($(this).val()=="3"){
+    		$("#contentType").val("3");
+			$("#type").val("1");
+			$("#radios1").attr("value","3");
+			console.log($("#radios1").val());
+			$("#_page_form").submit();
+    		console.log("专题");
+    	}
+    });
+    
+    var arr;
+    $('#sort #body1').sortable({ update: function(event, ui) {
+    	var arr = $( "#sort #body1" ).sortable('toArray');
+    	sortIndex(arr,1);
+    }});
+    $('#sort #body2').sortable({ update: function(event, ui) {
+    	var arr = $( "#sort #body2" ).sortable('toArray');
+    	sortIndex(arr,2);
+    }});
+    $('#sort #body3').sortable({ update: function(event, ui) {
+    	var arr = $( "#sort #body3" ).sortable('toArray');
+    	sortIndex(arr,3);
+    }});
+    
+    function sortIndex(arr,type){
+    	var temparr = new Array();
+    	for(var i=0;i<arr.length;i++){
+    		var a = arr[i];
+    		var b = i;
+    		var obj = {id:a,index:b};
+    		temparr.push(obj);
+    	}
+    	var str = JSON.stringify(temparr);
+    	var jsobj = JSON.parse(str);
+    	$.ajax({
+    		url:"${base}/admin/thematic/saveindex.do",
+    		method:"post",
+    		data:{
+    			obj:JSON.stringify(jsobj),
+    			type:type
+    		},
+    		success:function(res){
+    			var arr = JSON.parse(res);
+    			var div="";
+    			if(type==1){
+    				$.each(arr,function(index,ele){
+    					console.log(ele);
+    					div+="<div data-id="+ele.contentId+" class='bigPic col-lg-12 mobileActive'><span class='yugao'>预告</span><p class='bigPicMask'>"+ele.contentName+"</p></div>";
+    				});
+        			$("#yugao").empty().append(div);
+    			}else if(type == 2){
+    				$.each(arr,function(index,ele){
+    					if(index%2==0){
+    						div+="<div class='listBox'>";
+    					}
+    					div+="<div  data-id="+ele.contentId+" class='smallPic pull-left'><div class='smallPicBox'></div><p class='smallPicTit'>"+ele.contentName+"</p><p class='smallPicText'>活动简介活动简介活动简介活动简介</p></div>";
+    					if(index%2==0){
+    						div+="</div>";
+    					}
+    				});
+    				$("#huigu").empty().append(div);
+    			}else if(type == 3){
+    				console.log(3);
+    				console.log(arr);
+    			}
+    		},
+    		error:function(){
+    			console.log("请求失败");
+    		}
+    	});
+    }
+    $("#model_sub").on("click",function(){
+    	location.reload();
+    });
+    $("#policy").on("change",function(){
+    	p();
+    	var policy = $("#policy").val();
+    	$.ajax({
+    		url:"${base}/admin/thematic/updatePolicy.do",
+    		method:"post",
+    		data:{
+    			policy:policy
+    		},
+    		success:function(){
+    			console.log("success");
+    			if(policy==1){
+    				$("#contentType").val("");
+    				$("#type").val("");
+    				$("#_page_form").submit();
+    				//$("#body0").show();
+    				//$("#body1").hide();
+    				//$("#body2").hide();
+    				//$("#body3").hide();
+    			}else{
+    				//$("#body0").hide();
+        			if($("input[name='seletetype']").val()=="1"){
+        				$("#contentType").val("1");
+        				$("#type").val("1");
+        				$("#_page_form").submit();
+        	    		console.log("直播");
+        	    		//$("#body1").show();
+        	    		//$("#body2").hide();
+        	    		//$("#body3").hide();
+        	    	}else if($("input[name='seletetype']").val()=="2"){
+        	    		$("#contentType").val("1");
+        				$("#type").val("2");
+        				$("#_page_form").submit();
+        	    		console.log("回顾");
+        	    		//$("#body2").show();
+        	    		//$("#body1").hide();
+        	    		//$("#body3").hide();
+        	    	}else if($("input[name='seletetype']").val()=="3"){
+        	    		$("#contentType").val("3");
+        				$("#type").val("1");
+        				$("#_page_form").submit();
+        	    		console.log("专题");
+        	    		//$("#body3").show();
+        	    		//$("#body1").hide();
+        	    		//$("#body2").hide();
+        	    	}
+    			}
+    		},
+    		error:function(){
+    			console.log("error");
+    		}
+    	});
+    });
+    p();
+    function p(){
+    	if($("#policy").val() == '1'){
+    		$("#selectconz").hide();
+    		$("#selectcons").show();
+    	}else if($("#policy").val() == '2'){
+    		$("#selectcons").hide();
+    		$("#selectconz").show();
+    	}
+    }
+    $("#connum").on("change",function(){
+    	var num = $(this).val();
+    	$.ajax({
+    		url:"${base}/admin/thematic/updatePolicy.do",
+    		method:"post",
+    		data:{
+    			num:num
+    		},
+    		success:function(){
+    			console.log("success");
+    		},
+    		error:function(){
+    			console.log("error");
+    		}
+    	});
+    });
+</script>
+</html>

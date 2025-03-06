@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>体头条管理平台</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/>
+<script src="${base}/res/bvRadio/js/jquery.dragsort-0.5.2.min.js"
+	type="text/javascript"></script>
+<script>
+$(function(){
+	$.ajax({
+		type:"get",
+		url:"/bvRadioBBS/phoneActivity.jspx",
+		data:{
+			userId : userId ,
+			type : type
+				},
+		success : function(data, textStatus) {
+				var html="";
+				$.each(data,function(index,dom){
+					html+="<tr>";
+					html+="<td style=\"width: 10px;\"><input name=\"active\" type=\"radio\" value=\""+dom.URL+"\" /></td>";
+					html+="<td style=\"width: 550px;\">"+dom.title+"</td>";
+					html+="<td style=\"width: 150px;\">"+dom.activitySchedule+"</td>";
+					
+					
+					html+="</tr>";
+				})
+				
+			$("#activeList").append(html);
+			
+			
+		}
+	})
+	
+	
+})
+
+
+</script>
+</head>
+<body>
+	<div class="container-fluid" style="margin-top: 50px;">
+
+		<table border="1">
+			<tbody id="activeList">
+				<tr>
+
+					<td style="width: 10px;"></td>
+					<td style="width: 550px;">活动名称:</td>
+					<td style="width: 150px;">活动状态</td>
+
+				</tr>
+
+			</tbody>
+		</table>
+
+		<hr />
+	</div>
+	<div class='actions position-absolute-b10'>
+		<button class="btn btn-success btn-next ml5 mr5" type="button"
+			style="margin-bottom: 1px; margin-left: 1px;" data-toggle='modal'
+			href='#modal-wrap' id="open-button">
+			创建活动<i class='icon-check'></i>
+		</button>
+		<button class='btn btn-success btn-next ml5 mr5' id="save-button">
+			保存 <i class='icon-check'></i>
+		</button>
+	</div>
+	<script>
+	
+		$(document).ready(function() {
+			$("#save-button").click(function() {
+				var url=$("input[name='active']:checked").val();
+				var html="";
+				html+="邀请您参加以下活动,详情复制以下链接加入活动"+url;
+				$(window.parent.document).find("#textContent").val(html);
+				$(window.parent)[0].sendMessage();
+				$(window.parent.document).find(".close").click();
+			});
+			
+			$("#open-button").click(function() {
+				
+				window.open("/bvRadioBBS/bbs/tlap/apply/v_list1.do");
+			});
+		});
+		
+	</script>
+
+	<hr />
+</body>
+</html>

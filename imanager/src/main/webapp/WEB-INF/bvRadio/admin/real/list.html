@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>系统用户 - 用户管理 - 媒体头条管理平台</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/> 
+<#include "/bvRadio/uploadHead.html"/>
+<link href="${base}/res/common/css/jquery.tagsinput.css" rel="stylesheet" type="text/css" />
+<script src="${base}/res/common/js/jquery.tagsinput.js" type="text/javascript"></script>
+<script>
+	wid = $('.blcen').width()
+	$('.textbl').css('width', wid / 4 - 5)
+	$('#u7').css('width', wid / 4 - 5)
+	$(window).resize(function() { //当浏览器大小变化时
+
+		wid = $('.blcen').width()
+		$('.textbl').css('width', wid / 4 - 5)
+		$('#u7').css('width', wid / 4 - 5)
+	});
+</script>
+<script type="text/javascript">
+	var Gid = document.getElementById;
+
+	var showArea = function() {
+
+		Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+
+		Gid('s_city').value + " - 县/区" +
+
+		Gid('s_county').value + "</h3>"
+
+	}
+</script>
+<script type="text/javascript" src="${base}/real/js/area.js"></script>
+<script type="text/javascript" src="${base}/real/js/video.js"></script>
+<link rel="stylesheet" type="text/css" href="${base}/real/smrz.css" />
+</head>
+<body class="contrast-dark fixed-header">
+	<!--顶部开始-->
+	<#include "/bvRadio/admin/top.html"/>
+	<!--顶部结束-->
+	<!--主体开始-->
+	<div id="wrapper">
+		<!--左侧导航开始-->
+		<!--左侧导航结束-->
+		<!--右侧框架开始-->
+		<section id="content">
+			<!--下面内容部分-->
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12 fanhui">
+						<a style="font-weight: 500;">实名认证</a>
+					</div>
+				</div>
+				<div class="row ">
+					<div class="col-lg-12 bl no-padding">
+						<div class="blcen">
+							<div class="brt1 ">
+								<span class="l blspan">用户类型：</span><label><input 
+									name="user_fruit" type="radio" value="1" checked="checked"/>个人 </label> <label><input
+									name="user_fruit" type="radio" value="2" />企业 </label>
+							</div>
+						<!-- 	<div class="brt ">
+								<span class="l blspan">所在地区：</span>
+								<div class="info">
+									<div>
+										<select id="s_province" name="s_province"></select>   
+										<select id="s_city" name="s_city"></select>   
+										<select id="s_county" name="s_county"></select>
+										<script class="resources library"
+											src="${base}/real/js/area.js" type="text/javascript"></script>
+
+										<script type="text/javascript">
+											_init_area();
+										</script>
+									</div>
+
+									<div id="show"></div>
+
+								</div>
+							</div>
+							<div class="brt ">
+								<span class="l blspan">详细地址：</span><input value="" id="user_address" style="width: 420px;height: 36px;" class="textbl l "
+									type="text" />
+							</div> -->
+							<div class="brt ">
+								<span class="l blspan">公司名称：</span><input value="" id="company_name" style="width: 420px;height: 36px;" class="textbl l "
+									type="text" />
+							</div>
+							<div class="brt ">
+								<span class="l blspan">身份证明：</span> <select id="document_type" style="width: 420px;height: 36px;">
+									<option value="1">二代居民身份证</option>
+									<option value="2">护照</option>
+									<option value="3">港澳台保证</option>
+									<option value="4">驾驶证</option>
+								</select>
+							</div>
+							<div class="brt ">
+								<span class="l blspan">证件号码：</span><input value="" id="document_number" style="width: 420px;height: 36px;" class="textbl l "
+									type="text" />
+							</div>
+							<div class="brt ">
+								<span class="l blspan">真实姓名：</span><input value="" id="realName" style="width: 420px;height: 36px;" class="textbl l "
+									type="text" />
+							</div>
+							<div class="brt ">
+								<span class="l blspan">描述：</span><input value="" id="real_description" style="width: 420px;height: 36px;" class="textbl l "
+									type="text" />
+							</div>
+							
+							<div class="brt2 ">
+								<span class="l blspan">证件照片：</span>
+								<div class='controls'>
+									<input type="hidden" name="screenshot" id="screenshot" value="">
+									<div style="display: inline-block; position: relative;">
+										<input id="imgUpload" type="hidden">
+									</div>
+								</div>
+							</div>
+							<div class="brt3 ">
+								<span class="l blspan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;预览：</span>
+								<img class="l" id="previewImg" src="${base}/tysx/img/yl.png" />
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12 bac">
+						<button class="l" onclick="sumbRealCertificationBean()">提交认证</button>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--右侧框架结束-->
+	</div>
+	<!--主体结束-->
+	<script>
+		function sumbRealCertificationBean(){
+			var user_fruit = $("input:radio:checked").val();//用户类型
+			/* var s_province = $("#s_province").val();
+			var s_city = $("#s_city").val();
+			var s_county = $("#s_county").val();
+			if(s_province=="省份"){
+				alert("请选择省份！");
+				return;
+			}
+			if(s_city=="地级市"){
+				alert("请选择地级市！");
+				return;
+			}
+			if(s_county=="市、县级市"){
+				alert("请选择市、县级市！");
+				return;
+			} */
+			//var user_address = $("#user_address").val();//详细地址
+			var company_name = $("#company_name").val();//公司名称
+			var document_type = $("#document_type").val();//证件类型
+			var document_number = $("#document_number").val();//证件号
+			//console.log(user_fruit+"   s_province:"+s_province+"  s_city:"+s_city+"   s_county:"+s_county+"  document_type:"+document_type);			
+			//var user_area = s_province+"-"+s_city+"-"+s_county;//用户地区
+			if(user_fruit==1){
+				//个人
+				if(document_number==""){
+					alert("请输入证件号");
+					return;
+				}
+			}else if(user_fruit==2){
+				//企业
+				if(company_name==""){
+					alert("请输入公司名称");
+					return;
+				}
+			}else{
+				alert("请选择用户类型");
+				return;
+			}
+			var document_img = $("#screenshot").val();//图片
+			if(document_img==""){
+				alert("请上传证件图");
+				return;
+			}
+			var realName = $("#realName").val();//真实姓名
+			var real_description =$("#real_description").val();
+			$.ajax({
+			    type:'POST',
+			     url:"${base}/bbs/tlap/real/certification/r_add.do",
+			     data:{
+			    	 user_fruit : user_fruit,
+			    	 //user_address : user_address,
+					 company_name : company_name,
+					 document_type : document_type,
+					 document_number : document_number,
+					 //user_area : user_area,
+					 document_img:document_img,
+					 realName : realName,
+					 real_description:real_description
+			     },
+			     success:function(data){
+			    	 if(data=="success"){
+			    		 window.location.href ="${base}/bbs/tlap/index.do";
+			    	 }else{
+			    		 alert(data);
+			    	 }
+			     },
+			     error:function(){
+			        alert("执行错误");
+			     }
+			 });
+		}
+		$(function() {
+			var upload_url = "${base}/bbs/tlap/o_uploadFile.do";
+			var jsessionid = $.cookie("JSESSIONID");
+			if (jsessionid) {
+				upload_url += ";jsessionid=" + jsessionid;
+			}
+			var fileSizeLimit = "2GB";
+			var fileTypeDesc = "文件";
+			<#if fileType??&&fileType==1>
+			var fileType = "audio";
+			var fileTypeExts = "*.amr;*.m4a;*.wma;*.mp3;*.caf;*.flv";
+			<#elseif fileType??&&fileType==2>
+			var fileType = "video";
+			var fileTypeExts = "*.rmvb;*.wmv;*.avi;*.mp4;*.flv";
+			<#else>
+			var fileType = "others";
+			var fileTypeExts = "*.amr;*.m4a;*.wma;*.mp3;*.mp4;*.caf;*.flv";
+			</#if>
+			$('#fileUpload').uploadify({
+				'queueID':'uploadProgressWrap',
+			    'swf': '${base}/thirdparty/uploadify/uploadify.swf',	//指定上传控件的主体文件
+			    'uploader': upload_url,	//指定服务器端上传处理文件
+			    'auto':true,
+			    'multi':false,
+			    'buttonCursor':'hand',
+			    'fileObjName':'Filedata',
+			    'formData':{ 'fileType': fileType },
+			    'fileSizeLimit':fileSizeLimit,
+			    'fileTypeExts':fileTypeExts,
+			    'width' : 74,
+				'height' : 30,
+				'buttonText':'选择文件',
+				'removeCompleted':false,
+				'removeTimeout':1,
+				'itemTemplate':
+					'<div class="upload span12">'+
+						'<span class="pull-left"><h5>${r'${fileName}'}</h5></span>'+
+						'<span class="pull-right"><button class="btn" id="cannelUploadBtn" type="button" style="margin-bottom:5px" name="button" onclick="$(\'#${r'${instanceID}'}\').uploadify(\'cancel\', \'${r'${fileID}'}\')">取消上传</button></span>'+
+					'</div>'+
+					'<br>'+
+					'<div class="progress span12 no-margin mb5">'+
+						'<div class="progress progress-striped active">'+
+							'<div class="progress-bar" id="progress-bar" style="width: 0%">60%</div>'+
+						'</div>'+
+					'</div>'+
+					'<div class="upload">'+
+						'<span class="pull-right" id="progress-text">已上传:18.7MB/27.8MB</span>'+
+					'</div>',
+				'onSelect':function(){
+					$('#uploadProgressWrap').show();
+					$('#fileUploadButtonDiv').attr("style","position: absolute; top: -999em;");
+				},
+				'onUploadProgress': function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+					var uploadedSize = "";
+					var totalSize = "";
+					if (bytesUploaded > 1073741824) {
+						uploadedSize =( bytesUploaded / 1073741824).toFixed(2) + " GB";
+					} else if (bytesUploaded > 1048576) {
+						uploadedSize =( bytesUploaded / 1048576).toFixed(2) + " MB";
+					} else if (bytesUploaded > 1024) {
+						uploadedSize =( bytesUploaded / 1024).toFixed(2) + " KB";
+					} else {
+						uploadedSize = bytesUploaded + " B";
+					}
+					if (bytesTotal > 1073741824) {
+						totalSize =( bytesTotal / 1073741824).toFixed(2) + " GB";
+					} else if (bytesTotal > 1048576) {
+						totalSize =( bytesTotal / 1048576).toFixed(2) + " MB";
+					} else if (bytesTotal > 1024) {
+						totalSize =( bytesTotal / 1024).toFixed(2) + " KB";
+					} else {
+						totalSize = bytesTotal + " B";
+					}
+					var progressPer = (bytesUploaded/bytesTotal).toFixed(2)*100/1+"%";
+					$('#uploadProgressWrap #progress-text').html("已上传:"+uploadedSize+"/"+totalSize);
+					$('#uploadProgressWrap #progress-bar').css("width",progressPer);
+					$('#uploadProgressWrap #progress-bar').html(progressPer);
+				},
+				'onUploadSuccess' : function(file, data, response) {
+					var jsonObj = eval('(' + data + ')');
+					var filePath =  jsonObj.filePath;
+					var fileRootUrl =  jsonObj.fileRootUrl;
+					var fileRootUrl =  jsonObj.fileRootUrl;
+					var uploadServerId = jsonObj.uploadServerId;
+					$('#uploadProgressWrap #progress-text').html("文件上传成功");
+					$('#uploadProgressWrap #progress-bar').css("width","100%");
+					$('#uploadProgressWrap #progress-bar').html("100%");
+					var fileName = file.name;
+					if (fileName.indexOf(".")>0){
+						fileName = fileName.substring(0,fileName.indexOf("."));
+						$('#title').val(fileName);
+					} else {
+						$('#title').val(fileName);
+					}
+					$('#uploadServerId').val(uploadServerId);
+					$('#filePath').val(filePath);
+					var fileSize = file.size;
+					$('#fileSize').val(fileSize);
+					$('#duration').val(jsonObj.duration);
+					try{
+						$('#author').val(jsonObj.author);
+						var coverImgPath =  jsonObj.coverImgPath;
+						if(coverImgPath !== null && coverImgPath !== undefined && coverImgPath !== ''){
+							$('#previewImg').attr("src",fileRootUrl + coverImgPath);
+							$('#screenshot').val(fileRootUrl+coverImgPath);
+						}
+					}catch(e){
+					}
+					$('#cannelUploadBtn').hide();
+			    },
+			    'onCancel':function(){
+			    	$('#uploadProgressWrap').hide();
+			    	$('#fileUploadButtonDiv').attr("style","");
+			    },
+			    'onUploadError':function(){
+					window.location.reload(true);	   
+				 	alert("上传失败");
+			    	$('#uploadProgressWrap').hide();
+			    	$('#fileUploadButtonDiv').attr("style","");
+			    }
+			});
+			$('#imgUpload').uploadify({
+				'queueID':'uploadImgProgressWrap',
+			    'swf': '${base}/thirdparty/uploadify/uploadify.swf',	//指定上传控件的主体文件
+			    'uploader': upload_url,	//指定服务器端上传处理文件
+			    'auto':true,
+			    'multi':false,
+			    'buttonCursor':'hand',
+			    'fileObjName':'Filedata',
+			    'fileSizeLimit':20480,
+			    'fileTypeExts':"*.jpg;*.png",
+			    'width' : 74,
+				'height' : 30,
+				'buttonText':'选择文件',
+				'removeCompleted':true,
+				'removeTimeout':1,
+				'itemTemplate':'<div id="${r'${fileID}'}" class="uploadify-queue-item"> <div class="cancel"> '
+				+'<a href="javascript:$(\'#${r'${instanceID}'}\').uploadify(\'cancel\', \'${r'${fileID}'}\')">X</a></div>'
+				+'<span class="fileName">上传中</span><span class="data"></span>'
+				+'<div class="uploadify-progress"><div class="uploadify-progress-bar"></div></div></div>',
+				'onUploadSuccess' : function(file, data, response) {
+					var jsonObj = eval('(' + data + ')');
+					var filePath =  jsonObj.filePath;
+					$('#previewImg').attr("src",jsonObj.fileRootUrl +filePath);
+					$('#screenshot').val(jsonObj.httpUrl+jsonObj.fileRootUrl + filePath);
+			    },
+			});
+		});
+	</script>
+</body>
+</html>

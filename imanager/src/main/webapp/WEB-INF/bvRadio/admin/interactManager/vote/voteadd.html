@@ -1,0 +1,1250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title> <#include "/bvRadio/head.html"/>
+<link href="${base}/res/bvRadio/css/admin.css" rel="stylesheet"
+	type="text/css" />
+<link href="${base}/tysx/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link href="${base}/tysx/css/newhdgl.css" rel="stylesheet"
+	type="text/css" />
+<link href="${base}/res/common/css/jquery.validate.css" rel="stylesheet"
+	type="text/css" />
+<link href="${base}/res/common/css/jquery.treeview.css" rel="stylesheet"
+	type="text/css" />
+<link href="${base}/res/common/css/jquery-ui.css" rel="stylesheet"
+	type="text/css" />
+<link href="${base}/res/bvRadio/css/diyform.css" rel="stylesheet"
+	type="text/css" />
+<script src="${base}/res/bvRadio/js/jquery.dragsort-0.5.2.min.js"
+	type="text/javascript"></script>
+<script src="${base}/res/bvRadio/js/jquery-ui.js" type="text/javascript"></script>
+<script src="${base}/res/bvRadio/js/form.js" type="text/javascript"></script>
+<script src="${base}/res/bvRadio/js/address.js" type="text/javascript"></script>
+<script src="${base}/tysx/js/bootstrap-datetimepicker.min.js"></script>
+<#include "/bvRadio/uploadHead.html"/>
+<script type="text/javascript">
+	var diyformSubmitUrl = "${base}/admin/diyform/o_save.do?formType=1";
+	var liveEventId = "${iLiveLiveRoom.liveEvent.liveEventId}";
+	$(function() {
+		var upload_url = getUploadUrl();
+		var jsessionid = $.cookie("JSESSIONID");
+		if (jsessionid) {
+			upload_url += ";jsessionid=" + jsessionid;
+		}
+		var fileSizeLimit = 0;
+		var fileTypeDesc = "图片文件";
+		var fileTypeExts = "*.gif; *.jpg; *.png";
+		$('#fileUpload')
+				.uploadify(
+						{
+							'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+							'uploader' : upload_url, //指定服务器端上传处理文件
+							'auto' : true,
+							'buttonCursor' : 'hand',
+							'fileObjName' : 'Filedata',
+							'fileSizeLimit' : fileSizeLimit,
+							'fileTypeExts' : fileTypeExts,
+							'width' : 70,
+							'height' : 30,
+							'buttonText' : '上传图片',
+							'removeCompleted' : true,
+							'removeTimeout' : 1,
+							'onUploadSuccess' : function(file, data, response) {
+								var jsonObj = eval('(' + data + ')');
+								var midHtml = '<div class="cttp">';
+								midHtml += '<img class="cpimg" src="' + jsonObj.fileRootUrl + jsonObj.filePath + '" width="162px" height="189px"/>';
+								midHtml += '<div  class="cptitle"><label>标题</label><input type="text" value=""/></div></div>';
+								$("#uploadContentDiv").append(midHtml);
+							},
+							'onUploadError' : function(file, errorCode,
+									errorMsg, errorString) {
+								alert("上传失败。");
+							}
+						});
+	});
+</script>
+</head>
+<body>
+	<!--上面的导航栏部分-->
+	<#include "/bvRadio/admin/top.html"/>
+	<!--左侧部分-->
+	<#include "/bvRadio/admin/left.html"/>
+	<!--下面内容部分-->
+	<div class="wrapper wrapper-content border-left bgc-fff">
+		<div class="row title-header gray-bg border-bottom">
+			<div class="col-lg-12">
+				<div class="title-name" style="margin-left: 20px">
+					<a class="font-title">投票活动</a>
+				</div>
+				<div style="float: right; margin-right: 20px; margin-top: 13px;">
+					<a class="font-title btn btn-success" onclick="submitDiyform()">保存</a>
+				</div>
+			</div>
+		</div>
+		<!--下方模块-->
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div class="ibox-title font-weight font-title">投票控制</div>
+				<div class="ibox-content">
+					<div class="row">
+						<form class="form-horizontal">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="col-lg-2 drawname control-label font-content">活动名称:</label>
+									<div class="col-lg-10">
+										<input type="text" id="activity_name" placeholder="活动名称" class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="col-lg-2 drawname control-label font-content">参与时间:</label>
+									<div class="col-lg-4">
+										<input type="text" id="activity_start" placeholder="2018-2-10"
+											class="form-control form_datetime" >
+									</div>
+									<div class="col-lg-1 control-label">至</div>
+									<div class="col-lg-4">
+										<input type="text" id="activity_end"  placeholder="2018-3-30"
+											class="form-control form_datetime">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="col-lg-2 drawname control-label font-content">投票次数:</label>
+									<div class="col-lg-10">
+										<select class="form-control" id="vote_account" name="account">
+											<option value="1">仅一次</option>
+											<option value="2">多次</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label
+												class="col-lg-4 text-left drawname control-label font-content">最大选项:</label>
+											<div class="col-lg-6">
+												<input type="text" id="max_option" 
+													class="form-control">
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 text-right">
+										<label
+											class="col-lg-5 text-left drawname control-label font-content">投票结果:</label>
+										<div class="col-lg-6 text-left lh-35">
+											<input class="m-r" type="checkbox"
+												style="vertical-align: sub" value="1" id="vote_result"/>公开
+										</div>
+									</div>
+								</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox">
+					<div class="ibox-title font-weight font-title">选项设置</div>
+					<div class="ibox-content">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="wjContent bgc-fff m-t-lg" style="background: #fff;">
+									<div id="imageUpload" title="图片" style="display: none;">
+										<form>
+											<input id="fileUpload" name="fileUpload" type="file"
+												multiple="true">
+												<div id="uploadContentDiv"></div>
+										</form>
+									</div>
+									<div class="cq_content clear">
+										<div class="row-fluid clear">
+											<div class="rows1 m-l" style="width: 165px;">
+												<div class="well sidebar-nav affix-top" id="accordion1">
+													<div class="accordion-group">
+														
+														<!-- 代码 开始 -->
+														<div id="firstpane" class="menu_list">
+															
+															<p class="menu_head">更多题型</p>
+															<div style="display: none" class=menu_body>
+																<ul class="ul-tool">
+																	<li class="moduleL" fieldType="1"><a
+																		href="javascript:void(0);"> <i
+																			class="basic-too11-icon-active"></i> 单选题
+																	</a></li>
+																	<li class="moduleL" fieldType="2"><a
+																		href="javascript:void(0);"> <i
+																			class="basic-too12-icon-active"></i> 多选题
+																	</a></li>
+																	<li class="moduleL" fieldType="3"><a
+																		href="javascript:void(0);"> <i
+																			class="basic-too2013-icon-active"></i> 图片单选题
+																	</a></li>
+																	<li class="moduleL" fieldType="4"><a
+																		href="javascript:void(0);"> <i
+																			class="basic-too2014-icon-active"></i> 图片多选题
+																	</a></li>
+																</ul>
+															</div>
+														</div>
+														<script type=text/javascript>
+															$(document)
+																	.ready(
+																			function() {
+																				$(
+																						"#firstpane .menu_body:eq(0)")
+																						.show();
+																				$(
+																						"#firstpane p.menu_head")
+																						.click(
+																								function() {
+																									$(
+																											this)
+																											.addClass(
+																													"current")
+																											.next(
+																													"div.menu_body")
+																											.slideToggle(
+																													300)
+																											.siblings(
+																													"div.menu_body")
+																											.slideUp(
+																													"slow");
+																									$(
+																											this)
+																											.siblings()
+																											.removeClass(
+																													"current");
+																								});
+																				$(
+																						"#secondpane .menu_body:eq(0)")
+																						.show();
+																				$(
+																						"#secondpane p.menu_head")
+																						.mouseover(
+																								function() {
+																									$(
+																											this)
+																											.addClass(
+																													"current")
+																											.next(
+																													"div.menu_body")
+																											.slideDown(
+																													500)
+																											.siblings(
+																													"div.menu_body")
+																											.slideUp(
+																													"slow");
+																									$(
+																											this)
+																											.siblings()
+																											.removeClass(
+																													"current");
+																								});
+
+																			});
+														</script>
+														<!-- 代码 结束 -->
+														<!-- <input type="submit" name="diyformSubmitButton" value="submitDiyform" onclick="submitDiyform()" /> -->
+													</div>
+												</div>
+											</div>
+											<div class="rows2 well2 Tj bgc-fff" style="background: #fff;">
+												<input type="hidden" id="diyformId" name="diyformId" />
+												<ul class="dragwen ui-sortable" id="question_box"></ul>
+											</div>
+										</div>
+									</div>
+									<div id="questionTemplate">
+										<ul>
+											<!--问题验证-->
+											<li id="fieldType_37" class="module" fieldtype="7"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con" style="position: relative;">
+														<div class="Drag_area">
+															<div class="th4 T_edit q_title" name="fieldTitle"
+																contenteditable="true">问题验证</div>
+															<input type="hidden" name="fieldType" value="7">
+														</div>
+														<ul class="unstyled">
+															<li style="overflow: inherit">
+																<div class="option_Fill">
+																	<input style="width: 300px;" placeholder="请输入验证答案"
+																		name="defValue" class="defaltT" type="text">
+																</div>
+															</li>
+														</ul>
+														<div class="bitian">
+															<input type="checkbox">必填 
+														</div>
+													</div>
+
+												</div>
+											</li>
+											<!--问题验证结束-->
+											<!--手机号-->
+											<li id="fieldType_27" class="module" fieldtype="7"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con" style="position: relative;">
+														<div class="Drag_area">
+															<div class="th4 T_edit q_title" name="fieldTitle"
+																contenteditable="true">短信验证</div>
+															<input type="hidden" name="fieldType" value="7">
+														</div>
+														<ul class="unstyled">
+															<li style="overflow: inherit">
+																<div class="option_Fill">
+																	<input style="width: 150px;" placeholder="请输入验证答案"
+																		name="defValue" class="defaltT" type="text"> <span
+																		class="font-content m-l-lg">短信验证</span> <input
+																		type="checkbox" name="sex" id="male" class="chooseBtn"
+																		checked=""> <label for="male"
+																			class="choose-label yzlabel"></label>
+																			<p class="font-12 m-t color-999">手机号启用验证码时，用户每发送一条验证码，即收取一条短信通讯费用</p>
+																</div>
+															</li>
+														</ul>
+														<div class="bitian">
+															<input type="checkbox">必填 
+														</div>
+													</div>
+
+												</div>
+											</li>
+											<!--手机号结束-->
+											<li id="fieldType_1" class="module" fieldType="1"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a>
+															<!--拖拽图标-->
+															<a class="Drag" href="javascript:void(0);"
+																style="display: block;"> <i
+																class="fa fa-arrows faIcon"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div class="th4 T_edit q_title" name="fieldTitle"
+																contenteditable="true">单选题</div>
+															<input type="hidden" name="fieldType" value="1" />
+														</div>
+														<ul class="unstyled">
+															<li><input type="radio" name="defValue" /> <span
+																class="T_edit_min" name="optValue"
+																contenteditable="true">选项1</span> <a name="删除选项"
+																href="javascript:void(0);" class="DelEdit"> <i
+																	class="menu_edit5_icon"></i>
+															</a></li>
+															<li><input type="radio" name="defValue" /> <span
+																class="T_edit_min" name="optValue"
+																contenteditable="true">选项2</span> <a name="删除选项"
+																href="javascript:void(0);" class="DelEdit"> <i
+																	class="menu_edit5_icon"></i>
+															</a></li>
+														</ul>
+														<div class="operationH">
+															<a href="javascript:void(0);" class="cq_add"> <i
+																class="add-icon-active"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_2" class="module" fieldType="2"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div class="q_title th4 T_edit" name="fieldTitle"
+																style="width: 100%;" contenteditable="true">多选题</div>
+															<input type="hidden" name="fieldType" value="2" />
+														</div>
+														<ul class="unstyled ">
+															<li><input name="defValue" type="checkbox" /> <span
+																class="T_edit_min" name="optValue"
+																contenteditable="true">选项1</span> <a name="删除选项"
+																href="javascript:void(0);" class="DelEdit"> <i
+																	class="menu_edit5_icon"></i>
+															</a></li>
+															<li><input name="defValue" type="checkbox">
+																	<span class="T_edit_min" name="optValue"
+																	contenteditable="true">选项2</span> <a name="删除选项"
+																	href="javascript:void(0);" class="DelEdit"> <i
+																		class="menu_edit5_icon"></i>
+																</a></li>
+														</ul>
+														<div class="operationH">
+															<a href="javascript:void(0);" class="duo_add"> <i
+																class="add-icon-active"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_3" class="module" fieldType="3"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div name="fieldTitle" class="th4 T_edit q_title"
+																contenteditable="true">图片单选题</div>
+															<input type="hidden" name="fieldType" value="3" />
+														</div>
+														<ul class="unstyled Imgli">
+															<li class="dragZone" style="cursor: pointer;">
+																<div class="questionImgBox abor">
+																	<div class="AddQImgCon"></div>
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_4" class="module" fieldType="4"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div name="fieldTitle" class="th4 T_edit q_title"
+																style="width: 100%;" contenteditable="true">图片多选题</div>
+															<input type="hidden" name="fieldType" value="4" />
+														</div>
+														<ul class="unstyled Imgli">
+															<li class="dragZone" style="cursor: pointer;">
+																<div class="questionImgBox abor">
+																	<div class="AddQImgCon"></div>
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_5" class="module" fieldType="5"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div class="th4 T_edit q_title" name="fieldTitle"
+																contenteditable="true">单行填空</div>
+															<input type="hidden" name="fieldType" value="5" /> <input
+																type="hidden" name="textSize" value="0" />
+														</div>
+														<ul class="unstyled">
+															<li style="overflow: inherit">
+																<div class="option_Fill">
+																	<input style="width: 300px;" value="" name="defValue"
+																		class="defaltT" type="text">
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_6" class="module" fieldType="6"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div class="th4 T_edit q_title" name="fieldTitle"
+																contenteditable="true">多行填空</div>
+															<input type="hidden" name="fieldType" value="6" /> <input
+																type="hidden" name="textSize" value="0" /> <input
+																type="hidden" name="areaRows" value="0" /> <input
+																type="hidden" name="areaCols" value="0" />
+														</div>
+														<ul class="unstyled">
+															<li style="overflow: inherit">
+																<div class="option_Fill">
+																	<textarea class="defaltT" type="text" rows="5"
+																		cols="40" name="defValue"></textarea>
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_7" class="module" fieldType="7"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div class="th4 T_edit q_title" name="fieldTitle"
+																contenteditable="true">姓名</div>
+															<input type="hidden" name="fieldType" value="7" />
+														</div>
+														<ul class="unstyled">
+															<li style="overflow: inherit">
+																<div class="option_Fill">
+																	<input style="width: 300px;" value="" name="defValue"
+																		class="defaltT" type="text">
+																</div>
+															</li>
+														</ul>
+														<!--必填-->
+														<div class="bitian">
+															<input type="checkbox" style="vertical-align: sub">必填
+															
+														</div>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_8" class="module" fieldType="8"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div class="th4 T_edit q_title" name="fieldTitle"
+																contenteditable="true">性别</div>
+															<input type="hidden" name="fieldType" value="8" />
+														</div>
+														<ul class="unstyled">
+															<li><input type="radio" name="sex"> <span
+																	class="T_edit_min" name="optValue"
+																	contenteditable="true">男</span> <a name="删除选项"
+																	href="javascript:void(0);" class="DelEdit"> <i
+																		class="menu_edit5_icon"></i>
+																</a></li>
+															<li><input type="radio"> <span
+																	class="T_edit_min" name="optValue"
+																	contenteditable="true">女</span> <a name="删除选项"
+																	href="javascript:void(0);" class="DelEdit"> <i
+																		class="menu_edit5_icon"></i>
+																</a></li>
+															<li><input type="radio"> <span
+																	class="T_edit_min" name="optValue"
+																	contenteditable="true">保密</span> <a name="删除选项"
+																	href="javascript:void(0);" class="DelEdit"> <i
+																		class="menu_edit5_icon"></i>
+																</a></li>
+														</ul>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_9" class="module" fieldType="9"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div class="th4 T_edit q_title" name="fieldTitle"
+																contenteditable="true">身份证号</div>
+															<input type="hidden" name="fieldType" value="9" />
+														</div>
+														<ul class="unstyled">
+															<li style="overflow: inherit">
+																<div class="option_Fill">
+																	<input style="width: 300px;" value="" name="defValue"
+																		class="defaltT" type="text">
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_10" class="module" fieldType="10"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div class="th4 T_edit q_title" name="fieldTitle"
+																contenteditable="true">手机</div>
+															<input type="hidden" name="fieldType" value="10" />
+														</div>
+														<ul class="unstyled">
+															<li style="overflow: inherit">
+																<div class="option_Fill">
+																	<input style="width: 300px;" value="" name="defValue"
+																		class="defaltT" type="text">
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_11" class="module" fieldType="11"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div class="th4 T_edit q_title" name="fieldTitle"
+																contenteditable="true">邮箱</div>
+															<input type="hidden" name="fieldType" value="11" />
+														</div>
+														<ul class="unstyled">
+															<li style="overflow: inherit">
+																<div class="option_Fill">
+																	<input style="width: 300px;" value="" name="defValue"
+																		class="defaltT" type="text">
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_12" class="module" fieldType="12"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div class="th4 T_edit q_title" name="fieldTitle"
+																contenteditable="true">地址</div>
+															<input type="hidden" name="fieldType" value="12" />
+														</div>
+														<div class="jlbd">
+															省： <select id="cmbProvince" class="province"></select> 市：
+															<select id="cmbCity" class="city"></select> 区： <select
+																id="cmbArea" class="area"></select> <br />
+															<textarea style="margin-top: 10px; width: 358px;" name=""
+																placeholder="街道信息"></textarea>
+														</div>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_13" class="module" fieldType="13"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div name="fieldTitle" class="th4 T_edit q_title"
+																contenteditable="true">文件上传</div>
+															<input type="hidden" name="fieldType" value="13" />
+														</div>
+														<div class="upFile">
+															<div class="upBut">
+																<div class="Hbuttom">选择文件</div>
+															</div>
+															<p>
+																<span>( 50MB以内 )</span>
+															</p>
+														</div>
+													</div>
+												</div>
+											</li>
+											<li id="fieldType_14" class="module" fieldType="14"
+												style="display: none;">
+												<div class="topic_type">
+													<div class="topic_type_menu">
+														<div class="setup-group">
+															<a class="Bub" href="javascript:void(0);"
+																style="display: block;"> <i class="copy-icon-active"></i>
+															</a> <a class="Del" href="javascript:void(0);"
+																style="display: block;"> <i class="del2-icon-active"></i>
+															</a>
+														</div>
+													</div>
+													<div class="topic_type_con">
+														<div class="Drag_area">
+															<div name="fieldTitle" class="th4 T_edit q_title"
+																contenteditable="true">图片上传</div>
+															<input type="hidden" name="fieldType" value="14" />
+														</div>
+														<div class="upFile">
+															<div class="upBut">
+																<div class="Hbuttom">选择图片</div>
+															</div>
+															<p>
+																<span>(5MB以内 )</span>
+															</p>
+														</div>
+													</div>
+												</div>
+											</li>
+
+										</ul>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-12 m-b-lg text-center">
+				<button class="btn btn-danger" onclick="submitDiyform()">确定</button>
+			</div>
+		</div>
+	</div>
+
+	</div>
+<script >
+function submitDiyform(returnFunc) {
+	var fieldArray = $("#question_box li.module");
+	var fieldCount = 0;
+	
+	var diyformName = $("#activity_name").val();
+	var startTime = $("#activity_start").val();
+	var endTime = $("#activity_end").val();
+	var voteCount = $("#vote_account").find("option:selected").val();
+	var maxOption = $("#max_option").val();
+	if( $("#vote_result").is(":checked")){
+		var voteResult = 1;
+	}else{
+		var voteResult = 0;
+	}
+	
+	
+	var diyformId = $("#diyformId").val();
+	var resultJson = "{\"liveEventId\":\""+liveEventId+
+	"\",\"startTime\":\"" + startTime +
+	"\",\"endTime\":\"" + endTime + 
+	"\",\"voteCount\":\"" + voteCount + 
+	"\",\"maxOption\":\"" + maxOption + 
+	"\",\"voteResult\":\"" + voteResult + 
+		"\",\"diyformName\":\"" + diyformName + "\",";
+	if (diyformId && !isNaN(diyformId)) {
+		resultJson += "\"diyformId\":\"" + diyformId + "\",";
+	}
+	resultJson += "\"fieldData\":[";
+	for (i = 0; i < fieldArray.length; i++) {
+		var fieldObj = $("#question_box li.module:eq(" + i + ")");
+		resultJson += "{";
+		var fieldType = fieldObj.find("input[name='fieldType']").val();
+		var diymodelId = $("#diymodelId").val();
+		if (diymodelId && !isNaN(diymodelId)) {
+			resultJson += "\"diymodelId\":\"" + diymodelId + "\",";
+		}
+		switch (fieldType) {
+		case "1":
+			for (m = 0; m < type1Array.length; m++) {
+				var jsonkey = type1Array[m];
+				var jsonValue = "";
+				if (jsonkey == 'defValue') {
+					var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']:checked");
+					if (jsonObj.length) {
+						for (j = 0; j < jsonObj.length; j++) {
+							if ($(jsonObj[j]).parent().find("*[name='optValue']").val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+								jsonValue += $(jsonObj[j]).parent().find("*[name='optValue']").val();
+							} else {
+								jsonValue += $(jsonObj[j]).parent().find("*[name='optValue']").html();
+							}
+							if (j != jsonObj.length - 1) {
+								jsonValue += "@;@";
+							}
+						}
+					} else {
+						jsonValue = "";
+					}
+				} else {
+					var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+					if (jsonObj.length) {
+						for (j = 0; j < jsonObj.length; j++) {
+							if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+								jsonValue += $(jsonObj[j]).val();
+							} else {
+								jsonValue += $(jsonObj[j]).html();
+							}
+							if (j != jsonObj.length - 1) {
+								jsonValue += "@;@";
+							}
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "2":
+			for (m = 0; m < type2Array.length; m++) {
+				var jsonkey = type2Array[m];
+				var jsonValue = "";
+				if (jsonkey == 'defValue') {
+					var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']:checked");
+					if (jsonObj.length) {
+						for (j = 0; j < jsonObj.length; j++) {
+							if ($(jsonObj[j]).parent().find("*[name='optValue']").val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+								jsonValue += $(jsonObj[j]).parent().find("*[name='optValue']").val();
+							} else {
+								jsonValue += $(jsonObj[j]).parent().find("*[name='optValue']").html();
+							}
+							if (j != jsonObj.length - 1) {
+								jsonValue += "@;@";
+							}
+						}
+					} else {
+						jsonValue = "";
+					}
+				} else {
+					var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+					if (jsonObj.length) {
+						for (j = 0; j < jsonObj.length; j++) {
+							if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+								jsonValue += $(jsonObj[j]).val();
+							} else {
+								jsonValue += $(jsonObj[j]).html();
+							}
+							if (j != jsonObj.length - 1) {
+								jsonValue += "@;@";
+							}
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "3":
+			for (m = 0; m < type3Array.length; m++) {
+				var jsonkey = type3Array[m];
+				var jsonValue = "";
+				if (jsonkey == 'defValue') {
+					var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']:checked");
+					if (jsonObj.length) {
+						for (j = 0; j < jsonObj.length; j++) {
+							if ($(jsonObj[j]).parent().find("*[name='optValue']").val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+								jsonValue += $(jsonObj[j]).parent().find("*[name='optValue']").val();
+							} else {
+								jsonValue += $(jsonObj[j]).parent().find("*[name='optValue']").html();
+							}
+							if (j != jsonObj.length - 1) {
+								jsonValue += "@;@";
+							}
+						}
+					} else {
+						jsonValue = "";
+					}
+				} else {
+					var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+					if (jsonObj.length) {
+						for (j = 0; j < jsonObj.length; j++) {
+							if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+								jsonValue += $(jsonObj[j]).val();
+							} else {
+								jsonValue += $(jsonObj[j]).html();
+							}
+							if (j != jsonObj.length - 1) {
+								jsonValue += "@;@";
+							}
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "4":
+			for (m = 0; m < type4Array.length; m++) {
+				var jsonkey = type4Array[m];
+				var jsonValue = "";
+				if (jsonkey == 'defValue') {
+					var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']:checked");
+					if (jsonObj.length) {
+						for (j = 0; j < jsonObj.length; j++) {
+							if ($(jsonObj[j]).parent().find("*[name='optValue']").val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+								jsonValue += $(jsonObj[j]).parent().find("*[name='optValue']").val();
+							} else {
+								jsonValue += $(jsonObj[j]).parent().find("*[name='optValue']").html();
+							}
+							if (j != jsonObj.length - 1) {
+								jsonValue += "@;@";
+							}
+						}
+					} else {
+						jsonValue = "";
+					}
+				} else {
+					var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+					if (jsonObj.length) {
+						for (j = 0; j < jsonObj.length; j++) {
+							if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+								jsonValue += $(jsonObj[j]).val();
+							} else {
+								jsonValue += $(jsonObj[j]).html();
+							}
+							if (j != jsonObj.length - 1) {
+								jsonValue += "@;@";
+							}
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "5":
+			for (m = 0; m < type5Array.length; m++) {
+				var jsonkey = type5Array[m];
+				var jsonValue = "";
+				var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+				if (jsonObj.length) {
+					for (j = 0; j < jsonObj.length; j++) {
+						if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+							jsonValue += $(jsonObj[j]).val();
+						} else {
+							jsonValue += $(jsonObj[j]).html();
+						}
+						if (j != jsonObj.length - 1) {
+							jsonValue += "@;@";
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "6":
+			for (m = 0; m < type6Array.length; m++) {
+				var jsonkey = type6Array[m];
+				var jsonValue = "";
+				var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+				if (jsonObj.length) {
+					for (j = 0; j < jsonObj.length; j++) {
+						if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+							jsonValue += $(jsonObj[j]).val();
+						} else {
+							jsonValue += $(jsonObj[j]).html();
+						}
+						if (j != jsonObj.length - 1) {
+							jsonValue += "@;@";
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "7":
+			for (m = 0; m < type7Array.length; m++) {
+				var jsonkey = type7Array[m];
+				var jsonValue = "";
+				var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+				if (jsonObj.length) {
+					for (j = 0; j < jsonObj.length; j++) {
+						if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+							jsonValue += $(jsonObj[j]).val();
+						} else {
+							jsonValue += $(jsonObj[j]).html();
+						}
+						if (j != jsonObj.length - 1) {
+							jsonValue += "@;@";
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+
+		case "8":
+			for (m = 0; m < type8Array.length; m++) {
+				var jsonkey = type8Array[m];
+				var jsonValue = "";
+				if (jsonkey == 'defValue') {
+					var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']:checked");
+					if (jsonObj.length) {
+						for (j = 0; j < jsonObj.length; j++) {
+							if ($(jsonObj[j]).parent().find("*[name='optValue']").val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+								jsonValue += $(jsonObj[j]).parent().find("*[name='optValue']").val();
+							} else {
+								jsonValue += $(jsonObj[j]).parent().find("*[name='optValue']").html();
+							}
+							if (j != jsonObj.length - 1) {
+								jsonValue += "@;@";
+							}
+						}
+					} else {
+						jsonValue = "";
+					}
+				} else {
+					var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+					if (jsonObj.length) {
+						for (j = 0; j < jsonObj.length; j++) {
+							if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+								jsonValue += $(jsonObj[j]).val();
+							} else {
+								jsonValue += $(jsonObj[j]).html();
+							}
+							if (j != jsonObj.length - 1) {
+								jsonValue += "@;@";
+							}
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "9":
+			for (m = 0; m < type9Array.length; m++) {
+				var jsonkey = type9Array[m];
+				var jsonValue = "";
+				var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+				if (jsonObj.length) {
+					for (j = 0; j < jsonObj.length; j++) {
+						if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+							jsonValue += $(jsonObj[j]).val();
+						} else {
+							jsonValue += $(jsonObj[j]).html();
+						}
+						if (j != jsonObj.length - 1) {
+							jsonValue += "@;@";
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "10":
+			for (m = 0; m < type10Array.length; m++) {
+				var jsonkey = type10Array[m];
+				var jsonValue = "";
+				var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+				if (jsonObj.length) {
+					for (j = 0; j < jsonObj.length; j++) {
+						if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+							jsonValue += $(jsonObj[j]).val();
+						} else {
+							jsonValue += $(jsonObj[j]).html();
+						}
+						if (j != jsonObj.length - 1) {
+							jsonValue += "@;@";
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "11":
+			for (m = 0; m < type11Array.length; m++) {
+				var jsonkey = type11Array[m];
+				var jsonValue = "";
+				var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+				if (jsonObj.length) {
+					for (j = 0; j < jsonObj.length; j++) {
+						if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+							jsonValue += $(jsonObj[j]).val();
+						} else {
+							jsonValue += $(jsonObj[j]).html();
+						}
+						if (j != jsonObj.length - 1) {
+							jsonValue += "@;@";
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "12":
+			for (m = 0; m < type12Array.length; m++) {
+				var jsonkey = type12Array[m];
+				var jsonValue = "";
+				var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+				if (jsonObj.length) {
+					for (j = 0; j < jsonObj.length; j++) {
+						if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+							jsonValue += $(jsonObj[j]).val();
+						} else {
+							jsonValue += $(jsonObj[j]).html();
+						}
+						if (j != jsonObj.length - 1) {
+							jsonValue += "@;@";
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "13":
+			for (m = 0; m < type13Array.length; m++) {
+				var jsonkey = type13Array[m];
+				var jsonValue = "";
+				var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+				if (jsonObj.length) {
+					for (j = 0; j < jsonObj.length; j++) {
+						if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+							jsonValue += $(jsonObj[j]).val();
+						} else {
+							jsonValue += $(jsonObj[j]).html();
+						}
+						if (j != jsonObj.length - 1) {
+							jsonValue += "@;@";
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		case "14":
+			for (m = 0; m < type14Array.length; m++) {
+				var jsonkey = type14Array[m];
+				var jsonValue = "";
+				var jsonObj = $("#question_box li.module:eq(" + i + ")").find("*[name='" + jsonkey + "']");
+				if (jsonObj.length) {
+					for (j = 0; j < jsonObj.length; j++) {
+						if ($(jsonObj[j]).val().replace(/(^\s*)|(\s*$)/g, "") != '') {
+							jsonValue += $(jsonObj[j]).val();
+						} else {
+							jsonValue += $(jsonObj[j]).html();
+						}
+						if (j != jsonObj.length - 1) {
+							jsonValue += "@;@";
+						}
+					}
+				}
+				resultJson += "\"" + jsonkey + "\":\"" + $.trim(jsonValue.replace(/<[^<>]+>/g, "")) + "\",";
+			}
+			break;
+		default:
+			break;
+		}
+		resultJson += "\"fieldKey\":\"field" + i + "\",";
+		resultJson += "\"order\":\"" + i + "\"";
+		resultJson += "}";
+		if (i != fieldArray.length - 1) {
+			resultJson += ",";
+		}
+		fieldCount++;
+	}
+	resultJson += "],\"fieldCount\":\"" + fieldCount + "\"}";
+	$("#preview").html(resultJson);
+	$.post(diyformSubmitUrl, {
+		resultJson : resultJson
+	}, function(data, status) {
+//		returnFunc(data.diyformId);
+		if(data.status=="success") {
+			alert("表单保存成功");
+		}
+	});
+}			
+
+$(".form_datetime").datetimepicker({
+	format : 'yyyy-mm-dd hh:ii:ss',
+	autoclose : 1
+});
+</script>
+</body>
+</html>

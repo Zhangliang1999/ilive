@@ -1,0 +1,37 @@
+2017/09/27 14:12:53(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/gaoqing/9_d大象标清2_a41fps.ts
+ ret=-1
+2017/09/27 14:12:53(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/pd2.mp4
+ ret=-1
+2017/09/27 14:12:56(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:12:56(INFO)-------readthread audio wait vnum=0 anum=0 udp://224.1.1.1:9207
+2017/09/27 14:12:56(INFO)-------readthread audio wait vnum=0 anum=0 udp://224.1.1.1:9207
+2017/09/27 14:12:58(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/pd2.mp4
+ ret=-1
+2017/09/27 14:12:58(INFO)-------threadquit:CUDPStreamImpl:AudioDecodeThreadFunc
+2017/09/27 14:12:58(INFO)-------threadquit:CUDPStreamImpl:VideoDecodeThreadFunc
+2017/09/27 14:12:58(INFO)-------threadquit:CUDPStreamImpl:AudioDecodeThreadFunc
+2017/09/27 14:12:59(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/gaoqing/9_d大象标清2_a41fps.ts
+ ret=-1
+2017/09/27 14:12:59(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:12:59(INFO)-------func=CUDPStreamImpl::ReadThreadFunc msg=need quit ret=0 udp://224.1.1.1:9207
+2017/09/27 14:12:59(INFO)-------threadquit:CUDPStreamImpl:ReadThread
+2017/09/27 14:13:01(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:13:01(INFO)-------readthread audio wait vnum=0 anum=0 udp://224.1.1.1:9207
+2017/09/27 14:13:01(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:13:01(INFO)-------readthread audio wait vnum=0 anum=0 udp://224.1.1.1:9207
+2017/09/27 14:13:03(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/pd2.mp4
+ ret=-1
+2017/09/27 14:13:03(INFO)-------threadquit:CUDPStreamImpl:VideoDecodeThreadFunc
+2017/09/27 14:13:03(INFO)-------threadquit:CUDPStreamImpl:AudioDecodeThreadFunc
+2017/09/27 14:13:03(INFO)-------threadquit:CUDPStreamImpl:VideoDecodeThreadFunc
+2017/09/27 14:13:04(INFO)-------func=CFileStreamImpl::Start msg=文件不存在 i:/vod1/gaoqing/9_d大象标清2_a41fps.ts
+ ret=-1
+2017/09/27 14:13:04(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:13:04(INFO)-------func=CUDPStreamImpl::ReadThreadFunc msg=need quit ret=0 udp://224.1.1.1:9207
+2017/09/27 14:13:04(INFO)-------threadquit:CUDPStreamImpl:ReadThread
+2017/09/27 14:13:04(INFO)-------收UDP数据 udp://224.1.1.1:9207 超时:3秒  
+2017/09/27 14:13:04(INFO)-------func=CUDPStreamImpl::ReadThreadFunc msg=need quit ret=0 udp://224.1.1.1:9207
+2017/09/27 14:13:04(INFO)-------threadquit:CUDPStreamImpl:ReadThread
+2017/09/27 14:13:06(INFO)-------threadquit:CUDPStreamImpl:AudioDecodeThreadFunc
+2017/09/27 14:13:06(INFO)-------threadquit:CUDPStreamImpl:VideoDecodeThreadFunc
+2017/09/27 14:13:06(INFO)-------threadquit:CUDPStreamImpl:AudioDecodeThreadFunc

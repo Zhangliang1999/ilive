@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业详情</title>
+    <#include "/bvRadio/livemanager/head.html" />
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/account.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.js"></script>
+    <style>
+    	#ul_title{
+    		float:left;
+    		margin-left:100px;
+    		height:40px;
+    		margin-top:10px;
+    	}
+    	#ul_title li{
+    		background:#888;
+    		color:#eee;
+    		float:left;
+    		margin-left:10px;
+    		padding-left:20px;
+    		padding-right:20px;
+    		height:100%;
+    		line-height:40px;
+    		cursor:pointer;
+    	}
+    	#ul_title li.active2{
+    		background:rgb(255, 153, 0);
+    	}
+    	.swal2-popup, .swal2-modal, .swal2-show{
+			width:400px;
+			font-size:14px;
+		}
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+		<#include "/bvRadio/livemanager/top.html" />
+		<!--左侧部分-->
+		<#include "/bvRadio/livemanager/left.html" />
+        <!--下面内容部分-->
+        <input type="hidden" name="serverGroupId" value="${serverGroupId!}" id="serverGroupId"/>
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+            <input type="hidden" id="enterpriseId" value="${enterprise.enterpriseId!}"/>
+                <div class="col-lg-12">
+                    <div class="title-name" style="position:relative;width:100%">
+                        <a class="font-title" style="display:block;float:left">企业详情</a>
+                        <ul id="ul_title">
+                        	<li class="active2">基本资料</li>
+                        	<li>产品订购</li>
+                        </ul>
+                        <div style="position:absolute;bottom:0px;right:100px">
+                        	<button type="button" id="backBtn" class="btn btn-default">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 p-w-lg">
+                    <!-- <div class="businessTilLeft" style="overflow:hidden">
+                    	<#if (enterprise.enterpriseImg!"") != "">
+			                <img class="img-responsive center-block"  style="object-position:center center;" src="${enterprise.enterpriseImg}">
+			            </#if>
+                    </div> -->
+                    <#if enterprise.disabled?? && enterprise.disabled == 1>
+                    	<h2 id="statemark" style="color:red;">禁用状态</h2>
+                    	<button data-state="0" class="btn btn-success" id="disablebtn">启用该企业</button>
+                   		<div id="forbiddenreasondiv">
+                   			<div>
+                   				<label>禁用理由：</label>
+                   				<span id="forbiddenreason">${enterprise.forbiddenReason!}</span>
+                   			</div>
+                   			<div>
+                   				<label>禁用人：</label>
+                   				<span id="forbiddenperson">${enterprise.forbiddenUser!}</span>
+                   			</div>
+                    	</div>
+                    <#else>
+                    	<h2 id="statemark" style="">启用状态</h2>	
+                    	<button data-state="1" class="btn btn-danger" id="disablebtn">禁用该企业</button>
+                    	<div id="forbiddenreasondiv" style="display:none">
+                   			<div>
+                   				<label>禁用理由：</label>
+                   				<span id="forbiddenreason">${enterprise.forbiddenReason!}</span>
+                   			</div>
+                   			<div>
+                   				<label>禁用人：</label>
+                   				<span id="forbiddenperson">${enterprise.forbiddenUser!}</span>
+                   			</div>
+                    	</div>
+                    </#if>
+                    <div>
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="m-t-xs">
+                <div class="col-lg-12">
+                    <div id="myTabContent" class="tab-content">
+                        	<#if enterprise.stamp == 0>
+                        	<!-- 个人类型 -->
+                        	<div class="information">
+                                <div class="col-lg-6">
+	                                <div class="col-lg-12 manageGroup">
+	                                     <div class="manageName">企业id</div>
+	                                     <div class="manageRight">
+	                                     	<label>${enterprise.enterpriseId!}</label>
+	                                     </div>
+	                                 </div>
+	                                <div class="col-lg-12 manageGroup">
+	                                     <div class="manageName">注册账号</div>
+	                                     <div class="manageRight">
+											<label>${enterprise.userPhone!}</label>
+	                                     </div>
+	                                 </div>
+	                                <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">logo：</div>
+                                        <div class="manageRight">
+                                            <div class="license" style="width:120px;height:120px;position:relative;z-index:999">
+                                            	<img id="img_enterpriseImg" style="height:100%;width:100%" src="${enterprise.enterpriseImg!}">
+                                            	<input id="enterpriseImg" name="enterpriseImg" value="${enterprise.enterpriseImg!}" type="hidden">
+                                            
+                                            	<div style="position:absolute;width:80px;height:40px;line-height:40px;text-align:center;border-radius:5px;left:210px;bottom:0px;background:#ddd">
+                                            			更换logo
+                                            		<input type="file" id="file" accept="image/*" style="position: absolute; cursor:pointer; top: 0; left: 0px; right: 0px; bottom: 0px; opacity: 0; width: 100%;height:100%;z-index:99">
+                                            	</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+	                                    <div class="manageName">真实姓名：</div>
+	                                    <div class="manageRight">
+	                                        <input class="manageInput" id="contactName" type="text" placeholder="" value="${enterprise.contactName!}" />
+	                                    </div>
+                                	</div>
+                                	<div class="col-lg-12 manageGroup">
+	                                    <div class="manageName">联系电话：</div>
+	                                    <div class="manageRight">
+	                                        <input class="manageInput" id="contactPhone" type="text" placeholder="" value="${enterprise.contactPhone!}" />
+	                                    </div>
+                                	</div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">联系地址:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" id="enterpriseInfo" type="text" placeholder="" value="${enterprise.enterpriseInfo!}" />
+                                            <!-- <select style="width: 80px; margin-right: 15px;" id="cmbProvince" class="province  smallSelect pull-left" name="province"></select> 
+											<select style="width: 90px;margin-right: 15px;" id="cmbCity" name="city" class="smallSelect pull-left city"
+												style="margin: 0 15px 0 15px;"></select>
+											<select style="width: 90px;" id="cmbArea" class="smallSelect pull-left area" name="area"></select>
+                                            <input class="manageInput m-t" type="text" placeholder="街道信息" value="${enterprise.road!}"/> -->
+                                       
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">联系邮箱:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" id="contactEmail" type="text" placeholder="" value="${enterprise.contactEmail!}" />
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">创建/注册时间:</div>
+                                        <div class="manageRight">
+                                        	<label>${enterprise.applyTime!}</label>
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">认证时间:</div>
+                                        <div class="manageRight">
+                                        	<label>${enterprise.certTime!}</label>
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">注册来源:</div>
+                                        <div class="manageRight">
+                                        	<label>PC</label>
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">个人备注:</div>
+                                        <div class="manageRight">
+                                        	<textarea id="remark" rows="" cols="" style="width:290px">${enterprise.remark!}</textarea>
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">身份证扫描件：</div>
+                                        <div class="manageRight">
+                                            <div class="license" style="width:200px;height:120px;position:relative">
+                                            	<img id="img_certResource" style="height:100%;width:100%" src="${enterprise.certResource!}">
+                                            	<input type="hidden" id="certResource" name="certResource" value="${enterprise.certResource!}">
+                                            	<div style="position:absolute;width:80px;height:40px;line-height:40px;text-align:center;border-radius:5px;left:210px;bottom:0px;background:#ddd">
+                                            			更换身份证扫描件
+                                            		<input type="file" id="file2" accept="image/*" style="position: absolute; cursor:pointer; top: 0; left: 0px; right: 0px; bottom: 0px; opacity: 0; width: 100%;height:100%;z-index:99">
+                                            	</div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align:center;padding-top:10px">
+                                    	<button class="btn btn-success" style="margin:10px;" id="subedit">提交编辑</button>
+                                    	<!-- <button class="btn btn-default" style="margin-left:10px;">发站内信</button> -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">企业名称:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" id="enterpriseName" type="text" placeholder="" value="${enterprise.enterpriseName!}"/>
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">企业密码:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" id="password" type="password" value="${enterprise.password!}" placeholder="" />
+                                        	<button class="btn btn-default" onclick="resetpwd(${enterprise.enterpriseId!})">重置</button>
+                                            <button class="btn btn-default" id="copypwd" data-clipboard-target="password">复制</button>
+                                        </div>
+                                    </div>
+                               	 	<!-- <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">组织机构名称：</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" id="enterpriseRegName" type="text" placeholder="" value="${enterprise.enterpriseRegName!}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">组织机构代码:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" id="enterpriseRegNo" type="text" placeholder="" value="${enterprise.enterpriseRegNo!}" />
+                                        </div>
+                                    </div> -->
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">认证类型:</div>
+                                        <div class="manageRight">
+                                        	<select name="stamp" id="stamp">
+                                        		<option <#if enterprise.stamp==0>selected</#if> value="0">个人</option>
+                                        		<option <#if enterprise.stamp==1>selected</#if> value="1">企业</option>
+                                        	</select>
+                                        </div>
+                                    </div>
+                                   <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">类型:</div>
+                                        <div class="manageRight">
+                                        	<select name="entype" id="entype">
+                                        		<option <#if enterprise.entype?? && enterprise.entype==1>selected</#if> value="1">外部测试</option>
+                                        		<option <#if enterprise.entype?? && enterprise.entype==2>selected</#if> value="2">内部测试</option>
+                                        		<option <#if enterprise.entype?? && enterprise.entype==3>selected</#if> value="3">签约用户</option>
+                                        	</select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">联系人：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.contactName!}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">最后一次登录ip：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.lastIP!}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">直播累计次数：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.liveCount!}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">直播累计时长：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.liveTimeLong!}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">最后编辑人：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.lastEditPerson!}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">最后编辑人时间：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.lastEditTime!}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 text-center">
+                            </div>
+                            </div>
+                        	
+                        	<#elseif enterprise.stamp == 1>
+                        	<!-- 企业类型 -->
+                        	<div class="information">
+                                <div class="col-lg-6">
+	                                <div class="col-lg-12 manageGroup">
+	                                     <div class="manageName">企业id</div>
+	                                     <div class="manageRight">
+	                                     	<label>${enterprise.enterpriseId!}</label>
+	                                     </div>
+	                                 </div>
+	                                <div class="col-lg-12 manageGroup">
+	                                     <div class="manageName">注册账号</div>
+	                                     <div class="manageRight">
+											<label>${enterprise.userPhone!}</label>
+	                                     </div>
+	                                 </div>
+	                                <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">企业logo：</div>
+                                        <div class="manageRight" style="position:relative">
+                                            <div class="license" style="width:120px;height:120px;position:relative;z-index:999">
+                                            	<img id="img_enterpriseImg" style="height:100%;width:100%" src="${enterprise.enterpriseImg!}">
+                                            	<input id="enterpriseImg" name="enterpriseImg" value="${enterprise.enterpriseImg!}" type="hidden">
+                                            
+                                            	<div style="position:absolute;width:80px;height:40px;line-height:40px;text-align:center;border-radius:5px;left:210px;bottom:0px;background:#ddd">
+                                            			更换logo
+                                            		<input type="file" id="file" accept="image/*" style="position: absolute; cursor:pointer; top: 0; left: 0px; right: 0px; bottom: 0px; opacity: 0; width: 100%;height:100%;z-index:99">
+                                            	</div>
+                                            
+                                            </div>
+                                            <!-- <button onclick="enlarge('enterpriseImg')" class="btn btn-default" type="button" style="position:absolute;top:0px;right:0px;">放大</button> -->
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+	                                    <div class="manageName">公司联系人：</div>
+	                                    <div class="manageRight">
+	                                        <input class="manageInput" id="contactName" type="text" placeholder="" value="${enterprise.contactName!}" />
+	                                    </div>
+                                	</div>
+                                	<div class="col-lg-12 manageGroup">
+	                                    <div class="manageName">联系电话：</div>
+	                                    <div class="manageRight">
+	                                        <input class="manageInput" id="contactPhone" type="text" placeholder="" value="${enterprise.contactPhone!}" />
+	                                    </div>
+                                	</div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">公司地址:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" id="enterpriseInfo" placeholder="" value="${enterprise.enterpriseInfo!}" />
+                                            <!--  <select style="width: 80px; margin-right: 15px;" id="cmbProvince" class="province  smallSelect pull-left" name="province"></select> 
+											<select style="width: 90px;margin-right: 15px;" id="cmbCity" name="city" class="smallSelect pull-left city"
+												style="margin: 0 15px 0 15px;"></select>
+											<select style="width: 90px;" id="cmbArea" class="smallSelect pull-left area" name="area"></select>
+                                            <input class="manageInput m-t" type="text" placeholder="街道信息" value="${enterprise.road!}"/> -->
+                                        
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">公司邮箱:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" id="contactEmail" type="text" placeholder="" value="${enterprise.contactEmail!}" />
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">创建/注册时间:</div>
+                                        <div class="manageRight">
+                                        	<label>${enterprise.applyTime!}</label>
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">认证时间:</div>
+                                        <div class="manageRight">
+                                        	<label>${enterprise.certTime!}</label>
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">注册来源:</div>
+                                        <div class="manageRight">
+                                        	<label>PC</label>
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">企业备注:</div>
+                                        <div class="manageRight">
+                                        	<textarea id="remark" rows="" cols="" style="width:290px">${enterprise.remark!}</textarea>
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">组织机构代码扫描件：</div>
+                                        <div class="manageRight" style="position:relative">
+                                            <div class="license" style="width:200px;height:120px;position:relative">
+                                            	<img id="img_certResource" style="height:100%;width:100%" src="${enterprise.certResource!}">
+                                            	<input type="hidden" id="certResource" name="certResource" value="${enterprise.certResource!}">
+                                            
+                                            	<div style="position:absolute;width:80px;height:40px;line-height:40px;text-align:center;border-radius:5px;left:210px;bottom:0px;background:#ddd">
+                                            			更换扫描件
+                                            		<input type="file" id="file2" accept="image/*" style="position: absolute; cursor:pointer; top: 0; left: 0px; right: 0px; bottom: 0px; opacity: 0; width: 100%;height:100%;z-index:99">
+                                            	</div>
+                                            
+                                            </div>
+                                            <!-- <button onclick="enlarge('certResource')" class="btn btn-default" type="button" style="position:absolute;top:0px;right:0px;">放大</button> -->
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="text-align:center;padding-top:10px">
+                                    	<button class="btn btn-success" style="margin:10px;" id="subedit">提交编辑</button>
+                                    	<!-- <button class="btn btn-default" style="margin-left:10px;">发站内信</button> -->
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-lg-6">
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">企业名称:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" id="enterpriseName" type="text" placeholder="" value="${enterprise.enterpriseName!}"/>
+                                        </div>
+                                    </div>
+                                	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">企业密码:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" id="password" type="password" value="${enterprise.password!}" placeholder="" />
+                                            <button class="btn btn-default" onclick="resetpwd(${enterprise.enterpriseId!})">重置</button>
+                                            <button class="btn btn-default" id="copypwd" data-clipboard-target="password">复制</button>
+                                        </div>
+                                    </div>
+                               	 	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">组织机构名称：</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" id="enterpriseRegName" type="text" placeholder="" value="${enterprise.enterpriseRegName!}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">组织机构代码:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" id="enterpriseRegNo" type="text" placeholder="" value="${enterprise.enterpriseRegNo!}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">认证类型:</div>
+                                        <div class="manageRight">
+                                        	<select name="stamp" id="stamp">
+                                        		<option <#if enterprise.stamp==0>selected</#if> value="0">个人</option>
+                                        		<option <#if enterprise.stamp==1>selected</#if> value="1">企业</option>
+                                        	</select>
+                                        </div>
+                                    </div>
+                                   <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">企业类型:</div>
+                                        <div class="manageRight">
+                                        	<select name="entype" id="entype">
+                                        		<option <#if enterprise.entype?? && enterprise.entype==1>selected</#if> value="1">外部测试</option>
+                                        		<option <#if enterprise.entype?? && enterprise.entype==2>selected</#if> value="2">内部测试</option>
+                                        		<option <#if enterprise.entype?? && enterprise.entype==3>selected</#if> value="3">签约用户</option>
+                                        	</select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">联系人：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.contactName!}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">最后一次登录ip：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.lastIP!}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">直播累计次数：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.liveCount!}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">直播累计时长：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.liveTimeLong!}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">最后编辑人：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.lastEditPerson!}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">最后编辑人时间：</div>
+                                        <div class="manageRight">
+											<label>${enterprise.lastEditTime!}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        	</#if>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+<div id="bgModule" style="position:absolute;width:100%;height:100%;top:0px;left:0px;background:#000;display:none;opacity:0.8;z-index:9999">
+	<div id="showImg" style="position:absolute;top:50%;left:50%;width:400px;height:300px;background-size:cover;margin-top:-150px;margin-left:-200px">
+		
+	</div>
+	<button class="btn btn-default" onclick="closeModule()" style="display:block;position:absolute;top:50%;margin-top:-150px;left:50%;margin-left:200px;">关闭</button>
+</div>
+</body>
+<script src="${base}/res/bvRadio/js/address.js" type="text/javascript"></script>
+<script type="text/javascript" src="${base}/thirdparty/ZeroClipboard/ZeroClipboard.js"></script>
+<!-- Mainly scripts -->
+<script>
+
+$(document).ready(function() {
+	var winH = $(window).height() - 72;
+	$(".companyBox").height(winH - 90);
+	$(".slimBox").slimScroll({
+		height : winH - 90
+	});
+	var province = $(".province")[0];
+	var city = $(".city")[0];
+	var area = $(".area")[0];
+	addressInit(province, city, area,"${enterprise.province!}","${enterprise.city!}","${enterprise.area!}");
+});
+
+    $(function () {
+        $('#myTab li:eq(0) a').tab('show');
+        $(".wrapper").height("auto");
+        var winHeight;
+        //获取页面高度
+        winHeight = $(window).height();
+        //导航栏高度
+        var navHeight = $(".navbar").height();
+        //标题栏高度加边线
+        var titleHeight = $(".title-header").height()+2;
+        $(".information").slimScroll({
+            height: winHeight-navHeight-titleHeight-200
+        });
+        var div1 =  $('.scrollSwitchBox');
+        var div2 =  $('.scrollSwitch');
+        $('.scrollSwitchBox').click(function(){
+            if($("#div1").hasClass("open1")){
+                $("#div1").addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+                $("#div2").addClass("scrollSwitch").addClass("close2").removeClass("open2");
+                $("#div1 input").attr("checked",false);
+                return;
+            }else{
+                $("#div1").addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+                $("#div2").addClass("scrollSwitch").addClass("open2").removeClass("close2");
+                $("#div1 input").attr("checked",true);
+                return;
+            }
+        });
+        
+        
+        $('#backBtn').on("click",function(){
+        	window.location.href = "${base}/operator/enterprise/manager/list.do";
+        });
+        
+    });
+	//返回
+	$("#retback").on("click",function(){
+		$("#zhgl-box").show();
+    	$("#accountEdit").hide();
+	});
+    
+    
+    //修改账户按钮
+/*     $("#editAccountBtn").on("click",function(){
+    	var userId = $()
+    	$("#zhgl-box").hide();
+    	$("#accountEdit").show();
+    	$.ajax({
+    		url:"${base}/operator/enterprise/userdetail.do",
+    		method:"get",
+    		data:{
+    			userId:userId
+    		},
+    		success:function(res){
+    			console.log(res);
+    			$("#nailName").val(res.nailName);
+    			$("#addImg1Img").attr("src",res.userImg);
+    			$("#userImg").val(res.userImg);
+    			$("#userzhanghao").val(res.mobile);
+    			$("#usermobile").val(res.mobile);
+    		}
+    	});
+    });   */
+    function editAccountBtn1(ele){
+    	var userId = $(ele).attr("data-id");
+    	console.log(userId);
+    	$("#zhgl-box").hide();
+    	$("#accountEdit").show();
+    	$.ajax({
+    		url:"${base}/operator/enterprise/userdetail.do",
+    		method:"get",
+    		data:{
+    			userId:userId
+    		},
+    		success:function(res){
+    			console.log(res);
+    			$("#nailName").val(res.nailName);
+    			$("#addImg1Img").attr("src",res.userImg);
+    			$("#userImg").val(res.userImg);
+    			$("#userzhanghao").val(res.mobile);
+    			$("#usermobile").val(res.mobile);
+    			$("#saveuserid").val(res.userId);
+    		}
+    	});
+    }
+    
+    function saveUserInfo(){
+    	var userId = $("#saveuserid").val();
+    	var nailName = $("#nailName").val();
+    	var userImg = $("#userImg").val();
+    	$.ajax({
+    		url:"${base}/operator/enterprise/saveUser.do",
+    		method:"post",
+    		data:{
+    			userId:userId,
+    			nailName:nailName,
+    			userImg:userImg
+    		},
+    		success:function(){
+    			alert("修改成功");
+    		}
+    	});
+    }
+    
+    //上传图片
+    $("#file").on("change",function(){
+    	//获取点击的文本框
+		
+		var formData = new FormData();  
+	    var uploadFile = $("#file").get(0).files[0];
+	    var selectedId = $('#select').val();  
+	    var serverGroupId = $("#serverGroupId").val();
+	    formData.append("file",uploadFile);  
+	    formData.append("serverGroupId",serverGroupId);
+	    formData.append("fileType", "image");
+		
+	    $.ajax({
+			url : '${base}/admin/file/o_uploadFile.do',
+			type : 'POST',
+			data : formData,
+			async : false,
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				if (data.status==1) {
+					$("#backgroundimg").attr("src",data.httpUrl);
+					replaceImg(data.httpUrl);
+				} else {
+				}
+			},
+			error : function(data) {
+				console.log(data.status);
+			}
+		});
+    })
+
+    //
+    $(".user-ul li.userindex").on("click",function(){
+    	$(this).addClass("active").siblings().removeClass("active");
+    	var userId = $(this).attr("data-id");
+    	$("#editAccountBtn").attr("data-id",userId);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/userdetail.do",
+    		method:"get",
+    		data:{
+    			userId:userId
+    		},
+    		success:function(res){
+    			console.log(res);
+    			$("#usernamep").text(res.nailName);
+    			$("#userimgs").attr("src",res.userImg);
+    			
+    			$("#nailName").val(res.nailName);
+    			$("#addImg1Img").attr("src",res.userImg);
+    			$("#userImg").val(res.userImg);
+    			$("#userzhanghao").val(res.mobile);
+    			$("#usermobile").val(res.mobile);
+    			$("#saveuserid").val(res.userId);
+    		}
+    	});
+    	
+    });
+/*     
+    $("#forbidden").on("click",function(){
+    	var enterpriseId = "${enterprise.enterpriseId}";
+    	console.log(enterpriseId);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/forbidden.do",
+    		method:"post",
+    		data:{
+    			enterpriseId:enterpriseId,
+    			status:1
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1 && res.type==1){
+    				$("#forbidden").remove();
+    				$(".btn-box").append("<button type='button' id='noforbidden' class='btn blueButton'>解除禁用</button>");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    });
+    $("#noforbidden").on("click",function(){
+    	var enterpriseId = "${enterprise.enterpriseId}";
+    	console.log(enterpriseId);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/forbidden.do",
+    		method:"post",
+    		data:{
+    			enterpriseId:enterpriseId,
+    			status:0
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1 && res.type==0){
+    				$("#noforbidden").remove();
+    				$(".btn-box").append("<button type='button' id='forbidden' class='btn blueButton'>禁用</button>");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    }); */
+    function forbidden(){
+    	var enterpriseId = "${enterprise.enterpriseId}";
+    	console.log(enterpriseId);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/forbidden.do",
+    		method:"post",
+    		data:{
+    			enterpriseId:enterpriseId,
+    			status:1
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1 && res.type==1){
+    				$("#forbidden").remove();
+    				$(".btn-box").append("<button type='button' onclick='noforbidden()' id='noforbidden' class='btn blueButton'>解除禁用</button>");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    }
+    function noforbidden(){
+    	var enterpriseId = "${enterprise.enterpriseId}";
+    	console.log(enterpriseId);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/forbidden.do",
+    		method:"post",
+    		data:{
+    			enterpriseId:enterpriseId,
+    			status:0
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1 && res.type==0){
+    				$("#noforbidden").remove();
+    				$(".btn-box").append("<button type='button' onclick='forbidden()' id='forbidden' class='btn blueButton'>禁用</button>");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    }
+    
+    
+    $("#disablebtn").on("click",function(){
+    	var enterpriseId = "${enterprise.enterpriseId!}";
+    	var state = $(this).attr("data-state");
+    	console.log(state);
+    	var that = this;
+    	if(state == 0){
+    		swal({
+  			  title: '是否启用该企业用户',
+  			  input: 'textarea',
+  			  showCancelButton: true,
+  			  confirmButtonText: '确定',
+  			  showLoaderOnConfirm: true,
+  			  inputPlaceholder:'启用后，企业用户将恢复所配置的使用权限。是否确认启用？',
+  			  preConfirm: function(reason) {
+  				$.ajax({
+  		    		url:"${base}/operator/enterprise/editdisable",
+  		    		type:"post",
+  		    		data:{
+  		    			enterpriseId:enterpriseId,
+  		    			state:state
+  		    		},
+  		    		success:function(res){
+  		    			console.log("启用调用成功");
+  		    			console.log(res);
+  		    			if(res.code == 1){
+	    					$("#statemark").html("启用状态").css("color","#000");
+	    					$(that).attr("data-state","1").html("禁用该企业").removeClass("btn-success").addClass("btn-danger");
+  		    				$("#forbiddenreasondiv").hide();
+  		    			}else{
+  		    				alert("修改失败");
+  		    			}
+  		    		}
+  		    	});
+  			  },
+  			  allowOutsideClick: false
+  			}).then(function(email) {
+				
+  			}) 
+    	}else{
+    		swal({
+    			  title: '是否禁用该企业用户',
+    			  input: 'textarea',
+    			  showCancelButton: true,
+    			  confirmButtonText: '确定',
+    			  showLoaderOnConfirm: true,
+    			  inputPlaceholder:'输入禁用理由，此理由会在企业用户登录时告知用户',
+    			  preConfirm: function(reason) {
+    				$.ajax({
+    		    		url:"${base}/operator/enterprise/editdisable",
+    		    		type:"post",
+    		    		data:{
+    		    			enterpriseId:enterpriseId,
+    		    			state:state,
+    		    			reason:reason
+    		    		},
+    		    		success:function(res){
+    		    			if(res.code == 1){
+   		    					$("#statemark").html("禁用状态").css("color","red");
+   		    					$(that).attr("data-state","0").html("启用该企业").removeClass("btn-danger").addClass("btn-success");
+   		    					$("#forbiddenreasondiv").show();
+   		    					$("#forbiddenreason").html(reason);
+    		    				$("#forbiddenperson").html(res.person);
+    		    			}else{
+    		    				alert("修改失败");
+    		    			}
+    		    		}
+    		    	});
+    			  },
+    			  allowOutsideClick: false
+    			}).then(function(email) {
+  				
+    			}) 
+    	}
+    	
+    	
+    	/*var that = this;
+    	$.ajax({
+    		url:"${base}/operator/enterprise/editdisable",
+    		type:"post",
+    		data:{
+    			enterpriseId:id,
+    			state:state
+    		},
+    		success:function(res){
+    			if(res.code == 1){
+    				if(state == 0){
+    					$("#statemark").html("启用状态").css("color","#000");
+    					$(that).attr("data-state","1").html("禁用该企业").removeClass("btn-success").addClass("btn-danger");
+    				}else if(state == 1){
+    					$("#statemark").html("禁用状态").css("color","red");
+    					$(that).attr("data-state","0").html("启用该企业").removeClass("btn-danger").addClass("btn-success");
+    				}
+    			}else{
+    				alert("修改失败");
+    			}
+    		}
+    	});*/
+    	
+    	
+    });
+    
+    //提交编辑
+    $("#subedit").on("click",function(){
+    	console.log(12222222);
+    	//id
+    	var enterpriseId = $("#enterpriseId").val();
+    	//公司联系人
+    	var contactName = $("#contactName").val();
+    	//联系电话
+    	var contactPhone = $("#contactPhone").val();
+    	//公司地址
+    	var enterpriseInfo = $("#enterpriseInfo").val();
+    	//公司邮箱
+    	var contactEmail = $("#contactEmail").val();
+    	//企业备注
+    	var remark = $("#remark").val();
+    	//企业名称
+    	var enterpriseName = $("#enterpriseName").val();
+    	//企业密码
+    	var password = $("#password").val();
+    	//组织机构名称
+    	var enterpriseRegName = $("#enterpriseRegName").val();
+    	//组织机构代码
+    	var enterpriseRegNo = $("#enterpriseRegNo").val();
+    	//认证类型
+    	var stamp = $("#stamp").val();
+    	//企业类型
+    	var entype = $("#entype").val();
+    	//组织结构图片
+    	var certResource = $("#certResource").val();
+    	//企业logo
+    	var enterpriseImg = $("#enterpriseImg").val();
+    	
+    	$.ajax({
+    		url:"${base}/operator/enterprise/editsub",
+    		type:"post",
+    		data:{
+    			enterpriseId:enterpriseId,
+    			contactName:contactName,
+    			contactPhone:contactPhone,
+    			enterpriseInfo:enterpriseInfo,
+    			contactEmail:contactEmail,
+    			remark:remark,
+    			enterpriseName:enterpriseName,
+    			enterpriseRegNo:enterpriseRegNo,
+    			stamp:stamp,
+    			entype:entype,
+    			enterpriseRegName:enterpriseRegName,
+    			password:password,
+    			certResource:certResource,
+    			enterpriseImg:enterpriseImg
+    		},
+    		success:function(res){
+    			alert(res.msg);
+    		}
+    	});
+    	
+    });
+    
+    //上传图片
+    $("#file").on("change",function(){
+    	//获取点击的文本框
+    	var file = document.getElementById("file");
+    	var imgContainer
+    	//获取的图片文件
+    	var fileList = file.files;
+    	if (fileList.length > 0) {
+    		var formData = new FormData();
+    		var uploadFile = fileList[0];
+    		formData.append("file", uploadFile);
+    		formData.append("fileType", "image");
+    		console.log("${base}/operator/file/o_uploadFile.do");
+    		$.ajax({
+    			url : '${base}/operator/file/o_uploadFile.do',
+    			type : 'POST',
+    			data : formData,
+    			async : false,
+    			cache : false,
+    			contentType : false,
+    			processData : false,
+    			success : function(data) {
+    				console.log(data);
+    				if (data.status == 1) {
+    					var httpUrl = data.httpUrl;
+    					$('#img_enterpriseImg').attr("src", data.httpUrl);
+    					$('#enterpriseImg').val(data.httpUrl);
+    				} else {
+    					swal("上传失败");
+    				}
+    			},
+    			error : function(data) {
+    				console.log(data.code);
+    			}
+    		});
+    	}
+    });
+    //上传图片
+    $("#file2").on("change",function(){
+    	//获取点击的文本框
+    	var file = document.getElementById("file2");
+    	var imgContainer
+    	//获取的图片文件
+    	var fileList = file.files;
+    	if (fileList.length > 0) {
+    		var formData = new FormData();
+    		var uploadFile = fileList[0];
+    		formData.append("file", uploadFile);
+    		formData.append("fileType", "image");
+    		console.log("${base}/operator/file/o_uploadFile.do");
+    		$.ajax({
+    			url : '${base}/operator/file/o_uploadFile.do',
+    			type : 'POST',
+    			data : formData,
+    			async : false,
+    			cache : false,
+    			contentType : false,
+    			processData : false,
+    			success : function(data) {
+    				console.log(data);
+    				if (data.status == 1) {
+    					var httpUrl = data.httpUrl;
+    					$('#img_certResource').attr("src", data.httpUrl);
+    					$('#certResource').val(data.httpUrl);
+    				} else {
+    					swal("上传失败");
+    				}
+    			},
+    			error : function(data) {
+    				console.log(data.code);
+    			}
+    		});
+    	}
+    });
+    
+    function enlarge(id){
+    	$("#bgModule").show();
+    	console.log($("#"+id).val());
+    	$("#showImg").css({"background":"url("+$("#"+id).val()+")","background-size":"contain","background-repeat":"no-repeat"});
+    }
+    function closeModule(){
+    	$("#bgModule").hide();
+    }
+    
+    function resetpwd(enterpriseId){
+    	$.ajax({
+    		url:"${base}/operator/enterprise/resetpwd",
+    		type:"post",
+    		data:{
+    			enterpriseId:enterpriseId
+    		},
+    		success:function(res){
+    			swal(res.msg);
+    			$("#password").val("000000");
+    		}
+    	});
+    }
+    
+    function copy(){
+    	
+    }
+    
+    var clip2 = new ZeroClipboard(document.getElementById("copypwd"), {
+		moviePath : "${base}/thirdparty/ZeroClipboard/ZeroClipboard.swf"
+	});
+	clip2.addEventListener("complete", function() {
+		swal("复制成功！");
+	});
+    
+</script>
+</html>

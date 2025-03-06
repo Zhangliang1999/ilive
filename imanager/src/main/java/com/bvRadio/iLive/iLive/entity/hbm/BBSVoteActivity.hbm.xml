@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="BBSVoteActivity" table="bbs_vote_activity_control">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="voteId" type="java.lang.Long" column="vote_id"><generator class="assigned"/></id>
+
+		<property name="voteType" column="vote_type" type="java.lang.Integer"  length="20"/>
+		
+		<property name="voteMore" column="vote_more" type="java.lang.Integer"  length="50"/>
+		
+		<property name="maxOption" column="max_option" type="java.lang.Integer"  length="20"/>
+		
+		<property name="voteStartTime" column="vote_start_time" type="java.sql.Timestamp"  length="20"/>
+		
+		<property name="voteEndTime" column="vote_end_time" type="java.sql.Timestamp" length="20"/>
+		
+		<property name="createTime" column="create_time" type="java.sql.Timestamp" length="20"/>
+		
+		<property name="creditspolicy" column="creditspolicy" type="java.lang.Integer" length="20" />
+		
+		<property name="closeComment" column="close_comment" type="java.lang.Integer"  length="20"/>
+		
+		<property name="enableTerminalRestrictions" column="enable_terminal_restrictions" type="java.lang.Integer"  length="20"/>
+		
+		<property name="allowSeeResult" column="allow_see_result" type="java.lang.Integer"  length="20"/>
+		
+		<property name="enableIPControl" column="enable_IP_control" type="java.lang.Integer"  length="20"/>
+		
+		<property name="allowNotLogin" column="allow_not_login" type="java.lang.Integer"  length="20"/>
+		
+		<property name="backgroundDescription" column="background_description" type="java.lang.String"  length="20"/>
+		
+		<property name="ruleDescription" column="rule_description" type="java.lang.String"  length="20"/>
+		
+		<property name="voteTitle" column="vote_title" type="java.lang.String"  length="20"/>
+		
+		<property name="voteDescription" column="vote_description" type="java.lang.String"  length="20"/>
+		
+		
+		<property name="priority" column="priority" type="java.lang.Integer" length="20" />
+		
+		<property name="everydayCount" column="everyday_count" type="java.lang.Integer" length="20" />
+		
+		<property name="delFlag" column="del_flag" type="java.lang.Integer" length="2" />
+	
+		<many-to-one name="iLiveLiveRoom" class="ILiveLiveRoom" column="room_id" ></many-to-one> 
+		
+	
+		<set name="bbsVoteItems" inverse="true" cascade="delete-orphan" >
+			<key column="vote_activity_id"/>
+			<one-to-many class="BBSVoteItem"/>
+		</set>
+		
+	</class>
+</hibernate-mapping>

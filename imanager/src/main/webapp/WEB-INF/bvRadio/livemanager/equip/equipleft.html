@@ -1,0 +1,20 @@
+<!--平台左侧列表-->
+<nav class="navbar-default navbar-static-side navbar-width"
+	role="navigation">
+	<div class="sidebar-collapse">
+		<!-- ƽ̨Start -->
+		<ul class="nav metismenu nav-left" id="side-menu">
+			<li class="<#if leftActive??&&leftActive='1'>active</#if>"><a href="${base}/operator/equipment/equlplist.do?type=2"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">销售工单</span></a></li>
+			<li class="<#if leftActive??&&leftActive='2'>active</#if>"><a href="${base}/operator/equipment/equlplist.do?type=1"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">租赁工单</span></a></li>
+			<li class="<#if leftActive??&&leftActive='3'>active</#if>"><a href="${base}/operator/equipment/equlplist.do?type=3"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">服务工单</span></a></li>
+			<li class="<#if leftActive??&&leftActive='4'>active</#if>"><a href="${base}/operator/equipment/equlpment.do?rentOrSell=2"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">销售库存</span></a></li>
+			<li class="<#if leftActive??&&leftActive='5'>active</#if>"><a href="${base}/operator/equipment/equlpment.do?rentOrSell=1"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">租赁库存</span></a></li>
+		</ul>
+		<!-- ƽ̨End -->
+	</div>
+</nav>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>充值 - 财务管理 - 互动直播管理系统</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/>
+<style>
+.control-group .controls .error {
+	color: red;
+}
+</style>
+</head>
+<body class='contrast-dark fixed-header'>
+	<!--顶部开始-->
+	<#include "/bvRadio/admin/top.html"/>
+	<!--顶部结束-->
+	<!--主体开始-->
+	<div id='wrapper'>
+		<!--左侧导航开始-->
+		<#include "/bvRadio/admin/left.html"/>
+		<!--左侧导航结束-->
+		<!--右侧框架开始-->
+		<section id='content'>
+			<div class='container-fluid'>
+				<div class='row-fluid' id='content-wrapper'>
+					<div class='span12 box'>
+						<div class='page-header mb10'>
+							<h1 class='pull-left'>
+								<i class='icon-briefcase'></i> <span>充值</span>
+							</h1>
+							<div class='pull-right'></div>
+						</div>
+						<div class='row-fluid'>
+							<div class='span12 box'>
+								<div class="box-content" id="updateFrom">
+									<form accept-charset="UTF-8" action=""
+										class="form form-horizontal" method="post"
+										style="margin-bottom: 0;" id="addForm" />
+										<input type="hidden"  id="user_id" name="user_id" value="${user.userId!0}">
+									<div class='control-group'>
+										<label class='control-label' for='inputText1'>用户名称：</label>
+										<div class='controls'>
+											<input class='span4' id=userName name="userName" value="${user.username!'请确定充值用户'}"
+												type='text' readonly="readonly" />
+										</div>
+									</div>
+									<div class='control-group'>
+										<label class='control-label' for='inputText1'>商户订单号：</label>
+										<div class='controls'>
+											<input class='span4' id=out_trade_no name="out_trade_no" value="${out_trade_no!0}"
+												type='text' readonly="readonly" />
+										</div>
+									</div>
+									<div class='control-group'>
+										<label class='control-label' for='inputText1'>订单描述：</label>
+										<div class='controls'>
+											<input class='span4' id=orderDescription name="orderDescription" value=""
+												type='text'/>
+										</div>
+									</div>
+									<div class='control-group'>
+										<label class='control-label' for='inputText1'>充值价格(元)：</label>
+										<div class='controls'>
+											<input class='span4' id=totalAmount name="totalAmount"
+												onkeyup="this.value=this.value.replace(/[^\d-]/g,'')" type='text'/>
+										</div>
+									</div>
+									<div class='control-group'>
+										<label class='control-label' for='inputText1'>充值方式：</label>
+										<div class='controls'>
+											<input type="radio" id="paymentType" name="paymentType" value="0" checked="checked"/>
+											<img  class="img " src="${base}/recharge/img/alipay.png"/>
+											<input type="radio" id="paymentType" name="paymentType" value="1"/>
+											<img class="img " src="${base}/recharge/img/weixin.png"/>
+										</div>
+									</div>
+									<hr class='hr-normal' />
+									<div class='form-actions'>
+										<button class='btn btn-primary' type='button' id="save-button">
+											<i class='icon-save'></i> 保存
+										</button>
+										<button class='btn' type='button' id="cancel-button">取消</button>
+									</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<img id="id_wxtwoCode"src=""/>
+			<div class="text-center">Copyright@2015 北京经纬中天信息技术有限公司
+				京ICP备05028082号 京公网安备110108007659 电话：010-82890742/43 82145306
+				82899116</div>
+		</section>
+		<!--右侧框架结束-->
+	</div>
+	<!--主体结束-->
+	<script>
+	$(document).ready(function() {
+		$("#save-button").click(function() {
+			var user_id = $("#user_id").val();//用户ID
+			if(user_id==0){
+				alert("充值用户错误");
+				return;
+			}
+			var userName = $("#userName").val();//用户名称
+			if(userName=="请确定充值用户" || userName==""){
+				alert("请检查登录用户名称是否为空");
+				return;
+			}
+			var out_trade_no = $("#out_trade_no").val();//订单商务号
+			if(out_trade_no=="0"){
+				alert("商户订单号不能为空：0");
+				return;
+			}
+			var orderDescription = $("#orderDescription").val();//订单描述
+			var totalAmount = $("#totalAmount").val();
+			if(totalAmount==""){
+				alert("充值金额不能为空");
+				return;
+			}
+			var paymentType = $("input:radio:checked").val();
+			if(paymentType==0){
+				if (confirm("充值金额："+totalAmount+"元，请确认是否正确！")) {
+					$.ajax({
+						type : 'POST',
+						url : "${base}/admin/recharge/getCreate.do",
+						data : {
+							user_id : user_id,
+							userName:userName,
+							out_trade_no:out_trade_no,
+							orderDescription:orderDescription,
+							totalAmount:totalAmount,
+							paymentType:paymentType
+						},
+						success : function(data) {
+							$("#updateFrom").html(data);
+						},
+						error : function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("doDelete出错>>" + errorThrown);
+						}
+					});
+				}	
+			}else if(paymentType==1){
+				if(orderDescription==""){
+					alert("商品描述 不能为空！");
+					return;
+				}
+				$.ajax({
+				    type:'POST',
+				     url:"${base}/admin/weixin/WxPayUnifiedorder.do",
+				     data:{
+				    	 user_id : user_id,
+						 userName:userName,
+						 out_trade_no:out_trade_no,
+						 orderDescription:orderDescription,
+						 totalAmount:totalAmount,
+						 paymentType:paymentType
+				     },
+				     success:function(data){
+				    	 var codeUrl = data;
+				    	 alert(codeUrl);
+				    	 if(codeUrl!=null && codeUrl!=""){  
+				    	    $("#id_wxtwoCode").attr('src',"${base}/admin/weixin/qr_codeImg.do?code_url="+codeUrl);  
+				    	 }  
+				     },
+				     error:function(){
+				        alert("执行错误");
+				     }
+				 });
+			};
+		});
+	});
+	</script>
+</body>
+</html>

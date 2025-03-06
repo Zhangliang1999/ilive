@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业管理</title>
+	<#include "/bvRadio/livemanager/head.html" />
+	<style>
+		input{
+			display:inline-block;
+			border:1px solid #111;
+			height:20px;
+		}
+		select{
+			display:inline-block;
+			width:100px;
+			height:20px;
+		}
+		.line-show button{
+			margin-left:10px;
+		}
+	</style>
+	<link href="${base}/tysx/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.js"></script>
+	<style>
+		.swal2-popup, .swal2-modal, .swal2-show{
+			width:400px;
+			font-size:14px;
+		}
+	</style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+		<!--上面的导航栏部分-->
+		<#include "/bvRadio/livemanager/top.html" />
+		<!--左侧部分-->
+		<#include "/bvRadio/livemanager/left.html" />
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">企业管理</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left form-inline" style="width:100%">
+                    	<label style="width:60px">企业id</label>
+                    	<input  class="form-control" type="text" id="enterpriseId" value="${iLiveEnterprise.enterpriseId!}">
+                    	
+                    	<label style="width:60px;margin-left:20px">企业名称</label>
+                    	<input  class="form-control" type="text" id="enterpriseName" value="${iLiveEnterprise.enterpriseName!}">
+                    	
+                    	<label style="width:60px;margin-left:20px">注册账号</label>
+                    	<input  class="form-control" type="text" id="userPhone" value="${iLiveEnterprise.userPhone!}">
+                    	
+                    	<label style="width:60px;margin-left:20px">企业状态</label>
+                   		<select class="form-control" id="disabled" style="width:168px">
+                   			<option value="-1" <#if iLiveEnterprise.disabled?? && iLiveEnterprise.disabled== -1>selected</#if>>不限</option>
+                   			<option value="0" <#if iLiveEnterprise.disabled?? && iLiveEnterprise.disabled == 0>selected</#if>>启用</option>
+                   			<option value="1" <#if iLiveEnterprise.disabled?? && iLiveEnterprise.disabled == 1>selected</#if>>禁用</option>
+                   		</select>
+                    </div>
+                    
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left form-inline" style="width:100%">
+                    	<label style="width:60px">注册时间</label>
+                    	<input id="registerStartTime" value="${iLiveEnterprise.registerStartTime!}" name="registerStartTime" type="text" readonly="readonly" class="Wdate input no-margins form_datetime" style="height:40px;width:168px;">
+                    	<input id="registerEndTime" value="${iLiveEnterprise.registerEndTime!}" name="registerEndTime" type="text" readonly="readonly" class="Wdate input no-margins form_datetime" style="height:40px;width:168px;">
+                    	
+                    	<label style="width:60px;margin-left:20px">认证时间</label>
+                    	<input id="authStartTime" value="${iLiveEnterprise.authStartTime!}" name="authStartTime" type="text" readonly="readonly" class="Wdate input no-margins form_datetime" style="height:40px;width:168px;">
+                    	<input id="authEndTime" value="${iLiveEnterprise.authEndTime!}" name="authEndTime" type="text" readonly="readonly" class="Wdate input no-margins form_datetime" style="height:40px;width:168px;">
+                    	
+                    	<label style="width:60px;margin-left:20px;margin-left:20px">企业类型</label>
+                   		<select class="form-control" id="entype" style="width:168px">
+                   			<option value="-1">不限</option>
+                   			<option value="1" <#if iLiveEnterprise.entype?? && iLiveEnterprise.entype == 1>selected</#if>>外部测试</option>
+                   			<option value="2" <#if iLiveEnterprise.entype?? && iLiveEnterprise.entype == 2>selected</#if>>内部测试</option>
+                   			<option value="3" <#if iLiveEnterprise.entype?? && iLiveEnterprise.entype == 3>selected</#if>>签约用户</option>
+                   		</select>
+                    </div>
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left form-inline" style="width:100%">
+                    	<label style="width:60px;">认证类型</label>
+                   		<select class="form-control" id="stamp" style="width:168px">
+                   			<option value="-1" <#if iLiveEnterprise.stamp?? && iLiveEnterprise.stamp== -1>selected</#if>>不限</option>
+                   			<option value="0" <#if iLiveEnterprise.stamp?? && iLiveEnterprise.stamp== 0>selected</#if>>个人</option>
+                   			<option value="1" <#if iLiveEnterprise.stamp?? && iLiveEnterprise.stamp== 1>selected</#if>>企业</option>
+                   		</select>
+                   		
+                    	<label style="width:60px;margin-left:20px">联系人</label>
+                    	<input  class="form-control" type="text" id="contactName" value="${iLiveEnterprise.contactName!}">
+                    	
+                    	<button class="btn btn-default" style="margin-right:78px;float:right" id="search">查询</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row m-t-xs">
+            	<div class="col-lg-12 p-w-lg">
+            	 	<div class="line-show" style="margin-top:10px;padding-right:30px;">
+		            	<label>数据列表</label>
+		            	<div style="float:right">
+			            	<button class="btn btn-default" style="color:red" id="jinyong">批量禁用</button>
+			                <button class="btn btn-default" id="qiyong">批量启用</button>
+			                
+			                <button class="btn btn-default" id="send" style="margin-left:100px">发站内信</button>
+			                <button class="btn btn-default" id="setbeizhu">设置备注</button>
+			                <button class="btn btn-default" id="exportData">导出数据</button>
+			                <select id="pageSize" class="form-inline" style="height:34px">
+			                	<option value="10" <#if pageSize?? && pageSize==10>selected</#if>>10</option>
+			                	<option value="20" <#if pageSize?? && pageSize==20>selected</#if>>20</option>
+			                	<option value="30" <#if pageSize?? && pageSize==30>selected</#if>>30</option>
+			                	<option value="50" <#if pageSize?? && pageSize==50>selected</#if>>50</option>
+			                </select>
+			                
+		            	</div>
+		            </div>
+                   <@p.pageList value=pagination 
+					listAction="list.do";item,i,has_next> 
+					<@p.column class="text-center" style="width:20px;"
+					title="<button type='button' class='btn btn-default btn-sm' id='allsel'>全选</button>">
+					<input type="checkbox" name="check" id="${item.enterpriseId!}" />
+					</@p.column>
+					<@p.column class="text-center" style="width:20px;"
+					title="ID">
+					${item.enterpriseId!}
+					</@p.column>
+					<@p.column class="text-center" style="width:30px;"
+					title="企业名称">
+					<#if item.enterpriseName??>${item.enterpriseName!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="注册账号">
+					<#if item.userPhone??>${item.userPhone!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="注册时间">
+					<#if item.applyTime??>${item.applyTime!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="认证时间">
+					<#if item.certTime??>${item.certTime!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="企业状态">
+					<#if item.disabled?? && item.disabled == 1>
+							<span name="showdisbale" style="color:red">禁用</span>
+						<#else>
+							<span name="showdisbale">启用</span>
+					</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="认证类型">
+					<#if item.stamp?? && item.stamp == 0>
+						个人 
+						<#else>企业
+					</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="联系人">
+						<#if item.contactName??>${item.contactName!}</#if>
+					</@p.column>
+					
+					<@p.column class="text-center" style="width:40px;"
+					title="企业类型">
+						<#if item.entype?? && item.entype == 1>外部测试</#if>
+						<#if item.entype?? && item.entype == 2>内部测试</#if>
+						<#if item.entype?? && item.entype == 3>签约用户</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:20px;"
+					title="开发者权限">
+						<#if item.isDeveloper?? && item.isDeveloper == 1>
+							<span data-id="${item.enterpriseId!}" class="isDeveloper">是</span>
+						<#else>
+							<span data-id="${item.enterpriseId!}" class="isDeveloper">否</span>
+						</#if>
+					</@p.column>
+					
+					<@p.column class="text-center" style="width:80px;"
+					title="操作">
+                        <a href="${base}/operator/enterprise/detail2.do?enterpriseId=${item.enterpriseId!}" class="m-r-xs color-999">编辑</a>|
+                        <#if item.disabled?? && item.disabled == 1>
+							<a href="##" onclick="editdisable(${item.enterpriseId!},this)" class="m-r-xs color-999" data-state="0">启用</a>
+						<#else>
+							<a href="##" onclick="editdisable(${item.enterpriseId!},this)" class="m-r-xs color-999" data-state="1">禁用</a>
+					</#if>
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="开发者管理">
+						<#if item.isDeveloper?? && item.isDeveloper == 1>
+							<button type="button" data-id="${item.enterpriseId!}" class="btn btn-success btn-sm" onclick="closeDev(${item.enterpriseId!})">关闭</button>
+							<button type="button" data-id="${item.enterpriseId!}" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" onclick="lookDec(${item.enterpriseId!})">查看</button>
+						<#else>
+							<button type="button" data-id="${item.enterpriseId!}" class="btn btn-success btn-sm" onclick="startDev(${item.enterpriseId!})">开通</button>
+						</#if>
+					</@p.column>
+					</@p.pageList>
+                </div>
+            </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel" style="text-align:center">开发者信息</h4>
+      </div>
+      <div class="modal-body" id="modalbody">
+        	<div>开发者ID(appId):
+        		<lebal id="appId"></label>
+        	</div>
+        	<div>ACCESS TOKEN:
+        		<lebal id="secret"></label>
+        	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="submitbtn"  data-dismiss="modal">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script src="${base}/tysx/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".businessContent").slimScroll({
+        height: winHeight-navHeight-titleHeight-75-40
+    });
+    var div1 =  $('.scrollSwitchBox');
+    var div2 =  $('.scrollSwitch');
+    
+    function viewDetail(enterpriseId_tmp) {
+    	window.location.href = "${base}/operator/enterprise/detail.do?enterpriseId="+enterpriseId_tmp+"";
+    }
+    
+    $("#registerStartTime").datetimepicker({
+		format : 'yyyy-mm-dd hh:ii:ss',
+		minuteStep : 1,
+		minView : 'hour',
+		language : 'zh-CN',
+		pickerPosition : 'bottom-right',
+		autoclose : true,
+	}).on("click", function() {
+		// $("#liveStartTime").datetimepicker("setEndDate", $("#liveEndTime").val());
+	});
+    $("#registerEndTime").datetimepicker({
+		format : 'yyyy-mm-dd hh:ii:ss',
+		minuteStep : 1,
+		minView : 'hour',
+		language : 'zh-CN',
+		pickerPosition : 'bottom-right',
+		autoclose : true,
+	}).on("click", function() {
+		// $("#liveStartTime").datetimepicker("setEndDate", $("#liveEndTime").val());
+	});
+    $("#authStartTime").datetimepicker({
+		format : 'yyyy-mm-dd hh:ii:ss',
+		minuteStep : 1,
+		minView : 'hour',
+		language : 'zh-CN',
+		pickerPosition : 'bottom-right',
+		autoclose : true,
+	}).on("click", function() {
+		// $("#liveStartTime").datetimepicker("setEndDate", $("#liveEndTime").val());
+	});
+    $("#authEndTime").datetimepicker({
+		format : 'yyyy-mm-dd hh:ii:ss',
+		minuteStep : 1,
+		minView : 'hour',
+		language : 'zh-CN',
+		pickerPosition : 'bottom-right',
+		autoclose : true,
+	}).on("click", function() {
+		// $("#liveStartTime").datetimepicker("setEndDate", $("#liveEndTime").val());
+	});
+    
+    $("#_page_form").append("<input type='hidden' id='searchid' name='enterpriseId' value='${iLiveEnterprise.enterpriseId!}'/>")
+    	.append("<input type='hidden' id='searchName' name='enterpriseName' value='${iLiveEnterprise.enterpriseName!}'/>")
+    	.append("<input type='hidden' id='searchUserPhone' name='userPhone' value='${iLiveEnterprise.userPhone!}'/>")
+    	.append("<input type='hidden' id='searchregisterStartTime' name='registerStartTime' value='${iLiveEnterprise.registerStartTime!}'/>")
+    	.append("<input type='hidden' id='searchregisterEndTime' name='registerEndTime' value='${iLiveEnterprise.registerEndTime!}'/>")
+    	.append("<input type='hidden' id='searchauthStartTime' name='authStartTime' value='${iLiveEnterprise.authStartTime!}'/>")
+    	.append("<input type='hidden' id='searchauthEndTime' name='authEndTime' value='${iLiveEnterprise.authEndTime!}'/>")
+    	.append("<input type='hidden' id='searchDisabled' name='disabled' value='${iLiveEnterprise.disabled!}'/>")
+    	.append("<input type='hidden' id='searchEntype' name='entype' value='${iLiveEnterprise.entype!}'/>")
+    	.append("<input type='hidden' id='searchStamp' name='stamp' value='${iLiveEnterprise.stamp!}'/>")
+    	.append("<input type='hidden' id='searchpageSize' name='pageSize' value='${pageSize!}'/>")
+    	.append("<input type='hidden' id='searchContactName' name='contactName' value='${iLiveEnterprise.contactName!}'/>");
+    
+    $("#search").on("click",function(){
+    	var id = $("#enterpriseId").val();
+    	var name = $("#enterpriseName").val();
+    	var userPhone = $("#userPhone").val();
+    	var disabled = $("#disabled").val();
+    	var entype = $("#entype").val();
+    	var stamp = $("#stamp").val();
+    	var contactName = $("#contactName").val();
+    	var registerStartTime = $("#registerStartTime").val();
+    	var registerEndTime = $("#registerEndTime").val();
+    	var authStartTime = $("#authStartTime").val();
+    	var authEndTime = $("#authEndTime").val();
+    	var pageSize = $("#pageSize").val();
+    	$("#searchid").val(id);
+    	$("#searchName").val(name);
+    	$("#searchUserPhone").val(userPhone);
+    	$("#searchDisabled").val(disabled);
+    	$("#searchEntype").val(entype);
+    	$("#searchStamp").val(stamp);
+    	$("#searchContactName").val(contactName);
+    	$("#searchregisterStartTime").val(registerStartTime);
+    	$("#searchregisterEndTime").val(registerEndTime);
+    	$("#searchauthStartTime").val(authStartTime);
+    	$("#searchauthEndTime").val(authEndTime);
+    	$("#searchpageSize").val(pageSize);
+    	$("#_page_form").submit();
+    });
+    
+    var tempid;
+    var tempstate;
+    function editdisable(enterpriseId,ele){
+    	var that = ele;
+    	var state = $(ele).attr("data-state");
+    	if(state == 0){
+    		swal({
+    			  title: '是否启用该企业用户',
+    			  input: 'textarea',
+    			  showCancelButton: true,
+    			  confirmButtonText: '确定',
+    			  showLoaderOnConfirm: true,
+    			  inputPlaceholder:'启用后，企业用户将恢复所配置的使用权限。是否确认启用？',
+    			  preConfirm: function(reason) {
+    				$.ajax({
+    		    		url:"${base}/operator/enterprise/editdisable",
+    		    		type:"post",
+    		    		data:{
+    		    			enterpriseId:enterpriseId,
+    		    			state:state
+    		    		},
+    		    		success:function(res){
+    		    			if(res.code == 1){
+    		    				if(state == 0){
+    		    					$(that).closest("tr").find("span[name=showdisbale]").html("启用").css("color","#000");
+    		    					$(that).attr("data-state","1").html("禁用");
+    		    				}else if(state == 1){
+    		    					$(that).closest("tr").find("span[name=showdisbale]").html("禁用").css("color","red");
+    		    					$(that).attr("data-state","0").html("启用");
+    		    				}
+    		    			}else{
+    		    				alert("修改失败");
+    		    			}
+    		    		}
+    		    	});
+    			  },
+    			  allowOutsideClick: false
+    			}).then(function(email) {
+  				
+    			})    		
+    	}else{
+    		swal({
+  			  title: '是否禁用该企业用户',
+  			  input: 'textarea',
+  			  showCancelButton: true,
+  			  confirmButtonText: '确定',
+  			  showLoaderOnConfirm: true,
+  			  inputPlaceholder:'输入禁用理由，此理由会在企业用户登录时告知用户',
+  			  preConfirm: function(reason) {
+  				$.ajax({
+  		    		url:"${base}/operator/enterprise/editdisable",
+  		    		type:"post",
+  		    		data:{
+  		    			enterpriseId:enterpriseId,
+  		    			state:state,
+  		    			reason:reason
+  		    		},
+  		    		success:function(res){
+  		    			console.log("禁用");
+  		    			console.log(res);
+  		    			console.log(state);
+  		    			if(res.code == 1){
+  		    				if(state == 0){
+  		    					$(that).closest("tr").find("span[name=showdisbale]").html("启用").css("color","#000");
+  		    					$(that).attr("data-state","1").html("禁用");
+  		    				}else if(state == 1){
+  		    					$(that).closest("tr").find("span[name=showdisbale]").html("禁用").css("color","red");
+  		    					$(that).attr("data-state","0").html("启用");
+  		    				}
+  		    			}else{
+  		    				alert("修改失败");
+  		    			}
+  		    		}
+  		    	});
+  			  },
+  			  allowOutsideClick: false
+  			}).then(function(email) {
+				
+  			})
+    	
+    	}
+    }
+    
+    $("#submitbtn").on("click",function(){
+    	var state = tempstate;
+    	var reason = $("#reason").val();
+    });
+    
+    //批量禁用
+    $("#jinyong").on("click",function(){
+    	var arr = [];
+    	$("input[name=check]:checked").each(function(index,ele){
+    		arr.push({
+    			id:ele.id
+    		});
+    	});
+    	if(arr.length == 0){
+    		swal("请选择需要禁用的企业");
+    		return false;
+    	}else{
+    		swal({
+  			  title: '禁用企业',
+  			  input: 'textarea',
+  			  showCancelButton: true,
+  			  confirmButtonText: '确定',
+  			  showLoaderOnConfirm: true,
+  			  inputPlaceholder:'请输入禁用理由',
+  			  preConfirm: function(reason) {
+  				var str = JSON.stringify(arr);
+  		    	$.ajax({
+  		    		url:"${base}/operator/enterprise/editdisablemany",
+  		    		type:"post",
+  		    		data:{
+  		    			str:str,
+  		    			status:1,
+  		    			reason:reason
+  		    		},
+  		    		success:function(res){
+  		    			swal(res.msg);
+  		    			$("#_page_form").submit();
+  		    		}
+  		    	});
+  			  },
+  			  allowOutsideClick: false
+  			}).then(function(email) {
+				
+  			}) 
+    		
+    		
+    	}
+    });
+    
+    $("#qiyong").on("click",function(){
+    	var arr = [];
+    	$("input[name=check]:checked").each(function(index,ele){
+    		arr.push({
+    			id:ele.id
+    		});
+    	});
+    	if(arr.length == 0){
+    		swal("请选择需要启用的企业");
+    		return false;
+    	}
+    	var str = JSON.stringify(arr);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/editdisablemany",
+    		type:"post",
+    		data:{
+    			str:str,
+    			status:0
+    		},
+    		success:function(res){
+    			swal(res.msg);
+    			$("#_page_form").submit();
+    		}
+    	});
+    });
+    
+    //全选
+    $("#allsel").on("click",function(){
+    	$("input[name=check]").prop("checked",true);
+    });
+    
+    //设置备注
+    $("#setbeizhu").on("click",function(){
+    	var arr = [];
+    	$("input[name=check]:checked").each(function(index,ele){
+    		arr.push({
+    			id:ele.id
+    		});
+    	});
+    	if(arr.length == 0){
+    		swal("请选择需要设置备注的企业");
+    		return false;
+    	}else{
+    		swal({
+    			  title: '添加备注',
+    			  input: 'textarea',
+    			  showCancelButton: true,
+    			  confirmButtonText: '确定',
+    			  showLoaderOnConfirm: true,
+    			  inputPlaceholder:'请输入企业备注',
+    			  preConfirm: function(beizhu) {
+    			    	var str = JSON.stringify(arr);
+    			    	$.ajax({
+    			    		url:"${base}/operator/enterprise/setbeizhu",
+    			    		type:"post",
+    			    		data:{
+    			    			str:str,
+    			    			beizhu:beizhu
+    			    		},
+    			    		success:function(res){
+    			    			swal(res.msg);
+    			    		}
+    			    	});
+    			  },
+    			  allowOutsideClick: false
+    			}).then(function(email) {
+  				
+    			}) 
+    	}
+    });
+    
+    //导出数据
+    $("#exportData").on("click",function(){
+    	var enterpriseId = "${iLiveEnterprise.enterpriseId!}";
+    	var enterpriseName = "${iLiveEnterprise.enterpriseName!}";
+    	var userPhone = "${iLiveEnterprise.userPhone!}";
+    	var disabled = "${iLiveEnterprise.disabled!}";
+    	var entype = "${iLiveEnterprise.entype!}";
+    	var stamp = "${iLiveEnterprise.stamp!}";
+    	var contactName = "${iLiveEnterprise.contactName!}";
+    	var registerStartTime = "${iLiveEnterprise.registerStartTime!}";
+    	var registerEndTime = "${iLiveEnterprise.registerEndTime!}";
+    	var authStartTime = "${iLiveEnterprise.authStartTime!}";
+    	var authEndTime = "${iLiveEnterprise.authEndTime!}";
+    	$.ajax({
+    		url:"${base}/operator/enterprise/getList",
+    		type:"post",
+    		data:{
+    			enterpriseId:enterpriseId,
+    			enterpriseName:enterpriseName,
+    			userPhone:userPhone,
+    			disabled:disabled,
+    			entype:entype,
+    			stamp:stamp,
+    			contactName:contactName,
+    			registerStartTime:registerStartTime,
+    			registerEndTime:registerEndTime,
+    			authStartTime:authStartTime,
+    			authEndTime:authEndTime
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.code==1){
+    				location.href="${base}/operator/enterprise/exportData?uuid="+res.uuid+"";
+    			}
+    		}
+    	});
+    });
+    
+    function startDev(enterpriseId){
+    	
+    	swal({
+  		  title: "请确认",
+  		  text: "是否开通开发者权限",
+  		  icon: "warning",
+  		  buttons: true,
+  		  dangerMode: true,
+  		})
+  		.then((willDelete) => {
+  		  if (willDelete) {
+  			$.ajax({
+  	    		url:"${base}/operator/enterprise/startDev",
+  	    		type:"post",
+  	    		data:{
+  	    			id:enterpriseId
+  	    		},
+  	    		success:function(res){
+  	    			if(res.code==0){
+  	    				swal(res.msg);
+  	    			}else{
+  	    				swal(res.msg);
+  	    			}
+  	    			location.reload();
+  	    		}
+  	    	});
+  		  } else {
+  		  }
+  		});
+    	
+    	
+    }
+    
+    function closeDev(enterpriseId){
+    	
+    	swal({
+    		  title: "请确认",
+    		  text: "是否关闭开发者权限",
+    		  icon: "warning",
+    		  buttons: true,
+    		  dangerMode: true,
+    		})
+    		.then((willDelete) => {
+    		  if (willDelete) {
+    			  $.ajax({
+			    		url:"${base}/operator/enterprise/closeDev",
+			    		type:"post",
+			    		data:{
+			    			id:enterpriseId
+			    		},
+			    		success:function(res){
+			    			if(res.code==0){
+			    				swal(res.msg);
+			    			}else{
+			    				swal(res.msg);
+			    			}
+			    			location.reload();
+			    		}
+			    	});
+    		  } else {
+    		  }
+    		});
+    	
+    }
+    
+    function lookDec(enterpriseId){
+    	$.ajax({
+    		url:"${base}/operator/enterprise/getEnt",
+    		type:"get",
+    		data:{
+    			id:enterpriseId
+    		},
+    		success:function(res){
+    			if(res.code==0){
+    				console.log(res);
+    				var appId = res.appId;
+    				var secret = res.secret;
+					$("#appId").text(appId);
+					$("#secret").text(secret);
+    			}
+    		}
+    	});
+    }
+    
+</script>
+</html>

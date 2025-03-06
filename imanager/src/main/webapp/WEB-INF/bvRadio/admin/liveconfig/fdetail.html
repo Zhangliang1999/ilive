@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F码详情</title>
+	<#include "/bvRadio/head.html"/>
+    <!--直播设置模块样式-->
+    <link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css"/>
+</head>
+<body >
+<div id="wrapper" class="bgc-fff normal-font">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/admin/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/admin/left.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content bgc-fff">
+            <div class="row title-header">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title"> F码详情</a>
+                    </div>
+                </div>
+            </div>
+            <div class="fcode-info">
+                <div class="row fcode-infolist">
+                    <div class="col-lg-2"><h3 class="font-bold">${liveCode.codeName}</h3></div>
+                    <div class="col-lg-2">F码数量: <span> ${liveCode.codeNum}</span> &nbsp;&nbsp; 已使用：<span>${liveCode.useNum}</span></div>
+                    <div class="col-lg-5">
+                        有效日期： <input type="text" placeholder="2018-02-26 12:00:00" value="${liveCode.startTime}">至 &nbsp;&nbsp;
+                        <input type="text" placeholder="2018-04-26 16:04:00" value="${liveCode.endTime}">
+                    </div>
+                    <div class="col-lg-1 pull-right z-export">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-log-out">&nbsp;导出</span>
+                        </a>
+                    </div>
+                </div>
+                <ul class="fcode-detail">
+                <#list listFCode as list>
+                	<li class="z_pink">
+                        <div class="z-logo"><img src="${base}/tysx/img/Z_LOGO.png"/></div>
+                        <div class="f-detail">
+                            <p class="c_title">${liveCode.codeName}</p>
+                            <p class="c_code">${list.code}</p>
+                        </div>
+                    </li>
+                </#list>
+                    <!-- <li class="gray-bg">
+                        <div class="z-logo"><img src="${base}/tysx/img/z_logo.png"/></div>
+                        <div class="f-detail">
+                            <p class="c_title">XXXX公司F码</p>
+                            <p class="c_code">QWE123ZXC321Q</p>
+                        </div>
+                    </li> -->
+                </ul>
+            </div>
+         </div>
+    </div>
+</div>
+
+
+</body>
+
+<script>
+    $(".live-bottom").hide()
+
+    wid=$('.blcen').width()
+    $('.textbl').css('width',wid-300)
+    $('.textbl2').css('width',wid-300)
+
+    $(window).resize(function () {          //当浏览器大小变化时
+
+        wid=$('.blcen').width()
+        $('.textbl').css('width',wid-300)
+        $('.textbl2').css('width',wid-300)
+
+    });
+
+    $(".img-box").hover(function(){
+        $(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+    },function(){
+        $(this).find(".live-bottom").stop(true, false).slideUp(300)
+    })
+
+</script>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>直播监看</title>
+    <#include "/bvRadio/livemanager/head.html" />
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+    <style>
+    	.zbjk{
+    		position:relative;
+    	}	
+    	.zbjk div{
+    		position:absolute;
+    		left:0;
+    		top:0
+    	}
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/livemanager/top.html" />
+        <!--左侧部分-->
+        <#include "/bvRadio/livemanager/managercontrolleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">直播监看</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-t-xs p-w-lg">
+                <div class="col-lg-1">
+                    <div class="left"><img src="${base}/tysx/img/leftarrow.png" alt=""/></div>
+                </div>
+                <div class="col-lg-10 zbjkBox no-padding">
+                    <div class="zbjkSlim">
+                        <div class="picobox">
+                        <input type="hidden" id="pageNo" value="${pageNo!}"/>
+                        <input type="hidden" id="maxPage" value="${maxPage!}"/>
+                        <ul id="zbjkul">
+                        <li class="videobox">
+                        <#list list as item>
+                            <div class="zbjk">
+                            	<iframe width="100%" height="100%" frameborder="no" border="0" src="${base}/operator/managercontrol/getpattern?roomId=${item.roomId!}"></iframe>
+                            </div>
+                        </#list>
+                        </li>
+                           <!--  <li>
+                                <div class="zbjk">1</div>
+                                <div class="zbjk">
+                                	<iframe class="iframe" src="${base}/operator/managercontrol/pattern.do"></iframe>
+                                </div>
+                                <div class="zbjk">
+                                	<iframe class="iframe" src="${base}/operator/managercontrol/pattern.do"></iframe>
+                                </div>
+                                <div class="zbjk">
+                                	<iframe class="iframe" src="${base}/operator/managercontrol/pattern.do"></iframe>
+                                </div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                            </li> -->
+                          <!--   <li>
+                                <div class="zbjk">2</div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                            </li> -->
+                            <!-- <li>
+                                <div class="zbjk">3</div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                                <div class="zbjk"></div>
+                            </li> -->
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <div class="right"><img src="${base}/tysx/img/rightarrow.png" alt=""/></div>
+                </div>
+            </div>
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+<!-- <script src="${base}/tysx/js/zbjk.js"></script> -->
+
+
+
+<script>
+/**
+ * Created by Administrator on 2018/5/8.
+ */
+var winHeight;
+//��ȡҳ��߶�
+winHeight = $(window).height();
+//�������߶�
+var navHeight = $(".navbar").height();
+//�������߶ȼӱ���
+var titleHeight = $(".title-header").height()+2;
+$(".tablebox").slimScroll({
+    height: winHeight-navHeight-titleHeight-75
+});
+
+
+$(".picobox").slimScroll({
+    height: winHeight-navHeight-titleHeight-30
+});
+$(".right").css("margin-top",(winHeight-navHeight-titleHeight-75)/2)
+$(".left").css("margin-top",(winHeight-navHeight-titleHeight-75)/2)
+var zbjkWid = $(".zbjkBox").width();
+$(".picobox").width(zbjkWid);
+$("#zbjkul").width(zbjkWid);
+$("#zbjkul li").width(zbjkWid);
+$(".zbjk").height($(".zbjk").width()*9/16)
+// ��ȡ��һ��ͼƬ�Ľڵ����
+var firstImg = $('#zbjkul li').first().clone();
+// ��ӵ�����λ�� ������ ul �Ŀ��
+$('#zbjkul').append(firstImg).width($('#zbjkul li').length * $('#zbjkul li').width());
+var i = 0;
+var sign ;
+var imgW = $('#zbjkul li').width();
+var timer;
+// ��һ��
+$('.right').click(function () {
+	sign = 1;
+    moveImg(++i);
+
+});
+// ��һ��
+$('.left').click(function () {
+	sign = 0;
+    moveImg(--i);
+});
+// �ƶ���ָ����ͼƬ
+function moveImg() {
+    // ���һ��
+    if (i == $('#zbjkul li').length) {
+        $('#zbjkul').css({
+            left: 0
+        })
+        i = 1;
+    }
+    // �ǵ�һ�ŵ�ʱ��
+    if (i == -1) {
+        i = $('#zbjkul li').length - 2;
+        $('#zbjkul').css({
+            left: ($('#zbjkul li').length - 1) * -800
+        });
+    }
+    // �ƶ�ͼƬ����
+    $('#zbjkul').stop().animate({
+        left: i * -imgW
+    }, 400);
+    
+    var pageNo = $("#pageNo").val();
+    var maxPage = $("#maxPage").val();
+    console.log(pageNo+"  "+maxPage);
+    if(sign==1){
+    	console.log("right");
+    	if(pageNo<maxPage){
+    		pageNo++;
+    		$("#pageNo").val(pageNo)
+    	}else{
+    		alert("已经是最后一页！");
+    	}
+    	
+    }else if(sign ==0){
+    	console.log("left");
+    	if(pageNo>1){
+    		pageNo--;
+    		$("#pageNo").val(pageNo)
+    	}else{
+    		alert("已经是第一页！");
+    	}
+    }
+    $.ajax({
+		url:"${base}/operator/managercontrol/getPage.do",
+		method:"get",
+		data:{
+			pageNo:pageNo
+		},
+		success:function(res){
+			console.log(res);
+			var shows="";
+			$.each(res,function(index,ele){
+				shows+="<div class='zbjk'><iframe width='100%' height='100%' frameborder='no' border='0' src='${base}/operator/managercontrol/getpattern?roomId="+ele.roomId+"'></iframe></div>";
+				console.log(ele.roomName+"   "+ele.enterpriseName);
+			});
+			$("li.videobox").empty().append(shows);
+		}
+	});
+    
+}
+
+</script>
+</html>

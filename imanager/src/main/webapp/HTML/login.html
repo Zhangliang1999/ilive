@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+<title></title>
+<link rel="stylesheet" href="css/login.css" />
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header"></div>
+		<div class="main">
+			<div class="inputBox">
+				<input type="text" placeholder="手机号" name="phoneNumber"/>
+			</div>
+			<div class="inputBox">
+				<input type="text" placeholder="请输入验证码" name="password" />
+				<button class="yzmBtn" onclick="getAuthenticode()" id="spenTimer">获取验证码</button>
+			</div>
+			<button class="loginBtn" onclick="loginUser()">登录</button>
+		</div>
+	</div>
+	<input type="hidden" id="roomId" name="roomId" value="0">
+	<input type="hidden" id="fileId" name="fileId" value="0">
+</body>
+<script type="text/javascript">
+	$(".container").height($(window).height());
+</script>
+<script type="text/javascript">
+var h5Base="zb.tv189.com"; 
+var tomcatBase = "mp.zb.tv189.com";
+//var h5Base="192.168.222.156:80";
+//var tomcatBase = "192.168.222.156:8080";
+$(function(){
+	var param = window.location.search;
+	var newsidinfo = param.substr(param.indexOf("?") + 1, param.length)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+	var split = newsidinfo.split("&")
+	for (var i = 0; i < split.length; i++) {
+		var newsids = split[i].split("=");//对获得的参数字符串按照“=”进行分割
+		var newsid = newsids[1];//得到参数值
+		var newsname = newsids[0];
+		if (newsname == "roomId") {
+			$("input[name=roomId]").val(newsid);
+		}else if (newsname == "fileId") {
+			$("input[name=fileId]").val(newsid);
+		}
+	}
+});
+function loginUser(){
+	var roomId = $("input[name=roomId]").val();
+	if(roomId==0){
+		alert("请确认进入直播间");
+		return;
+	}
+	var phoneNumber = $("input[name=phoneNumber]").val();
+	var password = $("input[name=password]").val();
+	if(phoneNumber==undefined||phoneNumber.replace("\s+", "")==""){
+		alert("请输入登录用户");
+		return;
+	}
+	if(password==undefined||password.replace("\s+", "")==""){
+		alert("请输入验证码");
+		return;
+	}
+	$.ajax({
+		type : "GET",//请求方式 get/post
+		url : "http://" + tomcatBase + "/ilive/appuser/reg.jspx",
+		dataType : "jsonp",
+		jsonp : "callback",
+		cache : false,
+		data : {
+			phoneNum : phoneNumber,
+			vpassword : password,
+			type : 2
+		},
+		success : function(data) {
+			var status = data.code;
+			if (status == 1) {
+				var userId = data.data.userId;
+				var roomId = $("input[name=roomId]").val();
+				var fileId = $("input[name=fileId]").val();
+				if(fileId==0){
+					window.location.href="http://" +h5Base + "/phone/live.html?roomId="+roomId+"&userId="+userId;
+					return;
+				}else{
+					window.location.href="http://" +h5Base + "/phone/review.html?roomId="+roomId+"&userId="+userId;
+					return;
+				}
+			} else {
+				alert(data.message);
+			}
+		}
+	});
+}
+	var countdown = 60;
+	//获取验证码
+	function getAuthenticode() {
+		var roomId = $("input[name=roomId]").val();
+		if(roomId==0){
+			alert("请确认进入直播间");
+			return;
+		}
+		var phoneNumber = $("input[name=phoneNumber]").val();
+		$.ajax({
+			type : "GET",//请求方式 get/post
+			url : "http://" + tomcatBase + "/ilive/appuser/sendmsg.jspx",
+			dataType : "jsonp",
+			jsonp : "callback",
+			cache : false,
+			data : {
+				phoneNum : phoneNumber,
+				type:"reg"
+			},
+			success : function(data) {
+				var status = data.code;
+				if (status == 1) {
+					selectTimer();
+				} else {
+					alert(data.message);
+				}
+			}
+		});
+	}
+	function selectTimer() {
+		if (countdown == 0) {
+			$("#spenTimer").css("background", "#0084ff");
+			$("#spenTimer").text("重新发送");
+			$("#spenTimer").attr("onclick", "getAuthenticode()");
+			countdown = 60;
+		} else {
+			$("#spenTimer").css("background", "#656161");
+			$("#spenTimer").text("重新发送(" + countdown + "s)");
+			$("#spenTimer").removeAttr("onclick");
+			countdown--;
+			setTimeout(function() {
+				selectTimer();
+			}, 1000);
+		}
+	}
+</script>
+</html>

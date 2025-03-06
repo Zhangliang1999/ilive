@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean name="thirdSystemHomeUrl" value="http://127.0.0.1:8090/"></bean>
+	<bean name="ssoHomeUrl" value="http://127.0.0.1:8090/bvCaster_user/common"></bean>
+	<bean name="ssoExtranetHomeUrl" value="http://127.0.0.1:8090/bvCaster_user/common"></bean>
+	<bean name="ssoUserHandler" class="com.jwzt.sso.handler.SsoHandler"></bean>
+	<bean name="signPrivateKey" value="MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMgda0Ov39uyVpLyWJ2CIGuiAOVFmb+99I/O5LSyAk7Y7QyXzRNDV2eRFCGyl6MmgZYXmJz4yN5DWlsDp7Z/eyfc8PVl4TBBhpDvcrSMZy+MkW5soDsMbeCyjzH0C3AUs8Dtdokv2OpsR2QdhS82buddXiGvdJMrP9h2PR2SF69pAgMBAAECgYBUFhiGXpZ/6FX8dRzLQmyBDZe2vyI1sYncC6GKU+ooW3pv+jFP0NIfUJTW/AY/peR5vvx/qQIucrq617RXOQX0Ic4RcGiKta3sbIiqhoSjcwm46iL7h1ZmSFjE15TX+upAFg+Z4VUGMc/g+ZH4fU9oKK0rRJoeULinmmADx28YAQJBAOoc9kd7sG2mB+eT/sa5oDDcX9QLCMNufU27bGHHUm5IQwEh5HJ97TeRMJMhBuWsqsJIV5BG+cmXX1AvN9F1P+kCQQDa0sbHcIhqUlbFX4JMEn+5lqPgXo5jrbJGXOriGus/giDT4mlrw18pdmv5UucxUd5g11G8z5sHRV9LpuADNMOBAkBlGtLldi5wfCanxUtfaWUcFOAxw/4p4Hqu6kVZSOp5hC2jvI5bP7UFrWdL8xR2dgZc1z8xqOVRQVVBXNL/W2KZAkEAsvrbo50jtvMKDf4EsPwghEf2Wjp89ILJ4kt1wuKJsDRbbXMvDvmKCHvX7OImP2zbGxKCxJB6GQRg4ZvodjbeAQJAfBptpPUnxPDnw1v54npdo2O8eUsGN+njaJBWi3jDBZHLnnD81GpOAwZAz50EgVVzWKx89++HJXi5BhtDCwuHbw=="></bean>
+	<bean name="signPublicKey" value="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIHWtDr9/bslaS8lidgiBrogDlRZm/vfSPzuS0sgJO2O0Ml80TQ1dnkRQhspejJoGWF5ic+MjeQ1pbA6e2f3sn3PD1ZeEwQYaQ73K0jGcvjJFubKA7DG3gso8x9AtwFLPA7XaJL9jqbEdkHYUvNm7nXV4hr3STKz/Ydj0dkhevaQIDAQAB"></bean>
+	<bean name="signCharset" value="UTF-8"></bean>
+</beans>

@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>直播管理</title> 
+<#include "/bvRadio/head.html"/>
+<link rel="stylesheet" href="${base}/tysx/css/newzbj.css" />
+<link type="text/css" rel="stylesheet" href="${base}/common/gd.css"/>
+<link type="text/css" rel="stylesheet" href="${base}/tysx/css/bootstrap-fileinput.css"/>
+<!-- 上传 -->
+<link ype="text/css" rel="stylesheet" href="${base}/tysx/css/plugins/dropzone/dropzone.css"/>
+<script src="${base}/tysx/js/plugins/dropzone/dropzone.js"></script>
+<script type="text/javascript" src="${base}/js/qrcode.js"></script>
+</head>
+<body>
+	<!--上面的导航栏部分-->
+	<#include "/bvRadio/admin/top.html"/>
+	<!--左侧部分-->
+	<#include "/bvRadio/admin/left.html"/>
+	<!--下面内容部分-->
+	<div class="wrapper wrapper-content border-left bgc-fff">
+		<div class="row title-header">
+			<div class="col-lg-12">
+				<div class="title-name">
+					<i class="loc-icon"></i><a class="font-title">${ILiveEvent.liveTitle!}</a>
+				</div>
+				<div class="zbj-name pull-right m-r-lg">
+					<i class="fa fa-caret-square-o-right font-content m-r-xs"></i><a
+						class="font-content">直播间ID：${iLiveLiveRoom.roomId!}</a>
+				</div>
+				<div class="zbj-name pull-right m-r-lg zbshare">
+					<a class="font-content"><i
+						class="fa fa-share-square-o font-content m-r-xs"></i>直播分享
+						<div class="zhiboshare">
+							<div class="jiao"></div>
+							<div class="zbleft pull-left" style="margin-top: 0px;">
+								<p>电脑观看</p>
+								<textarea></textarea>
+								<button class="btn default-livebtn">复制</button>
+								<button class="btn default-livebtn">打开</button>
+							</div>
+							<div class="zbright pull-left">
+								<p>手机观看</p>
+								<div class="zbewmbox" id="zbewmbox">
+								</div>
+							</div>
+						</div> </a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="col-lg-5 ">
+					<div class="videotop">
+						<div class="pull-left font-title">直播监控</div>
+								<button
+									class="btn default-btn livebtn pull-right no-padding m-r-xs font-12"
+									style="width: 80px;height:30px;display: none;" id="startButton" onclick="iLiveOperation(0)">
+									<i class="fa fa-play m-r-xs"></i>开始直播
+								</button>
+								<button
+									class="btn stop-btn livebtn pull-right no-padding m-r-xs font-12"
+									style="width: 80px;height:30px; display: none;" id="endButton" onclick="iLiveOperation(1)">
+									<i class="fa fa-stop m-r-xs"></i>结束直播
+								</button>
+								<button
+									class="btn pause-btn livebtn pull-right no-padding m-r-xs font-12"
+									style="width: 80px;height:30px;display: none;" id="timeOutButton" onclick="iLiveOperation(2)">
+									<i class="fa fa-pause m-r-xs"></i>暂停直播
+								</button>
+								<button
+									class="btn stop-btn livebtn pull-right no-padding m-r-xs font-12"
+									style="width: 80px;height:30px; display: none;" id="continueButton" onclick="iLiveOperation(3)">
+									<i class="fa fa-play m-r-xs"></i>继续直播
+								</button>
+								<button
+									class="btn stop-btn livebtn pull-right no-padding m-r-xs font-12"
+									style="width: 80px;height:30px; display: none;" id="restartButton" onclick="iLiveOperation(4)">
+									<i class="fa fa-play m-r-xs"></i>继续直播
+								</button>
+					</div>
+					<div class="videobox">
+						<div id="flash" style="width:100%;height:100%;z-index:100;"></div>
+						 <!--wmv主播放器层id-->
+						 <div id="oPlayer" ></div>
+					</div>
+					<div class="mainbox">
+						<ul id="myTab" class="nav nav-tabs">
+							<#if ILiveEvent.playType??>
+								<!-- 直播控制播放类型 : 1 推流直播 2 拉流直播 3 列表直播 4 PC手机桌面直播 5 手机直播   6 导播台 -->
+								<li class="<#if ILiveEvent.playType== 1>active</#if>"><a href="#tab1" data-toggle="tab">设备直播 </a></li>
+								<li class="<#if ILiveEvent.playType== 5>active</#if>"><a href="#tab2" data-toggle="tab">手机直播</a></li>
+								<li class="<#if ILiveEvent.playType== 2>active</#if>"><a href="#tab3" data-toggle="tab">拉流直播</a></li>
+								<!-- <li class="<#if ILiveEvent.playType== 3>active</#if>"><a href="#tab4" data-toggle="tab">列表直播</a></li>
+								<li class="<#if ILiveEvent.playType== 4>active</#if>"><a href="#tab5" data-toggle="tab">桌面直播</a></li> -->
+								<li class="<#if ILiveEvent.playType== 6>active</#if>"><a href="#tab6" data-toggle="tab">导播台</a></li>
+							<#else>
+								<li class="active"><a href="#tab1" data-toggle="tab">设备直播 </a></li>
+								<li class=""><a href="#tab2" data-toggle="tab">手机直播</a></li>
+								<li class=""><a href="#tab3" data-toggle="tab">拉流直播</a></li>
+								<!-- <li class=""><a href="#tab4" data-toggle="tab">列表直播</a></li>
+								<li class=""><a href="#tab5" data-toggle="tab">桌面直播</a></li> -->
+								<li class=""><a href="#tab6" data-toggle="tab">导播台</a></li>
+							</#if>
+						</ul>
+						<div id="myTabContent" class="tab-content">
+							<div class="tab-pane fade  <#if ILiveEvent.playType== 1>in active</#if>" id="tab1">
+								<div class="suggest">
+									<p class="m-t-sm">建议直播网络上行带宽是码率的2倍以上</p>
+									<p>如：码率1500k，则推荐上行网络带宽不少于3M</p>
+								</div>
+								<div class="text-content">
+									<label class="font-content">推流地址：</label> <input
+										class="inputcon" value="${pushStreamAddr}" readonly type="text" />
+									<button class="btn copybtn">复制</button>
+								</div>
+
+							</div>
+							<div class="tab-pane fade <#if ILiveEvent.playType== 5>in active</#if>" id="tab2">
+								<div class="suggest" style="height: 50px">
+									<p class="m-t-sm">扫描二维码下载手机直播APP客户端</p>
+								</div>
+								<div class="text-content">
+									<div class="erweimabox">
+										<div class="erweimaleft pull-left">
+											<img src="${base}/tysx/img/ptqrshow.png" alt="" />
+										</div>
+										<div class="erweimaright pull-left">
+											<button class="btn default-btnios m-t-xs m-b pull-right">
+												<i class="fa fa-apple m-r-xs"></i>ios版下载
+											</button>
+											<button class="btn default-btngreen pull-right">
+												<i class="fa fa-android m-r-xs"></i>android版下载
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade <#if ILiveEvent.playType== 2>in active</#if>" id="tab3">
+								<div class="suggest" style="height: 50px">
+									<p class="m-t-sm">流地址支持：rtmp、hls等</p>
+								</div>
+								<div class="text-content">
+									<label class="font-content">拉流地址：</label> <input
+										class="inputcon" type="text" />
+									<button class="btn copybtn">检测</button>
+								</div>
+								<div class="text-content text-center">
+									<button class="btn default-btnios m-t m-b pull-left"
+									style="width: 110px;display: none;" id="playTypeButton2" onclick="iLiveOperation(5)">开始拉流直播</button>
+								</div>
+							</div>
+							<div class="tab-pane fade <#if ILiveEvent.playType== 3>in active</#if>" id="tab4">
+								<div class="listbox">
+									<table class="table table-striped no-margins">
+										<tbody>
+											<tr>
+												<td class="font-bold">|</td>
+												<td>视频名称视频名称视频名称</td>
+												<td>00:30:00</td>
+											</tr>
+											<tr>
+												<td class="font-bold">|</td>
+												<td>视频名称视频名称视频名称</td>
+												<td>00:30:00</td>
+											</tr>
+											<tr>
+												<td class="font-bold">|</td>
+												<td>视频名称视频名称视频名称</td>
+												<td>00:30:00</td>
+											</tr>
+											<tr>
+												<td class="font-bold">|</td>
+												<td>视频名称视频名称视频名称</td>
+												<td>00:30:00</td>
+											</tr>
+											<tr>
+												<td class="font-bold">|</td>
+												<td>视频名称视频名称视频名称</td>
+												<td>00:30:00</td>
+											</tr>
+											<tr>
+												<td class="font-bold">|</td>
+												<td>视频名称视频名称视频名称</td>
+												<td>00:30:00</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<button class="btn default-btnios m-t m-b pull-left"
+									style="width: 110px;display: none;" id="playTypeButton3" onclick="iLiveOperation(6)">开始列表直播</button>
+								<button class="btn default-btnios m-t m-b pull-right"
+									style="width: 95px;">视频管理</button>
+							</div>
+							<div class="tab-pane fade <#if ILiveEvent.playType== 4>in active</#if>" id="tab5">
+								<div class="suggest">
+									<p class="m-t-sm">点击下载桌面直播工具</p>
+									<p>支持摄像头直播、电脑桌面演示直播</p>
+								</div>
+								<div class="text-content">
+									<div class="erweimabox">
+										<div class="erweimaright pull-left">
+											<button class="btn default-btnwindow m-t-xs m-b pull-right">
+												<i class="fa fa-windows m-r-xs"></i>Windows版下载
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade <#if ILiveEvent.playType== 5>in active</#if>" id="tab6">
+								<div class="suggest">
+									<p class="m-t-sm">点击下载桌面直播工具</p>
+									<p>支持摄像头直播、电脑桌面演示直播</p>
+								</div>
+								<div class="text-content">
+									<div class="erweimabox">
+										<div class="erweimaright pull-left">
+											<button class="btn default-btnwindow m-t-xs m-b pull-right">
+												<i class="fa fa-windows m-r-xs"></i>Windows版下载
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-7 border-left">
+					<div class="rightTitle">
+						<div class="pull-left zbhdTag">直播互动</div>
+						<ul id="rightTab" class="nav nav-tabs m-t-xs">
+							<!-- <li class="active"><a href="#lthd" data-toggle="tab">聊天互动</a></li>
+							<li><a href="#twzb" data-toggle="tab">话题直播</a></li>
+							<li><a href="#wd" data-toggle="tab">问答</a></li> -->
+							<#list pageDecorateList as decorate>
+								<li liveMsgType="${decorate.menuType!}"  <#if (decorate_index!-1)==0> class="active"</#if> >
+									<a href="#${decorate.hrefValue!}" data-toggle="tab">${decorate.menuName!}</a>
+								</li>
+							</#list>
+						</ul>
+						<div class="jinyan">
+							<span class="jinyanname">全局禁言</span>
+							<div style="margin: 12px 20px 0px 50px;" onclick="updateEstoppelType()"  class="<#if ILiveEvent.estoppelType == 0>open1<#else>close1</#if> estoppelTypeSwitchBox scrollSwitchBox pull-left m-t-12">
+								<input name="estoppelType" type="hidden" value="${ILiveEvent.estoppelType!0}">
+								<div  class="<#if ILiveEvent.estoppelType == 0>open2<#else>close2</#if> estoppelTypeSwitch  scrollSwitch"></div>
+							</div>
+						</div>		
+						<!-- <div class="jinyan">
+							<span class="jinyanname">全局禁言</span> <input type="checkbox"
+								name="sex" id="male_all" class="chooseBtn_all" <#if ILiveEvent.estoppelType == 0> checked="checked" </#if> > <label
+								for="male_all" all="${ILiveEvent.estoppelType}" class="choose-label jinyanlabel label_estoppelType" "></label>
+						</div> -->
+						<a class="shezhi" href="${base}/admin/pagedecorate/mobilepage.do?roomId=${iLiveLiveRoom.roomId!}">页面设置</a>
+					</div>
+
+					<div id="rightTabContent" class="tab-content gray-bg">
+						<div class="tab-pane fade" id="lthd">
+							<div class="row lh-40">
+								<div class="col-lg-12">
+									<#if (ILiveEvent.autoCheckSecond)??>
+										<div class="switchbox pull-left m-l" >
+											<label class="pull-left">自动审核</label>
+											<div style="margin: 12px 20px 0px 10px;" onclick="autoCheckSecond()"  class="<#if ILiveEvent.autoCheckSecond gt 0>open1<#else>close1</#if> autoCheckSecondBox scrollSwitchBox pull-left m-t-12">
+												<input name="label_autoCheckSecond" type="hidden" value="${ILiveEvent.autoCheckSecond!}">
+												<div  class="<#if ILiveEvent.autoCheckSecond gt 0 >open2<#else>close2</#if> autoCheckSecondSwitch scrollSwitch"></div>
+											</div>
+										</div>
+											
+										<div class="switchbox pull-left" id="autoCheckSecondValue" <#if ILiveEvent.autoCheckSecond lt 0> style="display:none;" </#if> >
+											<span class="font-bold font-content" onclick="updateAutoCheckSecond(0)">-</span><input
+												class="timer" type="text" readonly value="${ILiveEvent.autoCheckSecond}" id="autoCheckSecond" /><span
+												class="font-bold font-content" onclick="updateAutoCheckSecond(1)">+</span>
+										</div>
+									</#if>
+									<div class="switchbox pull-right m-r">
+										<i class="fa fa-trash font-title" title="清空" onclick="deleteMessageAll()"></i>
+									</div>
+
+								</div>
+							</div>
+							<div id="livecom">
+								<div class="row commentbox white-bg m-l p-r"
+									style="overflow: hidden;">
+									<div class="col-lg-12">
+										<div class="zhidingBox" id="zhidingDiv">
+										</div>
+										<div class="widget-content " id="liveDiv">
+											<div id="topDiv">
+											</div>
+										</div>
+										<div id="msg_end" style="height:0px;overflow: hidden"></div>
+									</div>
+								</div>
+								<div class="row p-w-sm m-b setMessage">
+									<div class="col-lg-12 m-t m-b">
+										<textarea class="col-lg-12" placeholder="说点什么吧"
+											id="textContent_2"></textarea>
+									</div>
+									<div class="col-lg-12 m-b p-relative">
+										<!-- 表情 -->
+										<div class="qqBox" id="faceDiv" style="display: none;"></div>
+										<div class="circleimg m-l" title="发送表情" id="expression">
+											<img src="${base}/tysx/img/biaoqing.png">
+										</div>
+										<!-- <div class="circleimg toupiao" type="button"
+											style="margin-bottom: 1px; margin-left: 1px;" title="投票发布">
+											<img src="${base}/tysx/img/u856.png">
+											<div class="toupiaobox">
+												<ul>
+													<li>投票名称投票名称投票名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs">发布</a></li>
+													<li>投票名称投票名称投票名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs">发布</a></li>
+													<li>投票名称投票名称投票名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs">发布</a></li>
+													<li>投票名称投票名称投票名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs">发布</a></li>
+													<li>投票名称投票名称投票名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs">发布</a></li>
+													<li>投票名称投票名称投票名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs">发布</a></li>
+													<li>投票名称投票名称投票名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs">发布</a></li>
+													<li>投票名称投票名称投票名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs">发布</a></li>
+												</ul>
+											</div>
+										</div>
+										<div class="circleimg choujiang" type="button"
+											style="margin-bottom: 1px; margin-left: 1px;" title="抽奖活动">
+											<img src="${base}/tysx/img/u856.png">
+											<div class="choujiangbox">
+												<ul>
+													<li>抽奖活动名称抽奖活动名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs" data-toggle="modal"
+														data-target="#myModal">发布</a></li>
+													<li>抽奖活动名称抽奖活动名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs" data-toggle="modal"
+														data-target="#myModal">发布</a></li>
+													<li>抽奖活动名称抽奖活动名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs" data-toggle="modal"
+														data-target="#myModal">发布</a></li>
+													<li>抽奖活动名称抽奖活动名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs" data-toggle="modal"
+														data-target="#myModal">发布</a></li>
+													<li>抽奖活动名称抽奖活动名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs" data-toggle="modal"
+														data-target="#myModal">发布</a></li>
+													<li>抽奖活动名称抽奖活动名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs" data-toggle="modal"
+														data-target="#myModal">发布</a></li>
+													<li>抽奖活动名称抽奖活动名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs" data-toggle="modal"
+														data-target="#myModal">发布</a></li>
+													<li>抽奖活动名称抽奖活动名称 <a href="javascript:;"
+														class="pull-right fabu m-r-xs" data-toggle="modal"
+														data-target="#myModal">发布</a></li>
+												</ul>
+											</div>
+										</div>
+										<div class="circleimg" type="button"
+											style="margin-bottom: 1px; margin-left: 1px;" title="发送红包">
+											<img src="${base}/tysx/img/hongbao.png">
+										</div> -->
+										<a class="btn blue-btn pull-right" onclick="sendMessage(2)">发送</a>
+									</div>
+								</div>
+							</div>
+
+
+							<!-- 模态框（Modal） -->
+							<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-hidden="true">&times;</button>
+											<h4 class="modal-title" id="myModalLabel">抽奖设置</h4>
+										</div>
+										<div class="modal-body">
+											<div class="col-lg-12">
+												<span class="modalname">抽奖范围：</span> <span class="m-r-lg">
+													<input type="radio" name="" />所有用户
+												</span> <span class="m-r-lg"><input type="radio" name="" />付费用户</span>
+												<span class="m-r-lg"><input type="radio" name="" />白名单用户</span>
+											</div>
+											<div class="col-lg-12">
+												<input type="checkbox" style="margin-left: 80px;" /><input
+													class="mininput" placeholder="60" type="text" />分钟之内参与互动
+											</div>
+											<div class="col-lg-12">
+												<span class="modalname">时间范围：</span> <span class="m-r-lg"><input
+													class="timeinput" type="text" />截止时间后自动开奖</span>
+											</div>
+											<div class="col-lg-12">
+												<span class="modalname">中奖数量：</span> <span class="m-r-lg"><input
+													class="numinput" type="text" /></span>
+											</div>
+											<div class="col-lg-12">
+												<span class="modalname">奖品名称：</span> <span class="m-r-lg"><input
+													class="numinput" type="text" /></span>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-success"
+												data-dismiss="modal">立即开奖</button>
+											<button type="button" class="btn btn-danger"
+												data-dismiss="modal">确定</button>
+											<button type="button" class="btn btn-success">取消</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="twzb">
+							<div id="piccom">
+								<div class="row commentbox white-bg m-l"
+									style="overflow: hidden; width: auto;">
+									<div class="col-lg-12">
+										<div class="gray-bg h-15 row"></div>
+										<div class="widget-content " id="picDiv">
+											<div id="topDiv1">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row p-w-sm m-b">
+									<div class="col-lg-12 m-t m-b">
+										<textarea class="col-lg-12" placeholder="说点什么吧"
+											id="textContent_1"></textarea>
+									</div>
+									<div class="col-lg-12 m-b">
+										<div id="guestsList">
+											<div id="userIdDiv_${userBean.userId!}" class="circleimg" title="${userBean.username!'主持人'}" userId="${userBean.userId!0}" onclick="selectLoginUser()">
+													<img src="${userBean.userThumbImg!}">
+											</div>
+											<#list iLiveGuestsList as iLiveGuests>
+												<div id="guestsIdDiv_${iLiveGuests.guestsId!}" class="circleimg" title="${iLiveGuests.guestsName!}" guestsId="${iLiveGuests.guestsId!}" onclick="guestsMessage(${iLiveGuests.guestsId!})">
+													<img src="${iLiveGuests.guestsImage!}">
+												</div>
+											</#list>
+										</div>
+										
+										<div class="addcircleimg"
+											style="margin-bottom: 1px; margin-left: 1px;border:1px solid #666;" title="添加人员" data-toggle="modal" data-target="#myModal1">
+											+</div>
+										<a class="btn blue-btn pull-right" onclick="sendMessage(1)">发送</a> 
+										<i class="fa fa-photo font-26 pull-right m-r" style="vertical-align: top;" data-toggle="modal" data-target="#myModal2"></i>
+										<i class="fa fa-film font-24 pull-right m-r" style="vertical-align: top;" data-toggle="modal" data-target="#myModal3"></i>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--  添加嘉宾  -->
+						<!-- 模态框（Modal） -->
+						<!--最新添加成员-->
+						<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						    <div class="modal-dialog">
+						        <div class="modal-content">
+						            <div class="modal-header">
+						                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						                <h4 class="modal-title" id="myModalLabel">添加用户</h4>
+						            </div>
+						            <div class="modal-body">
+						                <div class="circleUserBox">
+						                    <ul class="circleUserUl">
+						                    	<#list iLiveGuestsList as iLiveGuests>
+						                    		<li id="guestsId_${iLiveGuests.guestsId!}">
+						                    			<div class='circleUserPic'>
+						                    				<img src="${iLiveGuests.guestsImage!}"/>
+						                    			</div>
+						                    			<input type='text' disabled="disabled" name="guestsName" value="${iLiveGuests.guestsName!}">
+						                    			<i class='fa fa-close' onclick="deleteGuests(${iLiveGuests.guestsId!})"></i>
+						                    		</li>
+												</#list>
+						                        <li class="addPic">+
+						                            <input type="file" name="file" id="file" value="" accept="image/*" multiple />
+						                        </li>
+						                    </ul>
+						                </div>
+						            </div>
+						            <div class="modal-footer">
+						                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						                <button type="button" class="btn btn-success" onclick="uploadSubmit()">提交更改</button>
+						            </div>
+						        </div>
+						    </div>
+						</div>				
+						<!-- 发送图集 -->
+						<!-- 模态框（Modal） -->
+						<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						    <div class="modal-dialog">
+						        <div class="modal-content">
+						            <div class="modal-header">
+						                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						                <h4 class="modal-title" id="myModalLabel">添加照片</h4>
+						            </div>
+						            <div class="modal-body">
+						                <div class="row">
+						                    <div class="col-lg-12">
+						                        <div class="ibox float-e-margins">
+						                            <div class="ibox-content no-padding">
+						                                <form  action="${base}/admin/upload/imageUpload.do" method="post" enctype="multipart/form-data"  id="themeForm"target="submitFrame"  class="dropzone dz-clickable">
+						                                	<input type="hidden" name="fileType" value="image">
+						                                    <div class="dropzone-previews"></div>
+						                                    <!-- <button type="submit" class="btn btn-primary pull-right">上传图片</button> -->
+						                                    <div class="dz-default dz-message"><span>拖拽文件上传</span></div>
+						                                </form>
+						                                <div>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						            <div class="modal-footer">
+						                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						                <button type="button" class="btn btn-success" onclick="submitImage()">确定</button>
+						            </div>
+						        </div><!-- /.modal-content -->
+						    </div><!-- /.modal -->
+						</div>
+						
+						<!-- 发送视频-->
+						<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						    <div class="modal-dialog">
+						        <div class="modal-content">
+						            <div class="modal-header">
+						                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						                <h4 class="modal-title" id="myModalLabel">添加视频</h4>
+						            </div>
+						            <div class="modal-body" style="height: 400px;">
+						                <div class="row">
+						                    <div class="col-lg-12">
+						                        <div class="ibox float-e-margins">
+						                            <div class="ibox-content no-padding">
+						                                <form  method="post" enctype="multipart/form-data"  id="themeForm"target="submitFrame"  class="dropzone dz-clickable" action="${base}/admin/file/o_uploadFile.do">
+						                                	<input type="hidden" name="fileType" value="video">
+						                                	<input type="hidden" name="serverGroupId"	value="${iLiveLiveRoom.serverGroupId}">
+						                                    <div class="dropzone-previews"></div>
+						                                    <div class="dz-default dz-message"><span>拖拽文件上传</span></div>
+						                                </form>
+						                                <div>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						            <div class="modal-footer">
+						                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						                <button type="button" class="btn btn-success">确定</button>
+						            </div>
+						        </div><!-- /.modal-content -->
+						    </div><!-- /.modal -->
+						</div>
+						
+						
+						<div class="tab-pane fade bgc-fff" id="wdzb">
+							<div class="row lh-40">
+								<div class="col-lg-12 gray-bg">
+									<div class="switchbox pull-left m-l">
+										<button class="btn default-btn uploadbtn">上传文档</button>
+									</div>
+									<div class="switchbox pull-left">
+										<div class="dropdown">
+											<button type="button" class="btn dropdown-toggle wendang m-l"
+												id="dropdownMenu2" data-toggle="dropdown">
+												选择文档 <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu" role="menu"
+												aria-labelledby="dropdownMenu2">
+												<li role="presentation"><a role="menuitem"
+													tabindex="-1" href="#">选择文档</a></li>
+												<li role="presentation"><a role="menuitem"
+													tabindex="-1" href="#">文档一</a></li>
+												<li role="presentation"><a role="menuitem"
+													tabindex="-1" href="#">文档二</a></li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="switchbox pull-left m-l-xl">
+										<div class="checkbox no-margins">
+											<label> <input type="checkbox" class="m-t"
+												style="margin-top: 15px;">允许下载
+											</label>
+										</div>
+									</div>
+									<div class="switchbox pull-right m-r">
+										<i class="fa fa-trash font-title" title="清空"></i>
+									</div>
+
+								</div>
+							</div>
+							<div id="wdbox" class="bgc-fff">
+								<div class="row wdcontent">
+									<div class="col-lg-12 bgc-fff  border-bottom">
+										<div class="col-lg-1">
+											<div class="left">
+												<img src="${base}/tysx/img/leftarrow.png" alt="" />
+											</div>
+										</div>
+										<div class="col-lg-10">
+											<div class="picobox">
+												<ul id="ul">
+													<li><img src="${base}/tysx/img/u1207.jpg"></li>
+													<li><img src="${base}/tysx/img/yl.png"></li>
+													<li><img src="${base}/tysx/img/u1207.jpg"></li>
+													<li><img src="${base}/tysx/img/yl.png"></li>
+													<li><img src="${base}/tysx/img/u1207.jpg"></li>
+												</ul>
+											</div>
+										</div>
+										<div class="col-lg-1">
+											<div class="right">
+												<img src="${base}/tysx/img/rightarrow.png" alt="" />
+											</div>
+										</div>
+										<div class="col-lg-12 text-center m-b">
+											<span class="num">11</span>/<span class="totle">41</span>
+										</div>
+									</div>
+								</div>
+								<div class="row gray-bg wdbottom">
+
+									<div class="col-lg-12">
+										<div class="olbox">
+											<ol id="ol">
+												<li class="border-red"><img src="${base}/tysx/img/u1207.jpg"></li>
+												<li><img src="${base}/tysx/img/yl.png"></li>
+												<li><img src="${base}/tysx/img/u1207.jpg"></li>
+												<li><img src="${base}/tysx/img/yl.png"></li>
+												<li><img src="${base}/tysx/img/u1207.jpg"></li>
+											</ol>
+
+										</div>
+										<div class="leftarr"></div>
+										<div class="rightarr"></div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="wd">
+							<div id="wdcom">
+								<div class="row commentbox white-bg m-l"
+									style="overflow: hidden; width: auto;">
+									<div class="col-lg-12">
+										<div class="gray-bg lh-40 row">
+											<div class="switchbox pull-left m-l">
+												<span class="m-l m-r font-content">问题筛选</span>
+											</div>
+											<div class="switchbox pull-left">
+												<div class="dropdown">
+													<button type="button"
+														class="btn dropdown-toggle wendang m-l" id="dropdownMenu3"
+														data-toggle="dropdown">
+														全部问题 <span class="caret"></span>
+													</button>
+													<ul class="dropdown-menu" role="menu"
+														aria-labelledby="dropdownMenu3">
+														<li role="presentation"><a role="menuitem"
+															tabindex="-1" onclick="retrieve(-1)">全部问题</a></li>
+														<li role="presentation"><a role="menuitem"
+															tabindex="-1" onclick="retrieve(1)">已回答</a></li>
+														<li role="presentation"><a role="menuitem"
+															tabindex="-1" onclick="retrieve(0)">待回答</a></li>
+														<!-- <li role="presentation"><a role="menuitem"
+															tabindex="-1" href="#">已忽略</a></li> -->
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="widget-content " id="wdDiv">
+											<div id="topDiv3">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row p-w-sm m-b"  id="replyContentOpen">
+									<div class="col-lg-12 m-t m-b">
+										<textarea class="col-lg-12" placeholder="回答问题" id="replyContent" disabled="disabled"></textarea>
+									</div>
+									<div class="col-lg-12 m-b">
+										<a class="btn blue-btn pull-right" id="replyContentOn" >回答</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" id="selectUserId" name="selectUserId" value="${userBean.userId!0}">
+	<input type="hidden" id="selectType" name="selectType" value="0">
+</body>
+<script type="text/javascript" src="${base}/res/bvRadio/js/jquery.qrcode.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var decorateJSON = '${decorateJSON}';
+		console.log(decorateJSON);
+		var pageDecorateList = JSON.parse(decorateJSON);
+		for (var i = 0; i < pageDecorateList.length; i++) {
+			var decorate = pageDecorateList[i];
+			if(i==0){
+				$("#"+decorate.hrefValue).addClass("in active");
+				if(decorate.menuType==1){
+					var liveWidth = $("#livecom").width();
+				    $(".commentbox").css("width",liveWidth-30);
+				}else if(decorate.menuType==2){
+					var liveWidth = $("#livecom").width();
+				    $(".commentbox").css("width",liveWidth-30);
+				}else if(decorate.menuType==3){
+					var liveWidth = $("#livecom").width();
+				    $(".commentbox").css("width",liveWidth-30);
+				}else if(decorate.menuType==6){
+					var liveWidth = $("#livecom").width();
+				    $(".commentbox").css("width",liveWidth-30);
+				}
+			}
+		}
+	});
+</script>
+<script type="text/javascript">
+$(function(){
+	$("#liveDiv #topDiv .feed-element:first-child").css("margin-top",$(".zhidingBox").height());
+	$("#myModal2 .modal-body").slimScroll({
+	    height:"390px"
+	});
+	var liveStatus = '${ILiveEvent.liveStatus}';
+	var playType = '${ILiveEvent.playType}';
+	/**
+	 * 直播状态：
+	 * 0 直播未开始 1 直播中 2 暂停中 3 直播结束 4待审 5已审 6审核不过    
+	 * id="startButton" 开始直播 id="timeOutButton" 暂停直播  id="endButton" 结束直播 
+	 * id="continueButton"> 继续直播 id="restartButton"> 继续直播
+	 */
+	if(liveStatus==0){
+		//开始直播
+		$("#startButton").css("display","block");
+		$("#timeOutButton").css("display","none");
+		$("#endButton").css("display","none");
+		$("#continueButton").css("display","none");
+		$("#restartButton").css("display","none");
+		$("#playTypeButton2").css("display","block");
+		$("#playTypeButton3").css("display","block");
+	}else if(liveStatus==1){
+		//直播中
+		$("#startButton").css("display","none");
+		$("#timeOutButton").css("display","block");
+		$("#endButton").css("display","block");
+		$("#continueButton").css("display","none");
+		$("#restartButton").css("display","none");
+		if(playType==2){
+			$("#playTypeButton2").css("display","none");
+			$("#playTypeButton3").css("display","block");
+		}else if(playType==3){
+			$("#playTypeButton2").css("display","block");
+			$("#playTypeButton3").css("display","none");
+		}else{
+			$("#playTypeButton2").css("display","block");
+			$("#playTypeButton3").css("display","block");
+		}
+	}else if(liveStatus==2){
+		//暂停
+		$("#startButton").css("display","none");
+		$("#timeOutButton").css("display","none");
+		$("#endButton").css("display","block");
+		$("#continueButton").css("display","block");
+		$("#restartButton").css("display","none");
+		if(playType==2){
+			$("#playTypeButton2").css("display","none");
+			$("#playTypeButton3").css("display","block");
+		}else if(playType==3){
+			$("#playTypeButton2").css("display","block");
+			$("#playTypeButton3").css("display","none");
+		}else{
+			$("#playTypeButton2").css("display","block");
+			$("#playTypeButton3").css("display","block");
+		}
+	}else if(liveStatus==3){
+		//直播结束
+		$("#startButton").css("display","none");
+		$("#timeOutButton").css("display","none");
+		$("#endButton").css("display","none");
+		$("#continueButton").css("display","none");
+		$("#restartButton").css("display","block");
+		$("#playTypeButton2").css("display","block");
+		$("#playTypeButton3").css("display","block");
+	}else if(liveStatus==4){
+		//待审
+		$("#startButton").css("display","none");
+		$("#timeOutButton").css("display","none");
+		$("#endButton").css("display","none");
+		$("#continueButton").css("display","none");
+		$("#restartButton").css("display","none");
+	}else if(liveStatus==5){
+		//已审
+		$("#startButton").css("display","none");
+		$("#timeOutButton").css("display","none");
+		$("#endButton").css("display","none");
+		$("#continueButton").css("display","none");
+		$("#restartButton").css("display","none");
+	}else if(liveStatus==6){
+		//审核不过   
+		$("#startButton").css("display","none");
+		$("#timeOutButton").css("display","none");
+		$("#endButton").css("display","none");
+		$("#continueButton").css("display","none");
+		$("#restartButton").css("display","none");
+	}
+
+	 
+});	
+	$(function() {
+		var ws;
+		var liveId = '${iLiveLiveRoom.roomId}';
+		var userId = $("#selectUserId").val();
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/intoRoom.jspx",
+			dataType : "json",
+			data : {
+				userId : userId,
+				liveId : liveId,
+				sessionType : 1,//WebSocket使用用户
+				userType : 1   //企业用户 
+			},
+			success : function(data) {
+				if (data.code == 1) {
+					var token = data.token;
+					if (typeof (WebSocket) == "undefined") {
+						alert("您的浏览器不支持WebSocket");
+						return;
+					}
+					var ip = document.location.host;
+					var url = "ws://"+ip+"/ilive/webSocketServer.jspx?username="+ token;
+					ws = new WebSocket(url);
+					ws.onopen = function(e) {
+						console.log("连接成功");
+					}
+					ws.onclose = function(e) {
+						console.log("关闭连接 " + e.reason);
+					}
+					ws.onerror = function(e) {
+						console.log(e);
+						console.log("建立连接异常" + e);
+					}
+					ws.onmessage = function(e) {
+						var iLiveMessage = JSON.parse(e.data);
+						var liveMsgType = iLiveMessage.liveMsgType;
+						if(iLiveMessage.roomType==1){
+							//消息管理
+							if(iLiveMessage.deleted==1){
+								$("#msgId_"+iLiveMessage.msgId).remove();
+							}else{
+								if(liveMsgType==2){
+									var deleteAll =  iLiveMessage.deleteAll;
+									if(deleteAll==1){
+										$("#topDiv").remove();
+									}else{
+										//update :  0 新增   1修改
+										var update = iLiveMessage.update;
+										if(iLiveMessage.top==0){
+											var HTMLTXT = "<div class=\"feed-element p-sm border-bottom-ccc checked\" id =\"msgId_"+iLiveMessage.msgId+"\">";
+											HTMLTXT += "<a class=\"pull-left\"> <img alt=\"image\" class=\"img-circle\" src=\""+iLiveMessage.senderImage+"\">";
+											HTMLTXT += "</a>";
+											HTMLTXT += "<div class=\"media-body\">";
+											HTMLTXT += "<p>";
+											HTMLTXT += "<strong class=\"pull-left font-content\">"+iLiveMessage.senderName+"</strong>";
+											HTMLTXT += "<span class=\"livetime font-12 pull-right color-999\">"+iLiveMessage.createTime+"</span>";
+											HTMLTXT += "</p>";
+											HTMLTXT += "<p class=\"text-content color-999\">"+iLiveMessage.content+"</p>";
+											HTMLTXT += "<div class=\"col-lg-9 pull-right text-right\">";
+											if(iLiveMessage.checked!=1){
+												HTMLTXT += "<a class=\"btn default-livebtn\" onclick=\"updateChecked("+iLiveMessage.msgId+")\" > 通过 </a>";
+											}
+											HTMLTXT += "<a class=\"btn default-livebtn\" onclick=\"topILiveMessage(1,"+iLiveMessage.msgId+")\">置顶</a>"; 
+											HTMLTXT += "<a class=\"btn delete-livebtn\" onclick=\"deleteILiveMessage("+iLiveMessage.msgId+")\"> 删除 </a>";	
+											if(iLiveMessage.senderType==0){
+												if(iLiveMessage.opType==11){
+													HTMLTXT += "<a class=\"btn delete-livebtn userId_"+iLiveMessage.senderId+"\"  onclick=\"estoppelILiveMessage("+iLiveMessage.msgId+",1)\"> 解禁 </a>";	
+												}else{
+													HTMLTXT += "<a class=\"btn default-livebtn userId_"+iLiveMessage.senderId+"\" onclick=\"estoppelILiveMessage("+iLiveMessage.msgId+",0)\"> 禁言 </a>";	
+												}
+											}
+											HTMLTXT += "</div>";
+											HTMLTXT += "</div>";
+											HTMLTXT += "</div>";
+											
+											var thit = $("#zhidingDiv  #msgId_"+iLiveMessage.msgId).width();
+											if(thit==null){
+												//新增聊天互动
+												if(update==0){
+													$("#topDiv").append(HTMLTXT);
+												}else{
+													$("#msgId_"+iLiveMessage.msgId).replaceWith(HTMLTXT);
+													console.log(iLiveMessage.opType);
+													if(iLiveMessage.opType==11){
+														$(".userId_"+iLiveMessage.senderId).attr("onclick","estoppelILiveMessage("+iLiveMessage.msgId+",1)");
+														$(".userId_"+iLiveMessage.senderId).text("解禁");
+													}else{
+														$(".userId_"+iLiveMessage.senderId).attr("onclick","estoppelILiveMessage("+iLiveMessage.msgId+",0)");
+														$(".userId_"+iLiveMessage.senderId).text("禁言");
+													}
+												}
+											}else{
+												if(update==0){
+												}else{
+													$("#topDiv").append(HTMLTXT);
+												}
+											}
+											$("#zhidingDiv #msgId_"+iLiveMessage.msgId).remove();
+										}else{
+											var HTMLTXT = "<div class=\"feed-element p-sm border-bottom-ccc checked\" id =\"msgId_"+iLiveMessage.msgId+"\">";
+												HTMLTXT += "	<a class=\"pull-left\"> <img alt=\"image\" class=\"img-circle\" src=\""+iLiveMessage.senderImage+"\"></a>";
+												HTMLTXT += "	<div class=\"media-body\">";
+												HTMLTXT += " 	<p>";
+												HTMLTXT += " 		<strong class=\"pull-left font-content\">"+iLiveMessage.senderName+"</strong><span class=\"zhiding\">顶</span><span class=\"livetime font-12 pull-right color-999\">"+iLiveMessage.createTime+"</span>";     
+												HTMLTXT += " 	</p>" ;
+												HTMLTXT += "	<p class=\"text-content color-999\">"+iLiveMessage.content+"</p>"; 
+												HTMLTXT += "	<div class=\"col-lg-9 pull-right text-right\">";
+												if(iLiveMessage.checked!=1){
+													HTMLTXT += "		<a class=\"btn default-livebtn\" onclick=\"updateChecked("+iLiveMessage.msgId+")\" >通过</a>";
+												}
+												HTMLTXT += "		<a class=\"btn delete-livebtn\" onclick=\"topILiveMessage(0,"+iLiveMessage.msgId+")\">取消置顶</a>";
+												HTMLTXT += "		<a class=\"btn delete-livebtn\" onclick=\"deleteILiveMessage("+iLiveMessage.msgId+")\">删除</a>";
+												if(iLiveMessage.senderType==0){
+													if(iLiveMessage.opType==11){
+														HTMLTXT += " 		<a class=\"btn delete-livebtn userId_"+iLiveMessage.senderId+"\" onclick=\"estoppelILiveMessage("+iLiveMessage.msgId+",1)\">解禁</a>";
+													}else{
+														HTMLTXT += " 		<a class=\"btn default-livebtn userId_"+iLiveMessage.senderId+"\"  onclick=\"estoppelILiveMessage("+iLiveMessage.msgId+",0)\">禁言</a>";
+													}
+												}
+												HTMLTXT += "</div>";
+												HTMLTXT += "</div>" ;
+												HTMLTXT += "</div>";
+												var thit = $("#topDiv  #msgId_"+iLiveMessage.msgId).width();
+												if(thit==null){
+													//新增聊天互动
+													if(update==0){
+														$("#zhidingDiv").append(HTMLTXT);
+													}else{
+														$("#msgId_"+iLiveMessage.msgId).replaceWith(HTMLTXT);
+														console.log(iLiveMessage.opType);
+														if(iLiveMessage.opType==11){
+															$(".userId_"+iLiveMessage.senderId).attr("onclick","estoppelILiveMessage("+iLiveMessage.msgId+",1)");
+															$(".userId_"+iLiveMessage.senderId).text("解禁");
+														}else{
+															$(".userId_"+iLiveMessage.senderId).attr("onclick","estoppelILiveMessage("+iLiveMessage.msgId+",0)");
+															$(".userId_"+iLiveMessage.senderId).text("禁言");
+														}
+													}
+												}else{
+													if(update==0){
+													}else{
+														$("#zhidingDiv").append(HTMLTXT);
+													}
+												}
+												$("#topDiv #msgId_"+iLiveMessage.msgId).remove();
+										}
+									}
+								}else if(liveMsgType==1){
+									//update :  0 新增   1修改
+									var update = iLiveMessage.update;
+									//图文直播
+									var HTMLTXT = "<div class=\"feed-element p-sm border-bottom-ccc checked\" id =\"msgId_"+iLiveMessage.msgId+"\">";
+										HTMLTXT += "	<a class=\"pull-left\"> <img alt=\"image\" class=\"img-circle\" src=\""+iLiveMessage.senderImage+"\"></a>";
+										HTMLTXT += "	<div class=\"media-body \">";
+										HTMLTXT += "	<p>";
+										HTMLTXT += "		<strong class=\"pull-left font-content\">"+iLiveMessage.senderName+"</strong>";
+										if(iLiveMessage.top!=0){
+											HTMLTXT += "<span class=\"zhiding\">顶</span>";	
+										}
+										HTMLTXT += "		<span class=\"livetime font-12 pull-right color-999\">"+iLiveMessage.createTime+"</span> ";
+										HTMLTXT += "		<span class=\"pull-right m-r color-999\">";
+										HTMLTXT += "			<i class=\"fa fa-comments-o m-r-xs\"></i><span id=\"commentsNumber_"+iLiveMessage.msgId+"\">0</span></span>";
+										HTMLTXT += "		<span class=\"pull-right m-r color-999\" id=\"messagePraise_"+iLiveMessage.msgId+"\">";
+										HTMLTXT += "			<i class=\"fa fa-thumbs-up m-r-xs\"></i>"+iLiveMessage.praiseNumber+"</span>";
+										HTMLTXT += "	</p>";
+										HTMLTXT += "	<p class=\"text-content pull-left color-999 picbox\" >"+iLiveMessage.content+"</p>";
+										HTMLTXT += "	<div class=\"col-lg-9 pull-right text-right m-b-xs\">";
+										HTMLTXT += "		<a class=\"btn default-livebtn\">编辑</a>";
+										if(iLiveMessage.top!=0){
+											HTMLTXT += "		<a class=\"btn delete-livebtn\" onclick=\"topILiveMessage(0,"+iLiveMessage.msgId+")\">取消置顶</a>";
+										}else{
+											HTMLTXT += "		<a class=\"btn default-livebtn\" onclick=\"topILiveMessage(1,"+iLiveMessage.msgId+")\">置顶</a>";
+										}
+										HTMLTXT += "		<a class=\"btn delete-livebtn\" onclick=\"deleteILiveMessage("+iLiveMessage.msgId+")\">删除</a>";
+										HTMLTXT += "	</div> <div id=\"commentsList_"+iLiveMessage.msgId+"\"></div>";
+										HTMLTXT += "	</div>";
+										HTMLTXT += "</div>";
+										if(update==0){
+											//新增图文
+											$("#topDiv1").append(HTMLTXT);
+										}else if(update==1){
+											$("#msgId_"+iLiveMessage.msgId).replaceWith(HTMLTXT);
+										}
+								}else if(liveMsgType==3){
+									//问答
+									//update :  0 新增   1修改
+									var update = iLiveMessage.update;
+									var HTMLTXT = "<div class=\"feed-element p-sm border-bottom-ccc checked\" id =\"msgId_"+iLiveMessage.msgId+"\">";
+										HTMLTXT +="<a class=\"pull-left\"> <img alt=\"image\" class=\"img-circle\" src=\""+iLiveMessage.senderImage+"\"></a>";
+										HTMLTXT +="<div class=\"media-body\">";
+										HTMLTXT +="<p>";
+										HTMLTXT +="<strong class=\"pull-left font-content\">"+iLiveMessage.senderName+"</strong>";
+										HTMLTXT +="<span class=\"livetime font-12 pull-right color-999\">"+iLiveMessage.createTime+"</span>";
+										HTMLTXT +="</p>";	 
+										HTMLTXT +="<p class=\"text-content color-999\">"+iLiveMessage.content+"</p>";
+										if(iLiveMessage.replyType==0){
+											HTMLTXT +="<div class=\"col-lg-10 questionbox color-blue\" style=\"background: #fff;\"></div>";
+											HTMLTXT +="<div class=\"col-lg-2 pull-right text-right\">"; 
+											HTMLTXT +="	<a class=\"btn default-livebtn\" onclick=\"addReplyContent("+iLiveMessage.msgId+")\">回答</a>";
+										}else{
+											HTMLTXT +="<div class=\"col-lg-10 questionbox color-blue\"> <span class=\"color-999\">回答："+iLiveMessage.replyContent+"</span></div> ";
+											HTMLTXT +="<div class=\"col-lg-2 pull-right text-right\">"; 
+											HTMLTXT +="	<a class=\"btn delete-livebtn\">已回答</a>";
+										}
+										HTMLTXT +="</div>";
+										HTMLTXT +="</div>";
+										HTMLTXT +="</div>";
+										if(update==0){
+											//新增回答
+											$("#topDiv3").append(HTMLTXT);
+										}else if(update==1){
+											$("#msgId_"+iLiveMessage.msgId).replaceWith(HTMLTXT);
+										}
+								}
+							}
+						}else if(iLiveMessage.roomType==0){
+							var iLiveEventVo = JSON.parse(iLiveMessage.iLiveEventVo);
+							if(iLiveEventVo.checkedTime>0){
+								$("input[name=label_autoCheckSecond]").attr("value",iLiveEventVo.checkedTime);
+								$("#autoCheckSecond").attr("value",iLiveEventVo.checkedTime);
+					            $("#autoCheckSecondValue").css("display","block");
+								$(".autoCheckSecondBox").removeClass("close1").addClass("open1");
+								$(".autoCheckSecondBox").find(".autoCheckSecondSwitch").eq(0).removeClass("close2").addClass("open2");
+							}else{
+								$("input[name=label_autoCheckSecond]").attr("value",-1);
+								$("#autoCheckSecond").attr("value",-1);
+								$("#autoCheckSecondValue").css("display","none");
+								$(".autoCheckSecondBox").removeClass("open1").addClass("close1");
+								$(".autoCheckSecondBox").find(".autoCheckSecondSwitch").eq(0).removeClass("open2").addClass("close2");
+							}
+							if(iLiveEventVo.estoppleType==0){
+								//开启
+								$(".estoppelTypeSwitchBox").removeClass("close1").addClass("open1");
+								$(".estoppelTypeSwitchBox").find(".estoppelTypeSwitch").eq(0).removeClass("close2").addClass("open2");
+								 $("input[name=estoppelType]").val(0);
+							}else{
+								//关闭
+								$(".estoppelTypeSwitchBox").removeClass("open1").addClass("close1");
+								$(".estoppelTypeSwitchBox").find(".estoppelTypeSwitch").eq(0).removeClass("open2").addClass("close2");
+								 $("input[name=estoppelType]").val(1);
+							}
+							/**
+							 * 直播状态：
+							 * 0 直播未开始 1 直播中 2 暂停中 3 直播结束 4待审 5已审 6审核不过
+							 */
+							var liveStatus = iLiveEventVo.liveStatus
+							var playType = iLiveEventVo.playType;
+							if(liveStatus==0){
+								//开始直播
+								$("#startButton").css("display","block");
+								$("#timeOutButton").css("display","none");
+								$("#endButton").css("display","none");
+								$("#continueButton").css("display","none");
+								$("#restartButton").css("display","none");
+								$("#playTypeButton2").css("display","block");
+								$("#playTypeButton3").css("display","block");
+							}else if(liveStatus==1){
+								//直播中
+								$("#startButton").css("display","none");
+								$("#timeOutButton").css("display","block");
+								$("#endButton").css("display","block");
+								$("#continueButton").css("display","none");
+								$("#restartButton").css("display","none");
+								if(playType==2){
+									$("#playTypeButton2").css("display","none");
+									$("#playTypeButton3").css("display","block");
+								}else if(playType==3){
+									$("#playTypeButton2").css("display","block");
+									$("#playTypeButton3").css("display","none");
+								}else{
+									$("#playTypeButton2").css("display","block");
+									$("#playTypeButton3").css("display","block");
+								}
+							}else if(liveStatus==2){
+								//暂停
+								$("#startButton").css("display","none");
+								$("#timeOutButton").css("display","none");
+								$("#endButton").css("display","block");
+								$("#continueButton").css("display","block");
+								$("#restartButton").css("display","none");
+								if(playType==2){
+									$("#playTypeButton2").css("display","none");
+									$("#playTypeButton3").css("display","block");
+								}else if(playType==3){
+									$("#playTypeButton2").css("display","block");
+									$("#playTypeButton3").css("display","none");
+								}else{
+									$("#playTypeButton2").css("display","block");
+									$("#playTypeButton3").css("display","block");
+								}
+							}else if(liveStatus==3){
+								//直播结束
+								$("#startButton").css("display","none");
+								$("#timeOutButton").css("display","none");
+								$("#endButton").css("display","none");
+								$("#continueButton").css("display","none");
+								$("#restartButton").css("display","block");
+								$("#playTypeButton2").css("display","block");
+								$("#playTypeButton3").css("display","block");
+							}else if(liveStatus==4){
+								//待审
+								$("#startButton").css("display","none");
+								$("#timeOutButton").css("display","none");
+								$("#endButton").css("display","none");
+								$("#continueButton").css("display","none");
+								$("#restartButton").css("display","none");
+							}else if(liveStatus==5){
+								//已审
+								$("#startButton").css("display","none");
+								$("#timeOutButton").css("display","none");
+								$("#endButton").css("display","none");
+								$("#continueButton").css("display","none");
+								$("#restartButton").css("display","none");
+							}else if(liveStatus==6){
+								//审核不过   
+								$("#startButton").css("display","none");
+								$("#timeOutButton").css("display","none");
+								$("#endButton").css("display","none");
+								$("#continueButton").css("display","none");
+								$("#restartButton").css("display","none");
+							}
+						}else{
+							console.log("错误消息类型");
+						}
+					}
+				}
+			}
+		});
+		window.setTimeout("selectcommentsList("+liveId+")",5000);//页面加载5秒执行一次
+		window.setInterval("selectcommentsList("+liveId+")",30000);//循环执行每一分钟执行一次
+		window.setInterval(function(){ //每隔5秒钟发送一次心跳，避免websocket连接因超时而自动断开
+			var ping = {"p":"1"};
+			ws.send(JSON.stringify(ping));
+		},10000);
+	});
+		//是否自动审核
+		function autoCheckSecond(){
+			var aa = $("input[name=label_autoCheckSecond]").val();
+			var liveEventId = '${ILiveEvent.liveEventId}';
+			var roomId = '${iLiveLiveRoom.roomId}';
+			var autoCheckSecond = 5;
+			if(aa>0){
+				autoCheckSecond = -1;
+			}else{
+				autoCheckSecond = 5;
+			}
+			$.ajax({
+				type : "POST",//请求方式 get/post
+				url : "${base}/admin/roomType/update/auto.do",
+				dataType : "json",
+				data : {
+					liveEventId : liveEventId,
+					autoCheckSecond : autoCheckSecond,
+					roomId : roomId
+				},
+				success : function(data) {
+					var status = data.status;
+					if(status==1){
+						 return;
+					}else{
+						alert("操作失败");
+					}
+				}
+        	});
+		}
+	function updateAutoCheckSecond(status){
+		var autoCheckSecondVal = $("#autoCheckSecond").val(); 
+		if(status==0){
+			//减
+			autoCheckSecondVal = parseInt(autoCheckSecondVal)-1;
+			if(autoCheckSecondVal<=	0){
+				alert("最小为1");
+				return;
+			}
+		}else{
+			//加
+			autoCheckSecondVal = parseInt(autoCheckSecondVal)+1;
+		}
+		var liveEventId = '${ILiveEvent.liveEventId}';
+		var roomId = '${iLiveLiveRoom.roomId}';
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/roomType/update/auto.do",
+			dataType : "json",
+			data : {
+				liveEventId : liveEventId,
+				autoCheckSecond : autoCheckSecondVal,
+				roomId : roomId
+			},
+			success : function(data) {
+				var status = data.status;
+				if(status==1){
+		            return;
+				}else{
+					alert("操作失败");
+				}
+			}
+    	});
+	}
+	//删除
+	function deleteILiveMessage(msgId){
+		var roomId = '${iLiveLiveRoom.roomId}';
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/message/delete.do",
+			dataType : "json",
+			data : {
+				msgId : msgId,
+				roomId : roomId
+			},
+			success : function(data) {
+				var status = data.code;
+				if(status==1){
+					$("#msgId_"+msgId).remove();
+		            return;
+				}
+			}
+    	});
+	}
+	//发送消息
+	function sendMessage(liveMsgType){
+		var roomId = '${iLiveLiveRoom.roomId}';
+		var userId =  $("#selectUserId").val();
+		var selectType = $("#selectType").val();
+		var liveEventId = '${ILiveEvent.liveEventId}';
+		var msgContent = ""
+		if(liveMsgType==2){
+			//聊天互动消息
+			msgContent = $("#textContent_2").val();
+			$("#textContent_2").val("");
+		}else if(liveMsgType==1) {
+			//图文直播
+			msgContent = $("#textContent_1").val();
+			$("#textContent_1").val("");
+		}else if(liveMsgType==3){
+			//问答消息
+			alert("问答消息待处理");
+			return;
+		}else{
+			alert("消息类型错误");
+			return;
+		}
+		console.log(msgContent+"  liveMsgType:"+liveMsgType);
+		if(msgContent.replace("\s+", "") ==""||msgContent == undefined){
+			alert("请输入要发送的消息");
+			return;
+		}
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/message/save.do",
+			dataType : "json",
+			data : {
+				userId : userId,
+				roomId : roomId,
+				msgContent : msgContent,
+				liveMsgType : liveMsgType,
+				fontColor : "#FFFFFF",
+				liveEventId : liveEventId,
+				selectType : selectType
+				},
+			success : function(data) {
+				var status = data.code;
+				if(status==1){
+					console.log("发送消息成功");
+				}else{
+					alert(data.message);
+				}
+				//嘉宾
+				$("#selectUserId").val('${userBean.userId}');
+				$("#selectType").val(0);
+			}
+    	});
+	}
+	//禁言和解禁
+	function estoppelILiveMessage(msgId,estoppelType){
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/message/estoppel.do",
+			dataType : "json",
+			data : {
+				msgId : msgId,
+				estoppelType : estoppelType
+				},
+			success : function(data) {
+				var status = data.code;
+				if(status==1){
+					console.log("处理成功");
+				}else{
+					alert(data.message);
+				}
+			}
+    	});
+	}
+	//清空
+	function deleteMessageAll(){
+		var roomId = '${iLiveLiveRoom.roomId}';
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/message/deleteAll.do",
+			dataType : "json",
+			data : {
+				roomId : roomId
+				},
+			success : function(data) {
+				var status = data.code;
+				if(status==1){
+					console.log("处理成功");
+					$("#topDiv").remove();
+				}else{
+					alert(data.message);
+				}
+			}
+    	});
+	}
+	//全局禁言操作
+	function updateEstoppelType(){
+		var estoppelType = $("input[name=estoppelType]").val();
+		var liveEventId = '${ILiveEvent.liveEventId}';
+		var roomId = '${iLiveLiveRoom.roomId}';
+		if(estoppelType==0){
+			estoppelType=1;
+		}else{
+			estoppelType=0;
+		}
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/roomType/update/estoppeltype.do",
+			dataType : "json",
+			data : {
+				liveEventId : liveEventId,
+				estoppelType : estoppelType,
+				roomId : roomId
+				},
+			success : function(data) {
+				var status = data.status;
+				if(status==1){
+					console.log("处理成功");
+				}else{
+					alert(data.message);
+				}
+			}
+    	});
+		
+	}
+	//回答
+	function addReplyContent(msgId){
+		$("#replyContentOn").attr("onclick","submittedReplyContent("+msgId+")");
+		//$("#replyContentOpen").css("display","block");
+		$("#replyContent").removeAttr("disabled");
+	}
+	//提交答案
+	function submittedReplyContent(msgId){
+		var replyContent = $("#replyContent").val();
+		if(replyContent ==""||replyContent == undefined){
+			alert("请输入要回复内容的消息");
+			return;
+		}
+		$("#replyContent").val("");
+		$("#replyContentOn").removeAttr("onclick");
+		$("#replyContent").attr("disabled","disabled");
+		//$("#replyContentOpen").css("display","none");
+		var liveEventId = '${ILiveEvent.liveEventId}';
+		var roomId = '${iLiveLiveRoom.roomId}';
+		var userId = $("#selectUserId").val();
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/message/addReplyContent.do",
+			dataType : "json",
+			data : {
+				roomId : roomId,
+				replyContent : replyContent,
+				msgId : msgId,
+				userId : userId
+				},
+			success : function(data) {
+				var status  = data.code;
+				if(status==1){
+					console.log("处理成功");
+				}else{
+					alert(data.message);
+				}
+			}
+    	});
+	}
+	//问答筛选
+	function retrieve(replyType){
+		if(replyType==-1){
+			$("#dropdownMenu3").text("全部问题");
+		}else if(replyType==0){
+			$("#dropdownMenu3").text("待回答");
+		}else if(replyType==1){
+			$("#dropdownMenu3").text("已回答");
+		}
+		var roomId = '${iLiveLiveRoom.roomId}';
+		$.ajax({
+			type : "GET",//请求方式 get/post
+			url : "${base}/admin/message/retrieve.do",
+			dataType : "json",
+			data : {
+				roomId : roomId,
+				replyType : replyType
+				},
+			success : function(data) {
+				var status  = data.code;
+				if(status==1){
+					var msgIds = data.msgIds;
+					var msgIds0 = data.msgIds0;
+					var msgIds1 = data.msgIds1;
+					if(replyType==-1){
+						for (var i = 0; i < msgIds.length; i++) {
+							$("#msgId_"+msgIds[i]).css("display","block");
+						}
+					}else if(replyType==0){
+						for (var i = 0; i < msgIds1.length; i++) {
+							$("#msgId_"+msgIds1[i]).css("display","none");
+						}
+						for (var i = 0; i < msgIds0.length; i++) {
+							$("#msgId_"+msgIds0[i]).css("display","block");
+						}
+					}else if(replyType==1){
+						for (var i = 0; i < msgIds0.length; i++) {
+							$("#msgId_"+msgIds0[i]).css("display","none");
+						}
+						for (var i = 0; i < msgIds1.length; i++) {
+							$("#msgId_"+msgIds1[i]).css("display","block");
+						}
+					}
+				}else{
+					alert(data.message);
+				}
+			}
+    	});
+	}
+	//选择用户
+	function  selectByUserId(id){
+		 $("#selectUserId").val(id);
+		 $("#selectType").val(1);
+	}
+	function selectLoginUser(){
+		var userId = '${userBean.userId}';
+		 $(".circleimg").removeClass("circleActive");
+		 $("#selectUserId").val(userId);
+		 $("#selectType").val(0);
+		 $("#userIdDiv_"+userId).addClass("circleActive");
+	}
+	$(function(){
+	
+		var userId = '${userBean.userId}';
+		var userId2 =  $("#selectUserId").val();
+		if(userId==userId2){
+			$(".circleimg").removeClass("circleActive");
+			 $("#selectUserId").val(userId);
+			 $("#selectType").val(0);
+			 $("#userIdDiv_"+userId).addClass("circleActive");
+		}else{
+			 $(".circleimg").removeClass("circleActive");
+			 $("#selectUserId").val(userId2);
+			 $("#selectType").val(2);
+			 $("#guestsIdDiv_"+userId2).addClass("circleActive");
+		}
+		$('#zbewmbox').qrcode({
+				render : "canvas", // 渲染方式有table方式和canvas方式
+				width : 60, //默认宽度
+				height : 60, //默认高度
+				text : "${liveAddr!}", //二维码内容
+				typeNumber : -1, //计算模式一般默认为-1
+				correctLevel : 2, //二维码纠错级别
+				background : "#ffffff", //背景颜色
+				foreground : "#000000" //二维码颜色
+		});
+	});
+	//选择嘉宾
+	function  guestsMessage(id){
+		 $(".circleimg").removeClass("circleActive");
+		 $("#selectUserId").val(id);
+		 $("#selectType").val(2);
+		 $("#guestsIdDiv_"+id).addClass("circleActive");
+	}
+	//置顶和取消
+	function topILiveMessage(top,msgId){
+		var roomId = '${iLiveLiveRoom.roomId}';
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/message/top.do",
+			dataType : "json",
+			data : {
+				roomId : roomId,
+				top : top,
+				msgId : msgId
+				},
+			success : function(data) {
+				var status  = data.code;
+				if(status==1){
+					console.log("处理成功");
+				}else{
+					alert(data.message);
+				}
+			}
+    	});
+	}
+	window.close=function(){websocket.onclose();}
+	window.onbeforeunload=function (){
+		if(event.clientX>document.body.clientWidth && event.clientY < 0 || event.altKey){
+			websocket.onclose();
+		}else{
+			websocket.onclose();
+		}
+	}
+	
+	
+	//添加嘉宾
+	function uploadSubmit(){
+		var roomId = '${iLiveLiveRoom.roomId}';
+		$(".addGuests").each(function(index,image){
+			var httpUrl =  $(image).find("img").attr("src");
+			var guestsName = $(image).find("input").val();
+			if(guestsName.replace("\s+", "") ==""||guestsName==undefined){
+				alert("请输入嘉宾名称");
+				return;
+			}
+	        $.ajax({
+    			type : "POST",//请求方式 get/post
+    			url : "${base}/admin/guests/addGuests.do",
+    			dataType : "json",
+    			data : {
+    				guestsName : guestsName,
+    				guestsImage : httpUrl,
+    				roomId : roomId
+    				},
+    			success : function(data) {
+    				var status  = data.code;
+    				if(status==1){
+    					var iLiveGuests = data.iLiveGuests;
+    					var HTMLTXT =  "<div id=\"guestsIdDiv_"+iLiveGuests.guestsId+"\" class=\"circleimg\" title=\""+iLiveGuests.guestsName+"\" guestsId=\""+iLiveGuests.guestsId+"\" onclick=\"guestsMessage("+iLiveGuests.guestsId+")\">";
+    						HTMLTXT += "	<img src=\""+iLiveGuests.guestsImage+"\">";
+    						HTMLTXT += "</div>";
+    					$("#guestsList").append(HTMLTXT);
+    				}else{
+    					alert(data.message);
+    				}
+    			}
+        	});
+		});
+		$("#myModal1").modal('hide');
+    }
+	//直播控制
+	function iLiveOperation(status){
+		var roomId = '${iLiveLiveRoom.roomId}';
+		if(status==0){
+			//开始直播 0
+			$.ajax({
+    			type : "POST",//请求方式 get/post
+    			url : "${base}/admin/liveevent/live/start.do",
+    			dataType : "json",
+    			data : {
+    				roomId : roomId,
+    				playType : 1
+    				},
+    			success : function(data) {
+    				var status  = data.status;
+    				console.log(data);
+    				if(status==1){
+    					
+    				}else{
+    					alert(data.message);
+    				}
+    			}
+        	});
+		}else if(status==1){
+			//结束直播 1
+			$.ajax({
+    			type : "POST",//请求方式 get/post
+    			url : "${base}/admin/liveevent/live/stop.do",
+    			dataType : "json",
+    			data : {
+    				roomId : roomId,
+    				playType : 1
+    				},
+    			success : function(data) {
+    				var status  = data.status;
+    				if(status==1){
+    					
+    				}else{
+    					alert(data.message);
+    				}
+    			}
+        	});
+		}else if(status==2){
+			//暂停直播 2
+			$.ajax({
+    			type : "POST",//请求方式 get/post
+    			url : "${base}/admin/liveevent/live/pause.do",
+    			dataType : "json",
+    			data : {
+    				roomId : roomId,
+    				playType : 1
+    				},
+    			success : function(data) {
+    				var status  = data.status;
+    				console.log(data);
+    				if(status==1){
+    					
+    				}else{
+    					alert(data.message);
+    				}
+    			}
+        	});
+		}else if(status==3){
+			//继续直播 3
+			$.ajax({
+    			type : "POST",//请求方式 get/post
+    			url : "${base}/admin/liveevent/live/continue.do",
+    			dataType : "json",
+    			data : {
+    				roomId : roomId,
+    				playType : 1
+    				},
+    			success : function(data) {
+    				var status  = data.status;
+    				if(status==1){
+    					
+    				}else{
+    					alert(data.message);
+    				}
+    			}
+        	});
+		}else if(status==4){
+			//继续直播 4
+			$.ajax({
+    			type : "POST",//请求方式 get/post
+    			url : "${base}/admin/liveevent/live/continue.do",
+    			dataType : "json",
+    			data : {
+    				roomId : roomId,
+    				playType : 1
+    				},
+    			success : function(data) {
+    				var status  = data.status;
+    				if(status==1){
+    					
+    				}else{
+    					alert(data.message);
+    				}
+    			}
+        	});
+		}else if(status==5){
+			//拉流直播
+			$.ajax({
+    			type : "POST",//请求方式 get/post
+    			url : "${base}/admin/liveevent/live/start.do",
+    			dataType : "json",
+    			data : {
+    				roomId : roomId,
+    				playType : 2
+    				},
+    			success : function(data) {
+    				var status  = data.status;
+    				console.log(data);
+    				if(status==1){
+    					
+    				}else{
+    					alert(data.message);
+    				}
+    			}
+        	});
+		}else if(status==5){
+			//列表直播
+			$.ajax({
+    			type : "POST",//请求方式 get/post
+    			url : "${base}/admin/liveevent/live/start.do",
+    			dataType : "json",
+    			data : {
+    				roomId : roomId,
+    				playType : 3
+    				},
+    			success : function(data) {
+    				var status  = data.status;
+    				if(status==1){
+    					
+    				}else{
+    					alert(data.message);
+    				}
+    			}
+        	});
+		}else{
+			alert("参数错误");
+		}
+	}
+	//获取话题评论
+	function selectcommentsList(roomId){
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/message/comments/selectComments.do",
+			dataType : "json",
+			data : {
+				roomId : roomId
+			},
+			success : function(data) {
+				var status = data.code;
+				if (status == 1) {
+					var iLiveCommentsMap = JSON.parse(data.iLiveCommentsMap);
+					for (var i = 0; i < iLiveCommentsMap.length; i++) {
+						var vo = iLiveCommentsMap[i];
+						var list = vo.list;
+						var HTMLTXT ="";
+						for (var j = 0; j < list.length; j++) {
+							var comments = list[j];
+							HTMLTXT += "	<p class=\"text-content color-999 gray-bg p-xs answerCon\" id=\"commentsId_"+comments.commentsId+"\">";
+							HTMLTXT += "		<span class=\"ansbox\"><span class=\"ansname\">"+comments.commentsName+"：</span>"+comments.comments+"</span>";
+							HTMLTXT += "		<span class=\"zbj-ansbtn pull-right m-t-xs\"> ";
+							if(comments.isChecked==0){
+								HTMLTXT += "			<a class=\"btn default-livebtn border-ccc\">审核</a>"; 
+							}else{
+								HTMLTXT += "			<a class=\"btn delete-livebtn border-ccc\">已审核</a>"; 
+							}
+							if(comments.isDelete==0){
+								HTMLTXT += "			<a class=\"btn default-livebtn border-ccc\" onclick=\"deleteComments("+comments.commentsId+")\">删除</a> ";
+							}else{
+								HTMLTXT += "			<a class=\"btn delete-livebtn border-ccc\">已删除</a> ";
+							}
+							/* HTMLTXT += "			<a class=\"btn default-livebtn border-ccc\">禁言</a> "; */
+							HTMLTXT += "		</span>";
+							HTMLTXT += "	</p>";
+						}
+						$("#commentsNumber_"+vo.msgId).text(list.length);
+						$("#commentsList_"+vo.msgId).html(HTMLTXT);
+					}
+					
+					var praiseMap = JSON.parse(data.praiseMap);
+					console.log(praiseMap);
+					for(var key in praiseMap)  {
+						var  praiseNumber = praiseMap[key].length;
+						if(praiseNumber==undefined){
+							praiseNumber=0;
+						} 
+						var HTML = "<i class=\"fa fa-thumbs-up m-r-xs\"></i>"+praiseNumber+"";
+						$("#messagePraise_"+key).html(HTML);
+					} 
+				} else {
+					alert(data.message);
+				}
+			}
+		});
+	}
+	//删除评论
+	function deleteComments(commentsId){
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/message/comments/delete.do",
+			dataType : "json",
+			data : {
+				commentsId : commentsId
+			},
+			success : function(data) {
+				var status = data.code;
+				if (status == 1) {
+					$("#commentsId_"+commentsId).remove();
+					console.log(data.message);
+				} else {
+					alert(data.message);
+				}
+			}
+		});
+	}
+	//删除嘉宾
+	function deleteGuests(guestsId){
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/guests/deleteGuests.do",
+			dataType : "json",
+			data : {
+				guestsId : guestsId
+			},
+			success : function(data) {
+				var status = data.code;
+				if (status == 1) {
+					$("#guestsIdDiv_"+guestsId).remove();
+					$("#guestsId_"+guestsId).remove();
+				} else {
+					alert(data.message);
+				}
+			}
+		});
+	}
+	//通过
+	function updateChecked(msgId){
+		var roomId = '${iLiveLiveRoom.roomId}';
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/message/updateChecked.do",
+			dataType : "json",
+			data : {
+				roomId : roomId,
+				msgId : msgId
+			},
+			success : function(data) {
+				var status = data.code;
+				if (status == 1) {
+					
+				} else {
+					alert(data.message);
+				}
+			}
+		});
+	}
+	//图集
+	function submitImage(){
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/upload/selectImage.do",
+			dataType : "json",
+			data : {},
+			success : function(data) {
+				var status = data.status;
+				if (status == 1) {
+					var imageList = data.imageList;
+					console.log(imageList);
+					var content="";
+					for (var i = 0; i < imageList.length; i++) {
+						content=content+"<img class=\"col-lg-3 tuwenPic\" data-src=\""+imageList[i]+"\" src=\""+imageList[i]+"\">";
+					}
+					var roomId = '${iLiveLiveRoom.roomId}';
+					var userId =  $("#selectUserId").val();
+					var selectType = $("#selectType").val();
+					var liveEventId = '${ILiveEvent.liveEventId}';
+					if(content.replace("\s+", "") ==""||content == undefined){
+						alert("请确认要发送的消息");
+						return;
+					}
+					$.ajax({
+						type : "POST",//请求方式 get/post
+						url : "${base}/admin/message/save.do",
+						dataType : "json",
+						data : {
+							userId : userId,
+							roomId : roomId,
+							msgContent : content,
+							liveMsgType : 1,
+							fontColor : "#FFFFFF",
+							liveEventId : liveEventId,
+							selectType : selectType
+							},
+						success : function(data) {
+							var status = data.code;
+							if(status==1){
+								console.log("发送消息成功");
+								$("#myModal2").modal('hide');
+								$(".dz-preview").remove();
+								$("#themeForm").removeClass("dz-started");
+							}else{
+								alert(data.message);
+							}
+						}
+			    	});
+				} else {
+					alert(data.message);
+				}
+			}
+		});
+	}
+</script>
+<script type="text/javascript">
+		$(document).ready(function(e) {
+			ImgIputHandler.Init();
+		});
+		var ImgIputHandler = {
+				facePath : [
+					<#if faceLists??&&faceLists?size gt 0>
+					<#list faceLists as expresssionMap>
+					<#assign key=expresssionMap["key"] />
+					<#assign value=expresssionMap["value"] />
+					<#assign data=value?eval />
+					{faceName:"${key}",faceImgPath:"${data.path!}",faceTitle:"${data.title!}"},
+					</#list>
+					{faceName:"",faceImgPath:"",faceTitle:""},
+					</#if>
+				],
+				Init : function() {
+					var isShowImg=false;
+					$("#expression").click(function() {
+						$("#faceDiv").show();
+						if (isShowImg == false) {
+							isShowImg = true;
+							$(this).parent().prev().animate({
+								marginTop : ""
+							}, 0);
+							console.log("ssss"+ImgIputHandler.facePath.length);
+							if ($("#faceDiv").children().length == 0) {
+								for (var i = 0; i < ImgIputHandler.facePath.length; i++) {
+									if (ImgIputHandler.facePath[i].faceName != "") {
+										$("#faceDiv").append("<img title=\""+ImgIputHandler.facePath[i].faceTitle+"\" src=\""+ImgIputHandler.facePath[i].faceImgPath+"\" faceName=\"["+ImgIputHandler.facePath[i].faceName+"]\" />");
+									}
+								}
+								$("#faceDiv>img").click(function() {
+									isShowImg = false;
+									$(this).parent().animate({
+										marginTop : "0px"
+									}, 300);
+									$("#faceDiv").hide();
+									ImgIputHandler.insertAtCursor($("#textContent_2")[0], "[" + $(this).attr("title") + "]");
+								});
+
+							}
+						} else {
+							isShowImg = false;
+							$("#faceDiv").hide();
+						}
+					});
+				},
+				insertAtCursor : function(myField, myValue) {
+					if (document.selection) {
+						myField.focus();
+						sel = document.selection.createRange();
+						sel.text = myValue;
+						sel.select();
+					} else if (myField.selectionStart || myField.selectionStart == "0") {
+						var startPos = myField.selectionStart;
+						var endPos = myField.selectionEnd;
+						var restoreTop = myField.scrollTop;
+						myField.value = myField.value.substring(0, startPos) + myValue + myField.value.substring(endPos, myField.value.length);
+						if (restoreTop > 0) {
+							myField.scrollTop = restoreTop;
+						}
+						myField.focus();
+						myField.selectionStart = startPos + myValue.length;
+						myField.selectionEnd = startPos + myValue.length;
+					} else {
+						myField.value += myValue;
+						myField.focus();
+					}
+				}
+			}
+</script>
+<script language="javascript">
+//	interfaceHttp ='http://192.168.1.176:8585/function=GetVodProgramInfo|newsId=0|fileId=375',
+interfaceHttp ='<?xml version=##1.0\## encoding=##GBK##?>' +
+'<root>' +
+'<smil>' +
+'<seq>'+
+	'<media role=##seq## srchigh=##C:/Users/useradmin/Videos/20180105193431680431000.mp4##  id=##5## videoHeadTime=##-1## highLow=##true##  videoEndTime=##-1##  adseq=##false##  noSkip=##false## begin=##300## dur=##600## end=##600## isnextplay=##false##   mediatype=##flv## isshiftmove=##false## returnInfo=##PT_85370379## > <clientData title=##正片1内容## captionURL=####/> <medaiTitle><![CDATA[##济宁##]]></medaiTitle></media>'+
+'</seq>'+
+'</smil>'+
+'</root>',
+interfaceHttp ='${pushStreamAddr!}',
+		shareHtmlUrl="案室著，按时投淳著",
+             	shareStatu='3',              					
+            AddressSeparator='#', 
+           // _playAuto='false',
+                //interfaceType  ='true';
+                authUrl='true',
+                  ifShowImageBtn='true',
+                  ifAuthCDN_WS='true',
+                  PlayVideoAspect='mc169',//mc43;mc169;diaplasis;bespread
+                  ifShowLogo='false',
+                  AudioPlayerType='2',
+                  AVPlayerType='0',
+           //               ifShowStream='false';
+            ifShiftMove='false',
+    
+          
+		_playAuto='true';
+                //ifShowSetBtn='false',
+              
+                //ifShowPoopBtn='false';
+                //ifShowStream='false';
+</script>
+<script src="${base}/common/js/JWZT_Player.js?t=20120609" type="text/javascript"></script>
+<script src="${base}/tysx/js/zbj.js" type="text/javascript" charset="utf-8"></script>
+</html>

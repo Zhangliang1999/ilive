@@ -1,0 +1,95 @@
+/*字体规范*/
+ol,ul{
+    list-style: none;
+}
+.font-title{
+    font-size: 16px;
+}
+.font-content{
+    font-size: 14px;
+}
+.font-12{
+    font-size: 12px;
+}
+.font-26{
+    font-size: 26px;
+}
+.font-24{
+    font-size: 24px;
+}
+/*背景色规范*/
+.bgc-fff{
+    background: #ffffff;
+}
+/*按钮规范*/
+.default-btn{
+    background: #0084ff!important;
+    color: #ffffff;
+    width: 110px;
+    height: 40px;
+    border-radius: 5px;
+}
+.default-btn:hover{
+    background: #0065c4;
+    color: #ffffff;
+}
+.red-btn{
+    background: #f23622;
+    color: #ffffff;
+}
+.red-btn:hover{
+    background: #f23622;
+    color: #ffffff;
+}
+/*开关按钮*/
+.chooseBtn {
+    display: none;
+}
+
+.choose-label {
+    box-shadow: #ccc 0px 0px 0px 1px;
+    width: 40px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 20px;
+    position: relative;
+    background-color: #bdbdbd;
+    overflow: hidden;
+    margin: 5px 0 0 15px;
+}
+
+.choose-label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 20px;
+    background-color: #fff;
+    z-index: 20;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.chooseBtn:checked + label.choose-label:before {
+    left: 20px;
+}
+
+.chooseBtn:checked + label.choose-label {
+    background-color: #51ccee;
+}
+/*行高*/
+.lh-40{
+    height: 40px;
+    line-height: 40px;
+}
+.color-999{
+    color: #999;
+}
+.color-blue{
+    color: #0084ff;
+}
+.border-bottom{
+    border-bottom: 1px solid #e7eaec;
+}

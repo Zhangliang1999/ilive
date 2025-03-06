@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>观看限制</title>
+		<link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css">
+		<#include "/bvRadio/head.html"/>
+	</head>
+	<body>
+		<div id="wrapper" class="bgc-fff normal-font">
+			<!--右侧内容的区域-->
+			<div id="page-wrapper" class="gray-bg">
+				<!--上面的导航栏部分-->
+				<#include "/bvRadio/admin/top.html"/>
+				<!--左侧部分-->
+				<#include "/bvRadio/admin/left.html"/>
+				<!--左侧部分-->
+				<!--下面内容部分-->
+				<div class="wrapper wrapper-content bgc-fff watch_limit common_nav">
+					<div class="row title-header">
+						<div class="col-lg-12">
+							<div class="title-name">
+								<a class="font-title">观看限制设置</a>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="watchlist m-t-md p-m">
+							<ul id="myTab" class="nav nav-tabs p-w-lg">
+								<li class="<#if liveEvent.viewAuthorized??><#if (liveEvent.viewAuthorized == 1||liveEvent.viewAuthorized == 5)>active</#if><#else>active</#if>">
+									<a href="#freewatch" data-toggle="tab">免费观看</a>
+								</li>
+								<li <#if liveEvent.viewAuthorized??><#if liveEvent.viewAuthorized == 2>class="active"</#if></#if>>
+									<a href="#codewatch" data-toggle="tab">密码观看</a>
+								</li>
+								<li <#if liveEvent.viewAuthorized??><#if liveEvent.viewAuthorized == 3>class="active"</#if></#if>>
+									<a href="#paywatch" data-toggle="tab">付费观看</a>
+								</li>
+								<li <#if liveEvent.viewAuthorized??><#if liveEvent.viewAuthorized == 4>class="active"</#if></#if>>
+									<a href="#listwatch" data-toggle="tab">白名单观看</a>
+								</li>
+							</ul>
+							<div id="myTabContent" class="tab-content p-m">
+								<div class="tab-pane fade <#if liveEvent.viewAuthorized??><#if (liveEvent.viewAuthorized == 1||liveEvent.viewAuthorized == 5)>active in</#if><#else>active in</#if>" id="freewatch">
+									<form class="watchset" action="${base}/admin/config/freeLogin.do" id="freeLogin">
+										<input type="hidden" value="${roomId}" name="roomId" id="roomId"/>
+										<div class="setlist">
+											<label>用户可免费观看</label>
+											<span class="">
+												<input type="radio" name="is_login" id="is_login" value="0" <#if liveEvent.viewAuthorized??><#if liveEvent.viewAuthorized == 5>checked="checked"</#if></#if> />
+												<label>启用登录观看</label> </span>
+										</div>
+										<button class="btn red-bg m-t-md z-sure" type="submit">
+											确定
+										</button>
+									</form>
+								</div>
+								<div class="tab-pane fade <#if liveEvent.viewAuthorized??><#if liveEvent.viewAuthorized == 2>in active</#if></#if>" id="codewatch">
+									<form class="watchset" method="post" action="${base}/admin/config/passwordLogin.do">
+										<div class="setlist">
+											<input type="hidden" value="${roomId!}" name="roomId" id="roomId"/>
+											<p class="m-b">
+												<span>观看密码：</span>
+												<input type="text" id="viewPassword" name="viewPassword" <#if liveEvent.viewPassword??>value="${liveEvent.viewPassword}"</#if> />
+											</p>
+											<p>
+												<span>欢迎语</span>
+												<input type="text" placeholder="欢迎观看该直播" name="welcomeMsg" <#if liveEvent.welcomeMsg??>value="${liveEvent.welcomeMsg}"</#if>>
+											</p>
+										</div>
+										<button class="btn red-bg m-t-md z-sure" type="submit">
+											确定
+										</button>
+									</form>
+								</div>
+								<div class="tab-pane fade <#if liveEvent.viewAuthorized??><#if liveEvent.viewAuthorized == 3>in active</#if></#if>" id="paywatch">
+									<form class="watchset" method="post" action="${base}/admin/config/payView.do">
+										<input type="hidden" value="${roomId}" name="roomId" id="roomId"/>
+										<div class="setlist">
+											<p class="m-b-sm">
+												<span>付费金额：</span>
+												<input type="text" name="viewMoney" id="viewMoney" <#if liveEvent.viewMoney??>value="${liveEvent.viewMoney}"</#if>/>
+												&nbsp;&nbsp;元
+												<br>
+												<small class="w_tips">天翼直播收取总收益5%的手续费，此费用为第三方支付平台手续费</small>
+												<small><a href="##">查看付费记录</a></small>
+											</p>
+											<p class="m-b-sm">
+												<span>欢迎语</span>
+												<input name="welcomeMsg" id="welcomeMsg" type="text" placeholder="欢迎观看该直播" <#if liveEvent.welcomeMsg??>value="${liveEvent.welcomeMsg}"</#if> >
+											</p>
+											<p>
+												<span>
+													<input type="radio" name="is_openF" id="is_openF" value="0"/>
+													启用F码</span>
+												<small>F码用于无需付款者进入观看使用，每个F码只能使用一次，成功使用1次后，即为已使用。 <a href="${base}/admin/config/fset.do?roomId=${baseIliveRoomId}">F码管理</a> </small>
+											</p>
+										</div>
+										<button class="btn red-bg m-t-md z-sure" type="submit">
+											确定
+										</button>
+									</form>
+								</div>
+								<div class="tab-pane fade <#if liveEvent.viewAuthorized??><#if liveEvent.viewAuthorized == 4>in active</#if></#if>" id="listwatch">
+									<form class="watchset" method="post" action="${base}/admin/config/whiteList.do">
+										<input type="hidden" value="${roomId}" name="roomId" id="roomId"/>
+										<div class="setlist set_list">
+											<p>
+												<span class="m-r-xl">
+													<input type="radio"/>
+													向被邀请人员发送观看短信通知</span>
+												<span>直播开始前:&nbsp;&nbsp;
+													<input type="text">
+													&nbsp;分钟 </span>
+											</p>
+											<p>
+												<small>开启功能后，每发送一条短信，将从您的账号中扣除一条短信通讯费用，开启过程中，若账户余额不足，短信开关将自动关闭。<a href="##">短信套餐</a></small>
+											</p>
+											<div class="row m-t-md p-w-m">
+												<p class="m-b-sm">
+													<input type="text"/>
+													<button type="button" class="btn default-btn m-r m-l" onclick="searchWhiteList()">
+														搜索
+													</button>
+													<small><a href="${base}/admin/member/whitelist.do">白名单管理</a></small>
+												</p>
+
+												<div class="col-lg-5 pull-left whitelist">
+													<table class="table">
+														<tbody id="leftWhiteList">
+															<#if enterprisewhiteList??>
+															<#list enterprisewhiteList as entwhite>
+															<tr id="l_${entwhite.phoneNum!}">
+																<td>${entwhite.phoneNum!}</td>
+																<td>${entwhite.userName!}</td>
+															</tr>
+															</#list>
+															</#if>
+														</tbody>
+													</table>
+												</div>
+
+												<div class="col-lg-2 m-t-95">
+													<p class="text-center">
+														<i id="dobuleRight" class="fa fa-angle-double-right"></i>
+													</p>
+
+													<p class="text-center">
+														<i id="singleRight" class="fa fa-arrow-right"></i>
+													</p>
+													<p class="text-center">
+														<i id="singleLeft" class="fa fa-arrow-left"></i>
+													</p>
+													<p class="text-center">
+														<i id="dobuleLeft" class="fa fa-angle-double-left"></i>
+													</p>
+												</div>
+
+												<div  id="rightBox" class="col-lg-5 pull-right whitelist">
+													<table class="table">
+														<tbody id="rightWhiteList">
+															<#if viewWhiteList??>
+																<#list viewWhiteList as viewwhite>
+																<tr id="r_${viewwhite.phoneNum!}">
+																	<td>${viewwhite.phoneNum!}</td>
+																	<td>${viewwhite.userName!}</td>
+																</tr>
+															</#list>
+															</#if>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+										<button class="btn red-bg m-t-md z-sure" type="button" onclick="submitWhiteList()">
+											确定
+										</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script>
+		$(".live-bottom").hide();
+		wid = $('.blcen').width();
+		$('.textbl').css('width', wid - 300);
+		$('.textbl2').css('width', wid - 300);
+		$(window).resize(function() {//当浏览器大小变化时
+			wid = $('.blcen').width();
+			$('.textbl').css('width', wid - 300);
+			$('.textbl2').css('width', wid - 300);
+		});
+
+		$(".img-box").hover(function() {
+			$(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+		}, function() {
+			$(this).find(".live-bottom").stop(true, false).slideUp(300)
+		})
+		$(function() {
+			// 左侧白名单
+			if ($('#leftWhiteList').find("tr").length > 0) {
+				$('#leftWhiteList tr').on("click", function(index, dom) {
+					$(this).addClass("tableActive").siblings().removeClass("tableActive");
+				});
+			}
+
+			// 往右侧多推
+			$('#dobuleRight').on("click", function() {
+				var leftHtml = $('#leftWhiteList').clone().html();
+				$('#rightWhiteList').html(leftHtml);
+			});
+
+			// 往右侧单推
+			$('#singleRight').on("click", function() {
+				if ($('#leftWhiteList .tableActive').length) {
+					var selectedId = $('#leftWhiteList .tableActive').data("phoneNum");
+					var selectedArr = selectedId.split("_");
+					var phoneNum = selectedArr[1];
+					if ($('#r_' + phoneNum).length) {
+						alert("已经存在");
+					} else {
+						$('#rightWhiteList').append("<tr class='tableActive'>" + $('#leftWhiteList .tableActive').clone().html() + "</tr>");
+					}
+				}
+			});
+
+			// 往左侧推
+			$('#singleLeft').on("click", function() {
+				if ($('#rightWhiteList .tableActive').length) {
+					$('#rightWhiteList .tableActive').remove();
+				}
+			});
+
+			// 全部往左侧推
+			$('#dobuleLeft').on("click", function() {
+				$('#rightWhiteList').empty();
+			});
+
+		});
+
+		/**
+		 * 搜索白名单
+		 */
+		function searchWhiteList() {
+			
+		}
+
+		/**
+		 * 提交白名单
+		 */
+		function submitWhiteList() {
+			
+			$('#rightWhiteList tr').each(function(index, dom) {
+				alert(123);
+				alert($(dom).attr("id"));
+			});
+			$.ajax({
+				url : "",
+				dataType : "json",
+				data : {
+
+				},
+				method : "post",
+				success : function(data) {
+
+				},
+				error : function(data) {
+
+				}
+			});
+
+		}
+	</script>
+</html>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	default-lazy-init="true">
+	<!-- MANAGER -->
+	<!-- IliveUSer end -->
+	<!--========================================= YanXL 2018-03-13 start 新增 
+		====================================================== -->
+	<!-- 禁言 -->
+	<bean id="iLiveEstoppelDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveEstoppelDaoImpl"></bean>
+	<bean id="iLiveEstoppelMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveEstoppelMngImpl"></bean>
+	<!-- 场次 -->
+	<bean id="iLiveEventDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveEventDaoImpl"></bean>
+	<bean id="iLiveEventMng" class="com.bvRadio.iLive.iLive.manager.impl.ILiveEventMngImpl"></bean>
+	<!-- 直播间 -->
+	<bean id="iLiveLiveRoomDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveLiveRoomDaoImpl"></bean>
+	<bean id="iLiveLiveRoomMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveLiveRoomMngImpl"></bean>
+	<bean id="iLiveFieldIdManagerDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.ILiveFieldIdManagerDaoImpl" />
+	<!-- 互动消息 -->
+	<bean id="iLiveMessageDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveMessageDaoImpl"></bean>
+	<bean id="iLiveMessageMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveMessageMngImpl"></bean>
+	<!-- MANAGER -->
+	<bean id="iLiveFieldIdManagerMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveFieldIdManagerMngImpl" />
+
+	<!-- 用户 -->
+	<bean id="iLiveManagerDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveManagerDaoImpl"></bean>
+	<bean id="iLiveManagerMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveManagerMngImpl"></bean>
+
+	<!-- 嘉宾 -->
+	<bean id="iLiveGuestsDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveGuestsDaoImpl"></bean>
+	<bean id="iLiveGuestsMng" class="com.bvRadio.iLive.iLive.manager.impl.ILiveGuestsMngImpl"></bean>
+
+	<!-- 专题 -->
+	<bean id="iLiveThematicDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveThematicDaoImpl" />
+	<bean id="iLiveThematicMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveThematicMngImpl" />
+	<!-- 评论 -->
+	<bean id="iLiveCommentsDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveCommentsDaoImpl" />
+	<bean id="iLiveCommentsMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveCommentsMngImpl" />
+
+	<!-- 点赞 -->
+	<bean id="iLiveMessagePraiseDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.ILiveMessagePraiseDaoImpl" />
+	<bean id="iLiveMessagePraiseMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveMessagePraiseMngImpl" />
+	<!--============================================================================================================================= -->
+
+	<bean class="com.bvRadio.iLive.iLive.dao.impl.ILiveServerGroupDaoImpl"></bean>
+
+	<bean class="com.bvRadio.iLive.iLive.dao.impl.ILiveServerAccessMethodDaoImpl"></bean>
+	<bean
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveServerAccessMethodMngImpl"></bean>
+
+	<bean class="com.bvRadio.iLive.iLive.dao.impl.ILiveServerMountDaoImpl"></bean>
+	<bean class="com.bvRadio.iLive.iLive.manager.impl.ILiveServerMountMngImpl"></bean>
+
+
+	<!--============================================================================================================================= -->
+
+	<!-- F码 -->
+	<bean id="iLiveFCodeMng" class="com.bvRadio.iLive.iLive.manager.impl.ILiveFCodeMngImpl"></bean>
+	<bean id="iLiveFCodeDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveFCodeDaoImpl"></bean>
+	<bean id="iLiveFCodeDetailDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.ILiveFCodeDetailDaoImpl"></bean>
+
+	<!-- 企业 -->
+	<bean id="iLiveEnterpriseMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveEnterpriseMngImpl"></bean>
+	<bean id="iLiveEnterpriseDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveEnterpriseDaoImpl"></bean>
+
+
+	<!-- 互动报名 -->
+	<bean id="bbsDiymodelDao" class="com.bvRadio.iLive.iLive.dao.impl.BBSDiymodelDaoImpl"></bean>
+	<bean id="bbsDiyformDao" class="com.bvRadio.iLive.iLive.dao.impl.BBSDiyformDaoImpl"></bean>
+	<bean id="bBSDiyOptionDao" class="com.bvRadio.iLive.iLive.dao.impl.BBSDiyOptionDaoImpl"></bean>
+
+	<!-- 互动报名 -->
+	<bean id="bbsDiyformMng" class="com.bvRadio.iLive.iLive.manager.impl.BBSDiyformMngImpl"></bean>
+	<bean id="bbsDiymodelMngImpl" class="com.bvRadio.iLive.iLive.manager.impl.BBSDiymodelMngImpl"></bean>
+	<bean id="bBsVoteActivetyMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.BBsVoteActivityMngImpl"></bean>
+	<bean id="bBsVoteActivityDao" class="com.bvRadio.iLive.iLive.dao.impl.BBsVoteActivityDapImpl"></bean>
+	<bean id="bBSDiyFormOptionChoiceMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.BBSDiyFormOptionChoiceMngImpl"></bean>
+	<bean id="bBSDiyFormOptionChoiceDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.BBSDiyFormOptionChoiceDaoImpl"></bean>
+
+	<!-- 媒资管理 -->
+	<bean id="iLiveMediaFileDaoImpl" class="com.bvRadio.iLive.iLive.dao.impl.ILiveMediaFileDaoImpl"></bean>
+	<bean id="iLiveMediaFileMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveMediaFileMngImpl"></bean>
+
+	<!-- UploadServer图片上传服务器 -->
+	<bean id="iLiveUploadServerDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.ILiveUploadServerDaoImpl"></bean>
+	<bean id="iLiveUploadServerMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveUploadServerMngImpl"></bean>
+
+	<!-- 页面装修 -->
+	<bean id="iLivePageDecorateMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILivePageDecorateMngImpl"></bean>
+	<bean id="iLIvePageDecorateDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.ILIvePageDecorateDaoImpl"></bean>
+
+	<!-- 企业 -->
+	<bean id="iLiveEnterpriseMng2"
+		class="com.bvRadio.iLive.manager.manager.impl.ILiveEnterpriseMngImpl"></bean>
+	<bean id="iLiveEnterpriseDao2"
+		class="com.bvRadio.iLive.manager.dao.impl.ILiveEnterpriseDaoImpl"></bean>
+
+	<!-- 白名单 -->
+	<bean id="iLiveEnterpriseMemberMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveEnterpriseMemberMngImpl"></bean>
+	<bean id="iLiveEnterpriseMemberDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.ILiveEnterpriseMemberDaoImpl"></bean>
+
+	<!-- 终端用户 -->
+	<bean id="terminalUserMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.TerminalUserMngImpl"></bean>
+	<bean id="terminalUserDao" class="com.bvRadio.iLive.iLive.dao.impl.TerminalUserDaoImpl"></bean>
+
+	<!-- 账户 -->
+	<bean id="accountMng" class="com.bvRadio.iLive.iLive.manager.impl.AccountMngImpl"></bean>
+	<bean id="accountDao" class="com.bvRadio.iLive.iLive.dao.impl.AccountDaoImpl"></bean>
+
+	<!-- 表单征集数据 -->
+	<bean id="bbSDiyformDataMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.BBSDiyformDataMngImpl"></bean>
+	<bean id="bbSDiyformDataDaoImpl" class="com.bvRadio.iLive.iLive.dao.impl.BBSDiyformDataDaoImpl"></bean>
+
+
+	<!-- 显示内容 -->
+	<bean id="ILiveContentSelectMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveContentSelectMngImpl"></bean>
+	<bean id="contentSelectDao" class="com.bvRadio.iLive.iLive.dao.impl.ContentSelectDaoImpl"></bean>
+	<bean id="contentPolicyDao" class="com.bvRadio.iLive.iLive.dao.impl.ContentPolicyDaoImpl"></bean>
+
+	<!-- 观看鉴权 -->
+	<bean id="iLiveViewAuthBillDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.ILiveViewAuthBillDaoImpl"></bean>
+	<bean id="iLiveViewAuthBillMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveViewAuthBillMngImpl"></bean>
+
+	<!-- 观看白名单 -->
+	<bean id="iLiveViewWhiteBillDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.ILiveViewWhiteBillDaoImpl"></bean>
+	<bean id="iLiveViewWhiteBillMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveViewWhiteBillMngImpl"></bean>
+
+	<!-- 粉丝 -->
+	<bean id="iliveEnterpriseFansDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.ILiveEnterpriseFansDaoImpl"></bean>
+	<bean id="iLiveEnterpriseFansMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveEnterpriseFansMngImpl"></bean>
+
+	<!-- 视频评论 -->
+	<bean id="iLiveMediaFileCommentsDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.ILiveMediaFileCommentsDaoImpl"></bean>
+
+	<bean id="iLiveMediaFileCommentsMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveMediaFileCommentsMngImpl"></bean>
+	
+	<bean id="iLiveViewSetRecordMng" class="com.bvRadio.iLive.iLive.manager.impl.ILiveViewSetRecordMngImpl"></bean>
+	<bean id="iLiveViewSetRecordDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveViewSetRecordDaoImpl"></bean>
+	
+	<bean id="iLiveManagerStateDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveManagerStateDaoImpl"></bean>
+	<!-- 工单 -->
+	<bean id="equipmentDao" class="com.bvRadio.iLive.iLive.dao.impl.EquipmentDaoImpl"></bean>
+	<bean id="equipmentOrderDao" class="com.bvRadio.iLive.iLive.dao.impl.EquipmentOrderDaoImpl"></bean>
+	<bean id="equipmentService" class="com.bvRadio.iLive.iLive.manager.impl.EquipmentServiceImpl"></bean>
+	<bean id="equipmentOrderService" class="com.bvRadio.iLive.iLive.manager.impl.EquipmentOrderServiceImpl"></bean>
+	
+	<!-- 预约 -->
+	<bean id="iLiveAppointmentMng"
+		class="com.bvRadio.iLive.iLive.manager.impl.ILiveAppointmentMngImple"></bean>
+	<bean id="iLiveAppointmentDao"
+		class="com.bvRadio.iLive.iLive.dao.impl.ILiveAppointmentDaoImpl"></bean>
+</beans>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>专题管理</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/myStyle.css"/>
+    <link rel="stylesheet" href="../css/jbxx.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/public.css"/>
+    <link rel="stylesheet" href="../css/zbgl.css"/>
+    <link rel="stylesheet" href="../css/shcommon.css"/>
+
+    <!--新加样式-->
+    <link rel="stylesheet" href="../css/newheader.css"/>
+    <link rel="stylesheet" href="../css/newleft.css"/>
+    <link rel="stylesheet" href="../css/zhuye.css"/>
+    <style>
+
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="bgc-fff">
+        <!--上面的导航栏部分-->
+        <div class="row">
+            <nav class="navbar navbar-static-top navbar-top-height" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+
+                    <div class="logo">
+                        <div class="header-logo">
+                            <div class="logoimg">
+                                <img alt="image" src="../img/newlogo.png"/>
+                            </div>
+                        </div>
+                        <ul class="logoul">
+                            <li class="headeractive"><a href="">直播</a></li>
+                            <li><a href="">媒体库</a></li>
+                            <li><a href="">会员</a></li>
+                            <li><a href="">主页</a></li>
+                            <li><a href="">数据</a></li>
+                            <li><a href="">账户</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <ul class="nav navbar-top-links navbar-right navbar-top-right" style="float:right;">
+                    <li class="nav-num">
+                        <img src="../css/patterns/3.png"/>
+                    </li>
+                    <li class="dropdown nav-sjgly">
+                        <a aria-expanded="false" role="button" href="###" class="dropdown-toggle" data-toggle="dropdown"
+                                >市级管理员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                class="fa fa-angle-down"></span></a>
+                        <ul role="menu" class="dropdown-menu nav-dropdown-list">
+                            <li><a href="###">aaa </a></li>
+                            <li><a href="###">vvv</a></li>
+                            <li><a href="###l">bbb</a></li>
+                            <li><a href="###l">bbb</a></li>
+                            <li><a href="###l">bbb</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <li class="dropdown m-t-sm">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="calendar.html#">
+                            <i class="fa fa-bell"></i>  <span class="label label-success">8</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="mailbox.html">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw "></i> You have 16 messages
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="profile.html">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="grid_options.html">
+                                    <div>
+                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a href="notifications.html">
+                                        <strong>See All Alerts</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+
+            </nav>
+        </div>
+        <!--左侧部分-->
+        <nav class="navbar-default navbar-static-side navbar-width" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu nav-left" id="side-menu">
+                    <li>
+                        <a href="##"><i class="fa fa-bookmark"></i> <span class="nav-label">主页管理</span></a>
+
+                    </li>
+                    <li>
+                        <a href="###"><i class="fa  fa-desktop"></i> <span class="nav-label">专题管理</span></a>
+
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content bgc-fff">
+           <div class="row title-header gray-bg">
+               <div class="col-lg-12">
+                   <div class="title-name">
+                        <a class="font-title">专题管理</a>
+                   </div>
+                   <div class="col-lg-3">
+                       <div class="dropdown">
+                           <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">直播状态
+                               <span class="caret"></span>
+                           </button>
+                           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                               <li role="presentation">
+                                   <a role="menuitem" tabindex="-1" href="#">预告</a>
+                               </li>
+                               <li role="presentation">
+                                   <a role="menuitem" tabindex="-1" href="#">直播</a>
+                               </li>
+                               <li role="presentation">
+                                   <a role="menuitem" tabindex="-1" href="#">结束</a>
+                               </li>
+
+                           </ul>
+                       </div>
+                   </div>
+                   <div class="pull-right m-r-lg">
+                       <input type="text" class="serachinput" placeholder="互动内容">
+                       <button class="btn commonbtn m-t-n-4">搜索</button>
+                   </div>
+               </div>
+           </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slimBox">
+                        <div class="newcontaine">
+                        <div class="content-box">
+                            <div class="live-box add-live"  data-toggle="modal" data-target="#myModal">
+                                +创建专题
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-box">
+                            <div class="live-box on-live">
+                                <div class="img-box">
+                                    <a href="javascript:;">
+                                        <img src="../img/u1207.jpg" alt=""/>
+                                    </a>
+
+                                    <div class="live-bottom">
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-edit m-r-sm"></i>编辑
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-cog m-r-sm"></i>管理
+                                        </a>
+                                        <a class="zt-bottombox" href="javascript:;">
+                                            <i class="fa fa-trash m-r-sm"></i>删除
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="content-box">
+                                    <p class="zt-title">新疆宜化发生一起闪爆事故 2人遇难8人受伤新疆宜化发生一起闪爆事故 2人遇难8人受伤</p>
+                                    <div class="bottom-content m-t-xs">
+                                        <div class="bottom-left pull-left">
+                                            <p>创建人：李扬</p>
+                                            <p>直播结束时间：2018-02-09 10:00</p>
+                                        </div>
+                                        <div class="bottom-right pull-left">
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">创建专题</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class="row ">
+                                <div class="col-lg-10 col-lg-offset-1 m-b">
+                                    <div class="input-group">
+                                       <span class="labelname">专题名称 ：</span>
+                                        <input class="form-control modal-input" type="text" placeholder="请输入专题名称"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-lg-offset-1 m-b">
+                                    <div class="input-group">
+                                        <span class="labelname">专题简介 ：</span>
+                                        <textarea class="form-control modal-input"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-lg-offset-1 m-b">
+                                    <div class="input-group">
+                                        <span class="labelname">专题封面 ：</span>
+                                        <div class="form-control modal-input fmBox">
+                                            <img src="../img/u1207.jpg" alt=""/>
+                                        </div>
+                                        <div class="modal-input m-t m-l-100">
+                                            <p class="m-t-sm">最大1M</p>
+                                            <p  class="m-t-sm">建议270*160像素</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger">确定</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal">取消</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+</body>
+<!-- Mainly scripts -->
+<script src="../js/jquery-2.1.1.js"></script>
+<script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="../js/inspinia.js"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
+
+<!-- Chosen -->
+<script src="../js/plugins/chosen/chosen.jquery.js"></script>
+
+<!-- JSKnob -->
+<script src="../js/plugins/jsKnob/jquery.knob.js"></script>
+
+<!-- Input Mask-->
+<script src="../js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+<!-- Data picker -->
+<script src="../js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<!-- NouSlider -->
+<script src="../js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+<!-- Switchery -->
+<script src="../js/plugins/switchery/switchery.js"></script>
+
+<!-- IonRangeSlider -->
+<script src="../js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+<!-- iCheck -->
+<script src="../../js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- MENU -->
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- Color picker -->
+<script src="../js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+<!-- Clock picker -->
+<script src="../js/plugins/clockpicker/clockpicker.js"></script>
+
+<!-- Image cropper -->
+
+<script src="../js/plugins/cropper/cropper.min.js"></script>
+
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="../js/plugins/fullcalendar/moment.min.js"></script>
+
+<!-- Date range picker -->
+<script src="../js/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="../js/myJs.js"></script>
+<script src="../js/video.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/leftHeight.js"></script>
+<script type="text/javascript">
+
+</script>
+
+<script>
+    $(".live-bottom").hide()
+    $(".deletespan").hide()
+
+    wid=$('.blcen').width()
+    $('.textbl').css('width',wid-300)
+    $('.textbl2').css('width',wid-300)
+
+    $(window).resize(function () {          //当浏览器大小变化时
+
+    wid=$('.blcen').width()
+    $('.textbl').css('width',wid-300)
+    $('.textbl2').css('width',wid-300)
+
+    });
+
+    $(".img-box").hover(function(){
+        $(this).find(".live-bottom").stop(true, false).slideDown(300);
+        $(this).find(".deletespan").stop(true, false).fadeIn(300);
+
+    },function(){
+        $(this).find(".live-bottom").stop(true, false).slideUp(300);
+        $(this).find(".deletespan").stop(true, false).fadeOut(300);
+    })
+//    var winWidth = $(window).width();
+//    var contWidth = $(".newcontaine").width()-$(".nav-left").width();
+//    $(".newcontaine").css("margin-left",(winWidth-contWidth)/2);
+    var winH = $(window).height()-140;
+    $(".slimBox").slimscroll({
+        height:winH
+    })
+</script>
+</html>

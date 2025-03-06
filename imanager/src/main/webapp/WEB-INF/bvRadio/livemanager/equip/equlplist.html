@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>工单管理</title>
+    <#include "/bvRadio/livemanager/head.html" />
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <style>
+		.scrollSwitchBox{
+			margin-left: 55px;
+		}
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+		<#include "/bvRadio/livemanager/top.html" />
+        <!--左侧部分-->
+		<#include "/bvRadio/livemanager/equip/equipleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">工单</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                	
+                </div>
+            </div>
+            <div class="row m-t-sm">
+            <@p.pageList value=page 
+					listAction="equlplist.do";item,i,has_next> 
+					<@p.column class="text-center" style="width:40px;"
+					title="工单编号">
+					${item.id!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="联系人">
+					${item.contactName!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="手机号">
+					${item.contactPhone!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="提交时间">
+					${item.createTime!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="状态">
+					${item.status!}
+					<#if item.status == 1>处理中</#if>
+					<#if item.status == 2>已关闭</#if>
+					<#if item.status == 3>已处理</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="操作">
+					<a href="${base}/operator/equipment/detail.do?id=${item.id!}">查看</a>
+					</@p.column> 
+					</@p.pageList>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+<script src="${base}/tysx/js/zbj.js"></script>
+<script>
+    var winHeight = $(window).height();
+    var navHeight = $(".navbar").height();
+    var titleHeight = $(".title-header").height()+2;
+    $(".newtable tbody").height(winHeight-navHeight-titleHeight-165);
+	
+	$(function(){
+		$("#_page_form").append("<input name='type' type='hidden' value='${type}'>");
+	})
+    
+</script>
+</html>

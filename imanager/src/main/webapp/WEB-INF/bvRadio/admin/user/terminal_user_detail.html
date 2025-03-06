@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>终端用户详情</title>
+
+    <link href="${base}/tysx/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/tysx/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="${base}/tysx/css/animate.css" rel="stylesheet">
+    <link href="${base}/tysx/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="${base}/tysx/css/myStyle.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/jbxx.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/public.css"/>
+
+    <link rel="stylesheet" href="${base}/tysx/css/shcommon.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/newheader.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/newleft.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/newhdgl.css"/>
+
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <style>
+
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <div class="row">
+            <nav class="navbar navbar-static-top navbar-top-height" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+
+                    <div class="logo">
+                        <div class="header-logo">
+                            <div class="logoimg">
+                                <img alt="image" src="${base}/tysx/img/newlogo.png"/>
+                            </div>
+                        </div>
+                        <ul class="logoul">
+                            <li class="headeractive"><a href="">直播</a></li>
+                            <li><a href="">媒体库</a></li>
+                            <li><a href="">会员</a></li>
+                            <li><a href="">主页</a></li>
+                            <li><a href="">数据</a></li>
+                            <li><a href="">账户</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <ul class="nav navbar-top-links navbar-right navbar-top-right" style="float: right;">
+                    <li class="nav-num">
+                        <img src="${base}/tysx/css/patterns/3.png"/>
+                    </li>
+                    <li class="dropdown nav-sjgly">
+                        <a aria-expanded="false" role="button" href="###" class="dropdown-toggle" data-toggle="dropdown"
+                                >市级管理员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                class="fa fa-angle-down"></span></a>
+                        <ul role="menu" class="dropdown-menu nav-dropdown-list">
+                            <li><a href="###">aaa </a></li>
+                            <li><a href="###">vvv</a></li>
+                            <li><a href="###l">bbb</a></li>
+                            <li><a href="###l">bbb</a></li>
+                            <li><a href="###l">bbb</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <li class="dropdown m-t-sm">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="calendar.html#">
+                            <i class="fa fa-bell"></i>  <span class="label label-success">8</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="mailbox.html">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw "></i> You have 16 messages
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="profile.html">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="grid_options.html">
+                                    <div>
+                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a href="notifications.html">
+                                        <strong>See All Alerts</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+
+            </nav>
+        </div>
+        <!--左侧部分-->
+        <nav class="navbar-default navbar-static-side navbar-width" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu nav-left" id="side-menu">
+                    <li>
+                        <a href="##"><i class="fa fa-bookmark"></i> <span class="nav-label">概览</span></a>
+
+                    </li>
+                    <li>
+                        <a href="###"><i class="fa  fa-desktop"></i> <span class="nav-label">终端用户管理</span></a>
+
+                    </li>
+                    <li>
+                        <a href="###"><i class="fa  fa-desktop"></i> <span class="nav-label">白名单管理</span></a>
+
+                    </li>
+                    <li>
+                        <a href="###"><i class="fa  fa-desktop"></i> <span class="nav-label">黑名单管理</span></a>
+
+                    </li>
+
+                </ul>
+                <!--<button class="btn btn-success">退出直播间</button>-->
+            </div>
+
+        </nav>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">终端用户详情</a>
+                        <input type="hidden" id="userId" value="${user.userId}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-t">
+                <div class="col-lg-12">
+                    <div class="col-lg-3">
+                        <div class="userbox">
+
+                        </div>
+                        <div class="userbottom font-content">
+                            <p><i class="fa fa-mobile"></i> <#if user.mobile??>${user.mobile}</#if></p>
+                            <p><i class="fa fa-user"></i><span id="shownailname"><#if user.nailName??>${user.nailName}</#if></span></p>
+                            <p><i class="fa fa-tachometer"></i> 2018-03-01 16:38</p>
+                            <p><i class="fa fa-rmb"></i> 3666.66</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="rightTitle">
+                            <ul id="rightTab" class="nav nav-tabs m-t-xs">
+                                <li class="active"><a href="#grzl" data-toggle="tab">个人资料</a>
+                                </li>
+                                <li><a href="#xgmm" data-toggle="tab">修改密码</a></li>
+                            </ul>
+
+                        </div>
+
+                        <div id="rightTabContent" class="tab-content gray-bg">
+                            <div class="tab-pane fade in active" id="grzl">
+                                <div class="col-lg-12 cjzbinput">
+                                    <span class="firstname">昵&nbsp;&nbsp;&nbsp;&nbsp;称</span>
+                                    <input <#if user.nailName??>value="${user.nailName}"</#if> class="col-lg-10" type="text" placeholder="昵称" id="nailName">
+                                </div>
+                                <div class="col-lg-12 cjzbinput">
+                                    <span class="firstname">生&nbsp;&nbsp;&nbsp;&nbsp;日</span>
+                            <input type="text" id="config-demo" class="form-control" <#if user.birthday??>value="${user.birthday}"</#if>>
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                </div>
+                                <div class="col-lg-12 cjzbinput">
+                                    <span class="firstname">星&nbsp;&nbsp;&nbsp;&nbsp;座</span>
+                                    <input id="constellatory" <#if user.constellatory??>value="${user.constellatory}"</#if> class="col-lg-10" type="text" placeholder="活动名称">
+
+                                </div>
+                                <div class="col-lg-12 cjzbinput">
+                                    <span class="firstname">性&nbsp;&nbsp;&nbsp;&nbsp;别</span>
+                                    <input id="sex" <#if user.sex??>value="${user.sex}"</#if> class="col-lg-10" type="text" placeholder="活动名称">
+
+                                </div>
+                                <div class="col-lg-12 cjzbinput">
+                                    <span class="firstname">教育水平</span>
+                                    <input id="eduLevel" <#if user.eduLevel??>value="${user.eduLevel}"</#if> class="col-lg-10" type="text" placeholder="活动名称">
+
+                                </div>
+                                <div class="col-lg-12 cjzbinput">
+                                    <span class="firstname">收入水平</span>
+                                    <input id="incomeLivel" <#if user.incomeLevel??>value="${user.incomeLevel}"</#if> class="col-lg-10" type="text" placeholder="活动名称">
+
+                                </div>
+                                <div class="col-lg-12 cjzbinput">
+                                    <span class="firstname">个人职业</span>
+                                    <input id="occupation" <#if user.occupation??>value="${user.occupation}"</#if> class="col-lg-10" type="text" placeholder="活动名称">
+
+                                </div>
+                                <div class="col-lg-12 cjzbinput">
+                                    <span class="firstname">地&nbsp;&nbsp;&nbsp;&nbsp;区</span>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default">-请选择-</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">切换下拉菜单</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">功能</a></li>
+                                            <li><a href="#">另一个功能</a></li>
+                                            <li><a href="#">其他</a></li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default">-请选择-</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">切换下拉菜单</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">功能</a></li>
+                                            <li><a href="#">另一个功能</a></li>
+                                            <li><a href="#">其他</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default">-请选择-</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">切换下拉菜单</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">功能</a></li>
+                                            <li><a href="#">另一个功能</a></li>
+                                            <li><a href="#">其他</a></li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-12 cjzbinput">
+                                        <span class="firstname m-r-lg"></span>
+                                        <a href="javascript:;" class="check-link m-l-sm"><i class="fa fa-check-square"></i> </a>
+                                        会员用户
+                                    </div>
+                                    <div class="col-lg-12 cjzbinput">
+                                        <button id="save" class="btn btn-danger">确定</button>
+                                        <a href="${base}/admin/terminal/usermanager.do" class="btn btn-success">取消</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- Mainly scripts -->
+<script src="${base}/tysx/js/jquery-2.1.1.js"></script>
+<script src="${base}/tysx/js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="${base}/tysx/js/bootstrap.min.js"></script>
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${base}/tysx/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="${base}/tysx/js/inspinia.js"></script>
+<script src="${base}/tysx/js/plugins/pace/pace.min.js"></script>
+
+<!-- Chosen -->
+<script src="${base}/tysx/js/plugins/chosen/chosen.jquery.js"></script>
+
+<!-- JSKnob -->
+<script src="${base}/tysx/js/plugins/jsKnob/jquery.knob.js"></script>
+
+<!-- Input Mask-->
+<script src="${base}/tysx/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+<!-- Data picker -->
+<script src="${base}/tysx/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<!-- NouSlider -->
+<script src="${base}/tysx/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+<!-- Switchery -->
+<script src="${base}/tysx/js/plugins/switchery/switchery.js"></script>
+
+<!-- IonRangeSlider -->
+<script src="${base}/tysx/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+<!-- iCheck -->
+<script src="${base}/tysx/${base}/tysx/js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- MENU -->
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- Color picker -->
+<script src="${base}/tysx/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+<!-- Clock picker -->
+<script src="${base}/tysx/js/plugins/clockpicker/clockpicker.js"></script>
+
+<!-- Image cropper -->
+
+<script src="${base}/tysx/js/plugins/cropper/cropper.min.js"></script>
+
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="${base}/tysx/js/plugins/fullcalendar/moment.min.js"></script>
+
+<!-- Date range picker -->
+<script src="${base}/tysx/js/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="${base}/tysx/js/myJs.js"></script>
+<script src="${base}/tysx/js/video.js" type="text/javascript" charset="utf-8"></script>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+<script src="${base}/tysx/js/zbj.js"></script>
+<!--时间控件-->
+<link href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/moment.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.js"></script>
+<script>
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75
+    });
+    var div1 =  $('.scrollSwitchBox');
+    var div2 =  $('.scrollSwitch');
+    $('.scrollSwitchBox').click(function(){
+        if($("#div1").hasClass("open1")){
+            $("#div1").addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+            $("#div2").addClass("scrollSwitch").addClass("close2").removeClass("open2");
+            $("#div1 input").attr("checked",false);
+            return
+        }else{
+            $("#div1").addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+            $("#div2").addClass("scrollSwitch").addClass("open2").removeClass("close2");
+            $("#div1 input").attr("checked",true);
+            return
+        }
+    })
+    $(".userbox").css("height",$(".userbox").width())
+    
+    // 时间控件设置
+    var beginTimeTake;
+
+    $('#config-demo').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            autoUpdateInput: false,
+            timePicker24Hour : true,
+            timePicker : true,
+            "locale": {
+                format: 'YYYY-MM-DD HH:mm',
+                applyLabel: "应用",
+                cancelLabel: "取消",
+                resetLabel: "重置",
+            }
+        },
+        function(start, end, label) {
+            beginTimeTake = start;
+            if(!this.startDate){
+                this.element.val('');
+            }else{
+                this.element.val(this.startDate.format(this.locale.format));
+            }
+        });
+    $("#save").on("click",function(){
+    	var userId = $("#userId").val();
+    	var nailName = $("#nailName").val();
+    	var birthday = $("#config-demo").val();
+    	var constellatory = $("#constellatory").val();
+    	var sex = $("#sex").val();
+    	var eduLevel = $("#eduLevel").val();
+    	var incomeLivel = $("#incomeLivel").val();
+    	var occupation = $("#occupation").val();
+    	$.ajax({
+    		url:"${base}/admin/terminal/saveUser.do",
+    		method:"post",
+    		data:{
+    			userId:userId,
+    			nailName:nailName,
+    			birthday:birthday,
+    			constellatory:constellatory,
+    			sex:sex,
+    			eduLevel:eduLevel,
+    			incomeLivel:incomeLivel,
+    			occupation:occupation
+    		},
+    		success:function(){
+    			$("#shownailname").html(nailName);
+    			alert("保存成功");
+    		},
+    		error:function(){
+    			console.log("保存成功");
+    		}
+    	});
+    });
+    
+</script>
+</html>

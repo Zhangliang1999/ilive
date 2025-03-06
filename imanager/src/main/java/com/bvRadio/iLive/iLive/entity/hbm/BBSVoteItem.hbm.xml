@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="BBSVoteItem" table="bbs_vote_item">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="itemId" type="integer" column="item_id"><generator class="identity"/></id>
+		
+		<property name="title" column="title" type="string" length="255"/>
+		
+		<property name="voteCount" column="vote_count" type="integer"  length="10"/>
+		
+		<property name="priority" column="priority" type="integer" length="10"/>
+		
+		<property name="mediaPath" column="media_path" type="string" length="500"/>
+	
+		<property name="photo" column="photo" type="string" length="500"/>
+		
+		<property name="optionNumber" column="option_number" type="integer" length="20"/>
+		<property name="voteActivitySynopsis" column="vote_activity_synopsis" type="string" length="500"/>
+		<property name="voteActivityDetail" column="vote_activity_detail" type="string" length="5000"/>
+		<property name="customNumber" column="custom_number" type="integer" length="10"/>
+		
+		<many-to-one name="bbsVoteActivity" column="vote_activity_id" class="BBSVoteActivity"></many-to-one>
+		
+		<set name="bbsVoteLogs" inverse="true" cascade="delete-orphan" >
+			<key column="item_id"/>
+			<one-to-many class="BBSVoteLog"/>
+		</set>
+		
+	</class>
+</hibernate-mapping>

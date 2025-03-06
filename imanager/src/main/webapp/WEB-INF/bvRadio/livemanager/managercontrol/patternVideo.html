@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<#include "/bvRadio/livemanager/head.html" />
+<title>直播管理</title>
+<style>
+	body{
+		margin:0px;
+		padding:0px;
+		width:100%;
+		height:190px;
+		overflow:hidden;
+		background:#fff;
+	}
+</style>
+</head>
+<body>
+<div style="z-index:999;position:relative">
+	<label>直播间名称</label>：${room.liveEvent.liveTitle!}<br/>
+	<label>企业名称</label>：${room.enterpriseName!}<br/>
+	<label>房间号</label>：${room.roomId!}<br/>
+	<label>手机号</label>：${room.phone!}
+
+	<button style="position:absolute;top:0px;right:0px;<#if room.disabled==1>display:none</#if>" class="btn btn-default" id="jinbo">禁播</button>
+	<button style="position:absolute;top:0px;right:0px;<#if room.disabled==0>display:none</#if>" class="btn btn-default" id="qiyong">启用</button>
+</div>
+<!-- <div style="position:absolute;top:0;left:0;z-index:999;color:#fff">
+	<label>直播间名称</label>：${room.liveEvent.liveTitle!}<br/>
+	<label>企业名称</label>：${room.enterpriseName!}
+</div> -->
+	<div id="flash" style="width:100%;height:75%;z-index:100;position:absolute;bottom:0px;"></div>
+	<!--wmv主播放器层id-->
+	<div id="oPlayer"></div>
+<script language="javascript">
+interfaceHttp ='<?xml version=##1.0\## encoding=##GBK##?>' +
+'<root>' +
+'<smil>' +
+'<seq>'+
+	'<media role=##seq## srchigh=##C:/Users/useradmin/Videos/20180105193431680431000.mp4##  id=##5## videoHeadTime=##-1## highLow=##true##  videoEndTime=##-1##  adseq=##false##  noSkip=##false## begin=##300## dur=##600## end=##600## isnextplay=##false##   mediatype=##flv## isshiftmove=##false## returnInfo=##PT_85370379## > <clientData title=##正片1内容## captionURL=####/> <medaiTitle><![CDATA[##济宁##]]></medaiTitle></media>'+
+'</seq>'+
+'</smil>'+
+'</root>',
+interfaceHttp ='${pushStreamAddr!}',
+		shareHtmlUrl="",
+             	shareStatu='',            					
+            AddressSeparator='#', 
+                authUrl='true',
+                  ifShowImageBtn='false',
+                  ifAuthCDN_WS='true',
+                  PlayVideoAspect='diaplasis',
+                  ifShowLogo='false',
+                  AudioPlayerType='2',
+                  AVPlayerType='0',
+            ifShiftMove='false',
+		_playAuto='true';
+</script>
+<script>
+	$("#jinbo").on("click",function(){
+		var roomId = "${room.roomId!}"
+		$.ajax({
+			url:"${base}/operator/managercontrol/jinbo",
+			type:"post",
+			data:{
+				roomId:roomId,
+				mark:1
+			},
+			success:function(res){
+				if(res.code==0){
+					$("#jinbo").hide();
+					$("#qiyong").show();
+				}
+			}
+		});
+	});
+	$("#qiyong").on("click",function(){
+		var roomId = "${room.roomId!}"
+		$.ajax({
+			url:"${base}/operator/managercontrol/jinbo",
+			type:"post",
+			data:{
+				roomId:roomId,
+				mark:0
+			},
+			success:function(res){
+				$("#qiyong").hide();
+				$("#jinbo").show();
+			}
+		});
+	});
+</script>
+<script src="${base}/common/js/JWZT_Player.js?t=20120609" type="text/javascript"></script>
+</body>
+</html>

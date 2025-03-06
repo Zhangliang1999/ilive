@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.manager.entity">
+	<class name="IliveOperationUser" table="imanager_operation_user">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="userId" type="java.lang.Long">
+			<column name="user_id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="userName" type="java.lang.String">
+			<column name="user_name" />
+		</property>
+
+		<property name="password" type="java.lang.String">
+			<column name="password" />
+		</property>
+
+		<property name="salt" type="java.lang.String">
+			<column name="salt" />
+		</property>
+
+		<property name="userImg" type="java.lang.String">
+			<column name="user_img" />
+		</property>
+		
+		<property name="nickName" type="java.lang.String">
+			<column name="nick_name" />
+		</property>
+
+	</class>
+</hibernate-mapping>

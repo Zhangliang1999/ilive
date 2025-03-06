@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>监控管理 - 系统管理 - 社区互动管理系统</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/>
+<script type="text/javascript">
+	var checkboxName = "ids";
+	//复写点击事件
+	PL.ondblclickLi = function(obj) {
+		var sensitiveWordId = $(obj).find("input[type=checkbox][name=" + checkboxName + "]").val();
+		edit(sensitiveWordId);
+	}
+	function add() {
+		window.location.href="monitor_add.do";
+	}
+	function edit(monitorId) {
+		window.location.href="monitor_edit.do?id=" + monitorId;
+	}
+	function doDelete(monitorId) {
+		if (monitorId) {
+			if (confirm("确定要删除吗？")) {
+				var ids = new Array();
+				ids.push(monitorId);
+				$.ajax({
+					type : 'POST',
+					url : "monitor_delete.do",
+					data : {
+						ids : ids
+					},
+					success : function(data, textStatus) {
+						window.location.reload(true);
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert("doDelete出错>>" + errorThrown);
+					},
+					dataType : "json"
+				});
+			}
+		} else {
+			if (PL.checkedCount(checkboxName) == 0) {
+				alert("您还没有选择！");
+			} else {
+				if (confirm("确定要删除吗？")) {
+					$.ajax({
+						type : 'POST',
+						url : "monitor_delete.do",
+						data : {
+							ids : PL.getCheckedIds(checkboxName)
+						},
+						success : function(data, textStatus) {
+							window.location.reload(true);
+						},
+						error : function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("doDelete出错>>" + errorThrown);
+						},
+						dataType : "json"
+					});
+				}
+			}
+		}
+	}
+
+    function startMonitor(){
+       var ids = PL.getCheckedIds(checkboxName);
+       //alert(ids);
+       if(ids==""){
+    	   alert("请选择监控内容");
+    	   return;
+       }
+       window.location.href="monitor_find.do?ids=" + ids;
+     }
+</script>
+<style>
+#messageDiv {
+	position: absolute;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	height: 50px;
+	width: 200px;
+	top: 10px;
+	opacity: 1;
+	display: none;
+	background: #999;
+	left: 50%;
+	margin-left: -100px !important;
+	z-index: 2000;
+}
+
+#messageDiv span {
+	color: #fff;
+	line-height: 50px;
+	font-size: 18px;
+}
+</style>
+</head>
+<body class="contrast-dark fixed-header">
+	<!--顶部开始-->
+	<#include "/bvRadio/admin/top.html"/>
+	<!--顶部结束-->
+	<!--主体开始-->
+	<div id="wrapper">
+		<!--左侧导航开始-->
+		<#include "/bvRadio/admin/left.html"/>
+		<!--左侧导航结束-->
+		<!--右侧框架开始-->
+		<section id="content">
+			<div class="container-fluid">
+				<div class='page-header mb10'>
+					<h1 class='pull-left'>
+						<i class='icon-eye-open'></i> <span>监控管理</span>
+					</h1>
+					<div class='pull-right'></div>
+				</div>
+				<div class="row-fluid box-header box-header-small"
+					style="height: 35px; overflow: hidden;">
+					<div class="pull-left">
+						<button class="btn btn-primary" type="button" id="addButton"
+							onclick="add()">添加直播流</button>
+						<button class="btn btn-primary" type="button" id="addButton"
+							onclick="startMonitor()">启用监控大屏</button>
+					</div>
+					<!-- <div class="pull-left ml10">
+						<input type="checkbox" id="checkbox_d1" class="chk_4" /><label for="checkbox_d1"></label>
+					</div> -->
+					<div class="pull-right">
+						<!-- <form action="v_list.do" method="post">
+							<div class="control-group pull-left mr5">
+								<label class="controls pull-left mr5">直播流名称:</label>
+								<div class="controls pull-left" style="margin-right: 8px;"></div>
+							</div>
+							<div class="pull-left form form-horizontal validate-form"
+								style="margin-bottom: 0;">
+								<input placeholder="按名称搜索" type="text" name="queryName"
+									value="${queryName!}">
+								<button type="submit" class="btn">搜索</button>
+							</div>
+						</form> -->
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class='box-content'>
+						<div class='tabbable'>
+							<@p.pageList value=monitorList listAction="monitor_list.do";monitor,i,has_next> 
+							<@p.inputs>
+							 <input
+								type="hidden" name="queryName" value="${queryName!}">
+							</@p.inputs> 
+							<@p.column class="text-center mr5 w15"
+								style="text-align: center; width:15px" title=" <input
+								type='checkbox' onclick='PL.checkbox(\"ids\",this.checked)'>">
+							<input type="checkbox" name="ids" value="${monitor.id}">
+							</@p.column> 
+							<@p.column class="text-center mr3" title="流名称"
+							style="text-align:
+							center">${monitor.name!}</@p.column> 
+							<@p.column class="text-center mr3" title="流地址"
+							style="text-align:
+							center">${monitor.address!}</@p.column> 
+							<@p.column
+							class="text-center" title="操作" style="text-align: center;">
+							<button class="btn btn-link" type="button"
+								style="margin-bottom: 5px" onclick="edit(${monitor.id})">编辑</button>
+							<button class="btn btn-link" type="button"
+								style="margin-bottom: 5px"
+								onclick="doDelete(${monitor.id})">删除</button>
+							</@p.column> <@p.buttons>
+							<!-- <div class="pull-left w30">
+								<input type="checkbox"
+									onclick='PL.checkbox(\"ids\",this.checked)'>
+							</div> -->
+							<!-- <button class="btn" type="button" onclick="doDisable()">关闭</button> -->
+						<!-- 	<button class="btn" type="button" onclick="doCancelDisable()">启用</button> -->
+						<!-- 	<button class="btn" type="button" onclick="doDelete()">删除</button> -->
+							</@p.buttons> </@p.pageList>
+						</div>
+					</div>
+				</div>
+				<hr />
+			</div>
+			<div id="messageDiv">
+				<span>排序保存成功</span>
+			</div>
+			<#include "/bvRadio/bottom.html"/>
+		</section>
+		<!--右侧框架结束-->
+	</div>
+	<!--主体结束-->
+</body>
+</html>

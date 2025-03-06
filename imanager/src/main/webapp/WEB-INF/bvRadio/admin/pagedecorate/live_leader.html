@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>直播引导页设置</title>
+	<#include "/bvRadio/head.html"/>
+    <!--直播设置模块样式-->
+    <link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css"/>
+    <link href="${base}/tysx/css/bootstrap-fileinput.css" rel="stylesheet" />
+    <style>
+    	.img_par{
+    		width:280px;
+    		height:567px;
+    		padding-left: 20px;
+    		padding-right:22px;
+    		padding-top:70px;
+    		padding-bottom:73px;
+    		background:url(${base}/tysx/img/phone1.png);
+    	}
+    </style>
+</head>
+<body >
+<div id="wrapper" class="bgc-fff normal-font">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="bgc-fff normal-font">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/admin/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/admin/left.html"/>
+        <!--下面内容部分-->
+        <!-- roomId -->
+		<input type="hidden" id="roomId" value="${iLiveLiveRoom.roomId}" />
+		<input type="hidden" name="serverGroupId" value="${serverGroupId}" id="serverGroupId"/>
+		<input type="hidden" id="guideAddr" <#if liveEvent.guideAddr??>value="${liveEvent.guideAddr}"</#if>>
+        <div class="wrapper wrapper-content bgc-fff countdownset">
+            <div class="row title-header">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title"> 直播引导页设置</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 space-30">
+                    <div class="col-lg-4" style="padding-left:60px;">
+                        <!-- <img src="${base}/tysx/img/phone1.png"/> -->
+                        <div class="img_par">
+                        	<img id="img_guide" class="img_guide" <#if liveEvent.guideAddr??>src="${liveEvent.guideAddr}"</#if>/>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 cright m-l-n-xl setinfo">
+                        <p>
+                            <span>功能开关:</span>
+                            <input type="checkbox" id="switchbutton" class="chooseBtn" <#if liveEvent.openGuideSwitch??><#if liveEvent.openGuideSwitch == 1>checked</#if></#if>/>
+                            <label for="switchbutton" class="choose-label"></label>
+                            <small class="m-l">此图片显示在进入直播页面之前，用于展示直播相关介绍内容</small>
+                        </p>
+                        <ol class="m-l">
+                            <li>图片大小2M以内</li>
+                            <li>图片分辨率865*486像素</li>
+                            <li>支持PNG、JPG、JPEG格式</li>
+                        </ol>
+                        <div>
+                        <span id="btn_span" class="btn btn-success btn-file"> <span class="fileUpload1 fileinput-new" style="border-color:#ed5565">+ 上传</span>
+								<input type="file"  id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+							</span>
+						</div>
+                        <button class="btn red-bg m-t-md z-sure" type="submit" id="submit">确定</button>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+<script src="${base}/tysx/js/bootstrap-fileinput.js"></script>
+</body>
+<script>
+    $(".live-bottom").hide()
+
+    wid=$('.blcen').width()
+    $('.textbl').css('width',wid-300)
+    $('.textbl2').css('width',wid-300)
+
+    $(window).resize(function () {          //当浏览器大小变化时
+
+        wid=$('.blcen').width()
+        $('.textbl').css('width',wid-300)
+        $('.textbl2').css('width',wid-300)
+
+    });
+
+    $(".img-box").hover(function(){
+        $(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+    },function(){
+        $(this).find(".live-bottom").stop(true, false).slideUp(300)
+    })
+
+
+    // 时间控件设置
+    var beginTimeTake;
+
+    $('#config-demo').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            autoUpdateInput: false,
+            timePicker24Hour : true,
+            timePicker : true,
+            "locale": {
+                format: 'YYYY-MM-DD HH:mm',
+                applyLabel: "应用",
+                cancelLabel: "取消",
+                resetLabel: "重置",
+            }
+        },
+        function(start, end, label) {
+            beginTimeTake = start;
+            if(!this.startDate){
+                this.element.val('');
+            }else{
+                this.element.val(this.startDate.format(this.locale.format));
+            }
+        });
+    //全局变量 引导页背景宽高比
+    var PROPOR = 0.56;
+    
+    getImg();
+    function getImg(){
+    	var url = $("#img_guide").attr("src");
+    	var realWidth;//真实的宽度
+        var realHeight;//真实的高度
+    	$("<img/>").attr("src",url).load(function(){
+    		realWidth = this.width;
+    		realHeight = this.height;
+    		if((realWidth/realHeight)>0.56){
+    			
+    			var scaleheight = (238 * realHeight) / realWidth;
+    			
+    			var mar = Math.abs(424 - scaleheight)/2;
+    			$("#img_guide").css({"width":"100%","margin-top":mar});
+    		}else{
+    			var scalewidth = (realWidth * 424) / realHeight
+    			
+    			var mar = Math.abs(238 - scalewidth)/2;
+    			$("#img_guide").css({"height":"100%","margin-left":mar});
+    		}
+    	});
+    }
+    
+    
+    judge();
+    function judge(){
+    	if($("#switchbutton").get(0).checked){
+    		$("#picID").attr("disabled",false);
+    	}else{
+    		$("#picID").attr("disabled","disabled");
+    	}
+    }
+    //按钮开关
+    $("#switchbutton").on("change",function(){
+    	judge();
+    });
+    //上传图片
+    $("#picID").on("change", function() {
+		var formData = new FormData();  
+	    var uploadFile = $("#picID").get(0).files[0];
+	    var selectedId = $('#select').val();  
+	    var serverGroupId = $("#serverGroupId").val();
+	    formData.append("file",uploadFile);  
+	    formData.append("serverGroupId",serverGroupId);
+	    formData.append("fileType", "image");
+		$.ajax({
+			url : '${base}/admin/file/o_uploadFile.do',
+			type : 'POST',
+			data : formData,
+			async : false,
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				$("#guideAddr").val(data.httpUrl);
+				$("#img_guide").attr("src",data.httpUrl);
+				getImg();
+				if (data.status==1) {
+					console.log('upload success');
+				} else {
+					console.log(data.message);
+				}
+			},
+			error : function(data) {
+				console.log(data.status);
+			}
+		});
+	});
+    
+    //确定
+    $("#submit").on("click",function(){
+    	var roomId = $("#roomId").val();
+    	var guideAddr = $("#img_guide").attr("src");
+    	var openGuideSwitch;
+    	if($("#switchbutton").get(0).checked){
+    		openGuideSwitch = 1;
+    	}else{
+    		openGuideSwitch = 0;
+    	}
+    	$.ajax({
+    		url:"${base}/admin/pagedecorate/liveleaderedit.do",
+    		method:"post",
+    		data:{
+    			roomId:roomId,
+    			guideAddr:guideAddr,
+    			openGuideSwitch:openGuideSwitch
+    		},
+    		success:function(){
+    			alert("保存成功");
+    		},
+    		error:function(){
+    			alert("保存失败");
+    		}
+    	});
+    });
+</script>
+</html>

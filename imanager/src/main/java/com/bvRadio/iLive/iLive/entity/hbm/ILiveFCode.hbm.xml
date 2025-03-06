@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveFCode" table="ilive_fcode">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="codeId" type="java.lang.Long">
+			<column name="code_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="codeName" type="java.lang.String">
+			<column name="code_name" />
+		</property>
+
+		<property name="code" type="java.lang.String">
+			<column name="code" />
+		</property>
+
+		<property name="startTime" type="java.sql.Timestamp">
+			<column name="start_time" />
+		</property>
+
+		<property name="endTime" type="java.sql.Timestamp">
+			<column name="end_time" />
+		</property>
+
+		<property name="consumerTime" type="java.sql.Timestamp">
+			<column name="consumer_time" />
+		</property>
+		
+		<property name="userId" type="java.sql.Timestamp">
+			<column name="user_id" />
+		</property>
+		
+		<property name="liveRoomId" type="java.sql.Timestamp">
+			<column name="live_roomId" />
+		</property>
+		
+		<property name="isDelete" type="java.lang.Integer">
+			<column name="is_delete" />
+		</property>
+		
+		<property name="codeNum" type="java.lang.Integer">
+			<column name="code_num"></column>
+		</property>
+		<property name="useNum" type="java.lang.Integer">
+			<column name="use_num"></column>
+		</property>
+	</class>
+</hibernate-mapping>

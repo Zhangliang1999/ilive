@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户账号列表</title>
+    <#include "/bvRadio/head.html"/>
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/plugins/datapicker/datepicker3.css"/>
+    <link href="${base}/tysx/css/bootstrap-fileinput.css" rel="stylesheet" />
+	<link href="${base}/tysx/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="${base}/css/tysx/newzbj.css" />
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/livemanager/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/livemanager/user/userleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">筛选查询</a>
+                    </div>
+                    <button class="btn btn-white pull-right font-12 m-t-sm m-r">查询结果</button>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left">
+                        <div class="pull-left lh-40 font-content">用户ID：</div>
+                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                            <input class="userInput" type="text" id="suserId" value="${user.userId!}"/>
+                        </div>
+                    </div>
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left">
+                        <div class="pull-left lh-40 font-content">用户账号：</div>
+                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                            <input class="userInput" type="text" id="suserName" name="suserName" value="${user.userName!}"/>
+                        </div>
+                    </div>
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left">
+                        <div class="pull-left lh-40 font-content">用户昵称：</div>
+                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                            <input class="userInput" type="text" id="snailName" name="snailName" value="${user.nailName!}"/>
+                        </div>
+                    </div>
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left">
+                        <div class="pull-left lh-40 font-content">用户标签：</div>
+                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                            <input class="userInput" type="text"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left">
+                        <div class="pull-left lh-40 font-content">注册时间：</div>
+                        <div class="dropdown pull-left m-t-xs m-r-lg input-group no-margins">
+                            <input id="sstartTime" value="${user.startTime!}" type="text" placeholder="开始时间" readonly class="Wdate input no-margins form_datetime" style="height:40px;width:210px;""/>
+                            <input id="sendTime" value="${user.endTime!}" type="text" placeholder="结束时间" readonly class="Wdate input no-margins form_datetime" style="height:40px;width:210px;"/>
+                        </div>
+                    </div>
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left">
+                        <div class="pull-left lh-40 font-content">注册来源：</div>
+                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                            <button type="button" class="btn dropdown-toggle bordered bgc-fff" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">不限
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">微博</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">微信</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left">
+                        <div class="pull-left lh-40 font-content">登录IP：</div>
+                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                            <button type="button" class="btn dropdown-toggle bordered bgc-fff" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">不限
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left">
+                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                            <button class="btn btn-default" id="search">搜索</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row title-header gray-bg m-t-sm m-l m-r">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-content">数据列表</a>
+                    </div>
+                    <div class="dropdown pull-right m-t-sm m-r font-12">
+                        <button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">显示条数
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">北京</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">上海</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">广州</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">导出数据</button>
+                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs" data-toggle="modal" data-target="#userModal">设置备注</button>
+                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs" data-toggle="modal" data-target="#bqModal">设置标签</button>
+                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">APP推送</button>
+                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs" data-toggle="modal" data-target="#msgModal">群发站内信</button>
+                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">群发短信</button>
+                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs" data-toggle="modal" data-target="#mlhModal">拉黑</button>
+                </div>
+            </div>
+            <div class="row m-t-xs">
+            	<@p.pageList value=page 
+					listAction="userlist.do";item,i,has_next> 
+					<@p.column class="text-center" style="width:40px;"
+					title="<button type='button' id='allselectbtn' class='btn btn-default'>全选</button>">
+					<input type="checkbox" name="userbox" data-id="${item.userId!}"/>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="用户ID">
+					${item.userId!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="用户账号">
+					${item.userName!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="用户昵称">
+					${item.nailName!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="注册时间">
+					${item.createTime!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="注册来源">
+					<#if item.applyTime??>${item.applyTime!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="关注商户">
+					<#if item.applyTime??>${item.certTime!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="最后一次登录IP">
+					<#if item.applyTime??>${item.checkPerson!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="操作">
+                        <a href="${base}/operator/user/userdetail.do?userId=${item.userId!}" class="m-r-xs color-999">查看</a>|
+                        <a onclick="remove(${item.userId!})" href="javascript:;" class="m-l-xs color-999" data-toggle="modal" data-target="#lhModal">拉黑</a>
+					</@p.column> 
+					</@p.pageList>
+            	</div>
+            
+
+            <!-- 拉黑模态框（Modal） -->
+            <div class="modal fade" id="lhModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">是否拉黑用户？</h4>
+                        </div>
+                        <div class="modal-body">
+                            <textarea class="modalarea" placeholder="输入拉黑理由，此理由会在用户登录时告知用户。" id="blackreason" style="width:100%"></textarea>
+                            <span class="modalBt">【必填】</span>
+                            <input type="hidden" id="nowuserid"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success font-12" id="subblack">确定</button>
+                            <button type="button" class="btn btn-default font-12" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 拉黑多个模态框（Modal） -->
+            <div class="modal fade" id="mlhModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">是否拉黑用户？</h4>
+                        </div>
+                        <div class="modal-body">
+                            <textarea class="modalarea" placeholder="输入拉黑理由，此理由会在用户登录时告知用户。" id="mblackreason" style="width:100%"></textarea>
+                            <span class="modalBt">【必填】</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success font-12" id="msubblack">确定</button>
+                            <button type="button" class="btn btn-default font-12" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 用户备注模态框（Modal） -->
+            <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">用户备注信息</h4>
+                        </div>
+                        <div class="modal-body">
+                            <textarea class="modalarea" placeholder="备注信息仅供后台查看，不超过200字符。"></textarea>
+                            <span class="modalBt">【必填】</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success font-12">确定</button>
+                            <button type="button" class="btn btn-default font-12" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 站内信模态框（Modal） -->
+            <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">编辑站内信内容</h4>
+                        </div>
+                        <div class="modal-body">
+                            <textarea class="modalarea" placeholder="选中用户将收到此条站内信，不超过200字符。"></textarea>
+                            <span class="modalBt">【必填】</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success font-12">确定</button>
+                            <button type="button" class="btn btn-default font-12" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 用户标签模态框（Modal） -->
+            <div class="modal fade" id="bqModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">用户标签信息</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input class="modalinput" />
+                            <span class="modalBt">【必填】</span>
+                            <p class="text-center m-t color-999">输入用户标签，仅在后台查看及查询使用。用中文半角顿号（、）隔开</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success font-12">确定</button>
+                            <button type="button" class="btn btn-default font-12" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+<script src="${base}/tysx/js/bootstrap-datetimepicker.min.js"></script>
+<script src="${base}/tysx/js/bootstrap-fileinput.js"></script>
+
+<script>
+    var winHeight = $(window).height();
+    var navHeight = $(".navbar").height();
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75
+    });
+    $(".newtable tbody").height(winHeight-navHeight-titleHeight-260)
+
+    $(function(){
+    	//向表单添加查询字段
+    	$("#_page_form").append("<input type='hidden' id='userId' name='userId'>")
+    		.append("<input type='hidden' id='userName' name='userName'>")
+    		.append("<input type='hidden' id='nailName' name='nailName'>")
+    		.append("<input type='hidden' id='startTime' name='startTime'>")
+    		.append("<input type='hidden' id='endTime' name='endTime'>");
+    	
+    	//搜索
+    	$("#search").on("click",function(){
+    		$("#userId").val($("#suserId").val());
+    		$("#userName").val($("#suserName").val());
+    		$("#nailName").val($("#snailName").val());
+    		$("#startTime").val($("#sstartTime").val());
+    		$("#endTime").val($("#sendTime").val());
+    		$("#_page_form").submit();
+    	});
+    	
+    	$(".form_datetime").datetimepicker({
+			format : 'yyyy-mm-dd hh:ii:ss',
+			autoclose : 1
+		});
+    });
+
+    function remove(id){
+    	$("#nowuserid").val(id);
+    }
+    $("#subblack").on("click",function(){
+    	var id = $("#nowuserid").val();
+    	var blackReason = $("#blackreason").val();
+    	$.ajax({
+    		url:"${base}/operator/user/toblack.do",
+    		method:"post",
+    		data:{
+    			userId:id,
+    			blackReason:blackReason
+    		},
+    		success:function(res){
+    			if(res.status==1){
+    				$("#search").trigger("click");
+    			}else{
+    				alert("操作失败");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    });
+
+    //全选
+    $("#allselectbtn").on("click",function(){
+    	$("input[name=userbox]").attr("checked",true);
+    });
+    //全局变量
+    var arr = [];
+    $("#mlhModal").on("click",function(){
+    	arr.splice(0,arr.length);
+    	$("input[name=userbox]:checked").each(function(index,ele){
+    		arr.push($(ele).attr("data-id"));
+    	});
+    	console.log(arr);
+    });
+    
+    //拉黑多个用户
+    $("#msubblack").on("click",function(){
+    	arr.splice(0,arr.length);
+    	$("input[name=userbox]:checked").each(function(index,ele){
+    		arr.push($(ele).attr("data-id"));
+    	});
+    	var id = JSON.stringify(arr);
+    	var blackReason = $("#mblackreason").val();
+    	$.ajax({
+    		url:"${base}/operator/user/toblackmany.do",
+    		method:"post",
+    		data:{
+    			userIds:id,
+    			blackReason:blackReason
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1){
+    				console.log(1);
+    				$("#search").trigger("click");
+    			}else{
+    				alert("操作失败");
+    			}
+    		},
+    		error:function(){
+    			console.log("失败");
+    		}
+    	});
+    });
+    
+</script>
+</html>

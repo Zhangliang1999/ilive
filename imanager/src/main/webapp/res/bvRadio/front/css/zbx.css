@@ -1,0 +1,189 @@
+*{margin:0;padding: 0;}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+body{
+    width: 7.5rem;
+    overflow-x:hidden;
+    background: #ebebeb;
+}
+.header{
+    width: 7rem;
+    height: 0.8rem;
+    background: #000000;
+    padding: 0 0.25rem;
+    font-size: 0.36rem;
+    line-height: 0.8rem;
+    text-align: center;
+    color: #ffffff;
+}
+
+
+
+
+.content{
+    width: 7.5rem;
+    height: auto;
+    overflow: hidden;
+}
+
+.videobox{
+    width: 7.5rem;
+    height: 4.2rem;
+    background: #fff;
+    float: left;
+}
+video{
+    width: 7.5rem;
+    height: 4.2rem;
+    background: #000;
+}
+
+.textcontent{
+    width: 7.5rem;
+    float: left;
+    background: url("../img/bg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.comment{
+    padding: 0.2rem;
+    font-size: 0.28rem;
+    line-height: 0.38rem;
+    overflow-y: auto;
+/*     width: 6rem; */
+	height:4rem;
+}
+.comment p{
+    margin-bottom: 0.11rem;
+}
+.giftbox{
+    width: 0.72rem;
+    height: 0.72rem;
+    float: left;
+    border-radius: 100%;
+    margin-left: 0.22rem;
+    position: relative;
+}
+.giftbox a{
+    display: block;
+    width: 0.72rem;
+    height: 0.72rem;
+}
+.giftbox img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.green{
+    color: #76e679;
+    margin: 0.2rem auto;
+}
+.name,.come{
+    color: #fa7c30;
+}
+.name{
+    margin-right: 0.2rem;
+}
+.zhubo{
+    color: #f91f1f;
+    margin-right: 0.2rem;
+}
+.bottomcon{
+    width: 7.5rem;
+    height: 3.0rem;
+}
+.text-fff{
+    color: #fff;
+}
+.row{
+    width: 7.5rem;
+    height: 0.78rem;
+    float: left;
+    background: #fff;
+}
+.tit{
+    width: 1.5rem;
+    height: 0.28rem;
+    text-align: center;
+    border-left: 4px solid #da3332;
+    font-size: 0.28rem;
+    margin-top: 0.25rem;
+    line-height: 0.28rem;
+    margin-left: 0.22rem;
+}
+.listbox{
+    width: 7.5rem;
+    height: auto;
+    background: #fff;
+    float: left;
+    overflow: auto;
+}
+.listbox li{
+    width: 3.375rem;
+    height: 2.67rem;
+    float: left;
+    margin-left: 0.25rem;
+    margin-bottom: 0.4rem;
+}
+.litop{
+    width: 3.375rem;
+    height: 2.07rem;
+    position: relative;
+}
+.litop img{
+    width: 100%;
+    height: 100%;
+}
+.libottom{
+    width: 2.975rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    text-align: left;
+    padding: 0 0.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.22rem;
+}
+.navactive{
+    background: #cd0100;
+}
+.navactive a{
+    color: #fff!important;
+}
+.redtitle{
+    max-width: 1.8rem;
+    padding: 0 0.1rem;overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    font-size: 0.28rem;
+    color: #ffffff;
+    background: #e2524b;
+    position: absolute;
+    top: 0.2rem;
+    left: 0;
+    border-radius: 0 0 10px 0;
+}
+.zbz{
+    width: 0.8rem;
+    padding: 0 0.1rem;
+    height: 0.32rem;
+    line-height: 0.32rem;
+    font-size: 0.12rem;
+    color: #ffffff;
+    position: absolute;
+    top: 0.2rem;
+    right: 0.1rem;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+    overflow: hidden;
+    text-align: center;
+}

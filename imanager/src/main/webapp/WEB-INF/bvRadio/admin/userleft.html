@@ -1,0 +1,23 @@
+<nav class="navbar-default navbar-static-side navbar-width"
+	role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav metismenu nav-left" id="side-menu">
+			<!-- <li><a href="##"><i class="fa fa-bookmark"></i> <span
+					class="nav-label">概览</span></a></li> -->
+			<li <#if leftActive??><#if leftActive=='1'>class="active"</#if></#if> >
+				<a href="${base}/admin/terminal/usermanager.do"><i class="fa fa-desktop"></i> 
+					<span class="nav-label">终端粉丝管理</span>
+				</a>
+			</li>
+			<li <#if leftActive??><#if
+				leftActive=='2'>class="active"</#if></#if>><a
+				href="${base}/admin/member/whitelist.do"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">白名单管理</span></a>
+			</li>
+			<li <#if leftActive??><#if
+				leftActive=='3'>class="active"</#if></#if>><a href="${base}/admin/terminal/blacklist.do"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">黑名单管理</span></a>
+			</li>
+		</ul>
+	</div>
+</nav>

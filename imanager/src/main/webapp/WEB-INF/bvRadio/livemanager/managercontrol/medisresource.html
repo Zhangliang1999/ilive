@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>媒资管控</title>
+	<#include "/bvRadio/livemanager/head.html" />
+
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+    <style>
+
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/livemanager/top.html" />
+        <!--左侧部分-->
+        <#include "/bvRadio/livemanager/managercontrolleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">直播管控</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                    <ul class="liveall">
+                        <li>全部视频:【${allNum!}】</li>
+                        <li>需审核:【0】</li>
+                        <li>暂存:【0】</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                    <div class="pull-left m-l">
+                        <div class="selectBox m-t-xs">
+                            <span class="m-r-sm">视频类型:</span>
+                            <select id="mediatype">
+                                <option value="">全部视频</option>
+                                <option value="0" <#if formmediatype??><#if formmediatype == 0>selected="selected"</#if></#if>>原片</option>
+                                <option value="1" <#if formmediatype??><#if formmediatype == 1>selected="selected"</#if></#if>>剪辑</option>
+                                <option value="2" <#if formmediatype??><#if formmediatype == 2>selected="selected"</#if></#if>>合并</option>
+                                <option value="3" <#if formmediatype??><#if formmediatype == 3>selected="selected"</#if></#if>>上传</option>
+                            </select>
+                        </div>
+                        <div class="selectBox m-t-xs">
+                            <span class="m-r-sm">视频状态:</span>
+                            <select id="mediastate">
+                                <option value="">全部视频</option>
+                                <option value="">需审核</option>
+                                <option value="">禁用</option>
+                                <option value="">暂存</option>
+                                <option value="">上线</option>
+                                <option value="">下线</option>
+                                <option value="">删除</option>
+                            </select>
+                        </div>
+                        <div class="selectBox m-t-xs">
+                            <span class="m-r-sm">创建日期:</span>
+                            <select>
+                                <option value="">2016-09-01至2016-09-06</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="pull-right m-r-lg">
+                        <input type="text" class="serachinput" id="search" placeholder="视频名称" value="${formsearch!}"/>
+                        <button id="searchbtn" class="btn blueButton m-t-n-4">搜索</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            
+            <@p.pageList value=page 
+					listAction="resourcecontrol.do";item,i,has_next> 
+					<@p.column class="text-center" style="width:40px;"
+					title="<button type='button' class='btn btn-primary btn-sm' id='allselect'>全选</button>">
+					<input type="checkbox" id="${item.fileId}"/></th>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="ID">
+					${item.fileId}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="类型">
+					<#if item.createType??><#if item.createType == 0>原片</#if></#if>
+					<#if item.createType??><#if item.createType == 1>剪辑</#if></#if>
+					<#if item.createType??><#if item.createType == 2>合并</#if></#if>
+					<#if item.createType??><#if item.createType == 3>上传</#if></#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="视频名称">
+					<#if item.mediaFileName??>${item.mediaFileName}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="企业名称">
+					<#if item.enterpriseId??>${item.enterpriseId}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="质量">
+					<p>${item.fileRate!}P</p><p style="color: #0084ff;">${item.fileSizeMb!}Mb</p>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="时长">
+					<#if item.duration??>${item.duration}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="暂存时限">
+	
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="创建时间">
+					${item.mediaCreateTime!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="状态">
+					${item.mediaCreateTime!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="操作">
+                        <a href="${base}/operator/managercontrol/mediadetail.do?fileId=${item.fileId}" class="m-r-xs color-999">查看</a>
+					</@p.column> 
+					</@p.pageList>
+            
+            	<div class="col-lg-4" style="margin-top:-30px;">
+	            	<div class="pull-left m-l" >
+	                        <button class="btn defaultButton m-r" id="btnpass">审核通过</button>
+	                        <button class="btn defaultButton" id="btnnotpass">禁用</button>
+	                </div>
+            	</div>	
+            </div>
+
+
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+<script src="${base}/tysx/js/zbj.js"></script>
+<script>
+
+	$(function(){
+		$("#_page_form").append("<input type='hidden' id='formmediatype' name='formmediatype'>")
+			.append("<input type='hidden' id='formmediastate' name='formmediastate'>")
+			.append("<input type='hidden' id='formsearch' name='formsearch'>");
+		
+		$("#mediatype").on("change",function(){selectchange();});
+		$("#mediastate").on("change",function(){selectchange();});
+		$("#searchbtn").on("click",function(){selectchange();});
+		
+		function selectchange(){
+			$("#formmediatype").val($("#mediatype").val());
+			$("#formmediastate").val($("#mediastate").val());
+			$("#formsearch").val($("#search").val());
+			$("#_page_form").submit();
+		}
+		
+	});
+	
+	
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75
+    });
+    var div1 =  $('.scrollSwitchBox');
+    var div2 =  $('.scrollSwitch');
+    $('.scrollSwitchBox').click(function(){
+        if($("#div1").hasClass("open1")){
+            $("#div1").addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+            $("#div2").addClass("scrollSwitch").addClass("close2").removeClass("open2");
+            $("#div1 input").attr("checked",false);
+            return
+        }else{
+            $("#div1").addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+            $("#div2").addClass("scrollSwitch").addClass("open2").removeClass("close2");
+            $("#div1 input").attr("checked",true);
+            return
+        }
+    })
+    window.onload=function(){
+    	$("tbody").height(winHeight-navHeight-titleHeight-215);
+    }
+    
+    $(function(){
+ 	   $("#allselect").on("click",function(){
+ 		   $("#_page_form tbody input[type=checkbox]").prop("checked",true);
+ 	   });
+ 	   $("#btnpass").on("click",function(){
+ 		  fileexamine(0)
+ 	   });
+ 	   $("#btnnotpass").on("click",function(){
+ 		  fileexamine(1)
+ 	   });
+ 	   
+ 	   function fileexamine(state){
+ 		   var check = $("#_page_form tbody input[type=checkbox]:checked");
+ 		   var arr=[];
+ 		   check.each(function(index,ele){
+ 			   arr.push({id:ele.id});
+ 		   });
+ 		   console.log(arr);
+ 		   var str = JSON.stringify(arr);
+ 		   console.log(str);
+ 		   $.ajax({
+ 			   url:"${base}/operator/managercontrol/"+state+"/fileexampass.do",
+ 			   method:"post",
+ 			   dataType:"json",
+ 			   data:{
+ 				   ids:str
+ 			   },
+ 			   success:function(res){
+ 				   console.log("修改成功");
+ 			   }
+ 		   });
+ 	   }
+    })
+    
+    
+</script>

@@ -1,0 +1,224 @@
+.red-line{
+    height: 4px;
+    background: #f0554d;
+    width: 50%;
+    float: left;
+}
+.gray-line{
+    float: left;
+    width: 50%;
+    height: 4px;
+    background: #dedede;
+}
+.redtit{
+    width: 44px;
+    height: 44px;
+    background: url("../img/redtit.png") no-repeat;
+    position: absolute;
+    top: -20px;
+
+    line-height: 44px;
+    text-align: center;
+    color: #ffffff;
+}
+.graytit{
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    background: url("../img/graytit.png") no-repeat;
+    text-align: center;
+    color: #666666;
+    position: absolute;
+    top: -20px;
+
+    z-index: 9;
+}
+.secondtit{
+    left: 47%;
+    margin: 0 auto;
+}
+.firsttit{
+    left: -43px;
+}
+.lasttit{
+    right:-43px!important;
+}
+.first{
+    position: absolute;
+    top: 40px;
+    left: -43px;
+}
+.second{
+    position: absolute;
+    top: 40px;
+    left: 47%;
+}
+.last{
+    position: absolute;
+    top: 40px;
+    right:-43px;
+}
+.redfont{
+    color: red;
+    margin-right: 0px;
+    float: right;
+}
+.input-group {
+    width: 475px;
+    height: 36px;
+    line-height: 36px;
+    margin: 0 auto 20px;
+}
+.input-group .firstname {
+    width: 75px;
+    display: block;
+    float: right;
+}
+.input-group input {
+    width: 238px;
+    height: 36px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 12px;
+}
+.input-group .copybtn {
+    width: 120px;
+    height: 36px;
+    margin-top: -2px;
+}
+.m-50{
+    margin-top: 50px;
+}
+.m-150{
+    margin-top: 150px;
+}
+.p-60{
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+.footerrz a{
+    display: block;
+    float: left;
+    width: 100px;
+    height: 18px;
+    line-height: 18px;
+    border-left: 1px solid #ccc;
+    text-align: center;
+    color: #898a8a;
+}
+.footerrz a:first-child{
+    border-left: none;
+}
+.footerrz{
+    width: 785px;
+    margin: 20px auto;
+    position: relative;
+}
+.topqipao{
+    margin: 0 auto;
+    width: 160px;
+    height: 120px;
+    background: url("../img/qipao.png") no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    line-height: 120px;
+}
+.redtitle{
+    color: #f0554d;
+    width: 160px;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 24px;
+}
+.qipaotext{
+    width: 160px;
+    height: 90px;
+    font-size: 14px;
+    margin: 0 auto;
+    overflow: hidden;
+
+}
+.selectbtn{
+    width: 158px;
+    height: 38px;
+    line-height: 38px;
+    border: 1px solid #f0554d;
+    background: #ffffff;
+    color: #f0554d;
+    margin: 35px auto;
+    display: block;
+    border-radius: 5px;
+    outline: none;
+}
+.topqipao i{
+    color: #ffffff;
+    font-size: 36px;
+}
+.leftcon{
+    width: 93px;
+    height: 36px;
+    line-height: 36px;
+    float: left;
+}
+.addimgbox{
+    width: 80px;
+    height: 80px;
+    float: left;
+    overflow: hidden;
+    position: relative;
+}
+.addimg{
+    width: 80px;
+    height: 80px;
+}
+.addimgzj{
+    width: 80px;
+    height: 80px;
+}
+.addimg img{
+    width: 100%;
+    height: 100%;
+}
+.addimgzj img{
+    width: 100%;
+    height: 100%;
+}
+.addimgbox input{
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height:100%;
+    opacity: 0;
+}
+.input-group textarea{
+    width: 370px;
+    resize: none;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+.renzhen .firstname{
+    width: auto;
+}
+.renzhen input[type="radio"]{
+    width: 15px;
+    height: 15px;
+    position: relative;
+    top: 2px;
+    margin-right: 0;
+    margin-left: 5px;
+}
+.redtishi{
+    width: 270px;
+    float: left;
+    padding: 0 10px;
+    line-height: 20px;
+    margin-top: 40px;
+}
+.input-group select{
+    height: 36px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+}

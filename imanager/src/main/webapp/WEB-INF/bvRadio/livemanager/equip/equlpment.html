@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>工单管理</title>
+    <#include "/bvRadio/livemanager/head.html" />
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/shcommon.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/newleft.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/newhdgl.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <style>
+		.scrollSwitchBox{
+			margin-left: 55px;
+		}
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+       <!--上面的导航栏部分-->
+		<#include "/bvRadio/livemanager/top.html" />
+        <!--左侧部分-->
+		<#include "/bvRadio/livemanager/equip/equipleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">工单</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                	<label>租售状态</label>
+                	<select id="status" class="form-inline m-r-lg m-t-xs" style="width:200px;height:30px">
+                		<option value="-1">全部</option>
+                		<option value="0">租售中</option>
+                		<option value="1">已下架</option>
+                	</select>
+                	
+                	<label>设备名称</label>
+                	<input type="text" id="sname" class="form-inline m-r-lg m-t-xs" style="width:200px;height:30px">
+               
+               		 <button class="btn blueButton m-t-n-4" id="searchBtn" type="button">查询</button>
+               		 <a href="${base}/operator/equipment/toaddEquip.do?rentOrSell=${rentOrSell}" class="btn blueButton m-t-n-4">新增库存</a>
+                </div>
+            </div>
+            <div class="row m-t-sm">
+            <@p.pageList value=page 
+					listAction="equlpment.do";item,i,has_next> 
+					<@p.column class="text-center" style="width:40px;"
+					title="产品编号">
+					${item.id!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="设备名称">
+					${item.name!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="价格">
+					${item.price!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="租售状态">
+						<#if item.isShangjia == 0>租售中</#if>
+						<#if item.isShangjia == 1>已下架</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="操作">
+					<a href="${base}/operator/equipment/toaddEquip.do?id=${item.id!}&rentOrSell=${rentOrSell}">编辑</a>
+					<a href="##" onclick="sxjia(${item.id!},${item.isShangjia})">
+						<#if item.isShangjia == 0>下架</#if>
+						<#if item.isShangjia == 1>上架</#if>
+					</a>
+					</@p.column> 
+					</@p.pageList>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+<script src="${base}/tysx/js/zbj.js"></script>
+<script>
+    var winHeight = $(window).height();
+    var navHeight = $(".navbar").height();
+    var titleHeight = $(".title-header").height()+2;
+    $(".newtable tbody").height(winHeight-navHeight-titleHeight-165);
+	
+	$(function(){
+		$("#_page_form").append("<input name='rentOrSell' type='hidden' value='${rentOrSell}'>")
+			.append("<input name='isShangjia' type='hidden' id='isShangjia' value='${isShangjia!}'>")
+			.append("<input name='name' type='hidden' id='name' value='${name!}'>");
+		
+		$("#status").val("${isShangjia!}");
+		$("#sname").val("${name!}")
+		$("#searchBtn").on("click",function(){
+			$("#isShangjia").val($("#status").val());
+			$("#name").val($("#sname").val());
+			$("#_page_form").submit();
+		});
+		
+		
+	})
+	function sxjia(id,status){
+			$.ajax({
+				url:"${base}/operator/equipment/sxjia.do",
+				method:"post",
+				data:{
+					id:id,
+					isShangjia:status
+				},
+				success:function(res){
+					if(res.status==0){
+						swal("修改成功");
+					}
+				}
+			});
+		}
+    
+</script>
+</html>

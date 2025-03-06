@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专题选择</title>
+	<#include "/bvRadio/head.html"/>
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/newheader.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/newleft.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/zhuye.css"/>
+    <script src="${base}/tysx/js/jquery-2.1.1.js"></script>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg" style="display:none">
+		<!--上面的导航栏部分-->
+		<#include "/bvRadio/admin/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/admin/userleft.html"/>
+        <!--下面内容部分-->
+    </div>
+	<div class="panel-body">
+	<@p.pageList value=page listAction="special.do";item,i,has_next>
+	<@p.column class="text-center" style="width:40px;" title="ID">
+	${item.thematicId} </@p.column> 
+	<@p.column class="text-center" style="width:40px;" title="专题">
+		<#if item.thematicName??>${item.thematicName}</#if>
+	</@p.column>
+	<@p.column class="text-center" style="width:40px;" title="简介">
+		<#if item.thematicDesc??>${item.thematicDesc}</#if>
+	</@p.column>
+	<@p.column class="text-center" style="width:40px;" title="创建时间">
+		<#if item.createTime??>${item.createTime}</#if>
+	</@p.column> 
+	<@p.column class="text-center" style="width:40px;" title="操作">
+		<a href="javascript:;" class="btn btn-success" onclick="sel(${item.thematicId},'${item.thematicName}')";>选用</a>
+	</@p.column> 
+	</@p.pageList>
+		<div class="col-lg-12 hasSelected">
+			<div>选择内容</div>
+			<ul id="contents" class="ulSelect pull-left">
+				<#list list as item>
+					<li data-id="${item.id}">
+					<div class="ulSelectTop">
+						<img src="${base}/tysx/img/u1207.jpg" alt="" /> <i
+							class="fa fa-close" onclick="remove(this)"></i>
+					</div>
+					<div class="ulSelectBottom">${item.contentName}</div>
+				</li>
+				</#list>
+			</ul>
+		</div>
+	</div>
+</body>
+<script>
+function sel(id,name){
+	console.log(id+"   "+name);
+	$.ajax({
+		url:"${base}/admin/thematic/saveselect.do",
+		method:"post",
+		data:{
+			contentId:id,
+			contentName:name,
+			contentType:3
+		},
+		success:function(id){
+			console.log(id);
+			var li = $("<li></li>");
+			var img = "<div class='ulSelectTop'><img src='${base}/tysx/img/u1207.jpg'/><i onclick='remove(this)' class='fa fa-close'></i></div><div class='ulSelectBottom'>"+name+"</div>";
+			li.append(img);
+			li.attr("data-id",id);
+			$("#contents").append(li);
+			alert("添加成功");
+		},
+		error:function(){
+			alert("添加失败");
+		}
+	});
+}
+function remove(i){
+	var li = $(i).closest("li")
+	var id = li.attr("data-id");
+	$.ajax({
+		url:"${base}/admin/thematic/removeselect.do",
+		method:"post",
+		data:{id:id},
+		success:function(){
+			li.remove();
+		},
+		error:function(){
+			alert("删除失败");
+		}
+	});
+}
+</script>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>工单详情</title>
+	<#include "/bvRadio/livemanager/head.html" />
+
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/ad.css"/>
+    <style>
+
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/livemanager/top.html"/>
+        <!--左侧部分-->
+		<#include "/bvRadio/livemanager/equip/equipleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">销售工单》工单详情</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-t-sm">
+                <div class="col-lg-12 font-title m-t" style="padding-left: 150px;">
+                    <span class="m-r"><span>工单编号：</span><span>${equiporder.id!}</span></span>
+                    <span class="m-r"><span>工单类型：</span><span>
+	                    <#if equiporder.type==1>设备租赁</#if>
+	                    <#if equiporder.type==2>设备购买</#if>
+                    </span></span>
+                    <span class="m-r"><span>提交时间：</span><span>
+                    	${equiporder.createTime!}
+                    </span></span>
+                    <div class="pull-right m-r font-12 pending">
+                    	<#if equiporder.status == 1>处理中</#if>
+                    	<#if equiporder.status == 2>已关闭</#if>
+                    	<#if equiporder.status == 3>已处理</#if>
+                    </div>
+                </div>
+                <div class="col-lg-12 m-t" style="padding-left: 150px;">
+                    <p class="font-title font-bold">订单信息：</p>
+                    <div class="messagebox">
+                        <div class="messleft"><img src="${equipment.img!}" alt=""/></div>
+                        <div class="messright">
+                            <p class="messTit">${equipment.name!}</p>
+                            <p class="messText">${equipment.descript!}</p>
+                            <span class="font-12 pending pull-left m-t">${equipment.rentPrice!}元/天</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 m-t font-title" style="padding-left: 150px;">
+                    <p class="font-title font-bold">联系方式：</p>
+                    <span class="m-r m-t pull-left"><span>姓名：</span><span>${equiporder.contactName!}</span></span>
+                    <span class="m-r m-t pull-left"><span>手机号：</span><span>${equiporder.contactPhone!}</span></span>
+                </div>
+                <div class="col-lg-10 col-lg-offset-2 m-t-lg">
+                    <button type="button" id="closeequip" class="btn btn-default" style="font-size: 12px!important;">关闭工单</button>
+                    <button type="button" id="deal" class="btn commonbtn" style="font-size: 12px!important;">确定处理</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75
+    });
+    
+    var id = "${equiporder.id!}";
+    //关闭工单
+    $("#closeequip").on("click",function(){
+    	$.ajax({
+    		url:"${base}/operator/equipment/closeOrder.do",
+    		method:"post",
+    		data:{
+    			id:id,
+    			status:2
+    		},
+    		success:function(res){
+    			if(res.status==0){
+    				alert("关闭成功");
+    			}
+    		}
+    	});
+    });
+    
+    //处理
+    $("#deal").on("click",function(){
+    	$.ajax({
+    		url:"${base}/operator/equipment/closeOrder.do",
+    		method:"post",
+    		data:{
+    			id:id,
+    			status:3
+    		},
+    		success:function(res){
+    			if(res.status==0){
+    				alert("关闭成功");
+    			}
+    		}
+    	});
+    });
+    
+</script>
+</html>

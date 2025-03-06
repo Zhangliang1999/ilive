@@ -1,0 +1,124 @@
+<!--上面的导航栏部分-->
+<div class="row">
+	<nav class="navbar navbar-static-top navbar-top-height" role="navigation" style="margin-bottom: 0">
+		<div class="navbar-header">
+			<div class="logo">
+				<div class="header-logo">
+					<div class="logoimg">
+						<img alt="image" src="${base}/tysx/img/newlogo.png"/>
+					</div>
+				</div>
+				<ul class="logoul">
+					<li class="<#if topActive??&&topActive='1'>headeractive</#if>">
+						<a href="${base}/admin/room/list.do">直播</a>
+					</li>
+					<li class="<#if topActive??&&topActive='2'>headeractive</#if>">
+						<a href="${base}/admin/mediafile/entervedio.do">媒体库</a>
+					</li>
+					<#if topUser.certStatus==4>
+					<li class="<#if topActive??&&topActive='3'>headeractive</#if>">
+						<a href="${base}/admin/terminal/usermanager.do">会员</a>
+					</li>
+					<li class="<#if topActive??&&topActive='4'>headeractive</#if>">
+						<a href="${base}/admin/thematic/thematicmain.do">主页</a>
+					</li>
+					</#if>
+					
+					<!-- 
+					<li class="<#if topActive??&&topActive='5'>headeractive</#if>">
+						<a href="">数据</a>
+					</li>
+					-->
+					
+					<li class="<#if topActive??&&topActive='6'>headeractive</#if>">
+						<a href="${base}/admin/account/overview.do">账户</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<ul class="nav navbar-top-links navbar-right navbar-top-right" style="float: right;">
+			<li class="nav-num">
+				<img src="${topUser.userThumbImg!}"/>
+			</li>
+			<li class="dropdown nav-sjgly">
+				<a aria-expanded="false" role="button" href="###" class="dropdown-toggle" data-toggle="dropdown"
+				><@shiro.user>
+				<@shiro.principal/>
+				</@shiro.user>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+				class="fa fa-angle-down"></span></a>
+				<ul role="menu" class="dropdown-menu nav-dropdown-list">
+					<#if topUser??>
+					<#if topUser.enterpriseId==0>
+					<li>
+						<a href="${base}/admin/cert/info.do">企业认证</a>
+					</li>
+					<#else>
+					<li>
+						<a href="${base}/admin/enterprise/info.do">企业信息</a>
+					</li>
+					</#if>
+					</#if>
+					<li>
+						<a href="${base}/admin/logout.do">退出登录 </a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="nav navbar-top-links navbar-right">
+			<li class="dropdown m-t-xs">
+				<a class="dropdown-toggle count-info" data-toggle="dropdown" href="calendar.html#"> <i class="fa fa-bell"></i> <span class="label label-success">8</span> </a>
+				<ul class="dropdown-menu dropdown-alerts">
+					<li>
+						<a href="mailbox.html">
+						<div>
+							<i class="fa fa-envelope fa-fw "></i> You have 16 messages <span class="pull-right text-muted small">4 minutes ago</span>
+						</div> </a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="profile.html">
+						<div>
+							<i class="fa fa-twitter fa-fw"></i> 3 New Followers <span class="pull-right text-muted small">12 minutes ago</span>
+						</div> </a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="grid_options.html">
+						<div>
+							<i class="fa fa-upload fa-fw"></i> Server Rebooted <span class="pull-right text-muted small">4 minutes ago</span>
+						</div> </a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<div class="text-center link-block">
+							<a href="notifications.html"> <strong>See All Alerts</strong> <i class="fa fa-angle-right"></i> </a>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<#if (topUser.certStatus!2)==2>
+		<div class="renzhengBox" style="cursor:pointer;" onclick="gotoCert()">
+			<i  class="fa fa-drivers-license m-r-sm"></i>点击认证
+		</div>
+		<#elseif topUser.certStatus==3>
+		<div class="renzhengBox">
+			<i class="fa fa-drivers-license-o m-r-sm"></i>认证中
+		</div>
+		<#elseif topUser.certStatus==4>
+		<div class="renzhengBox">
+			<i class="fa fa-drivers-license-o m-r-sm"></i>已认证
+		</div>
+		</#if>
+
+	</nav>
+</div>
+
+<script>
+	// 去认证
+	function gotoCert() {
+		window.location.href = "${base}/admin/cert/enterprise.do";
+	}
+
+</script>

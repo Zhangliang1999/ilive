@@ -1,0 +1,562 @@
+/** 
+约定
+普通布局相关css类可不用前缀
+与组件有关的css类前面要加z-前缀
+用于为js查找元素而附加的css类前面要加js-前缀
+**/
+/*全局样式*/
+#Site_outer {
+	top: -1.6px;
+	top: -0px\9;
+}
+
+#Site_outer .inputText {
+	background: transparent none;
+	color: #F2E8B6;
+	border: 0;
+	font-size: 12px;
+}
+
+#Site_outer .z-combox-spinner {
+	background: transparent;
+	border: none;
+}
+
+#Site_outer .z-combox-spinner
+    b {
+	border-top-color: #ddd;
+}
+
+body {
+	background-color: #DBE8F4;
+}
+
+.no_text_btn .z-btn b {
+	padding-right: 0;
+}
+
+#oneKeyReprintTool_div {
+	position: absolute;
+	left: 100px;
+	top: 100px;
+}
+
+#countDiv {
+	font-size: 9px;
+	font-family: Tahoma, Geneva, sans-serif;
+	display: inline-block;
+	text-align: center;
+	line-height: 11px;
+	padding: 0 4px 0 3px;
+	border-radius: 10px;
+	height: 11px;
+	min-width: 6px;
+	border: 2px solid rgba(255, 255, 255, 0.9);
+	color: #fff;
+	background-color: #F30;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+	position: relative;
+	left: -5px;
+	top: -5px;
+}
+
+/* See license.txt for terms of usage */ /** reset styling **/
+.firebugResetStyles {
+	z-index: 2147483646 !important;
+	top: 0 !important;
+	left: 0 !important;
+	display: block !important;
+	border: 0 none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	outline: 0 !important;
+	min-width: 0 !important;
+	max-width: none !important;
+	min-height: 0 !important;
+	max-height: none !important;
+	position: fixed !important;
+	transform: rotate(0deg) !important;
+	transform-origin: 50% 50% !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	background: transparent none !important;
+	pointer-events: none !important;
+	white-space: normal !important;
+}
+
+.firebugBlockBackgroundColor {
+	background-color: transparent !important;
+}
+
+.firebugResetStyles:before,.firebugResetStyles:after {
+	content: "" !important;
+} /**actual styling
+      to be modified by firebug theme**/
+.firebugCanvas {
+	display: none !important;
+} /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+      * * * * * * * * * * * * * * */
+.firebugLayoutBox {
+	width: auto !important;
+	position: static !important;
+}
+
+.firebugLayoutBoxOffset {
+	opacity: 0.8 !important;
+	position: fixed !important;
+}
+
+.firebugLayoutLine {
+	opacity: 0.4 !important;
+	background-color: #000000 !important;
+}
+
+.firebugLayoutLineLeft,.firebugLayoutLineRight {
+	width: 1px !important;
+	height: 100% !important;
+}
+
+.firebugLayoutLineTop,.firebugLayoutLineBottom {
+	width: 100% !important;
+	height: 1px !important;
+}
+
+.firebugLayoutLineTop {
+	margin-top: -1px !important;
+	border-top: 1px solid #999999 !important;
+}
+
+.firebugLayoutLineRight {
+	border-right: 1px solid #999999 !important;
+}
+
+.firebugLayoutLineBottom {
+	border-bottom: 1px solid #999999 !important;
+}
+
+.firebugLayoutLineLeft {
+	margin-left: -1px !important;
+	border-left: 1px solid #999999 !important;
+} /* * * * * * *
+      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+      * * * * * */
+.firebugLayoutBoxParent {
+	border-top: 0 none !important;
+	border-right: 1px dashed #E00 !important;
+	border-bottom: 1px dashed #E00 !important;
+	border-left: 0 none !important;
+	position: fixed !important;
+	width: auto !important;
+}
+
+.firebugRuler {
+	position: absolute !important;
+}
+
+.firebugRulerH {
+	top: -15px !important;
+	left: 0 !important;
+	width: 100% !important;
+	height: 14px !important;
+	background: url("") repeat-x !important;
+	border-top: 1px solid #BBBBBB !important;
+	border-right: 1px dashed #BBBBBB !important;
+	border-bottom: 1px solid #000000 !important;
+}
+
+.firebugRulerV {
+	top: 0 !important;
+	left: -15px !important;
+	width: 14px !important;
+	height: 100% !important;
+	background: url("") repeat-y !important;
+	border-left: 1px solid #BBBBBB !important;
+	border-right: 1px solid #000000 !important;
+	border-bottom: 1px dashed #BBBBBB !important;
+}
+
+.overflowRulerX>.firebugRulerV {
+	left: 0 !important;
+}
+
+.overflowRulerY>.firebugRulerH {
+	top: 0 !important;
+}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+      * * * * * * * * * * * * * */
+.fbProxyElement {
+	position: fixed !important;
+	pointer-events: auto !important;
+}
+/*全局样式*/
+img {
+	border: 0;
+}
+
+.dye {
+	color: #369;
+	font-style: normal;
+}
+
+a {
+	text-decoration: none;
+}
+/*通用布局*/
+body {
+	background: #f9f9f9;
+	margin: 0px;
+	padding: 0px;
+}
+
+.loginPageBody {
+	background: url(../img/top/loginbodybg.gif) repeat-x left center #d6dedf;
+}
+
+.LoginWrapbg {
+	background: url(../img/top/loginimgbg.jpg) no-repeat center center;
+	height: 100%;
+}
+
+.dialogBody {
+	background-color: #f9f9f9;
+}
+
+body.z-body-index {
+	
+}
+
+body.z-body-list {
+	background: #f9f9f9 url(../img/top/col_shadow2.gif) repeat-y left;
+}
+
+body.z-body-detail {
+	background: #eeeeee url(../img/top/col_shadow3.gif) repeat-y left;
+}
+
+.js_layoutTable {
+	table-layout: fixed;
+}
+
+.js_layoutTable tr {
+	vertical-align: top;
+}
+/*主页面布局*/
+.mainArea {
+	background: #DBE8F4;
+	padding-top: 4px;
+}
+
+.bluebg {
+	background: #dae4ed url(../img/top/zvingBlue.png) repeat-x right top;
+	color: #cfdee5;
+}
+
+#logo {
+	background-image: none;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	margin-left: 5px;
+}
+
+.loginInfo {
+	position: absolute;
+	right: 10px;
+	top: 0px;
+	text-align: right;
+	width: 50%;
+	font-size: 12px;
+}
+
+.loginInfo b {
+	color: #fff;
+}
+
+.loginInfo_welcom {
+	_margin-right: 36px;
+}
+
+.loginInfo_welcom a {
+	font-size: 12px;
+	color: #f2e8b6;
+	text-decoration: none;
+}
+
+.loginInfo_face {
+	float: right;
+	_margin-top: -1.4em;
+	margin-left: 5px;
+	border: 1px solid #fff;
+}
+
+.icon_msg {
+	background: url(../img/top/icons.gif) no-repeat -40px 0;
+}
+
+.icon_logout {
+	background: url(../img/top/icons.gif) no-repeat -40px 0;
+}
+
+.leftColumnWrap {
+	background: #f2f5fa url(../img/top/col_border1.gif) repeat-y right;
+}
+
+.centerColumnWrap {
+	background: url(../img/top/col_border2.gif) repeat-y right;
+}
+
+.z-overflowPanel {
+	background-color: #f7f7f7;
+	border: 1px solid #e0e0e0;
+	border-radius: 2px;
+	overflow: auto;
+	position: relative;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-khtml-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	*margin: -1px 0;
+	height: 100%;
+}
+
+.z-contentBorder {
+	background-color: #f7f7f7;
+	border: 1px solid #e0e0e0;
+	border-radius: 2px;
+	position: relative;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-khtml-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	*margin: -1px 0;
+	min-height: 100%;
+	_zoom: 1;
+}
+
+.z-body-list .z-overflowPanel {
+	background-color: #fcfcfc;
+}
+/*主菜单*/
+.navigation {
+	margin-top: 30px;
+}
+
+.navigation a {
+	float: left;
+	_display: inline;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	cursor: pointer;
+	height: 28px;
+	line-height: 18px;
+	padding: 0 0 0 22px;
+	font-size: 13px;
+	font-family: SimSun;
+	color: #DDFFFF;
+	margin-right: -20px;
+}
+
+.navigation a:first-child {
+	
+}
+
+.navigation a b {
+	font-weight: normal;
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	height: 21px;
+	white-space: nowrap;
+	padding: 7px 22px 0 0;
+	position: relative;
+	z-index: 1;
+}
+
+.navigation a:hover {
+	text-decoration: none;
+	background: url(../img/top/buttons.png) no-repeat 0 0;
+	_background-image: url(../img/top/buttons.gif);
+	position: relative;
+	z-index: 2;
+}
+
+.navigation a:hover b {
+	color: #004080;
+	background: url(../img/top/buttons.png) no-repeat right 0;
+	_background-image: url(../img/top/buttons.gif);
+}
+
+.navigation a.current {
+	text-decoration: none;
+	background: url(../img/top/buttons.png) no-repeat 0 -40px;
+	_background-image: url(../img/top/buttons.gif);
+	position: relative;
+	z-index: 3;
+}
+
+.navigation a.current b {
+	color: #004080;
+	font-weight: bold;
+	background: url(../img/top/buttons.png) no-repeat right -40px;
+	_background-image: url(../img/top/buttons.gif);
+}
+
+/* simulate select css class */
+.z-combox {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	vertical-align: middle;
+	position: relative;
+	white-space: nowrap;
+	padding: 0;
+	margin: 0;
+}
+
+.z-combox input,.z-combox .inputText {
+	vertical-align: middle;
+	cursor: default;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+.z-combox .z-combox-spinner {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	vertical-align: middle;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	left: -17px;
+	margin-right: -15px;
+	cursor: pointer;
+	width: 13px;
+	height: 15px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	text-align: center;
+	overflow: hidden;
+	border: 1px solid #ccddee;
+	background: #fcfcfc;
+	background: -moz-linear-gradient(top, #FFF, #EEE);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF),
+		to(#EEE));
+	background: linear-gradient(top, #FFF, #EEE);
+	cursor: pointer;
+}
+
+.z-combox .z-combox-spinner b {
+	margin: 0;
+	float: left;
+	margin-left: 5px;
+	border: 4px solid #777;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border-color: transparent;
+	border-style: dashed;
+	margin-top: 5px;
+	border-top-color: #777;
+	border-top-style: solid;
+}
+
+.z-combox .z-combox-spinner:hover {
+	border-color: #aaccee;
+	background: #f9f9f9;
+	background: -moz-linear-gradient(top, #FFF, #fff1bb);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF),
+		to(#fff1bb));
+	background: linear-gradient(top, #FFF, #fff1bb);
+}
+
+.z-combox .z-combox-spinner:hover b {
+	border-top-color: #1199dd;
+}
+
+.z-combox .arrowimg {
+	background-image: url(../img/top/arrow.gif)
+}
+
+.z-combox-editable .inputText {
+	border-color: #788994 #879aa6 #9aabb6;
+}
+
+.z-combox-editable .z-combox-spinner {
+	background: -moz-linear-gradient(top, #EEE, #FFF);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#EEE),
+		to(#FFF));
+	background: linear-gradient(top, #EEE, #FFF);
+}
+
+.z-combox-editable .arrowimg {
+	background-image: url(../img/top/arrow_editab.gif)
+}
+
+.z-combox-disabled .inputText,.z-combox-disabled input[type="text"]:hover,.z-combox-disabled input[type="text"]:focus
+	{
+	border-color: #ccc;
+}
+
+.z-combox-disabled .z-combox-spinner,.z-combox-disabled .z-combox-spinner:hover
+	{
+	background: transparent;
+	border-color: #f5f5f5;
+	border-left-color: #eee;
+}
+
+.z-combox-disabled .z-combox-spinner b,.z-combox-disabled .z-combox-spinner:hover b
+	{
+	border-top-color: #ccc;
+}
+
+.z-combox-disabled .arrowimg {
+	background-image: url(../img/top/arrow_disab.gif)
+}
+
+.noBackground {
+	background: transparent none;
+	border: 0 none;
+}
+
+.noBackground .z-combox-spinner {
+	background-color: #transparent;
+	border-style: none;
+}
+
+.noBackground .arrowimg {
+	background-image: url(../img/top/arrow_inCell.gif)
+}
+
+.optgroup {
+	padding: 1px;
+	overflow: auto;
+	overflow-x: hidden;
+	max-height: 280px;
+	color: #336699;
+	width: auto;
+}
+
+.optgroup a {
+	cursor: default;
+	display: block;
+	_width: auto;
+	text-align: left;
+	color: #336699;
+	white-space: nowrap;
+	padding: 1px 3px 2px 6px;
+	_padding: 0 3px 0 6px;
+	height: 18px;
+	min-width: 2em;
+	text-decoration: none;
+}
+
+.optgroup a:hover,.optgroup a.selected {
+	text-decoration: none;
+	background-color: #FAE9A5;
+}
+
+.optgroup a.selected {
+	color: #CCFFFF;
+	background: url(../img/top/optionbg_over.gif) #4499EE repeat-x 0;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <#include "/bvRadio/head.html"/>
+    <title>轮播列表设置</title>
+</head>
+<body >
+		<!--上面的导航栏部分-->
+		<#include "/bvRadio/admin/top.html"/>
+			<!--左侧部分-->
+		<#include "/bvRadio/admin/left.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content bgc-fff">
+            <div class="row title-header gray-bg border-bottom">
+                <div class="col-lg-12">
+                    <div class="title-name" style="margin-left: 20px">
+                        <a class="font-title">轮播列表设置</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 p-md lh-35">
+                    <button class="btn default-btn selectedbtn m-l-lg pull-left">选择视频</button>
+                    <button class="btn default-btn selectedbtn pull-left m-l">上移</button>
+                    <button class="btn default-btn selectedbtn pull-left m-l">下移</button>
+                    <button class="btn default-btn selectedbtn m-r pull-left m-l">删除</button>
+                    <span class="m-l-xl font-content pull-left m-r">列表总时长：<span>01:30:36</span></span>
+                    <span class="pull-left font-content m-l-xl">循环播放：</span>
+                    <input type="checkbox" name="sex" id="male" class="chooseBtn" checked="">
+                    <label for="male" class="choose-label pull-left" style="margin-top: 8px;"></label>
+
+                </div>
+            </div>
+            <div class="row m-t">
+                <div class="col-lg-12 p-lg">
+                    <table id="sort" class="table table-striped">
+                        <thead class="gray-bg">
+                        <tr>
+                            <th><input type="checkbox"/></th>
+                            <th>ID</th>
+                            <th>视频名称</th>
+                            <th>时长</th>
+                            <th>视频质量</th>
+                            <th>上传时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td class="index">1</td>
+                            <td><img class="lunbpic" src="../img/u1207.jpg" alt=""/>内容信息1内容信息1内容信息1内容信息1</td>
+                            <td>00:36:36</td>
+                            <td>1024×768_1024Kbs</td>
+                            <td>2018-03-01 16:36</td>
+                            <td><i class="fa fa-trash"></i></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td class="index">2</td>
+                            <td><img class="lunbpic" src="../img/u1207.jpg" alt=""/>内容信息2内容信息1内容信息1内容信息1</td>
+                            <td>00:36:36</td>
+                            <td>1024×768_1024Kbs</td>
+                            <td>2018-03-01 16:36</td>
+                            <td><i class="fa fa-trash"></i></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td class="index">3</td>
+                            <td><img class="lunbpic" src="../img/u1207.jpg" alt=""/>内容信息3内容信息1内容信息1内容信息1</td>
+                            <td>00:36:36</td>
+                            <td>1024×768_1024Kbs</td>
+                            <td>2018-03-01 16:36</td>
+                            <td><i class="fa fa-trash"></i></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td class="index">4</td>
+                            <td><img class="lunbpic" src="../img/u1207.jpg" alt=""/>内容信息4内容信息1内容信息1内容信息1</td>
+                            <td>00:36:36</td>
+                            <td>1024×768_1024Kbs</td>
+                            <td>2018-03-01 16:36</td>
+                            <td><i class="fa fa-trash"></i></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

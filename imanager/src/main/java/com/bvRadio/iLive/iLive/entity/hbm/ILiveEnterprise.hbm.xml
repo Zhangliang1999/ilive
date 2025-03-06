@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveEnterprise" table="ilive_enterprise">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="enterpriseName">
+			<column name="enterprise_name" />
+		</property>
+
+		<property name="enterpriseDesc">
+			<column name="enterprise_desc"></column>
+		</property>
+
+		<property name="enterpriseImg">
+			<column name="enterprise_img"></column>
+		</property>
+
+		<property name="enterpriseInfo">
+			<column name="enterprise_info"></column>
+		</property>
+
+		<property name="road">
+			<column name="road"></column>
+		</property>
+
+		<property name="certStatus">
+			<column name="cert_status"></column>
+		</property>
+
+		<property name="certTime">
+			<column name="cert_time"></column>
+		</property>
+
+		<property name="contactPhone">
+			<column name="contact_phone"></column>
+		</property>
+
+		<property name="contactEmail">
+			<column name="contact_email"></column>
+		</property>
+
+		<property name="certResource">
+			<column name="cert_resource"></column>
+		</property>
+
+		<property name="enterpriseSite">
+			<column name="enterprise_site"></column>
+		</property>
+
+		<property name="enterpriseType">
+			<column name="enterprise_type"></column>
+		</property>
+
+		<property name="enterpriseLicence">
+			<column name="enterprise_licence"></column>
+		</property>
+
+		<property name="enterpriseRegNo">
+			<column name="enterprise_reg_no"></column>
+		</property>
+
+		<property name="applyTime">
+			<column name="apply_time"></column>
+		</property>
+
+		<property name="idCard">
+			<column name="id_card"></column>
+		</property>
+
+		<property name="idCardImg">
+			<column name="id_card_img"></column>
+		</property>
+
+		<property name="enterpriseRegName">
+			<column name="enterprise_reg_name"></column>
+		</property>
+
+		<property name="contactName">
+			<column name="contact_name"></column>
+		</property>
+
+		<property name="enterprisePhone">
+			<column name="enterprise_phone"></column>
+		</property>
+
+		<property name="enterpriseEmail">
+			<column name="enterprise_email"></column>
+		</property>
+
+		<property name="isDel">
+			<column name="is_del"></column>
+		</property>
+
+		<!-- 审核人 -->
+		<property name="checkPerson" column="check_person"></property>
+		
+		<property name="province">
+			<column name="province"></column>
+		</property>
+		
+		<property name="city">
+			<column name="city"></column>
+		</property>
+		
+		<property name="area">
+			<column name="area"></column>
+		</property>
+		
+		<property name="iliveName">
+			<column name="ilive_name"></column>
+		</property>
+		
+		<property name="stamp">
+			<column name="stamp"></column>
+		</property>
+		
+		<property name="disabled">
+			<column name="disabled"></column>
+		</property>
+		<property name="userId">
+			<column name="user_id"></column>
+		</property>
+		<property name="userPhone">
+			<column name="user_phone"></column>
+		</property>
+		<property name="authUserId">
+			<column name="auth_user_id"></column>
+		</property>
+		<property name="autoUserName">
+			<column name="auto_user_name"></column>
+		</property>
+		<property name="forbiddenReason">
+			<column name="forbidden_reason"></column>
+		</property>
+		<property name="forbiddenUser">
+			<column name="forbidden_user"></column>
+		</property>
+		<property name="entype">
+			<column name="entype"></column>
+		</property>
+		<property name="remark">
+			<column name="remark"></column>
+		</property>
+		<property name="password">
+			<column name="entpassword"></column>
+		</property>
+		<property name="lastEditPerson">
+			<column name="last_edit_person"></column>
+		</property>
+		<property name="lastEditTime">
+			<column name="last_edit_time"></column>
+		</property>
+			<property name="isDeveloper">
+			<column name="is_developer"></column>
+		</property>
+		<property name="appId">
+			<column name="app_id"></column>
+		</property>
+		<property name="secret">
+			<column name="secret"></column>
+		</property>
+		<property name="autoBuy">
+			<column name="auto_buy"></column>
+		</property>
+		<property name="privacy">
+			<column name="privacy"></column>
+		</property>
+	</class>
+</hibernate-mapping>

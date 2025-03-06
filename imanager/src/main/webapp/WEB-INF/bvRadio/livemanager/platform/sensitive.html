@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>敏感词管理</title>
+	<#include "/bvRadio/head.html"/>
+
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/ad.css"/>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/livemanager/top.html"/>
+        <!--左侧部分-->
+		<#include "/bvRadio/livemanager/platformleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">敏感词管理</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                    <a href="javascript:;" data-toggle="modal" data-target="#myModal" class="btn commonbtn m-t m-l-lg pull-left">添加</a>
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left">
+                        <div class="pull-left lh-40 font-content">敏感词分类：</div>
+                        <div class="pull-left lh-40 font-content">
+                        	<select id="searchType">
+                                            <option value="0">全部</option>
+                                            <option value="1">暴恐词库</option>
+                                            <option value="2">反动词库</option>
+                                            <option value="3">民生词库</option>
+                                            <option value="4">色情词库</option>
+                                            <option value="5">贪腐词库</option>
+                                            <option value="6">其他</option>
+                                        </select>
+                        </div>
+                    </div>
+                    <div class="pull-right m-r-lg m-t-xs">
+
+                        <input type="text" class="serachinput" placeholder="按敏感词搜索" id="searchName"/>
+                        <button class="btn commonbtn m-t-n-4" id="searchBtn">搜索</button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row m-t-xs">
+                <div class="col-lg-12 p-w-lg">
+                   <div class="SensitiveContent" id="sentitiveContent">
+                   <#list list as item>
+                   		<div id="${item.id}" class="Sensitive">${item.sensitiveName} <i class="fa fa-close" onclick="remove('${item.id}')"></i></div>
+                   </#list>
+                   </div>
+
+                </div>
+                <div class="col-lg-12 m-t-sm pageBox">
+                    <div class="pull-right btn-group m-r" id="pagecontent">
+                        <button id="prevpage" type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                        <#list 1..pagenum as item>
+                        	<button class="btn btn-sm btn-white <#if item == 1>active</#if>"  onclick="getPage(${item},this)">${item}</button>
+                        </#list>
+                        <button id="nextpage" type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">添加敏感词</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="modalResult">
+                                    <div class="dhResultLeft">敏感词:</div>
+                                    <div class="modalResultRight">
+                                        <input id="sentitiveName" type="text" placeholder="请输入敏感词"/>
+                                    </div>
+                                </div>
+                                <div class="modalResult">
+                                    <div class="dhResultLeft">敏感词分类:</div>
+                                    <div class="modalResultRight">
+                                        <select id="sentitiveType">
+                                            <option value="1">暴恐词库</option>
+                                            <option value="2">反动词库</option>
+                                            <option value="3">民生词库</option>
+                                            <option value="4">色情词库</option>
+                                            <option value="5">贪腐词库</option>
+                                            <option value="6">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <button type="button" class="btn btn-danger" id="addBtn">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel">取消</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+<script src="${base}/tysx/js/zbj.js"></script>
+<script>
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".SensitiveContent").slimScroll({
+        height: winHeight-navHeight-titleHeight-70-40
+    });
+    $(document).delegate(".Sensitive","mouseenter",function(){
+    	$(this).find("i").show();
+    })
+    $(document).delegate(".Sensitive","mouseleave",function(){
+    	$(this).find("i").hide();
+    })
+   
+    
+    //添加敏感词
+    $("#addBtn").on("click",function(){
+    	var sentitiveName = $("#sentitiveName").val();
+    	var sentitiveType = $("#sentitiveType").val();
+    	$.ajax({
+    		url:"${base}/operator/platform/addplatform.do",
+    		method:"post",
+    		data:{
+    			sensitiveName:sentitiveName,
+    			type:sentitiveType
+    		},
+    		success:function(res){
+    			alert("添加成功");
+    			var data = res.data;
+    			$("#cancel").trigger("click");
+    			var sentitive = "<div id='"+data.id+"' class='Sensitive'>"+data.sensitiveName+"<i class='fa fa-close' onclick='remove('"+data.id+"')></i></div>";
+    			$("#sentitiveContent").prepend(sentitive);
+    		}
+    	});
+    });
+    
+    //敏感词分类搜索
+    $("#searchType").on("change",function(){
+    	console.log($("#searchType").val());
+    	var type = $("#searchType").val();
+    	$.ajax({
+    		url:"${base}/operator/platform/searchtype.do",
+    		method:"post",
+    		data:{
+    			type:type
+    		},
+    		success:function(res){
+    			console.log(res);
+    			$("#sentitiveContent").empty();
+    			var sentitive = "";
+    			$.each(res.data,function(index,ele){
+    				sentitive+="<div id='"+ele.id+"' class='Sensitive'>"+ele.sensitiveName+"<i class='fa fa-close' onclick='remove('"+ele.id+"')></i></div>";
+    			});
+    			$("#sentitiveContent").append(sentitive);
+    			
+    			var pageprev = "<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-left'></i></button>";
+    			var pagenum = "";
+    			for(var i = 1;i<=res.pageSize;i++){
+    				if(i == 1){
+    					pagenum +="<button class='btn btn-sm btn-white active' onclick='getPage("+i+",this)'>"+i+"</button>";
+    				}else{
+    					pagenum +="<button class='btn btn-sm btn-white' onclick='getPage("+i+",this)'>"+i+"</button>";
+    				}
+    			}
+    			var pagenext = "<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-right'></i> </button>";
+    			
+    			$("#pagecontent").empty().append(pageprev).append(pagenum).append(pagenext);
+    		},
+    		error:function(res){
+    			console.log(res);
+    		}
+    	});
+    });
+    //删除敏感词
+    function remove(id){
+    	$.ajax({
+    		url:"${base}/operator/platform/remove.do",
+    		method:"post",
+    		data:{
+    			id:id
+    		},
+    		success:function(res){
+    			$("#"+id+"").remove();
+    		},
+    		error:function(res){
+    			
+    		}
+    	});
+    }
+
+    //按敏感词名称搜索
+    $("#searchBtn").on("click",function(){
+    	var name = $("#searchName").val();
+    	$.ajax({
+    		url:"${base}/operator/platform/searchname.do",
+    		method:"post",
+    		data:{
+    			sensitiveName:name
+    		},
+    		success:function(res){
+    			console.log(res);
+    			$("#sentitiveContent").empty();
+    			var sentitive = "";
+    			$.each(res.data,function(index,ele){
+    				sentitive+="<div id='"+ele.id+"' class='Sensitive'>"+ele.sensitiveName+"<i class='fa fa-close' onclick='remove('"+ele.id+"')></i></div>";
+    			});
+    			$("#sentitiveContent").append(sentitive);
+    			
+    			var pageprev = "<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-left'></i></button>";
+    			var pagenum = "";
+    			for(var i = 1;i<=res.pageSize;i++){
+    				if(i == 1){
+    					pagenum +="<button class='btn btn-sm btn-white active' onclick='getPage("+i+",this)'>"+i+"</button>";
+    				}else{
+    					pagenum +="<button class='btn btn-sm btn-white' onclick='getPage("+i+",this)'>"+i+"</button>";
+    				}
+    			}
+    			var pagenext = "<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-right'></i> </button>";
+    			
+    			$("#pagecontent").empty().append(pageprev).append(pagenum).append(pagenext);
+    		},
+    		error:function(res){
+    			console.log(res);
+    		}
+    	});
+    });
+    
+    //点击分页操作
+    function getPage(pageNo,eve){
+    	console.log(pageNo);
+    	var type = $("#searchType").val();
+    	var searchname = $("#searchName").val();
+    	$.ajax({
+    		url:"${base}/operator/platform/getPage.do",
+    		method:"post",
+    		data:{
+    			pageNo:pageNo,
+    			sensitiveName:searchname,
+    			type:type
+    		},
+    		success:function(res){
+    			console.log(res);
+    			$("#sentitiveContent").empty();
+    			var sentitive = "";
+    			$.each(res.data,function(index,ele){
+    				sentitive+="<div id='"+ele.id+"' class='Sensitive'>"+ele.sensitiveName+"<i class='fa fa-close' onclick='remove('"+ele.id+"')></i></div>";
+    			});
+    			$("#sentitiveContent").append(sentitive);
+    			$(eve).addClass("active").siblings().removeClass("active");
+    		/* 	var pageprev = "<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-left'></i></button>";
+    			var pagenum = "";
+    			for(var i = 1;i<=res.pageSize;i++){
+    				if(i == pageNo){
+    					pagenum +="<button class='btn btn-sm btn-white active' onclick='getPage("+i+")'>"+i+"</button>";
+    				}else{
+    					pagenum +="<button class='btn btn-sm btn-white' onclick='getPage("+i+")'>"+i+"</button>";
+    				}
+    			}
+    			var pagenext = "<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-right'></i> </button>";
+    			 */
+    			//$("#pagecontent").empty().append(pageprev).append(pagenum).append(pagenext);
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    }
+    
+    //前一页
+    $("#prevpage").on("click",function(){
+    	var num = $("#pagecontent .active").text();
+    	console.log(num);
+    	if(num == 1){
+    		return false;
+    	}else{
+    		var pageNo = parseInt(num) - 1;
+    		getPage(pageNo);
+    	}
+    });
+    //后一页
+    $("#nextpage").on("click",function(){
+    	var num = $("#pagecontent .active").text();
+    	var size = $("#pagecontent>button").length;
+    	var maxno = parseInt(size) - 2;
+    	if(num == 1){
+    		return false;
+    	}else if(num == maxno){
+    		return false;
+    	}else{
+    		var pageNo = parseInt(num) - 1;
+    		getPage(pageNo);
+    	}
+    });
+    
+    //重新绘制敏感词内容和分页
+    function sentitivecontent(){
+    	
+    }
+</script>
+</html>

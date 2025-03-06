@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveLiveRoom" table="ilive_live_room">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="roomId" type="java.lang.Integer">
+			<column name="room_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="useState" type="java.lang.Integer">
+			<column name="use_state" />
+		</property>
+		<property name="openStatus" type="java.lang.Integer">
+			<column name="open_status" />
+		</property>
+		<property name="disabled" type="java.lang.Integer">
+			<column name="disabled" />
+		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="create_time" />
+		</property>
+
+		<property name="createPerson" type="java.lang.String">
+			<column name="create_person" />
+		</property>
+
+		<property name="affordMoney" type="java.lang.Double">
+			<column name="afford_money" />
+		</property>
+
+		<property name="liveViewNum" type="java.lang.Long">
+			<column name="live_view_num" />
+		</property>
+
+		<property name="managerId" type="java.lang.Long">
+			<column name="manager_id" />
+		</property>
+
+		<many-to-one name="liveEvent" fetch="join">
+			<column name="live_event_id"></column>
+		</many-to-one>
+
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+
+		<property name="serverGroupId" type="java.lang.Integer">
+			<column name="server_groupId" />
+		</property>
+
+		<property name="deleteStatus" type="java.lang.Integer">
+			<column name="delete_status" />
+		</property>
+
+		<property name="moneyLimitSwitch" type="java.lang.Boolean">
+			<column name="money_limit_switch" />
+		</property>
+		
+		<property name="affordLimit" type="java.lang.Double">
+			<column name="afford_limit" />
+		</property>
+		
+
+	</class>
+</hibernate-mapping>

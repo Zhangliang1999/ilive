@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关注商户列表</title>
+<#include "/bvRadio/livemanager/head.html" />
+<style>
+input {
+	display: inline-block;
+	border: 1px solid #111;
+	height: 20px;
+}
+
+select {
+	display: inline-block;
+	width: 100px;
+	height: 20px;
+}
+
+.line-show button {
+	margin-left: 10px;
+}
+</style>
+<link href="${base}/tysx/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet" />
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.js"></script>
+<style>
+.swal2-popup, .swal2-modal, .swal2-show {
+	width: 400px;
+	font-size: 14px;
+}
+
+.p-w-lg {
+	padding: 0px;
+}
+</style>
+</head>
+<body>
+	<!--下面内容部分-->
+	<div class="row btn-box">
+		<input type="hidden" id="userId" value="${userId!}" />
+	</div>
+	<div class="col-lg-12 p-w-lg">
+		<div class="line-show"
+			style="margin-top: 10px; padding-right: 30px; background: #fff; height: 50px;">
+			<label style="line-height: 50px;">登录列表</label>
+			<div style="float: right; height: 50px; line-height: 50px;">
+				<button class="btn btn-default" id="exportData">导出数据</button>
+			</div>
+		</div>
+		<@p.pageList value=page listAction="loginList";item,i,has_next>
+			<@p.column class="text-center" style="width:40px;" title="登录IP">
+				${item.createTime!}
+			</@p.column> 
+			<@p.column class="text-center" style="width:40px;" title="ip所在地"> 
+				${item.createTime!}
+			</@p.column>
+			<@p.column class="text-center" style="width:40px;" title="登录时间">
+				${item.createTime!}
+			</@p.column> 
+		</@p.pageList>
+	</div>
+</body>
+<script>
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".businessContent").slimScroll({
+        height: winHeight-navHeight-titleHeight-75-40
+    });
+    var userId = "${userId!}";
+    console.log(userId);
+    $("#_page_form").append("<input type='hidden' id='searchuserId' name='userId' value='${userId!}'/>");
+    //导出数据
+    $("#exportData").on("click",function(){
+    	var userId = $("#userId").val();
+    	location.href="${base}/operator/userrecord/exportLogList?userId="+userId+"";
+    });
+    
+    
+</script>
+</html>

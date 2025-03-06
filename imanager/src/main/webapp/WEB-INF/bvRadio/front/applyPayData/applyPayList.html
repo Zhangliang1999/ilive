@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="user-scalable=no; maximum-scale=1.0; initial-scale=1.0;width=device-width; height=device-height;" />
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<title>报名活动详情</title>
+<!-- Bootstrap -->
+<link href="${base}/res/bvRadio/css/bootstrap.css" rel="stylesheet">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<script src="${base}/res/bvRadio/js/jquery-1.12.1.js"></script>
+<!-- <script src="${base}/res/bvRadio/js/jquery.mobile-1.4.5.min.js"></script> -->
+<script src="${base}/res/bvRadio/js/bootstrap.min.js"></script>
+<script src="${base}/res/bvRadio/js/jqBootstrapValidation.js"></script>
+<script type="text/javascript" src="${base}/res/bvRadio/js/ac_join.js"></script>
+<link href="${base}/res/bvRadio/css/public.css" rel="stylesheet">
+<script src="${base}/res/WebViewJavascriptBridge/WebViewJavascriptBridge.js"></script>
+<script src="${base}/res/bvRadio/js/util.js"></script>
+<link type="text/css" rel="stylesheet" href="${base}/res/bvRadio/style/demo.css">
+<script src="${base}/res/bvRadio/js/demo.js"></script>
+<link rel="${base}/res/bvRadio/stylesheet" href="style/csshide1.css">
+<!-- 百度统计 --><script type="text/javascript" src="${base}/res/bvRadio/js/statistics.js"></script><!-- 百度统计 -->
+<style>
+.tb300x250 {
+	display: none !important;
+}
+
+.tb960x90 {
+	display: none !important;
+}
+</style>
+<script type="text/javascript">
+	window.onerror = function() {
+		return true;
+	}
+</script>
+<script>
+	$(function() {
+		$("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+	});
+</script>
+<script type="text/javascript">
+<#if applyPayActivity.enablePay!false>
+	var isSubmitPay = 0;
+	function pay() {
+		if (isSubmitPay == 0) {
+			var userId = ${userId!0};
+			if (userId > 0) {
+				isSubmitPay = 1;
+				var seachprov = $("#s1 option:selected").text();
+				var seachcity = $("#s2 option:selected").text();
+				var seachdistrict = $("#s3 option:selected").text();
+				var street = $("#s4").val();
+				var address = seachprov + seachcity + seachdistrict + street;
+				$("#address").attr("value", address);
+				var enableSubmit = true;
+				$("#form input").each(function(index, obj) {
+					var objType = $(obj).attr("type");
+					var objTitle = $(obj).attr("title");
+					if (objType != "hidden" && objType != "radio" && objType != "checkbox") {
+						var objVal = $(obj).val();
+						if (objVal == null || objVal == "") {
+							iAlert(objTitle + "没有填写，请填写后提交", "");
+							enableSubmit = false;
+							return false;
+						}
+					} else { 
+						if (objType != "hidden") {
+							var isChecked = false;
+							var objName = $(obj).attr("name");
+							$("#form input[name='" + objName + "']").each(function(index1, obj1) {
+								if ($(obj1).is(':checked')) {
+									isChecked = true;
+								}
+							});
+							if (!isChecked) {
+								iAlert(objTitle + "没有填写，请填写后提交", "");
+								enableSubmit = false;
+								return false;
+							}
+						}
+					}
+				});
+				if (enableSubmit) {
+					var dataMessage = {
+							activityId : ${activity.activityId!0},
+							diyformId : ${applyPayActivity.diyformId!}
+						}
+					$.ajax({
+						type : 'POST',
+						url : "../applyPayData/o_pay.jspx",
+						data : dataMessage,
+						success : function(data) {
+							isSubmitPay = 0;
+							if (data.status == 1) {
+								var money = data.money;
+								var orderNo = data.orderNo;
+								var alipayOrderId = data.alipayOrderId;
+								var productName = data.productName;
+								var notifyUrl = data.notifyUrl;
+								var productDesc = data.productDesc;
+								connectWebViewJavascriptBridge(function(bridge) {
+									bridge.init(function(message, responseCallback) {
+										responseCallback(data);
+									});
+									bridge.callHandler('PaymentNotice', {
+										"money" : money,
+										"payType" : "alipay",
+										"orderNo" : orderNo,
+										"productName" : productName,
+										"notifyUrl" : notifyUrl,
+										"productDesc" : productDesc
+									}, function(response) {
+										var jsonObj = eval('(' + response + ')');
+										var status = jsonObj.status;
+										if(status=="success"){
+											$("#alipayOrderId").val(alipayOrderId);
+											$("#form").submit();
+											/* window.location.href="../activity/v_fill.jspx?activityId="
+												+ activityId + "&alertMessage="+ encodeURI("报名成功")+"&userId=" + userId; */
+										}
+									});
+								});
+							} else {
+								isSubmitPay = 0;
+								iAlert("报名失败","");
+							}
+						},
+						error : function() {
+							isSubmitPay = 0;
+							iAlert("出现错误!","");
+						},
+					});
+				}
+			} else {
+				isSubmitPay = 0;
+				iAlert("您还没有登录！","login");
+			}
+		}
+	}
+<#else>
+	function submitMessage() {
+		var seachprov = $("#s1 option:selected").text();
+		var seachcity = $("#s2 option:selected").text();
+		var seachdistrict = $("#s3 option:selected").text();
+		var street = $("#s4").val();
+		var address = seachprov + seachcity + seachdistrict + street;
+		$("#address").attr("value", address);
+		var enableSubmit = true;
+		$("#form input").each(function(index, obj) {
+			var objType = $(obj).attr("type");
+			var objTitle = $(obj).attr("title");
+			if (objType != "hidden" && objType != "radio" && objType != "checkbox") {
+				var objVal = $(obj).val();
+				if (objVal == null || objVal == "") {
+					iAlert(objTitle + "没有填写，请填写后提交", "");
+					enableSubmit = false;
+					return false;
+				}
+			} else { 
+				if (objType != "hidden") {
+					var isChecked = false;
+					var objName = $(obj).attr("name");
+					$("#form input[name='" + objName + "']").each(function(index1, obj1) {
+						if ($(obj1).is(':checked')) {
+							isChecked = true;
+						}
+					});
+					if (!isChecked) {
+						iAlert(objTitle + "没有填写，请填写后提交", "");
+						enableSubmit = false;
+						return false;
+					}
+				}
+			}
+		});
+		if (enableSubmit) {
+			$("#form").submit();
+		}
+	}
+</#if>
+</script>
+</head>
+<body class="bgc-eee" onload="setup()">
+	<div id="wrapperBox">
+		<div class="container-fluid" style="background: #ea4146; color: #fff">
+			<h4 class="text-center">${activity.activityName!}</h4>
+			${activity.activitySynopsis!}
+		</div>
+		<div class="container">
+			<form class="form-horizontal" action="o_applyAdd.jspx" method="post" enctype="multipart/form-data" id="form">
+				<input type="hidden" name="diyformId" value="${applyPayActivity.diyformId!}">
+				<input type="hidden" name="activityId" value="${activity.activityId!}">
+				<input type="hidden" id="alipayOrderId" name="alipayOrderId">
+				<#if bbsDiymodels??> 
+				<#list bbsDiymodels as bbsDiymodel> 
+					<#if bbsDiymodel.diymodelType??> 
+						<#if bbsDiymodel.diymodelType==1>
+						<div class="form-group no-margin-L no-margin-R">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<div class="form-control height-auto">
+								<#if bbsDiymodel.optValue??> <#list bbsDiymodel.optValue?split("@;@") as arr>
+								<div class="radio">
+									<label>
+										<input title="${bbsDiymodel.diymodelTitle!}" type="radio" name="${bbsDiymodel.diymodelKey!}"  value="${arr}" >
+										${arr}
+									</label>
+								</div>
+								</#list> </#if>
+							</div>
+						</div>
+						<#elseif bbsDiymodel.diymodelType==2>
+						<div class="form-group no-margin-L no-margin-R checkeds">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<div class="form-control height-auto">
+								<#if bbsDiymodel.optValue??> <#list bbsDiymodel.optValue?split("@;@") as arr>
+								<div class="checkbox">
+									<label>
+										<input title="${bbsDiymodel.diymodelTitle!}" type="checkbox" name="${bbsDiymodel.diymodelKey!}" value="${arr}">
+										${arr}
+									</label>
+								</div>
+								</#list> </#if>
+							</div>
+						</div>
+						<#elseif bbsDiymodel.diymodelType==3>
+						<div class="ShowImgZon img_radio_wrap">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<div class="ShowImgCon2 mt5">
+			
+								<#if bbsDiymodel.optImgUrl??> <#list bbsDiymodel.optImgUrl?split("@;@") as img>
+								<div class="simg col-xs-6 pb5">
+									<div class="pull-left pl10 pr10" style="width: 100%;">
+										<div class="simgbox">
+											<img src="<#if img??&&img!=''>${img}<#else>${base}/res/bvRadio/images/cache/xiaotu01.png</#if>" orig_src="${base}/res/bvRadio/images/cache/xiaotu01.png" style="">
+										</div>
+										<div class="optionImg">
+											<div style="padding: 10px 0;" class="optionImg_wrap" data-id="option_57038504a320fc87cad54117">
+												<input title="${bbsDiymodel.diymodelTitle!}"  type="radio" class="ml5 pull-left" value="<#if bbsDiymodel.optValue??><#assign arr = bbsDiymodel.optValue?split('@;@') />${arr[img_index]!}</#if>"
+													name="${bbsDiymodel.diymodelKey!}">
+												<span class="img_txt"> <#if bbsDiymodel.optValue??> <#assign arr = bbsDiymodel.optValue?split("@;@") /> ${arr[img_index]!} </#if> </span>
+											</div>
+										</div>
+									</div>
+								</div>
+								</#list> </#if>
+							</div>
+						</div>
+						<#elseif bbsDiymodel.diymodelType==4>
+						<div class="ShowImgZon img_radio_wrap imgManySelect">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<div class="ShowImgCon2 mt5">
+								<#if bbsDiymodel.optImgUrl??> <#list bbsDiymodel.optImgUrl?split("@;@") as img>
+								<div class="simg col-xs-6 pb5">
+									<div class="pull-left pl10 pr10" style="width: 100%;">
+										<div class="simgbox">
+											<img src="<#if img??&&img!=''>${img}<#else>${base}/res/bvRadio/images/cache/xiaotu01.png</#if>" orig_src="${base}/res/bvRadio/images/cache/xiaotu01.png" style="">
+										</div>
+										<div class="optionImg">
+											<div style="padding: 10px 0;" class="optionImg_wrap" data-id="option_57038504a320fc87cad54117">
+												<input title="${bbsDiymodel.diymodelTitle!}" type="checkbox" class="ml5 pull-left" name="${bbsDiymodel.diymodelKey!}" 
+													value="<#if bbsDiymodel.optValue??><#assign arr = bbsDiymodel.optValue?split('@;@') />${arr[img_index]!}</#if>">
+												<span class="img_txt"> <#if bbsDiymodel.optValue??> <#assign arr = bbsDiymodel.optValue?split("@;@") /> ${arr[img_index]!} </#if> </span>
+											</div>
+										</div>
+									</div>
+								</div>
+								</#list> </#if>
+							</div>
+						</div>
+						<#elseif bbsDiymodel.diymodelType==5>
+						<div class="form-group no-margin-L no-margin-R">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<input title="${bbsDiymodel.diymodelTitle!}"  type="text" class="form-control" placeholder="文本输入框" name="${bbsDiymodel.diymodelKey!}">
+						</div>
+						<#elseif bbsDiymodel.diymodelType==6>
+						<div class="form-group no-margin-L no-margin-R">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<textarea title="${bbsDiymodel.diymodelTitle!}"  class="form-control" rows="3" placeholder="文本输入框" name="${bbsDiymodel.diymodelKey!}"></textarea>
+						</div>
+						<#elseif bbsDiymodel.diymodelType==7>
+						<div class="form-group no-margin-L no-margin-R">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<input title="${bbsDiymodel.diymodelTitle!}"  type="text" class="form-control" placeholder="文本输入框" name="${bbsDiymodel.diymodelKey!}">
+						</div>
+						<#elseif bbsDiymodel.diymodelType==8>
+						<div class="form-group no-margin-L no-margin-R">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<br>
+							<div class="form-control height-auto">
+								<#if bbsDiymodel.optValue??> <#list bbsDiymodel.optValue?split("@;@") as arr>
+								<div class="radio">
+									<label>
+										<input title="${bbsDiymodel.diymodelTitle!}" type="radio" name="${bbsDiymodel.diymodelKey!}"  value="${arr}" >
+										${arr}
+									</label>
+								</div>
+								</#list> </#if>
+							</div>
+						</div>
+						<#elseif bbsDiymodel.diymodelType==9>
+						<div class="form-group no-margin-L no-margin-R">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<input title="${bbsDiymodel.diymodelTitle!}" type="text" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" name="${bbsDiymodel.diymodelKey!}"
+								placeholder="数字输入框">
+						</div>
+						<#elseif bbsDiymodel.diymodelType==10>
+						<div class="form-group no-margin-L no-margin-R">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<input title="${bbsDiymodel.diymodelTitle!}" type="text" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" name="${bbsDiymodel.diymodelKey!}"
+								placeholder="数字输入框">
+						</div>
+						<#elseif bbsDiymodel.diymodelType==11>
+						<div class="form-group no-margin-L no-margin-R control-group">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<input title="${bbsDiymodel.diymodelTitle!}" type="email" class="form-control" placeholder="邮件输入框" name="${bbsDiymodel.diymodelKey!}">
+							<small class="help-block" style="height: 0"></small>
+						</div>
+						<#elseif bbsDiymodel.diymodelType==12>
+						<input title="${bbsDiymodel.diymodelTitle!}" type="hidden" name="${bbsDiymodel.diymodelKey!}" value="" id="address">
+						<div class="form-group no-margin-L no-margin-R form_ctrl form_select" title="城市">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<select id="s1" class="form-control mb5">
+								<option>省份</option>
+							</select>
+							<select id="s2" class="form-control mb5">
+								<option>地级市</option>
+							</select>
+							<select id="s3" class="form-control mb5">
+								<option>市、县级市、县</option>
+							</select>
+							<textarea class="form-control" rows="3" id="s4" placeholder="街道"></textarea>
+						</div>
+						<#elseif bbsDiymodel.diymodelType==13>
+						<div class="form-group no-margin-L no-margin-R">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<div class="file-box">
+								<input title="${bbsDiymodel.diymodelTitle!}"  class="selectFile" type="file" name="${bbsDiymodel.diymodelKey!}" >
+								<div class="Hbuttom">
+									<div id="">
+										选择文件
+									</div>
+								</div>
+							</div>
+						</div>
+						<#elseif bbsDiymodel.diymodelType==14>
+						<div class="form-group no-margin-L no-margin-R">
+							<label>${bbsDiymodel.diymodelTitle!}</label>
+							<div class="file-box">
+								<input title="${bbsDiymodel.diymodelTitle!}"  class="selectFile" type="file" name="${bbsDiymodel.diymodelKey!}" >
+								<div class="Hbuttom">
+									<div>
+										选择文件
+									</div>
+								</div>
+							</div>
+						</div>
+						</#if> 
+					</#if> 
+				</#list>
+				</#if>
+			</form>
+		</div>
+	</div>
+	<div class="h45"></div>
+	<div class="btns">
+		<div class="col-xs-12 no-padding">
+			<#if applyPayActivity.enablePay!false>
+			<button class="btn btn-red btn-lg border-radius0 btn-block col-xs-6" type="button" onclick="pay()">缴&nbsp;&nbsp;&nbsp;&nbsp;费</button>
+			<#else>
+			<button class="btn btn-red btn-lg border-radius0 btn-block col-xs-6" type="button" onclick="submitMessage()">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+			</#if>
+		</div>
+	</div>
+	<script type="text/javascript" src="${base}/res/bvRadio/js/city.js"></script>
+	<script>
+		var s = [ "s1", "s2", "s3" ];
+		var opt0 = [ "省份", "地级市", "市、县级市、县" ];
+		function setup() {
+			for (i = 0; i < s.length - 1; i++) {
+				document.getElementById(s[i]).onchange = new Function("change(" + (i + 1) + ")");
+			}
+			change(0);
+		}
+	</script>
+</body>
+</html>

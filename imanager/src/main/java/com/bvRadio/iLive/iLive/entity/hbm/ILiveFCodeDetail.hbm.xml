@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveFCodeDetail" table="ilive_fcode_detail">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id"/>
+			<generator class="assigned"/>
+		</id>
+		
+		<property name="codeId" type="java.lang.Long">
+			<column name="code_id"/>
+		</property>
+		
+		<property name="code" type="java.lang.String">
+			<column name="code"/>
+		</property>
+		
+		<property name="isUsed" type="java.lang.Integer">
+			<column name="is_used"/>
+		</property>
+		
+		<!-- <property name="usedTime" type="java.sql.Timestampr">
+			<column name="used_time"/>
+		</property> -->
+		
+	</class>
+</hibernate-mapping>

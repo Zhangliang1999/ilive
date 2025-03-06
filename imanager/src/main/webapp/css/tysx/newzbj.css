@@ -1,0 +1,503 @@
+.title-header{
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #eee;
+    background: rgba(244, 244, 244, 1);
+}
+.title-name{
+    margin-left: 10px;
+    float: left;
+    margin-right: 20px;
+}
+.loc-icon{
+    display: block;
+    float: left;
+    width: 22px;
+    height: 22px;
+    background: url("../img/location.png") no-repeat;
+    background-size:100% 100%;
+    margin: 9px 15px 0 5px;
+}
+.videobox{
+    width: 450px;
+    height: 253px;
+    background: #000;
+    margin: 0px auto 20px;
+}
+.nav-tabs > li > a{
+    padding:10px;
+}
+.suggest{
+    width: 385px;
+    height: 76px;
+    background-color: rgba(228, 24, 21, 0.0980392156862745);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(204, 204, 204, 1);
+    border-radius: 5px;
+    line-height: 28px;
+    padding: 0 0 0 20px;
+    margin: 20px auto;
+}
+.text-content{
+    width: 385px;
+    margin: 0px auto 20px;
+}
+.inputcon{
+    width: 260px;
+    height: 25px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(204, 204, 204, 1);
+    border-radius: 3px;
+}
+.copybtn{
+    width: 41px;
+    height: 26px;
+    vertical-align:bottom;
+    padding: 0;
+    font-size: 12px;
+}
+.videotop{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+}
+.livebtn{
+    margin-top: 10px;
+    color: #ffffff;
+
+}
+#myTab .active a {
+    /*color: #ed5d5d;*/
+    color: #ed5d5d;
+}
+#rightTab .active a {
+    /*color: #ed5d5d;*/
+    color: #0084ff;
+}
+.choose-label{
+    margin: 12px 20px 0 10px!important;
+}
+.choose-label {
+    box-shadow: #ccc 0px 0px 0px 1px;
+    width: 30px!important;
+    height: 15px!important;
+    display: inline-block;
+    border-radius: 20px;
+    position: relative;
+    background-color: #bdbdbd;
+    overflow: hidden;
+}
+
+.choose-label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 15px!important;
+    height: 15px!important;
+    display: inline-block;
+    border-radius: 20px;
+    background-color: #fff;
+    z-index: 20;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.chooseBtn:checked + label.choose-label:before {
+    left: 15px!important;
+}
+
+.chooseBtn:checked + label.choose-label {
+    background-color: #51ccee;
+}
+.timer{
+    width: 40px;
+    height: 20px;
+    text-align: center;
+    margin: 0 5px;
+}
+.commentbox {
+    height: 600px;
+    overflow: hidden;
+}
+.border-bottom-ccc {
+    border-bottom: 1px solid #f2f2f2;
+}
+.redtitle {
+    width: 40px;
+    height: 20px;
+    display: block;
+    float: left;
+    background: #0084ff;
+    color: #ffffff;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+.zhiding {
+    width: 20px;
+    height: 20px;
+    display: block;
+    float: left;
+    background: #ec5151;
+    margin-left: 10px;
+    overflow: hidden;
+    color: #ffffff;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+}
+.img-circle {
+    border-radius: 50%!important;
+}
+.media-body p {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.default-livebtn {
+    width: 40px!important;
+    height: 20px!important;
+    line-height: 19px;
+    padding: 0;
+    font-size: 12px;
+    margin-right: 5px;
+}
+.red-livebtn{
+    width: 70px;
+    height: 20px;
+    padding: 0;
+    line-height: 19px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+textarea {
+    height: 60px;
+    padding: 5px;
+    outline: none;
+    resize: none;
+    border: 1px solid #ececec;
+ }
+.circleimg {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    float: left;
+    margin-right: 15px;
+    overflow: hidden;
+}
+.addcircleimg{
+    width: 29px;
+    height: 28px;
+    border-radius: 100%;
+    float: left;
+    text-align: center;
+    line-height: 24px;
+    border: 1px solid #999;
+    margin-right: 15px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.circleimg img {
+    width: 100%;
+    height: 100%;
+}
+.switchbox i{
+  cursor: pointer;
+}
+.erweimaleft{
+    width: 91px;
+    height: 91px;
+}
+.erweimabox{
+    width: 321px;
+    margin: 0 auto;
+}
+.erweimaleft img{
+    width: 100%;
+    height: 100%;
+}
+.erweimaright{
+    width: 200px;
+}
+.default-btnios{
+    width: 132px;
+    height: 34px;
+    background: #0084ff;
+    color: #fff;
+}
+.default-btnwindow{
+    width: 150px;
+    height: 34px;
+    background: #0084ff;
+    color: #fff;
+}
+.default-btngreen{
+    width: 132px;
+    height: 34px;
+    background: #1AFA29;
+    color: #fff;
+}
+.questionbox{
+    padding: 10px;
+    background: #eee;
+    border-radius: 5px;
+}
+.uploadbtn{
+    width: 90px!important;
+    height: 25px!important;
+    padding: 0;
+    line-height: 23px;
+    font-size: 12px;
+}
+.wendang{
+    width: 110px;
+    background: #ffffff;
+    height: 26px;
+    padding: 0;
+    margin-top: -2px;
+}
+.banner img{
+    max-width: 100%;
+    width: 460px;
+    height: 360px;
+}
+/**/
+.picobox {
+    width:460px;
+    height:360px;
+    margin:10px auto;
+    position:relative;
+    overflow:hidden;
+}
+.picobox #ul {
+    position:absolute;
+}
+.picobox #ul li {
+    float:left;
+}
+.picobox #ul li img {
+    max-width: 100%;
+    width: 460px;
+    height: 360px;
+}
+.olbox{
+    width: 440px;
+    height: 78px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+}
+#ol {
+    position: absolute;
+
+
+}
+#ol li {
+    width:78px;
+    height:65px;
+    border:2px solid green;
+    float:left;
+    margin:5px;
+
+}
+#ol li img{
+    width: 100%;
+    height: 100%;
+}
+.button {
+    position:absolute;
+    width: 30px;
+    top:105px;
+    font-size:50px;
+    display:none;
+    height: 60px;
+}
+.button-left{
+    background:url("../img/leftarrow.png") no-repeat;
+    background-size:100% 100%;
+}
+.button-right{
+    background:url("../img/rightarrow.png") no-repeat;
+    background-size:100% 100%;
+}
+
+.border-red{
+    border: 2px solid #ef7777!important;
+}
+.numbox{
+    position: absolute;
+    left: 10px;
+    bottom: 120px;
+}
+.num{
+    font-size: 20px;
+    color: #ec5151;
+}
+.totle{
+    font-size: 14px;
+}
+.leftarr{
+    width: 15px;
+    height: 45px;
+    background: url("../img/leftarr.png") no-repeat;
+    background-size:100% 100%;
+    position: absolute;
+    left: 40px;
+    bottom: 16px;
+    cursor: pointer;
+}
+.rightarr{
+    width: 15px;
+    height: 45px;
+    background: url("../img/rightarr.png") no-repeat;
+    background-size:100% 100%;
+    position: absolute;
+    right: 40px;
+    bottom: 16px;
+    cursor: pointer;
+}
+
+.left,
+.right {
+    height: auto;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    margin-top: 150px;
+}
+.right{
+    margin-left: -30px;
+}
+.feed-element {
+    padding: 10px!important;
+}
+.rightTitle{
+    position: relative;
+}
+.jinyan{
+    width: 110px;
+    position: absolute;
+    right: 150px;
+    top: 0;
+}
+.jinyanname{
+    position: absolute;
+    top: 11px;
+    left: 0;
+
+}
+.jinyanlabel{
+    position: absolute!important;
+    top: 0px;
+    right: 0px;
+}
+.shezhi{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #0084ff;
+    text-decoration:underline;
+}
+.shezhi:hover{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #0084ff;
+    text-decoration:underline;
+}
+.ansbox{
+    line-height: 20px;
+}
+.ansname{
+    color: #0084ff;
+}
+.pause-btn{
+    background: #f23622!important;
+    color: #ffffff;
+    border-radius: 5px;
+}
+.stop-btn{
+    background: rgba(228, 24, 21, 1)!important;
+    color: #ffffff;
+    border-radius: 5px;
+}
+.blue-btn {
+    background: #0084ff;
+    color: #ffffff;
+}
+
+/*创建直播页面样式*/
+.squol{
+    list-style: square;
+    line-height: 30px;
+}
+.cjzbinput:first-child {
+    margin-top: 15px;
+}
+.cjzbinput {
+    height: 38px;
+    margin-bottom: 15px;
+}
+.cjzbinput .firstname {
+    width: 80px;
+    display: block;
+    float: left;
+    line-height: 38px;
+}
+.cjzbinput input {
+    width: 457px;
+    height: 36px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 12px;
+}
+.cjzbinput textarea {
+    width: 457px;
+    height: 98px;
+    resize: none;
+    border-radius: 5px;
+}
+.ewmbox{
+    width: 91px;
+    height: 91px;
+}
+.ewmbox img{
+    width: 100%;
+    height: 100%;
+}
+.blue-btn:hover{
+    color: #ffffff;
+}
+.stop-btn:hover{
+    color: #ffffff;
+}
+.pause-btn:hover{
+    color: #ffffff;
+}
+.subbtn{
+    position: relative;
+}
+.subpic{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    opacity: 0;
+}
+.picbox img{
+    max-width: 20%;
+    margin-right: 3%;
+    max-height: 100px;
+    margin-top: 10px;
+    vertical-align: bottom;
+}

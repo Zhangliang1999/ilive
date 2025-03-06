@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>直播间列表</title> <#include "/bvRadio/head.html"/>
+</head>
+<body>
+	<!--上面的导航栏部分-->
+	<#include "/bvRadio/admin/top.html"/>
+	<!--下面内容部分-->
+	<div class="wrapper  bgc-fff">
+		<div class="row title-header gray-bg">
+			<div class="col-lg-12">
+				<div class="title-name">
+					<a class="font-title" href="${base}/admin/room/list.do">直播列表</a>
+				</div>
+				<div class="col-lg-3">
+					<div class="dropdown">
+						<button type="button" class="btn dropdown-toggle"
+							id="dropdownMenu1" data-toggle="dropdown"
+							dataval="${roomStatus!}">
+							<#if roomStatus==0> 预告 <#elseif roomStatus==1> 直播中 <#elseif
+							roomStatus==2> 已结束 <#elseif roomStatus==10> 直播状态 </#if> <span
+								class="caret"> </span>
+						</button>
+						<ul id="searchStatusBtn" class="dropdown-menu" role="menu"
+							aria-labelledby="dropdownMenu1">
+							<li role="presentation" dataval="0"><a role="menuitem"
+								tabindex="-1">预告</a></li>
+							<li role="presentation" dataval="1"><a role="menuitem"
+								tabindex="-1">直播中</a></li>
+							<li role="presentation" dataval="2"><a role="menuitem"
+								tabindex="-1">已结束</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="pull-right">
+					<div class="input-group">
+						<input id="liveTitle" value="${roomName}" class="inputcon"
+							type="text" placeholder="直播名称" />
+						<button onclick="searchRoom()" class="btn default-btn m-r m-l">搜索</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="containe">
+					<div class="content-box">
+						<div class="live-box add-live" id="createRoomBtn">+创建直播</div>
+					</div>
+					<#list pager.list as liveRoom>
+					<div class="content-box">
+						<#if liveRoom.liveEvent.liveStatus == 0>
+						<div class="live-box wait-live">
+							<#elseif liveRoom.liveEvent.liveStatus == 1>
+							<div class="live-box on-live">
+								<#elseif liveRoom.liveEvent.liveStatus == 2>
+								<div class="live-box end-live">
+									<#elseif liveRoom.liveEvent.liveStatus == 3>
+									<div class="live-box end-live">
+										</#if>
+										<div class="img-box">
+											<a href="javascript:;"> <img
+												src="${liveRoom.liveEvent.converAddr!}" alt="" />
+											</a> <#if liveRoom.openStatus==0> 已关闭 <#else> <#if
+											liveRoom.liveEvent.liveStatus == 0><span class="biaoqian ">预告
+											</span><#elseif liveRoom.liveEvent.liveStatus == 1> <span
+												class="biaoqian on-live"> 直播中</span> <#elseif
+											liveRoom.liveEvent.liveStatus == 2> <span
+												class="biaoqian end-live"> 暂停中 </span> <#elseif
+											liveRoom.liveEvent.liveStatus == 3> <span
+												class="biaoqian end-live">已结束 </span></#if> </#if> <#if
+											(topUser.enterpriseId!10)==10> <span class="tryout">试用</span>
+											<#else> <span class="deletespan"
+												style="display: none; opacity: 1;"><i
+												class="fa fa-trash"></i></span> </#if>
+											<div class="live-bottom enterRoomBtn"
+												dataId="${liveRoom.roomId!}"
+												datastatus="${liveRoom.openStatus!}">
+												<a dataId="${liveRoom.roomId!}"
+													datastatus="${liveRoom.openStatus!}"
+													class="live-bottombox zbj enterRoomBtn"> <i></i>直播间
+												</a> <a dataId="${liveRoom.roomId!}"
+													class="live-bottombox sz editRoomBtn"> <i></i>设置
+												</a> <a class="live-bottombox tj" href="javascript:;"> <i></i>统计
+												</a> <a class="live-bottombox sl" href="javascript:;"> <i></i>收录
+												</a>
+											</div>
+										</div>
+										<div class="content-box">
+											<p class="live-title">${liveRoom.liveEvent.liveTitle!}</p>
+											<div class="bottom-content m-t-xs">
+												<div class="bottom-left pull-left">
+													<p>开始时间：${liveRoom.liveEvent.liveStartTime!}</p>
+													<p>结束时间：${liveRoom.liveEvent.liveEndTime!}</p>
+												</div>
+												<div class="bottom-right pull-left">
+													<div dataval="${liveRoom.roomId}"
+														class="<#if liveRoom.openStatus==1>open1<#else>close1</#if> scrollSwitchBox pull-left m-t-12">
+														<input name="openBarrageSwitch" type="hidden"
+															value="${liveRoom.openStatus!}">
+														<div
+															class="<#if liveRoom.openStatus==1>open2<#else>close2</#if> scrollSwitch"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								</#list>
+							</div>
+						</div>
+					</div>
+				</div>
+</body>
+<script>
+	$(".live-bottom").hide();
+	wid = $('.blcen').width();
+	$('.textbl').css('width', wid - 300);
+	$('.textbl2').css('width', wid - 300);
+
+	$(window).resize(function() { //当浏览器大小变化时
+		wid = $('.blcen').width();
+		$('.textbl').css('width', wid - 300);
+		$('.textbl2').css('width', wid - 300);
+	});
+
+	$(".img-box").hover(function() {
+		$(this).find(".live-bottom").stop(true, false).slideDown(300);
+	}, function() {
+		$(this).find(".live-bottom").stop(true, false).slideUp(300);
+	})
+	$(function() {
+		$('#createRoomBtn').on("click", function() {
+			if("${topUser.certStatus!0}"!=4) {
+				alert("未经过认证不能创建");
+			}else {
+				window.location.href = "${base}/admin/room/create.do";
+			}
+		});
+		
+		$('.enterRoomBtn').on("click", function() {
+			window.location.href = "${base}/admin/room/selectRoom.do?roomId="+$(this).attr("dataId");
+		});
+		
+		$('.editRoomBtn').on("click", function() {
+			window.location.href = "${base}/admin/room/edit.do?roomId="+$(this).attr("dataId");
+		});
+		
+		$('#searchStatusBtn li').on("click",function(){
+			var dataval = $(this).attr("dataval");
+			var searchName = $('#liveTitle').val();
+			if($.trim(searchName)=="") {
+				window.location.href = "${base}/admin/room/list.do?s="+dataval;
+			}else {
+				window.location.href = "${base}/admin/room/list.do?s="+dataval+"&q="+searchName;
+			}
+		});
+		
+		
+		$('.scrollSwitchBox').on("click",function(){
+			var url = "${base}/admin/room/";
+			var roomId = $(this).attr("dataval");
+			var valSw = $(this).find("input").eq(0);
+			if($(this).hasClass("close1")){
+				$(this).removeClass("close1").addClass("open1");
+				valSw.val(1);
+				url = url + "open.do";
+			}else {
+				$(this).removeClass("open1").addClass("close1");
+				valSw.val(0);
+				url = url + "close.do";
+			}
+			var diffSw = $(this).find(".scrollSwitch").eq(0);
+			if(diffSw.hasClass("close2")){
+				diffSw.removeClass("close2").addClass("open2");
+			}else {
+				diffSw.removeClass("open2").addClass("close2");
+			}
+			$.post(url,
+					{
+						roomId : roomId
+					},function(data){
+				if(data.status==1) {
+					window.location.href = window.location.href;					
+				}
+			});
+		});
+		
+	});
+	
+	function searchRoom() {
+		var searchName = $('#liveTitle').val();
+		var status = $('#dropdownMenu1').attr("dataval");
+		if(status==10) {
+			if($.trim(searchName)==""){
+				window.location.href = "${base}/admin/room/list.do";
+			}else {
+				window.location.href = "${base}/admin/room/list.do?q="+searchName;
+			}
+		}else {
+			if($.trim(searchName)==""){
+				window.location.href = "${base}/admin/room/list.do?s="+status;
+			}else {
+				window.location.href = "${base}/admin/room/list.do?s="+status+"&q="+searchName;
+			}
+		}
+	}
+</script>
+</html>

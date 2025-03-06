@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LOGO设置</title>
+	<#include "/bvRadio/head.html"/>
+    <link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css"/>
+    <link href="${base}/tysx/css/bootstrap-fileinput.css" rel="stylesheet" />
+	<link href="${base}/tysx/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="${base}/css/tysx/newzbj.css" />
+	<style type="text/css">
+		.leftTop{
+			position: absolute;
+    		top: 5%;
+   		 	left: 5%;
+		}
+		.rightTop{
+			position: absolute;
+    		top: 5%;
+   		 	right: 5%;
+		}
+		.leftBottom{
+			position: absolute;
+    		bottom: 5%;
+   		 	left: 5%;
+		}
+		.rightBottom{
+			position: absolute;
+    		bottom: 5%;
+   		 	right: 5%;
+		}
+	</style>
+</head>
+<body >
+<div id="wrapper" class="bgc-fff normal-font">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/admin/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/admin/left.html"/>
+        <!--下面内容部分-->
+        <!-- roomId -->
+		<input type="hidden" id="roomId" value="${iLiveLiveRoom.roomId}" />
+		<input type="hidden" name="serverGroupId" value="${serverGroupId}" id="serverGroupId"/>
+		<input type="hidden" id="logoUrl" <#if liveEvent.logoUrl??>value="${liveEvent.logoUrl}"</#if>>
+        <div class="wrapper wrapper-content bgc-fff logoset">
+            <div class="row title-header">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title"> LOGO设置</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 m-lg">
+                    <div class="col-lg-5">
+                        <h3 class="m-b-md">预览：</h3>
+                        <div class="col-lg-11 gray-bg z_preview">
+                        <#if liveEvent.logoUrl??><#if liveEvent.logoUrl!=""><img src="${liveEvent.logoUrl}" id="imgdemo" class="leftTop"/><#else><img src="${base}/tysx/img/x.png" id="imgdemo" class="leftTop"/></#if>
+                        <#else><img src="${base}/tysx/img/x.png" id="imgdemo" class="leftTop"/></#if>
+                        </div>
+                        <input type="hidden" value="<#if liveEvent.logoClass??>${liveEvent.logoClass}<#else>leftTop</#if>" id="logoclass"/>
+                    </div>
+                    <div class="col-lg-7 setinfo">
+                        <p>
+                            <span>功能开关:</span>
+                            <input type="checkbox" id="switchbutton" class="chooseBtn" <#if liveEvent.openLogoSwitch??><#if liveEvent.openLogoSwitch == 1>checked</#if></#if> />
+                            <label for="switchbutton" class="choose-label"></label>
+                            <span class="m-l">视频窗口Logo显示</span>
+                        </p>
+                        <p id="position">
+                            <span>logo位置：</span>
+                            <span><input name="z-pos" type="radio" value="1" <#if liveEvent.logoPosition??><#if liveEvent.logoPosition == 1>checked</#if><#else>checked</#if>/>左上角 </span>
+                            <span><input name="z-pos" type="radio" value="2" <#if liveEvent.logoPosition??><#if liveEvent.logoPosition == 2>checked</#if></#if>/>右上角 </span>
+                            <span><input name="z-pos" type="radio" value="3" <#if liveEvent.logoPosition??><#if liveEvent.logoPosition == 3>checked</#if></#if>/>左下角 </span>
+                            <span><input name="z-pos" type="radio" value="4" <#if liveEvent.logoPosition??><#if liveEvent.logoPosition == 4>checked</#if></#if>/>右下角 </span>
+                        </p>
+                        <ol class="m-l">
+                            <li>图片大小2M以内</li>
+                            <li>图片分辨率865*486像素</li>
+                            <li>支持PNG、JPG、JPEG格式</li>
+                            <!-- <input id="uploadImg" type="file" class="btn text-danger text-center m-t bgc-fff" accept="image/gif,image/jpeg,image/x-png" style="border-color:#ed5565" value="+ 上传">   -->         
+                        <div>
+							<span class="btn btn-success btn-file"> <span class="fileUpload1 fileinput-new" style="border-color:#ed5565">+ 上传</span>
+								<input type="file"  id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+							</span>
+						</div>
+                        </ol>
+                        <button class="btn red-btn m-t-xl" id="submit">确定</button>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+
+</body>
+<script type="text/javascript" src="${base}/thirdparty/ZeroClipboard/ZeroClipboard.js"></script>
+<script type="text/javascript" src="${base}/res/bvRadio/js/jquery.qrcode.min.js"></script>
+<script src="${base}/tysx/js/bootstrap-datetimepicker.min.js"></script>
+<script src="${base}/tysx/js/bootstrap-fileinput.js"></script>
+<script>
+	if(!($("#switchbutton").get(0).checked)){
+		$("input").attr("disabled","disabled");
+		$("#switchbutton").attr("disabled",false);
+	}
+	
+    $(".live-bottom").hide()
+
+    wid=$('.blcen').width()
+    $('.textbl').css('width',wid-300)
+    $('.textbl2').css('width',wid-300)
+
+    $(window).resize(function () {          //当浏览器大小变化时
+
+        wid=$('.blcen').width()
+        $('.textbl').css('width',wid-300)
+        $('.textbl2').css('width',wid-300)
+
+    });
+
+    $(".img-box").hover(function(){
+        $(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+    },function(){
+        $(this).find(".live-bottom").stop(true, false).slideUp(300)
+    })
+    $("#imgdemo").removeClass().addClass($("#logoclass").val());
+
+    //调整图片所在位置
+    $("input[name='z-pos']").on("change",function(){
+    	var i = parseInt($("input[name='z-pos']:checked").val());
+    	console.log(i);
+    	switch(i){
+    	case 1:$("#imgdemo").removeClass().addClass("leftTop");break;
+    	case 2:$("#imgdemo").removeClass().addClass("rightTop");break;
+    	case 3:$("#imgdemo").removeClass().addClass("leftBottom");break;
+    	case 4:$("#imgdemo").removeClass().addClass("rightBottom");break;
+    	}
+    });
+    
+    //确认
+    $("#submit").on("click",function(){
+    	var logoUrl = $("#logoUrl").val();
+    	var roomId = $("#roomId").val();
+    	var openLogoSwitch;
+    	if($("#switchbutton").get(0).checked){
+    		openLogoSwitch = 1;
+    	}else{
+    		openLogoSwitch = 0;
+    	}
+    	var logoPosition = $("#position input[name='z-pos']:checked").val();
+    	$.ajax({
+    		url:"${base}/admin/config/logosetEdit.do",
+    		method:"post",
+    		data:{
+    			logoUrl:logoUrl,
+    			roomId:roomId,
+    			openLogoSwitch:openLogoSwitch,
+    			logoPosition:logoPosition
+    		},
+    		success:function(){
+				alert("保存成功");
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    });
+    
+    //上传图片
+    $("#picID").on("change", function() {
+		var formData = new FormData();  
+	    var uploadFile = $("#picID").get(0).files[0];
+	    var selectedId = $('#select').val();  
+	    var serverGroupId = $("#serverGroupId").val();
+	    formData.append("file",uploadFile);  
+	    formData.append("serverGroupId",serverGroupId);
+	    console.log(${serverGroupId});
+	    formData.append("fileType", "image");
+		console.log(uploadFile);
+		$.ajax({
+			url : '${base}/admin/file/o_uploadFile.do',
+			type : 'POST',
+			data : formData,
+			async : false,
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				$("#logoUrl").val(data.httpUrl)
+				$("#imgdemo").attr("src",data.httpUrl);
+				if (data.status==1) {
+					console.log('upload success');
+					$('#converAddr').val(data.filePath);
+					$('#converAddrHttp').val(data.httpUrl);
+				} else {
+					console.log(data.message);
+				}
+			},
+			error : function(data) {
+				console.log(data.status);
+			}
+		});
+	});
+    
+    $("#switchbutton").on("change",function(){
+    	if($(this).get(0).checked){
+    		$("#picID").attr("disabled",false);
+    		$("#position input[name='z-pos']").attr("disabled",false);
+    	}else{
+    		$("#picID").attr("disabled","disabled");
+    		$("#position input[name='z-pos']").attr("disabled","disabled");
+    	}
+    });
+    
+</script>
+</html>

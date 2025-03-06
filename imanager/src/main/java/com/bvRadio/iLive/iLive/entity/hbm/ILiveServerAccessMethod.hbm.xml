@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveServerAccessMethod" table="ilive_server_access_method">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="method_id" type="java.lang.Integer">
+			<column name="method_id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="method_name" type="java.lang.String">
+			<column name="method_name" length="50" />
+		</property>
+
+
+		<property name="ftp_address" type="java.lang.String">
+			<column name="ftp_address" length="50" />
+		</property>
+
+		<property name="ftp_address_inner" type="java.lang.String">
+			<column name="ftp_address_inner" length="50" />
+		</property>
+
+		<property name="ftp_user" type="java.lang.String">
+			<column name="ftp_user" length="50" />
+		</property>
+
+		<property name="ftp_pwd" type="java.lang.String">
+			<column name="ftp_pwd" length="50" />
+		</property>
+
+		<property name="http_address" type="java.lang.String">
+			<column name="http_address" length="50" />
+		</property>
+
+		<property name="default_method">
+			<column name="default_method" />
+		</property>
+
+		<property name="umsport">
+			<column name="umsport" />
+		</property>
+
+		<property name="iliveServerId">
+			<column name="server_id" />
+		</property>
+
+
+		<property name="ftpEncode">
+			<column name="ftp_encode" />
+		</property>
+
+		<property name="ftpPort">
+			<column name="ftp_port" />
+		</property>
+
+		<property name="webHttpUrl">
+			<column name="web_httpUrl" />
+		</property>
+
+		<property name="h5HttpUrl">
+			<column name="h5_httpUrl" />
+		</property>
+
+		<property name="livemsport">
+			<column name="livemsport" />
+		</property>
+
+		<property name="orgLiveHttpUrl">
+			<column name="org_liveHttpUrl" />
+		</property>
+
+	</class>
+</hibernate-mapping>

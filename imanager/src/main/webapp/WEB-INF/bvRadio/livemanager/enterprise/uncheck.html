@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<#include "/bvRadio/livemanager/head.html" />
+    <title>企业认证</title>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+    	<!--上面的导航栏部分-->
+		<#include "/bvRadio/livemanager/top.html" />
+		<!--左侧部分-->
+		<#include "/bvRadio/livemanager/left.html" />
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">企业认证</a>
+                    </div>
+                </div>
+            </div>
+           <div class="row btn-box">
+                <div class="col-lg-12">
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left">
+                       <!-- <div class="pull-left lh-40 font-content">企业分类：</div>-->
+                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                           <!--  <button type="button" class="btn dropdown-toggle bordered bgc-fff" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">选择类型
+                                <span class="caret"></span>
+                            </button>
+                           	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">IT</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">教育</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">金融</a>
+                                </li>
+                        	</ul> -->
+                        	  <!-- <select class="form-control" id="selectenterpriseType">
+                        		<option value="0">全部</option>
+                        		<option value="1">IT</option>
+                        		<option value="2">金融</option>
+                        		<option value="3">教育</option>
+                        		<option value="4">其他</option>
+                        	</select>-->
+                        </div>
+                    </div>
+                    <div class="pull-right m-r-lg m-t-xs">
+                        <input id="serachinput" class="serachinput" placeholder="按手机号搜索" type="text">
+                        <button class="btn commonbtn m-t-n-4" id="search">搜索</button>
+                        <button class="btn commonbtn m-t-n-4"><i class="fa fa-external-link m-r-xs"></i>导出</button>
+                    </div>
+                </div>
+            </div>
+                <@p.pageList value=pagination 
+					listAction="list.do";item,i,has_next> 
+					<@p.column class="text-center" style="width:40px;"
+					title="ID">
+					${item.enterpriseId!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="企业名称">
+					<#if item.enterpriseName??>${item.enterpriseName!}</#if>
+					</@p.column>
+					<!-- <@p.column class="text-center" style="width:40px;"
+					title="企业类型">
+					<#if item.enterpriseType??>
+						<#if item.enterpriseType=="1">
+								IT
+							<#elseif item.enterpriseType=="2">
+								金融
+							<#elseif item.enterpriseType=="3">
+								教育
+							<#else>
+								其他
+						</#if>
+					</#if>
+					</@p.column> -->
+					<@p.column class="text-center" style="width:40px;"
+					title="营业执照注册号">
+					<#if item.enterpriseRegNo??>${item.enterpriseRegNo!}</#if>
+					</@p.column>
+					<!-- <@p.column class="text-center" style="width:40px;"
+					title="营业执照">
+					<#if item.enterpriseLicence??><img style="width:50px;height:50px;" src="${item.enterpriseLicence!}" /></#if>
+					</@p.column> -->
+					<@p.column class="text-center" style="width:80px;"
+					title="认证状态">
+					<#if item.certStatus??>
+						<#if item.certStatus==1>
+							认证中
+						<#elseif item.certStatus==5>
+							认证不通过
+						</#if>
+					</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:80px;"
+					title="申请人手机号">
+						${item.userPhone!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="申请时间">
+					<#if item.applyTime??>${item.applyTime!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="操作">
+                        <a href="${base}/operator/enterprise/certinfo.do?enterpriseId=${item.enterpriseId!}" class="m-r-xs color-999">查看</a>|<a onclick="remove(${item.enterpriseId})" href="javascript:;" class="m-l-xs color-999" id="remove">删除</a>
+					</@p.column> 
+					</@p.pageList>
+</body>
+<script>
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75
+    });
+    var div1 =  $('.scrollSwitchBox');
+    var div2 =  $('.scrollSwitch');
+    $('.scrollSwitchBox').click(function(){
+        if($("#div1").hasClass("open1")){
+            $("#div1").addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+            $("#div2").addClass("scrollSwitch").addClass("close2").removeClass("open2");
+            $("#div1 input").attr("checked",false);
+            return
+        }else{
+            $("#div1").addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+            $("#div2").addClass("scrollSwitch").addClass("open2").removeClass("close2");
+            $("#div1 input").attr("checked",true);
+            return
+        }
+    })
+    $(function(){
+    	 $("#_page_form").append("<input type='hidden' id='content' name='content'/>");
+    	 $("#_page_form").append("<input type='hidden' id='enterprisetype' name='enterpriseType'/>");
+    })
+    function remove(enterpriseId){
+    	console.log(enterpriseId);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/remove.do",
+    		method:"post",
+    		data:{
+    			enterpriseId:enterpriseId
+    		},
+    		success:function(){
+    			location.reload();
+    			console.log("修改成功");
+    		},
+    		error:function(){
+    		}
+    	});
+    }
+    
+    //搜索
+    $("#search").on("click",function(){
+    	var content = $("#serachinput").val();
+    	$("#content").val(content);
+    	var type = $("#selectenterpriseType").val();
+    	$("#enterprisetype").val(type);
+    	$("#_page_form").submit();
+    });
+    
+    //按企业类型搜索
+    $("#selectenterpriseType").on("change",function(){
+    	var type = $("#selectenterpriseType").val();
+    	$("#enterprisetype").val(type);
+    	$("#_page_form").submit();
+    });
+    $("#selectenterpriseType").val("${enterpriseType}");
+    $("#serachinput").val("");
+</script>
+</html>

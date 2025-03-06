@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>媒资管控详情</title>
+	<#include "/bvRadio/livemanager/head.html" />
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+    <style>
+
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="bgc-fff">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/livemanager/top.html" />
+        <!--左侧部分-->
+        <#include "/bvRadio/livemanager/managercontrolleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">视频详情</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 p-w-lg">
+                    <ul>
+                        <li>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">视频名称：</div>
+                                <div class="liveRoomRight">${file.mediaFileName!}</div>
+                            </div>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">企业名称：</div>
+                                <div class="liveRoomRight">${file.enterpriseId!}</div>
+                            </div>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">ID：</div>
+                                <div class="liveRoomRight">${file.fileId!}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">视频信息：</div>
+                                <div class="liveRoomRight">${file.fileRate!}P,${file.fileSizeMb!}Mb,${file.duration!}</div>
+                            </div>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">创建时间：</div>
+                                <div class="liveRoomRight">${file.mediaCreateTime!}</div>
+                            </div>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">创建人：</div>
+                                <div class="liveRoomRight">
+                                <#if file.userName??>${file.userName!}</#if>
+                                <#if file.userName?? && file.userId??>,</#if>
+                                <#if file.userId??>${file.userId!}</#if>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">来源：</div>
+                                <div class="liveRoomRight">
+									<#if file.createType??><#if file.createType == 0>原片</#if></#if>
+									<#if file.createType??><#if file.createType == 1>剪辑</#if></#if>
+									<#if file.createType??><#if file.createType == 2>合并</#if></#if>
+									<#if file.createType??><#if file.createType == 3>上传</#if></#if>
+								</div>
+                            </div>
+
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">状态：</div>
+                                <div class="liveRoomRight">
+                                <#if file.onlineFlag??><#if file.onlineFlag == 1>
+                                	<span id="statetext">上线</span>
+                                <#else>
+                                	<span id="statetext">禁用</span>
+                                </#if></#if>
+                                <button id="jinyong" class="btn defaultButton m-l" <#if file.onlineFlag??><#if file.onlineFlag == 0>style="display:none"</#if></#if> onclick="setState('${file.fileId}',0)">禁用</button>
+                                <button id="huifu" class="btn defaultblueButton m-l" <#if file.onlineFlag??><#if file.onlineFlag == 1>style="display:none"</#if></#if> onclick="setState('${file.fileId}',1)">恢复</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="m-t-xs">
+                <div class="col-lg-12">
+                    <ul id="myTab" class="nav nav-tabs dcTab">
+                        <li class="active"><a href="#home" data-toggle="tab">
+                            视频详情
+                        </a>
+                        </li>
+                        <!-- <li><a href="#jmeter" data-toggle="tab">
+                            观看授权</a>
+                        </li>
+                        <li><a href="#ejb" data-toggle="tab">
+                            智能管控</a>
+                        </li>
+                        <li><a href="#czjl" data-toggle="tab">
+                            操作记录</a>
+                        </li> -->
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade in active" id="home">
+                            <div class="information m-t-sm">
+                                <div class="col-lg-4">
+                                    <div class="liveBg">
+                                    <video src="${file.filePath!}" controls></video>
+                                        <!-- <img src="${base}/tysx/img/u1207.jpg" alt=""/> -->
+                                        <div class="playMask">
+                                            <i class="fa fa-play"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-weight">观看地址：</td>
+                                                <td class="text-left">
+                                                    <input value="${mediavedioAddr!}" type="text" id="addr"/>
+                                                    <button id="copy1" class="btn defaultButton pull-right m-l">复制</button>
+                                                    <a href="${mediavedioAddr!}" class="btn defaultButton pull-right">打开</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight">嵌入地址：</td>
+                                                <td class="text-left">
+                                                    <input id="addr2" type="text" value="${file.filePath!}" />
+                                                    <button id="copy2" class="btn defaultButton pull-right">复制</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight">下载地址：</td>
+                                                <td class="text-left">
+                                                    <input id="addr3" type="text" value="${file.filePath!}" />
+                                                    <button id="copy3" class="btn defaultButton pull-right">复制</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight">手机预览：</td>
+                                                <td class="text-left">
+                                                    <div class="erweimaBox" id="zbewmbox"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>视频简介：</td>
+                                                <td class="text-left">
+                                                    <textarea class="livetextarea">${file.mediaFileDesc!}</textarea>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="ejb">
+                            <div class="information m-t-sm">
+                                <div class="col-lg-4">
+                                    <div class="liveBg">
+                                        <img src="${base}/tysx/img/u1207.jpg" alt=""/>
+                                        <div class="playMask">
+                                            <i class="fa fa-play"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                        <tr>
+                                            <td class="font-weight">推流地址：</td>
+                                            <td class="text-left">
+                                                rtmp://live.iptv-soft.com/live/live58648546
+                                                <button class="btn defaultButton pull-right">复制</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight">PC观看地址：</td>
+                                            <td class="text-left">
+                                                rtmp://live.iptv-soft.com/live/live58648546
+                                                <button class="btn defaultButton pull-right m-l">复制</button>
+                                                <button class="btn defaultButton pull-right">打开</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight">播放地址：</td>
+                                            <td class="text-left">
+                                                rtmp://live.iptv-soft.com/live/live58648546
+                                                <button class="btn defaultButton pull-right">复制</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight">手机预览：</td>
+                                            <td class="text-left">
+                                                <div class="erweimaBox"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>直播简介：</td>
+                                            <td class="text-left">
+                                                <textarea class="livetextarea"></textarea>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="jmeter">
+                            <div class="watchTitle m-t">
+                                <div class="watchList">
+                                    <div class="watchName">观看授权：</div>
+                                    <div class="watchText">密码 <a class="watchUnder" href="#">查看观看授权用户记录</a></div>
+                                </div>
+                                <div class="watchList">
+                                    <div class="watchName">观看密码：</div>
+                                    <div class="watchText">1111</div>
+                                </div>
+                                <div class="watchList">
+                                    <div class="watchName">欢迎语：</div>
+                                    <div class="watchText">欢迎您的光临~</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 p-w-lg">
+                                    <p class="font-weight m-t">观看授权设置记录：</p>
+                                    <table class="table watchtable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th>观看授权类型</th>
+                                            <th>欢迎语</th>
+                                            <th>设置人</th>
+                                            <th>设置时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>密码：1111</td>
+                                            <td class="text-left">欢迎观看</td>
+                                            <td>
+                                                苏飞
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>公开</td>
+                                            <td class="text-left">欢迎观看</td>
+                                            <td>
+                                                苏飞
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>手机验证</td>
+                                            <td class="text-left">欢迎观看</td>
+                                            <td>
+                                                苏飞
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>付费：12.00</td>
+                                            <td class="text-left">欢迎观看</td>
+                                            <td>
+                                                苏飞
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>白名单</td>
+                                            <td class="text-left">欢迎观看</td>
+                                            <td>
+                                                苏飞
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 m-t-sm pageBox">
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="czjl">
+                            <div class="row m-t">
+                                <div class="col-lg-12 p-w-lg">
+                                    <table class="table cztable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>操作人类型</th>
+                                            <th>操作人</th>
+                                            <th>操作账号</th>
+                                            <th>操作时间</th>
+                                            <th>操作明细</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>5368595</td>
+                                            <td>
+                                                播管
+                                            </td>
+                                            <td>李扬</td>
+                                            <td>ly</td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                恢复直播
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5368595</td>
+                                            <td>
+                                                播管
+                                            </td>
+                                            <td>李扬</td>
+                                            <td>ly</td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                禁用直播
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5368595</td>
+                                            <td>
+                                                企业
+                                            </td>
+                                            <td>李扬</td>
+                                            <td>ly</td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                直播间关闭
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5368595</td>
+                                            <td>
+                                                播管
+                                            </td>
+                                            <td>李扬</td>
+                                            <td>ly</td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                修改直播信息
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5368595</td>
+                                            <td>
+                                                播管
+                                            </td>
+                                            <td>李扬</td>
+                                            <td>ly</td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                创建直播场次
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5368595</td>
+                                            <td>
+                                                播管
+                                            </td>
+                                            <td>李扬</td>
+                                            <td>ly</td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                审批不通过：理由
+                                            </td>
+                                        </tr>
+
+
+
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 m-t-sm pageBox">
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+<script type="text/javascript" src="${base}/res/bvRadio/js/jquery.qrcode.min.js"></script>
+<script>
+$(function(){
+	$('#zbewmbox').qrcode({
+			render : "canvas", // 渲染方式有table方式和canvas方式
+			width : 100, //默认宽度
+			height : 100, //默认高度
+			text : "${mediavedioAddr!}", //二维码内容
+			typeNumber : -1, //计算模式一般默认为-1
+			correctLevel : 2, //二维码纠错级别
+			background : "#ffffff", //背景颜色
+			foreground : "#000000" //二维码颜色
+	});
+	});
+	
+    $(function () {
+        $('#myTab li:eq(0) a').tab('show');
+        $(".wrapper").height("auto");
+        var winHeight;
+        //获取页面高度
+        winHeight = $(window).height();
+        //导航栏高度
+        var navHeight = $(".navbar").height();
+        //标题栏高度加边线
+        var titleHeight = $(".title-header").height()+2;
+        $(".information").slimScroll({
+            height: winHeight-navHeight-titleHeight-160
+        });
+        $(".watchtable tbody").height(winHeight-navHeight-titleHeight-220-190);
+        $(".cztable tbody").height(winHeight-navHeight-titleHeight-280)
+        $(".liveBg").height($(".liveBg").width()*9/16);
+
+    });
+    //设置状态
+    function setState(fileId,state){
+    	$.ajax({
+    		url:"${base}/operator/managercontrol/"+fileId+"/"+state+"/setfilestate.do",
+    		method:"post",
+    		success:function(){
+    			if(state == 1){
+    				$("#statetext").text("上线");
+    				$("#jinyong").show();
+    				$("#huifu").hide();
+    			}else if(state == 0){
+    				$("#statetext").text("禁用");
+    				$("#jinyong").hide();
+    				$("#huifu").show();
+    			}
+    		},
+    		error:function(){
+    		}
+    	});
+    }
+    $("#copy1").on("click",function(){
+    	var Url2=document.getElementById("addr");
+    	Url2.select(); // 选择对象
+    	document.execCommand("Copy"); // 执行浏览器复制命令
+    	alert("已复制好，可贴粘。");
+    });
+    $("#copy2").on("click",function(){
+    	var Url2=document.getElementById("addr2");
+    	Url2.select(); // 选择对象
+    	document.execCommand("Copy"); // 执行浏览器复制命令
+    	alert("已复制好，可贴粘。");
+    });
+    $("#copy3").on("click",function(){
+    	var Url2=document.getElementById("addr3");
+    	Url2.select(); // 选择对象
+    	document.execCommand("Copy"); // 执行浏览器复制命令
+    	alert("已复制好，可贴粘。");
+    });
+
+</script>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<#include "/bvRadio/livemanager/head.html" />
+    <title>企业管理</title>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+    	<!--上面的导航栏部分-->
+		<#include "/bvRadio/livemanager/top.html" />
+		<!--左侧部分-->
+		<#include "/bvRadio/livemanager/left.html" />
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">企业管理</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                    <div class="pull-right m-r-lg m-t-xs">
+                        <!-- <div class="dropdown pull-left m-t-xs m-r-lg ">
+                            <button type="button" class="btn dropdown-toggle bordered bgc-fff" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">选择文档
+                                <span class="caret"></span>
+                            </button>
+                        </div> -->
+                        <select id="select">
+                        	<option value = "0">全部</option>
+                        	<option value = "1">IT</option>
+                        	<option value = "2">教育</option>
+                        	<option value = "3">政府</option>
+                        </select>
+                        <input type="text" class="serachinput" placeholder="按企业搜索" id="name"/>
+                        <button class="btn commonbtn m-t-n-4" id="search">搜索</button>
+                        <button class="btn commonbtn m-t-n-4"><i class="fa fa-external-link m-r-xs"></i>导出</button>
+                    </div>
+                </div>
+            </div>
+                <@p.pageList value=pagination 
+					listAction="manager.do";item,i,has_next> 
+					<@p.column class="text-center" style="width:40px;"
+					title="ID">
+					${item.enterpriseId!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="企业名称">
+					<#if item.enterpriseName??>${item.enterpriseName!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="企业类型">
+					<#if item.enterpriseType??><#if item.enterpriseType??>
+						<#if item.enterpriseType=="1">
+								IT
+							<#elseif item.enterpriseType=="2">
+								金融
+							<#elseif item.enterpriseType=="3">
+								教育
+							<#else>
+								其他
+						</#if>
+					</#if></#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="营业执照注册号">
+					<#if item.enterpriseRegNo??>${item.enterpriseRegNo!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="申请时间">
+					<#if item.applyTime??>${item.applyTime!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="过审时间">
+					<#if item.applyTime??>${item.certTime!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="审核人">
+					<#if item.applyTime??>${item.checkPerson!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="操作">
+                        <a href="${base}/operator/enterprise/detail.do?enterpriseId=${item.enterpriseId}" class="m-r-xs color-999">查看</a>|<a onclick="remove(${item.enterpriseId})" href="javascript:;" class="m-l-xs color-999" id="remove">删除</a>
+					</@p.column> 
+					</@p.pageList>
+</body>
+<script>
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75
+    });
+    var div1 =  $('.scrollSwitchBox');
+    var div2 =  $('.scrollSwitch');
+    $('.scrollSwitchBox').click(function(){
+        if($("#div1").hasClass("open1")){
+            $("#div1").addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+            $("#div2").addClass("scrollSwitch").addClass("close2").removeClass("open2");
+            $("#div1 input").attr("checked",false);
+            return
+        }else{
+            $("#div1").addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+            $("#div2").addClass("scrollSwitch").addClass("open2").removeClass("close2");
+            $("#div1 input").attr("checked",true);
+            return
+        }
+    })
+    $("#_page_form").append("<input type='hidden' id='content' name='content'/>");
+    $("#_page_form").append("<input type='hidden' id='enterprisetype' name='enterprisetype'/>");
+    function remove(enterpriseId){
+    	$.ajax({
+    		url:"${base}/manager/enterprise/remove.do",
+    		method:"post",
+    		data:{
+    			enterpriseId:enterpriseId
+    		},
+    		success:function(){
+    			location.reload();
+    			console.log("修改成功");
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    }
+    
+    //搜索
+    $("#search").on("click",function(){
+    	var content = $("#name").val();
+    	var select = $("#select").val();
+    	//console.log(select);
+    	$("#content").val(content);
+    	$("#enterprisetype").val(select);
+    	$("#_page_form").submit();
+    });
+
+</script>
+</html>

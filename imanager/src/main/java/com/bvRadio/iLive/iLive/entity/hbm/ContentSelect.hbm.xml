@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ContentSelect" table="content_select">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" />
+		</property>
+		<property name="contentType" type="java.lang.Integer">
+			<column name="content_type" />
+		</property>
+
+		<property name="contentId" type="java.lang.Integer">
+			<column name="content_id" />
+		</property>
+
+		<property name="contentName" type="java.lang.String">
+			<column name="content_name" />
+		</property>
+
+		<property name="contentImg" type="java.lang.String">
+			<column name="content_img" />
+		</property>
+
+		<property name="type" type="java.lang.Integer">
+			<column name="type" />
+		</property>
+
+		<property name="indexs" type="java.lang.Integer">
+			<column name="indexs" />
+		</property>
+
+		<property name="shows" type="java.lang.Integer">
+			<column name="shows" />
+		</property>
+
+		<property name="contentBrief" type="java.lang.String">
+			<column name="content_brief" />
+		</property>
+
+	</class>
+</hibernate-mapping>

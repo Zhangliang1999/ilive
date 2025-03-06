@@ -1,0 +1,67 @@
+<!--平台左侧列表-->
+<nav class="navbar-default navbar-static-side navbar-width"
+	role="navigation">
+	<div class="sidebar-collapse">
+		<!-- ƽ̨Start -->
+		<ul class="nav metismenu nav-left" id="side-menu">
+			<!-- <li class="<#if leftActive??&&leftActive='1'>active</#if>"><a href="##"><i
+					class="fa fa-bookmark"></i> <span class="nav-label">菜单</span></a></li>
+			<li class="<#if leftActive??&&leftActive='2'>active</#if>"><a href="##"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">APP管理</span></a></li> -->
+			<li class="<#if leftActive??&&leftActive='3'>active</#if>"><a href="${base}/operator/platform/platform.do"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">敏感词管理</span></a></li>
+			<li ><a href="${base}/operator/page/version.do"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">版本管理</span></a></li>
+			
+			<li>
+                <a href="javascript:void(0);">
+                    <i class="fa fa-bookmark"></i>
+                    <span class="nav-label">产品设置</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse">
+					<li>
+						<a href="${base}/operator/page/package.do">资源套餐</a>
+					</li>
+					<li>
+						<a href="${base}/operator/page/product.do">资源包</a>
+					</li>
+				</ul>
+            </li>
+           
+			<!-- <li class="<#if leftActive??&&leftActive='4'>active</#if>"><a href="##"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">操作日志</span></a></li> -->
+			<li class="<#if leftActive??&&leftActive='5'>active</#if>"><a href="${base}/operator/report/reportlist.do?type=1"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">举报管理</span></a></li>
+			<li class="<#if leftActive??&&leftActive='6'>active</#if>"><a href="${base}/operator/report/reportlist.do?type=2"><i
+					class="fa  fa-desktop"></i> <span class="nav-label">投诉建议管理</span></a></li>
+			<li class="<#if leftActive??&&leftActive='7'>active</#if>">
+                <a href="javascript:void(0);">
+                    <i class="fa fa-bookmark"></i>
+                    <span class="nav-label">APP管理</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse">
+					
+					<li>
+						<a href="${base}/operator/managercontrol/recommendEp.do">推荐企业设置</a>
+					</li>
+				</ul>
+            </li>
+			<li class="<#if leftActive??&&leftActive='8'>active</#if>">
+				<a href="javascript:void(0);">
+					<i class="fa fa-bookmark"></i>
+					<span class="nav-label">平台消息管理</span>
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level collapse">
+
+					<li>
+						<a href="${base}/operator/managercontrol/platformMessageManager.do">app消息</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<!-- ƽ̨End -->
+	</div>
+</nav>

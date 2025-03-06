@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>专题管理</title>
+<!--新加样式-->
+<#include "/bvRadio/head.html"/>
+<link rel="stylesheet" href="${base}/tysx/css/newheader.css" />
+<link rel="stylesheet" href="${base}/tysx/css/newleft.css" />
+<link rel="stylesheet" href="${base}/tysx/css/zhuye.css" />
+<link type="text/css" rel="stylesheet" href="${base}/tysx/css/bootstrap-fileinput.css"/>
+</head>
+<body>
+	<div id="wrapper">
+		<!--右侧内容的区域-->
+		<div id="page-wrapper" class="bgc-fff">
+			<!--上面的导航栏部分-->
+			<#include "/bvRadio/admin/top.html"/>
+			<!--左侧部分-->
+			<#include "/bvRadio/admin/mainleft.html"/>
+			<!--下面内容部分-->
+			<div class="wrapper wrapper-content bgc-fff">
+				<div class="row title-header gray-bg">
+					<div class="col-lg-12">
+						<div class="title-name">
+							<a class="font-title">专题管理</a>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="slimBox">
+							<div class="newcontaine">
+								<div class="content-box">
+									<div class="live-box add-live" data-toggle="modal"
+										data-target="#myModal">+创建专题</div>
+								</div>
+								<#list pagination.list as thematic>
+								<div class="content-box">
+									<div class="live-box on-live">
+										<div class="img-box">
+											<a href="javascript:;"> <img
+												src="${thematic.thematicImage!}" alt="" />
+											</a>
+
+											<div class="live-bottom">
+												<a class="zt-bottombox" href="javascript:;"> <i
+													class="fa fa-edit m-r-sm"></i>编辑
+												</a> <a class="zt-bottombox" href="javascript:;"> <i
+													class="fa fa-cog m-r-sm"></i>管理
+												</a> <a class="zt-bottombox" href="${base}/admin/thematic/delete.do?pageNo=${pagination.pageNo!1}&thematicId=${thematic.thematicId!}"> <i
+													class="fa fa-trash m-r-sm"></i>删除
+												</a>
+
+											</div>
+										</div>
+										<div class="content-box">
+											<p class="zt-title">${thematic.thematicDesc!}</p>
+											<div class="bottom-content m-t-xs">
+												<div class="bottom-left pull-left">
+													<p>创建人：${thematic.thematicName!}</p>
+													<p>直播结束时间：${thematic.createTime!}</p>
+												</div>
+												<div style="width: 40px;height: 20px;margin-left: 240px;margin-top: -20px;" onclick="updatechecked(${thematic.thematicId!0})"  class="<#if thematic.isChecked == 1>open1<#else>close1</#if> onlineFlagSwitchBox_${thematic.thematicId!0} scrollSwitchBox pull-left m-t-12">
+													<input id="isChecked_${thematic.thematicId!0}" name="isChecked" type="hidden" value="${thematic.isChecked!0}">
+													<div style="width: 20px;height: 20px;" class="<#if thematic.isChecked == 1>open2<#else>close2</#if> onlineFlagSwitch_${thematic.thematicId!0}  scrollSwitch"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								</#list>
+							</div>
+							<form id="_page_form"
+								action="${base}/admin/thematic/into/list.do" method="post">
+								<div
+									class="dataTables_paginate paging_simple_numbers pull-right m-r-lg"
+									id="DataTables_Table_0_paginate">
+									<#if !pagination?is_sequence> <#assign
+									pageNow=pagination.pageNo totalPage=pagination.totalPage > <input
+										type="hidden" name="pageNo" value="${pagination.pageNo}">
+									<#if (pageNow>0) && (pageNow<=totalPage) > <#if (pageNow<=1)>
+									<button type="button" class="btn btn-sm btn-white disabled">
+										<a><i class="fa fa-chevron-left"></i></a>
+									</button>
+									<#else>
+									<button type="button" onclick="PL.gotoPage(${pageNow - 1})"
+										class="btn btn-sm btn-white">
+										<a><i class="fa fa-chevron-left"></i></a>
+									</button>
+									</#if> <#if (pageNow-4 >1)> <#if (pageNow
+									<totalPage-2)>
+									<button type="button" onclick="PL.gotoPage(1)"
+										class="btn btn-sm btn-white">
+										<a>1</a>
+									</button>
+									<button type="button" class="btn btn-sm btn-white">
+										<a>...</a>
+									</button>
+									<#list pageNow-2..pageNow-1 as i>
+									<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+										<a>${i}</a>
+									</button>
+									</#list> <#elseif (pageNow-6 > 1)>
+									<button onclick="PL.gotoPage(1)" type="button"
+										class="btn btn-sm btn-white">
+										<a>1</a>
+									</button>
+									<button type="button" class="btn btn-sm btn-white">
+										<a>...</a>
+									</button>
+									<#list pageNow-4..pageNow-1 as i>
+									<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+										<a>${i}</a>
+									</button>
+									</#list> <#else> <#list 1..pageNow-1 as i>
+									<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+										<a>${i}</a>
+									</button>
+									</#list> </#if> <#elseif (pageNow=1)> <#else> <#list
+									1..pageNow-1 as i>
+									<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+										<a>${i}</a>
+									</button>
+									</#list> </#if>
+									<button type="button" onclick="PL.gotoPage(${pageNow})"
+										class="active btn btn-sm btn-white">
+										<a>${pageNow}</a>
+									</button>
+									<#if (pageNow+4 < totalPage)> <#if (pageNow>2)> <#list
+									pageNow+1..pageNow+2 as i>
+									<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+										<a>${i}</a>
+									</button>
+									</#list>
+									<button type="button" class="btn btn-sm btn-white">
+										<a>...</a>
+									</button>
+									<button type="button" onclick="PL.gotoPage(${totalPage})"
+										class="btn btn-sm btn-white">
+										<a>${totalPage}</a>
+									</button>
+									<#elseif (pageNow+6 < totalPage)> <#list pageNow+1..pageNow+4
+									as i>
+									<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+										<a>${i}</a>
+									</button>
+									</#list>
+									<button type="button" class="btn btn-sm btn-white">
+										<a>...</a>
+									</button>
+									<button type="button" onclick="PL.gotoPage(${totalPage})"
+										class="btn btn-sm btn-white">
+										<a>${totalPage}</a>
+									</button>
+									<#else> <#list pageNow+1..totalPage as i>
+									<button onclick="PL.gotoPage(${i})" type="button"
+										class="btn btn-sm btn-white">
+										<a>${i}</a>
+									</button>
+									</#list> </#if> <#elseif (pageNow=totalPage)> <#else> <#list
+									pageNow+1..totalPage as i>
+									<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+										<a>${i}</a>
+									</button>
+									</#list> </#if> <#if (pageNow>=totalPage)>
+									<button type="button" class="btn btn-sm btn-white disabled">
+										<a><i class="fa fa-chevron-right"></i></a>
+									</button>
+									<#else>
+									<button type="button" onclick="PL.gotoPage(${pageNow + 1})"
+										class="btn btn-sm btn-white">
+										<a><i class="fa fa-chevron-right"></i></a>
+									</button>
+									</#if> <#else>
+									<button type="button" class="btn btn-sm btn-white">
+										<a><i class="fa fa-chevron-left"></i></a>
+									</button>
+									<button type="button" onclick="PL.gotoPage(1)"
+										class="btn btn-sm btn-white">
+										<a>1</a>
+									</button>
+									<button type="button" class="btn btn-sm btn-white">
+										<a><i class="fa fa-chevron-right"></i></a>
+									</button>
+									</#if> </#if> 
+								</div>
+							</form>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 800px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">创建专题</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<div class="row ">
+							<div class="col-lg-4">
+								<div class="mobliePhone">
+									<div class="mobliePhoneCon"></div>
+								</div>
+							</div>
+							<div class="col-lg-8">
+								<div class="col-lg-12 m-b">
+									<div class="input-group">
+										<span class="labelname">专题名称 ：</span> <input
+											class="form-control modal-input" type="text"
+											placeholder="请输入专题名称" name="thematicName"/>
+									</div>
+								</div>
+								<div class="col-lg-12 m-b">
+									<div class="input-group">
+										<span class="labelname">专题简介 ：</span>
+										<textarea class="form-control modal-input" id="thematicDesc"></textarea>
+									</div>
+								</div>
+								<div class="col-lg-12 m-b">
+									<div class="input-group">
+										<span class="labelname">专题封面 ：</span>
+										<div class="form-group m-l-100" id="uploadForm"
+											enctype='multipart/form-data'>
+											<div class="fileinput fileinput-new"
+												data-provides="fileinput" id="exampleInputUpload">
+												<div class="fileinput-new thumbnail"
+													style="width: 200px;height: 140px;max-height:150px;">
+												</div>
+												<div class="fileinput-preview fileinput-exists thumbnail"
+													style="max-width: 200px; max-height: 150px;"></div>
+												<div>
+													<span class="btn btn-primary btn-file"> <span
+														class="fileinput-new">选择文件</span> <span
+														class="fileinput-exists">换一张</span> <input type="file"
+														name="pic1" id="picID"
+														accept="image/gif,image/jpeg,image/x-png" />
+													</span> <a href="javascript:;"
+														class="btn btn-warning fileinput-exists"
+														data-dismiss="fileinput">移除</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12 m-b">
+									<div class="input-group">
+										<span class="labelname">模板选择 ：</span>
+										<div class="muban m-l-100">
+											<ul class="mubanUl">
+												<li>
+													<div class="mubanPic"></div>
+													<div class="mubanTxt">模板名称</div>
+												</li>
+												<li>
+													<div class="mubanPic"></div>
+													<div class="mubanTxt">模板名称</div>
+												</li>
+												<li>
+													<div class="mubanPic mubanActive"></div>
+													<div class="mubanTxt">模板名称</div>
+												</li>
+												<li>
+													<div class="mubanPic"></div>
+													<div class="mubanTxt">模板名称</div>
+												</li>
+												<li>
+													<div class="mubanPic"></div>
+													<div class="mubanTxt">模板名称</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" onclick="saveILiveThematic()">确定</button>
+					<button type="button" class="btn btn-success" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	//修改数据状态
+	function updatechecked(thematicId){
+		var isChecked = $("#isChecked_"+thematicId).val();
+		if(isChecked==0){
+			isChecked = 1;
+		}else{
+			isChecked = 0;
+		}
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "${base}/admin/thematic/checked/update.do",
+			dataType : "json",
+			data : {
+				thematicId : thematicId,
+				isChecked : isChecked
+				},
+			success : function(data) {
+				var status = data.code;
+				if(status==1){
+					if(isChecked==1){
+						//开启
+						$(".onlineFlagSwitchBox_"+thematicId).removeClass("close1").addClass("open1");
+						$(".onlineFlagSwitchBox_"+thematicId).find(".onlineFlagSwitch_"+thematicId).eq(0).removeClass("close2").addClass("open2");
+						$("#isChecked_"+thematicId).val(1);
+					}else{
+						//关闭
+						$(".onlineFlagSwitchBox_"+thematicId).removeClass("open1").addClass("close1");
+						$(".onlineFlagSwitchBox_"+thematicId).find(".onlineFlagSwitch_"+thematicId).eq(0).removeClass("open2").addClass("close2");
+						$("#isChecked_"+thematicId).val(0);
+					}
+				}else{
+					alert(data.message);
+				}
+			}
+		});
+	}
+	//添加数据
+	function saveILiveThematic(){
+		var formData = new FormData();  
+	    var uploadFile = $('#picID')[0].files[0];  
+	    formData.append("file", uploadFile);
+		formData.append("fileType", "image");
+		$.ajax({
+            url: '${base}/admin/file/o_uploadFile.do',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+            	 console.log(data);
+                 if(data.status==1){
+                 	var httpUrl = data.httpUrl;
+                 	console.log("上传图片："+httpUrl);
+                 	var thematicName = $("input[name=thematicName]").val();
+                 	if(thematicName.replace("\s+", "")=="" || thematicName==undefined){
+                 		
+                 	}
+                 	var thematicDesc = $("#thematicDesc").text();
+                 	var templateId = 1;
+                 	$.ajax({
+            			type : "POST",//请求方式 get/post
+            			url : "${base}/admin/thematic/save.do",
+            			dataType : "json",
+            			data : {
+            				thematicName : thematicName,
+            				thematicDesc : thematicDesc,
+            				thematicImage : httpUrl,
+            				templateId : templateId
+            				},
+            			success : function(data) {
+            				var status  = data.code;
+            				if(status==1){
+            					$("#myModal").modal('hide');
+            					window.location.href="${base}/admin/thematic/into/list.do?pageNo="+'${pagination.pageNo}';
+            				}else{
+            					alert(data.message);
+            				}
+            			}
+                	});
+                 	
+                 }else{
+                	 alert("上传图片失败");
+                 }
+            }
+		});
+	}
+</script>
+<script>
+	$(".live-bottom").hide()
+	$(".deletespan").hide()
+	wid = $('.blcen').width()
+	$('.textbl').css('width', wid - 300)
+	$('.textbl2').css('width', wid - 300)
+	$(window).resize(function() { //当浏览器大小变化时
+		wid = $('.blcen').width()
+		$('.textbl').css('width', wid - 300)
+		$('.textbl2').css('width', wid - 300)
+	});
+	$(".img-box").hover(function() {
+		$(this).find(".live-bottom").stop(true, false).slideDown(300);
+		$(this).find(".deletespan").stop(true, false).fadeIn(300);
+	}, function() {
+		$(this).find(".live-bottom").stop(true, false).slideUp(300);
+		$(this).find(".deletespan").stop(true, false).fadeOut(300);
+	})
+	var winH = $(window).height() - 140;
+	$(".slimBox").slimscroll({
+		height : winH
+	})
+</script>
+</html>

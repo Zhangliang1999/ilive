@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>账号管理</title>
+		<#include "/bvRadio/head.html"/>
+		<!--新加账户css-->
+		<link rel="stylesheet" type="text/css" href="${base}/tysx/css/account.css"/>
+	</head>
+	<body>
+		<div id="wrapper" class="bgc-fff">
+			<!--右侧内容的区域-->
+			<div id="page-wrapper">
+				<!--上面的导航栏部分-->
+				<#include "/bvRadio/admin/top.html"/>
+				<!--左侧部分-->
+				<#include "/bvRadio/admin/account/accountleft.html"/>
+				<!--下面内容部分-->
+				<div class="wrapper wrapper-content bgc-fff">
+					<div class="row">
+						<div class="col-lg-12 enterpriseinfo">
+							<div class="col-lg-10 font-content">
+								<p class="listinfo m-b-md">
+									<span><i class="text-danger p-w-sm"> * </i> 用户昵称：</span>
+									<input  autocomplte="off" id="nailName" placeholder="" type="text" value="${iLiveManager.nailName!}">
+									<small class="color-999 m-l-sm"><a id="nailNameLimit">${iLiveManager.nailName!?length}</a>/8字以内</small>
+								</p>
+								<p class="listinfo m-b-md">
+									<span class="pull-left"> 用户头像：</span>
+								</p>
+								<div class="logoImg pull-left" id="addImg1" style="width:100px;height:100px;position:relative;">
+									<input type="file" id="file" accept="image/*" style="position: absolute; cursor:pointer; top: 0; right: 0px; right: 0px; bottom: 0px; opacity: 0; width: 96px;">
+									<#if iLiveManager.userImg??&&iLiveManager.userImg!="">
+									<img id="addImg1Img" style="width:90px;height:90px;object-fit:contain;object-position: center center;" src="${iLiveManager.userImg!}">
+									</#if>
+								</div>
+								<input type="hidden" name="userImg" id="userImg" value="${iLiveManager.userImg!}" />
+
+								<small class="color-999 pull-left m-l">建议尺寸100*100</small>
+								<br>
+								<small class="color-999 pull-left m-l">格式要求：PNG,JPG</small>
+								<p></p>
+								<p class="listinfo m-b-md">
+									<span>用户账号：</span>
+									<input readonly="readonly" type="text" value="${iLiveManager.mobile!}">
+								</p>
+								<p class="listinfo m-b-md">
+									<span> 绑定手机：</span>
+									<input readonly="readonly" value="${iLiveManager.mobile!}" type="text">
+								</p>
+								<button type="button" onclick="saveUserInfo()" class="btn blueButton col-lg-offset-4 m-b-lg" style="padding: 5px 20px;">
+									确认保存
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="${base}/tysx/js/limit.js"></script>
+	<script>
+		function imgChange() {
+			//获取点击的文本框
+			var file = document.getElementById("file");
+			var imgContainer
+			//获取的图片文件
+			var fileList = file.files;
+			if (fileList.length > 0) {
+				var formData = new FormData();
+				var uploadFile = fileList[0];
+				formData.append("file", uploadFile);
+				formData.append("fileType", "image");
+				$.ajax({
+					url : '${base}/admin/file/o_uploadFile.do',
+					type : 'POST',
+					data : formData,
+					async : false,
+					cache : false,
+					contentType : false,
+					processData : false,
+					success : function(data) {
+						console.log(data);
+						if (data.status == 1) {
+							var httpUrl = data.httpUrl;
+							$('#addImg1Img').attr("src", data.httpUrl);
+							$('#userImg').val(data.httpUrl);
+						} else {
+							swal("上传失败");
+						}
+					},
+					error : function(data) {
+						console.log(data.code);
+					}
+				});
+			}
+		};
+
+		$(document).delegate("#addImg1 input", "change", function() {
+			imgChange();
+		});
+
+		// 保存用户
+		function saveUserInfo() {
+			var userImg = $('#userImg').val();
+			var nailName = $('#nailName').val();
+			$.ajax({
+				url : "${base}/admin/account/update/userinfo.do",
+				data : {
+					userImg : userImg,
+					nailName : nailName,
+					managerId : "${iLiveManager.userId!}"
+				},
+				method : "post",
+				dataType : "json",
+				success : function(data) {
+					swal("保存成功");
+				},
+				error : function(e) {
+					swal("保存失败");
+				}
+			});
+		}
+		
+		initLimit("nailName","nailNameLimit",8);
+
+	</script>
+</html>

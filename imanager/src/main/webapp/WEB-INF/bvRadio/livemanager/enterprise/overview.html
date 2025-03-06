@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<#include "/bvRadio/livemanager/head.html" />
+		<title>企业概览</title>
+	</head>
+<body >
+		<div id="wrapper">
+			<!--右侧内容的区域-->
+			<div id="page-wrapper" class="gray-bg">
+				<!--上面的导航栏部分-->
+				<#include "/bvRadio/livemanager/top.html" />
+				<!--左侧部分-->
+				<#include "/bvRadio/livemanager/left.html" />
+				<!--下面内容部分-->
+				<div class="wrapper wrapper-content border-left bgc-fff">
+					<!--<div class="row title-header gray-bg">-->
+					<!--<div class="col-lg-12">-->
+					<!--<div class="title-name">-->
+					<!--<a class="font-title">企业概览</a>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<div class="row m-t p-w-md">
+						<div class="col-lg-3 col-lg-offset-1">
+							<div class="widget style1 yellow-bg">
+								<div class="row">
+									<div class="col-xs-4">
+										<i class="fa fa-eye fa-5x"></i>
+									</div>
+									<div class="col-xs-8 text-right">
+										<span> 待认证企业 </span>
+										<h2 class="font-bold">32</h2>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="widget style1 yellow-bg">
+								<div class="row">
+									<div class="col-xs-4">
+										<i class="fa fa-commenting-o fa-5x"></i>
+									</div>
+									<div class="col-xs-8 text-right">
+										<span> 新增企业 </span>
+										<h2 class="font-bold">366</h2>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="widget style1 yellow-bg">
+								<div class="row">
+									<div class="col-xs-4">
+										<i class="fa fa-share-square-o fa-5x"></i>
+									</div>
+									<div class="col-xs-8 text-right">
+										<span> 累计企业 </span>
+										<h2 class="font-bold">322</h2>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row m-t-lg">
+						<div class="col-lg-12">
+							<ul class="echartul col-lg-offset-1">
+								<li>
+									今日
+								</li>
+								<li class="echartulActive">
+									7日
+								</li>
+								<li>
+									30日
+								</li>
+							</ul>
+						</div>
+						<div class="col-lg-12 m-t">
+							<div class="echartBox"></div>
+						</div>
+					</div>
+	</body>
+	<script>
+		var winHeight;
+		//获取页面高度
+		winHeight = $(window).height();
+		//导航栏高度
+		var navHeight = $(".navbar").height();
+		//标题栏高度加边线
+		var titleHeight = $(".title-header").height() + 2;
+		$(".tablebox").slimScroll({
+			height : winHeight - navHeight - titleHeight - 75
+		});
+		var div1 = $('.scrollSwitchBox');
+		var div2 = $('.scrollSwitch');
+		$('.scrollSwitchBox').click(function() {
+			if ($("#div1").hasClass("open1")) {
+				$("#div1").addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+				$("#div2").addClass("scrollSwitch").addClass("close2").removeClass("open2");
+				$("#div1 input").attr("checked", false);
+				return
+			} else {
+				$("#div1").addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+				$("#div2").addClass("scrollSwitch").addClass("open2").removeClass("close2");
+				$("#div1 input").attr("checked", true);
+				return
+			}
+		})
+
+	</script>
+</html>

@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>互动直播 - 社区互动管理系统</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/> <#include
+"/bvRadio/lightGallery.html"/> <#assign noCss=1/> <#include
+"/bvRadio/uploadHead.html"/> <#include "/bvRadio/colorPickerHead.html"/>
+<link href='${base}/res/bvRadio/css/chats.css' media='all'
+	rel='stylesheet' type='text/css' />
+<style>
+#bgLiveMessage {
+	display: none;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index: 1001;
+	-moz-opacity: 0.7;
+	opacity: .70;
+	filter: alpha(opacity = 70);
+}
+
+#showLiveMessage {
+	left: 50%;
+	top: 50%;
+	margin-left: -410px !important;
+	margin-top: -245px !important;
+	display: none;
+	position: absolute;
+	width: 820px;
+	height: 490px;
+	padding: 8px;
+	border: 8px solid #E8E9F7;
+	background-color: white;
+	z-index: 1002;
+	overflow: auto;
+}
+
+.row-fluid .span8 {
+	width: 60.811966%;
+}
+
+.row-fluid .span4 {
+	width: 36%;
+}
+
+.row-fluid .span6 {
+	width: 43%;
+}
+
+.tabli {
+	width: 90px;
+	height: 35px;
+	text-align: center;
+	border-width: 1px;
+	border-style: solid;
+	background: linear-gradient(180deg, rgba(242, 242, 242, 1) 0%,
+		rgba(242, 242, 242, 1) 0%, rgba(215, 215, 215, 1) 100%,
+		rgba(215, 215, 215, 1) 100%);
+	border-color: rgba(204, 204, 204, 1);
+	font-size: 13px;
+}
+
+.tabli a {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.nav .active {
+	color: #1A97D7;
+	border-top: 3px solid #1A97D7;
+}
+
+.active a {
+	color: #1A97D7 !important;
+}
+
+.nav-tabs>.active>a,.nav-tabs>.active>a:hover,.nav-tabs>.active>a:focus
+	{
+	border: none;
+}
+
+.lineright {
+	border-right: 1px solid #eee !important;
+}
+
+.tishi {
+	width: 405px;
+	height: 76px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgba(204, 204, 204, 1);
+	border-radius: 5px;
+	background-color: rgba(217, 234, 243, 1);
+	margin: 20px 0;
+	padding: 15px;
+}
+
+.tishi p {
+	margin: 14px 0;
+}
+
+.chk_4+label {
+	padding: 8px 0;
+	vertical-align: sub;
+}
+
+.chk_4+label::before {
+	height: 20px;
+	left: -1px;
+	width: 18px;
+}
+
+.chk_4:checked+label::after {
+	left: 2px;
+}
+
+.chk_4+label::after {
+	content: '' !important;
+	left: 22px;
+	font-size: 12px;
+}
+
+.chk_4+label {
+	line-height: 10px;
+	width: 35px;
+	height: 4px;
+}
+
+.chk_4:checked+label::before {
+	content: ' ';
+	position: absolute;
+	z-index: 99;
+	left: 34px;
+}
+
+.chk_4:checked+label:before {
+	content: '' !important;
+	left: 18px;
+	height: 20px;
+	width: 18px;
+}
+
+.chk_4:checked+label:after {
+	content: '' !important;
+}
+
+.titleheader {
+	background: #eee !important;
+}
+
+#checkIntervalTime {
+	margin-bottom: 0px;
+}
+
+.m-r-xs {
+	margin-right: 10px;
+	margin-top: 5px;
+}
+
+.chat .widget-content {
+	overflow: hidden;
+}
+
+.borderbottom {
+	border-bottom: 1px solid #eee;
+	margin-bottom: 5px;
+}
+
+.m-l-xs {
+	margin-left: 15px;
+}
+
+.position-absolute-b10 {
+	position: absolute;
+	bottom: 10px;
+	left: 15%;
+}
+</style>
+<script type="text/javascript">
+	function getMsg(){
+		var autoCheck = $("#autoCheck").is(":checked");
+		var autoScroll = $("#autoScroll").is(":checked");
+		var liveScrollTop = $("#liveDiv").scrollTop();
+		var yourself="${topUser.username}";
+		$.ajax({
+			type : 'POST',
+			url : "v_new_list.do",
+			data : {
+				liveId : ${liveId!0},
+			},
+			success : function(data, textStatus) {
+				if (data.status == 1) {
+					var msgList = data.data;
+					for(var i=0; i<msgList.length; i++){
+						try {
+							var msg = msgList[i];
+							var msgId = msg.msgId;
+							var liveMsgType = msg.liveMsgType;
+							var checked = msg.checked;
+							var senderName = msg.senderName;
+							var content = msg.content;
+							var images = msg.images;
+							var msgType = msg.msgType;
+							var fontColor = msg.fontColor;
+							var createTime = msg.createTime;
+							var update = msg.update;
+							var deleted = msg.deleted;
+							var checked = msg.checked;
+							//是删除
+							if (deleted == 1) {
+								$("#msgDiv_"+msgId).remove();
+								continue;
+							}
+							if(liveMsgType==2){
+								//是更新
+								if (update == 1) {
+									$("#msgDiv_"+msgId).find(".senderName").html(senderName);
+									$("#msgDiv_"+msgId).find(".msgContent").html(content);
+									$("#msgDiv_"+msgId).find(".msgContent").css("color",fontColor);
+									continue;
+								}
+								// 直播消息
+								var innerHTML = "";
+								innerHTML += "<div class=\"row-fluid\" id=\"msgDiv_"+msgId+"\">";
+								innerHTML += "<div class=\"span12 borderbottom\">";
+								innerHTML += "<div class=\"word_img\" style=\"width:10%; float:left; text-align:center;\">";
+								if(yourself==senderName){
+									innerHTML += "<img style=\"margin-top:5px;width:50px; height:50px;\"  src=\"${topUser.userThumbImg!'/res/bvRadio/img/u768.png'}\">";
+								}else{
+									innerHTML += "<img style=\"margin-top:5px;\" src=\"${base}/res/bvRadio/img/u768.png\">";
+								}
+								innerHTML += "</div>";
+
+								innerHTML += "<div class=\"word_contact\" style=\"width:90%; float:right;\">";
+								innerHTML += "<div class=\"row no-margin\">";
+								innerHTML += "<h5 class=\"span4 no-margin lh30\">";
+								innerHTML += "<span class=\"senderName\" style=\"color: #1A97D7;\">"+senderName+"</span>";
+								if(yourself==senderName){
+									innerHTML += " <span style=\"color:white;background-color: rgba(26, 151, 215, 1);margin-left: 20px;padding:5px;border-radius:3px\">官方</span>";
+								}else{
+									innerHTML += "<span style=\"color:white;background-color: rgba(26, 151, 215, 1);margin-left: 20px;padding:5px;border-radius:3px\">网友</span>";
+								}
+								innerHTML += "</h5>";
+								innerHTML += "<h5 class=\"span4 text-center no-margin lh30\" style=\"float:right\"><small>"+createTime+"</small></h5>";
+								innerHTML += "</div>";
+								if(msgType==1){
+									if(fontColor&&fontColor!=""){
+										innerHTML += "<p style=\"margin: 0;color:"+fontColor+";\" class=\"span12 pull-left msgContent\">"+content+"</p>";
+									}else{
+										innerHTML += "<p style=\"margin: 0\" class=\"span12 pull-left msgContent\">"+content+"</p>";
+									}
+									innerHTML += "</div>";
+								}
+								innerHTML += "<div class=\"pull-right mt5\" style=\"width:250px\">";
+								if(msgType==1){
+									if(!checked){
+										innerHTML += "<div  data-placement=\"bottom\" style=\"color:#1A97D7;width:41px;height:17px;text-algin:center;line-height:17px;font-size:12px;background-color: rgba(217, 234, 243, 1);border-width: 1px;border-style: solid;border-color: rgba(26, 151, 215, 1);border-radius: 5px!important;\" class=\"btn btn-mini has-tooltip pull-left mb5 mr5\" id=\"megTG\" onclick=\"1showLiveMessagediv("+msgId+")\">";
+										innerHTML += "通过";
+										innerHTML += "</div>";
+									}
+									innerHTML += "<div  data-placement=\"bottom\" style=\"color:#1A97D7;width:41px;height:17px;text-algin:center;line-height:17px;font-size:12px;background-color: rgba(217, 234, 243, 1);border-width: 1px;border-style: solid;border-color: rgba(26, 151, 215, 1);border-radius: 5px!important;\" class=\"btn btn-mini has-tooltip pull-left mb5 mr5\" id=\"megZD\" onclick=\"showTop("+msgId+")\">";
+									innerHTML += "置顶";
+									innerHTML += "</div>";
+									
+									innerHTML += "<div  data-placement=\"bottom\" style=\"color:#1A97D7;width:41px;height:17px;text-algin:center;line-height:17px;font-size:12px;background-color: rgba(217, 234, 243, 1);border-width: 1px;border-style: solid;border-color: rgba(26, 151, 215, 1);border-radius: 5px!important;\" class=\"btn btn-mini btn-danger pull-left mb5 mr5\" id=\"megSC\" onclick=\"deleteLiveMessage("+msgId+")\">";
+									innerHTML += "删除";
+									innerHTML += "</div>";
+									innerHTML += "<div  data-placement=\"bottom\" style=\"color:#1A97D7;width:41px;height:17px;text-algin:center;line-height:17px;font-size:12px;background-color: rgba(217, 234, 243, 1);border-width: 1px;border-style: solid;border-color: rgba(26, 151, 215, 1);border-radius: 5px!important;\" class=\"btn btn-mini btn-danger pull-left mb5 mr5\" id=\"megJY\" onclick=\"1deleteLiveMessage("+msgId+"})\">";
+									innerHTML += "禁言";
+									innerHTML += "</div>";
+									//innerHTML += "<div class=\"btn btn-mini has-tooltip pull-left mb5 mr5\" onclick=\"showLiveMessagediv("+msgId+")\">";
+									//innerHTML += "<i class=\"icon-pencil\"></i>";
+									//innerHTML += "</div>";
+								}
+								//innerHTML += "<div class=\"btn btn-mini btn-danger pull-left mb5 mr5\" onclick=\"deleteLiveMessage("+msgId+")\">";
+								//innerHTML += "<i class=\"icon-remove\"></i>";
+								innerHTML += "</div>";
+								innerHTML += "</div>";
+								innerHTML += "</div>";
+								if(msgType==1){
+									//if(fontColor&&fontColor!=""){
+									//	innerHTML += "<p style=\"margin: 0;color:"+fontColor+";\" class=\"span12 pull-left msgContent\">"+content+"</p>";
+									//}else{
+									//	innerHTML += "<p style=\"margin: 0\" class=\"span12 pull-left msgContent\">"+content+"</p>";
+									//}
+									//innerHTML += "</div>";	
+								}else if (msgType==2){
+									innerHTML += "<div class=\"demo-gallery pull-left\">";
+									innerHTML += "<ul class=\"list-unstyled row no-margin lightgallery\">";
+									for(var j=0; j<images.length; j++){
+										var image = images[j];
+										innerHTML += "<li class=\"col-xs-6 col-sm-4 col-md-3\" data-responsive=\""+image+"\" data-src=\""+image+"\">";
+										innerHTML += "<a href=\"javascript:void(0)\">";
+										innerHTML += "<img class=\"img-responsive\" src=\""+image+"\">";
+										innerHTML += "<div class=\"demo-gallery-poster\">";
+										innerHTML += "</div>";
+										innerHTML += "</a>";
+										innerHTML += "</li>";
+									}
+									innerHTML += "</ul>";
+									innerHTML += "</div>";
+								}
+								innerHTML += "</div>";
+								innerHTML += "</div>";
+								$("#liveDiv").prepend(innerHTML);
+								$('.lightgallery').lightGallery();
+								if(liveScrollTop==0){
+									$("#liveDiv").scrollTop(0);
+								}else{
+									try {
+										$("#liveDiv").scrollTop(liveScrollTop+$("#msgDiv_"+msgId).outerHeight());
+									} catch (e) {
+									}
+								}
+							}else if(liveMsgType==1){
+								//是审核
+								if (checked == 1&&$("#checkDiv_"+msgId).length>0) {
+									var innerHTML = "<div class=\"btn btn-mini btn-danger pull-left mb5 mr5\" onclick=\"deleteInteractMessage("+msgId+")\">删除</div>";
+									$("#checkDiv_"+msgId).html(innerHTML);
+									continue;
+								}
+								// 互动消息
+								var innerHTML = "";
+								if(checked){
+									innerHTML += "<div class=\"row-fluid checked\" id=\"msgDiv_"+msgId+"\">";
+								}else{
+									innerHTML += "<div class=\"row-fluid unchecked\" id=\"msgDiv_"+msgId+"\">";
+								}
+								innerHTML += "<div class=\"span12 \"";
+
+								innerHTML += "<div class=\"word_img\" style=\"width:10%; float:left; text-align:center;\">";
+								innerHTML += "<img style=\"margin-top:5px;\" src=\"${base}/res/bvRadio/img/u768.png\">";
+								innerHTML += "</div>";
+								innerHTML += "<div class=\"word_contact\" style=\"width:90%; float:right;\">";
+								
+								innerHTML += "<div class=\"row no-margin\">";
+								innerHTML += "<input type=\"hidden\" class=\"createTime\" value=\""+createTime+"\">";
+								innerHTML += "<h5 class=\"span6 no-margin lh30\">";
+								innerHTML += "<span class=\"senderName\" style=\"color: #1A97D7;\">"+senderName+"</span>";
+								innerHTML += "</h5>";
+								innerHTML += "<div class=\"pull-right mt5\" id=\"checkDiv_"+msgId+"\">";
+								if(checked){
+									innerHTML += "<div class=\"btn btn-mini btn-danger pull-left mb5 ml5\" onclick=\"deleteInteractMessage("+msgId+")\">删除</div>";
+								}else{
+									innerHTML += "<div class=\"btn btn-mini has-tooltip pull-left mb5 mr5\" onclick=\"checkInteractMessage("+msgId+")\">通过</div>";
+									innerHTML += "<div class=\"btn btn-mini btn-danger pull-left mb5 mr5\" onclick=\"deleteInteractMessage("+msgId+")\">不通过</div>";
+								}
+								innerHTML += "</div>";
+								innerHTML += "</div>";
+								innerHTML += "<p style=\"margin: 0\" class=\"span12 pull-left\">"+content+"</p>";
+								innerHTML += "</div>";
+								innerHTML += "</div>";
+								innerHTML += "</div>";
+								$("#interactDiv").prepend(innerHTML);
+								// 自动滚动
+								if(autoScroll){
+									$("#interactDiv").scrollTop(0);
+								}else{
+									try {
+										$("#interactDiv").scrollTop(liveScrollTop+$("#msgDiv_"+msgId).outerHeight());
+									} catch (e) {
+									}
+								}
+							}
+						} catch (e) {
+							alert(e);
+						}
+					}
+					getMsg();
+				} else {
+					try {
+						// 直播消息
+						var innerHTML = "";
+						innerHTML += "<div class=\"alert alert-warning\">";
+						innerHTML += "<h4>";
+						innerHTML += "<i class=\"icon-exclamation-sign\"></i>";
+						innerHTML += "警告：您的账号已经在另外一个IP登陆，您将获取不到消息，请重新进入直播间。";
+						innerHTML += "</h4>";
+						innerHTML += "</div>";
+						$("#liveDiv").prepend(innerHTML);
+						// 互动消息
+						innerHTML = "";
+						innerHTML += "<div class=\"alert alert-warning\">";
+						innerHTML += "<h4>";
+						innerHTML += "<i class=\"icon-exclamation-sign\"></i>";
+						innerHTML += "警告：您的账号已经在另外一个地方登陆，您将获取不到消息，请重新进入直播间。";
+						innerHTML += "</h4>";
+						innerHTML += "</div>";
+						$("#interactDiv").prepend(innerHTML);
+					} catch (e) {
+						alert(e);
+					}
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				if (textStatus == "timeout") { // 请求超时
+					getMsg(); // 递归调用
+				} else { 
+					getMsg();
+				}
+			},
+			dataType : "json"
+		});
+	}
+	
+	function autoCheck(){
+		var autoCheck = $("#autoCheck").is(":checked");
+		if(autoCheck){
+			var checkIntervalTime = $("#checkIntervalTime").val();
+			$("#interactDiv div[id^='msgDiv_'].unchecked").each(function(index,element){
+				try {
+					var nowDate = new Date();
+					var createTime = $(element).find("input.createTime").val();
+					var createDate = new Date(createTime);
+					if((createDate.getTime()+checkIntervalTime*1000)<nowDate.getTime()){
+						var msgId = $(element).attr("id").replace("msgDiv_","");
+						checkInteractMessage(msgId);
+					}
+				} catch (e) {
+				}
+			});
+		}
+		setTimeout("autoCheck()", 1000);
+	}
+	
+	function showLiveMessagediv(msgId) {
+		if (msgId) {
+			$.ajax({
+				type : 'POST',
+				url : "v_edit_live_message.do",
+				data : {
+					liveId : ${liveId!0},
+					msgId : msgId
+				},
+				success : function(data, textStatus) {
+					if (data.status == 1) {
+						var msg = data.data;
+						var msgId = msg.msgId;
+						var senderName = msg.senderName;
+						var content = msg.content;
+						var fontColor = msg.fontColor;
+						$("#editMsgId").val(msgId);
+						$("#editTextContent").val(content);
+						$("#editFontColor").val(fontColor);
+					    $("#editSenderName").val(senderName);
+					    document.getElementById("bgLiveMessage").style.display = "block";
+						document.getElementById("showLiveMessage").style.display = "block";
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("消息不存在");
+				},
+				dataType : "json"
+			});
+			
+		}
+	}
+	
+	function hideLiveMessagediv() {
+		document.getElementById("bgLiveMessage").style.display = 'none';
+		document.getElementById("showLiveMessage").style.display = 'none';
+	}
+	
+	function editLiveMessage(){
+		var msgId = $("#editMsgId").val();
+		var msgContent = $("#editTextContent").val();
+	    var senderName = $("#editSenderName").val();
+		if(senderName.replace(" ","").length==0){
+			alert("发言人不能为空");
+			return;
+		}
+		if(msgContent.replace(" ","").length==0){
+			alert("发送内容不能为空");
+			return;
+		}
+		var editFontColor = $("#editFontColor").val();
+		$.ajax({
+			type : 'POST',
+			url : "o_update_live_message.do",
+			data : {
+				liveId : ${liveId!0},
+				msgId : msgId,
+				senderName : senderName,
+				content : msgContent,
+				fontColor : editFontColor
+			},
+			success : function(data, textStatus) {
+				if (data.status == 1) {
+					var msg = data.data;
+					var msgId = msg.msgId;
+					var senderName = msg.senderName;
+					var content = msg.content;
+					var fontColor = msg.fontColor;
+					$("#msgDiv_"+msgId).find(".senderName").html(senderName);
+					$("#msgDiv_"+msgId).find(".msgContent").html(content);
+					$("#msgDiv_"+msgId).find(".msgContent").css("color",fontColor);
+				}
+				hideLiveMessagediv();
+				$("#editMsgId").val("");
+				$("#editTextContent").val("");
+			    $("#editSenderName").val("");
+			    $("#editFontColor").val("#00000");
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("editLiveMessage出错。");
+			},
+			dataType : "json"
+		});
+	}
+	
+	function deleteLiveMessage(msgId){
+		if (confirm("确定要删除吗？")) {
+			$.ajax({
+				type : 'POST',
+				url : "o_delete.do",
+				data : {
+					liveId : ${liveId!0},
+					msgId : msgId
+				},
+				success : function(data, textStatus) {
+					if (data.status == 1) {
+						$("#msgDiv_"+msgId).remove();
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("deleteLiveMessage出错。");
+				},
+				dataType : "json"
+			});
+		}		
+	}
+	
+	function checkInteractMessage(msgId){
+		$.ajax({
+			type : 'POST',
+			url : "o_check.do",
+			data : {
+				liveId : ${liveId!0},
+				msgId : msgId
+			},
+			success : function(data, textStatus) {
+				if (data.status == 1) {
+					$("#msgDiv_"+msgId).find("#megTG").remove();
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("checkInteractMessage出错。");
+			},
+			dataType : "json"
+		});
+	}
+	
+	function deleteInteractMessage(msgId){
+		$.ajax({
+			type : 'POST',
+			url : "o_delete.do",
+			data : {
+				liveId : ${liveId!0},
+				msgId : msgId
+			},
+			success : function(data, textStatus) {
+				if (data.status == 1) {
+					$("#msgDiv_"+msgId).remove();
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("deleteInteractMessage出错。");
+			},
+			dataType : "json"
+		});
+	}
+	
+	function sendMessage(){
+		var msgType = $("#msgType").val();
+		var msgContent = "";
+		if(msgType==2){
+			msgContent = $("#textContent").val();
+		}else if(msgType==1){
+			var valArr = new Array;
+		    $("#Imginput_Box .imgContent").each(function(i){
+		    	valArr[i] = $(this).val();
+			});
+	     	msgContent = valArr.join(',');
+		}
+	    var senderName = $("#senderName").val();
+	    //alert(senderName+":>"+msgContent+"<");
+		if(senderName.replace(" ","").length==0){
+			//alert("发言人不能为空");
+			//return;
+			senderName="${topUser.username}";
+		}
+		if(msgContent.replace(" ","").length==0){
+			alert("发送内容不能为空");
+			return;
+		}
+		var liveMsgType = $("#liveMsgType").val();
+		var ajaxUrl = "";
+		if(liveMsgType==1){
+			ajaxUrl = "o_send_live_message.do";
+		}else if(liveMsgType==2){
+			ajaxUrl = "o_send_interact_message.do";
+		}
+		var fontColor = $("#fontColor").val();
+		$.ajax({
+			type : 'POST',
+			url : ajaxUrl,
+			data : {
+				liveId : ${liveId!0},
+				senderName : senderName,
+				content : msgContent,
+				msgType : msgType,
+				fontColor : fontColor
+			},
+			success : function(data, textStatus) {
+				$("#msgType").val(2);
+				$("#textContent").val("");
+			 	$("#Imginput_Box dl").html("");
+				$('#textContent').show();
+				$('#Imginput_Box').hide();
+				$('#width').val("");
+				$('#height').val("");
+				$('#width').removeAttr("value");
+				$('#height').removeAttr("value");
+				$("#textContent").css("color","#000000");
+				$("#fontColor").trigger("colorpickersliders.updateColor", "#000000");
+				
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("sendMessage出错。");
+			},
+			dataType : "json"
+		});
+	}
+	
+	$(function(){
+		if($.cookie("autoCheckCookie_${liveId!0}")=='0'){
+			$("#autoCheck").attr("checked",null);
+		}else{
+			$("#autoCheck").attr("checked","checked");
+		}
+		if($.cookie("autoScrollCookie_${liveId!0}")=='0'){
+			$("#autoScroll").attr("checked",null);
+		}else{
+			$("#autoScroll").attr("checked","checked");
+		}
+		if($.cookie("checkIntervalTimeCookie_${liveId!0}")!=null){
+			$("#checkIntervalTime").val($.cookie("checkIntervalTimeCookie_${liveId!0}"))
+		}
+		getMsg();
+		setTimeout("autoCheck()", 1000);
+		$("#interactDiv").scrollTop(0);
+		$("#liveDiv").scrollTop(0);
+		
+		$("#autoCheck").click(function (){
+			if($("#autoCheck").is(":checked")){
+				$.cookie("autoCheckCookie_${liveId!0}", "1", { expires: 9999 }); 
+			}else{
+				$.cookie("autoCheckCookie_${liveId!0}", "0", { expires: 9999 }); 
+			}
+		});
+		$("#autoScroll").click(function (){
+			if($("#autoScroll").is(":checked")){
+				$.cookie("autoScrollCookie_${liveId!0}", "1", { expires: 9999 }); 
+			}else{
+				$.cookie("autoScrollCookie_${liveId!0}", "0", { expires: 9999 }); 
+			}
+		});
+		$("#checkIntervalTime").blur(function (){
+			$.cookie("checkIntervalTimeCookie_${liveId!0}", $("#checkIntervalTime").val(), { expires: 9999 }); 
+		});
+		
+		//var int=self.setInterval("getMsg()",10000);
+		
+	});
+	
+	
+	function showActive(){
+		$("#modelFrame").attr("src","../s_active.do");
+	}
+	
+	function showordisplay(){
+		if($("#otheruser").is(":hidden")){
+				$("#otheruser").show();
+		}else{
+		      $("#otheruser").hide();     
+		}
+		
+	}
+	
+</script>
+<script>
+$(function(){
+	$(document).keydown(function(event){
+		if($("#textContent").is(":focus")){
+			if((event.ctrlKey && event.keyCode == 13)) {
+				sendMessage();
+			} 
+		}
+	});
+});
+</script>
+</head>
+<body class="contrast-dark fixed-header">
+	<!--顶部开始-->
+	<#include "/bvRadio/admin/top.html"/>
+	<!--顶部结束-->
+	<!--主体开始-->
+	<div id="wrapper">
+		<!--左侧导航开始-->
+		<#include "/bvRadio/admin/left.html"/>
+		<!--左侧导航结束-->
+		<!--右侧框架开始-->
+		<section id="content">
+			<div class='container-fluid'>
+
+				<div class='page-header mb10'>
+					<a href="${base}/admin/live/v_list.do"
+						class="pull-left btn mr10 mt5" data-placement="bottom"
+						style="color: #1A97D7; width: 41px; height: 17px; text-algin: center; line-height: 17px; font-size: 12px; background-color: rgba(217, 234, 243, 1); border-width: 1px; border-style: solid; border-color: rgba(26, 151, 215, 1); border-radius: 5px !important;"
+						class="btn btn-mini has-tooltip pull-left mb5 mr5">返回</a>
+					<!-- <a class="pull-left btn mr10 mt5" href="${base}/admin/live/v_list.do"><i class="icon-chevron-left mr5"></i>返回</a> -->
+					<div class="title">
+						<ul class='breadcrumb no-margin'>
+							<li class=""><i class="icon-map-marker ml5 mr5"></i>直播管理</li>
+							<li class='separator'><i class='icon-angle-right'></i></li>
+							<li class='active'>${title!}</li>
+						</ul>
+					</div>
+				</div>
+
+
+				<div class='row-fluid' id='content-wrapper'>
+					<div class='span8 mt10 box' style='margin-bottom: 0; float: right'>
+						<div class='box-header dark-background pt5 pb5'>
+							<div class='title'>图文直播</div>
+						</div>
+
+						<div class='box-content titleheader'>
+							<div class="row-fluid">
+
+
+								<div class='m-r-xs pull-left'>
+									自动滚屏：<input type="checkbox" id="autoScroll" class="chk_4"
+										checked="checked" /> <label class="no-margin"
+										for="autoScroll"></label>
+								</div>
+								<div class='m-r-xs pull-left'>
+									自动审核：<input type="checkbox" id="autoCheck" class="chk_4"
+										checked="checked" /> <label class="no-margin"
+										for="autoCheck"></label>
+								</div>
+
+
+								<div class='pull-right span2'>
+									<div class='controls'>
+										<input class='input-xlarge span12' id='checkIntervalTime'
+											onkeyup="this.value=this.value.replace(/\D/g,'')"
+											onafterpaste="this.value=this.value.replace(/\D/g,'')"
+											type='text' value="5" />
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class='box-content scrollable' data-scrollable-height='375'
+							data-scrollable-start='top'>
+							<div class="widget-container chat chat-page no-margin"
+								style="padding-bottom: 10px;">
+								<div class="widget-content " id="topdiv"></div>
+								<div class="widget-content " id="liveDiv">
+									<#if interactCheckedMsgList??> <#list
+									interactCheckedMsgList?reverse as liveMsg>
+									<div class="row-fluid" id="msgDiv_${liveMsg.msgId!}">
+										<div class="span12 borderbottom">
+											<div class="word_img"
+												style="width: 10%; float: left; text-align: center;">
+												<#if liveMsg.senderName==topUser.username> <img
+													style="margin-top: 5px; width: 50px; height: 50px;"
+													src="${topUser.userThumbImg!'/res/bvRadio/img/u768.png'}">
+												<#else> <img style="margin-top: 5px;"
+													src="${base}/res/bvRadio/img/u768.png"> </#if>
+
+
+											</div>
+											<div class="word_contact" style="width: 90%; float: right;">
+												<div class="row no-margin">
+													<h5 class="span4 no-margin lh30">
+														<span class="senderName" style="color: #1A97D7;">${liveMsg.senderName!'未知用户'}</span>
+														<span
+															style="color: white; background-color: rgba(26, 151, 215, 1); margin-left: 20px; padding: 5px; border-radius: 3px"><#if
+															liveMsg.senderName==topUser.username>官方<#else>网友</#if></span>
+														<#if liveMsg.senderLevel??&&liveMsg.senderLevel==2>
+														<script>
+																	showTop('${liveMsg.msgId!}');
+																</script>
+														</#if>
+													</h5>
+													<h5 class="span4 text-center no-margin lh30"
+														style="float: right">
+														<small>${(liveMsg.createTime?string("MM-dd
+															HH:mm:ss"))!}</small>
+													</h5>
+
+													<!-- 删除修改 -->
+												</div>
+												<#if liveMsg.msgType??&&liveMsg.msgType==1>
+												<p style="margin: 0;color:${liveMsg.fontColor!}"
+													class="span12 pull-left msgContent">${liveMsg.content!}</p>
+											</div>
+											<#elseif liveMsg.msgType??&&liveMsg.msgType==2>
+											<p style="margin: 0;color:${liveMsg.fontColor!}"
+												class="span12 pull-left msgContent">${liveMsg.content!}</p>
+											</#if>
+
+											<div class="pull-right mt5" style="width: 250px">
+												<#if liveMsg.msgType??&&liveMsg.msgType==1> <#if
+												!liveMsg.checked>
+												<div data-placement="bottom"
+													style="color: #1A97D7; width: 41px; height: 17px; text-algin: center; line-height: 17px; font-size: 12px; background-color: rgba(217, 234, 243, 1); border-width: 1px; border-style: solid; border-color: rgba(26, 151, 215, 1); border-radius: 5px !important;"
+													class="btn btn-mini has-tooltip pull-left mb5 mr5"
+													id="megTG"
+													onclick="checkInteractMessage(${liveMsg.msgId!})">通过
+												</div>
+												</#if>
+												<div data-placement="bottom"
+													style="color: #1A97D7; width: 41px; height: 17px; text-algin: center; line-height: 17px; font-size: 12px; background-color: rgba(217, 234, 243, 1); border-width: 1px; border-style: solid; border-color: rgba(26, 151, 215, 1); border-radius: 5px !important;"
+													class="btn btn-mini has-tooltip pull-left mb5 mr5"
+													id="megZD" onclick="showTop(${liveMsg.msgId!})">置顶</div>
+
+												<div data-placement="bottom"
+													style="color: #1A97D7; width: 41px; height: 17px; text-algin: center; line-height: 17px; font-size: 12px; background-color: rgba(217, 234, 243, 1); border-width: 1px; border-style: solid; border-color: rgba(26, 151, 215, 1); border-radius: 5px !important;"
+													class="btn btn-mini btn-danger pull-left mb5 mr5"
+													id="megSC" onclick="deleteLiveMessage(${liveMsg.msgId!})">
+													删除</div>
+												<div data-placement="bottom"
+													style="color: #1A97D7; width: 41px; height: 17px; text-algin: center; line-height: 17px; font-size: 12px; background-color: rgba(217, 234, 243, 1); border-width: 1px; border-style: solid; border-color: rgba(26, 151, 215, 1); border-radius: 5px !important;"
+													class="btn btn-mini btn-danger pull-left mb5 mr5"
+													id="megJY" onclick="1deleteLiveMessage(${liveMsg.msgId!})">
+													禁言</div>
+												</#if>
+											</div>
+
+										</div>
+									</div>
+
+									</#list> </#if>
+								</div>
+							</div>
+						</div>
+
+
+						<div class='box-content mt10'>
+							<div class="row-fluid">
+								<div class="pull-left mr5" id="otheruser" style="display: none">
+									<label class="controls no-margin pull-left">发言人:</label>
+									<div class="pull-left ml5">
+										<input class='no-margin' type="text" placeholder="发言人"
+											id="senderName">
+									</div>
+								</div>
+								<div class='pull-left mr5'>
+									<label class='control-label pull-left no-margin'>对：</label>
+									<div class='controls pull-left'>
+										<select id='liveMsgType' class='no-margin'>
+											<option value="2" selected="selected" />聊天互动
+											<option value="1"/>图文直播
+										</select>
+									</div>
+									<script>
+										$("#liveMsgType").change(function(){
+											var type = $("#liveMsgType").val();
+											if(type==2){
+												$("#imageDiv").hide();
+												$("#fontColor").hide();
+											}else{
+												$("#imageDiv").show();
+												$("#fontColor").show();
+											}
+										});
+									</script>
+								</div>
+								<div class='pull-left mr5'>
+									<div class="form-group">
+										<input type="text" class="form-control" id="fontColor"
+											data-color-format="hex" style="width: 50px">
+									</div>
+									<script>
+									$("#fontColor").ColorPickerSliders({ 
+										size: 'sm', 
+										placement : 'right', 
+										color : "#000000",
+										swatches : false, 
+										sliders : false, 
+										hsvpanel : true,
+										onchange : function(container, color){
+											if(color!=''){
+												$("#textContent").css("color",color.tiny.toHexString());
+											}else{
+												$("#textContent").css("color","#000000");
+											}
+										}
+									});
+								  	</script>
+								</div>
+								<div class='pull-left mr5'>
+									<div data-original-title="图片" data-placement="bottom"
+										class="btn has-tooltip pull-left mb5 mr5" id="imageDiv">
+										<input type="hidden" id="imgUpload">
+										<div id="uploadProgressWrap" style="display: none"></div>
+									</div>
+									<div data-original-title="表情" data-placement="bottom"
+										class="btn has-tooltip pull-left mb5 mr5" id="expression">
+										<i class="icon-smile"></i>
+									</div>
+								</div>
+								<div class="pull-right">
+									<input type="hidden" name="width" id="width"> <input
+										type="hidden" name="height" id="height"> <input
+										type="hidden" name="msgType" id="msgType" value="2">
+									<button class="btn btn-success pull-right" type="button"
+										onclick="sendMessage()">
+										<i class="icon-plus">发送</i>
+									</button>
+								</div>
+							</div>
+
+							<textarea class="Input_text input-block-level mt5" rows="3"
+								style="resize: none;" placeholder="内容" id="textContent"></textarea>
+
+							<button class="btn btn-link" type="button"
+								style="margin-bottom: 1px; margin-left: 1px;"
+								data-toggle='modal' onclick="showordisplay();" title="模拟网友">
+								<img src="${base}/res/bvRadio/img/u854.png" />
+							</button>
+							<button class="btn btn-link" type="button"
+								style="margin-bottom: 1px; margin-left: 1px;"
+								data-toggle='modal' href='#modal-wrap' onclick="showActive();"
+								title="报名活动">
+								<img src="${base}/res/bvRadio/img/u856.png" />
+							</button>
+							<button class="btn btn-link" type="button"
+								style="margin-bottom: 1px; margin-left: 1px;"
+								data-toggle='modal' href='#modal-wrap' onclick="showActive();"
+								title="投票活动">
+								<img src="${base}/res/bvRadio/img/u858.png" />
+							</button>
+							<button class="btn btn-link" type="button"
+								style="margin-bottom: 1px; margin-left: 1px;"
+								data-toggle='modal' href='#modal-wrap' onclick="showActive();"
+								title="捐款活动">
+								<img src="${base}/res/bvRadio/img/u860.png" />
+							</button>
+							<div class="faceDiv" id="faceDiv"></div>
+							<div class="Imginput_Box" id="Imginput_Box">
+								<dl class='unstyled pull-left list-striped'>
+								</dl>
+							</div>
+						</div>
+					</div>
+					<div class='span4 mt10 box lineright' style='margin-bottom: 0'
+						style="float:left">
+
+						<div class='control-group'
+							style="background: #fff; margin-bottom: 0; padding-bottom: 10px">
+
+							<div id=flash style="width: 450px; height: 310px;"></div>
+							<!--wmv主播放器层id-->
+							<div id="oPlayer"></div>
+
+						</div>
+						<div class='row-fluid'>
+							<div class='span12'>
+								<div class='box-content overflow-hidden'>
+									<div class='tabbable'>
+										<ul class='nav nav-tabs'>
+											<li class='active tabli'><a data-toggle='tab'
+												href='#tab1'> 采集设备推流 </a></li>
+											<li class="tabli"
+												style="border-left: none; border-right: none"><a
+												data-toggle='tab' href='#tab2'> 手机直播 </a></li>
+											<li class="tabli"><a data-toggle='tab' href='#tab3'>
+													HLS拉流 </a></li>
+										</ul>
+
+										<div class='tab-content'>
+											<div class='tab-pane active' id='tab1'>
+												<div class="tishi">
+													<p>按照下列信息配置编码器。配置正确的推流地址及流名称</p>
+													<p>推荐编码参数设置：使用H.264编码，AAC音频</p>
+												</div>
+												<div class='control-group'>
+
+													<div class='controls' style="margin-top: 10px">
+														推流地址：<input class='input-xlarge span8' name="push"
+															id="push" type='text' value="${hls!}" />
+
+													</div>
+													<div class='controls' style="margin-top: 10px">
+														<lable style="letter-spacing:3.8px;">流名称：<input
+															class='input-xlarge span8' name="pushName" id="pushName"
+															type='text' value="${title!}" />
+													</div>
+												</div>
+
+
+											</div>
+											<div class='tab-pane' id='tab2'>
+												<div class='control-group'>
+
+													<div class='controls' style="margin-top: 10px">
+														手机地址：<input class='input-xlarge span8' name="phone"
+															id="push" type='text' value="${hls!}" />
+
+													</div>
+													<div class='controls' style="margin-top: 10px">
+														<lable style="letter-spacing:3.8px;">流名称：<input
+															class='input-xlarge span8' name="phoneName" id="pushName"
+															type='text' value="${title!}" />
+													</div>
+												</div>
+
+
+
+											</div>
+
+											<div class='tab-pane' id='tab3'>
+												<form method="post"
+													action="${base}/admin/live/o_update_more.do" id="addForm">
+													<div class='control-group'>
+
+														<input type="hidden" name="liveId" value="${liveId!}" />
+														<div class='controls' style="margin-top: 10px">
+															拉流地址：<input class='input-xlarge span8' name="channelName"
+																id="channelName" type='text'
+																value="${live.channelName!}" />
+
+														</div>
+														<div class='controls' style="margin-top: 10px">
+															<lable style="letter-spacing:3.8px;">流名称：</lable>
+															<input class='input-xlarge span8' name="liveOneWord"
+																id="liveOneWord" type='text'
+																value="${live.liveOneWord!}" />
+
+														</div>
+
+
+													</div>
+													<div class='actions position-absolute-b10'>
+														<button class='btn btn-success btn-next ml5 mr5'
+															id="save-button">
+															保存 <i class='icon-check'></i>
+														</button>
+													</div>
+												</form>
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+					</div>
+				</div>
+			</div>
+			<#include "/bvRadio/bottom.html"/>
+		</section>
+		<!--右侧框架结束-->
+	</div>
+	<!--主体结束-->
+	<!--直播编辑弹出层-->
+	<div id="bgLiveMessage"></div>
+	<div id="showLiveMessage">
+		<div class="md">
+			<div class='row-fluid'>
+				<div class='span12 box bordered-box orange-border'
+					style='margin-bottom: 0;'>
+					<div class="box-header mb10">
+						<div class="title" style="margin-left: 45%;">图文直播</div>
+						<div class="actions">
+							<a class="btn btn-mini btn-link" href="#"
+								onclick="hideLiveMessagediv();"> <i class="icon-remove"></i>
+							</a>
+						</div>
+					</div>
+					<hr class="no-margin no-padding" style="height: 10px">
+					<div class='box-no-padding mt10'>
+						<input type="hidden" name="editMsgId" id="editMsgId">
+						<div class="row-fluid">
+							<div class="pull-left mr5">
+								<label class="controls no-margin pull-left">发言人:</label>
+								<div class="pull-left ml5">
+									<input class='no-margin' type="text" placeholder="发言人"
+										id="editSenderName">
+								</div>
+							</div>
+							<div class='pull-left mr5'>
+								<div class="form-group">
+									<input type="text" class="form-control" id="editFontColor"
+										data-color-format="hex" style="width: 50px">
+								</div>
+								<script>
+								$("#editFontColor").ColorPickerSliders({ 
+									size: 'sm', 
+									placement : 'right', 
+									color : "#000000",
+									swatches : false, 
+									sliders : false, 
+									hsvpanel : true,
+									onchange : function(container, color){
+										if(color!=''){
+											$("#editTextContent").css("color",color.tiny.toHexString());
+										}else{
+											$("#editTextContent").css("color","#000000");
+										}
+									}
+								});
+							  	</script>
+							</div>
+							<div class='pull-left mr5'>
+								<div data-original-title="表情" data-placement="bottom"
+									class="btn has-tooltip pull-left mb5 mr5" id="editExpression">
+									<i class="icon-smile"></i>
+								</div>
+							</div>
+						</div>
+						<textarea class="Input_text input-block-level mt5" rows="6"
+							style="resize: none;" placeholder="内容" id="editTextContent"></textarea>
+						<div class="editFaceDiv" id="editFaceDiv"></div>
+						<div class='row-fluid mt10'>
+							<div class='span3 offset5 box'>
+								<button class='btn btn-success ml5 mr5' type="button"
+									onclick="editLiveMessage();">
+									<i class='icon-save mr10'></i>确定
+								</button>
+								<button class='btn btn-next ml5 mr5'
+									onclick="hideLiveMessagediv();">取消</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--直播编辑弹出层-->
+	<script>
+		$(function() {
+			var upload_url = getUploadUrl();
+			var jsessionid = $.cookie("JSESSIONID");
+			if (jsessionid) {
+				upload_url += ";jsessionid=" + jsessionid;
+			}
+			var fileSizeLimit = "2GB";
+			$('#imgUpload').uploadify({
+				'queueID':'uploadProgressWrap',
+			    'swf': '${base}/thirdparty/uploadify/uploadify.swf',	//指定上传控件的主体文件
+			    'uploader': upload_url,	//指定服务器端上传处理文件
+			    'auto':true,
+			    'multi':true,
+			    'buttonCursor':'hand',
+			    'fileObjName':'Filedata',
+			    'formData':{ 'fileType': 'interactImage' },
+			    'fileSizeLimit':20480,
+			    'fileTypeExts':"*.jpg;*.png",
+			    'width' : 20,
+				'height' : 20,
+				'buttonText':'',
+				'removeCompleted':true,
+				'removeTimeout':1,
+				'itemTemplate':'',
+				'onUploadSuccess' : function(file, data, response) {
+					$("#msgType").val(2);
+					$('#Imginput_Box').show();
+			    	$('#textContent').hide();
+					var jsonObj = eval('(' + data + ')');
+					var filePath =  jsonObj.filePath;
+					var thumbImgFilePath =  jsonObj.thumbImgFilePath;
+					var fileRootUrl =  jsonObj.fileRootUrl;
+					var uploadServerId = jsonObj.uploadServerId;
+					var width = jsonObj.width;
+					var height = jsonObj.height;
+					var imageHtml = "";
+					imageHtml += "<dd class=\"pull-left\" width=\"86\" height=\"86\" align=\"center\">";
+					imageHtml += "<a title=\"photo by xixi\" rel=\"lightbox\" href=\"javascript:void(0)\">";
+					imageHtml += "<img width=\"60\" height=\"60\" border=\"0\" src=\""+fileRootUrl +filePath+"\"/>";
+					imageHtml += "<input class=\"imgContent\" type=\"hidden\" name=\"imgContent\" value=\""+fileRootUrl +filePath+"\">";
+					imageHtml += "</a>";
+					imageHtml += "<div class=\"del icon-remove-sign deleteImgButton\"></div>";
+					imageHtml += "</dd>";
+					$("#Imginput_Box dl").append(imageHtml);
+			    },
+			    'onSelect':function(){
+			    },
+			    'onInit':function(){
+					$("#imgUpload-button").attr("class","uploadify-button icon-picture");
+			    }
+			});
+			$(document).on("click",".deleteImgButton",function(){
+				$(this).parent().remove();
+				var imagesWarp = $("#Imginput_Box dl dd");
+				if(imagesWarp.length<=0){
+					$("#msgType").val(1);
+					$('#textContent').show();
+					$('#Imginput_Box').hide();
+					$('#width').val("");
+					$('#height').val("");
+					$('#width').removeAttr("value");
+					$('#height').removeAttr("value");
+				}
+			});
+		});
+		$(document).ready(function(e) {
+			ImgIputHandler.Init();
+			EditImgIputHandler.Init();
+		});
+		var ImgIputHandler = {
+			facePath : [
+				<#if expresssionMapList??&&expresssionMapList?size gt 0>
+				<#list expresssionMapList as expresssionMap>
+				<#assign key=expresssionMap["key"] />
+				<#assign value=expresssionMap["value"] />
+				<#assign data=value?eval />
+				{faceName:"${key}",faceImgPath:"${data.path!}",faceTitle:"${data.title!}"},
+				</#list>
+				{faceName:"",faceImgPath:"",faceTitle:""},
+				</#if>
+			],
+			Init : function() {
+				var isShowImg=false;
+				$("#expression").click(function() {
+					$("#faceDiv").show();
+					if (isShowImg == false) {
+						isShowImg = true;
+						$(this).parent().prev().animate({
+							marginTop : ""
+						}, 0);
+						if ($("#faceDiv").children().length == 0) {
+							for (var i = 0; i < ImgIputHandler.facePath.length; i++) {
+								if (ImgIputHandler.facePath[i].faceName != "") {
+									$("#faceDiv").append("<img title=\""+ImgIputHandler.facePath[i].faceTitle+"\" src=\"${base}/res/bvRadio/face"+ImgIputHandler.facePath[i].faceImgPath+"\" faceName=\"["+ImgIputHandler.facePath[i].faceName+"]\" />");
+								}
+							}
+							$("#faceDiv>img").click(function() {
+								isShowImg = false;
+								$(this).parent().animate({
+									marginTop : "0px"
+								}, 300);
+								$("#faceDiv").hide();
+								ImgIputHandler.insertAtCursor($("#textContent")[0], "[" + $(this).attr("title") + "]");
+							});
+
+						}
+					} else {
+						isShowImg = false;
+						$("#faceDiv").hide();
+					}
+				});
+			},
+			insertAtCursor : function(myField, myValue) {
+				if (document.selection) {
+					myField.focus();
+					sel = document.selection.createRange();
+					sel.text = myValue;
+					sel.select();
+				} else if (myField.selectionStart || myField.selectionStart == "0") {
+					var startPos = myField.selectionStart;
+					var endPos = myField.selectionEnd;
+					var restoreTop = myField.scrollTop;
+					myField.value = myField.value.substring(0, startPos) + myValue + myField.value.substring(endPos, myField.value.length);
+					if (restoreTop > 0) {
+						myField.scrollTop = restoreTop;
+					}
+					myField.focus();
+					myField.selectionStart = startPos + myValue.length;
+					myField.selectionEnd = startPos + myValue.length;
+				} else {
+					myField.value += myValue;
+					myField.focus();
+				}
+			}
+		}
+		var EditImgIputHandler = {
+			facePath : [
+				<#if expresssionMapList??&&expresssionMapList?size gt 0>
+				<#list expresssionMapList as expresssionMap>
+				<#assign key=expresssionMap["key"] />
+				<#assign value=expresssionMap["value"] />
+				<#assign data=value?eval />
+				{faceName:"${key}",faceImgPath:"${data.path!}",faceTitle:"${data.title!}"},
+				</#list>
+				{faceName:"",faceImgPath:"",faceTitle:""},
+				</#if>
+			],
+			Init : function() {
+				var isShowImg=false;
+				$("#editExpression").click(function() {
+					$("#editFaceDiv").show();
+					if (isShowImg == false) {
+						isShowImg = true;
+						$(this).parent().prev().animate({
+							marginTop : ""
+						}, 0);
+						if ($("#editFaceDiv").children().length == 0) {
+							for (var i = 0; i < ImgIputHandler.facePath.length; i++) {
+								if (ImgIputHandler.facePath[i].faceName != "") {
+									$("#editFaceDiv").append("<img title=\""+ImgIputHandler.facePath[i].faceTitle+"\" src=\"${base}/res/bvRadio/face"+ImgIputHandler.facePath[i].faceImgPath+"\" faceName=\"["+ImgIputHandler.facePath[i].faceName+"]\" />");
+								}
+							}
+							$("#editFaceDiv>img").click(function() {
+								isShowImg = false;
+								$(this).parent().animate({
+									marginTop : "0px"
+								}, 300);
+								$("#editFaceDiv").hide();
+								ImgIputHandler.insertAtCursor($("#editTextContent")[0], "[" + $(this).attr("title") + "]");
+							});
+
+						}
+					} else {
+						isShowImg = false;
+						$("#editFaceDiv").hide();
+					}
+				});
+			},
+			insertAtCursor : function(myField, myValue) {
+				if (document.selection) {
+					myField.focus();
+					sel = document.selection.createRange();
+					sel.text = myValue;
+					sel.select();
+				} else if (myField.selectionStart || myField.selectionStart == "0") {
+					var startPos = myField.selectionStart;
+					var endPos = myField.selectionEnd;
+					var restoreTop = myField.scrollTop;
+					myField.value = myField.value.substring(0, startPos) + myValue + myField.value.substring(endPos, myField.value.length);
+					if (restoreTop > 0) {
+						myField.scrollTop = restoreTop;
+					}
+					myField.focus();
+					myField.selectionStart = startPos + myValue.length;
+					myField.selectionEnd = startPos + myValue.length;
+				} else {
+					myField.value += myValue;
+					myField.focus();
+				}
+			}
+		}
+	</script>
+
+	<script language="javascript">
+ 	
+		interfaceHttp ='${hls!}',
+		shareHtmlUrl="1",
+             	shareStatu='3',              					
+            AddressSeparator='#', 
+           // _playAuto='false',
+                //interfaceType  ='true';
+                authUrl='true',
+                  ifShowImageBtn='false',
+                  ifAuthCDN_WS='false',
+                  PlayVideoAspect='diaplasis',//mc43;mc169;diaplasis;bespread
+                  ifShowLogo='false',
+                  AudioPlayerType='0',
+                  AVPlayerType='0',
+           //               ifShowStream='false';
+            ifShiftMove='true',
+    
+          
+		_playAuto='true';
+                //ifShowSetBtn='false',
+              
+                //ifShowPoopBtn='false';
+                //ifShowStream='false';
+</script>
+	<script src="${base}/res/common/js/JWZT_Player.js"
+		type="text/javascript"></script>
+	<script>
+function showTop(msgId){
+	$("#msgDiv_"+msgId).find(".senderName").parent().append("<span class=\"m-l-xs\"><img src=\"${base}/res/bvRadio/img/u778.png\"></span>");
+	var html=$("#msgDiv_"+msgId).html();
+	$("#msgDiv_"+msgId).remove();
+	$("#topdiv").prepend("<div class=\"row-fluid\" id=\"msgDiv_"+msgId+"\">"+html+"</div>");
+	if (msgId) {
+		$.ajax({
+			type : 'POST',
+			url : "o_update_live_message_level.do",
+			data : {
+				liveId : ${liveId!0},
+				msgId : msgId
+			},
+			success : function(data, textStatus) {
+				if (data.status == 1) {
+					alert("置顶成功");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("消息不存在");
+			},
+			dataType : "json"
+		});
+		
+	}
+}
+
+
+</script>
+
+	<!-- 遮罩层开始 -->
+	<div class='modal hide fade' id='modal-wrap' role='dialog'
+		tabindex='-1' style="text-align: center">
+		<div class='modal-header'>
+			<button class='close' data-dismiss='modal' type='button'>&times;</button>
+			<h3>活动报名</h3>
+		</div>
+		<iframe id="modelFrame" src="" frameborder="0" scrolling="no"
+			style="width: 900px; height: 450px;"></iframe>
+	</div>
+	<!-- 遮罩层结束 -->
+	<hr />
+
+</body>
+</html>

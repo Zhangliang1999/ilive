@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>直播管理</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/myStyle.css"/>
+    <link rel="stylesheet" href="../css/jbxx.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/public.css"/>
+    <!--新加css-->
+    <link rel="stylesheet" href="../css/newzbj.css"/>
+    <link rel="stylesheet" href="../css/shcommon.css"/>
+    <link rel="stylesheet" href="../css/lightGallery.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/newheader.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/newleft.css"/>
+
+    <style>
+
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <div class="row">
+            <nav class="navbar navbar-static-top navbar-top-height" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+
+                    <div class="logo">
+                        <div class="header-logo">
+                            <div class="logoimg">
+                                <img alt="image" src="../img/newlogo.png"/>
+                            </div>
+                        </div>
+                        <ul class="logoul">
+                            <li class="headeractive"><a href="">直播</a></li>
+                            <li><a href="">媒体库</a></li>
+                            <li><a href="">会员</a></li>
+                            <li><a href="">主页</a></li>
+                            <li><a href="">数据</a></li>
+                            <li><a href="">账户</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <ul class="nav navbar-top-links navbar-right navbar-top-right" style="float: right;">
+                    <li class="nav-num">
+                        <img src="../css/patterns/3.png"/>
+                    </li>
+                    <li class="dropdown nav-sjgly">
+                        <a aria-expanded="false" role="button" href="###" class="dropdown-toggle" data-toggle="dropdown"
+                           >市级管理员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                class="fa fa-angle-down"></span></a>
+                        <ul role="menu" class="dropdown-menu nav-dropdown-list">
+                            <li><a href="###">aaa </a></li>
+                            <li><a href="###">vvv</a></li>
+                            <li><a href="###l">bbb</a></li>
+                            <li><a href="###l">bbb</a></li>
+                            <li><a href="###l">bbb</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <li class="dropdown m-t-sm">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="calendar.html#">
+                            <i class="fa fa-bell"></i>  <span class="label label-success">8</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="mailbox.html">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw "></i> You have 16 messages
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="profile.html">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="grid_options.html">
+                                    <div>
+                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a href="notifications.html">
+                                        <strong>See All Alerts</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+
+            </nav>
+        </div>
+        <!--左侧部分-->
+        <nav class="navbar-default navbar-static-side navbar-width" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu nav-left" id="side-menu">
+                <li>
+                    <a href="##"><i class="fa fa-bookmark"></i> <span class="nav-label">直播控制</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="##">直播间</a></li>
+                        <li><a href="##">第三方推流</a></li>
+                        <li><a href="##">轮播列表设置</a></li>
+                        <li><a href="##">直播工具包</a></li>
+                        <li><a href="##">播出设置</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="###"><i class="fa  fa-desktop"></i> <span class="nav-label">直播设置</span><span
+                            class="fa arrow"></span></a>
+                  <ul class="nav nav-second-level collapse">
+                        <li><a href="##">直播属性</a></li>
+                        <li><a href="##">LOGO设置</a></li>
+                        <li><a href="##">观看授权</a></li>
+                          <li><a href="##">报名观看</a></li>
+                          <li><a href="##">打赏设置</a></li>
+                          <li><a href="##">直播倒计时</a></li>
+                          <li><a href="##">数据显示美化</a></li>
+                      <li><a href="##">推广分享</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="###"><i class="fa  fa-desktop"></i> <span class="nav-label">页面装修</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="##">移动端页面</a></li>
+                        <li><a href="##">PC端页面</a></li>
+                        <li><a href="##">直播引导页</a></li>
+                        <li><a href="##">邀请函</a></li>
+                        <li><a href="##">现场签到</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="###"><i class="fa  fa-desktop"></i> <span class="nav-label">互动管理</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="##">互动</a></li>
+                        <li><a href="##">抽奖</a></li>
+                        <li><a href="##">投票</a></li>
+                        <li><a href="##">红包</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="###"><i class="fa  fa-desktop"></i> <span class="nav-label">内容管理</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="##">直播场次</a></li>
+                        <li><a href="##">视频内容</a></li>
+                        <li><a href="##">精彩截图</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="###"><i class="fa  fa-desktop"></i> <span class="nav-label">直播数据</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="##">直播数据统计</a></li>
+                        <li><a href="##">报名记录</a></li>
+                        <li><a href="##">收益记录</a></li>
+                        <li><a href="##">用户记录</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="###"><i class="fa  fa-desktop"></i> <span class="nav-label">直播间管理</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="##">直播禁言</a></li>
+                        <li><a href="##">消费上限</a></li>
+                        <li><a href="##">协同管理</a></li>
+                    </ul>
+                </li>
+                <li class="m-t-xl m-b-xl text-center">
+                    <button class="btn btn-success">退出直播间</button>
+                </li>
+            </ul>
+           <!--<button class="btn btn-success">退出直播间</button>-->
+        </div>
+
+    </nav>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+           <div class="row title-header">
+               <div class="col-lg-12">
+                   <div class="title-name">
+                        <i class="loc-icon"></i><a class="font-title">活动名称活动名称活动名称活动名称</a>
+                   </div>
+                   <div class="zbj-name pull-right m-r-lg">
+                       <i class="fa fa-caret-square-o-right font-content m-r-xs"></i><a class="font-content">直播间ID：366366</a>
+                   </div>
+                   <div class="zbj-name pull-right m-r-lg zbshare">
+                       <a class="font-content"><i class="fa fa-share-square-o font-content m-r-xs"></i>直播分享
+                            <div class="zhiboshare">
+                                <div class="jiao"></div>
+                                <div class="zbleft pull-left">
+                                    <p>电脑观看</p>
+                                    <textarea></textarea>
+                                    <button class="btn default-livebtn">复制</button>
+                                    <button class="btn default-livebtn">打开</button>
+                                </div>
+                                <div class="zbright pull-left">
+                                    <p>手机观看</p>
+                                    <div class="zbewmbox">
+                                        <img src="../img/ptqrshow.png" alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                       </a>
+                   </div>
+
+               </div>
+           </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-5 ">
+                        <div class="videotop">
+                            <div class="pull-left font-title">直播监控</div>
+                            <button class="btn default-btn livebtn pull-right no-padding m-r-xs font-12" style="width: 80px;height:30px;">
+                                <i class="fa fa-play m-r-xs"></i>开始直播
+                            </button>
+                            <button class="btn pause-btn livebtn pull-right no-padding m-r-xs font-12" style="width: 80px;height:30px;">
+                                <i class="fa fa-pause m-r-xs"></i>暂停直播
+                            </button>
+                            <button class="btn stop-btn livebtn pull-right no-padding m-r-xs font-12" style="width: 80px;height:30px;">
+                                <i class="fa fa-stop m-r-xs"></i>结束直播
+                            </button>
+                        </div>
+                        <div class="videobox">
+
+                        </div>
+                        <div class="mainbox">
+                            <ul id="myTab" class="nav nav-tabs">
+                                <li class="active"><a href="#tab1" data-toggle="tab">
+                                    设备直播 </a>
+                                </li>
+                                <li class=""><a href="#tab2" data-toggle="tab">手机直播</a></li>
+                                <li class=""><a href="#tab3" data-toggle="tab">拉流直播</a></li>
+                                <li class=""><a href="#tab4" data-toggle="tab">列表直播</a></li>
+                                <li class=""><a href="#tab5" data-toggle="tab">桌面直播</a></li>
+                                <li class=""><a href="#tab6" data-toggle="tab">导播台</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade active in" id="tab1">
+                                    <div class="suggest">
+                                        <p class="m-t-sm">建议直播网络上行带宽是码率的2倍以上</p>
+                                        <p>如：码率1500k，则推荐上行网络带宽不少于3M</p>
+                                    </div>
+                                    <div class="text-content">
+                                        <label class="font-content">推流地址：</label>
+                                        <input class="inputcon" type="text"/>
+                                        <button class="btn copybtn">复制</button>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane fade" id="tab2">
+                                    <div class="suggest" style="height: 50px">
+                                        <p class="m-t-sm">扫描二维码下载手机直播APP客户端</p>
+                                    </div>
+                                    <div class="text-content">
+                                        <div class="erweimabox">
+                                          <div class="erweimaleft pull-left">
+                                              <img src="../img/ptqrshow.png" alt=""/>
+                                          </div>
+                                            <div class="erweimaright pull-left">
+                                                <button class="btn default-btnios m-t-xs m-b pull-right"><i class="fa fa-apple m-r-xs"></i>ios版下载</button>
+                                                <button class="btn default-btngreen pull-right"><i class="fa fa-android m-r-xs"></i>android版下载</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab3">
+                                    <div class="suggest" style="height: 50px">
+                                        <p class="m-t-sm">流地址支持：rtmp、hls等</p>
+                                    </div>
+                                    <div class="text-content">
+                                        <label class="font-content">拉流地址：</label>
+                                        <input class="inputcon" type="text"/>
+                                        <button class="btn copybtn">检测</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab4">
+                                    <div class="listbox">
+                                        <table class="table table-striped no-margins">
+                                            <tbody>
+                                            <tr>
+                                                <td class="font-bold">|</td>
+                                                <td>视频名称视频名称视频名称</td>
+                                                <td>00:30:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">|</td>
+                                                <td>视频名称视频名称视频名称</td>
+                                                <td>00:30:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">|</td>
+                                                <td>视频名称视频名称视频名称</td>
+                                                <td>00:30:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">|</td>
+                                                <td>视频名称视频名称视频名称</td>
+                                                <td>00:30:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">|</td>
+                                                <td>视频名称视频名称视频名称</td>
+                                                <td>00:30:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">|</td>
+                                                <td>视频名称视频名称视频名称</td>
+                                                <td>00:30:00</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <button class="btn default-btnios m-t m-b pull-right" style="width: 95px;">视频管理</button>
+                                </div>
+                                <div class="tab-pane fade" id="tab5">
+                                    <div class="suggest">
+                                        <p class="m-t-sm">点击下载桌面直播工具</p>
+                                        <p>支持摄像头直播、电脑桌面演示直播</p>
+                                    </div>
+                                    <div class="text-content">
+                                        <div class="erweimabox">
+                                            <div class="erweimaright pull-left">
+                                                <button class="btn default-btnwindow m-t-xs m-b pull-right"><i class="fa fa-windows m-r-xs"></i>Windows版下载</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab6">
+                                    <div class="suggest">
+                                        <p class="m-t-sm">点击下载桌面直播工具</p>
+                                        <p>支持摄像头直播、电脑桌面演示直播</p>
+                                    </div>
+                                    <div class="text-content">
+                                        <div class="erweimabox">
+                                            <div class="erweimaright pull-left">
+                                                <button class="btn default-btnwindow m-t-xs m-b pull-right"><i class="fa fa-windows m-r-xs"></i>Windows版下载</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 border-left">
+                        <div class="rightTitle">
+                            <ul id="rightTab" class="nav nav-tabs m-t-xs">
+                                <li class="active"><a href="#lthd" data-toggle="tab">聊天互动</a>
+                                </li>
+                                <li><a href="#twzb" data-toggle="tab">图文直播</a></li>
+                                <li><a href="#wdzb" data-toggle="tab">文档直播</a></li>
+                                <li><a href="#wd" data-toggle="tab">问答</a></li>
+                                <!--<li><a href="#zdycd" data-toggle="tab">自定义菜单</a></li>-->
+                            </ul>
+                            <div class="jinyan">
+                                <span class="jinyanname">全局禁言</span>
+                                <input type="checkbox" name="sex" id="male" class="chooseBtn" checked="">
+                                <label for="male" class="choose-label jinyanlabel"></label>
+                            </div>
+                            <a class="shezhi" href="javascript:;">页面设置</a>
+
+                        </div>
+
+                        <div id="rightTabContent" class="tab-content gray-bg">
+                            <div class="tab-pane fade in active" id="lthd">
+                                <div class="row lh-40">
+                                    <div class="col-lg-12">
+                                        <div class="switchbox pull-left m-l">
+                                            <label class="pull-left">自动审核</label>
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                        <div class="switchbox pull-left">
+                                            <span class="font-bold font-content">-</span><input class="timer" type="text" readonly value="5s"/><span class="font-bold font-content">+</span>
+                                        </div>
+                                        <div class="switchbox pull-left m-l">
+                                            <label class="pull-left">自动滚屏</label>
+                                            <input type="checkbox" name="sex" id="male" class="chooseBtn" checked/>
+                                            <label for="male" class="choose-label"></label>
+                                        </div>
+                                        <div class="switchbox pull-right m-r">
+                                           <i class="fa fa-trash font-title" title="清空"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="livecom">
+                                    <div class="row commentbox white-bg m-l p-r" style="overflow: hidden;">
+                                        <div class="col-lg-12">
+                                        <div class="widget-content " id="liveDiv">
+                                        <div id="topDiv">
+                                            <div class="feed-element p-sm border-bottom-ccc checked">
+                                                <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                <div class="media-body ">
+                                                    <p>
+                                                        <strong class="pull-left font-content">李扬</strong><span class="redtitle"> 网友</span><span class="zhiding">顶</span><span class="livetime font-12 pull-right color-999">2017-08-06 16:36</span>
+                                                    </p>
+                                                    <p class="text-content color-999">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                                                    <div class="col-lg-9 pull-right text-right">
+                                                        <a class="btn default-livebtn">通过</a>
+                                                        <a class="btn delete-livebtn">取消置顶</a>
+                                                        <a class="btn delete-livebtn">删除</a>
+                                                        <a class="btn default-livebtn" >禁言</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="feed-element p-sm border-bottom-ccc checked">
+                                                <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                <div class="media-body ">
+                                                    <p>
+                                                        <strong class="pull-left font-content">李扬</strong><span class="redtitle"> 网友</span><span class="zhiding">顶</span><span class="livetime font-12 pull-right color-999">2017-08-06 16:36</span>
+                                                    </p>
+                                                    <p class="text-content color-999">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                                                    <div class="col-lg-9 pull-right text-right">
+                                                        <a class="btn default-livebtn">通过</a>
+                                                        <a class="btn delete-livebtn">取消置顶</a>
+                                                        <a class="btn delete-livebtn">删除</a>
+                                                        <a class="btn default-livebtn" >禁言</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="feed-element p-sm border-bottom-ccc checked">
+                                                <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                <div class="media-body ">
+                                                    <p>
+                                                        <strong class="pull-left font-content">李扬</strong><span class="redtitle"> 网友</span><span class="zhiding">顶</span>
+                                                    </p>
+                                                    <p class="text-content color-999">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                                                    <div class="col-lg-9 pull-right text-right">
+                                                        <a class="btn default-livebtn">通过</a>
+                                                        <a class="btn delete-livebtn">取消置顶</a>
+                                                        <a class="btn delete-livebtn">删除</a>
+                                                        <a class="btn default-livebtn" >禁言</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="feed-element p-sm border-bottom-ccc checked">
+                                                <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                <div class="media-body ">
+                                                    <p>
+                                                        <strong class="pull-left font-content">李扬</strong><span class="redtitle"> 网友</span><span class="zhiding">顶</span>
+                                                    </p>
+                                                    <p class="text-content color-999">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                                                    <div class="col-lg-9 pull-right text-right">
+                                                        <a class="btn default-livebtn">通过</a>
+                                                        <a class="btn delete-livebtn">取消置顶</a>
+                                                        <a class="btn delete-livebtn">删除</a>
+                                                        <a class="btn default-livebtn" >禁言</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="feed-element p-sm border-bottom-ccc checked">
+                                                <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                <div class="media-body ">
+                                                    <p>
+                                                        <strong class="pull-left font-content">李扬</strong><span class="redtitle"> 网友</span><span class="zhiding">顶</span>
+                                                    </p>
+                                                    <p class="text-content color-999">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                                                    <div class="col-lg-9 pull-right text-right">
+                                                        <a class="btn default-livebtn">通过</a>
+                                                        <a class="btn delete-livebtn">取消置顶</a>
+                                                        <a class="btn delete-livebtn">删除</a>
+                                                        <a class="btn default-livebtn" >禁言</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                        </div>
+                                </div>
+                                <div class="row p-w-sm m-b setMessage">
+                                    <div class="col-lg-12 m-t m-b">
+                                        <textarea class="col-lg-12" placeholder="说点什么吧" id="textContent"></textarea>
+                                    </div>
+                                    <div class="col-lg-12 m-b">
+                                        <div class="circleimg" title="发送表情">
+                                            <img src="../img/biaoqing.png">
+                                        </div>
+                                        <div class="circleimg toupiao" type="button" style="margin-bottom: 1px; margin-left: 1px;" title="投票发布">
+                                            <img src="../img/u856.png">
+                                            <div class="toupiaobox">
+                                                <ul>
+                                                    <li>投票名称投票名称投票名称 <a href="javascript:;" class="pull-right fabu m-r-xs">发布</a></li>
+                                                    <li>投票名称投票名称投票名称 <a href="javascript:;" class="pull-right fabu m-r-xs">发布</a></li>
+                                                    <li>投票名称投票名称投票名称 <a href="javascript:;" class="pull-right fabu m-r-xs">发布</a></li>
+                                                    <li>投票名称投票名称投票名称 <a href="javascript:;" class="pull-right fabu m-r-xs">发布</a></li>
+                                                    <li>投票名称投票名称投票名称 <a href="javascript:;" class="pull-right fabu m-r-xs">发布</a></li>
+                                                    <li>投票名称投票名称投票名称 <a href="javascript:;" class="pull-right fabu m-r-xs">发布</a></li>
+                                                    <li>投票名称投票名称投票名称 <a href="javascript:;" class="pull-right fabu m-r-xs">发布</a></li>
+                                                    <li>投票名称投票名称投票名称 <a href="javascript:;" class="pull-right fabu m-r-xs">发布</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="circleimg choujiang" type="button" style="margin-bottom: 1px; margin-left: 1px;" title="抽奖活动">
+                                            <img src="../img/u856.png">
+                                            <div class="choujiangbox">
+                                                <ul>
+                                                    <li>抽奖活动名称抽奖活动名称 <a href="javascript:;"  class="pull-right fabu m-r-xs" data-toggle="modal" data-target="#myModal">发布</a></li>
+                                                    <li>抽奖活动名称抽奖活动名称 <a href="javascript:;" class="pull-right fabu m-r-xs" data-toggle="modal" data-target="#myModal">发布</a></li>
+                                                    <li>抽奖活动名称抽奖活动名称 <a href="javascript:;" class="pull-right fabu m-r-xs" data-toggle="modal" data-target="#myModal">发布</a></li>
+                                                    <li>抽奖活动名称抽奖活动名称 <a href="javascript:;" class="pull-right fabu m-r-xs" data-toggle="modal" data-target="#myModal">发布</a></li>
+                                                    <li>抽奖活动名称抽奖活动名称 <a href="javascript:;" class="pull-right fabu m-r-xs" data-toggle="modal" data-target="#myModal">发布</a></li>
+                                                    <li>抽奖活动名称抽奖活动名称 <a href="javascript:;" class="pull-right fabu m-r-xs" data-toggle="modal" data-target="#myModal">发布</a></li>
+                                                    <li>抽奖活动名称抽奖活动名称 <a href="javascript:;" class="pull-right fabu m-r-xs" data-toggle="modal" data-target="#myModal">发布</a></li>
+                                                    <li>抽奖活动名称抽奖活动名称 <a href="javascript:;" class="pull-right fabu m-r-xs" data-toggle="modal" data-target="#myModal">发布</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="circleimg" type="button" style="margin-bottom: 1px; margin-left: 1px;"  title="发送红包">
+                                            <img src="../img/hongbao.png">
+                                        </div>
+                                        <a class="btn blue-btn pull-right" >发送</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                <!-- 模态框（Modal） -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">抽奖设置</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-lg-12">
+                                                    <span class="modalname">抽奖范围：</span>
+                                                    <span class="m-r-lg"> <input type="radio" name=""/>所有用户</span>
+                                                    <span class="m-r-lg"><input type="radio" name=""/>付费用户</span>
+                                                    <span class="m-r-lg"><input type="radio" name=""/>白名单用户</span>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <input type="checkbox" style="margin-left: 80px;"/><input class="mininput" placeholder="60" type="text"/>分钟之内参与互动
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <span class="modalname">时间范围：</span>
+                                                    <span class="m-r-lg"><input class="timeinput" type="text"/>截止时间后自动开奖</span>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <span class="modalname">中奖数量：</span>
+                                                    <span class="m-r-lg"><input class="numinput" type="text"/></span>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <span class="modalname">奖品名称：</span>
+                                                    <span class="m-r-lg"><input class="numinput" type="text"/></span>
+                                                </div>
+                                            </div> 
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">立即开奖</button>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
+                                                <button type="button" class="btn btn-success">取消</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal -->
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="twzb">
+                                <div id="piccom">
+                                    <div class="row commentbox white-bg m-l" style="overflow: hidden; width: auto;">
+                                        <div class="col-lg-12">
+                                            <div class="gray-bg h-15 row" ></div>
+                                            <div class="widget-content " id="picDiv">
+                                                <div id="topDiv1">
+                                                    <div class="feed-element p-sm border-bottom-ccc checked">
+                                                        <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                        <div class="media-body ">
+                                                            <p>
+                                                                <strong class="pull-left font-content">李扬</strong><span class="redtitle"> 网友</span><span class="zhiding">顶</span>
+
+                                                                <span class="livetime font-12 pull-right color-999">2017-08-06 16:36</span>
+
+                                                                <span class="pull-right m-r color-999"><i class="fa fa-comments-o m-r-xs"></i>200</span>
+                                                                <span class="pull-right m-r color-999"><i class="fa fa-thumbs-up m-r-xs"></i>200</span>
+                                                            </p>
+                                                            <p class="text-content color-999">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                                                            <div class="col-lg-9 pull-right text-right m-b">
+                                                                <a class="btn default-livebtn">编辑</a>
+                                                                <a class="btn delete-livebtn">取消置顶</a>
+                                                                <a class="btn delete-livebtn">删除</a>
+                                                                <a class="btn default-livebtn" >禁言</a>
+                                                            </div>
+                                                            <p class="text-content color-999 gray-bg p-xs">
+                                                                <span class="ansbox"><span class="ansname">记忆的歌：</span>全国各地都在举办马拉松全国各地都在举办马拉松全国各地都在举办马拉松，黑人大兄弟明显不够用</span>
+                                                                <span class="ansbtn pull-right m-t-xs">
+                                                                    <a class="btn default-livebtn">审核</a>
+                                                                    <a class="btn delete-livebtn">删除</a>
+                                                                    <a class="btn default-livebtn" >禁言</a>
+                                                                </span>
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="feed-element p-sm border-bottom-ccc checked">
+                                                        <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                        <div class="media-body ">
+                                                            <p>
+                                                                <strong class="pull-left font-content">李扬</strong><span class="redtitle"> 网友</span><span class="zhiding">顶</span>
+
+                                                                <span class="livetime font-12 pull-right color-999">2017-08-06 16:36</span>
+
+                                                                <span class="pull-right m-r color-999"><i class="fa fa-comments-o m-r-xs"></i>200</span>
+                                                                <span class="pull-right m-r color-999"><i class="fa fa-thumbs-up m-r-xs"></i>200</span>
+                                                            </p>
+                                                            <p class="text-content color-999">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                                                            <div class="col-lg-9 pull-right text-right">
+                                                                <a class="btn default-livebtn">通过</a>
+                                                                <a class="btn delete-livebtn">取消置顶</a>
+                                                                <a class="btn delete-livebtn">删除</a>
+                                                                <a class="btn default-livebtn" >禁言</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feed-element p-sm border-bottom-ccc checked">
+                                                        <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                        <div class="media-body ">
+                                                            <p>
+                                                                <strong class="pull-left font-content">李扬</strong><span class="redtitle"> 网友</span><span class="zhiding">顶</span>
+
+                                                                <span class="livetime font-12 pull-right color-999">2017-08-06 16:36</span>
+
+                                                                <span class="pull-right m-r color-999"><i class="fa fa-comments-o m-r-xs"></i>200</span>
+                                                                <span class="pull-right m-r color-999"><i class="fa fa-thumbs-up m-r-xs"></i>200</span>
+                                                            </p>
+                                                            <p class="text-content color-999">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                                                            <div class="col-lg-9 pull-right text-right">
+                                                                <a class="btn default-livebtn">通过</a>
+                                                                <a class="btn delete-livebtn">取消置顶</a>
+                                                                <a class="btn delete-livebtn">删除</a>
+                                                                <a class="btn default-livebtn" >禁言</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feed-element p-sm border-bottom-ccc checked">
+                                                        <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                        <div class="media-body ">
+                                                            <p>
+                                                                <strong class="pull-left font-content">李扬</strong><span class="redtitle"> 网友</span><span class="zhiding">顶</span>
+
+                                                                <span class="livetime font-12 pull-right color-999">2017-08-06 16:36</span>
+
+                                                                <span class="pull-right m-r color-999"><i class="fa fa-comments-o m-r-xs"></i>200</span>
+                                                                <span class="pull-right m-r color-999"><i class="fa fa-thumbs-up m-r-xs"></i>200</span>
+                                                            </p>
+                                                            <p class="picbox m-t m-b">
+                                                                <img data-src="../img/u1207.jpg" class="col-lg-3" src="../img/u1207.jpg" alt=""/>
+                                                                <img data-src="../img/u1207.jpg" class="col-lg-3" src="../img/u1207.jpg" alt=""/>
+                                                                <img data-src="../img/u1207.jpg" class="col-lg-3" src="../img/u1207.jpg" alt=""/>
+                                                                <img data-src="../img/u1207.jpg" class="col-lg-3" src="../img/u1207.jpg" alt=""/>
+                                                            </p>
+                                                            <div class="col-lg-9 pull-right text-right">
+                                                                <a class="btn default-livebtn">通过</a>
+                                                                <a class="btn delete-livebtn">取消置顶</a>
+                                                                <a class="btn delete-livebtn">删除</a>
+                                                                <a class="btn default-livebtn" >禁言</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feed-element p-sm border-bottom-ccc checked">
+                                                        <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                        <div class="media-body ">
+                                                            <p>
+                                                                <strong class="pull-left font-content">李扬</strong><span class="redtitle"> 网友</span><span class="zhiding">顶</span>
+
+                                                                <span class="livetime font-12 pull-right color-999">2017-08-06 16:36</span>
+
+                                                                <span class="pull-right m-r color-999"><i class="fa fa-comments-o m-r-xs"></i>200</span>
+                                                                <span class="pull-right m-r color-999"><i class="fa fa-thumbs-up m-r-xs"></i>200</span>
+                                                            </p>
+                                                            <p class="text-content color-999">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                                                            <div class="col-lg-9 pull-right text-right">
+                                                                <a class="btn default-livebtn">通过</a>
+                                                                <a class="btn delete-livebtn">取消置顶</a>
+                                                                <a class="btn delete-livebtn">删除</a>
+                                                                <a class="btn default-livebtn" >禁言</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row p-w-sm m-b">
+                                        <div class="col-lg-12 m-t m-b">
+                                            <textarea class="col-lg-12" placeholder="说点什么吧" id="textContent"></textarea>
+                                        </div>
+                                        <div class="col-lg-12 m-b">
+                                            <div class="circleimg" title="发送表情">
+                                                <img src="../img/u1207.jpg">
+                                            </div>
+                                            <div class="addcircleimg" style="margin-bottom: 1px; margin-left: 1px;" title="添加人员">
+                                              +
+                                            </div>
+                                            <a class="btn blue-btn pull-right" >发送</a>
+                                            <i class="fa fa-photo font-26 pull-right m-r" style="vertical-align: top;"></i>
+                                            <i class="fa fa-film font-24 pull-right m-r" style="vertical-align: top;"></i>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade bgc-fff" id="wdzb">
+                                <div class="row lh-40">
+                                    <div class="col-lg-12 gray-bg">
+                                        <div class="switchbox pull-left m-l">
+                                            <button class="btn default-btn uploadbtn">上传文档</button>
+                                        </div>
+                                        <div class="switchbox pull-left">
+                                            <div class="dropdown">
+                                                <button type="button" class="btn dropdown-toggle wendang m-l" id="dropdownMenu2" data-toggle="dropdown">选择文档
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">选择文档</a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">文档一</a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">文档二</a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="switchbox pull-left m-l-xl">
+                                            <div class="checkbox no-margins">
+                                                <label>
+                                                    <input type="checkbox" class="m-t" style="margin-top: 15px;">允许下载
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="switchbox pull-right m-r">
+                                            <i class="fa fa-trash font-title" title="清空"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="wdbox" class="bgc-fff">
+                                    <div class="row wdcontent" >
+                                        <div class="col-lg-12 bgc-fff  border-bottom">
+                                            <div class="col-lg-1">
+                                                <div class="left"><img src="../img/leftarrow.png" alt=""/></div>
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <div class="picobox">
+                                                    <ul id="ul">
+                                                        <li><img src="../img/u1207.jpg"></li>
+                                                        <li><img src="../img/yl.png"></li>
+                                                        <li><img src="../img/u1207.jpg"></li>
+                                                        <li><img src="../img/yl.png"></li>
+                                                        <li><img src="../img/u1207.jpg"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1">
+                                                <div class="right"><img src="../img/rightarrow.png" alt=""/></div>
+                                            </div>
+                                            <div class="col-lg-12 text-center m-b">
+                                                <span class="num">11</span>/<span class="totle">41</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row gray-bg wdbottom">
+
+                                    <div class="col-lg-12">
+                                        <div class="olbox">
+                                            <ol id="ol">
+                                                <li class="border-red"><img src="../img/u1207.jpg"></li>
+                                                <li><img src="../img/yl.png"></li>
+                                                <li><img src="../img/u1207.jpg"></li>
+                                                <li><img src="../img/yl.png"></li>
+                                                <li><img src="../img/u1207.jpg"></li>
+                                            </ol>
+
+                                        </div>
+                                        <div class="leftarr">
+
+                                        </div>
+                                        <div class="rightarr">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="wd">
+                                <div id="wdcom">
+                                    <div class="row commentbox white-bg m-l" style="overflow: hidden; width: auto;">
+                                        <div class="col-lg-12">
+                                            <div class="gray-bg lh-40 row" >
+                                                <div class="switchbox pull-left m-l">
+                                                    <span class="m-l m-r font-content">问题筛选</span>
+                                                </div>
+                                                <div class="switchbox pull-left">
+                                                    <div class="dropdown">
+                                                    <button type="button" class="btn dropdown-toggle wendang m-l" id="dropdownMenu3" data-toggle="dropdown">全部问题
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                                                        <li role="presentation">
+                                                            <a role="menuitem" tabindex="-1" href="#">全部问题</a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a role="menuitem" tabindex="-1" href="#">已回答</a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a role="menuitem" tabindex="-1" href="#">待回答</a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a role="menuitem" tabindex="-1" href="#">已忽略</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="widget-content " id="wdDiv">
+                                                <div id="topDiv">
+                                                    <div class="feed-element p-sm border-bottom-ccc checked">
+                                                        <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                        <div class="media-body ">
+                                                            <p>
+                                                                <strong class="pull-left font-content">李扬</strong>
+                                                                <span class="livetime font-12 pull-right color-999">2017-08-06 16:36</span>
+                                                            </p>
+                                                            <p class="text-content color-999">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                                                            <div class="col-lg-9 pull-right text-right">
+                                                                <a class="btn default-livebtn">回答</a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feed-element p-sm border-bottom-ccc checked">
+                                                        <a class="pull-left"> <img alt="image" class="img-circle" src="http://106.15.181.24:8181//2018_02/03/1517628489180.jpg"> </a>
+                                                        <div class="media-body">
+                                                            <p>
+                                                                <strong class="pull-left font-content">李扬</strong>
+                                                                <span class="livetime font-12 pull-right color-999">2017-08-06 16:36</span>
+                                                            </p>
+                                                            <p class="text-content color-999">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                                                            <div class="col-lg-10 questionbox color-blue"><span class="color-999">回答：</span>媒体:一旦中印开战 解放军将以雷霆之势全歼印军媒体:一旦中印开战 解放军将以雷霆之势全歼印军媒体:一旦中印开战 解放军将以雷霆之势全歼印军</div>
+
+                                                            <div class="col-lg-2 pull-right text-right">
+                                                                <a class="btn delete-btn">已回答</a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row p-w-sm m-b">
+                                        <div class="col-lg-12 m-t m-b">
+                                            <textarea class="col-lg-12" placeholder="回答问题"></textarea>
+                                        </div>
+                                        <div class="col-lg-12 m-b">
+
+                                            <a class="btn blue-btn pull-right">回答</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+     	
+</body>
+<!-- Mainly scripts -->
+<script src="../js/jquery-2.1.1.js"></script>
+<script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="../js/inspinia.js"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
+
+<!-- Chosen -->
+<script src="../js/plugins/chosen/chosen.jquery.js"></script>
+
+<!-- JSKnob -->
+<script src="../js/plugins/jsKnob/jquery.knob.js"></script>
+
+<!-- Input Mask-->
+<script src="../js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+<!-- Data picker -->
+<script src="../js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<!-- NouSlider -->
+<script src="../js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+<!-- Switchery -->
+<script src="../js/plugins/switchery/switchery.js"></script>
+
+<!-- IonRangeSlider -->
+<script src="../js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+<!-- iCheck -->
+<script src="../../js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- MENU -->
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- Color picker -->
+<script src="../js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+<!-- Clock picker -->
+<script src="../js/plugins/clockpicker/clockpicker.js"></script>
+
+<!-- Image cropper -->
+
+<script src="../js/plugins/cropper/cropper.min.js"></script>
+
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="../js/plugins/fullcalendar/moment.min.js"></script>
+
+<!-- Date range picker -->
+<script src="../js/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="../js/myJs.js"></script>
+<script src="../js/video.js" type="text/javascript" charset="utf-8"></script>
+<!--新加js-->
+<script src="../js/lightGallery.js"></script>
+<script src="../js/leftHeight.js"></script>
+<script src="../js/zbj.js"></script>
+<script type="text/javascript">
+
+</script>
+
+<script>
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户账号详情</title>
+    <#include "/bvRadio/head.html"/>
+    <link href="${base}/tysx/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/tysx/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${base}/tysx/css/animate.css" rel="stylesheet">
+    <link href="${base}/tysx/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="${base}/tysx/css/myStyle.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/jbxx.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/public.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/shcommon.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/bgpt/bgleft.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/newhdgl.css"/>
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/livemanager/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/livemanager/user/userleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">用户详情</a>
+                    </div>
+                    <button id="returnlist" class="btn btn-white pull-right font-12 m-t-sm m-r">返回用户账号数据列表</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="m-t p-w-m">
+                    <ul id="myTab" class="col-lg-12 nav nav-tabs p-w-lg dcTab">
+                        <li class="active"><a href="#freewatch" data-toggle="tab">基本资料</a></li>
+                        <li><a href="#codewatch" data-toggle="tab">观看列表</a></li>
+                        <li><a href="#paywatch" data-toggle="tab">关注商户</a></li>
+                        <li><a href="#talklist" data-toggle="tab">回看评论列表</a></li>
+                        <li><a href="#talklist2" data-toggle="tab">话题评论列表</a></li>
+                        <li><a href="#loginList" data-toggle="tab">登录列表</a></li>
+                    </ul>
+                    <div class=" col-lg-12 tab-content">
+                        <div class="tab-pane fade in active" id="freewatch">
+                            <div class="col-lg-12 m-t-lg"><button class="btn btn-danger font-12" id="toblack">拉黑该用户</button></div>
+                            <div class="col-lg-6 m-t">
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户ID：</div>
+                                    <div class="userlistRight">${user.userId!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户账号：</div>
+                                    <div class="userlistRight">${user.userName!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">创建/注册时间：</div>
+                                    <div class="userlistRight">${user.createTime!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">注册来源：</div>
+                                    <div class="userlistRight">${user.createFrom!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户备注：</div>
+                                    <textarea id="beizhu" class="userlistTextarea">${user.beizhu!}</textarea>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 m-t">
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户昵称：</div>
+                                    <input type="text" id="nailName" class="userlistinput" value="${user.nailName!}"/>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户密码：</div>
+                                    <input type="password" class="userlistinput" id="userPwd" value="${user.userPwd!}"/>
+                                    <button class="btn btn-danger font-12 pull-left m-l" style="padding: 4px 10px;">重置</button>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户状态：</div>
+                                    <div class="userlistRight">正常</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">最后一次登录IP：</div>
+                                    <div class="userlistRight">${user.loginIp!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">最后编辑人帐号：</div>
+                                    <div class="userlistRight" id="lastUpdateName">${user.updateUserName!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">最后编辑时间：</div>
+                                    <div class="userlistRight" id="lastUpdateTime">${user.updateTime!}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-10 m-t-lg col-lg-offset-1 m-b">
+                                <button id="submitbtn" type="button" class="btn btn-success font-12">提交编辑</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="codewatch">
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                    <div class="selectedGroup m-l-lg pull-left">
+                                        <div class="pull-left lh-40 font-content">视频ID：</div>
+                                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                                            <input class="userInput" type="text">
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-white m-t-xs pull-right font-12 m-r">查询</button>
+                                </div>
+                            </div>
+                            <div class="row title-header gray-bg m-t-sm m-r-none m-l-none">
+                                <div class="col-lg-12">
+                                    <div class="title-name">
+                                        <a class="font-content">数据列表</a>
+                                    </div>
+                                    <div class="dropdown pull-right m-t-sm m-r font-12">
+                                        <button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">显示条数
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">导出数据</button>
+                                </div>
+                            </div>
+                            <div class="row m-t-xs">
+                                <div class="col-lg-12">
+                                    <table class="table newtable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th width="50"></th>
+                                            <th>视频ID</th>
+                                            <th>观看时间</th>
+                                            <th>结束观看时间</th>
+                                            <th>持续时长（小时）<i class="fa fa-caret-down"></i></th>
+                                            <th>观看IP</th>
+                                            <th>观看IP地址</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td >2018-03-27  08：09：21</td>
+                                            <td >2018-03-27  08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 pageBox">
+                                    <div class="pull-left m-l"><input class="m-r-sm" type="checkbox" style="vertical-align: sub" id=""/>全选</div>
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="paywatch">
+                            <div class="row title-header gray-bg m-t-sm m-r-none m-l-none">
+                                <div class="col-lg-12">
+                                    <div class="title-name">
+                                        <a class="font-content">数据列表</a>
+                                    </div>
+                                    <div class="dropdown pull-right m-t-sm m-r font-12">
+                                        <button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">显示条数
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">导出数据</button>
+                                </div>
+                            </div>
+                            <div class="row m-t-xs">
+                                <div class="col-lg-12">
+                                    <table class="table shtable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th width="50"></th>
+                                            <th>关注商户ID</th>
+                                            <th>商户名称</th>
+                                            <th>关注时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-12 pageBox">
+                                    <div class="pull-left m-l"><input class="m-r-sm" type="checkbox" style="vertical-align: sub"/>全选</div>
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="talklist">
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                    <div class="selectedGroup m-l-lg pull-left">
+                                        <div class="pull-left lh-40 font-content">回看ID：</div>
+                                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                                            <input class="userInput" type="text" id="fileid">
+                                        </div>
+                                    </div>
+                                    <div class="selectedGroup m-l-lg pull-left">
+                                        <div class="pull-left lh-40 font-content">评论关键字：</div>
+                                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                                            <input class="userInput" type="text" id="filecomment">
+                                        </div>
+                                        <!-- <div class="selectedGroup m-l-lg pull-left">
+                                            <div class="pull-left lh-40 font-content">状态：</div>
+                                            <div class="dropdown pull-left m-t-xs m-r-lg  open">
+                                                <button type="button" class="btn dropdown-toggle bordered bgc-fff" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true" style="height: 30px;">不限
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <button type="button" class="btn btn-white m-t-xs pull-right font-12 m-r" id="searchfilecomment">查询</button>
+                                </div>
+                            </div>
+                            <div class="row title-header gray-bg m-t-sm m-r-none m-l-none">
+                                <div class="col-lg-12">
+                                    <div class="title-name">
+                                        <a class="font-content">数据列表</a>
+                                    </div>
+                                    <div class="dropdown pull-right m-t-sm m-r font-12">
+                                        <button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">显示条数
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">导出数据</button>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs" id="delfilecomment">删除</button>
+                                </div>
+                            </div>
+                            <div class="row m-t-xs">
+                               <div class="col-lg-12">
+                                    <table class="table newtable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th></th>
+                                            <th>回看ID</th>
+                                            <th>评论内容</th>
+                                            <th>评论时间</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="filecommentbody">
+                                        <#list filecomments as item>
+											<tr>
+												<td><input type="checkbox" name="filecommentcheck" data-id="${item.commentsId!}"></td>
+												<td>${item.iLiveMediaFile.fileId!}</td>
+												<td>${item.comments!}</td>
+												<td>${item.updateTime!}</td>
+												<td>${item.checkState!}</td>
+												<td><a href="##" class="m-r-xs color-999" onclick="removefilecom(${item.commentsId!},this)">删除</a></td>
+											</tr>
+										</#list>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 pageBox">
+                                    <div class="pull-left m-l"><input class="m-r-sm" type="checkbox" style="vertical-align: sub" id="fileAllSelect"/>全选</div>
+                                    <div class="pull-right btn-group m-r" id="filePage">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <#list 1..filecommentsPage as i>
+                                        	<button class="btn btn-sm btn-white <#if i==1>active</#if>" onclick="tofilepage(${i},this)">${i}</button>
+                                        </#list>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="talklist2">
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                    <div class="selectedGroup m-l-lg pull-left">
+                                        <div class="pull-left lh-40 font-content">话题ID：</div>
+                                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                                            <input class="userInput" type="text" id="msgid">
+                                        </div>
+                                    </div>
+                                    <div class="selectedGroup m-l-lg pull-left">
+                                        <div class="pull-left lh-40 font-content">评论关键字：</div>
+                                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                                            <input class="userInput" type="text" id="msgcomment">
+                                        </div>
+                                        <!-- <div class="selectedGroup m-l-lg pull-left">
+                                            <div class="pull-left lh-40 font-content">状态：</div>
+                                            <div class="dropdown pull-left m-t-xs m-r-lg  open">
+                                                <button type="button" class="btn dropdown-toggle bordered bgc-fff" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true" style="height: 30px;">不限
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <button class="btn btn-white m-t-xs pull-right font-12 m-r" id="searchmsgcomment">查询</button>
+                                </div>
+                            </div>
+                            <div class="row title-header gray-bg m-t-sm m-r-none m-l-none">
+                                <div class="col-lg-12">
+                                    <div class="title-name">
+                                        <a class="font-content">数据列表</a>
+                                    </div>
+                                    <div class="dropdown pull-right m-t-sm m-r font-12">
+                                        <button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">显示条数
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">导出数据</button>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs" id="delmsgcomment">删除</button>
+                                </div>
+                            </div>
+                            <div class="row m-t-xs">
+                               <div class="col-lg-12">
+                                    <table class="table newtable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th></th>
+                                            <th>话题ID</th>
+                                            <th>评论内容</th>
+                                            <th>评论时间</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="msgcomments">
+                                        <#list filecomments as item>
+											<tr>
+												<td><input type="checkbox" name="msgcommentcheck" data-id="${item.commentsId!}"></td>
+												<td>${item.msgId!}</td>
+												<td>${item.comments!}</td>
+												<td>${item.createTime!}</td>
+												<td>${item.isChecked!}</td>
+												<td><a href="javascript:;" class="m-r-xs color-999" onclick="removemsgcomment(${item.commentsId!},this)">删除</a></td>
+											</tr>
+										</#list>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 pageBox">
+                                    <div class="pull-left m-l"><input class="m-r-sm" type="checkbox" style="vertical-align: sub" id="msgAllSelect"/>全选</div>
+                                    <div class="pull-right btn-group m-r" id="msgpage">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <#list 1..topicCommentsPage as i>
+                                        	<button class="btn btn-sm btn-white <#if i==1>active</#if>" onclick="tomsgpage(${i},this)">${i}</button>
+                                        </#list>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="loginList">
+                            <div class="row title-header gray-bg m-t-sm m-r-none m-l-none">
+                                <div class="col-lg-12">
+                                    <div class="title-name">
+                                        <a class="font-content">数据列表</a>
+                                    </div>
+                                    <div class="dropdown pull-right m-t-sm m-r font-12">
+                                        <button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">显示条数
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">导出数据</button>
+                                </div>
+                            </div>
+                            <div class="row m-t-xs">
+                                <div class="col-lg-12">
+                                    <table class="table shtable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th width="50"></th>
+                                            <th>登录IP</th>
+                                            <th>IP所在地</th>
+                                            <th>登录时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 pageBox">
+                                    <div class="pull-left m-l"><input class="m-r-sm" type="checkbox" style="vertical-align: sub"/>全选</div>
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+
+<script>
+    var winHeight = $(window).height();
+    var navHeight = $(".navbar").height();
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75
+    });
+    $(".newtable tbody").height(winHeight-navHeight-titleHeight-270);
+    $(".shtable tbody").height(winHeight-navHeight-titleHeight-220);
+
+	$("#submitbtn").on("click",function(){
+		var userId = "${user.userId!}";
+		var nailName = $("#nailName").val();
+		var password = $("#userPwd").val();
+		var beizhu = $("#beizhu").val();
+		$.ajax({
+			url:"${base}/operator/user/updateUser.do",
+			method:"post",
+			data:{
+				userId:userId,
+				nailName:nailName,
+				beizhu:beizhu
+			},
+			success:function(res){
+				if(res.status == 1){
+					$("#lastUpdateTime").text(res.data.updateTime);
+					$("#lastUpdateName").text(res.data.updateUserName);
+					alert("修改成功");
+				}
+			}
+		});
+	});
+	
+	//拉黑该用户
+	$("#toblack").on("click",function(){
+		var id = "${user.userId!}";
+    	$.ajax({
+    		url:"${base}/operator/user/toblack.do",
+    		method:"post",
+    		data:{
+    			userId:id
+    		},
+    		success:function(res){
+    			if(res.status==1){
+    				$("#toblack").remove();
+    				alert("拉黑成功");
+    			}else{
+    				alert("操作失败");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+	});
+	
+	//返回列表
+	$("#returnlist").on("click",function(){
+		var certStatus = "${user.certStatus!}";
+		console.log(certStatus);
+		if(certStatus==4){
+			location.href="${base}/operator/user/enterpriseuserlist.do";
+		}else{
+			location.href="${base}/operator/user/userlist.do";
+		}
+	});
+	
+	//删除回看评论
+	function removefilecom(id,ele){
+		console.log(id);
+		$.ajax({
+			url:"${base}/operator/user/deletefilecomment.do",
+			method:"post",
+			data:{
+				commentsId:id
+			},
+			success:function(res){
+				if(res.status == 1){
+					$(ele).closest("tr").remove();
+					alert("删除成功");
+				}
+			}
+		});
+	}
+	
+	//删除话题评论
+	function removemsgcomment(id,ele){
+		$.ajax({
+			url:"${base}/operator/user/deletemsgcomment.do",
+			method:"post",
+			data:{
+				commentsId:id
+			},
+			success:function(res){
+				if(res.status == 1){
+					$(ele).closest("tr").remove();
+					alert("删除成功");
+				}
+			}	
+		});
+	}
+	
+	//回看评论查询
+	$("#searchfilecomment").on("click",function(){
+		var id = $("#fileid").val();
+		var word = $("#filecomment").val();
+		var userId = "${user.userId!}";
+		$.ajax({
+			url:"${base}/operator/user/searchfilecomment.do",
+			method:"get",
+			data:{
+				userId:userId,
+				fileId:id,
+				comments:word
+			},
+			success:function(res){
+				console.log(res);
+				if(res.status==1){
+					var show = "";
+					if(res.fileComments!=null && res.fileComments.length!=0){
+						console.log(res.fileComments);
+						$.each(res.fileComments,function(index,ele){
+							show+="<tr><td></td><td>"+ele.iLiveMediaFile.fileId+"</td>";
+							show+="<td>"+ele.comments+"</td>";
+							show+="<td>"+ele.updateTime+"</td>";
+							show+="<td>"+ele.checkState+"</td>";
+							show+="<td><a href='javascript:;' class='m-r-xs color-999' onclick='removefilecom("+ele.commentsId+",this)'>删除</a></td>";
+							show+="</tr>";
+						});
+					}
+					$("#filecommentbody").empty().append(show);
+					
+					var page = "";
+					var pageprev = "";
+					var pagenext = "";
+					if(res.pageSize<=1){
+						page += "<button class='btn btn-sm btn-white active' onclick='tofilepage(1,this)'>1</button>";
+					}else{
+						for(var i=0;i<res.pageSize;i++){
+							if(i==0){
+								page+="<button class='btn btn-sm btn-white active' onclick='tofilepage("+(parseInt(i)+1)+",this)'>"+(parseInt(i)+1)+"</button>";
+							}else{
+								page+="<button class='btn btn-sm btn-white' onclick='tofilepage("+(parseInt(i)+1)+",this)'>"+(parseInt(i)+1)+"</button>";
+							}
+						}
+					}
+					pageprev+="<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-left'></i></button>";
+					pagenext = "<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-right'></i> </button>";
+					$("#filePage").empty().append(pageprev).append(page).append(pagenext);
+				}
+			}
+		})
+	});
+	
+	//话题评论查询
+	$("#searchmsgcomment").on("click",function(){
+		var userId = "${user.userId!}";
+		var id = $("#msgid").val();
+		var word = $("#msgcomment").val();
+		$.ajax({
+			url:"${base}/operator/user/searchmsgcomment.do",
+			method:"post",
+			data:{
+				userId:userId,
+				msgId:id,
+				comments:word
+			},
+			success:function(res){
+				console.log(res);
+				if(res.status==1){
+					var show = "";
+					if(res.msgComments!=null && res.msgComments.length!=0){
+						$.each(res.msgComments,function(index,ele){
+							show+="<tr><td><input type='checkbox' name='msgcommentcheck' data-id='"+ele.commentsId+"'></td><td>"+ele.msgId+"</td>";
+							show+="<td>"+ele.comments+"</td>";
+							show+="<td>"+ele.createTime+"</td>";
+							show+="<td>"+ele.isChecked+"</td>";
+							show+="<td><a href='javascript:;' class='m-r-xs color-999' onclick='removemsgcomment("+ele.commentsId+",this)'>删除</a></td>";
+							show+="</tr>";
+						});
+					}
+					$("#msgcomments").empty().append(show);
+					
+					var page = "";
+					var pageprev = "";
+					var pagenext = "";
+					if(res.pageSize<=1){
+						page += "<button class='btn btn-sm btn-white active' onclick='tomsgpage(1,this)'>1</button>";
+					}else{
+						for(var i=0;i<res.pageSize;i++){
+							if(i==0){
+								page+="<button class='btn btn-sm btn-white active' onclick='tomsgpage("+(parseInt(i)+1)+",this)'>"+(parseInt(i)+1)+"</button>";
+							}else{
+								page+="<button class='btn btn-sm btn-white' onclick='tomsgpage("+(parseInt(i)+1)+",this)'>"+(parseInt(i)+1)+"</button>";
+							}
+						}
+					}
+					pageprev+="<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-left'></i></button>";
+					pagenext = "<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-right'></i> </button>";
+					$("#msgpage").empty().append(pageprev).append(page).append(pagenext);
+				}
+			}
+		})
+	});
+	
+	//回看查询分页
+	function tofilepage(pageNo,ele){
+		var id = $("#fileid").val();
+		var word = $("#filecomment").val();
+		var userId = "${user.userId!}";
+		var that = ele;
+		$.ajax({
+			url:"${base}/operator/user/searchfilecomment.do",
+			method:"get",
+			data:{
+				userId:userId,
+				fileId:id,
+				comments:word,
+				pageNo:pageNo
+			},
+			success:function(res){
+				console.log(res);
+				if(res.status==1){
+					var show = "";
+					if(res.fileComments!=null && res.fileComments.length!=0){
+						$.each(res.fileComments,function(index,ele){
+							show+="<tr><td></td><td>"+ele.iLiveMediaFile.fileId+"</td>";
+							show+="<td>"+ele.comments+"</td>";
+							show+="<td>"+ele.updateTime+"</td>";
+							show+="<td>"+ele.checkState+"</td>";
+							show+="<td><a href='javascript:;' class='m-r-xs color-999' onclick='removefilecom("+ele.commentsId+",this)'>删除</a></td>";
+							show+="</tr>";
+						});
+					}
+					$("#filecommentbody").empty().append(show);
+					$(that).addClass("active").siblings().removeClass("active");
+				}
+			}
+		})
+	}
+	
+	//话题分页
+	function tomsgpage(pageNo,ele){
+		var userId = "${user.userId!}";
+		var id = $("#msgid").val();
+		var word = $("#msgcomment").val();
+		console.log(word);
+		var that = ele;
+		$.ajax({
+			url:"${base}/operator/user/searchmsgcomment.do",
+			method:"POST",
+			data:{
+				userId:userId,
+				msgId:id,
+				comments:word
+			},
+			success:function(res){
+				console.log(res);
+				if(res.status==1){
+					var show = "";
+					if(res.msgComments!=null && res.msgComments.length!=0){
+						$.each(res.msgComments,function(index,ele){
+							show+="<tr><td><input type='checkbox' name='msgcommentcheck' data-id='"+ele.commentsId+"'></td><td>"+ele.msgId+"</td>";
+							show+="<td>"+ele.comments+"</td>";
+							show+="<td>"+ele.createTime+"</td>";
+							show+="<td>"+ele.isChecked+"</td>";
+							show+="<td><a href='javascript:;' class='m-r-xs color-999' onclick='removemsgcomment("+ele.commentsId+",this)'>删除</a></td>";
+							show+="</tr>";
+						});
+					}
+					$("#msgcomments").empty().append(show);
+					$(that).addClass("active").siblings().removeClass("active");
+				}
+			}
+		})
+	}
+	
+	//回看评论列表全选
+	$("#fileAllSelect").on("change",function(){
+		console.log($("#fileAllSelect").get(0).checked);
+		if($("#fileAllSelect").get(0).checked){
+			$("input[type=checkbox][name=filecommentcheck]").prop("checked",true);
+		}else{
+			$("input[type=checkbox][name=filecommentcheck]").prop("checked",false);
+		}
+	});
+	
+	//话题评论列表全选
+	$("#msgAllSelect").on("change",function(){
+		console.log($("#msgAllSelect").get(0).checked);
+		if($("#msgAllSelect").get(0).checked){
+			$("input[type=checkbox][name=msgcommentcheck]").prop("checked",true);
+		}else{
+			$("input[type=checkbox][name=msgcommentcheck]").prop("checked",false);
+		}
+	});
+	var filecommentarr = [];
+	//根据多选框删除回看评论
+	$("#delfilecomment").on("click",function(){
+		filecommentarr.splice(0,filecommentarr.length);
+		$("input[type=checkbox][name=filecommentcheck]:checked").each(function(index,ele){
+			filecommentarr.push($(ele).attr("data-id"));
+    	});
+		var id = JSON.stringify(filecommentarr);
+		$.ajax({
+    		url:"${base}/operator/user/delmanyfilecomment.do",
+    		method:"post",
+    		data:{
+    			ids:id
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1){
+    				$("input[type=checkbox][name=filecommentcheck]:checked").each(function(index,ele){
+    					$(ele).closest("tr").remove();
+    		    	});
+    				alert("删除成功");
+    			}else{
+    				alert("操作失败");
+    			}
+    		},
+    		error:function(){
+    			console.log("失败");
+    		}
+    	});
+	});
+	var msgcommentarr = [];
+	//根据多选框删除话题评论
+	$("#delmsgcomment").on("click",function(){
+		msgcommentarr.splice(0,msgcommentarr.length);
+		$("input[type=checkbox][name=msgcommentcheck]:checked").each(function(index,ele){
+			msgcommentarr.push($(ele).attr("data-id"));
+    	});
+		var id = JSON.stringify(msgcommentarr);
+		$.ajax({
+    		url:"${base}/operator/user/delmanymsgcomment.do",
+    		method:"post",
+    		data:{
+    			ids:id
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1){
+    				$("input[type=checkbox][name=msgcommentcheck]:checked").each(function(index,ele){
+    					$(ele).closest("tr").remove();
+    		    	});
+    				alert("删除成功");
+    			}else{
+    				alert("操作失败");
+    			}
+    		},
+    		error:function(){
+    			console.log("失败");
+    		}
+    	});
+	});
+	
+</script>
+</html>

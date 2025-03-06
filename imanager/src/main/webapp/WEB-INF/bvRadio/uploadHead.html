@@ -1,0 +1,19 @@
+<#if noCss??&&noCss==1><#else>
+<link href="${base}/thirdparty/uploadify/uploadify.css" rel="stylesheet"
+	type="text/css" />
+</#if>
+<script src="${base}/thirdparty/uploadify/jquery.uploadify.min.js"
+	type="text/javascript"></script>
+<script src="${base}/res/bvRadio/js/jquery.cookie.js"
+	type="text/javascript"></script>
+<script>
+	function getUploadUrl() {
+		var locationUrl = window.location.href;
+		var hostname = window.location.hostname;
+		var uploadUrl = "${base}/admin/o_uploadFile.do";
+		if (locationUrl.toLocaleLowerCase().indexOf("https://")!=-1) {
+			uploadUrl = "http://"+hostname+":9000/${base}/admin/o_uploadFile.do";
+		}
+		return uploadUrl;
+	}
+</script>

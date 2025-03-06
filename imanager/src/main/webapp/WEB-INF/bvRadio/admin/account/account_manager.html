@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>账号管理</title>
+	<#include "/bvRadio/head.html"/>
+    <link href="${base}/tysx/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/tysx/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="${base}/tysx/css/animate.css" rel="stylesheet">
+    <link href="${base}/tysx/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="${base}/tysx/css/myStyle.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/jbxx.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/public.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/zbgl.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/shcommon.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/newheader.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/newleft.css"/>
+
+    <!--新加账户css-->
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/account.css"/>
+
+    <style>
+
+    </style>
+</head>
+<body >
+<div id="wrapper" class="bgc-fff">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/admin/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/admin/account/accountleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content bgc-fff">
+            <div class="row accountlist">
+                <h3 class="lh-50 m-t-lg">安全设置</h3>
+                <div class="col-lg-12">
+                    <div class="col-lg-4 zlink">
+                        <div class="col-lg-2 col-lg-offset-2"><img src="${base}/tysx/img/pos.png"/> </div>
+                        <div class="col-lg-4 m-l-sm">
+                            <span>登录密码</span>
+                            <button class="btn gray-bg m-t-sm">修改密码</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 zlink">
+                        <div class="col-lg-2 col-lg-offset-2"><img src="${base}/tysx/img/p.png"/> </div>
+                        <div class="col-lg-4 m-l-sm">
+                            <span>135****9090</span>
+                            <button class="btn gray-bg m-t-sm">修改绑定</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 zlink">
+                        <div class="col-lg-2 col-lg-offset-2"><img src="${base}/tysx/img/m.png"/> </div>
+                        <div class="col-lg-4 m-l-sm">
+                            <span>绑定邮箱</span>
+                            <button class="btn gray-bg m-t-sm">立即绑定</button>
+                        </div>
+                    </div>
+                </div>
+                <hr style="width: 100%">
+            </div>
+            <div class="row accountlist">
+                <h3 class="lh-50">绑定社交账号</h3>
+                <div class="col-lg-12">
+                    <div class="col-lg-4 zlink">
+                        <div class="col-lg-2 col-lg-offset-2"><img src="${base}/tysx/img/x.png"/> </div>
+                        <div class="col-lg-4 m-l-sm">
+                            <span>登录密码</span>
+                            <button class="btn gray-bg m-t-sm">立即绑定</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 zlink">
+                        <div class="col-lg-2 col-lg-offset-2"><img src="${base}/tysx/img/q.png"/> </div>
+                        <div class="col-lg-4 m-l-sm">
+                            <span>135****9090</span>
+                            <button class="btn gray-bg m-t-sm">立即绑定</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 zlink">
+                        <div class="col-lg-2 col-lg-offset-2"><img src="${base}/tysx/img/2.png"/> </div>
+                        <div class="col-lg-4 m-l-sm">
+                            <span>绑定邮箱</span>
+                            <button class="btn gray-bg m-t-sm">立即绑定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="col-lg-offset-5 btn red-bg" style="padding: 5px 20px;">确定</button>
+         </div>
+    </div>
+</div>
+
+
+</body>
+<!-- Mainly scripts -->
+<script src="${base}/tysx/js/jquery-2.1.1.js"></script>
+<script src="${base}/tysx/js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="${base}/tysx/js/bootstrap.min.js"></script>
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${base}/tysx/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="${base}/tysx/js/inspinia.js"></script>
+<script src="${base}/tysx/js/plugins/pace/pace.min.js"></script>
+
+<!-- Chosen -->
+<script src="${base}/tysx/js/plugins/chosen/chosen.jquery.js"></script>
+
+<!-- JSKnob -->
+<script src="${base}/tysx/js/plugins/jsKnob/jquery.knob.js"></script>
+
+<!-- Input Mask-->
+<script src="${base}/tysx/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+<!-- Data picker -->
+<script src="${base}/tysx/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<!-- NouSlider -->
+<script src="${base}/tysx/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+<!-- Switchery -->
+<script src="${base}/tysx/js/plugins/switchery/switchery.js"></script>
+
+<!-- IonRangeSlider -->
+<script src="${base}/tysx/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+<!-- iCheck -->
+<script src="${base}/tysx/${base}/tysx/js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- MENU -->
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- Color picker -->
+<script src="${base}/tysx/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+<!-- Clock picker -->
+<script src="${base}/tysx/js/plugins/clockpicker/clockpicker.js"></script>
+
+<!-- Image cropper -->
+
+<script src="${base}/tysx/js/plugins/cropper/cropper.min.js"></script>
+
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="${base}/tysx/js/plugins/fullcalendar/moment.min.js"></script>
+
+<!-- Date range picker -->
+<script src="${base}/tysx/js/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="${base}/tysx/js/myJs.js"></script>
+<script src="${base}/tysx/js/video.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+</script>
+
+<script>
+
+</script>
+</html>

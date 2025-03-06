@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>移动端页面</title>
+		<#include "/bvRadio/head.html"/>
+		<!--直播设置模块样式-->
+		<link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css"/>
+		<link rel="stylesheet" href="${base}/tysx/js/kindeditor/themes/default/default.css" />
+	</head>
+	<body>
+		<div id="wrapper" class="bgc-fff">
+			<!--右侧内容的区域-->
+			<div id="page-wrapper">
+				<!--上面的导航栏部分-->
+				<#include "/bvRadio/admin/top.html"/>
+				<!--左侧部分-->
+				<#include "/bvRadio/admin/left.html"/>
+				<!--下面内容部分-->
+				<!--  -->
+				<input type="hidden" id="liveEventId" value="${liveEvent.liveEventId}"/>
+				<div class="wrapper wrapper-content bgc-fff normal-font wapset">
+					<div class="row title-header">
+						<div class="col-lg-12">
+							<div class="title-name">
+								<a class="font-title"> 移动端页面设置</a>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 space-30">
+							<div class="col-lg-3 m-l-lg" style="">
+								<div class="c-contain">
+									<div class="c-top"></div>
+									<div class="c-middle">
+										<span
+										class="glyphicon glyphicon-comment p-w-sm pull-right m-t-sm">3666</span>
+										<span class="glyphicon glyphicon-user p-w-sm pull-right m-t-sm">366</span>
+									</div>
+									<!-- 左侧列表 -->
+									<div class="c-botttom common_nav">
+										<ul id="myTab" class="nav nav-tabs" style="background: #e6e6e6;">
+											<#list list as item>
+											<li <#if item_index == 0>class="active"</#if>>
+												<a href="#interchat" data-id="${item.id}" data-toggle="tab" data-type="${item.menuType}" data-order="${item.menuOrder}">${item.menuName}</a>
+											</li>
+											</#list>
+											<!-- <li class="active"><a href="#interchat" data-toggle="tab" data-type="1" data-order="1">互动聊天</a></li>
+											<li><a href="#videoreview" data-toggle="tab" data-type="4" data-order="2">视频回顾</a></li>
+											<li><a href="#activityintro" data-toggle="tab" data-type="3" data-order="3">活动简介</a></li> -->
+											<a href="#" class="text-center" style="display: inline-block; width: 63px; line-height: 40px;" id="addMenu"> + </a>
+										</ul>
+										<div class="text-center p-sm m-t-xl">
+											<img src="${base}/tysx/img/ptqrshow.png" width="100" />
+											<p class="m-t-md">
+												手机扫描二维码查看显示效果
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 右侧内容 -->
+							<div class="col-lg-8 cright m-l-lg">
+								<!-- 右侧头部信息 -->
+								<p class="wapselect"  id="editpage">
+									<input type="hidden" id="oldType" value="">
+									<input type="hidden" id="oldOrder" value="">
+									<input type="hidden" id="dataid" value="">
+									<span class="">菜单名称：
+										<input type="text" id="menuname"/>
+									</span>
+									<span>菜单类型：
+										<select id="menutype">
+											<option value="1" selected>话题直播</option>
+											<option value="2">聊天互动</option>
+											<option value="3">在线问答</option>
+											<option value="4">直播简介</option>
+											<option value="5">视频列表</option>
+											<option value="6">文档直播</option>
+										</select> 
+									</span>
+									<span> 菜单顺序：
+										<select id="menuorder">
+											<option value="1" selected>1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+										</select> </span>
+								</p
+								<!-- 右侧头部信息  增加-->
+								<p class="wapselect" id="addpage" style="display:none">
+									<span class="">菜单名称：
+										<input type="text" id="addmenuname"/>
+									</span>
+									<span>菜单类型：
+										<select id="addmenutype">
+											<option value="1">话题直播</option>
+											<option value="2">聊天互动</option>
+											<option value="3">在线问答</option>
+											<option value="4">直播简介</option>
+											<option value="5">视频列表</option>
+											<option value="6">文档直播</option>
+										</select> 
+									</span>
+									<span> 菜单顺序：
+										<select id="addmenuorder">
+											<option value="1" selected>1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+										</select> </span>
+								</p
+
+
+
+
+								<!-- 右侧内容部分 -->
+								<div id="myTabContent" class="tab-content">
+								<div id="ri" style="display:none">
+								<textarea id="mul_input" name="content" style="width:700px;height:200px;display:block;"><#if pageRichContent??>${pageRichContent}</#if></textarea>
+								</div>
+								
+									<div class="tab-pane fade in active" id="interchat">
+
+										<!-- <p class="setlist m-t-xl">该菜单与原有聊天版块功能一致，添加后可在直播控制页进行聊天和监控。</p> -->
+										<!-- <button class="btn red-bg m-t-md z-sure" type="submit">确定</button>
+										<button class="btn m-t-md" type="submit">删除</button> -->
+									</div>
+									<div class="tab-pane fade in" id="activityintro">
+										<!-- <textarea id="mul_input" name="content" style="width:700px;height:200px;visibility:hidden;display: block;"></textarea> -->
+										<!-- <button class="btn red-bg m-t-md z-sure" type="submit">确定</button>
+										<button class="btn m-t-md" type="submit">删除</button> -->
+									</div>
+									<div class="tab-pane fade in" id="videoreview"></div>
+									<div class="editBtn">
+										<button class="btn red-bg m-t-md z-sure" id="edit">
+											确定
+										</button>
+										<button class="btn red-bg m-t-md z-sure" id="add" style="display:none">
+											增加
+										</button>
+										<button class="btn m-t-md" id="remove">
+											删除
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div id="alist">
+		<option value="1">话题直播</option>
+		<option value="2">聊天互动</option>
+		<option value="3">在线问答</option>
+		<option value="4">直播简介</option>
+		<option value="5">视频列表</option>
+		<option value="6">文档直播</option>
+	</div>
+</body>
+
+	<script charset="utf-8" src="${base}/tysx/js/kindeditor/kindeditor-min.js"></script>
+	<script charset="utf-8" src="${base}/tysx/js/kindeditor/lang/zh_CN.js"></script>
+	<script>
+		//简单模式初始化
+		var editor;
+		KindEditor.ready(function(K) {
+			editor = K.create('textarea[name="content"]', {
+				resizeType : 1,
+				allowPreviewEmoticons : false,
+				allowImageUpload : true,
+				uploadJson : '${base}/admin/file/o_uploadImgFile.do',
+				items : ['fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+			});
+		});
+	</script>
+	<script>
+		$(".live-bottom").hide()
+		wid = $('.blcen').width()
+		$('.textbl').css('width', wid - 300)
+		$('.textbl2').css('width', wid - 300)
+		$(window).resize(function() {//当浏览器大小变化时
+			wid = $('.blcen').width()
+			$('.textbl').css('width', wid - 300)
+			$('.textbl2').css('width', wid - 300)
+		});
+
+		$(".img-box").hover(function() {
+			$(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+		}, function() {
+			$(this).find(".live-bottom").stop(true, false).slideUp(300)
+		})
+		/* if ($("#myTab li").size() >= 4) {
+			$("#addMenu").remove();
+		} */
+		//定义一个全局变量  记录当前是哪个标签页
+		var ORDER;
+
+		//确定按钮  修改操作
+		$("#edit").on("click", function() {
+
+			var oldType = $("#oldType").val();
+			var oldOrder = $("#oldOrder").val();
+			var name = $("#menuname").val();
+			var order = $("#menuorder").val();
+			var type = $("#menutype").val();
+			var liveEventId = $("#liveEventId").val();
+			var id = $("#dataid").val();
+			if (true) {
+				var html = editor.html();
+			}
+			//查看该类型是否存在
+			var existType;
+			var existIden = false;
+			
+			var objarr = [];
+			var larindex = 1;
+			$("#myTab li").each(function(index, e) {
+				existType = $(e).find("a").attr("data-type");
+				if (existType == type && oldType != type) {
+					existIden = true;
+				}
+				var a = $(this).find("a");
+				larindex = a.attr("data-order");
+				//顺序向后调整
+				if(oldOrder < order){
+					if(id != a.attr("data-id")){
+						var menuid = a.attr("data-id");
+						var menutype = a.attr("data-type");
+						var menuorder = a.attr("data-order");
+						if(menuorder<=order && menuorder>oldOrder){
+							menuorder--;
+						}
+						var obj = {id:menuid,type:menutype,order:menuorder};
+						objarr.push(obj);
+					}
+				//顺序向前调整
+				}else if(oldOrder > order){
+					if(id != a.attr("data-id")){
+						var menuid = a.attr("data-id");
+						var menutype = a.attr("data-type");
+						var menuorder = a.attr("data-order");
+						if(menuorder<oldOrder && menuorder>=order){
+							menuorder++;
+						}
+						var obj = {id:menuid,type:menutype,order:menuorder};
+						objarr.push(obj);
+					}
+				}
+			});
+			if(parseInt(order) - parseInt(larindex) > 0){
+				order = parseInt(larindex);
+			}
+			var objjson = JSON.stringify(objarr);
+			
+			if (existIden) {
+				alert("该菜单类型已存在");
+				return false;
+			}
+
+			$.ajax({
+				url : "${base}/admin/pagedecorate/editmobilepage.do",
+				method : "post",
+				data : {
+					liveEventId : liveEventId,
+					menuName : name,
+					menuType : type,
+					menuOrder : order,
+					oldType : oldType,
+					oldOrder : oldOrder,
+					richContent:html,
+					id:id,
+					jsonobj:objjson
+				},
+				success : function() {
+					if (oldOrder == order) {
+						var order1 = parseInt(ORDER) - 1;
+						$("#myTab li:eq(" + order1 + ")").find("a").attr("data-type", type).attr("data-order", order1).attr("data-id",id).html(name);
+					} else {
+						//先删除
+						var order2 = parseInt(ORDER) - 1;
+						$("#myTab li:eq(" + order2 + ")").remove();
+						var thisorder, expectorder,thisid;
+						$("#myTab li").each(function(index, element) {
+							thisorder = parseInt($(element).find("a").attr("data-order"));
+							thisid = parseInt($(element).find("a").attr("data-id"));
+							if (thisorder >= parseInt(ORDER)) {
+								expectorder = parseInt(thisorder) - 1;
+								$(element).find("a").attr("data-order", expectorder).attr("data-id",thisid);
+							}
+						});
+						//再增加
+						var thisorder, expectorder;
+						var a = $("<a></a>").attr("data-toggle", "tab").attr("data-type", type).attr("data-id",id).html(name);
+						switch(parseInt(type)) {
+						case 1:
+							a.attr("href", "#interchat");
+							break;
+						case 4:
+							a.attr("href", "#activityintro");
+							break;
+						case 3:
+							a.attr("href", "#videoreview");
+							break;
+						}
+						if (order > $("#myTab li").size()) {
+							a.attr("data-order", order);
+							var li = $("<li></li>").append(a);
+							$("#addMenu").before(li);
+						} else {
+							$("#myTab li").each(function(index, element) {
+								thisorder = parseInt($(element).find("a").attr("data-order"));
+								if (thisorder >= order) {
+									expectorder = parseInt(thisorder) + 1;
+									$(element).find("a").attr("data-order", expectorder);
+								}
+							});
+							a.attr("data-order", order);
+							var li = $("<li></li>").append(a);
+							var eq = parseInt(order) - 1;
+							$("#myTab li:eq(" + eq + ")").before(li);
+							$("#myTab li:eq(" + eq + ")").find("a").trigger("click");
+						}
+					}
+					alert("修改成功");
+				},
+				error : function() {
+
+				}
+			});
+		});
+
+		//菜单切换行为
+		$("#myTab").on("click", "li", function() {
+			$("#edit").show();
+			$("#remove").show();
+			$("#add").hide();
+			var name = $(this).find("a").html();
+			$("#menuname").val(name);
+			var type = $(this).find("a").attr("data-type");
+			$("#oldType").val(type);
+			$("#menutype").val(type);
+			//$("#menutype option[value=" + type + "]").attr("selected", "selected").siblings().attr("selected", false);
+			var order = $(this).find("a").attr("data-order");
+			$("#oldOrder").val(order);
+			$("#menuorder").val(order);
+			//将id放入input
+			$("#dataid").val($(this).find("a").attr("data-id"));
+			//$("#menuorder option[value=" + order + "]").attr("selected", "selected").siblings().attr("selected", false);
+			ORDER = parseInt(order);
+			
+			$("#editpage").show();
+			$("#addpage").hide();
+			
+			
+			
+			$("#menutype").trigger("change");
+			if($("#menutype").val()==4){
+				$("#ri").css("display","block");
+			}else{
+				$("#ri").css("display","none");
+			}
+		});
+		//添加菜单按钮
+		$("#myTab").on("click", "#addMenu", function() {
+			$("#edit").hide();
+			$("#remove").hide();
+			$("#add").show();
+			
+			//$("#menuname").val("");
+			$("#interchat").siblings().removeClass("active in").end().addClass("active in");
+			$("#addmenutype").val(1);
+			$("#addmenuorder").val(1);
+			$("#ri").css("display","none");
+			
+			$("#addmenuname").val("");
+			
+			$("#addpage").show();
+			$("#editpage").hide();
+			judgeList();
+		});
+
+		//增加  列表菜单选择
+		$("#addmenutype").on("change", function() {
+			var type = $("#addmenutype").val();
+			switch(parseInt(type)) {
+			case 1:
+				$("#interchat").siblings().removeClass("active in").end().addClass("active in");
+				break;
+			case 4:
+				$("#activityintro").siblings().removeClass("active in").end().addClass("active in");
+				break;
+			case 3:
+				$("#videoreview").siblings().removeClass("active in").end().addClass("active in");
+				break;
+			}
+			if($("#addmenutype").val()==4){
+				$("#ri").css("display","block");
+			}else{
+				$("#ri").css("display","none");
+			}
+		});
+		//菜单选择
+		$("#menutype").on("change", function() {
+			var type = $("#menutype").val();
+			switch(parseInt(type)) {
+			case 1:
+				$("#interchat").siblings().removeClass("active in").end().addClass("active in");
+				break;
+			case 4:
+				$("#activityintro").siblings().removeClass("active in").end().addClass("active in");
+				break;
+			case 3:
+				$("#videoreview").siblings().removeClass("active in").end().addClass("active in");
+				break;
+			}
+			if($("#menutype").val()==4){
+				$("#ri").css("display","block");
+			}else{
+				$("#ri").css("display","none");
+			}
+		});
+
+		//增加按钮
+		$("#add").on("click", function() {
+			var name = $("#addmenuname").val();
+			var type = $("#addmenutype").val();
+			var order = $("#addmenuorder").val();
+			console.log(order);
+			//查看该类型是否存在
+			var existType;
+			var existIden = false;
+			
+			var objarr = [];
+			var larindex = 1;
+			$("#myTab li").each(function(index, e) {
+				existType = $(e).find("a").attr("data-type");
+				if (existType == type) {
+					existIden = true;
+				}
+				var a = $(this).find("a");
+				var menuid = a.attr("data-id");
+				var menutype = a.attr("data-type");
+				var menuorder = a.attr("data-order");
+				
+				larindex = menuorder;
+				if(menuorder>=order){
+					menuorder++;
+				}
+				var obj = {id:menuid,type:menutype,order:menuorder};
+				objarr.push(obj);
+			});
+			if(parseInt(order) - parseInt(larindex) > 1){
+				order = parseInt(larindex) + 1;
+			}
+			var objjson = JSON.stringify(objarr);
+			
+			
+			if (existIden) {
+				alert("该菜单类型已存在");
+				return false;
+			}
+			var liveEventId = $("#liveEventId").val();
+			var richcontent = "";
+			if(type == 4){
+				richcontent = editor.html();
+			}
+			$.ajax({
+				url : "${base}/admin/pagedecorate/addmobilepage.do",
+				method : "post",
+				data : {
+					liveEventId : liveEventId,
+					menuName : name,
+					menuType : type,
+					menuOrder : order,
+					richContent:richcontent,
+					objjson:objjson
+				},
+				success : function(res) {
+					console.log(res);
+					var thisorder, expectorder;
+					var a = $("<a></a>").attr("data-toggle", "tab").attr("data-type", type).attr("data-id",res).html(name);
+					switch(parseInt(type)) {
+					case 1:
+						a.attr("href", "#interchat");
+						break;
+					case 4:
+						a.attr("href", "#activityintro");
+						break;
+					case 3:
+						a.attr("href", "#videoreview");
+						break;
+					}
+					if (order > $("#myTab li").size()) {
+						a.attr("data-order", order);
+						var li = $("<li></li>").append(a);
+						$("#addMenu").before(li);
+					} else {
+						$("#myTab li").each(function(index, element) {
+							thisorder = parseInt($(element).find("a").attr("data-order"));
+							if (thisorder >= order) {
+								expectorder = parseInt(thisorder) + 1;
+								$(element).find("a").attr("data-order", expectorder);
+							}
+						});
+						a.attr("data-order", order);
+						var li = $("<li></li>").append(a);
+						var eq = parseInt(order) - 1;
+						$("#myTab li:eq(" + eq + ")").before(li);
+						alert("添加成功");
+						$("#myTab li:eq(" + eq + ")").find("a").trigger("click");
+					}
+				},
+				error : function() {
+					alert("添加失败");
+				}
+			});
+		});
+
+		//删除按钮
+		$("#remove").on("click", function() {
+			var liveEventId = $("#liveEventId").val();
+			var id = $("#dataid").val();
+			var type = $("#menutype").val();
+			var oldOrder = $("#oldOrder").val();
+			var objarr = [];
+			var larindex = 1;
+			$("#myTab li").each(function(index, e) {
+				existType = $(e).find("a").attr("data-type");
+				var a = $(this).find("a");
+				var menuid = a.attr("data-id");
+				var menuorder = a.attr("data-order");
+				larindex = menuorder;
+				if(id!=menuid){
+					if(menuorder>oldOrder){
+						menuorder--;
+					}
+					var obj = {id:menuid,type:menutype,order:menuorder};
+					objarr.push(obj);
+				}
+				
+			});
+			console.log(objarr);
+			var noind = 0;
+			if(larindex == oldOrder){
+				noind = 1;
+			}
+			
+			$.ajax({
+				url : "${base}/admin/pagedecorate/mobilepagedelete.do",
+				data : {
+					liveEventId : liveEventId,
+					menuType : type,
+					menuOrder : parseInt(ORDER),
+					id:id,
+					noind:noind,
+					jsonobj:JSON.stringify(objarr)
+				},
+				method : "post",
+				success : function() {
+					var order = parseInt(ORDER) - 1;
+					$("#myTab li:eq(" + order + ")").remove();
+					var thisorder, expectorder;
+					$("#myTab li").each(function(index, element) {
+						thisorder = parseInt($(element).find("a").attr("data-order"));
+						if (thisorder >= parseInt(ORDER)) {
+							expectorder = parseInt(thisorder) - 1;
+							$(element).find("a").attr("data-order", expectorder);
+						}
+					});
+					alert("删除成功");
+					$("#myTab li:eq(0)").find("a").trigger("click");
+				},
+				error : function() {
+					alert("删除失败");
+				}
+			});
+		});
+		$("#myTab li:eq(0)").find("a").trigger("click");
+		judgeList();
+		function judgeList(){
+			var ind;
+			var a = $("#alist").html();
+			
+			$("#addmenutype").empty().append(a);
+			$("#myTab li").each(function(index,ele){
+				ind = $(this).find("a").attr("data-type");
+				$("#addmenutype option[value="+ind+"]").remove();
+			});
+			$("#addmenutype option:eq(0)").attr("selected","true");
+			if($("#addmenutype").val() == 4){
+				$("#ri").show();
+			}
+		}
+		
+		
+	</script>
+</html>

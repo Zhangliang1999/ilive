@@ -1,0 +1,41 @@
+/*默认*/
+.normal-font{ font-size: 14px;}
+input[type="text"]{border:1px solid #ddd; border-radius: 4px; line-height: 36px; text-indent: 8px;}
+.title-header{background: rgba(244, 244, 244, 1);}
+
+.recallmanage i{ font-style: normal;}
+.list-title span{ padding-right: 50px; }
+.recallmanage .recalllist{ width: 100%; height: 300px;}
+.recallmanage .recalllist li{ width: 32%; float: left; margin-right: 2%; border: 1px solid #ddd; padding: 10px; margin-bottom: 20px;}
+.recallmanage .recalllist li>a{ display: inline-block;}
+.recallmanage .recalllist li img{ max-width: 100%;}
+.recallmanage .recalllist li:nth-child(3n){ margin-right: 0%;}
+.list_action{ position: relative;}
+.list_action p{ width: 100%; line-height: 40px; position: absolute; bottom: 0; background: rgba(102,102,102,.7);display: none;}
+.list_action p a{ color: #fff; font-size: 12px;}
+.recallmanage .recalllist li:hover .list_action p{ display: block;}
+.list-contain{ width: 96%; margin: 0 auto;}
+.list-title button{ width: auto; height: auto; padding: 2px 10px; color: #fff;}
+.list-title button:hover{ background: #000;}
+.list-title button:nth-child(1):hover{ background: #0065c4;}
+.playinfo{font-size: 14px;}
+.list_action .time{position:absolute; display:inline-block;top: 10px; left: 10px; padding: 2px 10px; background: rgba(255,255,255,.6); color: #fff; border-radius: 4px;}
+.list_action .curlabel{position:absolute; display:inline-block;top: 10px; right: 10px; padding: 0px 10px; color: #fff; background: #0084ff;}
+.recalllist .choose-label{ width: 30px; height: 15px;}
+.recalllist .choose-label:before{ width: 15px;height: 15px;}
+.recalllist .chooseBtn:checked + label.choose-label:before {left: 15px;}
+.list-contain .wset{color: #1c84c6;display: inline-block;margin-left: 30px;text-decoration: underline}
+.recallmdal .modal-dialog{ width: 60%;}
+.recallmdal .modal-dialog .modal-content{ height: 700px;}
+.recallmanage .recalllist.cutpic li{ width: 19%; margin-right: 1%;}
+.recalllist .storage{ padding-left: 15px;  background: url("../img/u9190.png") no-repeat 0px 3px; background-size: 14px;}
+.recalllist .pictype{ padding-left: 20px; background: url("../img/u10113.png") no-repeat 0px 3px; background-size: 16px;}
+
+.videomanage table th{ text-align: center; background: #ccc !important;}
+.videomanage table td{ line-height: 30px !important;}
+.videomanage .list-title button:hover{ color: #fff;}
+.videomanage .ztype{ width:28px;}
+
+.picmanage .cutpic .list_action{ width: 100%; height: 200px;}
+.picmanage .recalllist.cutpic li{ padding-top: 0!important;}
+.zimg{ position: absolute; top:0%; left: 0; right: 0; bottom: 0; margin: auto;}

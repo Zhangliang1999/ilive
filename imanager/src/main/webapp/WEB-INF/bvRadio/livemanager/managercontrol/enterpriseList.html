@@ -1,0 +1,139 @@
+<link rel="stylesheet" type="text/css" href="${base}/tysx/css/pagination/zxf_page.css"/>
+<form id="_page_form2" action="${base}/operator/managercontrol/addrementerprise.do" method="post">
+
+<div class="hidden">
+        
+        </div>
+        </form>
+<div class="row btn-box">
+                <div class="col-lg-12">
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left">
+                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                           
+                        </div>
+                    </div>
+                    
+                    <div class="pull-right m-r-lg m-t-xs">
+                    
+                        <input id="serachInput"  class="serachinput" placeholder="企业名称/主账号" type="text" value="">
+                        <button class="btn commonbtn m-t-n-4" id="searchName" onclick="searchEvent()">搜索</button>
+                    </div>
+                     
+                </div>
+            </div>
+             <table class="table table-striped table-hover ScrollViewer table-responsive">
+                <thead class="gray-bg">
+                <tr>
+                <th class="text-center" style="width:20px;"><input type='checkbox' onclick="checkbox('ids',this.checked)"/></th>
+				<th class="text-center" style="width:40px;">企业ID</th>	
+				<th class="text-center" style="width:40px;">企业名称</th>
+				<th class="text-center" style="width:80px;">企业信息介绍</th>					
+				<th class="text-center" style="width:80px;">企业LOGO</th>	
+				<th class="text-center" style="width:40px;">企业主账号</th>             
+				</tr>
+                </thead>
+                        <tbody class="enterprise" style="height: 743px;">
+                        
+									
+                        </tbody>
+                    </table>
+<script src="${base}/tysx/css/pagination/zxf_page.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(".modal-header").slimScroll({
+	height : "638px"
+});
+var total;
+var currentPage;
+function LoadData(pageIndex) {
+	var params = {};
+	params.pageNo = pageIndex;
+	params.enterpriseName = $("#serachInput").val();
+	$.ajax({
+		type : 'post',
+		dataType : 'json',
+		async : false,
+		url : '${base}/operator/enterprise/dataList.do',
+		data : params,
+		success : function(json) {
+			console.log(json);
+			if (json.code==1) {
+				total = json.pagination.totalPage;
+				
+				currentPage = json.pagination.pageNo;
+				//列表内容展示代码集，太多了，就省略了，根据各自需求去展示自己的内容就可以了  
+				var shtml = "";
+				$(json.pagination.list).each(
+						function(index, appfile) {
+							shtml += "<tr><td class='text-center' style='width:20px;'><input type='checkbox' name='ids' value='"+appfile.enterpriseId+"' onclick='hideIds("+appfile.enterpriseId+",this.checked)'/></td>"
+							+"<td class='text-center' style='width:40px;'>"+appfile.enterpriseId+"</td>"
+							+"<td class='text-center' style='width:40px;'>"+appfile.enterpriseName+"</td>"
+							+"<td class='text-center' style='width:80px;'><p style='width:270px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;' title = '"+appfile.enterpriseDesc+"'>"+appfile.enterpriseDesc+"</p></td>"				
+							+"<td class='text-center' style='width:80px;'><img style='width:100px;height:100px' alt='' src='"+appfile.enterpriseImg+"'></td>"
+							+"<td class='text-center' style='width:40px;'>"+appfile.userPhone+"</td></tr>";
+						});
+				$('.enterprise').html(shtml);
+				//翻页
+				$(".zxf_pagediv").createPage({
+					
+					pageNum: total,
+					current: currentPage,
+					backfun: function(e) {
+						
+					}
+				});
+			} else {
+			}
+		}
+	});
+}
+
+$(function() {
+	LoadData(1);//分页初始化
+	
+});
+//翻页
+$(".zxf_pagediv").createPage({
+	
+	pageNum: total,
+	current: currentPage,
+	backfun: function(e) {
+		//回调
+		LoadData(e.current)
+		console.log(e.current)
+	}
+});
+function searchEvent() {
+	
+	LoadData(1);
+}
+function checkbox(name, checked) {
+	$("input[type=checkbox][name=" + name + "]").each(function() {
+		$(this).prop("checked", checked);
+		
+		hideIds($(this).val(), checked);
+		
+		
+	});
+}
+
+
+function hideIds(id, checked) {
+	if (checked) {
+		$("#id_" + id).remove();
+		$("#ids_" + id).remove();
+		$('.hidden').append('<input type="hidden" name="newsIds" id="id_'+id+'" value="'+id+'">');
+	} else {
+		$("#id_" + id).remove();
+		$("#ids_" + id).remove();
+	}
+	
+}
+function banfaAll() {
+	 var ids=document.getElementsByName("newsIds"); 
+	 if(ids.length==0){ 
+		 alert('请选择至少一条数据') 
+	}else{
+		$("#_page_form2").submit();
+	}
+}
+</script>

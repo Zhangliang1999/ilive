@@ -1,0 +1,278 @@
+@charset "utf-8";
+
+img {
+	border: 0;
+	vertical-align: top;
+	width: 100%;
+}
+
+.game_header {
+	width: 100%;
+	position: relative;
+}
+
+.head_img {
+	wdith: 100%;
+	border: 0;
+	vertical-align: top;
+}
+
+/* 刮刮乐效果CSS开始 */
+#bg {
+	height: 550px !important;
+}
+
+#bg1 {
+	display: none;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index: 1001;
+	-moz-opacity: 0.7;
+	opacity: .70;
+	filter: alpha(opacity = 70);
+}
+
+#show {
+	display: none;
+	position: fixed;
+	background-color: #fff;
+	z-index: 1002;
+	overflow: auto;
+}
+/* 刮刮乐效果CSS结束 */
+
+/* 老虎机抽奖效果CSS开始 */
+.keTitle {
+	height: 100px;
+	line-height: 100px;
+	font-size: 30px;
+	font-family: '微软雅黑';
+	color: #FFF;
+	text-align: center;
+	background: url(../images/bodyBg3.jpg) repeat-x bottom left;
+	font-weight: normal
+}
+
+.kePublic {
+	padding: 0;
+	margin-top: 15px;
+}
+
+.keBottom {
+	color: #FFF;
+	padding-top: 25px;
+	line-height: 28px;
+	text-align: center;
+	font-family: '微软雅黑';
+	background: url(../images/bodyBg2.jpg) repeat-x top left;
+	padding-bottom: 25px
+}
+
+.keTxtP {
+	font-size: 16px;
+	color: #ffffff;
+}
+
+.keUrl {
+	color: #FFF;
+	font-size: 30px;
+}
+
+.keUrl:hover {
+	text-decoration: underline;
+	color: #FFF;
+}
+
+.mKeBanner,.mKeBanner div {
+	text-align: center;
+}
+
+#lottery {
+	width: auto;
+	height: 563px;
+	margin: 0px auto;
+	background: url(../images/bg.jpg) no-repeat;
+	padding: 39px 43px;
+}
+
+#lottery table td {
+	width: 138px;
+	height: 138px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 24px;
+	color: #333;
+	font-index: -999;
+	line-height: 0px;
+}
+
+#lottery table td img {
+	max-height: 110px !important;
+	width: auto;
+	margin: 0 auto;
+}
+
+#lottery table td a {
+	width: 284px;
+	height: 284px;
+	line-height: 150px;
+	display: block;
+	text-decoration: none;
+}
+
+#lottery table td.activebox {
+	width: 138px;
+	height: 138px;
+	background-color: #fd605b !important;
+}
+/* 老虎机抽奖效果CSS结束 */
+
+/* 砸金蛋抽奖效果CSS开始 */
+.egg {
+	width: 660px;
+	height: 400px;
+	margin: 50px auto 20px auto;
+}
+
+.egg ul li {
+	z-index: 999;
+}
+
+.eggList {
+	padding-top: 110px;
+	position: relative;
+	width: 660px;
+}
+
+.eggList li {
+	list-style-type: none;
+	float: left;
+	background: url(../images/egg_1.png) no-repeat bottom;
+	width: 158px;
+	height: 187px;
+	cursor: pointer;
+	position: relative;
+	margin-left: 35px;
+}
+
+.eggList li span {
+	position: absolute;
+	width: 30px;
+	height: 60px;
+	left: 68px;
+	top: 64px;
+	color: #ff0;
+	font-size: 42px;
+	font-weight: bold
+}
+
+.eggList li.curr {
+	background: url(../images/egg_2.png) no-repeat bottom;
+	cursor: default;
+	z-index: 300;
+}
+
+.eggList li.curr sup {
+	position: absolute;
+	background: url(images/img-4.png) no-repeat;
+	width: 232px;
+	height: 181px;
+	top: -36px;
+	left: -34px;
+	z-index: 800;
+}
+
+.hammer {
+	background: url(../images/img-6.png) no-repeat;
+	width: 74px;
+	height: 87px;
+	position: absolute;
+	text-indent: -9999px;
+	z-index: 150;
+	left: 168px;
+	top: 100px;
+}
+
+.resultTip {
+	position: absolute;
+	background: #ffc;
+	width: 148px;
+	padding: 6px;
+	z-index: 500;
+	top: 200px;
+	left: 10px;
+	color: #f60;
+	text-align: center;
+	overflow: hidden;
+	display: none;
+	z-index: 500;
+}
+
+.resultTip b {
+	font-size: 14px;
+	line-height: 24px;
+}
+/* 砸金蛋抽奖效果CSS开始 */
+.game_content {
+	padding: 3% 3% 0;
+}
+
+.game_content li {
+	margin-bottom: 4%;
+}
+
+.game_content .hd {
+	text-align: center;
+	width: 60%;
+	margin: 0 auto;
+	position: relative;
+	z-index: 100;
+	border-radius: 30px;
+	height: 60px;
+	line-height: 60px;
+	color: #fff;
+}
+
+.game_content .hd .title {
+	line-height: 60px;
+	font-size: 22px;
+	font-weight: bold;
+	font-family: "微软雅黑";
+}
+
+.game_content .bd {
+	margin-top: -15px;
+	z-index: 10;
+	color: #666;
+	padding: 10% 4% 5%;
+	font-size: 16px;
+	line-height: 30px;
+}
+
+.game_content .green_box .hd {
+	background: #ff6866;
+}
+
+.game_content .green_box .bd {
+	background: #dff0d8;
+}
+
+.game_content .orange_box .hd {
+	background: #ff6866;
+}
+
+.game_content .orange_box .bd {
+	background: #fdf8e4;
+}
+
+.game_content .red_box .hd {
+	background: #ff6866;
+}
+
+.game_content .red_box .bd {
+	background: #f2dedf;
+}

@@ -1,0 +1,223 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.p_left {
+	width: 227px;
+	height: 450px;
+	font-family: Tahoma, SimSun, sans-serif;
+	font-size: 12px;
+}
+
+.p_left li {
+	list-style: none;
+}
+
+.p_left a {
+	text-decoration: none;
+}
+
+.p_left a img {
+	border: 0 none;
+	vertical-align: middle;
+}
+
+.sideNavigation {
+	margin: 0 2px 0 0;
+	overflow: hidden;
+}
+
+.sideNavigation li {
+	background-image: url(../img/main/bar.gif);
+	background-repeat: repeat-x;
+	background-attachment: scroll;
+	background-position: 0 -240px;
+}
+
+.subChirdLeft {
+	background-image: url(../img/main/bar.gif);
+	background-repeat: repeat-x;
+	background-attachment: scroll;
+	background-position: 0 -240px;
+}
+
+.sideNavigation li b {
+	font-weight: normal;
+	padding-left: 16px;
+}
+
+.sideNavigation a,.sideNavigation a b {
+	-moz-user-select: none;
+	cursor: pointer;
+	display: block;
+	height: 30px;
+	line-height: 29px;
+	white-space: nowrap;
+}
+
+.sideNavigation a {
+	color: #3D4E66;
+	font-family: SimSun;
+	font-size: 13px;
+}
+
+.sideNavigation a img {
+	float: left;
+	margin: 6px 4px 0 0;
+}
+
+img.icon029a12 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -1290px -300px;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon040a1 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -1080px -420px;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon038a6 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -810px -420px;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon400a18 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -930px -630px;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon029a4 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -630px -330px;
+	height: 18px;
+	width: 18px;
+}
+
+/*-------------------*/
+img.icon003a1 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -1140px 0;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon047a1 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -240px -510px;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon400a9 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -1350px -630px;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon024a1 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -90px -270px;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon033a15 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -930px -360px;
+	height: 18px;
+	width: 18px;
+}
+/*-------------------*/
+img.icon003a9 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -540px -30px;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon003a1 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -1140px 0;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon027a4 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -540px -300px;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon022a1 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -570px -240px;
+	height: 18px;
+	width: 18px;
+}
+
+img.icon095a1 {
+	background-image: url(../img/main/spirites.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: -300px -630px;
+	height: 18px;
+	width: 18px;
+}
+
+/*.sideNavigation a:hover, .sideNavigation a.current { }*/
+.sideNavigation a:hover {
+	color: #fff;
+	text-decoration: none;
+	background-image: url(../img/main/bar.gif);
+	background-repeat: repeat-x;
+	background-position: 0 -320px;
+}
+
+.sideNavigation a.current {
+	color: #fff;
+	text-decoration: none;
+	background-image: url(../img/main/bar.gif);
+	background-repeat: repeat-x;
+	background-position: 0 -320px;
+}

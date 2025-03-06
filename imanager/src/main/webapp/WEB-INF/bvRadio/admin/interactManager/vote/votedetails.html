@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<#include "/bvRadio/head.html"/>
+    <title>投票详情</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/myStyle.css"/>
+    <link rel="stylesheet" href="../css/jbxx.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/public.css"/>
+    <!--新加css-->
+    <link rel="stylesheet" href="../css/shcommon.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/newheader.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/newleft.css"/>
+    <link rel="stylesheet" href="../css/newhdgl.css"/>
+    <style>
+
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+	 	<!--上面的导航栏部分-->
+		<#include "/bvRadio/admin/top.html"/>
+		<!--左侧部分-->
+		<#include "/bvRadio/admin/left.html"/>
+    
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">投票结果详情</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12 lh-50">
+                    <div class="title-name font-weight lh-50 m-t-sm">
+                        <a class="font-title m-l-lg">${voteTitle!}</a>
+                    </div>
+                    <div class="font-content pull-left lh-50 m-l-lg m-t-sm">参与人数：<span>${count!}</span></div>
+                    <div class="pull-right m-r-lg m-t-sm">
+                        <input type="text" class="serachinput" value="${username!}" id="search_username" placeholder="用户名/手机号"/>
+                        <button class="btn commonbtn m-t-n-4" onclick="searchVoteDetails();">搜索</button>
+                        <button class="btn commonbtn m-t-n-4"><i class="fa fa-external-link m-r-xs"></i>导出</button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row m-t ">
+                <div class="col-lg-12 p-w-lg">
+                 <@p.pageList value=pagination 
+					listAction="entervotedetails.do";data,i,has_next> 
+					<@p.column class="text-center mr5 w15"
+					style="text-align: center; width:40px" title="序号">
+					${i+1}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="参与人">
+					${data.user.userName!}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="联系方式">
+					${data.user.userPhone!}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="投票对象">
+					${data.bbsDiyformOption.optionName!}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="参与终端">
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="IP">
+					${data.iLiveIpAddress.ip!}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="地区">
+					${data.iLiveIpAddress.region!}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="参与时间">
+					${data.createTime!}
+					</@p.column> 
+					</@p.pageList>
+                    
+                </div>
+            </div>
+
+</body>
+<!-- Mainly scripts -->
+<script src="../js/jquery-2.1.1.js"></script>
+<script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="../js/inspinia.js"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
+
+<!-- Chosen -->
+<script src="../js/plugins/chosen/chosen.jquery.js"></script>
+
+<!-- JSKnob -->
+<script src="../js/plugins/jsKnob/jquery.knob.js"></script>
+
+<!-- Input Mask-->
+<script src="../js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+<!-- Data picker -->
+<script src="../js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<!-- NouSlider -->
+<script src="../js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+<!-- Switchery -->
+<script src="../js/plugins/switchery/switchery.js"></script>
+
+<!-- IonRangeSlider -->
+<script src="../js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+<!-- iCheck -->
+<script src="../../js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- MENU -->
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- Color picker -->
+<script src="../js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+<!-- Clock picker -->
+<script src="../js/plugins/clockpicker/clockpicker.js"></script>
+
+<!-- Image cropper -->
+
+<script src="../js/plugins/cropper/cropper.min.js"></script>
+
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="../js/plugins/fullcalendar/moment.min.js"></script>
+
+<!-- Date range picker -->
+<script src="../js/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="../js/myJs.js"></script>
+<script src="../js/video.js" type="text/javascript" charset="utf-8"></script>
+<!--新加js-->
+<script src="../js/lightGallery.js"></script>
+<script src="../js/leftHeight.js"></script>
+<script src="../js/zbj.js"></script>
+<script>
+	$("#_page_form").append($("<input type='hidden'  name='voteId' value='${voteId!}'/>"));
+	$("#_page_form").append($("<input type='hidden'  name='roomId' value='${iLiveLiveRoom.roomId!}'/>"));
+	$("#_page_form").append($("<input type='hidden'  name='voteTitle' value='${voteTitle!}'/>"));
+	$("#_page_form").append($("<input type='hidden' id='votedetails_username' name='username' />"));
+
+
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75-50
+    });
+    var div1 =  $('.scrollSwitchBox');
+    var div2 =  $('.scrollSwitch');
+    $('.scrollSwitchBox').click(function(){
+        if($("#div1").hasClass("open1")){
+            $("#div1").addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+            $("#div2").addClass("scrollSwitch").addClass("close2").removeClass("open2");
+            $("#div1 input").attr("checked",false);
+            return
+        }else{
+            $("#div1").addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+            $("#div2").addClass("scrollSwitch").addClass("open2").removeClass("close2");
+            $("#div1 input").attr("checked",true);
+            return
+        }
+    })
+    
+    function searchVoteDetails(){
+    	$("#votedetails_username").val($("#search_username").val());
+    	$("#_page_form").submit();
+    }
+    
+
+</script>
+</html>

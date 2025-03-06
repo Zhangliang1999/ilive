@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>直播</title>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/mescroll.css" />
+<link rel="stylesheet" type="text/css" href="css/lightGallery.css" />
+<link rel="stylesheet" href="css/review.css" />
+</head>
+<body>
+	<div class="videoBox">
+		<video src="oceans.mp4" controls></video>
+	</div>
+	<div class="titleBox">
+		<div class="titleBoxLeft" id="mediaDesc"></div>
+		<div class="titleBoxRight">
+			<i class="fa fa-star-o"></i> <i class="fa fa-share-square-o"></i>
+		</div>
+	</div>
+	<div class="mainBox">
+		<div class="firstBox">
+			<div class="menuBox">
+				<ul>
+					<li class="liactive">评论</li>
+					<li>更多回看</li>
+				</ul>
+			</div>
+			<div class="contentBox">
+				<ul>
+					<li class="talkLi">
+						<div id="mescroll" class="mescroll">
+							<div class="talkBox" id="talkBoxListDiv">
+							
+								<div class="talkBoxList">
+									<p>
+										<span class="username">梦美甲999:</span>益成为新工业革命的关键支撑和深化“互联
+										网+先进制造业”的重要基石。
+									</p>
+								</div>
+								<div class="talkBoxList">
+									<p>
+										<span class="username">梦美甲999:</span>益成为新工业革命的关键支撑和深化“互联
+										网+先进制造业”的重要基石。
+									</p>
+								</div>
+								
+							</div>
+						</div>
+						<div class="talkCon box" id="contentDIV" style="display: block;">
+							<input type="text" placeholder="我来说两句..." id="saytext" name="msgContent"/>
+							<div class="hiddenDiv" style="display: none;"></div>
+							<div class="newhiddenDiv" style="display: none;"></div>
+							<div class="biaoqing emotion" data="emoji"></div>
+							<button class="sendMessage">发送</button>
+							<div class="emojiBox">
+								<section class="emoji_container"></section>
+							</div>
+						</div>
+					</li>
+					<li class="review" id="recallingDiv"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" id="roomId" name="roomId" value="0">
+	<input type="hidden" id="fileId" name="fileId" value="0">
+	<input type="hidden" id="userId" name="userId" value="0">
+</body>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lightGallery.js"></script>
+<script src="js/mescroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/A-emoji.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/review.js"></script>
+<script type="text/javascript">
+var h5Base="zb.tv189.com"; 
+var tomcatBase = "mp.zb.tv189.com";
+//var h5Base="192.168.222.156:80";
+//var tomcatBase = "192.168.222.156:8080";
+	$(function(){
+		var param = window.location.search;
+		var newsidinfo = param.substr(param.indexOf("?") + 1, param.length)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+		var split = newsidinfo.split("&")
+		for (var i = 0; i < split.length; i++) {
+			var newsids = split[i].split("=");//对获得的参数字符串按照“=”进行分割
+			var newsid = newsids[1];//得到参数值
+			var newsname = newsids[0];
+			if (newsname == "roomId") {
+				$("input[name=roomId]").val(newsid);
+			}else if (newsname == "fileId") {
+				$("input[name=fileId]").val(newsid);
+			}else if (newsname=="userId"){
+				$("input[name=userId]").val(newsid);
+			}
+		}
+		var fileId = $("input[name=fileId]").val();
+		if(fileId==0){
+			alert("选择正确文件");
+		}else{
+			// 鉴定登录
+			var roomId = $("input[name=roomId]").val();//直播间ID
+			var userId = $("input[name=userId]").val();
+			$.ajax({
+				type : "GET",//请求方式 get/post
+				url : "http://" + tomcatBase + "/ilive/app/room/vod/checklogin.jspx",
+				dataType : "jsonp",
+				jsonp : "callback",
+				cache : false,
+				data : {
+					fileId:fileId
+				},
+				success : function(data) {
+					console.log(data);
+					var status = data.code;
+					if (status == 1) {
+						var roomNeedLogin = JSON.parse(data.data).roomNeedLogin;
+						if(roomNeedLogin==1){
+							window.location.href="http://"+h5Base+"/phone/login.html?roomId="+roomId+"&fileId="+fileId+"&userId="+userId;
+							return;
+						}else{
+							var userInfo = JSON.parse(data.data).userInfo;
+							if(userInfo!=undefined||userInfo!=null){
+								var userId = userInfo.userId;
+								if(userId!=undefined||userId!=null){
+									$("input[name=userId]").val(userId);
+								}
+							}
+							//引导鉴权
+							$.ajax({
+								type : "GET",//请求方式 get/post
+								url : "http://" + tomcatBase + "/ilive/app/room/vod/guide.jspx",
+								dataType : "jsonp",
+								jsonp : "callback",
+								cache : false,
+								data : {
+									fileId:fileId
+								},
+								success : function(data) {
+									console.log(data);
+									var status = data.code;
+									if(status==1){
+										var liveEvent = data.data.liveEvent;
+										var viewAuthorized = liveEvent.viewAuthorized;
+										if(viewAuthorized==2){
+											window.location.href="http://"+h5Base+"/phone/password.html?roomId="+roomId+"&fileId="+fileId;
+											return;
+										}else{
+											selectMediaFile(fileId);
+											//获取回看
+											if(roomId!=0){
+												$.ajax({
+													type : "GET",//请求方式 get/post
+													url : "http://" + tomcatBase + "/ilive/app/room/getrecordlist.jspx",
+													dataType : "jsonp",
+													jsonp : "callback",
+													cache : false,
+													data : {
+														roomId  : roomId
+													},
+													success : function(data) {
+														console.log(data);
+														if(data.code==1){
+															var list = data.data;
+															var recallingDiv = "";
+															for (var i = 0; i < list.length; i++) {
+																var mediaFile = list[i];
+																recallingDiv += "<div class=\"reviewList\" id=\"fileId_"+mediaFile.fileId+"\" onclick=\"selectMediaFileById("+mediaFile.fileId+")\" >";
+																recallingDiv +="	<div class=\"reviewLeft\">";
+																recallingDiv +="		<img src=\""+mediaFile.fileImg+"\" >";
+																recallingDiv +="		<div class=\"reviewMask\">";
+																recallingDiv +="			<span><i class=\"fa fa-play\"></i>"+mediaFile.playNum+"</span>";
+																recallingDiv +="			<span><i class=\"fa fa-commenting\"></i>"+mediaFile.commentsNum+"</span> <span class=\"maskTime\">"+mediaFile.fileDuration+"</span>";
+																recallingDiv +="		</div></div>";
+																recallingDiv +="	<div class=\"reviewRight\">";
+																recallingDiv +="		<div class=\"reviewRightTop\">"+mediaFile.fileName+"</div>";
+																recallingDiv +="		<div class=\"reviewRightBottom\">"+mediaFile.createTime+"</div>";
+																recallingDiv +="	</div>";
+																recallingDiv +="</div>";
+															}
+															$("#recallingDiv").html(recallingDiv);	
+														}else{
+															alert(data.message);
+														}
+													}
+												});
+											}
+										}
+									}else{
+										alert(data.message);
+									}
+								}
+							});
+						}
+					}else{
+						alert(data.message);
+					}
+				}
+			});
+		}
+	});
+	function selectMediaFileById(fileId){
+		var roomId = $("input[name=roomId]").val();//直播间ID
+		var userId = $("input[name=userId]").val();//用户ID
+		window.location.href="http://"+h5Base+"/phone/review.html?fileId="+fileId+"&userId="+userId+"&roomId="+roomId;
+	}
+	//回去当前文件信息
+	function selectMediaFile(fileId){
+		//获得文件信息
+		$.ajax({
+			type : "GET",//请求方式 get/post
+			url : "http://" + tomcatBase + "/ilive/app/room/vod/fileinfo.jspx",
+			dataType : "jsonp",
+			jsonp : "callback",
+			cache : false,
+			data : {
+				fileId : fileId
+			},
+			success : function(data) {
+				console.log(data);
+				var status = data.code;
+				if(status==1){
+					var mediaFile = data.data;
+					if(mediaFile!=null&&mediaFile!=undefined){
+						var mediaFileName = mediaFile.mediaFileName;
+						var mediaFileDesc = mediaFile.mediaFileDesc;
+						var filePath = mediaFile.filePath;
+						var fileId = mediaFile.fileId;
+						var viewNum = mediaFile.viewNum;
+						$("video").attr("src",filePath);
+						var HTML = "<p class=\"bigTit\">"+mediaFileDesc+"</p><p class=\"smallTit\">"+mediaFileName+"</p>";
+						$("#mediaDesc").html(HTML);
+					}else{
+						alert("获取文件信息失败");
+					}
+				}else{
+					alert(data.message);
+				}
+			}
+		});
+	}
+	//发表评论
+	function saveComments(){
+		var userId = $("input[name=userId]").val();//用户ID
+		var fileId = $("input[name=fileId]").val();//文件ID
+		if(userId==0){
+			if(confirm("是否进入登录？")){
+				var roomId = $("input[name=roomId]").val();//直播间ID
+				window.location.href="http://"+h5Base+"/phone/login.html?roomId="+roomId+"&fileId="+fileId+"&userId="+userId;
+			}else{
+				alert("不登录无法发送消息");
+			}
+			return;
+		}else{
+			var msgContent = $("input[name=msgContent]").val();//发送内容
+			if (msgContent.replace("\s+", "") == "" || msgContent == undefined) {
+				alert("请输入发送内容");
+				return;
+			}else{
+				$.ajax({
+					type : "GET",//请求方式 get/post
+					url : "http://" + tomcatBase + "/ilive/app/room/vod/pushcomments.jspx",
+					dataType : "jsonp",
+					jsonp : "callback",
+					cache : false,
+					data : {
+						userId : userId,
+						fileId : fileId, 
+						comments : encodeURI(msgContent)
+					},
+					success : function(data) {
+						console.log(data);
+						var status = data.code;
+						if(status==1){
+							var comments = data.data;
+							var HTML =  "<div class=\"talkBoxList\" id=\"commentsId_"+comments.commentsId+"\">";
+								HTML += "	<p><span class=\"username\">"+comments.commentsUser+":</span>"+comments.comments+"</p>"
+								HTML += "</div>"	
+							$("#talkBoxListDiv").prepend(HTMLTXT);
+								$("input[name=msgContent]").val("")
+						}else{
+							alert(data.message);
+						}
+					}
+				});
+			}
+		}
+	}
+	//获取评论
+	function selectComments(){
+		var fileId = $("input[name=fileId]").val();//文件ID
+		$.ajax({
+			type : "GET",//请求方式 get/post
+			url : "http://" + tomcatBase + "/ilive/app/room/vod/getcomments.jspx",
+			dataType : "jsonp",
+			jsonp : "callback",
+			cache : false,
+			data : {
+				fileId : fileId
+			},
+			success : function(data) {
+				console.log(data);
+				var status = data.code;
+				if(status==1){
+					var list = data.data;
+					for (var i = 0; i < list.length; i++) {
+						var HTML =  "<div class=\"talkBoxList\" id=\"commentsId_"+comments.commentsId+"\">";
+						HTML += "	<p><span class=\"username\">"+comments.commentsUser+":</span>"+comments.comments+"</p>";
+						HTML += "</div>";
+						$("#talkBoxListDiv").prepend(HTMLTXT);
+					}
+				}else{
+					alert(data.message);
+				}
+			}
+		});
+	}
+</script>
+<script type="text/javascript">
+	$(function() {
+		console.log($("input").width());
+		var winHeight = $(window).height();
+		var VideoBox = $(".videoBox").height();
+		var menuBox = $(".menuBox").height();
+		var talkCon = $(".talkCon").height();
+		var titHeight = $(".titleBox").height();
+		$(".contentBox").css("height",
+				winHeight - VideoBox - menuBox - titHeight - 2);
+		$(".contentBox ul li").css("height",
+				winHeight - VideoBox - menuBox - titHeight);
+		$(".talkLi").css("height", winHeight - VideoBox - menuBox - titHeight);
+		//图片点击放大
+		$(".imgBox").lightGallery({
+			loop : false,
+			auto : false,
+			closable : true
+		});
+		$(".talkCon #saytext").focus(function() {
+			$(".qiandao").addClass("hide");
+			$(".liwu").addClass("hide");
+			//$(".sendMessage").removeClass("hide");
+		});
+		$(".talkCon #saytext").blur(function() {
+			$(".qiandao").removeClass("hide");
+			$(".liwu").removeClass("hide");
+			//$(".sendMessage").addClass("hide");
+			if ($(this).val().length > 0) {
+				$(".qiandao").addClass("hide");
+				$(".liwu").addClass("hide");
+				//$(".sendMessage").removeClass("hide");
+			}
+		});
+		var e = A_Emoji($('.box'));
+	});
+</script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>web测试</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<script src='${base}/res/bvRadio/js/jquery-1.12.1.js'
+	type='text/javascript'></script>
+<script type="text/javascript">
+	function getMsg(token) {
+		$.ajax({
+			type : "get",
+			url : "/bvRadioILive/WebGetMessage.jspx",
+			data : "token="+token,
+			async : false,
+			crossDomain : true,
+			dataType : "jsonp",
+			jsonp : 'jsoncallback',
+			success : function(data, textStatus) {
+				try {
+					if (data.status == 1) {
+						var msgList = data.data;
+						for (var i = 0; i < msgList.length; i++) {
+							try {
+								var msg = msgList[i];
+								$("#contentDiv").append("<span>" + msg.senderName + " 说：" + msg.content + "</span><br/>")
+							} catch (e) {
+								alert(e);
+							}
+						}
+					}
+				} catch (e) {
+				}
+				getMsg(token);
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				if (textStatus == "timeout") { // 请求超时
+					getMsg(token); // 递归调用
+				} else {
+					getMsg(token);
+				}
+			}
+		});
+	}
+
+	var LocString = String(window.document.location.href);
+	function getQueryStr(str) {
+		var rs = new RegExp("(^|)" + str + "=([^/&]*)(/&|$)", "gi").exec(LocString), tmp;
+		if (tmp = rs) {
+			return tmp[2];
+		}
+		return "";
+	}
+
+	function loginError() {
+
+	}
+
+	$(function() {
+		var liveId = getQueryStr("liveId");
+		$.ajax({
+			type : 'get',
+			url : "/bvRadioILive/WebLiveLogin.jspx",
+			data : "liveId="+liveId,
+			async : false,
+			crossDomain : true,
+			dataType : "jsonp",
+			jsonp : 'jsoncallback',
+			success : function(data, textStatus) {
+				if (data.status == 1) {
+					var live = data.data.token;
+					var token = data.data.token;
+					getMsg(token);
+				} else {
+					loginError();
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				loginError();
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="contentDiv"></div>
+</body>
+</html>

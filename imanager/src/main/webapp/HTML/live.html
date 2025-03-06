@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>直播</title>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/mescroll.css" />
+<link rel="stylesheet" type="text/css" href="css/lightGallery.css" />
+<link rel="stylesheet" href="css/live.css" />
+</head>
+
+<body>
+	<div class="videoBox" id="videoImg"></div>
+	<div class="mainBox">
+		<div class="firstBox">
+			<div class="menuBox" >
+				<ul id="menuBoxDIV">
+				</ul>
+			</div>
+			<div class="contentBox" >
+				<ul id="contentBoxDIV">
+				</ul> 
+				<div class="talkCon box" id="sendMessageDIV" style="display: none;" tablevalue="1">
+					<input type="text" placeholder="说点什么吧..." id="saytext"
+						name="msgContent" />
+					<div class="hiddenDiv" style="display: none;"></div>
+					<div class="wen" onclick="selectMsgType()" msgValue="2"></div>
+					<div class="biaoqing emotion" data="emoji"></div>
+					<div class="qiandao" style="display: none;"></div>
+					<div class="liwu" style="display: none;"></div>
+					<button class="sendMessage " onclick="sendMessageSubmitted()">发送</button>
+					<div class="emojiBox">
+						<section class="emoji_container"></section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" id="roomId" name="roomId" value="0">
+	<input type="hidden" id="userId" name="userId" value="0">
+	<input type="hidden" id="liveEventId" name="liveEventId" value="0">
+	<input type="hidden" id="commentsMsgId" name="commentsMsgId" value="0">
+</body>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lightGallery.js"></script>
+<script src="js/A-emoji.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var e = A_Emoji($('.box'));
+		//直播简介
+		$(".followBox").click(function() {
+			if ($(this).html() == "关注企业") {
+				$(this).html("取消关注");
+			} else {
+				$(this).html("关注企业");
+			}
+		});
+		//话题
+		$(document).delegate(".arrowBox i","click",function(){
+			if($(this).hasClass("fa-angle-down")){
+				$(this).removeClass("fa-angle-down").addClass("fa-angle-up");
+				$(this).parent().parent().parent().parent().find(".themeFooter").stop(true,true).slideDown();
+			}else{
+				$(this).removeClass("fa-angle-up").addClass("fa-angle-down");
+				$(this).parent().parent().parent().parent().find(".themeFooter").stop(true,true).slideUp();
+			}
+		});
+	});
+</script>
+<script type="text/javascript" charset="utf-8">
+	window.close = function() {
+		websocket.onclose();
+	}
+	window.onbeforeunload = function() {
+		if (event.clientX > document.body.clientWidth && event.clientY < 0
+				|| event.altKey) {
+			websocket.onclose();
+		} else {
+			websocket.onclose();
+		}
+	}
+	window.onunload = function() {
+		if (event.clientX > document.body.clientWidth && event.clientY < 0
+				|| event.altKey) {
+			websocket.onclose();
+		} else {
+			websocket.onclose();
+		}
+	}
+</script>
+</html>

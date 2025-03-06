@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业认证信息</title>
+	<link href="${base}/tysx/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/tysx/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="${base}/tysx/css/animate.css" rel="stylesheet">
+    <link href="${base}/tysx/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="${base}/tysx/css/myStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/public.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/newheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/newleft.css"/>
+    <link rel="stylesheet" href="${base}/css/shiming.css"/>
+</head>
+<body >
+<div id="wrapper">
+
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <div class="row border-bottom m-b">
+            <nav class="navbar navbar-static-top navbar-top-height" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                   <div class="logo">
+                        <div class="logoimg">
+                        </div>
+                        <div class="logoname">
+                            <span>企业直播平台</span>
+                        </div>
+                   </div>
+                </div>
+            </nav>
+        </div>
+        <!--下面内容部分-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 p-60 white-bg " style="height:auto;">
+                    <div class="col-lg-10 col-lg-offset-1  no-padding">
+                        <div class="red-line no-padding"></div>
+                        <div class="gray-line no-padding"></div>
+                        <div class="redtit firsttit pull-left">1</div>
+                        <div class="redtit secondtit">2</div>
+                        <div class="graytit lasttit">3</div>
+                        <div class="first redfont">提交注册</div>
+                        <div class="second redfont">提交认证</div>
+                        <div class="last">后台审核</div>
+                    </div>
+                    <form action="${base}/admin/enterprise/save.do" method="post">
+                    <div class="row m-t-lg">
+                        <div class="m-150 renzhen">
+                            <div class="input-group">
+                                <div class="leftcon text-right">
+                                    <span class="firstname">企业名称：</span><span class="redfont">*</span>
+                                </div>
+                                <input type="text" name="enterpriseName" value="" id="enterpriseName" style="width: 370px;" placeholder="请输入您的企业名称">
+                            </div>
+                            <div class="input-group">
+                                <div class="leftcon text-right">
+                                    <span class="firstname">企业LOGO：</span>
+                                </div>
+                                 <div class="addimgbox">
+									<img width="80" height="80" id="userImgView" src="${base}/tysx/assets/images/touxiang.png" />
+									<input type="hidden" name="enterpriseImg" id="enterpriseImg" value="">
+									<button class="btn btn-success" style="
+									    margin-top: 46px;
+									    margin-left: 60px;
+									">上传图片</button>
+                                </div>
+                                <div style="display: inline-block; position: relative;">
+										<input id="userImgUpload" type="hidden">
+								</div>
+                            </div>
+                            <div class="input-group">
+                                <div class="leftcon text-right">
+                                     <span class="firstname">企业简介：</span>
+                                </div>
+                                <textarea name="enterpriseDesc" id="enterpriseDesc" placeholder="介绍一下您的企业，让大家更加了解~"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <div class="leftcon text-right">
+                                    <span class="firstname">详细地址：</span><span class="redfont">*</span>
+                                </div>
+                                <input type="text" name="enterpriseInfo" id="enterpriseInfo" value="" style="width: 370px;" placeholder="请输入详细地址">
+                            </div>
+                            <div class="input-group">
+                                <div class="leftcon text-right">
+                                    <span class="firstname">企业网站：</span>
+                                </div>
+                                <input type="text" id="enterpriseSite" name="enterpriseSite" value="" style="width: 370px;" placeholder="请输入你的企业网站">
+
+                            </div>
+                            <div class="input-group">
+                                <div class="leftcon text-right">
+                                    <span class="firstname">营业执照号：</span><span class="redfont">*</span>
+                                </div>
+                                <input type="text" id="enterpriseLicence" value="" name="enterpriseLicence"  style="width: 370px;" placeholder="请输入公司营业执照编号">
+                            </div>
+                            <div class="input-group">
+                                <div class="leftcon text-right">
+                                    <span class="firstname">证件照片：</span>
+                                </div>
+                                <div class="addimgbox">
+									<img width="80" height="80" id="documentImgView" src="${base}/real/img/yl.png" />
+									<input type="hidden" name="certResource" id="certResource" value="">
+                                </div>
+                                <div style="display: inline-block; position: relative;">
+										<input id="documentImgUpload" type="hidden">
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-50">
+                        <div class="input-group text-center">
+                            <button class="btn btn-danger" onclick="submitReal()">提交认证</button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="footer footerrz gray-bg no-borders">
+                    <a href="javascript:;">关于我们</a>
+                    <a href="javascript:;">入驻条款</a>
+                    <a href="javascript:;">法律声明</a>
+                    <a href="javascript:;">联系我们</a>
+                    <div class="footer-right">
+                        &copy 2018Media headline.com All Right Reserved
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<!-- Mainly scripts -->
+<script src="${base}/tysx/js/jquery-2.1.1.js"></script>
+<script src="${base}/tysx/js/bootstrap.min.js"></script>
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${base}/tysx/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="${base}/tysx/js/inspinia.js"></script>
+<script src="${base}/tysx/js/plugins/pace/pace.min.js"></script>
+<!-- Chosen -->
+<script src="${base}/tysx/js/plugins/chosen/chosen.jquery.js"></script>
+<!-- JSKnob -->
+<script src="${base}/tysx/js/plugins/jsKnob/jquery.knob.js"></script>
+<!-- Input Mask-->
+<script src="${base}/tysx/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+<!-- Data picker -->
+<script src="${base}/tysx/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<!-- NouSlider -->
+<script src="${base}/tysx/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+<!-- Switchery -->
+<script src="${base}/tysx/js/plugins/switchery/switchery.js"></script>
+<!-- IonRangeSlider -->
+<script src="${base}/tysx/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+<!-- iCheck -->
+<script src="${base}/tysx/js/plugins/iCheck/icheck.min.js"></script>
+<!-- MENU -->
+<script src="${base}/tysx/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<!-- Color picker -->
+<script src="${base}/tysx/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<!-- Clock picker -->
+<script src="${base}/tysx/js/plugins/clockpicker/clockpicker.js"></script>
+<!-- Image cropper -->
+<script src="${base}/tysx/js/plugins/cropper/cropper.min.js"></script>
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="${base}/tysx/js/plugins/fullcalendar/moment.min.js"></script>
+<!-- Date range picker -->
+<script src="${base}/tysx/js/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="${base}/tysx/js/myJs.js"></script>
+<script src="${base}/js/video.js" type="text/javascript" charset="utf-8"></script>
+<script src="${base}/thirdparty/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+<script src="${base}/tysx/js/jquery.cookie.js" type="text/javascript"></script>
+<link href="${base}/thirdparty/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+function submitReal(){
+	var company_name = $("#company_name").val();//公司姓名
+	if(company_name==""){
+		alert("公司名称不能为空");
+		return;
+	}
+	var userImg = $("#userImg").val();//账户头像
+	var real_description =$("#real_description").val();//账户描述
+	var user_address = $("#user_address").val();//详细地址
+	var company_path = $("#company_path").val();//公司网址
+	var document_number = $("#document_number").val();//证件号
+	if(document_number==""){
+		alert("证件号码不能为空");
+		return;
+	}
+	var document_img = $("#document_img").val();//证件照
+	if(document_img==""){
+		alert("营业执照不能为空");
+		return;
+	}
+}
+
+
+
+$(function() {
+	var upload_url = "${base}/admin/o_uploadFile.do";
+	var jsessionid = '${jsessionid}';
+	if (jsessionid) {
+		upload_url += ";jsessionid=" + jsessionid;
+	}
+	var fileSizeLimit = 1024000;
+	var fileTypeDesc = "头像文件";
+	var fileTypeExts = "*.gif; *.jpg; *.png";
+	$('#userImgUpload').uploadify({
+		'queueID' : 'uploadProgressWrap',
+		'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+		'uploader' : upload_url, //指定服务器端上传处理文件
+		'auto' : true,
+		'buttonCursor' : 'hand',
+		'fileObjName' : 'Filedata',
+		'fileSizeLimit' : fileSizeLimit,
+		'fileTypeExts' : fileTypeExts,
+		'formData':{ 'fileType': 'image','serverGroupId':100 },
+		'width' : 74,
+		'height' : 30,
+		'buttonText' : '上传头像',
+		'removeCompleted' : true,
+		'removeTimeout' : 0,
+		'multi' : false,
+		'onUploadSuccess' : function(file, data, response) {
+			var jsonObj = eval('(' + data + ')');
+			var imgPath = jsonObj.httpUrl+jsonObj.fileRootUrl + jsonObj.filePath;
+			$("#userImgView").attr("src", imgPath);
+			$("#userImg").val(imgPath);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+		    console.log(errorMsg);
+		    console.log(errorString);
+		    console.log(errorCode);
+			alert("上传失败。");
+		}
+	});
+}); 
+</script>
+</html>

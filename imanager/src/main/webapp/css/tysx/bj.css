@@ -1,0 +1,104 @@
+.fanhui a{
+	margin-left: 25px;
+	margin-right: 25px;
+	font-size: 18px;
+	font-weight: 100;
+	line-height: 50px;
+}
+.fanhui{
+	height: 50px;
+	background: #EFEFEF;
+}
+.new{
+	background: #09C;
+	   height: 51px;
+	    color: #fff;
+	    font-size: 16px;
+	    text-align: center;
+	    line-height: 51px;
+}
+.border-t{
+	border-bottom: 3px solid #0095E6;
+	padding-bottom: 11px;
+	color: #0095E6 !important;
+	font-weight: 500 !important;
+}
+.bl{
+	background: #fff;
+		
+		
+}
+.blcen{
+	height: 185px;
+	margin-left: 10px;
+border-bottom: 1px solid #ddd;
+padding-top:28px ;
+padding-bottom:28px ;
+padding-left: 20px;
+margin-right: 60px;
+}
+.blleft img{
+	width: 155px;
+	height: 118px;
+	margin-top: 5px;
+}
+.textbl{
+	width: 90%;
+    height: 36px;
+    background: inherit;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(215, 215, 215, 1);
+      padding-left: 10px;
+}
+.blspan{
+	line-height: 36px;
+	    font-weight: 700;
+    font-style: normal;
+    font-size: 16px;
+}
+.blrigh{
+	margin-left: 20px;
+}
+.textbl2{
+	width: 90%;
+    height: 72px;
+    background: inherit;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(215, 215, 215, 1);
+  resize:none;
+  padding-left: 10px;
+}
+
+.brt{
+	height: 55px;
+}
+.bac{
+	padding-top: 50px;
+	background: #fff;
+	padding-bottom: 30px;
+	height: 120px;
+}
+.bac button{
+	float: left;
+	margin-left: 30px;
+	    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    background: #169BD5;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+}
+.bac button:nth-child(2){
+	background: #F2F2F2;
+	    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(215, 215, 215, 1);
+    color: #000000;
+}

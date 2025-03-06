@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	default-lazy-init="true">
+
+	<!-- 播管系统用户管理 -->
+	<bean id="iLiveManagerOperatorUserMng"
+		class="com.bvRadio.iLive.manager.manager.impl.ILiveManagerOperatorUserMngImpl"></bean>
+	<bean id="iLiveManagerOperatorUserDao"
+		class="com.bvRadio.iLive.manager.dao.impl.ILiveManagerOperatorUserDaoImpl"></bean>
+	<!-- 敏感词 -->
+	<bean id="iLiveSensitiveWordMng" class="com.bvRadio.iLive.iLive.manager.impl.ILiveSensitiveWordMngImpl"></bean>
+	<bean id="iLiveSensitiveWordDao" class="com.bvRadio.iLive.iLive.dao.impl.ILiveSensitiveWordDaoImpl"></bean>
+	
+	<!-- 企业信息审核内容管理 -->
+	<bean class="com.bvRadio.iLive.manager.manager.impl.ILiveCertTopicMngImpl"></bean>
+	<bean class="com.bvRadio.iLive.manager.dao.impl.ILiveCertTopicDaoImpl"></bean>
+	
+	<!-- 举报投诉 -->
+	<bean id="reportAndComplainDao" class="com.bvRadio.iLive.manager.dao.impl.ReportAndComplainDaoImpl"></bean>
+	<bean id="reportAndComplainService" class="com.bvRadio.iLive.manager.manager.impl.ReportAndComplainServiceImpl"></bean>
+	<bean id="replyDao" class="com.bvRadio.iLive.manager.dao.impl.ReplyDaoImpl"></bean>
+	<bean id="replyService" class="com.bvRadio.iLive.manager.manager.impl.ReplyServiceImpl"></bean>
+	
+	<bean id="fankongMng" class="com.bvRadio.iLive.manager.manager.impl.FankongMngImpl"></bean>
+	<bean id="fankongDao" class="com.bvRadio.iLive.manager.dao.impl.FankongDaoImpl"></bean>
+	<!-- 推荐企业设置 -->
+	<bean id="remEnterpriseMng" class="com.bvRadio.iLive.manager.manager.impl.ILiveRemEnterpriseMngImpl"></bean>
+	<bean id="remEnterpriseDao" class="com.bvRadio.iLive.manager.dao.impl.ILiveRemEnterpriseDaoImpl"></bean>
+	
+	<!-- 站内信 -->
+	<bean id="instationMessageDao" class="com.bvRadio.iLive.manager.dao.impl.InstationMessageDaoImpl"></bean>
+	<bean id="instationMessageUserDao" class="com.bvRadio.iLive.manager.dao.impl.InstationMessageUserDaoImpl"></bean>
+	<bean id="instationMessageUserService" class="com.bvRadio.iLive.manager.manager.impl.InstationMessageUserServiceImpl"></bean>
+	<bean id="instationMessageService" class="com.bvRadio.iLive.manager.manager.impl.InstationMessageServiceImpl"></bean>
+	<!-- 日志 -->
+	<bean id="workLog" class="com.bvRadio.iLive.manager.entity.WorkLog"></bean>
+	<bean id="workLogMng" class="com.bvRadio.iLive.manager.manager.impl.WorkLogMngImpl"></bean>
+</beans>

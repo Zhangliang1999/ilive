@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title></title>
+<link href="css/mui.min.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
+<style>
+.area {
+	margin: 20px auto 0px auto;
+}
+
+.mui-input-group {
+	margin-top: 10px;
+}
+
+.mui-input-group:first-child {
+	margin-top: 20px;
+}
+
+.mui-input-group label {
+	width: 22%;
+}
+
+.mui-input-row label ~input,.mui-input-row label ~select,.mui-input-row label
+	 ~textarea {
+	width: 78%;
+}
+
+.mui-checkbox input[type=checkbox],.mui-radio input[type=radio] {
+	top: 6px;
+}
+
+.mui-content-padded {
+	margin-top: 25px;
+}
+
+.mui-btn {
+	padding: 10px;
+}
+
+.link-area {
+	display: block;
+	margin-top: 25px;
+	text-align: center;
+}
+
+.spliter {
+	color: #bbb;
+	padding: 0px 8px;
+}
+
+.oauth-area {
+	position: absolute;
+	bottom: 20px;
+	left: 0px;
+	text-align: center;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+.oauth-area .oauth-btn {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	background-size: 30px 30px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	margin: 0px 20px;
+	/*-webkit-filter: grayscale(100%); */
+	border: solid 1px #ddd;
+	border-radius: 25px;
+}
+
+.oauth-area .oauth-btn:active {
+	border: solid 1px #aaa;
+}
+
+.oauth-area .oauth-btn.disabled {
+	background-color: #ddd;
+}
+</style>
+<script src="js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<h1 class="mui-title">登录</h1>
+	</header>
+	<div class="mui-content">
+		<form id='login-form' class="mui-input-group">
+			<div class="mui-input-row">
+				<label>账号</label> <input id='username' name="username" type="text"
+					class="mui-input-clear mui-input" placeholder="请输入账号">
+			</div>
+			<div class="mui-input-row">
+				<label>密码</label> <input id='password' name="password" type="password"
+					class="mui-input-clear mui-input" placeholder="请输入密码">
+			</div>
+		</form>
+		<div class="mui-content-padded">
+			<button id='login' class="mui-btn mui-btn-block mui-btn-primary" onclick="loginUser()">登录</button>
+			<div class="link-area">
+				<a id='reg'>注册账号</a> <span class="spliter">|</span> <a
+					id='forgetPassword'>忘记密码</a>
+			</div>
+		</div>
+		<div class="mui-content-padded oauth-area"></div>
+	</div>
+	<input type="hidden" id="roomId" name="roomId" value="0">
+	<input type="hidden" id="fileId" name="fileId" value="0">
+</body>
+<script type="text/javascript">
+var h5Base="zb.tv189.com"; 
+var tomcatBase = "mp.zb.tv189.com";
+// var h5Base="192.168.222.156:80";
+//var tomcatBase = "192.168.222.156:8080";
+$(function(){
+	var param = window.location.search;
+	var newsidinfo = param.substr(param.indexOf("?") + 1, param.length)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+	var split = newsidinfo.split("&")
+	for (var i = 0; i < split.length; i++) {
+		var newsids = split[i].split("=");//对获得的参数字符串按照“=”进行分割
+		var newsid = newsids[1];//得到参数值
+		var newsname = newsids[0];
+		if (newsname == "roomId") {
+			$("input[name=roomId]").val(newsid);
+		}else if (newsname == "fileId") {
+			$("input[name=fileId]").val(newsid);
+		}
+	}
+	$("#reg").attr("href","http://"+h5Base+"/phone/reg.html?roomId="+$("input[name=roomId]").val());
+});
+function loginUser(){
+	var username = $("input[name=username]").val();
+	var password = $("input[name=password]").val();
+	if(username==undefined||username.replace("\s+", "")==""){
+		alert("请输入登录用户");
+		return;
+	}
+	if(password==undefined||password.replace("\s+", "")==""){
+		alert("请输入密码");
+		return;
+	}
+	$.ajax({
+		type : "GET",//请求方式 get/post
+		url : "http://" + tomcatBase + "/ilive/appuser/login.jspx",
+		dataType : "jsonp",
+		jsonp : "callback",
+		cache : false,
+		data : {
+			phoneNum : username,
+			password : password,
+			type : 1
+
+		},
+		success : function(data) {
+			var status = data.code;
+			if (status == 1) {
+				var userId = data.data.userId;
+				var roomId = $("input[name=roomId]").val();
+				var fileId = $("input[name=fileId]").val();
+				if(fileId==0){
+					window.location.href="http://" +h5Base + "/phone/live.html?roomId="+roomId+"&userId="+userId;
+					return;
+				}else{
+					window.location.href="http://" +h5Base + "/phone/review.html?roomId="+roomId+"&userId="+userId;
+					return;
+				}
+			} else {
+				alert(data.message);
+			}
+		}
+	});
+}
+</script>
+</html>

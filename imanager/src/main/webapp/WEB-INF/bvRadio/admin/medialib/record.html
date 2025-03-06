@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>直播收录</title> 
+<#include "/bvRadio/head.html"/>
+<link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css" />
+<link rel="stylesheet" href="${base}/tysx/css/ContentManage.css" />
+</head>
+<body>
+	<div id="wrapper" class="bgc-fff">
+		<div id="page-wrapper">
+	    <#include "/bvRadio/admin/top.html"/>
+		<#include "/bvRadio/admin/medialeft.html" />
+			<div class="wrapper wrapper-content bgc-fff normal-font recallmanage">
+				<div class="row title-header">
+					<div class="col-lg-12">
+						<div class="title-name">
+							<a class="font-title">直播收录</a>
+						</div>
+					</div>
+				</div>
+				<div class="row list-contain">
+				   <div class="col-lg-12 list-title space-20">
+                    <span><img src="${base}/tysx/img/u9186.png"> 节目录制：<i class="text-danger">${fileNumber!}</i>个</span>
+                    <span><img src="${base}/tysx/img/u9190.png" width="16px;"> 储存空间:<i class="text-danger">${totalFileSize!}</i>Mb</span>
+                    <div class="col-lg-4 pull-right text-right no-padding">
+                        <input type="text" id="record_name_id" class="serachinput" value="${mediaName!}" placeholder="按资源搜索"/>
+                        <button onclick="searchRecord();" class="btn blue-bg">搜索</button>
+                    </div>
+                   </div>
+                   
+					<div class="col-lg-12">
+					<ul class="recalllist">
+					  <#list pagination.list as liverecord>
+			          <li>
+					  <div class="row list_action no-margins">
+							<a href="#">
+							<!-- ${liverecord.fileCover!} -->
+							<img  src="${base}/tysx/img/u208.jpg"/>
+							</a> 
+							<span class="time">${liverecord.durationTime!}</span> 
+							<span class="btn curlabel">原片</span>
+								
+							<p class="p-w-m col-lg-12 text-center">
+								<a href="${base}/admin/mediafile/entermediaedit.do?id=${liverecord.fileId!}&&menuType=2" class="col-lg-4 pull-left" title="编辑"> <span
+									class="glyphicon glyphicon-pencil">编辑</span>
+								</a> <a href="#" class="col-lg-4 pull-left" title="剪辑"> <span
+									class="glyphicon glyphicon-edit">剪辑</span>
+								</a> <a href="javascipt:void(0);" onclick="deleteLiveRecord(${liverecord.fileId!})" class="col-lg-4 delete pull-right" title="删除">
+									<span class="glyphicon glyphicon-trash">删除</span>
+								</a>
+							</p>
+						</div>
+						<p class="font-bold m-t-sm">${liverecord.mediaFileName!}</p>
+						<p class="m-t-sm">
+							录制时间:${liverecord.createStartTime!} <span class="pull-right">
+							<input type="checkbox" id="switchbutton${liverecord_index!}" 
+							<#if liverecord.onlineFlag??&&liverecord.onlineFlag ==1>
+							 checked="checked" 
+							</#if>
+							 class="chooseBtn no-margins" onclick="updateOnlineFlag(${liverecord.fileId!},${liverecord.onlineFlag?if_exists},this)"/> 
+							 <label	for="switchbutton${liverecord_index!}" class="choose-label no-margins"></label>
+							</span>
+						</p>
+						<p class="col-lg-12 no-padding playinfo m-t-sm">
+							<span class="col-lg-4 pull-left storage"> <i> ${liverecord.fileSizeMb!} Mb</i>
+							</span> <span class="col-lg-4 no-padding text-center"> <img
+								src="${base}/tysx/img/u9245.png" /><i>
+								${liverecord.viewNum!'0'}
+								</i>
+							</span> <span href="#"
+								class="col-lg-4 no-padding delete pull-right text-right">
+								<img src="${base}/tysx/img/u9421.png" /><i>
+								${liverecord.commentsCount!'0'}
+								</i>
+							</span>
+						</p>
+						</li> 
+						</#list>
+						</ul>
+					</div>
+					<form id="_page_form"
+						action="enterliverecord.do"
+						method="post">
+						<div
+							class="dataTables_paginate paging_simple_numbers pull-right m-r-lg"
+							id="DataTables_Table_0_paginate">
+							<#if !pagination?is_sequence> <#assign pageNow=pagination.pageNo
+							totalPage=pagination.totalPage > <input type="hidden"
+								name="pageNo" value="${pagination.pageNo}"> <#if
+							(pageNow>0) && (pageNow<=totalPage) > <#if (pageNow<=1)>
+							<button type="button" class="btn btn-sm btn-white disabled">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							<#else>
+							<button type="button" onclick="PL.gotoPage(${pageNow - 1})"
+								class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							</#if> <#if (pageNow-4 >1)> <#if (pageNow
+							<totalPage-2)>
+							<button type="button" onclick="PL.gotoPage(1)"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<#list pageNow-2..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> <#elseif (pageNow-6 > 1)>
+							<button onclick="PL.gotoPage(1)" type="button"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<#list pageNow-4..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> <#else> <#list 1..pageNow-1 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#elseif (pageNow=1)> <#else> <#list 1..pageNow-1
+							as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if>
+							<button type="button" onclick="PL.gotoPage(${pageNow})"
+								class="active btn btn-sm btn-white">
+								<a>${pageNow}</a>
+							</button>
+							<#if (pageNow+4 < totalPage)> <#if (pageNow>2)> <#list
+							pageNow+1..pageNow+2 as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(${totalPage})"
+								class="btn btn-sm btn-white">
+								<a>${totalPage}</a>
+							</button>
+							<#elseif (pageNow+6 < totalPage)> <#list pageNow+1..pageNow+4 as
+							i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list>
+							<button type="button" class="btn btn-sm btn-white">
+								<a>...</a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(${totalPage})"
+								class="btn btn-sm btn-white">
+								<a>${totalPage}</a>
+							</button>
+							<#else> <#list pageNow+1..totalPage as i>
+							<button onclick="PL.gotoPage(${i})" type="button"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#elseif (pageNow=totalPage)> <#else> <#list
+							pageNow+1..totalPage as i>
+							<button type="button" onclick="PL.gotoPage(${i})"
+								class="btn btn-sm btn-white">
+								<a>${i}</a>
+							</button>
+							</#list> </#if> <#if (pageNow>=totalPage)>
+							<button type="button" class="btn btn-sm btn-white disabled">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							<#else>
+							<button type="button" onclick="PL.gotoPage(${pageNow + 1})"
+								class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							</#if> <#else>
+							<button type="button" class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-left"></i></a>
+							</button>
+							<button type="button" onclick="PL.gotoPage(1)"
+								class="btn btn-sm btn-white">
+								<a>1</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-white">
+								<a><i class="fa fa-chevron-right"></i></a>
+							</button>
+							</#if> </#if> 
+						</div>
+					</form>
+					
+					</div>
+				
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	$("#_page_form").append($("<input type='hidden' id='record_name_hidden' name='mediaName'/>"));
+	$(".live-bottom").hide()
+	wid = $('.blcen').width()
+	$('.textbl').css('width', wid - 300)
+	$('.textbl2').css('width', wid - 300)
+	$(window).resize(function() { //当浏览器大小变化时
+	
+		wid = $('.blcen').width()
+		$('.textbl').css('width', wid - 300)
+		$('.textbl2').css('width', wid - 300)
+	
+	});
+	$(".img-box").hover(function() {
+		$(this).find(".live-bottom").stop(true, false).slideDown(300)
+	}, function() {
+		$(this).find(".live-bottom").stop(true, false).slideUp(300)
+	})
+	
+	function searchRecord(){
+    	var recordName = $("#record_name_id").val();
+    	$("#record_name_hidden").val(recordName);
+    	$("#_page_form").submit();
+	}
+	
+	function deleteLiveRecord(id){
+		if (confirm("确定要删除吗？")){
+    		$.ajax({
+				type : 'POST',
+				url : "${base}/admin/mediafile/delete.do",
+				data : {
+					id : id
+				},
+				dataType : "json",
+				success : function(data, textStatus) {
+					searchRecord();
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("delete出错>>" + errorThrown);
+				}
+			});
+    	}
+	}
+	
+	/**
+	*修改上线状态
+	*/
+	function updateOnlineFlag(id,state,ele){
+		var desState;
+		if(state==''||state==null||state==undefined||state!=1){
+			desState = 1;
+		}else{
+			desState = 0;
+		}
+		
+		var ids = [];
+		ids.push(id);
+		$.ajax({
+			type : 'POST',
+			url : "${base}/admin/mediafile/updatelinestate.do",
+			data : {
+				ids : ids,
+				state:desState
+			},
+			dataType : "json",
+			success : function(data, textStatus) {
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("delete出错>>" + errorThrown);
+			}
+		});
+	}
+</script>
+</html>

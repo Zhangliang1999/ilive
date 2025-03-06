@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>日志操作</title>
+    <#include "/bvRadio/livemanager/head.html" />
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+    <style>
+		.scrollSwitchBox{
+			margin-left: 55px;
+		}
+		input{
+			border:1px solid #ddd;
+			width:210px;
+		}
+		label{
+			margin-left:30px;
+			width:100px;
+		}
+		 /* 外面盒子样式---自己定义 */
+        .page_div{margin:20px 10px 20px 0;color:#666;float: right;}
+        /* 页数按钮样式 */
+        .page_div button{display:inline-block;min-width:30px;height:28px;cursor:pointer;color:#666;font-size:13px;line-height:28px;background-color:#f9f9f9;border:1px solid #dce0e0;text-align:center;margin:0 4px;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+        #firstPage,#lastPage,#nextPage,#prePage{width:50px;color:#0073A9;border:1px solid #0073A9}
+        #nextPage,#prePage{width:70px}
+        .page_div .current{background-color:#0073A9;border-color:#0073A9;color:#FFF}
+        /* 页面数量 */
+        .totalPages{margin:0 10px}
+        .totalPages span,.totalSize span{color:#0073A9;margin:0 5px}
+        /*button禁用*/
+        .page_div button:disabled{opacity:.5;cursor:no-drop}
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/livemanager/top.html" />
+        <!--左侧部分-->
+        <#include "/bvRadio/livemanager/managercontrolleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">日志操作</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12" style="padding-left:40px;padding-top:10px">
+                	<div style="height:40px">
+                	<label>类型</label>
+                	<select id="selecttype" class="form-inline" style="width:210px;height:30px">
+                		<option value="0">全部</option>
+                		<option value="128">登录</option>
+                		<option value="129">创建直播间</option>
+                		<option value="102">修改直播属性</option>
+                		<option value="103">logo设置</option>
+                		<option value="105">修改报名</option>
+                		<option value="104">修改观看授权</option>
+                		<option value="106">修改直播倒计时</option>
+                		<option value="107">修改推广分享</option>
+                		<option value="130">发送短信邀请</option>
+                		<option value="131">修改邀请卡</option>
+                		<option value="108">修改移动端引导页</option>
+                		<option value="110">修改直播引导页</option>
+                		<option value="112">往期回看</option>
+                		<option value="133">结束直播</option>
+                		<option value="132">开始直播</option>
+                		<option value="134">媒体库上传视频</option>
+                		<option value="137">媒体库删除视频</option>
+                		<option value="123">主页修改</option>
+                		<option value="135">专题创建</option>
+                		<option value="136">专题修改</option>
+                	</select>
+                	
+                	<label>内容id</label>
+                	<input type="text" class="form-inline" style="height:30px" id="contentid"/>
+                	
+                	<label>用户id</label>
+                	<input type="text" class="form-inline" style="height:30px" id="userId"/>
+                	</div>
+                	<div style="height:40px">
+                	<label>开始时间</label>
+                	<input id="startTime" name="startTime" type="text" readonly class="Wdate input no-margins form_datetime" style="height:40px;width:210px;">
+                	
+                	<label>结束时间</label>
+                	<input id="endTime" name="endTime" type="text" readonly class="Wdate input no-margins form_datetime" style="height:40px;width:210px;">
+                	
+                	<button class="btn blueButton m-t-n-4" id="searchBtn" type="button" style="margin-left:30px">查询</button>
+                	
+                	</div>
+                </div>
+            </div>
+            <div class="row m-t-sm">
+			<div class="col-lg-12 p-w-lg">
+                    <table class="table newtable table-striped table-hover ScrollViewer table-responsive">
+                        <thead class="gray-bg">
+                        <tr>
+                            <th>系统id</th>
+                            <th>模块类型</th>
+                            <th>操作内容id</th>
+                            <th>操作人</th>
+                            <th>操作人id</th>
+                            <th>操作时间</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        	<#list list as item>
+                        		<tr>
+                        			<td>${item.systemId!}</td>
+                        			<td>${item.contentName!}</td>
+                        			<td>${item.contentId!}</td>
+                        			<td>${item.userName!}</td>
+                        			<td>${item.userId!}</td>
+                        			<td>${item.createTime!}</td>
+                        		</tr>
+                        	</#list>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="col-lg-12 pageBox">
+                    <div id="page" class="page_div"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+<script src="${base}/tysx/js/zbj.js"></script>
+<script src="${base}/tysx/js/bootstrap-datetimepicker.min.js"></script>
+<script src="${base}/tysx/js/bootstrap-fileinput.js"></script>
+<script src="${base}/tysx/js/pageMe.js"></script>
+<script>
+    var winHeight = $(window).height();
+    var navHeight = $(".navbar").height();
+    var titleHeight = $(".title-header").height()+2;
+    $(".newtable tbody").height(winHeight-navHeight-titleHeight-165);
+	
+    $("#startTime").datetimepicker({
+		format : 'yyyy-mm-dd hh:ii:ss',
+		minuteStep : 1,
+		minView : 'hour',
+		language : 'zh-CN',
+		pickerPosition : 'bottom-right',
+		autoclose : true,
+	}).on("click", function() {
+		// $("#liveStartTime").datetimepicker("setEndDate", $("#liveEndTime").val());
+	});
+    $("#endTime").datetimepicker({
+		format : 'yyyy-mm-dd hh:ii:ss',
+		minuteStep : 1,
+		minView : 'hour',
+		language : 'zh-CN',
+		pickerPosition : 'bottom-right',
+		autoclose : true,
+	}).on("click", function() {
+		// $("#liveStartTime").datetimepicker("setEndDate", $("#liveEndTime").val());
+	});
+    
+	$(function(){
+		$("#searchBtn").on("click",function(){
+			var type=$("#selecttype").val();
+			var contentid = $("#contentid").val();
+			var userId = $("#userId").val();
+			if(type==0){
+				type=null;
+			}
+			var startTime = $("#startTime").val();
+			var endTime = $("#endTime").val();
+			$.ajax({
+				url:"${base}/operator/worklog/getpage",
+				data:{
+					pageNo:1,
+					modelId:type,
+					contentId:contentid,
+					userId:userId,
+					startTime:startTime,
+					endTime:endTime
+				},
+				success:function(res){
+					console.log(res);
+					if(res.code==1){
+						var show = "";
+						console.log(res.data);
+						$.each(res.data,function(index,ele){
+							show+="<tr><td>"+ele.systemId+"</td>";
+							show+="<td>"+ele.contentName+"</td>";
+							show+="<td>"+ele.contentId+"</td>";
+							show+="<td>"+ele.userName+"</td>";
+							show+="<td>"+ele.userId+"</td>";
+							show+="<td>"+ele.createTime+"</td></tr>";
+						});
+						$("#tbody").empty().append(show);
+						
+						var pagenum = res.pagenum;
+						var nowpage = res.nowpage;
+						var show2 ="";
+						show2+="<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-left'></i></button>";
+						for(var i=0;i<pagenum;i++){
+							var num1 = i+1;
+							if(pagenum==nowpage){
+								show2+="<button class='btn btn-sm btn-white active' onclick='getpage("+num1+",this)'>"+num1+"</button>";
+							}else{
+								show2+="<button class='btn btn-sm btn-white' onclick='getpage("+num1+",this)'>"+num1+"</button>";
+							}
+						}
+						show2+="<button type='button' class='btn btn-sm btn-white'><i class='fa fa-chevron-right'></i></button>";
+						$('#pagediv').empty().append(show2);
+						
+					}
+				}
+			});
+			
+		});
+		
+	})
+	var pageNum=${nowpage};
+	var totalNum=${pagenum};
+	var totalList=${total};
+	 $("#page").paging({
+        pageNum:pageNum , // 当前页面
+        totalNum:totalNum , // 总页码
+        totalList: totalList, // 记录总数量
+        callback: function (num) { //回调函数
+            console.log(num);
+            getpage(num,this);
+        }
+    });
+	function getpage(i,thi){
+		var type=$("#selecttype").val();
+		var contentid = $("#contentid").val();
+		var userId = $("#userId").val();
+		if(type==0){
+			type=null;
+		}
+		var startTime = $("#startTime").val();
+		var endTime = $("#endTime").val();
+		$.ajax({
+			url:"${base}/operator/worklog/getpage",
+			data:{
+				pageNo:i,
+				modelId:type,
+				contentId:contentid,
+				userId:userId,
+				startTime:startTime,
+				endTime:endTime
+			},
+			success:function(res){
+				console.log(res);
+				if(res.code==1){
+					$(thi).addClass("active").siblings().removeClass("active");
+					var show = "";
+					console.log(res.data);
+					$.each(res.data,function(index,ele){
+						show+="<tr><td>"+ele.systemId+"</td>";
+						show+="<td>"+ele.contentName+"</td>";
+						show+="<td>"+ele.contentId+"</td>";
+						show+="<td>"+ele.userName+"</td>";
+						show+="<td>"+ele.userId+"</td>";
+						show+="<td>"+ele.createTime+"</td></tr>";
+					});
+					$("#tbody").empty().append(show);
+				}
+			}
+		});
+	}
+    
+</script>
+</html>

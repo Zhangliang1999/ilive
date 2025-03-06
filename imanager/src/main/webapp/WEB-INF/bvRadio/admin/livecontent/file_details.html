@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>视频详情</title>
+    <link rel="stylesheet" href="${base}/tysx/css/newzbj.css"/>
+    <#include "/bvRadio/head.html"/>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper">
+        <!--上面的导航栏部分-->
+		<#include "/bvRadio/admin/top.html"/>
+		<!--左侧部分-->
+		<#include "/bvRadio/admin/left.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content bgc-fff">
+            <div class="row title-header">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                       <a class="font-content">直播录制视频名称:${iLiveMediaFile.mediaFileName!'未命名'}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-5" style="padding:0 40px;">
+                        <div class="videotop">
+                        </div>
+                        <div class="videobox no-margins">
+							<img id="fileCover" src="${iLiveMediaFile.fileCover!''}" style="height: 100%;width: 100%;">
+                        </div>
+                        <div class="p-xs no-top-border" style="border: 1px solid #ddd;">
+                            <button class="btn">上传</button>
+							<button class="btn pull-right">剪辑</button>
+                        </div>
+                        <div class="mainbox">
+                            <div style="border:1px solid #ddd;" class="no-top-border p-xs">
+                                <h3 class="p-xs">视频信息：</h3>
+                                <ol class="font-content">
+                                    <li class="m-sm">创建时间：${iLiveMediaFile.createStartTime!''}</li>
+                                    <li class="m-sm">创建人：${iLiveMediaFile.cuserName!''}</li>
+                                    <li class="m-sm">视频类型：
+                                    		<#if iLiveMediaFile.createType==3>手动上传 
+                                    		<#else>直播收录</#if>
+                                    </li>
+                                    <li class="m-sm">视频大小：${iLiveMediaFile.fileSize!0}kb</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 p-lg">
+                        <div class="row white-bg">
+                            <div class="col-lg-12 cjzbinput">
+                                <span class="firstname"><b class="text-danger">*</b>视频名称：</span>
+                                <input class="col-lg-10" type="text" placeholder="活动名称" name="mediaFileName" value="${iLiveMediaFile.mediaFileName!'未命名'}">
+                            </div>
+                            <div class="col-lg-12 cjzbinput" style="height: auto;">
+                                <span class="firstname">视频简介：</span>
+                                <textarea name="mediaFileDesc" placeholder="简介">${iLiveMediaFile.mediaFileDesc!'未命名'}</textarea>
+                            </div>
+                            <div class="col-lg-12 cjzbinput">
+                                <span class="firstname">视频地址：</span>
+                                <input class="col-lg-10" type="text" placeholder="视频地址" readonly="readonly" value="${iLiveMediaFile.filePath!}">
+                                <button class="btn btn-default">复制</button>
+                            </div>
+                            <div class="col-lg-12 cjzbinput">
+                                <span class="firstname">播放地址：</span>
+                                <input class="col-lg-10" type="text" placeholder="播放地址" readonly="readonly" value="${iLiveMediaFile.docDealFinishAddr!}">
+                                <button class="btn btn-default">复制</button>
+                            </div>
+                            <div class="col-lg-12 cjzbinput" style="height: auto;">
+                                <span class="firstname">手机预览：</span>
+                                <div class="ewmbox pull-left">
+                                    <img src="../img/ptqrshow.png" alt=""/>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 cjzbinput" style="height: auto;">
+                                <button class="btn red-btn" onclick="updateMediaFile(${iLiveMediaFile.fileId!0})">确定</button>
+                                <button class="btn yellow-bg m-l-lg" onclick="javascript:history.back(1);">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+//修改
+function updateMediaFile(fileId){
+	if(fileId==0){
+		alert("修改文件目标失败");
+		return;
+	}
+	var mediaFileName = $("input[name=mediaFileName]").val();
+	var mediaFileDesc = $("textarea[name=mediaFileDesc]").val();
+	var fileCover = $("#fileCover").attr("src");
+	$.ajax({
+		type : "POST",//请求方式 get/post
+		url : "${base}/admin/content/events/update.do",
+		dataType : "json",
+		data : {
+			fileId : fileId,
+			mediaFileName : mediaFileName,
+			mediaFileDesc :mediaFileDesc,
+			fileCover :fileCover
+			},
+		success : function(data) {
+			var status  = data.status;
+			console.log(data);
+			if(status==1){
+				alert("修改成功");
+			}else{
+				alert(data.message);
+			}
+		}
+	});
+	
+}
+</script>
+<script>
+    //获取视频的宽度
+    $(".videobox").css("width","100%");
+    var videoWidth = $(".videobox").width();
+    $(".videobox").css("height",videoWidth*9/16);
+</script>
+</html>

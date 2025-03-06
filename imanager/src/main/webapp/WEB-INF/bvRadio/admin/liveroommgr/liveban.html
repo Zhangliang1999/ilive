@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<#include "/bvRadio/head.html"/>
+		<link rel="stylesheet" href="${base}/tysx/css/newhdgl.css"/>
+		<title>直播禁言</title>
+	</head>
+	<body >
+		<div id="wrapper">
+			<!--右侧内容的区域-->
+			<div id="page-wrapper" class="gray-bg">
+				<!--上面的导航栏部分-->
+				<#include "/bvRadio/admin/top.html"/>
+				<!--左侧部分-->
+				<#include "/bvRadio/admin/left.html"/>
+				<!--下面内容部分-->
+				<div class="wrapper wrapper-content border-left bgc-fff">
+					<div class="row title-header gray-bg">
+						<div class="col-lg-12">
+							<div class="title-name">
+								<a class="font-title">禁言管理设置</a>
+							</div>
+						</div>
+					</div>
+					<div class="row btn-box">
+						<div class="col-lg-12 lh-50">
+							<div class="font-title pull-left lh-50 m-l-lg m-t-sm">
+								<i class="fa fa-user"></i> 禁言人数：<span class="color-blue">${pagination.totalCount!}</span>人
+							</div>
+							<div class="pull-right m-r-lg m-t-xs">
+								<input type="text" class="serachinput" placeholder="按用户搜索"/>
+								<button class="btn commonbtn m-t-n-4">
+									搜索
+								</button>
+							</div>
+						</div>
+					</div>
+					<@p.pageList value=pagination
+					listAction="${base}/admin/room/banlist.do?roomId=${baseIliveRoomId}";live,i,has_next>
+					<@p.column class="text-center mr5 w15"
+					style="text-align: center; width:15px" title="
+					<input
+					type='checkbox' onclick='PL.checkbox(\"ids\",this.checked)'>
+					">
+					<input type="checkbox" name="ids" value="${live.userId!}">
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="序号">${live.userId!}
+					</@p.column>
+					<@p.column
+					class="text-left" style=""
+					title="禁言用户">${live.userName!'未知'}
+					</@p.column>
+					<@p.column class="text-center" style="width:60px;"
+					title="手机号">
+					${live.phoneNum!}
+					</@p.column>
+					<@p.column class="text-center" style="width:60px;"
+					title="用户IP">
+					${live.userIp!}
+					</@p.column>
+					<@p.column class="text-center" style="width:180px;" title="禁言时间">
+					<small style="color: #6B7C98;">${live.time!}
+						</@p.column>
+						</@p.pageList>
+	</body>
+	<!-- Mainly scripts -->
+	<script src="../js/jquery-2.1.1.js"></script>
+	<script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- Custom and plugin javascript -->
+	<script src="../js/inspinia.js"></script>
+	<script src="../js/plugins/pace/pace.min.js"></script>
+
+	<!-- Chosen -->
+	<script src="../js/plugins/chosen/chosen.jquery.js"></script>
+
+	<!-- JSKnob -->
+	<script src="../js/plugins/jsKnob/jquery.knob.js"></script>
+
+	<!-- Input Mask-->
+	<script src="../js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+	<!-- Data picker -->
+	<script src="../js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+	<!-- NouSlider -->
+	<script src="../js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+	<!-- Switchery -->
+	<script src="../js/plugins/switchery/switchery.js"></script>
+
+	<!-- IonRangeSlider -->
+	<script src="../js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+	<!-- iCheck -->
+	<script src="../../js/plugins/iCheck/icheck.min.js"></script>
+
+	<!-- MENU -->
+	<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+	<!-- Color picker -->
+	<script src="../js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+	<!-- Clock picker -->
+	<script src="../js/plugins/clockpicker/clockpicker.js"></script>
+
+	<!-- Image cropper -->
+
+	<script src="../js/plugins/cropper/cropper.min.js"></script>
+
+	<!-- Date range use moment.js same as full calendar plugin -->
+	<script src="../js/plugins/fullcalendar/moment.min.js"></script>
+
+	<!-- Date range picker -->
+	<script src="../js/plugins/daterangepicker/daterangepicker.js"></script>
+
+	<script src="../js/myJs.js"></script>
+	<script src="../js/video.js" type="text/javascript" charset="utf-8"></script>
+	<!--新加js-->
+	<script src="../js/lightGallery.js"></script>
+	<script src="../js/leftHeight.js"></script>
+	<script src="../js/zbj.js"></script>
+	<script>
+		var winHeight;
+		//获取页面高度
+		winHeight = $(window).height();
+		//导航栏高度
+		var navHeight = $(".navbar").height();
+		//标题栏高度加边线
+		var titleHeight = $(".title-header").height() + 2;
+		$(".tablebox").slimScroll({
+			height : winHeight - navHeight - titleHeight - 75 - 50
+		});
+		var div1 = $('.scrollSwitchBox');
+		var div2 = $('.scrollSwitch');
+		$('.scrollSwitchBox').click(function() {
+			if ($("#div1").hasClass("open1")) {
+				$("#div1").addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+				$("#div2").addClass("scrollSwitch").addClass("close2").removeClass("open2");
+				$("#div1 input").attr("checked", false);
+				return
+			} else {
+				$("#div1").addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+				$("#div2").addClass("scrollSwitch").addClass("open2").removeClass("close2");
+				$("#div1 input").attr("checked", true);
+				return
+			}
+		})
+
+	</script>
+</html>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="EquipmentOrder" table="equipment_order">
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="equipmentId">
+			<column name="equipment_id"></column>
+		</property>
+
+		<property name="type">
+			<column name="type"></column>
+		</property>
+
+		<property name="status">
+			<column name="status"></column>
+		</property>
+
+		<property name="area">
+			<column name="area"></column>
+		</property>
+
+		<property name="startTime">
+			<column name="start_time"></column>
+		</property>
+
+		<property name="endTime">
+			<column name="end_time"></column>
+		</property>
+
+		<property name="contactName">
+			<column name="contact_name"></column>
+		</property>
+
+		<property name="contactPhone">
+			<column name="contact_phone"></column>
+		</property>
+
+		<property name="createTime">
+			<column name="create_time"></column>
+		</property>
+
+		<property name="updateTime">
+			<column name="update_time"></column>
+		</property>
+
+		<property name="applyAccount">
+			<column name="apply_account"></column>
+		</property>
+
+		<property name="userId">
+			<column name="user_id"></column>
+		</property>
+
+		<property name="rentOrSell">
+			<column name="rent_or_sell"></column>
+		</property>
+
+		<property name="liveScene">
+			<column name="live_scene"></column>
+		</property>
+
+		<property name="liveTime">
+			<column name="live_time"></column>
+		</property>
+
+		<property name="city">
+			<column name="city"></column>
+		</property>
+
+		<property name="predictNum">
+			<column name="predict_num"></column>
+		</property>
+
+		<property name="predictDuration">
+			<column name="predict_duration"></column>
+		</property>
+
+		<property name="predictBudget">
+			<column name="predict_budget"></column>
+		</property>
+
+		<property name="otherDemand">
+			<column name="other_demand"></column>
+		</property>
+
+		<property name="isDel">
+			<column name="is_del"></column>
+		</property>
+
+
+		<many-to-one name="equipment" fetch="join">
+			<column name="equipment"></column>
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>

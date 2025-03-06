@@ -1,0 +1,59 @@
+<div class="row">
+    <nav class="navbar navbar-static-top navbar-top-height" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+
+            <div class="logo">
+                <div class="header-logo">
+                    <div class="logoimg">
+                        <img alt="image" src="${base}/tysx/img/newlogo.png"/>
+                    </div>
+                </div>
+                <ul class="logoul">
+                    <li class="<#if topActive??&&topActive='1'>headeractive</#if>">
+                        <a href="${base}/operator/managercontrol/managercontrol.do">管控</a>
+                    </li>
+                    <li class="<#if topActive??&&topActive='2'>headeractive</#if>">
+                        <a href="${base}/operator/page/billing.do">运营</a>
+                    </li>
+                    <li class="<#if topActive??&&topActive='3'>headeractive</#if>">
+                        <a href="${base}/operator/enterprise/uncheck/list.do">企业</a>
+                    </li>
+                    <li class="<#if topActive??&&topActive='5'>headeractive</#if>">
+                        <a href="${base}/operator/page/statistic.do">数据</a>
+                    </li>
+                    <li class="<#if topActive??&&topActive='8'>headeractive</#if>">
+                        <a href="${base}/operator/userrecord/alluser.do">用户</a>
+                    </li>
+                    <li class="<#if topActive??&&topActive='6'>headeractive</#if>">
+                        <a href="${base}/operator/platform/platform.do">平台</a>
+                    </li>
+                    <li class="<#if topActive??&&topActive='7'>headeractive</#if>">
+                        <a href="${base}/operator/equipment/equlplist.do?type=2">工单</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul class="nav navbar-top-links navbar-right navbar-top-right" style="float: right;">
+            <li class="nav-num">
+                <img src="${base}/tysx/css/patterns/3.png"/>
+            </li>
+            <li class="dropdown nav-sjgly">
+                <a aria-expanded="false" role="button" href="" class="dropdown-toggle" data-toggle="dropdown"
+                >${topUser.username!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                class="fa fa-angle-down"></span></a>
+                <ul role="menu" class="dropdown-menu nav-dropdown-list">
+                    <li>
+                        <a href="${base}/operator/logout.do">退出登录</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-top-links navbar-right">
+
+            <li class="dropdown m-t-sm">
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="calendar.html#"> <i class="fa fa-bell"></i> <span class="label label-success">8</span> </a>
+                <ul class="dropdown-menu dropdown-alerts"></ul>
+            </li>
+        </ul>
+    </nav>
+</div>

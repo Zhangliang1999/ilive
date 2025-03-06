@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业管理</title>
+    <#include "/bvRadio/livemanager/head.html" />
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/account.css"/>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+		<#include "/bvRadio/livemanager/top.html" />
+		<!--左侧部分-->
+		<#include "/bvRadio/livemanager/left.html" />
+        <!--下面内容部分-->
+        <input type="hidden" name="serverGroupId" value="${serverGroupId!}" id="serverGroupId"/>
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">企业管理</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 p-w-lg">
+                    <div class="businessTilLeft" style="overflow:hidden">
+                    	<#if (enterprise.enterpriseImg!"") != "">
+			                <img class="img-responsive center-block"  style="object-position:center center;" src="${enterprise.enterpriseImg}">
+			            </#if>
+                    </div>
+                    <div class="businessTilRight">
+                        <p class="businessTitName">${enterprise.enterpriseName!}</p>
+                        <p class="businessTitID">企业ID：${enterprise.enterpriseId!}</p>
+                        <p class="businessTitID">认证时间：${enterprise.certTime!}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="m-t-xs">
+                <div class="col-lg-12">
+                    <ul id="myTab" class="nav nav-tabs dcTab">
+                        <li class="active"><a href="#home" data-toggle="tab">
+                            	企业资料
+                        </a>
+                        </li>
+                        <li><a href="#ios" data-toggle="tab">订单记录</a></li>
+                        
+                        <li><a href="#jmeter" data-toggle="tab">
+                           		 提现记录</a>
+                        </li>
+                        <li><a href="#ejb" data-toggle="tab">
+                            	操作记录</a>
+                        </li>
+                        <li><a href="#zhgl" data-toggle="tab">
+                            	账户管理</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade in active" id="home">
+                        	<#if enterprise.stamp == 0>
+                        	<!-- 个人类型 -->
+                        	<div class="information">
+                                <div class="col-lg-6">
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">类型:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="个人" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">直播方名称:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="${enterprise.enterpriseName!}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">真实姓名：</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="${enterprise.contactName!}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                	<div class="col-lg-12 manageGroup">
+	                                    <div class="manageName">运营者手机：</div>
+	                                    <div class="manageRight">
+	                                        <input class="manageInput" type="text" placeholder="" value="${enterprise.contactPhone!}" />
+	                                    </div>
+                                	</div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">身份证号:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="${enterprise.idCard!}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">身份证扫描件:</div>
+                                        <div class="manageRight">
+                                            <div class="bodylic" style="width:200px;height:120px">
+                                            	<img src="${enterprise.idCardImg!}" style="width: 100%;height:100%"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 text-center">
+                                <!-- <button class="btn blueButton">确定</button> -->
+                                <div class="btn-box">
+                                <button type="button" id="backBtn" class="btn btn-danger">返回</button>
+                                <#if enterprise.disabled==0><button type="button" id="forbidden" onclick="forbidden()" class="btn blueButton">禁用</button></#if>
+                                <#if enterprise.disabled==1><button type="button" id="noforbidden" onclick="noforbidden()" class="btn blueButton">解除禁用</button></#if>
+                           		</div>
+                            </div>
+                            </div>
+                        	
+                        	<#elseif enterprise.stamp == 1>
+                        	<!-- 企业类型 -->
+                        	<div class="information">
+                                <div class="col-lg-6">
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">类型</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="企业" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">企业名称:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="${enterprise.enterpriseName!}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">公司地址:</div>
+                                        <div class="manageRight">
+                                            <!-- <select>
+                                                <option>北京</option>
+                                            </select>
+                                            <select>
+                                                <option>海淀区</option>
+                                            </select> -->
+                                            
+                                            <select style="width: 80px; margin-right: 15px;" id="cmbProvince" class="province  smallSelect pull-left" name="province"></select> 
+							
+											<select style="width: 90px;margin-right: 15px;" id="cmbCity" name="city" class="smallSelect pull-left city"
+												style="margin: 0 15px 0 15px;"></select>
+											
+											<select style="width: 90px;" id="cmbArea" class="smallSelect pull-left area" name="area"></select>
+                                            
+                                            <input class="manageInput m-t" type="text" placeholder="街道信息" value="${enterprise.road!}"/>
+                                        </div>
+                                    </div>
+                                   <!--  <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">企业电话:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="${enterprise.enterprisePhone!}"/>
+                                        </div>
+                                    </div>-->
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">企业邮箱:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="${enterprise.enterpriseEmail!}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                    <div class="manageName">联系方式：</div>
+                                    <div class="manageRight">
+                                        <input class="manageInput" type="text" placeholder="" value="${enterprise.contactPhone!}" />
+                                    </div>
+                                	</div>
+                                </div>
+                                <div class="col-lg-6">
+                               	 	<div class="col-lg-12 manageGroup">
+                                        <div class="manageName">组织机构名称：</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="${enterprise.enterpriseRegName!}" />
+                                        </div>
+                                    </div>
+                                   <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">企业类别:</div>
+                                        <div class="manageRight">
+                                        	<select name="enterpriseType" id="enterpriseType">
+                                        		<option value="1">IT</option>
+                                        		<option value="2">教育</option>
+                                        		<option value="3">金融</option>
+                                        		<option value="4">其他</option>
+                                        	</select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">组织机构代码:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="${enterprise.enterpriseRegNo!}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">组织机构代码扫描件：</div>
+                                        <div class="manageRight">
+                                            <div class="license" style="width:200px;height:120px">
+                                            	<img style="height:100%;width:100%" src="${enterprise.certResource!}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">组织联系人：</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="${enterprise.contactName!}"/>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">运营者身份证号:</div>
+                                        <div class="manageRight">
+                                            <input class="manageInput" type="text" placeholder="" value="${enterprise.idCard!}"/>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="col-lg-12 manageGroup">
+                                        <div class="manageName">身份证扫描件:</div>
+                                        <div class="manageRight">
+                                            <div class="bodylic">
+                                            	<img src="${enterprise.idCardImg!}"/>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <div class="col-lg-6 text-center">
+                                <!-- <button class="btn blueButton">确定</button> -->
+                                <div class="btn-box">
+                                <button type="button" id="backBtn" class="btn btn-danger">返回</button>
+                                <#if enterprise.disabled==0><button type="button" id="forbidden" onclick="forbidden()" class="btn blueButton">禁用</button></#if>
+                                <#if enterprise.disabled==1><button type="button" id="noforbidden" onclick="noforbidden()" class="btn blueButton">解除禁用</button></#if>
+                            	</div>
+                            </div>
+                            </div>
+                        	</#if>
+                        </div>
+                        <div class="tab-pane fade" id="ios">
+                            <div class="ddjlTitle">
+                                <div class="col-lg-4">
+                                    <span class="ddjlTitName">产品/服务类型：</span>
+                                    <select class="ddjlSelect" name="account">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <span class="ddjlTitName">支付状态：</span>
+                                    <select class="ddjlSelect" name="account">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-danger pull-right m-r m-t">搜索</button>
+                                <div class="btn-group buttonBox pull-right m-r">
+                                    <button type="button" class="btn btn-default w-250">默认</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle"
+                                            data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">切换下拉菜单</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">功能</a></li>
+                                        <li><a href="#">另一个功能</a></li>
+                                        <li><a href="#">其他</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 p-w-lg">
+                                    <table class="table qiyetable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th>订单号</th>
+                                            <th>产品/服务名称</th>
+                                            <th>订单类型</th>
+                                            <th>金额(元)</th>
+                                            <th>支付状态</th>
+                                            <th>购买时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+
+                                            <td>记忆的歌</td>
+                                            <td>
+                                                套餐
+                                            </td>
+                                            <td>
+                                                3666.00
+                                            </td>
+                                            <td>
+                                                已支付
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+
+
+                                            </td>
+                                            <td>
+                                               <a href="javascript:;" class="m-l color-999">详情</a>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+
+                                            <td>记忆的歌</td>
+                                            <td>
+                                                套餐
+                                            </td>
+                                            <td>
+                                                3666.00
+                                            </td>
+                                            <td>
+                                                已支付
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+
+
+                                            </td>
+                                            <td>
+                                                <a href="javascript:;" class="m-l color-999">详情</a>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+
+                                            <td>记忆的歌</td>
+                                            <td>
+                                                套餐
+                                            </td>
+                                            <td>
+                                                3666.00
+                                            </td>
+                                            <td>
+                                                已支付
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+
+
+                                            </td>
+                                            <td>
+                                                <a href="javascript:;" class="m-l color-999">详情</a>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+
+                                            <td>记忆的歌</td>
+                                            <td>
+                                                套餐
+                                            </td>
+                                            <td>
+                                                3666.00
+                                            </td>
+                                            <td>
+                                                已支付
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+
+
+                                            </td>
+                                            <td>
+                                                <a href="javascript:;" class="m-l color-999">详情</a>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+
+                                            <td>记忆的歌</td>
+                                            <td>
+                                                套餐
+                                            </td>
+                                            <td>
+                                                3666.00
+                                            </td>
+                                            <td>
+                                                已支付
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+
+
+                                            </td>
+                                            <td>
+                                                <a href="javascript:;" class="m-l color-999">详情</a>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+
+                                            <td>记忆的歌</td>
+                                            <td>
+                                                套餐
+                                            </td>
+                                            <td>
+                                                3666.00
+                                            </td>
+                                            <td>
+                                                已支付
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+
+
+                                            </td>
+                                            <td>
+                                                <a href="javascript:;" class="m-l color-999">详情</a>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+
+                                            <td>记忆的歌</td>
+                                            <td>
+                                                套餐
+                                            </td>
+                                            <td>
+                                                3666.00
+                                            </td>
+                                            <td>
+                                                已支付
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+
+
+                                            </td>
+                                            <td>
+                                                <a href="javascript:;" class="m-l color-999">详情</a>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+
+                                            <td>记忆的歌</td>
+                                            <td>
+                                                套餐
+                                            </td>
+                                            <td>
+                                                3666.00
+                                            </td>
+                                            <td>
+                                                已支付
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+
+
+                                            </td>
+                                            <td>
+                                                <a href="javascript:;" class="m-l color-999">详情</a>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+
+                                            <td>记忆的歌</td>
+                                            <td>
+                                                套餐
+                                            </td>
+                                            <td>
+                                                3666.00
+                                            </td>
+                                            <td>
+                                                已支付
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+
+
+                                            </td>
+                                            <td>
+                                                <a href="javascript:;" class="m-l color-999">详情</a>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+
+                                            <td>记忆的歌</td>
+                                            <td>
+                                                套餐
+                                            </td>
+                                            <td>
+                                                3666.00
+                                            </td>
+                                            <td>
+                                                已支付
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+
+
+                                            </td>
+                                            <td>
+                                                <a href="javascript:;" class="m-l color-999">详情</a>
+                                            </td>
+
+                                        </tr>
+
+
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 m-t-sm pageBox">
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="jmeter">
+                            <div class="ddjlTitle">
+                                <div class="col-lg-4">
+                                    <span class="ddjlTitName">体现状态：</span>
+                                    <select class="ddjlSelect" name="account">
+                                        <option>全部提现记录</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-danger pull-right m-r m-t">搜索</button>
+                                <div class="btn-group buttonBox pull-right m-r">
+                                    <button type="button" class="btn btn-default w-250">默认</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle"
+                                            data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">切换下拉菜单</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">功能</a></li>
+                                        <li><a href="#">另一个功能</a></li>
+                                        <li><a href="#">其他</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 p-w-lg">
+                                    <table class="table qiyetable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>提现金额</th>
+                                            <th>提现账户类型</th>
+                                            <th>提现方式</th>
+                                            <th>第三方支付订单号</th>
+                                            <th>状态</th>
+                                            <th>提交时间</th>
+                                            <th>处理时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>500</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                佣金提现
+                                            </td>
+                                            <td>
+                                                432748628648732687
+                                            </td>
+                                            <td>
+                                                提现中
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>500</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                佣金提现
+                                            </td>
+                                            <td>
+                                                432748628648732687
+                                            </td>
+                                            <td>
+                                                提现中
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>500</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                佣金提现
+                                            </td>
+                                            <td>
+                                                432748628648732687
+                                            </td>
+                                            <td>
+                                                提现中
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>500</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                佣金提现
+                                            </td>
+                                            <td>
+                                                432748628648732687
+                                            </td>
+                                            <td>
+                                                提现中
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>500</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                佣金提现
+                                            </td>
+                                            <td>
+                                                432748628648732687
+                                            </td>
+                                            <td>
+                                                提现中
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>500</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                佣金提现
+                                            </td>
+                                            <td>
+                                                432748628648732687
+                                            </td>
+                                            <td>
+                                                提现中
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>500</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                佣金提现
+                                            </td>
+                                            <td>
+                                                432748628648732687
+                                            </td>
+                                            <td>
+                                                提现中
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>500</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                佣金提现
+                                            </td>
+                                            <td>
+                                                432748628648732687
+                                            </td>
+                                            <td>
+                                                提现中
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>500</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                佣金提现
+                                            </td>
+                                            <td>
+                                                432748628648732687
+                                            </td>
+                                            <td>
+                                                提现中
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>500</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                佣金提现
+                                            </td>
+                                            <td>
+                                                432748628648732687
+                                            </td>
+                                            <td>
+                                                提现中
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                        </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 m-t-sm pageBox">
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="ejb">
+                            <div class="row m-t">
+                                <div class="col-lg-12 p-w-lg">
+                                    <table class="table newqiyetable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>操作人</th>
+                                            <th>操作时间</th>
+                                            <th>操作明细</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                	支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                	企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                	支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                	企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                               	 支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                	企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                	支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                               	 企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                	支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                	企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                	支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                               	 企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                	支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                	企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                               	 支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                	企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                	支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                	企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                	支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                	企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                	支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                              	  企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-12 m-t-sm pageBox">
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white active">1</button>
+                                        <button class="btn btn-sm btn-white  ">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="zhgl">
+                        	<div class="zhgl-box" id="zhgl-box">
+                        		<div class="user-ul">
+                        			<ul class="nav nav-pills">
+                        			  <li role="presentation"><a>该企业下有${num!}个账户</a></li>
+                        			  <#list list as i>
+                        			  	<li class="userindex <#if i_index == 0>active</#if>" role="presentation" data-id="${i.userId}"><a href="#">${i.mobile!}</a></li>
+                        			  </#list>
+									</ul>
+                        		</div>
+                        	
+	                            <div class="information" id="accountInformation">
+		                            <div class="row m-t">
+		                                <div class="col-lg-12 border-bottom">
+		                                    <div class="zhLeft text-right font-content">管理账号：</div>
+		                                    <div class="zhRight m-b-lg">
+		                                        <div class="zhRightImg">
+		                                        	<img src="${first.userImg}" id="userimgs" style="width:100%;height:100%"/>
+		                                        </div>
+		                                        <div class="zhRightText">
+		                                            <p id="usernamep" class="zhRightTop font-content">${first.nailName!}</p>
+		                                            <p><button id="editAccountBtn" class="btn btn-bgpt m-r" data-id="${first.userId}" onclick="editAccountBtn1(this)">修改</button><!-- <button class="btn btn-bgpt">查看</button> --></p>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                <div class="col-lg-12 m-t">
+		                                    <div class="zhLeft text-right font-content">计费模式：</div>
+		                                    <div class="zhRight">
+		                                        <span class="m-r-lg"><input class="m-r-xs" type="radio" style="vertical-align: sub;"/>套餐购买</span>
+		                                        <span><input type="radio" class="m-r-xs" style="vertical-align: sub;"/>后付费用户</span>
+		                                    </div>
+		                                </div>
+		                                <div class="col-lg-12">
+		                                    <div class="zhLeft text-right font-content">授权金额：</div>
+		                                    <div class="zhRight">
+		                                        <input class="zhRightInput" type="text" placeholder="10000"/>
+		                                    </div>
+		                                </div>
+		                                <div class="col-lg-12">
+		                                    <div class="zhLeft text-right font-content">授权人：</div>
+		                                    <div class="zhRight">
+		                                        <input class="zhRightInput" type="text" placeholder="10000"/>
+		                                    </div>
+		                                </div>
+		                                <div class="col-lg-12">
+		                                    <div class="zhLeft text-right font-content">授权理由：</div>
+		                                    <div class="zhRight">
+		                                        <textarea placeholder="请输入授权理由"></textarea>
+		                                    </div>
+		                                </div>
+		                                <div class="w-500 text-center">
+		                                     <button class="btn btn-danger  m-t">确定</button>
+		                                </div>
+		                            </div>
+	                            </div>
+                            </div>
+                            <!-- 账户修改 -->
+                            <div id="accountEdit" style="display:none">
+                            
+                            	<div class="wrapper bgc-fff">
+									<div class="row">
+										<div class="col-lg-12 enterpriseinfo">
+                            
+								<div class="col-lg-10 font-content form-group">
+									<p class="listinfo m-b-md" style="clear:both;">
+										<span><i class="text-danger p-w-sm"> * </i> 用户昵称：</span>
+										<input  autocomplte="off" id="nailName" placeholder="" type="text">
+										<small class="color-999 m-l-sm"><a id="nailNameLimit"></a>8字以内</small>
+									</p>
+									<p class="listinfo m-b-md" style="clear:both;">
+										<span class="pull-left"> 用户头像：</span>
+									</p>
+									<div class="logoImg pull-left" id="addImg1" style="width:100px;height:100px;position:relative;">
+										<input type="file" id="file" accept="image/*" style="position: absolute; cursor:pointer; top: 0; right: 0px; right: 0px; bottom: 0px; opacity: 0; width: 96px;">
+										<img id="addImg1Img" style="width:90px;height:90px;object-fit:contain;object-position: center center;">
+									</div>
+									<input type="hidden" name="userImg" id="userImg" />
+									<small class="color-999 pull-left m-l">建议尺寸100*100</small>
+									<br>
+									<small class="color-999 pull-left m-l">格式要求：PNG,JPG</small>
+									<p></p>
+									<p class="listinfo m-b-md" style="clear:both;">
+										<span>用户账号：</span>
+										<input readonly="readonly" type="text" id="userzhanghao">
+									</p>
+									<p class="listinfo m-b-md" style="clear:both;">
+										<span> 绑定手机：</span>
+										<input readonly="readonly" id="usermobile" type="text">
+									</p>
+									<input type="hidden" id="saveuserid"/>
+									<button type="button" onclick="saveUserInfo()" class="btn blueButton col-lg-offset-4 m-b-lg" style="padding: 5px 20px;">
+										确认保存
+									</button>
+									<button type="button" class="btn btn-default  m-b-lg" id="retback">返回</button>
+								</div>  
+								</div>
+								</div>
+								</div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+</body>
+<script src="${base}/res/bvRadio/js/address.js" type="text/javascript"></script>
+<!-- Mainly scripts -->
+<script>
+
+$(document).ready(function() {
+	var winH = $(window).height() - 72;
+	$(".companyBox").height(winH - 90);
+	$(".slimBox").slimScroll({
+		height : winH - 90
+	});
+	var province = $(".province")[0];
+	var city = $(".city")[0];
+	var area = $(".area")[0];
+	addressInit(province, city, area,"${enterprise.province!}","${enterprise.city!}","${enterprise.area!}");
+});
+
+    $(function () {
+        $('#myTab li:eq(0) a').tab('show');
+        $(".wrapper").height("auto");
+        var winHeight;
+        //获取页面高度
+        winHeight = $(window).height();
+        //导航栏高度
+        var navHeight = $(".navbar").height();
+        //标题栏高度加边线
+        var titleHeight = $(".title-header").height()+2;
+        $(".information").slimScroll({
+            height: winHeight-navHeight-titleHeight-200
+        });
+        var div1 =  $('.scrollSwitchBox');
+        var div2 =  $('.scrollSwitch');
+        $('.scrollSwitchBox').click(function(){
+            if($("#div1").hasClass("open1")){
+                $("#div1").addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+                $("#div2").addClass("scrollSwitch").addClass("close2").removeClass("open2");
+                $("#div1 input").attr("checked",false);
+                return;
+            }else{
+                $("#div1").addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+                $("#div2").addClass("scrollSwitch").addClass("open2").removeClass("close2");
+                $("#div1 input").attr("checked",true);
+                return;
+            }
+        });
+        
+        
+        $('#backBtn').on("click",function(){
+        	window.location.href = "${base}/operator/enterprise/manager/list.do";
+        });
+        
+    });
+	//返回
+	$("#retback").on("click",function(){
+		$("#zhgl-box").show();
+    	$("#accountEdit").hide();
+	});
+    
+    
+    //修改账户按钮
+/*     $("#editAccountBtn").on("click",function(){
+    	var userId = $()
+    	$("#zhgl-box").hide();
+    	$("#accountEdit").show();
+    	$.ajax({
+    		url:"${base}/operator/enterprise/userdetail.do",
+    		method:"get",
+    		data:{
+    			userId:userId
+    		},
+    		success:function(res){
+    			console.log(res);
+    			$("#nailName").val(res.nailName);
+    			$("#addImg1Img").attr("src",res.userImg);
+    			$("#userImg").val(res.userImg);
+    			$("#userzhanghao").val(res.mobile);
+    			$("#usermobile").val(res.mobile);
+    		}
+    	});
+    });   */
+    function editAccountBtn1(ele){
+    	var userId = $(ele).attr("data-id");
+    	console.log(userId);
+    	$("#zhgl-box").hide();
+    	$("#accountEdit").show();
+    	$.ajax({
+    		url:"${base}/operator/enterprise/userdetail.do",
+    		method:"get",
+    		data:{
+    			userId:userId
+    		},
+    		success:function(res){
+    			console.log(res);
+    			$("#nailName").val(res.nailName);
+    			$("#addImg1Img").attr("src",res.userImg);
+    			$("#userImg").val(res.userImg);
+    			$("#userzhanghao").val(res.mobile);
+    			$("#usermobile").val(res.mobile);
+    			$("#saveuserid").val(res.userId);
+    		}
+    	});
+    }
+    
+    function saveUserInfo(){
+    	var userId = $("#saveuserid").val();
+    	var nailName = $("#nailName").val();
+    	var userImg = $("#userImg").val();
+    	$.ajax({
+    		url:"${base}/operator/enterprise/saveUser.do",
+    		method:"post",
+    		data:{
+    			userId:userId,
+    			nailName:nailName,
+    			userImg:userImg
+    		},
+    		success:function(){
+    			alert("修改成功");
+    		}
+    	});
+    }
+    
+    //上传图片
+    $("#file").on("change",function(){
+    	//获取点击的文本框
+		
+		var formData = new FormData();  
+	    var uploadFile = $("#file").get(0).files[0];
+	    var selectedId = $('#select').val();  
+	    var serverGroupId = $("#serverGroupId").val();
+	    formData.append("file",uploadFile);  
+	    formData.append("serverGroupId",serverGroupId);
+	    formData.append("fileType", "image");
+		
+	    $.ajax({
+			url : '${base}/admin/file/o_uploadFile.do',
+			type : 'POST',
+			data : formData,
+			async : false,
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				if (data.status==1) {
+					$("#backgroundimg").attr("src",data.httpUrl);
+					replaceImg(data.httpUrl);
+				} else {
+				}
+			},
+			error : function(data) {
+				console.log(data.status);
+			}
+		});
+    })
+
+    //
+    $(".user-ul li.userindex").on("click",function(){
+    	$(this).addClass("active").siblings().removeClass("active");
+    	var userId = $(this).attr("data-id");
+    	$("#editAccountBtn").attr("data-id",userId);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/userdetail.do",
+    		method:"get",
+    		data:{
+    			userId:userId
+    		},
+    		success:function(res){
+    			console.log(res);
+    			$("#usernamep").text(res.nailName);
+    			$("#userimgs").attr("src",res.userImg);
+    			
+    			$("#nailName").val(res.nailName);
+    			$("#addImg1Img").attr("src",res.userImg);
+    			$("#userImg").val(res.userImg);
+    			$("#userzhanghao").val(res.mobile);
+    			$("#usermobile").val(res.mobile);
+    			$("#saveuserid").val(res.userId);
+    		}
+    	});
+    	
+    });
+/*     
+    $("#forbidden").on("click",function(){
+    	var enterpriseId = "${enterprise.enterpriseId}";
+    	console.log(enterpriseId);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/forbidden.do",
+    		method:"post",
+    		data:{
+    			enterpriseId:enterpriseId,
+    			status:1
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1 && res.type==1){
+    				$("#forbidden").remove();
+    				$(".btn-box").append("<button type='button' id='noforbidden' class='btn blueButton'>解除禁用</button>");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    });
+    $("#noforbidden").on("click",function(){
+    	var enterpriseId = "${enterprise.enterpriseId}";
+    	console.log(enterpriseId);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/forbidden.do",
+    		method:"post",
+    		data:{
+    			enterpriseId:enterpriseId,
+    			status:0
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1 && res.type==0){
+    				$("#noforbidden").remove();
+    				$(".btn-box").append("<button type='button' id='forbidden' class='btn blueButton'>禁用</button>");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    }); */
+    function forbidden(){
+    	var enterpriseId = "${enterprise.enterpriseId}";
+    	console.log(enterpriseId);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/forbidden.do",
+    		method:"post",
+    		data:{
+    			enterpriseId:enterpriseId,
+    			status:1
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1 && res.type==1){
+    				$("#forbidden").remove();
+    				$(".btn-box").append("<button type='button' onclick='noforbidden()' id='noforbidden' class='btn blueButton'>解除禁用</button>");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    }
+    function noforbidden(){
+    	var enterpriseId = "${enterprise.enterpriseId}";
+    	console.log(enterpriseId);
+    	$.ajax({
+    		url:"${base}/operator/enterprise/forbidden.do",
+    		method:"post",
+    		data:{
+    			enterpriseId:enterpriseId,
+    			status:0
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1 && res.type==0){
+    				$("#noforbidden").remove();
+    				$(".btn-box").append("<button type='button' onclick='forbidden()' id='forbidden' class='btn blueButton'>禁用</button>");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    }
+    
+</script>
+</html>

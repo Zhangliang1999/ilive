@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>互动</title> <#include "/bvRadio/head.html"/>
+	</head>
+	<body>
+		<div id="wrapper">
+			<!--右侧内容的区域-->
+			<div id="page-wrapper" class="gray-bg">
+				<!--上面的导航栏部分-->
+				<#include "/bvRadio/admin/top.html"/>
+				<!--左侧部分-->
+				<#include "/bvRadio/admin/left.html"/>
+				<!--下面内容部分-->
+				<div class="wrapper wrapper-content border-left bgc-fff">
+					<form id="_page_form"
+					action="${base}/admin/interactmanager/interact.do?roomId=${baseIliveRoomId}"
+					method="post">
+						<input type="hidden" id="interactType" name="interactType"
+						value="${interactType}" />
+						<div class="row title-header gray-bg">
+							<div class="col-lg-12">
+								<div class="tabbox font-title">
+									<ul>
+										<li onclick="destInteract(2)"
+										class="<#if interactType==2>hdactive</#if>">
+											聊天<span
+											class="badge badge-danger tabbadge"><#if
+												interactType==2>${pagination.totalCount}</#if> </span>
+										</li>
+										<li onclick="destInteract(4)"
+										class="<#if interactType==4>hdactive</#if>">
+											弹幕<span
+											class="badge badge-danger tabbadge"><#if
+												interactType==4>${pagination.totalCount}</#if> </span>
+										</li>
+										<li onclick="destInteract(1)"
+										class="<#if interactType==1>hdactive</#if>">
+											话题<span
+											class="badge badge-danger tabbadge"><#if
+												interactType==1>${pagination.totalCount}</#if> </span>
+										</li>
+										<li onclick="destInteract(3)"
+										class="<#if interactType==3>hdactive</#if>">
+											问答<span
+											class="badge badge-danger tabbadge"><#if
+												interactType==3>${pagination.totalCount}</#if> </span>
+										</li>
+									</ul>
+								</div>
+								<div class="pull-right m-r-lg">
+									<input type="text" value="${searchContent!}"
+									name="searchContent" class="serachinput" placeholder="内容" />
+									<button class="btn commonbtn m-t-n-4">
+										搜索
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12 tabcontent">
+								<#if interactType == 2>
+								<div class="tab">
+									<div class="tablebox">
+										<table class="table">
+											<tbody>
+												<#list pagination.list as item>
+												<tr>
+													<td class="w-70">
+													<div class="userimg pull-left">
+														<img src="${item.senderImage!}" alt="" />
+													</div></td>
+													<td class="text-left">
+													<div class="usertext pull-left">
+														<p class="username">
+															${item.senderName!}
+														</p>
+														<p class="usercon">
+															${item.msgContent!}
+														</p>
+													</div></td>
+													<td class="w-160 p-relative">
+													<div class="usertext pull-right">
+														<p class="usertime m-r text-right font-12">
+															${item.createTime!}
+														</p>
+														<button class="btn commonbtn pull-right m-r delebtn"
+														onclick="deleteMsg(${item.msgId!})">
+															删除
+														</button>
+													</div></td>
+												</tr>
+												</#list>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								</#if> <#if interactType==4>
+								<div class="tab hide">
+									<div class="tablebox">
+										<table class="table">
+											<tbody>
+												<#list pagination.list as item>
+												<tr>
+													<td class="w-70">
+													<div class="userimg pull-left">
+														<img src="${item.senderImage!}" alt="" />
+													</div></td>
+													<td class="text-left">
+													<div class="usertext pull-left">
+														<p class="username">
+															${item.senderName!}
+														</p>
+														<p class="usercon">
+															${item.msgContent!}
+														</p>
+													</div></td>
+													<td class="w-160 p-relative">
+													<div class="usertext pull-right">
+														<p class="usertime m-r text-right"></p>
+														<button class="btn commonbtn pull-right m-r delebtn">
+															删除
+														</button>
+													</div></td>
+												</tr>
+												</#list>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								</#if> <#if interactType==1>
+								<div class="tab">
+									<div class="tablebox">
+										<table class="table">
+											<tbody>
+												<#list pagination.list as item>
+												<tr>
+													<td class="w-70">
+													<div class="userimg pull-left">
+														<img src="${item.senderImage!}" alt="">
+													</div></td>
+													<td class="text-left">
+													<div class="usertext pull-left">
+														<p class="username">
+															${item.senderName!}<span class="answer">回复:123</span><span>赞:312</span>
+														</p>
+														<p class="gray-bg p-xs m-t-xs" style="overflow: hidden;">
+															<span class="color-blue">${item.msgContent!}</span>
+														</p>
+													</div></td>
+													<td class="w-160 p-relative">
+													<div class="usertext pull-right">
+														<p class="usertime m-r text-right font-12">
+															${item.createTime!}
+														</p>
+														<button class="btn commonbtn pull-right m-r delebtn font-12">
+															删除
+														</button>
+													</div></td>
+												</tr>
+												</#list>
+											</tbody>
+										</table>
+									</div>
+									<div</div>
+									</#if>
+									<#if interactType==3>
+									<div class="tab">
+									<div class="slimScrollDiv"
+									style="position: relative; overflow: hidden; width: auto; height: 457px;">
+									<div class="tablebox"
+									style="overflow: hidden; width: auto; height: 457px;">
+									<table class="table">
+									<tbody style="height: 457px;">
+									<#list pagination.list as item>
+									<tr>
+									<td class="w-70">
+									<div class="userimg pull-left">
+									<img src="${item.senderImage}" alt="">
+									</div>
+									</td>
+									<td class="text-left">
+									<div class="usertext pull-left">
+									<p class="username">${item.senderName!}</p>
+									<p class="usercon">${item.msgContent!}</p>
+									<p class="gray-bg p-xs m-t-xs">
+									回答: <span class="color-blue">${item.replyContent!}</span>
+									</p>
+									</div>
+									</td>
+									<td class="w-160 p-relative">
+									<div class="usertext pull-right">
+									<p class="usertime m-r text-right font-12">${item.createTime!}</p>
+									<button
+									class="btn commonbtn pull-right m-r ansbtn font-12">回复</button>
+									<button
+									class="btn commonbtn pull-right m-r delebtn font-12">删除</button>
+									</div>
+									</td>
+									</tr>
+									</#list>
+									</tbody>
+									</table>
+									</div>
+									</div>
+									</div>
+									</#if>
+									</div>
+									<div
+									class="dataTables_paginate paging_simple_numbers pull-right m-r-lg"
+									id="DataTables_Table_0_paginate">
+									<#if !pagination?is_sequence> <#assign pageNow=pagination.pageNo
+									totalPage=pagination.totalPage > <input type="hidden"
+									name="pageNo" value="${pagination.pageNo}"> <#if
+									(pageNow>0) && (pageNow<=totalPage) > <#if (pageNow<=1)>
+									<button type="button" class="btn btn-sm btn-white disabled">
+									<a><i class="fa fa-chevron-left"></i></a>
+									</button>
+									<#else>
+									<button type="button" onclick="PL.gotoPage(${pageNow - 1})"
+									class="btn btn-sm btn-white">
+										<a><i class="fa fa-chevron-left"></i></a>
+									</button>
+									</#if> <#if (pageNow-4 >1)> <#if (pageNow
+									<totalPage-2)>
+										<button type="button" onclick="PL.gotoPage(1)"
+										class="btn btn-sm btn-white">
+											<a>1</a>
+										</button>
+										<button type="button" class="btn btn-sm btn-white">
+											<a>...</a>
+										</button>
+										<#list pageNow-2..pageNow-1 as i>
+										<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+											<a>${i}</a>
+										</button>
+										</#list> <#elseif (pageNow-6 > 1)>
+										<button onclick="PL.gotoPage(1)" type="button"
+										class="btn btn-sm btn-white">
+											<a>1</a>
+										</button>
+										<button type="button" class="btn btn-sm btn-white">
+											<a>...</a>
+										</button>
+										<#list pageNow-4..pageNow-1 as i>
+										<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+											<a>${i}</a>
+										</button>
+										</#list> <#else> <#list 1..pageNow-1 as i>
+										<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+											<a>${i}</a>
+										</button>
+										</#list> </#if> <#elseif (pageNow=1)> <#else> <#list
+										1..pageNow-1 as i>
+										<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+											<a>${i}</a>
+										</button>
+										</#list> </#if>
+										<button type="button" onclick="PL.gotoPage(${pageNow})"
+										class="active btn btn-sm btn-white">
+											<a>${pageNow}</a>
+										</button>
+										<#if (pageNow+4 < totalPage)> <#if (pageNow>2)> <#list
+										pageNow+1..pageNow+2 as i>
+										<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+											<a>${i}</a>
+										</button>
+										</#list>
+										<button type="button" class="btn btn-sm btn-white">
+											<a>...</a>
+										</button>
+										<button type="button" onclick="PL.gotoPage(${totalPage})"
+										class="btn btn-sm btn-white">
+											<a>${totalPage}</a>
+										</button>
+										<#elseif (pageNow+6 < totalPage)> <#list pageNow+1..pageNow+4 as
+										i>
+										<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+											<a>${i}</a>
+										</button>
+										</#list>
+										<button type="button" class="btn btn-sm btn-white">
+											<a>...</a>
+										</button>
+										<button type="button" onclick="PL.gotoPage(${totalPage})"
+										class="btn btn-sm btn-white">
+											<a>${totalPage}</a>
+										</button>
+										<#else> <#list pageNow+1..totalPage as i>
+										<button onclick="PL.gotoPage(${i})" type="button"
+										class="btn btn-sm btn-white">
+											<a>${i}</a>
+										</button>
+										</#list> </#if> <#elseif (pageNow=totalPage)> <#else> <#list
+										pageNow+1..totalPage as i>
+										<button type="button" onclick="PL.gotoPage(${i})"
+										class="btn btn-sm btn-white">
+											<a>${i}</a>
+										</button>
+										</#list> </#if> <#if (pageNow>=totalPage)>
+										<button type="button" class="btn btn-sm btn-white disabled">
+											<a><i class="fa fa-chevron-right"></i></a>
+										</button>
+										<#else>
+										<button type="button" onclick="PL.gotoPage(${pageNow + 1})"
+										class="btn btn-sm btn-white">
+											<a><i class="fa fa-chevron-right"></i></a>
+										</button>
+										</#if> <#else>
+										<button type="button" class="btn btn-sm btn-white">
+											<a><i class="fa fa-chevron-left"></i></a>
+										</button>
+										<button type="button" onclick="PL.gotoPage(1)"
+										class="btn btn-sm btn-white">
+											<a>1</a>
+										</button>
+										<button type="button" class="btn btn-sm btn-white">
+											<a><i class="fa fa-chevron-right"></i></a>
+										</button>
+										</#if> </#if>
+								</div>
+							</div>
+						</div>
+	</body>
+	<!--新加js-->
+	<script src="${base}/tysx/js/lightGallery.js"></script>
+	<script src="${base}/tysx/js/zbj.js"></script>
+	<script>
+		var winHeight;
+		//获取页面高度
+		winHeight = $(window).height();
+		//导航栏高度
+		var navHeight = $(".navbar").height();
+		//标题栏高度加边线
+		var titleHeight = $(".title-header").height() + 2;
+		$(".tablebox").slimScroll({
+			height : winHeight - navHeight - titleHeight - 75
+		});
+		$(".tabbox li").each(function(i, v) {
+			$(v).click(function() {
+				$(".tabbox li").find(".tabbadge").hide();
+				$(v).addClass("hdactive").siblings().removeClass("hdactive");
+				$(v).find(".tabbadge").show();
+				$(".tabcontent>.tab").eq(i).removeClass("hide").siblings().addClass("hide");
+			})
+		})
+		// 提交
+		function destInteract(tp) {
+			$('#interactType').val(tp);
+			$('#_page_form').submit();
+		}
+
+		function deleteMsg(msgId) {
+			$.ajax({
+				type : "POST", //请求方式 get/post
+				url : "${base}/admin/message/delete.do",
+				dataType : "json",
+				data : {
+					msgId : msgId, //消息ID
+					roomId : "${baseIliveRoomId}"//直播间
+				},
+				success : function(data) {
+					var status = data.status;
+					if (status == 1) {
+						// alert("处理成功");
+						// $('#_page_form').submit();
+						window.location.href = window.location.href;
+					}
+				}
+			});
+		}
+
+		function replyMsg() {
+			$.ajax({
+				type : "POST", //请求方式 get/post
+				url : "${base}/admin/message/addReplyContent.do",
+				dataType : "json",
+				data : {
+					roomId : roomId, //直播间ID
+					replyContent : replyContent, //回答内容
+					msgId : msgId
+					//消息提D
+				},
+				success : function(data) {
+					var status = data.status;
+					if (status == 1) {
+						console.log("处理成功");
+					} else {
+						alert(data.message);
+					}
+				}
+			});
+		}
+	</script>
+</html>

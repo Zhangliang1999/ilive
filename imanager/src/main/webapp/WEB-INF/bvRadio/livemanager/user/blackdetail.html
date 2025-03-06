@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户账号详情</title>
+    <#include "/bvRadio/head.html"/>
+    <link href="${base}/tysx/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/tysx/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${base}/tysx/css/animate.css" rel="stylesheet">
+    <link href="${base}/tysx/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="${base}/tysx/css/myStyle.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/jbxx.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/public.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/shcommon.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/tysx/css/bgpt/bgleft.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/newhdgl.css"/>
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/livemanager/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/livemanager/user/userleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">用户详情</a>
+                    </div>
+                    <a href="${base}/operator/user/blacklist.do" class="btn btn-white pull-right font-12 m-t-sm m-r">返回用户账号数据列表</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="m-t p-w-m">
+                    <ul id="myTab" class="col-lg-12 nav nav-tabs p-w-lg dcTab">
+                        <li class="active"><a href="#freewatch" data-toggle="tab">基本资料</a></li>
+                        <li><a href="#codewatch" data-toggle="tab">观看列表</a></li>
+                        <li><a href="#paywatch" data-toggle="tab">关注商户</a></li>
+                        <li><a href="#listwatch" data-toggle="tab">评论列表</a></li>
+                        <li><a href="#loginList" data-toggle="tab">登录列表</a></li>
+                    </ul>
+                    <div class=" col-lg-12 tab-content">
+                        <div class="tab-pane fade in active" id="freewatch">
+                            <div class="col-lg-12 border-bottom lh-50 font-content"><span class="color-red">此用户当前已被拉黑</span></div>
+                            <div class="col-lg-12 border-bottom">
+                                <div class="hmdList">
+                                    <div class="sfLeft font-content">拉黑理由：</div>
+                                    <div class="sfResult">${user.blackReason!}</div>
+                                </div>
+                                <div class="hmdList">
+                                    <div class="sfLeft font-content">禁用账号：</div>
+                                    <div class="sfRight">${user.userId!}</div>
+                                </div>
+                                <div class="hmdList">
+                                    <button class="btn btn-success font-12">启用商户</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 m-t">
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户ID：</div>
+                                    <div class="userlistRight">${user.userId!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户账号：</div>
+                                    <div class="userlistRight">${user.userName!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">创建/注册时间：</div>
+                                    <div class="userlistRight">${user.createTime!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">注册来源：</div>
+                                    <div class="userlistRight">${user.createFrom!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户备注：</div>
+                                    <textarea class="userlistTextarea">${user.beizhu!}</textarea>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 m-t">
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户昵称：</div>
+                                    <input type="text" id="nailName" class="userlistinput" value="${user.nailName!}"/>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户密码：</div>
+                                    <input type="password" class="userlistinput" id="userPwd" value="${user.userPwd!}"/>
+                                    <button class="btn btn-danger font-12 pull-left m-l" style="padding: 4px 10px;">重置</button>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">用户状态：</div>
+                                    <div class="userlistRight"><span class="color-red">黑名单</span></div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">最后一次登录IP：</div>
+                                    <div class="userlistRight">${user.loginIp!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">最后编辑人帐号：</div>
+                                    <div class="userlistRight"  id="lastUpdateName">${user.updateUserName!}</div>
+                                </div>
+                                <div class="userlist m-t-sm">
+                                    <div class="userlistLeft">最后编辑时间：</div>
+                                    <div class="userlistRight" id="lastUpdateTime">${user.updateTime!}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-10 m-t-lg col-lg-offset-1 m-b">
+                                <button id="submitbtn" class="btn btn-success font-12">提交编辑</button>
+                                <button class="btn btn-gray font-12 m-l">群发短信</button>
+                                <button class="btn btn-gray font-12 m-l">群发站内信</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="codewatch">
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                    <div class="selectedGroup m-l-lg pull-left">
+                                        <div class="pull-left lh-40 font-content">视频ID：</div>
+                                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                                            <input class="userInput" type="text">
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-white m-t-xs pull-right font-12 m-r">查询</button>
+                                </div>
+                            </div>
+                            <div class="row title-header gray-bg m-t-sm m-r-none m-l-none">
+                                <div class="col-lg-12">
+                                    <div class="title-name">
+                                        <a class="font-content">数据列表</a>
+                                    </div>
+                                    <div class="dropdown pull-right m-t-sm m-r font-12">
+                                        <button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">显示条数
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">导出数据</button>
+                                </div>
+                            </div>
+                            <div class="row m-t-xs">
+                                <div class="col-lg-12">
+                                    <table class="table newtable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th width="50"></th>
+                                            <th>视频ID</th>
+                                            <th>观看时间</th>
+                                            <th>结束观看时间</th>
+                                            <th>持续时长（小时）<i class="fa fa-caret-down"></i></th>
+                                            <th>观看IP</th>
+                                            <th>观看IP地址</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td >2018-03-27  08：09：21</td>
+                                            <td >2018-03-27  08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>2018-03-27 08：09：21</td>
+                                            <td>0.01</td>
+                                            <td>192.168.0.1</td>
+                                            <td>
+                                                上海
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 pageBox">
+                                    <div class="pull-left m-l"><input class="m-r-sm" type="checkbox" style="vertical-align: sub"/>全选</div>
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="paywatch">
+                            <div class="row title-header gray-bg m-t-sm m-r-none m-l-none">
+                                <div class="col-lg-12">
+                                    <div class="title-name">
+                                        <a class="font-content">数据列表</a>
+                                    </div>
+                                    <div class="dropdown pull-right m-t-sm m-r font-12">
+                                        <button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">显示条数
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">导出数据</button>
+                                </div>
+                            </div>
+                            <div class="row m-t-xs">
+                                <div class="col-lg-12">
+                                    <table class="table shtable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th width="50"></th>
+                                            <th>关注商户ID</th>
+                                            <th>商户名称</th>
+                                            <th>关注时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>8447466</td>
+                                            <td>中国电信集团</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 pageBox">
+                                    <div class="pull-left m-l"><input class="m-r-sm" type="checkbox" style="vertical-align: sub"/>全选</div>
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="listwatch">
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                    <div class="selectedGroup m-l-lg pull-left">
+                                        <div class="pull-left lh-40 font-content">直播ID：</div>
+                                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                                            <input class="userInput" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="selectedGroup m-l-lg pull-left">
+                                        <div class="pull-left lh-40 font-content">评论关键字：</div>
+                                        <div class="dropdown pull-left m-t-xs m-r-lg ">
+                                            <input class="userInput" type="text">
+                                        </div>
+                                        <div class="selectedGroup m-l-lg pull-left">
+                                            <div class="pull-left lh-40 font-content">状态：</div>
+                                            <div class="dropdown pull-left m-t-xs m-r-lg  open">
+                                                <button type="button" class="btn dropdown-toggle bordered bgc-fff" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true" style="height: 30px;">不限
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-white m-t-xs pull-right font-12 m-r">查询</button>
+                                </div>
+                            </div>
+                            <div class="row title-header gray-bg m-t-sm m-r-none m-l-none">
+                                <div class="col-lg-12">
+                                    <div class="title-name">
+                                        <a class="font-content">数据列表</a>
+                                    </div>
+                                    <div class="dropdown pull-right m-t-sm m-r font-12">
+                                        <button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">显示条数
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">导出数据</button>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">删除</button>
+                                </div>
+                            </div>
+                            <div class="row m-t-xs">
+                                <div class="col-lg-12">
+                                    <table class="table newtable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th width="50"></th>
+                                            <th width="150">直播ID</th>
+                                            <th>评论内容</th>
+                                            <th width="100">评论时间<i class="fa fa-caret-down"></i></th>
+                                            <th width="80">状态</th>
+                                            <th width="80">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td width="150">8447466</td>
+                                            <td>直播这个东西，说实在话，楼主的确是见的蛮多的了，由最开始的什么元旦除夕跨年晚会的直播，到现在的全民直播。</td>
+                                            <td width="100">2018-03-27  08：09：21</td>
+                                            <td width="80">正常</td>
+                                            <td width="80"><a href="javascript:;" class="m-r-xs color-999">删除</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td width="150">8447466</td>
+                                            <td>直播这个东西，说实在话，楼主的确是见的蛮多的了，由最开始的什么元旦除夕跨年晚会的直播，到现在的全民直播。</td>
+                                            <td width="100">2018-03-27  08：09：21</td>
+                                            <td width="80"><span class="color-red">已删除</span></td>
+                                            <td width="80"></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td width="150">8447466</td>
+                                            <td>直播这个东西，说实在话，楼主的确是见的蛮多的了，由最开始的什么元旦除夕跨年晚会的直播，到现在的全民直播。</td>
+                                            <td width="100">2018-03-27  08：09：21</td>
+                                            <td width="80">正常</td>
+                                            <td width="80"><a href="javascript:;" class="m-r-xs color-999">删除</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td width="150">8447466</td>
+                                            <td>直播这个东西，说实在话，楼主的确是见的蛮多的了，由最开始的什么元旦除夕跨年晚会的直播，到现在的全民直播。</td>
+                                            <td width="100">2018-03-27  08：09：21</td>
+                                            <td width="80"><span class="color-red">已删除</span></td>
+                                            <td width="80"></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td width="150">8447466</td>
+                                            <td>直播这个东西，说实在话，楼主的确是见的蛮多的了，由最开始的什么元旦除夕跨年晚会的直播，到现在的全民直播。</td>
+                                            <td width="100">2018-03-27  08：09：21</td>
+                                            <td width="80">正常</td>
+                                            <td width="80"><a href="javascript:;" class="m-r-xs color-999">删除</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td width="150">8447466</td>
+                                            <td>直播这个东西，说实在话，楼主的确是见的蛮多的了，由最开始的什么元旦除夕跨年晚会的直播，到现在的全民直播。</td>
+                                            <td width="100">2018-03-27  08：09：21</td>
+                                            <td width="80"><span class="color-red">已删除</span></td>
+                                            <td width="80"></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td width="150">8447466</td>
+                                            <td>直播这个东西，说实在话，楼主的确是见的蛮多的了，由最开始的什么元旦除夕跨年晚会的直播，到现在的全民直播。</td>
+                                            <td width="100">2018-03-27  08：09：21</td>
+                                            <td width="80">正常</td>
+                                            <td width="80"><a href="javascript:;" class="m-r-xs color-999">删除</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td width="150">8447466</td>
+                                            <td>直播这个东西，说实在话，楼主的确是见的蛮多的了，由最开始的什么元旦除夕跨年晚会的直播，到现在的全民直播。</td>
+                                            <td width="100">2018-03-27  08：09：21</td>
+                                            <td width="80"><span class="color-red">已删除</span></td>
+                                            <td width="80"></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td width="150">8447466</td>
+                                            <td>直播这个东西，说实在话，楼主的确是见的蛮多的了，由最开始的什么元旦除夕跨年晚会的直播，到现在的全民直播。</td>
+                                            <td width="100">2018-03-27  08：09：21</td>
+                                            <td width="80">正常</td>
+                                            <td width="80"><a href="javascript:;" class="m-r-xs color-999">删除</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td width="150">8447466</td>
+                                            <td>直播这个东西，说实在话，楼主的确是见的蛮多的了，由最开始的什么元旦除夕跨年晚会的直播，到现在的全民直播。</td>
+                                            <td width="100">2018-03-27  08：09：21</td>
+                                            <td width="80"><span class="color-red">已删除</span></td>
+                                            <td width="80"></td>
+                                        </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 pageBox">
+                                    <div class="pull-left m-l"><input class="m-r-sm" type="checkbox" style="vertical-align: sub"/>全选</div>
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="loginList">
+                            <div class="row title-header gray-bg m-t-sm m-r-none m-l-none">
+                                <div class="col-lg-12">
+                                    <div class="title-name">
+                                        <a class="font-content">数据列表</a>
+                                    </div>
+                                    <div class="dropdown pull-right m-t-sm m-r font-12">
+                                        <button type="button" class="btn dropdown-toggle bordered bgc-fff font-12" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">显示条数
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">北京</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">上海</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">广州</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-white pull-right font-12 m-t-sm m-r-xs">导出数据</button>
+                                </div>
+                            </div>
+                            <div class="row m-t-xs">
+                                <div class="col-lg-12">
+                                    <table class="table shtable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th width="50"></th>
+                                            <th>登录IP</th>
+                                            <th>IP所在地</th>
+                                            <th>登录时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50"><input type="checkbox"/></td>
+                                            <td>192.168.0.0</td>
+                                            <td>中国 上海 浦东新区</td>
+                                            <td>2018-03-27  08：09：21</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 pageBox">
+                                    <div class="pull-left m-l"><input class="m-r-sm" type="checkbox" style="vertical-align: sub"/>全选</div>
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+
+<script>
+    var winHeight = $(window).height();
+    var navHeight = $(".navbar").height();
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75
+    });
+    $(".newtable tbody").height(winHeight-navHeight-titleHeight-270)
+    $(".shtable tbody").height(winHeight-navHeight-titleHeight-220)
+
+    $("#submitbtn").on("click",function(){
+		var userId = "${user.userId!}";
+		var nailName = $("#nailName").val();
+		var password = $("#userPwd").val();
+		var beizhu = $("#beizhu").val();
+		$.ajax({
+			url:"${base}/operator/user/updateUser.do",
+			method:"post",
+			data:{
+				userId:userId,
+				nailName:nailName,
+				beizhu:beizhu
+			},
+			success:function(res){
+				if(res.status == 1){
+					$("#lastUpdateTime").text(res.data.updateTime);
+					$("#lastUpdateName").text(res.data.updateUserName);
+					alert("修改成功");
+				}
+			}
+		});
+	});
+
+
+</script>
+</html>

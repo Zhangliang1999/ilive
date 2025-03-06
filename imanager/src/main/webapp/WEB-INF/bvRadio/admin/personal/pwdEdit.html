@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>账号管理 - 媒体头条管理平台<</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<#include "/bvRadio/head.html"/>
+<#include "/bvRadio/uploadHead.html"/>
+</head>
+<body class="contrast-dark fixed-header">
+	<!--顶部开始-->
+	<#include "/bvRadio/admin/top.html"/>
+	<!--顶部结束-->
+	<!--主体开始-->
+	<div id="wrapper">
+		<!--左侧导航开始-->
+		<#include "/bvRadio/admin/left.html"/>
+		<!--左侧导航结束-->
+		<!--右侧框架开始-->
+		<section id='content'>
+			<input   type="hidden" id="jsessionId" value="${jsessionId!}"></input>
+			<div class='container-fluid'>
+				<div class='row-fluid' id='content-wrapper'>
+					<div class='span12 box'>
+						<div class='page-header' style="margin-left:0px;">
+							<h1 class='pull-left'>
+								<i class='icon-user'></i>
+								<span>账号管理</span>
+							</h1>
+							<div class='pull-right'></div>
+						</div>
+						<div class='row-fluid'>
+							<div class='span12 box'>
+								<div class='box-content'>
+									<form accept-charset="UTF-8" action="o_update.do" class="form form-horizontal" method="post" style="margin-bottom: 0;" id="editForm" />
+									<input type="hidden" name="id" value="${currUser.userId!}">
+									<div class='control-group'>
+										<label class='control-label' style="margin-top:25px" for='inputText1'>头像</label>
+										<div class='controls'>
+											<img width="80" height="80" id="userImgView" src="<#if currUser.userImg??&&currUser.userImg!=''>${currUser.userThumbImg!}<#else>${base}/res/bvRadio/assets/images/touxiang.png</#if>" />
+											<input type="hidden" name="userImg" id="userImg" value="${currUser.userThumbImg!}">
+											<input type="hidden" name="userThumbImg" id="userThumbImg" value="${currUser.userThumbImg!}">
+											<div style="display: inline-block; position: relative;">
+												<input id="userImgUpload" type="hidden">
+												<div id="uploadProgressWrap" style="display: none"></div>
+											</div>
+										</div>
+									</div>
+									<div class='control-group'>
+										<label class='control-label' for='inputText1'>账号</label>
+										<div class='controls' style="line-height: 30px;">${currUser.username!}</div>
+									</div>
+									<div class='control-group'>
+										<label class='control-label' for='inputText1'>姓名</label>
+										<div class='controls'>
+											<input class='span4' id='realname' name="realname" placeholder='姓名' type='text' value="" />
+										</div>
+									</div>
+									<div class='control-group'>
+										<label class='control-label' for='inputText1'>昵称</label>
+										<div class='controls'>
+											<input class='span4' id='nickname' name="nickname" placeholder='昵称' type='text' value="${currUser.nickname!}" />
+										</div>
+									</div>
+									<hr class='hr-normal' />
+									<div class='control-group'>
+										<div class='controls'>
+											<label class='checkbox'>
+												<input class="mt10" data-target='#change-password' data-toggle='collapse' id='changepasswordcheck' type='checkbox' value='option1' />
+												修改密码？
+											</label>
+										</div>
+									</div>
+									<div class='collapse' id='change-password'>
+										<div class='control-group'>
+											<label class='control-label'>原密码</label>
+											<div class='controls'>
+												<input class='span4' id='origPwd' name="origPwd" placeholder='原密码' type='password' />
+											</div>
+										</div>
+										<div class='control-group'>
+											<label class='control-label'>新密码</label>
+											<div class='controls'>
+												<input class='span4' id='password' name="password" placeholder='新密码' type='password' />
+											</div>
+										</div>
+										<div class='control-group'>
+											<label class='control-label'>确认密码</label>
+											<div class='controls'>
+												<input class='span4' id='confirmPassword' placeholder='确认密码' type='password' />
+											</div>
+										</div>
+									</div>
+									<div class='form-actions'>
+										<button class='btn btn-primary' type='button' id="save-button">
+											<i class='icon-save'></i> 保存
+										</button>
+										<!-- <button class='btn' type='button' id="cancel-button">取消</button> -->
+									</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<#include "/bvRadio/bottom.html"/>
+		</section>
+		<!--右侧框架结束-->
+	</div>
+	<!--主体结束-->
+	<script>
+		$(document).ready(function() {
+			$("#save-button").click(function() {
+				if ($("#origPwd").val() != "") {
+					var passwordValue = $("#password").val();
+					var confirmPasswordValue = $("#confirmPassword").val();
+					if(passwordValue.length<6){
+						alert("密码不能少于6位");
+					}else if(passwordValue!=confirmPasswordValue){
+						alert("两次输入密码不一致");
+					}else{
+						$.ajax({
+							type : 'POST',
+							url : "v_checkPwd.do",
+							data : {
+								origPwd : $("#origPwd").val()
+							},
+							success : function(data) {
+								if (data.status) {
+									$("#editForm").submit();
+								} else {
+									alert("原密码错误！");
+									$("#origPwd").focus();
+								}
+							}
+						});
+					}
+				} else {
+					$("#editForm").submit();
+				}
+			});
+			$("#cancel-button").click(function() {
+				window.location.href = "v_list.do?channelId=${channelId!}&queryUsername=${queryUsername!}";
+			});
+		});
+		$(document).ready(function() {
+			var upload_url = getUploadUrl();
+			var jsessionid = $('#jsessionId').val();
+			if (jsessionid) {
+				upload_url += ";jsessionid=" + jsessionid;
+			}
+			var fileSizeLimit = "5MB";
+			var fileTypeDesc = "图片文件";
+			var fileTypeExts = "*.jpeg; *.jpg; *.png";
+				$('#userImgUpload').uploadify({
+					'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+					'uploader' : upload_url, //指定服务器端上传处理文件
+					'auto' : true,
+					'buttonCursor':'hand',
+					'fileObjName':'Filedata',
+					'formData':{ 'fileType': 'image' },
+					'fileSizeLimit':fileSizeLimit,
+					'fileTypeExts':fileTypeExts,
+					'width' : 74,
+					'height' : 30,
+					'buttonText' : '上传图片',
+					//'removeCompleted':true,
+					'removeTimeout':1,
+					'onUploadSuccess' : function(file, data, response) {
+					var jsonObj = eval('(' + data + ')');
+					var imgPath =jsonObj.fileRootUrl + jsonObj.filePath;
+					$("#userImgView").attr("src", imgPath);
+					$("#userImg").val(imgPath);
+					$("#userThumbImg").val(thumbImg);
+					},
+					'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+						alert("上传失败。");
+					}
+				});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<#include "/bvRadio/head.html"/>
+		<link rel="stylesheet" href="${base}/tysx/css/newhdgl.css"/>
+		<title>消费上限</title>
+	</head>
+	<body >
+		<div id="wrapper">
+			<!--右侧内容的区域-->
+			<div id="page-wrapper" class="gray-bg">
+				<!--上面的导航栏部分-->
+				<#include "/bvRadio/admin/top.html"/>
+				<!--左侧部分-->
+				<#include "/bvRadio/admin/left.html"/>
+				<!--下面内容部分-->
+				<div class="wrapper wrapper-content border-left bgc-fff">
+					<div class="row title-header gray-bg">
+						<div class="col-lg-12">
+							<div class="title-name">
+								<a class="font-title">消费上限设置</a>
+							</div>
+						</div>
+					</div>
+					<div class="row m-t">
+						<div class="col-lg-12">
+							<div class="maxbox">
+								<div class="col-lg-10 cjzbinput lh-38">
+									<span class="firstname">功能开关：</span>
+									<div dataval="${iLiveLiveRoom.roomId!0}"  class="<#if (iLiveLiveRoom.moneyLimitSwitch!false)  >open1<#else>close1</#if> scrollSwitchBox pull-left m-t-12">
+										<input id="moneyLimitSwitch" name="moneyLimitSwitch" type="hidden" value="<#if (iLiveLiveRoom.moneyLimitSwitch!false) >1<#else>0</#if>">
+										<div  class="<#if (iLiveLiveRoom.moneyLimitSwitch!false) >open2<#else>close2</#if> scrollSwitch"></div>
+									</div>
+									<span class="color-999 font-content m-l">开启功能后,启用直播间消费金额限制</span>
+
+								</div>
+								<div class="col-lg-10 cjzbinput lh-38">
+									<span class="firstname">账户余额：</span>
+									<span class="color-gold font-content">0</span>元
+								</div>
+								<div class="col-lg-10 cjzbinput lh-38">
+									<span class="firstname">直播间消费上限：</span>
+									<#if (iLiveLiveRoom.moneyLimitSwitch!false)>
+									<input id="affordLimit" class="col-lg-10" type="text" value="${iLiveLiveRoom.affordLimit!}">
+									<#else>
+									<input id="affordLimit" disabled="disabled" value="${iLiveLiveRoom.affordLimit!}" class="col-lg-10" type="text">
+									</#if>
+									元
+								</div>
+								<div class="col-lg-10 cjzbinput lh-38">
+									<button type="button" onclick="updateBtnEvent()" class="btn btn-success m-t-100 m-l-md">
+										确定
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	</body>
+	<script>
+		var winHeight;
+		//获取页面高度
+		winHeight = $(window).height();
+		//导航栏高度
+		var navHeight = $(".navbar").height();
+		//标题栏高度加边线
+		var titleHeight = $(".title-header").height() + 2;
+		$(".tablebox").slimScroll({
+			height : winHeight - navHeight - titleHeight - 75 - 50
+		});
+		$('.scrollSwitchBox').on("click", function() {
+			var valSw = $(this).find("input").eq(0);
+			if ($(this).hasClass("close1")) {
+				$(this).removeClass("close1").addClass("open1");
+				valSw.val(1);
+				$('#affordLimit').removeAttr("disabled");
+			} else {
+				$(this).removeClass("open1").addClass("close1");
+				valSw.val(0);
+				$('#affordLimit').attr("disabled","disabled");
+			}
+			var diffSw = $(this).find(".scrollSwitch").eq(0);
+			if (diffSw.hasClass("close2")) {
+				diffSw.removeClass("close2").addClass("open2");
+			} else {
+				diffSw.removeClass("open2").addClass("close2");
+			}
+		});
+
+		function updateBtnEvent() {
+			var affordLimit  = $('#affordLimit').val().trim();
+			if(affordLimit=="") {
+				alert("请输入金额上限");
+			}else if(!ValidatInteger(affordLimit)) {
+				alert("输入金额不合法");
+			}else{
+				$.ajax({
+					url : "${base}/admin/room/consumption_limit_update.do?roomId=${baseIliveRoomId}",
+					method : "post",
+					dataType : "json",
+					data : {
+						affordLimit : $('#affordLimit').val(),
+						moneyLimitSwitch : $('#moneyLimitSwitch').val()
+					},
+					success : function(data){
+						if(data.status==1) {
+							alert("设置成功");
+						}else {
+							alert("设置失败");
+						}
+					},
+					error : function() {
+					
+					}
+				});
+			}
+		}
+		
+		
+		function ValidatInteger(obj) {
+	        var reg = /^[1-9]\d*$/
+	        if (!reg.test(obj)) {
+	            return false;
+	        }
+	        return true;
+    	}
+	</script>
+</html>

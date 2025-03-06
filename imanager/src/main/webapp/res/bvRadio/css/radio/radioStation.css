@@ -1,0 +1,191 @@
+@charset "utf-8";
+/* CSS Document */
+header {
+	border-bottom: 2px solid #b72b2e;
+	height: 62px;
+}
+
+.warBox {
+	width: 980px;
+	margin: 0 auto;
+}
+
+.logoBox {
+	width: 220px;
+}
+
+.navBox {
+	width: 580px;
+	height: 60px;
+}
+
+.nav-box {
+	height: 60px;
+}
+
+.nav-box>li {
+	height: 40px;
+	line-height: 40px;
+	float: left;
+}
+
+.nav-box>li>a {
+	padding: 10px 25px;
+	border-radius: 0px;
+}
+
+.nav-box>li+li {
+	margin-left: 0px;
+}
+
+.nav-box>li.active>a,.nav-box>li.active>a:hover,.nav-box>li.active>a:focus
+	{
+	color: #fff;
+	background-color: #b72b2e;
+}
+
+.list-group-item.active>.badge,.nav-pills,.nav-box>.active>a>.badge {
+	color: #337ab7;
+	background-color: #fff;
+}
+
+.nav-box>li>a>.badge {
+	margin-left: 3px;
+}
+
+.appDownloadBox {
+	width: 180px;
+	height: 60px;
+	cursor: pointer;
+	position: relative;
+}
+
+.appDownloadBox img {
+	margin-top: 18px;
+}
+
+.appDownloadBox h5 {
+	margin-top: 18px;
+}
+
+.appDownloadBox:hover .dbc2Box {
+	display: block !important;
+	position: absolute;
+	top: 60px;
+	right: 10px;
+	width: 190px;
+	height: 190px;
+	z-index: 9999999999
+}
+
+#wrapper {
+	min-height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+#main-nav-bg {
+	background: #f1f1f1 none repeat scroll 0 0;
+	border-right: 1px solid #dddddd;
+	display: block;
+	float: left;
+	height: 100%;
+	position: absolute;
+	width: 180px;
+	z-index: 0;
+}
+
+.warBox-L {
+	width: 180px;
+	float: left;
+	padding: 20px;
+}
+
+.warBox-L ul {
+	
+}
+
+.warBox-L ul li {
+	height: 60px;
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.warBox-R {
+	width: 800px;
+	height: 100%;
+}
+
+.radioStation {
+	background: url(../a_images/liveBox.png) repeat-x;
+	height: 200px;
+	padding: 22px;
+}
+
+.radioStationList {
+	
+}
+
+.radioStationList img {
+	margin: 0 auto;
+}
+
+.md_bd {
+	
+}
+
+.md_bd ul {
+	float: left;
+	width: 800px;
+	padding: 10px 25px 10px 25px;
+	display: inline;
+	overflow: hidden;
+}
+
+.md_bd ul li {
+	float: left;
+	position: relative;
+	font-size: 12px;
+	display: inline;
+}
+
+.md_bd ul li .image {
+	float: left;
+	width: 36px;
+	height: 36px;
+	background: url(../a_images/player.png) no-repeat;
+	position: absolute;
+	top: 75px;
+	left: 130px;
+}
+
+.md_bd ul li img {
+	border: 1px solid #ddd;
+	width: 100%;
+	padding: 3px;
+}
+
+.md_bd ul li h5 {
+	float: left;
+	height: 28px;
+	overflow: hidden;
+}
+
+.md_bd ul li a strong {
+	color: #000;
+}
+
+.md_bd ul li a:hover strong {
+	color: #f30;
+}
+
+.footer {
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+
+.footer ul {
+	width: 760px;
+	margin-left: auto;
+	margin-right: auto;
+}

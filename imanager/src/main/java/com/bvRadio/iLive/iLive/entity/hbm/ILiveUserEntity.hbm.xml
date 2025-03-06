@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.iLive.entity">
+	<class name="ILiveUserEntity" table="ilive_user">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="userId" type="java.lang.Integer">
+			<column name="user_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="userName" type="java.lang.String">
+			<column name="username" />
+		</property>
+		<property name="userType" type="java.lang.Integer">
+			<column name="user_type" />
+		</property>
+		<property name="userLevel" type="java.lang.Integer">
+			<column name="user_level" />
+		</property>
+		<property name="userImg" type="java.lang.String">
+			<column name="user_img" />
+		</property>
+		<property name="disabled" column="is_disabled" type="java.lang.Boolean"
+			not-null="true" />
+	</class>
+</hibernate-mapping>

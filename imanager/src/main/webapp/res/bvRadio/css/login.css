@@ -1,0 +1,402 @@
+@charset "utf-8";
+/** 
+约定
+普通布局相关css类可不用前缀
+与组件有关的css类前面要加z-前缀
+用于为js查找元素而附加的css类前面要加js-前缀
+**/
+.dye {
+	color: #369;
+	font-style: normal;
+}
+
+/*通用布局*/
+body {
+	background: #f9f9f9;
+}
+
+#loginBtn {
+	background: url("../img/login/loginbtn.gif") no-repeat 0 0;
+	width: 100px;
+	display: block;
+	height: 34px;
+	color: #ffffff;
+	font-size: 14px;
+	line-height: 32px;
+	text-align: center;
+	word-spacing: 1px;
+	letter-spacing: 6px;
+}
+
+.LoginWrapbg {
+	background: url("../img/login/loginimgbg.jpg") no-repeat center center;
+	height: 100%;
+}
+
+.dialogBody {
+	background-color: #f9f9f9;
+}
+
+.loginBar {
+	width: 345px;
+	padding-top: 80px;
+	padding-left: 50px;
+	font-size: 14px;
+}
+
+.fieldWrap {
+	text-align: left;
+	width: 300px;
+	height: 30px;
+	padding-top: 10px;
+	overflow: hidden;
+}
+
+.lable {
+	padding-top: 3px;
+	width: 90px;
+	float: left;
+	color: #333333;
+	font-size: 14px;
+	text-align: right;
+}
+
+.inputWrap {
+	background: url("../img/login/loginInputWrapbg.gif") no-repeat left top;
+	height: 28px;
+	line-height: 16px;
+	border: none;
+	width: 200px;
+	float: left;
+}
+
+.selectWrap {
+	background: url("../img/login/loginSelectWrapbg.gif") no-repeat left top;
+}
+
+.verifyCodeWrap {
+	display: none;
+}
+
+.verifyCode {
+	float: left;
+}
+
+.verifyCodeWrap .inputWrap {
+	
+}
+
+.welcome {
+	color: #2477b3;
+	font-family: "微软雅黑", Tahoma, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 6px 0;
+	padding-top: 10px;
+	padding-left: 20px;
+	letter-spacing: 1px;
+	text-align: center;
+}
+
+.copyright {
+	padding-top: 10px;
+	text-align: center;
+}
+
+img {
+	vertical-align: middle;
+}
+
+input.inputText {
+	background: transparent none;
+	border: none;
+	margin-top: 3px;
+	_margin-top: 1px;
+}
+
+.inputWrap .inputText {
+	width: 200px;
+	height: 28px;
+	font-size: 14px;
+	padding-left: 6px;
+	margin-top: 0px;
+	padding-top: 4px;
+}
+
+.verification_pic {
+	display: block;
+	float: left;
+	width: 100px;
+	height: 28px;
+}
+
+input.inputTextHover {
+	background: transparent none;
+	border: none;
+}
+
+input.inputTextFocus {
+	background: transparent none;
+	border: none;
+}
+
+input[type="text"]:hover,input[type="password"],input[type="verification"]:hover
+	{
+	border-color: #3EA201;
+}
+
+input[type="text"]:focus,input[type="password"],input[type="verification"]:focus
+	{
+	background: transparent none;
+	border: none;
+}
+
+#captcha {
+	width: 100px;
+	height: 28px;
+	padding: 0 5px;
+	float: left;
+	margin: 0 10px 0 0;
+	background: url(../img/login/loginInputWrapbg.png) no-repeat;
+}
+
+#loginBtnWrap {
+	padding: 12px 0px 10px 130px;
+	width: 100px;
+}
+
+#Language_textField,#skin_textField {
+	background: transparent none;
+	color: #369;
+	border: 0;
+}
+
+#Language_outer .z-combox-spinner,#skin_outer .z-combox-spinner {
+	background: transparent;
+	border: none;
+}
+
+#Language_outer .z-combox-spinner b,#skin_outer .z-combox-spinner b {
+	border-top-color: #888;
+}
+
+.loginLogo {
+	width: 266px;
+	height: 45px;
+	margin: 0 auto;
+	background: url("../img/login/logo_login.png");
+	_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/login/logo_login.png',
+		sizingMethod= 'scale');
+	_background: none;
+}
+
+.z-combox {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	vertical-align: middle;
+	position: relative;
+	white-space: nowrap;
+	padding: 0;
+	margin: 0;
+}
+
+.z-combox input,.z-combox .inputText {
+	vertical-align: middle;
+	cursor: default;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+.z-combox .z-combox-spinner {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	vertical-align: middle;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	left: -17px;
+	margin-right: -15px;
+	cursor: pointer;
+	width: 13px;
+	height: 15px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	text-align: center;
+	overflow: hidden;
+	border: 1px solid #ccddee;
+	background: #fcfcfc;
+	background: -moz-linear-gradient(top, #FFF, #EEE);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF),
+		to(#EEE));
+	background: linear-gradient(top, #FFF, #EEE);
+	cursor: pointer;
+}
+
+.z-combox .z-combox-spinner b {
+	margin: 0;
+	float: left;
+	margin-left: 3px;
+	border: 4px solid #777;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border-color: transparent;
+	border-style: dashed;
+	margin-top: 5px;
+	border-top-color: #777;
+	border-top-style: solid;
+}
+
+.z-combox .z-combox-spinner:hover {
+	border-color: #aaccee;
+	background: #f9f9f9;
+	background: -moz-linear-gradient(top, #FFF, #fff1bb);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF),
+		to(#fff1bb));
+	background: linear-gradient(top, #FFF, #fff1bb);
+}
+
+.z-combox .z-combox-spinner:hover b {
+	border-top-color: #1199dd;
+}
+
+body {
+	background-color: #FFFFFF;
+	color: #444444;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	border: 0 none;
+}
+
+.z-viewport,.z-viewport body {
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	height: auto;
+}
+
+a {
+	color: #08d;
+	text-decoration: none;
+	border: 0;
+	background-color: transparent;
+}
+
+a:hover {
+	color: #f80;
+	text-decoration: none;
+}
+
+a:active,a:focus {
+	color: #f60;
+	text-decoration: none;
+}
+
+a.selected {
+	background: #2266BB;
+	color: #DDFFFF;
+	text-decoration: none;
+}
+
+a[href^="#"]:focus,a[href^="javascript"]:focus {
+	outline: 0;
+	-moz-outline-style: none;
+}
+
+div,blockquote,q,iframe,form,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,p {
+	margin: 0;
+	padding: 0;
+}
+
+ul,ol,dl,li {
+	list-style: none;
+}
+
+a img {
+	border: none 0;
+	vertical-align: middle;
+}
+
+body,td,textarea {
+	line-height: 1.4;
+}
+
+textareap,p {
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+body,input,textarea,select,button {
+	margin: 0;
+	font-size: 12px;
+	font-family: Tahoma, SimSun, sans-serif;
+	-webkit-text-size-adjust: none;
+}
+
+li {
+	font-family: SimSun, Tahoma, sans-serif;
+}
+
+textarea {
+	font-family: "monospace", "Courier New", serif;
+}
+
+div,p,table,th,td,font {
+	font-size: 1em;
+	font-family: inherit;
+	line-height: inherit;
+}
+
+iframe {
+	border-style: solid;
+	border-color: #778899;
+	border-width: 0;
+}
+
+h1 {
+	font-size: 24px;
+	font-family: SIMHEI, sans-serif;
+	font-weight: normal;
+}
+
+h2 {
+	font-size: 20px;
+	font-family: SIMHEI, sans-serif;
+	font-weight: normal;
+}
+
+h3 {
+	font-size: 16px;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+}
+
+h4 {
+	font-size: 14px;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+}
+
+h5 {
+	font-size: 13px;
+	font-family: Simsun, sans-serif;
+	font-weight: bold;
+}
+
+h6 {
+	font-size: 12px;
+	font-family: Simsun, sans-serif;
+	font-weight: bold;
+}
+
+q:before,q:after,blockquote:before,blockquote:after {
+	content: "";
+	content: none;
+}
+
+blockquote,q {
+	quotes: "" "";
+}

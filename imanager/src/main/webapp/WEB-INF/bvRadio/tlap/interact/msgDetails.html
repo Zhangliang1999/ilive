@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>媒体头条管理平台</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/>
+<script type="text/javascript">
+	var checkboxName = "ids";
+	//复写点击事件
+	PL.ondblclickLi = function(obj) {
+		var liveId = $(obj).find("input[type=checkbox][name=" + checkboxName + "]").val();
+		//edit(liveId);
+	}
+</script>
+</head>
+<body class="contrast-dark fixed-header">
+	<!--顶部开始-->
+	<#include "/bvRadio/tlap/top.html"/>
+	<!--顶部结束-->
+	<!--主体开始-->
+	<div id="wrapper">
+		<!--左侧导航开始-->
+		<#include "/bvRadio/tlap/left.html"/>
+		<!--左侧导航结束-->
+		<!--右侧框架开始-->
+		<section id="content">
+			<div class="container-fluid">
+				<div class='page-header mb10'>
+					<a class="pull-left btn mr10 mt5"
+						href="v_list.do?pageNo=${interactPageNo!1}"><i
+						class="icon-chevron-left mr5"></i>返回</a>
+					<div class="title">
+						<ul class='breadcrumb no-margin'>
+							<li class=""><i class=" icon-map-marker ml5 mr5"></i>互动详情</li>
+							<li class='separator'><i class='icon-angle-right'></i></li>
+							<li class='active'>${live.liveName!}</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+				<div class="row-fluid box-header box-header-small"
+					style="height: 35px; overflow: hidden;">
+					<div class="pull-left"></div>
+					<div class="pull-right">
+						<form action="v_msg_details.do" method="post">
+							<input type="hidden" name="liveId" value="${live.liveId!0}">
+							<div class="control-group pull-left no-margin">
+								<label class="controls pull-left mr5">内容:</label>
+							</div>
+							<div
+								class="pull-left form form-horizontal validate-form no-margin">
+								<input placeholder="按内容搜索" type="text" name="queryMsgContent"<#if
+								queryLiveName??>value="${queryLiveName!}"</#if>>
+								<button type="submit" class="btn">搜索</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="row-fluid">
+					<div class='box-content'>
+						<div class='tabbable'>
+							<@p.pageList value=pagination
+							listAction="v_msg_details.do";message,i,has_next> <@p.inputs> <input
+								type="hidden" name="liveId" value="${live.liveId!0}"> <input
+								type="hidden" name="queryMsgContent" value="${queryMsgContent!}">
+							</@p.inputs> <@p.column class="text-center" style="width:120px;"
+							title="ID">${message.msgId!}</@p.column> <@p.column
+							class="text-center" style="width:110px;"
+							title="参与人">${message.senderName!'未知'}</@p.column> <@p.column
+							class="text-left" style=""
+							title="互动内容">${message.content!'无'}</@p.column> <@p.column
+							class="text-center" style="width:200px;"
+							title="设备编号">${message.IMEI!'未知'}</@p.column> <@p.column
+							class="text-center" style="width:110px;" title="IP&所在地区"> <small
+								style="color: #6B7C98;">${(message.iLiveIpAddress.ip)!'未知'}</small>
+							<br /> <small>${(message.iLiveIpAddress.address)!'未知'}</small>
+							</@p.column> <@p.column class="text-center" style="width:110px;"
+							title="时间"> <small>${((message.createTime)?string("yyyy-MM-dd
+								HH:mm"))!}</small> </@p.column> <@p.buttons>
+							<!--<button class="btn" type="button" onclick="doDelete()">删除</button>
+							 	<button class="btn" type="button" onclick="doOffline()">下线</button>
+								<button class="btn" type="button" onclick="doOnline()">上线</button> -->
+							</@p.buttons> </@p.pageList>
+						</div>
+					</div>
+				</div>
+				<hr />
+			</div>
+			<#include "/bvRadio/bottom.html"/>
+		</section>
+		<!--右侧框架结束-->
+	</div>
+	<!--主体结束-->
+</body>
+</html>

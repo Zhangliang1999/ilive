@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+
+	<!-- 企业概览 -->
+	<bean id="enterpriseAct" class="com.bvRadio.iLive.manager.action.EnterpriseAct"></bean>
+
+	<!-- 用户模块 -->
+	<bean id="iliveManagerUserAct" class="com.bvRadio.iLive.manager.action.IliveManagerUserAct"></bean>
+
+	<!-- 用户登录 -->
+	<bean id="iliveManagerLoginAct" class="com.bvRadio.iLive.manager.action.IliveManagerLoginAct"></bean>
+
+	<!-- 平台模块 -->
+	<bean id="iLivePlatformController" class="com.bvRadio.iLive.manager.action.ILivePlatformController"></bean>
+
+	<!-- 管控模块 -->
+	<bean id="iliveManagerController" class="com.bvRadio.iLive.manager.action.ILiveManagerController"></bean>
+	
+	
+	<bean id="iLivePageGuideAct" class="com.bvRadio.iLive.manager.action.ILivePageGuideAct"></bean>
+
+	<!-- 举报 、投诉 -->
+	<bean id="ReportController" class="com.bvRadio.iLive.manager.action.ReportController"></bean>
+
+	<bean id="equipmentController" class="com.bvRadio.iLive.manager.action.EquipmentController"></bean>
+
+	<!-- 日志 -->
+	<bean id="workLogController" class="com.bvRadio.iLive.manager.action.WorkLogController"></bean>
+
+	<bean id="fileUploadController2" class="com.bvRadio.iLive.manager.action.FileUploadController"></bean>
+	
+	<!-- 所有用户记录 -->
+	<bean id="userRecordController" class="com.bvRadio.iLive.manager.action.UserRecordController"></bean>
+	
+</beans>

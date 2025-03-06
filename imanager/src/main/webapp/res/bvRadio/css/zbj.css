@@ -1,0 +1,376 @@
+.fa-angle-left{
+    font-size: 30px;
+    color: #ed5d5d;
+    vertical-align: middle;
+    margin-top: -7px;
+    margin-right: 7px;
+}
+.zbjtitle{
+    height: 50px;
+    line-height: 50px;
+    background: #ffffff;
+    font-size: 18px;
+}
+.zbjtitle a{
+    color: #ed5d5d;
+}
+.text-overflow{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.border-bottom-ccc{
+    border-bottom: 1px solid #f2f2f2;
+}
+.zbjbody{
+    height: 100%;
+}
+.videobox{
+    /*width: 460px;*/
+    height: 320px;
+    background: #000;
+    margin: 20px auto;
+}
+#myTab .active{
+    background: #ffffff;
+    color: #ed5d5d;
+}
+#myTab .active a{
+    color: #ed5d5d;
+}
+.jianjie{
+    /*width: 460px;*/
+    height: 69px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    background: #f6f6f6;
+    margin: 20px auto;
+    padding: 10px 20px;
+    line-height: 25px;
+    overflow: hidden;
+}
+.input-group{
+    width: 460px;
+    height: 36px;
+    line-height: 36px;
+    margin: 0 auto 20px;
+}
+.input-group .firstname{
+    width: 80px;
+    display: block;
+    float: left;
+}
+.input-group input{
+    width: 308px;
+    height: 36px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 12px;
+}
+.input-group .copybtn{
+    width: 60px;
+    height: 36px;
+    margin-top: -2px;
+}
+#rightTab .active{
+    background: #ffffff;
+    color: #ed5d5d;
+}
+#rightTab .active a{
+    color: #ed5d5d;
+}
+.h-45{
+    height: 45px;
+    line-height: 45px;
+    overflow: hidden;
+}
+.h-35{
+    height: 35px;
+    line-height: 35px;
+    overflow: hidden;
+}
+.h-80{
+    height: 80px;
+    line-height: 80px;
+    overflow: hidden;
+}
+.switchbox{
+    margin-left: 40px;
+}
+.switchbox label{
+    margin-top:9px;
+}
+.redtitle{
+    width: 34px;
+    height: 16px;
+    display: block;
+    float: left;
+    background: #ec5151;
+    color: #ffffff;
+    line-height: 16px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+.zhiding{
+    width: 14px;
+    height: 14px;
+    display: block;
+    float: left;
+    background: #ec5151;
+    margin-left: 10px;
+    overflow: hidden;
+    color: #ffffff;
+    line-height: 14px;
+    font-size: 12px;
+    text-align: center;
+}
+.media-body p{
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.text-muted{
+    font-size: 14px;
+}
+.commentbox{
+    height: 440px;
+    min-height: 440px;
+    overflow: hidden;
+}
+textarea{
+    height: 60px;
+    padding: 5px;
+    outline: none;
+    resize: none;
+    border: 1px solid #ececec;
+}
+.circleimg{
+    width: 31px;
+    height: 30px;
+    border-radius: 100%;
+    float: left;
+    margin-right: 15px;
+}
+.circleimg img{
+    width: 100%;
+    height: 100%;
+    
+}
+.videoshare{
+    width: 460px;
+    height: 40px;
+    line-height: 40px;
+}
+.m-b-0{
+    margin-bottom: 0;
+}
+.full-20{
+    width: 20px;
+    height: 20px;
+}
+.m-t-3{
+    margin-top: 3px;
+
+}
+.addimg{
+    width: 138px;
+    height: 138px;
+    line-height: 138px;
+    text-align: center;
+    border: 1px solid #dedede;
+    background: #f6f6f6;
+    margin: 35px 0;
+    cursor: pointer;
+    position: relative;
+}
+.addimg-xs{
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border: 1px solid #dedede;
+    background: #f6f6f6;
+    cursor: pointer;
+    position: relative;
+}
+.add{
+    width: 60px;
+    height: 60px;
+    background: url("../img/add.png") no-repeat;
+    background-size: 100%;
+    margin: 39px auto;
+}
+.add-xs{
+    width: 30px;
+    height: 30px;
+    background: url("../img/add.png") no-repeat;
+    background-size: 100%;
+    margin: 15px auto;
+    position: relative;
+}
+.addimg input{
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%!important;
+    height:100%!important;
+    opacity: 0;
+    cursor: pointer;
+}
+.addimg-xs input{
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%!important;
+    height:100%!important;
+    opacity: 0;
+    cursor: pointer;
+}
+.tishi{
+    margin-top: 150px;
+    margin-left: 25px;
+}
+.cjzbinput:first-child{
+    margin-top: 15px;
+}
+.cjzbinput{
+    height: 38px;
+    margin-bottom: 15px;
+}
+.cjzbinput .firstname{
+    width: 80px;
+    display: block;
+    float: left;
+    line-height: 38px;
+}
+.cjzbinput input{
+    width: 450px;
+    height: 36px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 12px;
+}
+.cjzbinput textarea{
+    width: 450px;
+    height: 98px;
+    resize: none;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.h-98{
+    height: 98px;
+}
+.cjzbinput select{
+    width: 450px;
+    height: 36px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 12px;
+}
+.cjzbinput input[type=radio]{
+    width: 15px;
+    height: 15px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 5px;
+    margin-top: 11px;
+    float: left;
+}
+.cjzbinput input[type=checkbox]{
+    width: 15px;
+    height: 15px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 5px;
+    margin-top: 11px;
+    float: left;
+}
+.checkmain{
+    width: 455px;
+    height: 80px;
+    float: left;
+}
+.zbjfooter{
+    height: 85px;
+    line-height: 85px;
+}
+.redfont{
+    color: red;
+}
+.add-img{
+    width: 71px;
+    height: 34px;
+    position: relative;
+}
+.add-img input{
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height:100%;
+    opacity: 0;
+}
+#myTabContent .tab-pane{
+    min-height: 208px;
+    height: 208px;
+    overflow: hidden;
+}
+.erwei{
+    width: 133px;
+    height: 133px;
+    overflow: hidden;
+    margin: 20px auto 0;
+}
+.erweitext{
+    width: 100%;
+    margin-top: 15px;
+    text-align: center;
+}
+.graytitle{
+    background: #999999;
+    width: 34px;
+    height: 16px;
+    display: block;
+    float: left;
+    color: #ffffff;
+    line-height: 16px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+.p-19{
+    padding: 17px;
+}
+.switchbox .dropdown-menu li{
+    padding: 6px;
+}
+.switchbox .dropdown-menu li input[type=checkbox]{
+    margin-top: 3px;float: left;
+    margin-right: 5px;
+}
+.switchbox .dropdown-menu{
+    top: 40px;
+}
+.vertical-timeline-icon img{
+    width: 100%;
+    height: 100%;
+}
+.vertical-timeline-content p{
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.rtime{
+    float: right;margin-right: 5px;
+    color: #999;
+}

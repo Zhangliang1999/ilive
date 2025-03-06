@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>开通试用</title>
+		<#include "/bvRadio/head.html"/>
+		<!--新加样式-->
+		<link rel="stylesheet" href="${base}/tysx/css/newheader.css"/>
+		<link rel="stylesheet" href="${base}/tysx/css/qyrz.css"/>
+	</head>
+	<body>
+		<div id="wrapper">
+			<!--右侧内容的区域-->
+			<div id="page-wrapper" class="bgc-fff">
+				<!--上面的导航栏部分-->
+				<div class="row">
+					<nav class="navbar navbar-static-top navbar-top-height" role="navigation" style="margin-bottom: 0">
+						<div class="navbar-header">
+							<div class="logo">
+								<div class="header-logo">
+									<div class="logoimg">
+										<img alt="image" src="${base}/tysx/img/newlogo.png"/>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<ul class="nav navbar-top-links navbar-right navbar-top-right" style="float: right;">
+							<li class="nav-num">
+								<img src="${topUser.userThumbImg!}"/>
+							</li>
+							<li class="dropdown nav-sjgly">
+								<a aria-expanded="false" role="button" class="dropdown-toggle" data-toggle="dropdown"
+								><@shiro.user>
+				<@shiro.principal/>
+				</@shiro.user>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+								class="fa fa-angle-down"></span></a>
+								<ul role="menu" class="dropdown-menu nav-dropdown-list">
+									<li>
+										<a href="${base}/admin/logout.do">退出登录 </a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+
+					</nav>
+				</div>
+
+				<!--下面内容部分-->
+				<div class="wrapper bgc-fff">
+					<div class="companyBox">
+						<div class="slimBox">
+							<div class="qyrzTit">
+								<div class="tagBox">
+									<div class="tagactive">
+										1
+									</div>
+									<p class="pactive">
+										账号注册
+									</p>
+								</div>
+								<div class="taglineactive"></div>
+								<div class="tagBox">
+									<div class="tagactive">
+										2
+									</div>
+									<p class="pactive">
+										开通试用
+									</p>
+								</div>
+								<div class="tagline"></div>
+								<div class="tagBox">
+									<div class="tag">
+										3
+									</div>
+									<p class="pnormal">
+										企业认证
+									</p>
+								</div>
+
+							</div>
+							<div class="qyrzContent">
+								<div class="btnGroup">
+									<p class="partone">
+										亲爱的 <span class="font-blue"><@shiro.user>
+											<@shiro.principal/>
+											</@shiro.user> </span>
+										用户
+									</p>
+								</div>
+								<div class="btnGroup">
+									<p class="parttwo">
+										恭喜您，您已成为天翼直播的新用户。
+									</p>
+								</div>
+								<div class="btnGroup">
+									<p class="partthree">
+										开通试用后，可享受免费试用服务。完成认证，能享受更多更好的服务哦！
+									</p>
+								</div>
+								<button type="button" onclick="openTryService()" class="btn btn-success m-t" style="width: 200px;">
+									点击试用
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<!-- Mainly scripts -->
+	
+	
+	<script>
+		$(document).ready(function() {
+			var winH = $(window).height() - 72;
+			$(".companyBox").height(winH - 90);
+			$(".slimBox").slimScroll({
+				height : winH - 90
+			});
+		})
+		
+		function openTryService(){
+			window.location.href = "${base}/admin/tryuse.do";		
+		}
+	</script>
+	<script language="javascript">
+		//    function onbeforeunload_handler(){
+		//        window.location.href = "http://www.baidu.com";
+		//    }
+		//    window.attachEvent("onbeforeunload",onbeforeunload_handler());
+
+	</script>
+</html>

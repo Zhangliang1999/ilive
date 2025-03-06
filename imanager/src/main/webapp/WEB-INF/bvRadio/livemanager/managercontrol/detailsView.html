@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>直播管控详情</title>
+	<#include "/bvRadio/livemanager/head.html" />
+    <!--新加css-->
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/huiyuan.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgheader.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/bgpt/bgpt.css"/>
+    <link rel="stylesheet" href="${base}/tysx/css/plugins/datapicker/datepicker3.css"/>
+    <link href="${base}/tysx/css/bootstrap-fileinput.css" rel="stylesheet" />
+	<link href="${base}/tysx/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <style>
+		select{
+			height:36px;
+		}    	
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/livemanager/top.html" />
+        <!--左侧部分-->
+        <#include "/bvRadio/livemanager/managercontrolleft.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">直播详情</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 lh-40 border-bottom">
+                   <div class="liveRoomName m-l-lg">
+                       <span class="font-weight">直播间：</span>
+                       <span id="showstate">
+						<#if iliveroom.disabled??><#if iliveroom.disabled == 0>正常</#if></#if>
+						<#if iliveroom.disabled??><#if iliveroom.disabled == 1>禁用</#if></#if>
+						</span>
+                       <button class="btn defaultButton m-l-lg" style="color: #f23622;<#if iliveroom.disabled??><#if iliveroom.disabled == 1>display:none</#if></#if>" id="jinyongbtn" onclick="disabledf('${iliveroom.roomId}',1)">禁用</button>
+                       <button class="btn defaultButton m-l-lg" style="color: #0084ff;<#if iliveroom.disabled??><#if iliveroom.disabled == 0>display:none</#if></#if>" id="huifubtn" onclick="disabledf('${iliveroom.roomId}',0)">恢复</button>
+                   </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 p-w-lg">
+                    <ul>
+                        <li>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">直播名称：</div>
+                                <div class="liveRoomRight">${iliveroom.liveEvent.liveTitle!}</div>
+                            </div>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">直播间ID：</div>
+                                <div class="liveRoomRight">${iliveroom.roomId!}</div>
+                            </div>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">审核：</div>
+                                <div class="liveRoomRight">
+                                <span id="examinetest">
+                                <#if iliveroom.liveEvent.liveStatus??><#if iliveroom.liveEvent.liveStatus == 4>待审核
+                                <#elseif iliveroom.liveEvent.liveStatus == 5> 已审核
+                                <#elseif iliveroom.liveEvent.liveStatus == 6> 审核未通过
+                                <#else>已通过
+                                </#if></#if>
+                                </span>
+                                <button id="examinebtn" onclick="examine('${iliveroom.roomId}')" class="btn defaultButton m-l" <#if iliveroom.liveEvent.liveStatus!=4>style="display:none"</#if>>审核通过</button></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">直播方名称：</div>
+                                <div class="liveRoomRight">${iliveroom.liveEvent.hostName!}</div>
+                            </div>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">所属企业：</div>
+                                <div class="liveRoomRight">${iliveroom.enterpriseName!}</div>
+                            </div>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">直播时间：</div>
+                                <div class="liveRoomRight">${(iliveroom.liveEvent.liveStartTime?string("yyyy-MM-dd HH:mm"))!}-${(iliveroom.liveEvent.liveEndTime?string("yyyy-MM-dd HH:mm"))!}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">创建账号：</div>
+                                <div class="liveRoomRight">${iliveroom.createPerson!}</div>
+                            </div>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">创建时间：</div>
+                                <div class="liveRoomRight">${iliveroom.createTime!}</div>
+                            </div>
+                            <div class="liveRoom">
+                                <div class="liveRoomLeft">直播状态：</div>
+                                <div class="liveRoomRight">
+                                <#if iliveroom.liveEvent.liveStatus??><#if iliveroom.liveEvent.liveStatus == 0>预告</#if></#if>
+                                <#if iliveroom.liveEvent.liveStatus??><#if iliveroom.liveEvent.liveStatus == 1>直播中</#if></#if>
+                                <#if iliveroom.liveEvent.liveStatus??><#if iliveroom.liveEvent.liveStatus == 2>暂停中</#if></#if>
+                                <#if iliveroom.liveEvent.liveStatus??><#if iliveroom.liveEvent.liveStatus == 3>直播结束</#if></#if>
+                                <#if iliveroom.liveEvent.liveStatus??><#if iliveroom.liveEvent.liveStatus == 4>待审核</#if></#if>
+                                <#if iliveroom.liveEvent.liveStatus??><#if iliveroom.liveEvent.liveStatus == 5>预告</#if></#if>
+                                <#if iliveroom.liveEvent.liveStatus??><#if iliveroom.liveEvent.liveStatus == 6>审核未通过</#if></#if>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="m-t-xs">
+                <div class="col-lg-12">
+                    <ul id="myTab" class="nav nav-tabs dcTab">
+                        <li class="active"><a href="#home" data-toggle="tab">
+                            直播详情
+                        </a>
+                        </li>
+                        <li><a href="#ios" data-toggle="tab">直播设置</a></li>
+                        <li><a href="#jmeter" data-toggle="tab">
+                            观看授权</a>
+                        </li>
+                        <!-- <li><a href="#ejb" data-toggle="tab">
+                            智能管控</a>
+                        </li> -->
+                        <li><a href="#zhgl" data-toggle="tab">
+                            往期场次</a>
+                        </li>
+                        <li><a href="#fkjh" data-toggle="tab">
+                            反恐鉴黄</a>
+                        </li>
+                       <!--  <li><a href="#czjl" data-toggle="tab">
+                            操作记录</a>
+                        </li> -->
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade in active" id="home">
+                            <div class="information m-t-sm">
+                                <div class="col-lg-4">
+                                    <div class="liveBg">
+                                        <img <#if iliveroom.liveEvent.converAddr??>src="${iliveroom.liveEvent.converAddr}"<#else>src="${base}/tysx/img/u1207.jpg"</#if> alt=""/>
+                                        <div class="liveBgTag">直播封面图</div>
+                                    </div>
+                                    <div class="liveBg m-t">
+                                        <img <#if iliveroom.liveEvent.playBgAddr??>src="${iliveroom.liveEvent.playBgAddr}"<#else>src="${base}/tysx/img/u1207.jpg"</#if> alt=""/>
+                                        <div class="liveBgTag">播放器背景图</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-weight">推流地址：</td>
+                                                <td class="text-left">
+                                                    <input type="text" id="addr1" value="${liveAddr!}"/>
+                                                    <button class="btn defaultButton pull-right" id="copy1">复制</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight">PC观看地址：</td>
+                                                <td class="text-left">
+                                                    <input type="text" id="addr2" value="${liveAddr!}"/>
+                                                    <button  id="copy2" class="btn defaultButton pull-right m-l">复制</button>
+                                                    <a href="${liveAddr!}" target="_blank" class="btn defaultButton pull-right">打开</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight">播放地址：</td>
+                                                <td class="text-left">
+                                                    <input type="text" id="addr3" value="${liveAddr!}"/>
+                                                    <button  id="copy3" class="btn defaultButton pull-right">复制</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight">手机预览：</td>
+                                                <td class="text-left">
+                                                    <div class="erweimaBox" id="zbewmbox"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>直播简介：</td>
+                                                <td class="text-left">
+                                                    <textarea class="livetextarea">${iliveroom.liveEvent.liveDesc!}</textarea>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="ios">
+                            <div class="information">
+                                <div class="liveSet">
+                                    <div class="liveSetHeader">LOGO设置</div>
+                                    <div class="liveSetCon">
+                                        <div class="liveSetLeft">
+                                            <div class="LogoBox">
+                                            <#if iliveroom.liveEvent.logoUrl??>
+                                            	<img src="${iliveroom.liveEvent.logoUrl}">
+                                            </#if>
+                                            </div>
+                                        </div>
+                                        <div class="liveSetRight">
+                                            <p class="text-center m-t-lg">logo位置：
+                                            <#if iliveroom.liveEvent.logoPosition??><#if iliveroom.liveEvent.logoPosition == 1>左上角</#if></#if>
+                                            <#if iliveroom.liveEvent.logoPosition??><#if iliveroom.liveEvent.logoPosition == 2>右上角</#if></#if>
+                                            <#if iliveroom.liveEvent.logoPosition??><#if iliveroom.liveEvent.logoPosition == 3>左下角</#if></#if>
+                                            <#if iliveroom.liveEvent.logoPosition??><#if iliveroom.liveEvent.logoPosition == 4>右下角</#if></#if>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="liveSet">
+                                    <div class="liveSetHeader">直播倒计时</div>
+                                    <div class="liveSetCon">
+                                        <div class="liveSetpara">
+                                            <div class="liveSetName">直播提示文字：</div>
+                                            <div class="liveSetText">${iliveroom.liveEvent.countdownTitle!}</div>
+                                        </div>
+                                        <div class="liveSetpara">
+                                            <div class="liveSetName">直播开始时间：</div>
+                                            <div class="liveSetText">${iliveroom.liveEvent.liveStartTime!}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="liveSet">
+                                    <div class="liveSetHeader">数据显示美化</div>
+                                    <div class="liveSetCon">
+                                        <div class="liveSetpara">
+                                            <div class="liveSetName">显示数据：</div>
+                                            <div class="liveSetText">当前在线人数</div>
+                                        </div>
+                                        <div class="liveSetpara">
+                                            <div class="liveSetName">增加形式：</div>
+                                            <div class="liveSetText">
+                                                <p>默认基础人数 <span class="color-333">
+                                                <#if iliveroom.liveEvent.baseNum??>${iliveroom.liveEvent.baseNum}<#else>0</#if>
+                                                </span>人</p>
+                                                <p>显示数据x <span class="color-333">
+                                                <#if iliveroom.liveEvent.multiple??>${iliveroom.liveEvent.multiple}<#else>1</#if>
+                                                </span>倍</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="liveSet">
+                                    <div class="liveSetHeader">报名观看 <a>查看报名记录</a></div>
+                                    <div class="liveSetCon">
+                                        <div class="liveSetpara">
+                                            <div class="liveSetName">验证方式：</div>
+                                            <div class="liveSetText"><!-- 启用短信验证 -->
+                                            <#if iliveroom.liveEvent.viewAuthorized??><#if iliveroom.liveEvent.viewAuthorized == 1>公开观看</#if></#if>
+                                            <#if iliveroom.liveEvent.viewAuthorized??><#if iliveroom.liveEvent.viewAuthorized == 2>密码观看</#if></#if>
+                                            <#if iliveroom.liveEvent.viewAuthorized??><#if iliveroom.liveEvent.viewAuthorized == 3>付费观看</#if></#if>
+                                            <#if iliveroom.liveEvent.viewAuthorized??><#if iliveroom.liveEvent.viewAuthorized == 4>白名单</#if></#if>
+                                            <#if iliveroom.liveEvent.viewAuthorized??><#if iliveroom.liveEvent.viewAuthorized == 5>登录观看</#if></#if>
+                                            
+                                            </div>
+                                        </div>
+                                        <div class="liveSetpara">
+                                            <div class="liveSetName">报名人数：</div>
+                                            <div class="liveSetText">0人</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="liveSet">
+                                    <div class="liveSetHeader">推广分享</div>
+                                    <div class="liveSetCon">
+                                        <div class="liveSetpara">
+                                            <div class="liveSetName">分享标题：</div>
+                                            <div class="liveSetText"></div>
+                                        </div>
+                                        <div class="liveSetpara">
+                                            <div class="liveSetshare">
+                                                <div class="liveSetName">分享摘要：</div>
+                                                <div class="liveSetText"></div>
+                                            </div>
+                                            <div class="livesharerig">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="liveSet">
+                                    <div class="liveSetHeader">引导图</div>
+                                    <div class="liveSetCon">
+                                       <div class="leadPic">
+                                           <img src="${base}/tysx/img/kobe.jpg" alt=""/>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="liveSet">
+                                    <div class="liveSetHeader">礼物设置</div>
+                                    <div class="liveSetCon">
+                                        <div class="gift">
+                                           未设置
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="jmeter">
+                            <div class="watchTitle m-t">
+                                <div class="watchList">
+                                    <div class="watchName">观看授权：</div>
+                                    <div class="watchText"><!-- 密码 --> 
+                                    		<#if iliveroom.liveEvent.viewAuthorized??><#if iliveroom.liveEvent.viewAuthorized == 1>公开观看</#if></#if>
+                                            <#if iliveroom.liveEvent.viewAuthorized??><#if iliveroom.liveEvent.viewAuthorized == 2>密码观看</#if></#if>
+                                            <#if iliveroom.liveEvent.viewAuthorized??><#if iliveroom.liveEvent.viewAuthorized == 3>付费观看</#if></#if>
+                                            <#if iliveroom.liveEvent.viewAuthorized??><#if iliveroom.liveEvent.viewAuthorized == 4>白名单</#if></#if>
+                                            <#if iliveroom.liveEvent.viewAuthorized??><#if iliveroom.liveEvent.viewAuthorized == 5>登录观看</#if></#if>
+                                    <!-- <a class="watchUnder" href="#">查看观看授权用户记录</a> --></div>
+                                </div>
+                                <!-- <div class="watchList">
+                                    <div class="watchName">观看密码：</div>
+                                    <div class="watchText">1111</div>
+                                </div>
+                                <div class="watchList">
+                                    <div class="watchName">欢迎语：</div>
+                                    <div class="watchText">欢迎您的光临~</div>
+                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 p-w-lg">
+                                    <p class="font-weight m-t">观看授权设置记录：</p>
+                                    
+                                    <table class="table watchtable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th>观看授权类型</th>
+                                            <th style="text-align:center">欢迎语</th>
+                                            <th>设置人</th>
+                                            <th>设置时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="viewsetbody">
+                                        <#list recordlist as item>
+                                       	<tr>
+                                        	<td>
+                                        	<#if item.viewAuthorized==1>公开观看</#if>
+                                        	<#if item.viewAuthorized==2>密码观看</#if>
+                                        	<#if item.viewAuthorized==3>付费观看</#if>
+                                        	<#if item.viewAuthorized==4>白名单观看</#if>
+                                        	<#if item.viewAuthorized==5>登录观看</#if>
+                                        	</td>
+                                        	<td>${item.welcome!}</td>
+                                        	<td>${item.userName!}</td>
+                                        	<td>${item.updateTime!}</td>
+                                        </tr>
+                                   	 	</#list>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 m-t-sm pageBox">
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <#list 1..pageNum as i>
+                                        	<button class="btn btn-sm btn-white" onclick="topage(${i})">${i}</button>
+                                        </#list>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="ejb">
+                            <div class="row m-t">
+                                <div class="col-lg-12 p-w-lg">
+                                    <table class="table newqiyetable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>操作人</th>
+                                            <th>操作时间</th>
+                                            <th>操作明细</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                企业账号认证通过
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                支付宝
+                                            </td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                企业账号认证通过
+                                            </td>
+                                        </tr>
+
+
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 m-t-sm pageBox">
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="zhgl">
+                            <p class="font-content m-t-sm">共直播场次：${listeventsize!}场</p>
+                            <div class="newinformation">
+                            <div class="row m-t">
+                                <div class="col-lg-12">
+                                
+                                <div id="eventBox">
+                                <#list listevent as item>
+                                	<div class="historyBox">
+                                        <div class="histroyLeft">
+                                            <img src="${item.converAddr}" alt=""/>
+                                            <div class="histroyMask">ID：${item.liveEventId!}</div>
+                                        </div>
+                                        <div class="histroyRight">
+                                            <div class="historyCon">
+                                                <div class="historyList">
+                                                    <div class="histroyName">直播日期：</div>
+                                                    <div class="histroyText">${item.startDate!}</div>
+                                                </div>
+                                                <div class="historyList">
+                                                    <div class="histroyName">直播时长：</div>
+                                                    <div class="histroyText">
+                                                    	<#if item.hours??>${item.hours}<#else>0</#if>
+                                                    	小时
+														<#if item.minute??>${item.minute}<#else>0</#if>
+														分钟</div>
+                                                </div>
+                                                <div class="historyList">
+                                                    <div class="histroyName">直播名称：</div>
+                                                    <div class="histroyText">${item.liveTitle}</div>
+                                                </div>
+                                            </div>
+                                            <div class="historyBtn">
+                                                <button class="btn defaultButton m-r-xs">数据统计</button>
+                                                <button class="btn defaultButton m-r-xs">互动内容</button>
+                                                <button class="btn defaultButton">收录视频</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </#list>
+                                </div>
+                                <#if listeventsize gt 10>
+									<div class="col-lg-12 m-t-sm pageBox">
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <#list 1..pageNumEvent as i>
+                                        	<button class="btn btn-sm btn-white" onclick="topageEvent(${i})">${i}</button>
+                                        </#list>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                                </#if>
+                                    <!-- <div class="historyBox">
+                                        <div class="histroyLeft">
+                                            <img src="${base}/tysx/img/u1207.jpg" alt=""/>
+                                            <div class="histroyMask">ID：788925</div>
+                                        </div>
+                                        <div class="histroyRight">
+                                            <div class="historyCon">
+                                                <div class="historyList">
+                                                    <div class="histroyName">直播日期：</div>
+                                                    <div class="histroyText">2019-09-09 04:09:30</div>
+                                                </div>
+                                                <div class="historyList">
+                                                    <div class="histroyName">直播时长：</div>
+                                                    <div class="histroyText">3小时30分钟</div>
+                                                </div>
+                                                <div class="historyList">
+                                                    <div class="histroyName">直播名称：</div>
+                                                    <div class="histroyText">第十一届环太平洋综合贸易环境声带测定会   </div>
+                                                </div>
+                                            </div>
+                                            <div class="historyBtn">
+                                                <button class="btn defaultButton m-r-xs">数据统计</button>
+                                                <button class="btn defaultButton m-r-xs">互动内容</button>
+                                                <button class="btn defaultButton">收录视频</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="historyBox">
+                                        <div class="histroyLeft">
+                                            <img src="${base}/tysx/img/u1207.jpg" alt=""/>
+                                            <div class="histroyMask">ID：788925</div>
+                                        </div>
+                                        <div class="histroyRight">
+                                            <div class="historyCon">
+                                                <div class="historyList">
+                                                    <div class="histroyName">直播日期：</div>
+                                                    <div class="histroyText">2019-09-09 04:09:30</div>
+                                                </div>
+                                                <div class="historyList">
+                                                    <div class="histroyName">直播时长：</div>
+                                                    <div class="histroyText">3小时30分钟</div>
+                                                </div>
+                                                <div class="historyList">
+                                                    <div class="histroyName">直播名称：</div>
+                                                    <div class="histroyText">第十一届环太平洋综合贸易环境声带测定会   </div>
+                                                </div>
+                                            </div>
+                                            <div class="historyBtn">
+                                                <button class="btn defaultButton m-r-xs">数据统计</button>
+                                                <button class="btn defaultButton m-r-xs">互动内容</button>
+                                                <button class="btn defaultButton">收录视频</button>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="czjl">
+                            <div class="row m-t">
+                                <div class="col-lg-12 p-w-lg">
+                                    <table class="table cztable table-striped table-hover ScrollViewer table-responsive">
+                                        <thead class="gray-bg">
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>操作人类型</th>
+                                            <th>操作人</th>
+                                            <th>操作账号</th>
+                                            <th>操作时间</th>
+                                            <th>操作明细</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>5368595</td>
+                                            <td>
+                                                播管
+                                            </td>
+                                            <td>李扬</td>
+                                            <td>ly</td>
+                                            <td>
+                                                2018-03-01 16:36
+                                            </td>
+                                            <td>
+                                                恢复直播
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-lg-12 m-t-sm pageBox">
+                                    <div class="pull-right btn-group m-r">
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="btn btn-sm btn-white">1</button>
+                                        <button class="btn btn-sm btn-white  active">2</button>
+                                        <button class="btn btn-sm btn-white">3</button>
+                                        <button class="btn btn-sm btn-white">4</button>
+                                        <button type="button" class="btn btn-sm btn-white"><i class="fa fa-chevron-right"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="fkjh">
+                            <div class="row m-t">
+                                <div class="col-lg-4">
+                                    <input id="fkallsel" type="checkbox" style="vertical-align: sub;"/>全选
+                                    <button id="hulue" class="btn whiteButton m-l" style="font-size: 12px!important;">忽略</button>
+                                </div>
+                                <div class="col-lg-8 text-right">
+                                    <select id="type1" class="commonSelect m-t-none">
+                                        <option value="0">全部</option>
+                                        <option value="1">需要审核</option>
+                                        <option value="2">建议禁止</option>
+                                        <option value="3">忽略</option>
+                                    </select>
+                                    <select id="type2" class="commonSelect m-t-none">
+                                        <option value="0">全部</option>
+                                        <option value="1">涉恐</option>
+                                        <option value="2">涉黄</option>
+                                    </select>
+									<input id="startTime" type="text" placeholder="起始时间" readonly class="Wdate input no-margins form_datetime" style="height:40px;width:210px;"/>
+									<input id="endTime" type="text" placeholder="结束时间" readonly class="Wdate input no-margins form_datetime" style="height:40px;width:210px;"/>
+                                    <button id="searchfk" class="btn whiteButton" style="font-size: 12px!important;">查询</button>
+                                </div>
+                            </div>
+                            <div class="row m-t">
+                                <div class="col-lg-12">
+                                
+                                	<#list fkpage as item>
+	                                	<div class="control">
+	                                        <div class="liveControl bordered">
+	                                            <div class="littleControl">
+	                                                <div class="yellowTag">涉黄
+	                                               <!--  ${item.replyMsg} -->
+	                                                </div>
+	                                                <img src="${item.picUrl!}" alt=""/>
+	                                                <input name="fksh" data-id="${item.taskId!}" type="checkbox" class="controlCheck"/>
+	                                            </div>
+	                                        </div>
+	                                        <div class="controlText">
+	                                            <div class="contrLeft">${item.checkTime!}</div>
+	                                            <div class="contrRight"><span class="warnText">
+	                                            
+	                                            <#if item.monitorLevel?? && item.monitorLevel == 1>
+	                                            	<span class="warnText">(需要审核)</span>
+	                                            </#if>
+	                                            <#if item.monitorLevel?? && item.monitorLevel == 2>
+	                                            	<span class="dangerText">(建议禁止)</span>
+	                                            </#if>
+	                                            <#if item.monitorLevel?? && item.monitorLevel == 3>
+	                                            	<span class="color-blue">(已忽略)</span>
+	                                            </#if>
+	                                            
+	                                            </span></div>
+	                                        </div>
+	                                    </div>
+                                	</#list>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+<!--新加js-->
+<script src="${base}/tysx/js/lightGallery.js"></script>
+<script src="${base}/tysx/js/leftHeight.js"></script>
+<script src="${base}/tysx/js/zbj.js"></script>
+<script type="text/javascript" src="${base}/res/bvRadio/js/jquery.qrcode.min.js"></script>
+<script src="${base}/tysx/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+
+$(function(){
+	$('#zbewmbox').qrcode({
+			render : "canvas", // 渲染方式有table方式和canvas方式
+			width : 100, //默认宽度
+			height : 100, //默认高度
+			text : "${liveAddr!}", //二维码内容
+			typeNumber : -1, //计算模式一般默认为-1
+			correctLevel : 2, //二维码纠错级别
+			background : "#ffffff", //背景颜色
+			foreground : "#000000" //二维码颜色
+	});
+});
+
+	//直播间禁用
+	function disabledf(roomId,disabled){
+		$.ajax({
+			url:"${base}/operator/managercontrol/disabledf.do",
+			method:"post",
+			data:{
+				roomId:roomId,
+				disabled:disabled
+			},
+			success:function(res){
+				console.log("修改成功");
+				if(res == 1){
+					$("#showstate").text("禁用");
+					$("#jinyongbtn").hide();
+					$("#huifubtn").show();
+				}else if(res == 0){
+					$("#showstate").text("正常");
+					$("#jinyongbtn").show();
+					$("#huifubtn").hide();
+				}
+			}
+		});
+	}
+	
+	//观看鉴权分页
+	function topage(pageNo){
+		var roomId = "${iliveroom.roomId}";
+		console.log("${iliveroom.roomId}");
+		$.ajax({
+			url:"${base}/operator/managercontrol/getRecordPage.do",
+			method:"post",
+			data:{
+				roomId:roomId,
+				pageNo:pageNo
+			},
+			success:function(res){
+				console.log(res);
+				var show = "";
+				$.each(res,function(index,ele){
+					console.log(ele);
+					show+="<tr><td>";
+					if(ele.viewAuthorized == 1){
+						show+="公开观看</td>";
+					}else if(ele.viewAuthorized == 2){
+						show+="密码观看</td>";
+					}else if(ele.viewAuthorized == 3){
+						show+="付费观看</td>";
+					}else if(ele.viewAuthorized == 4){
+						show+="白名单观看</td>";
+					}else if(ele.viewAuthorized == 5){
+						show+="登录观看</td>";
+					}
+					show+="<td>"+ele.welcome+"</td>";
+					show+="<td>"+ele.userName+"</td>";
+					show+="<td>"+ele.date+"</td>";
+					show+="</tr>";
+				});
+				$("#viewsetbody").empty().append(show);
+			},
+			error:function(res){
+				console.log(res);
+			}
+		});
+	}
+	
+	//往期场次分页
+	function topageEvent(pageNo){
+		var roomId = "${iliveroom.roomId}";
+		$.ajax({
+			url:"${base}/operator/managercontrol/getPageEvent.do",
+			method:"post",
+			data:{
+				roomId:roomId,
+				pageNo:pageNo
+			},
+			success:function(res){
+				console.log(res);
+				
+				var eventBox = "";
+				$.each(res,function(index,ele){
+					console.log(index,ele);
+					eventBox+="<div class='historyBox'><div class='histroyLeft'><img src='"+ele.converAddr+"' alt=''/><div class='histroyMask'>ID:"+ele.liveEventId+"</div></div>";
+					eventBox+="<div class='histroyRight'><div class='historyCon'><div class='historyList'><div class='histroyName'>直播日期：</div><div class='histroyText'>"+ele.startDate+"</div></div>";
+					eventBox+="<div class='historyList'><div class='histroyName'>直播时长：</div><div class='histroyText'>"+ele.hours+"小时"+ele.minute+"分钟</div></div>";     
+					eventBox+="<div class='historyList'><div class='histroyName'>直播名称：</div><div class='histroyText'>"+ele.liveTitle+"</div></div></div>";
+					eventBox+="<div class='historyBtn'><button class='btn defaultButton m-r-xs'>数据统计</button><button class='btn defaultButton m-r-xs'>互动内容</button><button class='btn defaultButton'>收录视频</button></div></div></div>";
+				});
+				$("#eventBox").empty().append(eventBox);
+				
+				
+			}
+		});
+	}
+	
+    $(function () {
+        $('#myTab li:eq(0) a').tab('show');
+        $(".wrapper").height("auto");
+        var winHeight;
+        //获取页面高度
+        winHeight = $(window).height();
+        //导航栏高度
+        var navHeight = $(".navbar").height();
+        //标题栏高度加边线
+        var titleHeight = $(".title-header").height()+2;
+        $(".information").slimScroll({
+            height: winHeight-navHeight-titleHeight-210
+        });
+        $(".newinformation").slimScroll({
+            height: winHeight-navHeight-titleHeight-230
+        });
+        $(".watchtable tbody").height(winHeight-navHeight-titleHeight-250-190);
+        $(".cztable tbody").height(winHeight-navHeight-titleHeight-320)
+
+        $(".form_datetime").datetimepicker({
+			format : 'yyyy-mm-dd hh:ii',
+			autoclose : 1
+		});
+        
+    });
+    
+    $(".liveBg").height($(".liveBg").width()*9/16);
+    
+    //复制
+	function fuzhi(test){
+		window.clipboardData.setData("text", test);  
+    }    
+    
+    //审核通过
+    function examine(id){
+    	$.ajax({
+    		url:"${base}/operator/managercontrol/"+id+"/examine.do",
+    		method:"post",
+    		success:function(){
+    			$("#examinebtn").hide();
+    			$("#examinetest").text("已审核");
+    		}
+    	});
+    }
+    
+    $("#fkallsel").on("click",function(){
+    	if($(this).prop("checked")){
+    		$("input[name=fksh]").prop("checked",true);
+    	}else{
+    		$("input[name=fksh]").prop("checked",false);
+    	}
+    	
+    });
+    
+    //忽略
+    $("#hulue").on("click",function(){
+    	var arr = [];
+    	$("input[name=fksh]:checked").each(function(){
+    		var obj = {};
+    		console.log($(this).attr("data-id"));
+    		var id = $(this).attr("data-id");
+    		obj.id = id;
+    		arr.push(obj);
+    	});
+    	var str = JSON.stringify(arr);
+    	$.ajax({
+			url:"${base}/operator/managercontrol/ignore",
+			method:"post",
+			data:{
+				str:str
+			},
+			success:function(res){
+				if(res.code==1){
+					console.log("修改成功");
+				}
+			}
+		});
+    });
+    
+    //查询反恐
+    $("#searchfk").on("click",function(){
+    	var type1 = $("#type1").val();
+    	var type2 = $("#type2").val();
+    	var startTime = $("#startTime").val();
+    	var endTime = $("#endTime").val();
+    	
+    	$.ajax({
+    		url:"${base}/operator/managercontrol/searchfk",
+    		method:"post",
+    		data:{
+    			type1:type1,
+    			type2:type2,
+    			startTime:startTime,
+    			endTime:endTime
+    		},
+    		success:function(res){
+    			
+    		}
+    	});
+    	
+    });
+    $("#copy1").on("click",function(){
+    	var Url2=document.getElementById("addr1");
+    	Url2.select(); // 选择对象
+    	document.execCommand("Copy"); // 执行浏览器复制命令
+    	alert("已复制好，可贴粘。");
+    });
+    $("#copy2").on("click",function(){
+    	var Url2=document.getElementById("addr2");
+    	Url2.select(); // 选择对象
+    	document.execCommand("Copy"); // 执行浏览器复制命令
+    	alert("已复制好，可贴粘。");
+    });
+    $("#copy3").on("click",function(){
+    	var Url2=document.getElementById("addr3");
+    	Url2.select(); // 选择对象
+    	document.execCommand("Copy"); // 执行浏览器复制命令
+    	alert("已复制好，可贴粘。");
+    });
+    
+</script>
+</html>

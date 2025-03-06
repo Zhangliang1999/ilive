@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bvRadio.iLive.manager.entity">
+	<class name="ILiveRemEnterprise" table="ilive_rem_enterprise">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		
+		<property name="orderNum" type="java.lang.Long">
+			<column name="order_num" />
+		</property>
+		<property name="topNum" type="java.lang.Integer">
+			<column name="top_num" />
+		</property>
+		<many-to-one name="enterprise" lazy="false">
+			<column name="enterprise_id"></column>
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>

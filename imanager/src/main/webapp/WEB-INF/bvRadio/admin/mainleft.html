@@ -1,0 +1,20 @@
+<!--左侧部分-->
+<nav class="navbar-default navbar-static-side navbar-width"
+	role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav metismenu nav-left" id="side-menu">
+			<li class="<#if leftActive??&&leftActive=='1_1'>active</#if>">
+				<a href="${base}/admin/thematic/thematicmain.do">
+					<i class="fa fa-bookmark"></i> 
+					<span class="nav-label">主页管理</span> 
+				</a>
+			</li>
+			<li class="<#if leftActive??&&leftActive=='2_1'>active</#if>">
+				<a href="${base}/admin/thematic/into/list.do">
+					<i class="fa  fa-desktop"></i>
+					<span class="nav-label">专题管理</span> 
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>

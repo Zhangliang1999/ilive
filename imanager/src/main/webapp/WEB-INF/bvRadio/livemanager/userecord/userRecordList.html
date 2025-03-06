@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户列表</title>
+	<#include "/bvRadio/livemanager/head.html" />
+	<style>
+		input{
+			display:inline-block;
+			border:1px solid #111;
+			height:20px;
+		}
+		select{
+			display:inline-block;
+			width:100px;
+			height:20px;
+		}
+		.line-show button{
+			margin-left:10px;
+		}
+	</style>
+	<link href="${base}/tysx/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.js"></script>
+	<style>
+		.swal2-popup, .swal2-modal, .swal2-show{
+			width:400px;
+			font-size:14px;
+		}
+	</style>
+</head>
+<body >
+<div id="wrapper">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper" class="gray-bg">
+		<!--上面的导航栏部分-->
+		<#include "/bvRadio/livemanager/top.html" />
+		<!--左侧部分-->
+		<#include "/bvRadio/livemanager/userecord/userRecordleft.html" />
+        <!--下面内容部分-->
+        <iinput type="hidden" id="isBlack" value="${isBlack!}"/>
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">筛选查询</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left form-inline" style="width:100%">
+                    	<label style="width:60px">用户id</label>
+                    	<input  class="form-control" type="text" id="userId" value="${iLiveManager.userId!}">
+                    	
+                    	<label style="width:60px;margin-left:20px">用户账号</label>
+                    	<input  class="form-control" type="text" id="mobile" value="${iLiveManager.mobile!}">
+                    	
+                    	<label style="width:60px;margin-left:20px">用户昵称</label>
+                    	<input  class="form-control" type="text" id="nailName" value="${iLiveManager.nailName!}">
+                    	
+                    	<label style="width:60px;margin-left:20px">用户备注</label>
+                    	<input  class="form-control" type="text" id="beizhu" value="${iLiveManager.beizhu!}">
+                    	
+                    </div>
+                    
+                    <div class="selectedGroup m-t-sm m-l-lg pull-left form-inline" style="width:100%">
+                    	<label style="width:60px">注册时间</label>
+                    	<input id="registerStartTime" value="${iLiveManager.registerStartTime!}" name="registerStartTime" type="text" readonly="readonly" class="Wdate input no-margins form_datetime" style="height:40px;width:168px;">
+                    	<input id="registerEndTime" value="${iLiveManager.registerEndTime!}" name="registerEndTime" type="text" readonly="readonly" class="Wdate input no-margins form_datetime" style="height:40px;width:168px;">
+                    	
+                    	<label style="width:60px;margin-left:20px;margin-left:20px">注册来源</label>
+                   		<select class="form-control" id="registerSource" style="width:168px">
+                   			<option value="-1">不限</option>
+                   			<option value="1" <#if iLiveManager.registerSource?? && iLiveManager.registerSource == 1>selected</#if>>微博</option>
+                   			<option value="2" <#if iLiveManager.registerSource?? && iLiveManager.registerSource == 2>selected</#if>>微信</option>
+                   		</select>
+                   		
+                   		<button class="btn btn-default" style="margin-right:78px;float:right" id="search">查询</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row m-t-xs">
+            	<div class="col-lg-12 p-w-lg">
+            	 	<div class="line-show" style="margin-top:10px;padding-right:30px;">
+		            	<label>数据列表</label>
+		            	<div style="float:right">
+		            		<#if isBlack?? && isBlack == "0">
+		            			<button class="btn btn-default" style="color:red" id="letblack">拉黑</button>
+		            			<#else>
+		            			<button class="btn btn-default" style="color:red" id="letblack2">释放</button>
+		            		</#if>
+			                
+			                <button class="btn btn-default" id="send" style="margin-left:100px">发送短消息</button>
+			                <button class="btn btn-default" id="setbeizhu">设置备注</button>
+			                <button class="btn btn-default" id="exportData">导出数据</button>
+			                
+		            	</div>
+		            </div>
+                   <@p.pageList value=page
+					listAction="alluser";item,i,has_next> 
+					<@p.column class="text-center" style="width:40px;"
+					title="<button type='button' class='btn btn-default btn-sm' id='allsel'>全选</button>">
+					<input type="checkbox" name="check" id="${item.userId!}" />
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="用户ID">
+					${item.userId!}
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="用户账号">
+					<#if item.mobile??>${item.mobile!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="用户昵称">
+					<#if item.nailName??>${item.nailName!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="注册时间">
+					<#if item.createTime??>${item.createTime!}</#if>
+					</@p.column>
+					<@p.column class="text-center" style="width:40px;"
+					title="最后一次登录ip">
+						${item.lastIP!}
+					</@p.column>
+					<@p.column class="text-center" style="width:80px;"
+					title="操作">
+                        <a href="${base}/operator/userrecord/detail?userId=${item.userId!}&isBlack=${isBlack!}" class="m-r-xs color-999">编辑</a>|
+                        <#if isBlack?? && isBlack == "0">
+                        	<a onclick="letBlack(${item.userId!})" href="##" class="m-r-xs color-999">拉黑</a>
+                        	<#else>
+                        	<a onclick="letBlack2(${item.userId!})" href="##" class="m-r-xs color-999">释放</a>
+                        </#if>
+					</@p.column> 
+					</@p.pageList>
+                </div>
+            </div>
+</body>
+<script src="${base}/tysx/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".businessContent").slimScroll({
+        height: winHeight-navHeight-titleHeight-75-40
+    });
+    var div1 =  $('.scrollSwitchBox');
+    var div2 =  $('.scrollSwitch');
+    
+    
+    $("#registerStartTime").datetimepicker({
+		format : 'yyyy-mm-dd hh:ii:ss',
+		minuteStep : 1,
+		minView : 'hour',
+		language : 'zh-CN',
+		pickerPosition : 'bottom-right',
+		autoclose : true,
+	}).on("click", function() {
+		// $("#liveStartTime").datetimepicker("setEndDate", $("#liveEndTime").val());
+	});
+    $("#registerEndTime").datetimepicker({
+		format : 'yyyy-mm-dd hh:ii:ss',
+		minuteStep : 1,
+		minView : 'hour',
+		language : 'zh-CN',
+		pickerPosition : 'bottom-right',
+		autoclose : true,
+	}).on("click", function() {
+		// $("#liveStartTime").datetimepicker("setEndDate", $("#liveEndTime").val());
+	});
+    
+    $("#_page_form").append("<input type='hidden' id='searchuserId' name='userId' value='${iLiveManager.userId!}'/>")
+    	.append("<input type='hidden' id='searchmobile' name='mobile' value='${iLiveManager.mobile!}'/>")
+    	.append("<input type='hidden' id='searchnailName' name='nailName' value='${iLiveManager.nailName!}'/>")
+    	.append("<input type='hidden' id='searchregisterStartTime' name='registerStartTime' value='${iLiveManager.registerStartTime!}'/>")
+    	.append("<input type='hidden' id='searchregisterEndTime' name='registerEndTime' value='${iLiveManager.registerEndTime!}'/>")
+    	.append("<input type='hidden' id='searchbeizhu' name='beizhu' value='${iLiveManager.beizhu!}'/>")
+    	.append("<input type='hidden' id='searchregisterSource' name='registerSource' value='${iLiveManager.registerSource!}'/>");
+    
+    $("#search").on("click",function(){
+    	var userId = $("#userId").val();
+    	var mobile = $("#mobile").val();
+    	var nailName = $("#nailName").val();
+    	var registerStartTime = $("#registerStartTime").val();
+    	var registerEndTime = $("#registerEndTime").val();
+    	var beizhu = $("#beizhu").val();
+    	var registerSource = $("#registerSource").val();
+    	$("#searchuserId").val(userId);
+    	$("#searchmobile").val(mobile);
+    	$("#searchnailName").val(nailName);
+    	$("#searchregisterStartTime").val(registerStartTime);
+    	$("#searchregisterEndTime").val(registerEndTime);
+    	$("#searchbeizhu").val(beizhu);
+    	$("#searchregisterSource").val(registerSource);
+    	$("#_page_form").submit();
+    });
+    
+    
+    
+    //批量拉黑
+    $("#letblack").on("click",function(){
+    	var arr = [];
+    	$("input[name=check]:checked").each(function(index,ele){
+    		arr.push({
+    			id:ele.id
+    		});
+    	});
+    	if(arr.length == 0){
+    		swal("请选择需要拉黑的用户");
+    		return false;
+    	}else{
+    		var userIds = JSON.stringify(arr);
+    		$.ajax({
+        		url:"${base}/operator/userrecord/letBatchBlack",
+        		type:"post",
+        		data:{
+        			userIds:userIds,
+        			status:1
+        		},
+        		success:function(res){
+        			if(res.code == 0){
+        				swal(res.msg);
+        				location.reload();
+        			}else{
+        				swal(res.msg);
+        			}
+        		}
+        	}); 		
+    	}
+    });
+    
+    //批量释放
+    $("#letblack2").on("click",function(){
+    	var arr = [];
+    	$("input[name=check]:checked").each(function(index,ele){
+    		arr.push({
+    			id:ele.id
+    		});
+    	});
+    	if(arr.length == 0){
+    		swal("请选择需要释放的用户");
+    		return false;
+    	}else{
+    		var userIds = JSON.stringify(arr);
+    		$.ajax({
+        		url:"${base}/operator/userrecord/letBatchBlack",
+        		type:"post",
+        		data:{
+        			userIds:userIds,
+        			status:0
+        		},
+        		success:function(res){
+        			if(res.code == 0){
+        				swal(res.msg);
+        				location.reload();
+        			}else{
+        				swal(res.msg);
+        			}
+        		}
+        	}); 		
+    	}
+    });
+    
+    
+    //全选
+    $("#allsel").on("click",function(){
+    	$("input[name=check]").prop("checked",true);
+    });
+    
+    //设置备注
+    $("#setbeizhu").on("click",function(){
+    	var arr = [];
+    	$("input[name=check]:checked").each(function(index,ele){
+    		arr.push({
+    			id:ele.id
+    		});
+    	});
+    	if(arr.length == 0){
+    		swal("请选择需要设置备注的用户");
+    		return false;
+    	}else{
+    		swal({
+    			  title: '添加备注',
+    			  input: 'textarea',
+    			  showCancelButton: true,
+    			  confirmButtonText: '确定',
+    			  showLoaderOnConfirm: true,
+    			  inputPlaceholder:'请输入企业备注',
+    			  preConfirm: function(beizhu) {
+    			    	var str = JSON.stringify(arr);
+    			    	$.ajax({
+    			    		url:"${base}/operator/userrecord/setbeizhu",
+    			    		type:"post",
+    			    		data:{
+    			    			str:str,
+    			    			beizhu:beizhu
+    			    		},
+    			    		success:function(res){
+    			    			swal(res.msg);
+    			    		}
+    			    	});
+    			  },
+    			  allowOutsideClick: false
+    			}).then(function(email) {
+  				
+    			}) 
+    	}
+    });
+    
+    //导出数据
+    $("#exportData").on("click",function(){
+    	var userId = $("#userId").val();
+    	var mobile = $("#mobile").val();
+    	var nailName = $("#nailName").val();
+    	var registerStartTime = $("#registerStartTime").val();
+    	var registerEndTime = $("#registerEndTime").val();
+    	var beizhu = $("#beizhu").val();
+    	var registerSource = $("#registerSource").val();
+    	$.ajax({
+    		url:"${base}/operator/userrecord/getList",
+    		type:"post",
+    		data:{
+    			userId:userId,
+    			mobile:mobile,
+    			nailName:nailName,
+    			registerStartTime:registerStartTime,
+    			registerEndTime:registerEndTime,
+    			beizhu:beizhu,
+    			registerSource:registerSource
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.code==1){
+    				location.href="${base}/operator/userrecord/exportData?uuid="+res.uuid+"";
+    			}
+    		}
+    	});
+    });
+    
+    function letBlack(userId){
+    	$.ajax({
+    		url:"${base}/operator/userrecord/letBlack",
+    		type:"post",
+    		data:{
+    			userId:userId,
+    			status:1
+    		},
+    		success:function(res){
+    			swal(res.msg);
+    		}
+    	});
+    }
+    function letBlack2(userId){
+    	$.ajax({
+    		url:"${base}/operator/userrecord/letBlack",
+    		type:"post",
+    		data:{
+    			userId:userId,
+    			status:0
+    		},
+    		success:function(res){
+    			swal(res.msg);
+    		}
+    	});
+    }
+    
+</script>
+</html>

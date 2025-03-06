@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>直播属性</title>
+		<#include "/bvRadio/head.html"/>
+		<link href="${base}/tysx/css/bootstrap-fileinput.css" rel="stylesheet" />
+		<link href="${base}/tysx/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${base}/css/tysx/newzbj.css" />
+	</head>
+	<body >
+		<#include "/bvRadio/admin/top.html"/>
+		<!--下面内容部分-->
+		<div class="wrapper bgc-fff">
+			<div class="row title-header">
+				<div class="col-lg-12">
+					<div class="title-name">
+						<a class="btn blue-btn default-livebtn m-r m-l" style="margin-top: -3px;" onclick="javascript:history.back()">返回</a><a class="font-content">创建直播</a>
+					</div>
+				</div>
+			</div>
+		
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="col-lg-5 " style="padding:0 40px;">
+						<form id="uploadForm" method="post" enctype='multipart/form-data'>
+							<div class="form-group" >
+								<div class="fileinput fileinput-new" data-provides="fileinput"  id="exampleInputUpload" style="width:100%;">
+									<div  class="videotop"></div>
+									<div class="fileinput-new thumbnail videobox"></div>
+									<div class="fileinput-preview fileinput-exists thumbnail videobox"></div>
+									<div class="mainbox">
+										<ul id="myTab" class="nav nav-tabs">
+											<li class="active" onclick="convertChange()">
+												<a data-toggle="tab"> 直播封面图 </a>
+											</li>
+											<li class="" onclick="playChange()">
+												<a data-toggle="tab">播放器背景图</a>
+											</li>
+										</ul>
+										<div id="myTabContent" class="tab-content">
+											<div class="tab-pane fade active in" id="tab1">
+												<div class="text-content">
+													<ol class="squol font-content  m-t-lg">
+														<li>
+															图片大小2M以内
+														</li>
+														<li>
+															图片分辨率865*486像素
+														</li>
+														<li>
+															支持PNG、JPG、JPEG格式
+														</li>
+													</ol>
+													<div>
+														<span class="btn btn-success btn-file"> <span class="fileUpload1 fileinput-new">上传图片</span> <span class="fileUpload1 fileinput-exists">换一张</span>
+															<input type="file"  id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+														</span>
+													</div>
+													<!--<a class="btn red-btn text-center subbtn" id="uploadSubmit">上传图片<input class="subpic" type="file"/></a>-->
+												</div>
+											</div>
+											<div class="tab-pane fade" id="tab2">
+												<div class="text-content">
+													<ol class="squol font-content  m-t-lg">
+														<li>
+															图片大小2M以内
+														</li>
+														<li>
+															图片分辨率865*486像素
+														</li>
+														<li>
+															支持PNG、JPG、JPEG格式
+														</li>
+													</ol>
+													<div>
+														<span class="btn btn-success btn-file"> <span class="fileUpload2 fileinput-new">上传图片</span> <span class="fileUpload2 fileinput-exists">换一张</span>
+															<input type="file"  id="picID2" accept="image/gif,image/jpeg,image/x-png"/>
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<form method="post" action="${base}/admin/room/update.do" id="editForm">
+						<input type="hidden" id="converAddr" name="converAddr" value="${iliveRoom.liveEvent.converAddr!}" />
+						<input type="hidden" id="playBgAddr" name="playBgAddr" value="${iliveRoom.liveEvent.playBgAddr!}" />
+						<input type="hidden" id="converAddrHttp" name="converAddrHttp" value="${iliveRoom.liveEvent.converAddr!}" />
+						<input type="hidden" id="playBgAddrHttp" name="playBgAddrHttp" value="${iliveRoom.liveEvent.playBgAddr!}" />
+						<div class="col-lg-7 border-left p-lg" style="padding-left: 100px;">
+							<div class="row white-bg">
+								<div class="col-lg-12 cjzbinput">
+									<span class="firstname"><b class="text-danger">*</b>活动名称：</span>
+									<input name="liveTitle" id="liveTitle" class="col-lg-10" type="text" value="${iliveRoom.liveEvent.liveTitle}" placeholder="活动名称">
+								</div>
+								<div class="col-lg-12 cjzbinput">
+									<span class="firstname"><b class="text-danger">*</b>直播时间：</span>
+									<div class="col-lg-10 " style="margin-left: -15px;">
+										<div class="input-group no-margins" style="width: 450px;height:41px!important;">
+											<input id="liveStartTime" name="liveStartTime" type="text" value="${iliveRoom.liveEvent.liveStartTime!}" readonly class="Wdate input no-margins form_datetime" style="height:40px;width:210px;">
+											<span class="input-group-addon no-borders">至</span>
+											<input id="liveEndTime" name="liveEndTime" type="text" value="${iliveRoom.liveEvent.liveEndTime!}" readonly class="Wdate input form_datetime" style="height:40px;width:210px;">
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12 cjzbinput" style="height: auto;">
+									<span class="firstname">直播简介：</span>
+									<textarea id="liveDesc" name="liveDesc"  placeholder="2018天安门广场，升国旗仪式，将由解放军第一次负责。">${iliveRoom.liveEvent.liveDesc!}</textarea>
+								</div>
+
+								<div class="col-lg-12 cjzbinput">
+									<span class="firstname">直播状态：</span>
+									<p class="firstname" style="width: 20%;">
+										<input id="liveStatus" name="liveStatus" type="hidden" value="${iliveRoom.liveEvent.liveStatus}"/>
+										<input id="liveEventSwitch" name="liveEventSwitch" type="hidden" value="0"/>
+										<#if (iliveRoom.liveEvent.liveStatus!0)==0>
+										                   预告
+										<#elseif iliveRoom.liveEvent.liveStatus==1>
+											         直播中
+										<#elseif iliveRoom.liveEvent.liveStatus==2>
+											         暂停
+										<#elseif iliveRoom.liveEvent.liveStatus==3>
+											<p id="liveStatusText" class="col-lg-2 firstname">
+												结束
+											</p>
+										<button type="button" onclick="resetLive()" class="btn btn-default gray-bg">
+											恢复为预告
+										</button>
+									</#if>
+									</p>
+								</div>
+
+								<div class="col-lg-12 cjzbinput">
+									<span class="firstname">互动审核：</span>
+									<div  class="<#if (iliveRoom.liveEvent.openCheckSwitch!0)==1>open1<#else>close1</#if> scrollSwitchBox pull-left m-t-12">
+										<input name="openCheckSwitch" type="hidden" value="${iliveRoom.liveEvent.openCheckSwitch!}">
+										<div  class="<#if (iliveRoom.liveEvent.openCheckSwitch!0)==1>open2<#else>close2</#if> scrollSwitch"></div>
+									</div>
+
+									<span class="firstname m-l-lg">弹幕互动：</span>
+									<div  class="<#if (iliveRoom.liveEvent.openBarrageSwitch!0)==1>open1<#else>close1</#if> scrollSwitchBox pull-left m-t-12">
+										<input name="openBarrageSwitch" type="hidden" value="${iliveRoom.liveEvent.openBarrageSwitch!}">
+										<div  class="<#if (iliveRoom.liveEvent.openBarrageSwitch!0)==1>open2<#else>close2</#if> scrollSwitch"></div>
+									</div>
+								</div>
+								<div class="col-lg-12 cjzbinput">
+									<span class="firstname">直播地址：</span>
+									<input name="viewAddr" value="${liveAddr!}" readonly class="col-lg-10" id="copyContent2" type="text" placeholder="直播地址">
+									<button class='btn btn-default' id="copyButton2" data-clipboard-target="copyContent2">
+										复制
+									</button>
+								</div>
+								<div class="col-lg-12 cjzbinput">
+									<span class="firstname">播放地址：</span>
+									<input name="playerAddr" readonly class="col-lg-10" value="${playAddr!}" id="copyContent3" type="text" placeholder="播放地址">
+									<button class='btn btn-default' id="copyButton3" data-clipboard-target="copyContent3">
+										复制
+									</button>
+								</div>
+								<div class="col-lg-12 cjzbinput" style="height: auto;">
+									<span class="firstname">手机预览：</span>
+									<div id="qrcode" class="ewmbox pull-left"></div>
+								</div>
+								<div class="col-lg-9" style="margin-left: 85px;">
+									<div class="checkbox no-margins pull-left">
+										<label>
+											<input id="aggreeProtocal" type="checkbox" checked>
+										</label>
+									</div>
+									<span class="pull-left" style="margin-top: 2px;">同意<a class="color-blue" href="javascript:;">《***协议》</a></span>
+								</div>
+								<div class="col-lg-12 cjzbinput" style="height: auto;">
+									<span class="firstname">
+										<button type="button" onclick="submitBackForm()" class="btn red-btn">
+											确定
+										</button> </span>
+								</div>
+							</div>
+						</div>
+						<input type="hidden" name="iLiveRoomId" value="${iliveRoom.roomId!}"/>
+					</form>
+				</div>
+			</div>
+
+	</body>
+	<script type="text/javascript" src="${base}/thirdparty/ZeroClipboard/ZeroClipboard.js"></script>
+	<script type="text/javascript" src="${base}/res/bvRadio/js/jquery.qrcode.min.js"></script>
+	<script src="${base}/tysx/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="${base}/tysx/js/bootstrap-fileinput.js"></script>
+	<script>
+		//获取视频的宽度
+		$(".videobox").css("width", "100%");
+		var videoWidth = $(".videobox").width();
+		$(".videobox").css("height", videoWidth * 9 / 16);
+		var clip2 = new ZeroClipboard(document.getElementById("copyButton2"), {
+			moviePath : "${base}/thirdparty/ZeroClipboard/ZeroClipboard.swf"
+		});
+		clip2.addEventListener("complete", function() {
+			alert("复制成功！");
+		});
+
+		var clip3 = new ZeroClipboard(document.getElementById("copyButton3"), {
+			moviePath : "${base}/thirdparty/ZeroClipboard/ZeroClipboard.swf"
+		});
+		clip3.addEventListener("complete", function() {
+			alert("复制成功！");
+		});
+
+	</script>
+	<script>
+		//获取视频的宽度
+		$(".videobox").css("width", "100%");
+		var videoWidth = $(".videobox").width();
+		$(".videobox").css("height", videoWidth * 9 / 16);
+		$(function() {
+			$(".form_datetime").datetimepicker({
+				format : 'yyyy-mm-dd hh:ii',
+				autoclose : 1
+			});
+
+			$('#qrcode').qrcode({
+				render : "canvas", // 渲染方式有table方式和canvas方式
+				width : 86, //默认宽度
+				height : 86, //默认高度
+				text : "${liveAddr!}", //二维码内容
+				typeNumber : -1, //计算模式一般默认为-1
+				correctLevel : 2, //二维码纠错级别
+				background : "#ffffff", //背景颜色
+				foreground : "#000000" //二维码颜色
+			});
+
+			$('.scrollSwitchBox').on("click", function() {
+				var valSw = $(this).find("input").eq(0);
+				if ($(this).hasClass("close1")) {
+					$(this).removeClass("close1").addClass("open1");
+					valSw.val(1);
+				} else {
+					$(this).removeClass("open1").addClass("close1");
+					valSw.val(0);
+				}
+				var diffSw = $(this).find(".scrollSwitch").eq(0);
+				if (diffSw.hasClass("close2")) {
+					diffSw.removeClass("close2").addClass("open2");
+				} else {
+					diffSw.removeClass("open2").addClass("close2");
+				}
+			});
+
+			$('#picID').on("change", function() {
+				var formData = new FormData();
+				var uploadFile = $('#picID').get(0).files[0];
+				//  var uploadFile = new FormData($("#file")[0]);
+				var selectedId = $('#select').val();
+				formData.append("file", uploadFile);
+				formData.append("serverGroupId", "${serverGroupId}");
+				formData.append("fileType", "image");
+				//	var uploadFile = new FormData($("#uploadForm")[0]);
+				console.log(uploadFile);
+				$.ajax({
+					url : '${base}/admin/file/o_uploadFile.do',
+					type : 'POST',
+					data : formData,
+					async : false,
+					cache : false,
+					contentType : false,
+					processData : false,
+					success : function(data) {
+						console.log(data);
+						if (data.status == 1) {
+							console.log('upload success');
+							$('#converAddr').val(data.httpUrl);
+							$('#converAddrHttp').val(data.httpUrl);
+						} else {
+							console.log(data.message);
+						}
+					},
+					error : function(data) {
+						console.log(data.status);
+					}
+				});
+			});
+
+			$('#picID2').on("change", function() {
+				var formData = new FormData();
+				var uploadFile = $('#picID2').get(0).files[0];
+				//  var uploadFile = new FormData($("#file")[0]);
+				var selectedId = $('#select').val();
+				formData.append("file", uploadFile);
+				formData.append("serverGroupId", "${serverGroupId}");
+				formData.append("fileType", "image");
+				//	var uploadFile = new FormData($("#uploadForm")[0]);
+				console.log(uploadFile);
+				$.ajax({
+					url : '${base}/admin/file/o_uploadFile.do',
+					type : 'POST',
+					data : formData,
+					async : false,
+					cache : false,
+					contentType : false,
+					processData : false,
+					success : function(data) {
+						console.log(data);
+						if (data.status == 1) {
+							$('#playBgAddr').val(data.httpUrl);
+							$('#playBgAddrHttp').val(data.httpUrl);
+						} else {
+							console.log(data.message);
+						}
+					},
+					error : function(data) {
+						console.log(data.status);
+					}
+				});
+			});
+			
+			convertChange();
+		});
+
+		function submitBackForm() {
+
+			if ($.trim($('#liveTitle').val()) == "") {
+				alert("直播标题不能为空");
+				return;
+			}
+			if ($.trim($('#liveStartTime').val()) == "") {
+				alert("直播开始时间不能为空");
+				return;
+			}
+			if ($.trim($('#liveEndTime').val()) == "") {
+				alert("直播结束时间不能为空");
+				return;
+			}
+
+			if (!$('#aggreeProtocal').prop("checked")) {
+				alert("请同意直播协议");
+				return;
+			}
+			$('#editForm').submit();
+		}
+
+		function resetLive() {
+			$('#liveStatusText').html("预告");
+			$('#liveStatus').val(0);
+			$('#liveEventSwitch').val(1);
+		}
+
+		function convertChange() {
+			if ($('#converAddrHttp').val() != "") {
+				$('#exampleInputUpload').removeClass("fileinput-new").addClass("fileinput-exists");
+			} else {
+				$('#exampleInputUpload').removeClass("fileinput-exists").addClass("fileinput-new");
+			}
+			$('.videobox img').removeAttr("src");
+			$('#myTabContent .tab-pane').removeClass("fade");
+			$('#myTabContent .tab-pane').eq(0).css("display", "block");
+			$('#myTabContent .tab-pane').eq(1).css("display", "none")
+			if ($('#converAddrHttp').val() != "") {
+				if($('.videobox img').length>0) {
+					$('.videobox img').attr("src", $('#converAddrHttp').val());
+				}else {
+					$('.videobox').html("<img src="+$('#converAddrHttp').val()+" />")
+				}
+				
+			}
+
+		}
+
+		function playChange() {
+			if ($('#playBgAddrHttp').val() != "") {
+				$('#exampleInputUpload').removeClass("fileinput-new").addClass("fileinput-exists");
+			} else {
+				$('#exampleInputUpload').removeClass("fileinput-exists").addClass("fileinput-new");
+			}
+			$('.videobox img').attr("src", "");
+			$('#myTabContent .tab-pane').removeClass("fade");
+			$('#myTabContent .tab-pane').eq(0).css("display", "none")
+			$('#myTabContent .tab-pane').eq(1).css("display", "block");
+			if ($('#playBgAddrHttp').val() != "") {
+				$('.videobox img').attr("src", $('#playBgAddrHttp').val());
+			}
+		}
+
+	</script>
+	</script>
+</html>

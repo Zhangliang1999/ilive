@@ -1,0 +1,119 @@
+.navbar-top-height {
+	min-height: 65px;
+    background: #f6f6f6!important;
+}
+.navbar {
+    border: 0;
+}
+.logo {
+    margin-left: 30px;
+}
+.logoimg {
+    float: left;
+    margin-top: 20px;
+    padding-right: 20px;
+}
+.logoname {
+    float: left;
+}
+
+.logo span {
+    font-size: 18px;
+    line-height: 64px;
+    color: #000;
+}
+.logo b {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.logoul {
+    color: #000;
+    float: left;
+    padding-left: 50px;
+}
+
+ul {
+    list-style: none;
+}
+.logoul li {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: 30px;
+}
+.logoul li a {
+    font-size: 18px;
+    line-height: 64px;
+    color: #000;
+}
+a:visited {
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+    color: #000;
+    cursor:pointer;
+}
+.border-thead {
+    border-bottom: 3px solid #f83c3c;
+    padding-bottom: 17px;
+    color: #f83c3c !important;
+    font-weight: 500 !important;
+}
+.navbar-top-links li {
+    display: inline-block;
+    position:relative;
+}
+.nav-num {
+    width: 35px;
+    height: 35px;
+    float: left;
+    margin-top: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background: #f00;
+}
+.nav-num img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.navbar-top-links li:last-child {
+    margin-right: 40px;
+}
+.navbar-top-links li a {
+	font-size: 14px;
+    padding: 20px 10px;
+    min-height: 50px;
+    color: #000!important;
+}
+.navbar-top-links li a span:before{
+	width:9px;
+	height:13px;
+	color:#000;
+}
+.navbar-top-links .dropdown-menu li a {
+    padding: 3px 20px;
+    min-height: 0;
+}
+.nav.navbar-top-links a {
+    font-size: 14px;
+}
+.dropdown-menu > li > a {
+    border-radius: 3px;
+    color: inherit;
+    line-height: 25px;
+    margin: 4px;
+    text-align: left;
+    font-weight: normal;
+}
+.nav-dropdown-list li a:hover{
+	width:100%;
+	background:#f5f5f5;
+}
+.dropdown-menu{
+	top:60px;
+}
+.pace .pace-progress{
+	background:#df3931 !important
+}

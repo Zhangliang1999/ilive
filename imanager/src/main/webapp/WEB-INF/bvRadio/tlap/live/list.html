@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>媒体头条管理平台</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/>
+<script type="text/javascript">
+	var checkboxName = "ids";
+	//复写点击事件
+	PL.ondblclickLi = function(obj) {
+		var liveId = $(obj).find("input[type=checkbox][name=" + checkboxName + "]").val();
+		edit(liveId);
+	}
+	function add() {
+		window.location.href="v_add.do";
+	}
+	function edit(liveId) {
+		window.location.href="v_edit.do?liveId=" + liveId;
+	}
+	function editMore(liveId) {
+		window.location.href="v_edit_more.do?liveId=" + liveId;
+	}
+	function message(liveId) {
+		window.location.href="message/v_list.do?liveId=" + liveId;
+	}
+	function doDelete(liveId) {
+		if (liveId) {
+			if (confirm("确定要删除吗？")) {
+				var ids = new Array();
+				ids.push(liveId);
+				$.ajax({
+					type : 'POST',
+					url : "o_delete.do",
+					data : {
+						ids : ids
+					},
+					success : function(data, textStatus) {
+						window.location.reload(true);
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert("doDelete出错>>" + errorThrown);
+					},
+					dataType : "json"
+				});
+			}
+		} else {
+			if (PL.checkedCount(checkboxName) == 0) {
+				alert("您还没有选择！");
+			} else {
+				if (confirm("确定要删除吗？")) {
+					$.ajax({
+						type : 'POST',
+						url : "o_delete.do",
+						data : {
+							ids : PL.getCheckedIds(checkboxName)
+						},
+						success : function(data, textStatus) {
+							window.location.reload(true);
+						},
+						error : function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("doDelete出错>>" + errorThrown);
+						},
+						dataType : "json"
+					});
+				}
+			}
+		}
+	}
+	function doOnline(liveId){
+		if(liveId){
+			if(confirm("确定要上线吗？")){
+				var ids = new Array();
+				ids.push(liveId);
+				$.ajax({
+					type : 'POST',
+					url : "o_online.do",
+					data : {
+							ids : ids
+						},
+					success : function(data, textStatus) {
+							window.location.reload(true);
+						},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("doOnline出错>>"+errorThrown);
+						},
+					dataType : "json"
+				});
+			}
+		}else{
+			if(PL.checkedCount(checkboxName)==0){
+				alert("您还没有选择！");
+			}else{
+				if(confirm("确定要上线吗？")){
+					$.ajax({
+						type:'POST',
+						url:"o_online.do",
+						data:{
+								ids:PL.getCheckedIds(checkboxName)
+							},
+						success:function(data, textStatus){
+								window.location.reload(true);
+							},
+						error: function(XMLHttpRequest, textStatus, errorThrown){
+								alert("doOnline出错>>"+errorThrown);
+							},
+						dataType:"json"
+					});
+				}
+			}
+		}
+	}
+	function doOffline(liveId){
+		if(liveId){
+			if(confirm("确定要下线吗？")){
+				var ids = new Array();
+				ids.push(liveId);
+				$.ajax({
+					type : 'POST',
+					url : "o_offline.do",
+					data : {
+							ids : ids
+						},
+					success : function(data, textStatus) {
+							window.location.reload(true);
+						},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("doOffline出错>>"+errorThrown);
+						},
+					dataType : "json"
+				});
+			}
+		}else{
+			if(PL.checkedCount(checkboxName)==0){
+				alert("您还没有选择！");
+			}else{
+				if(confirm("确定要下线吗？")){
+					$.ajax({
+						type:'POST',
+						url:"o_offline.do",
+						data:{
+								ids:PL.getCheckedIds(checkboxName)
+							},
+						success:function(data, textStatus){
+								window.location.reload(true);
+							},
+						error: function(XMLHttpRequest, textStatus, errorThrown){
+								alert("doOffline出错>>"+errorThrown);
+							},
+						dataType:"json"
+					});
+				}
+			}
+		}
+	}
+</script>
+</head>
+<body class="contrast-dark fixed-header">
+	<!--顶部开始-->
+	<#include "/bvRadio/tlap/top.html"/>
+	<!--顶部结束-->
+	<!--主体开始-->
+	<div id="wrapper">
+		<!--左侧导航开始-->
+		<#include "/bvRadio/tlap/left.html"/>
+		<!--左侧导航结束-->
+		<!--右侧框架开始-->
+		<section id="content">
+			<div class="container-fluid">
+				<hr>
+				<div class="row-fluid box-header box-header-small"
+					style="height: 35px; overflow: hidden;">
+					<div class="pull-left">
+					 	<button class="btn btn-primary" type="button" id="addButton"
+							onclick="add()">添加活动直播</button> 
+					</div>
+					<div class="pull-right">
+						<form action="v_active_list.do" method="post">
+							<div class="control-group pull-left no-margin">
+								<label class="controls pull-left mr5">名称:</label>
+							</div>
+							<div
+								class="pull-left form form-horizontal validate-form no-margin">
+								<input placeholder="按名称搜索" type="text" name="queryLiveName"<#if
+								queryLiveName??>value="${queryLiveName!}"</#if>>
+								<button type="submit" class="btn">搜索</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class='box-content'>
+						<div class='tabbable'>
+							<@p.pageList value=pagination
+							listAction="v_active_list.do";live,i,has_next> <@p.inputs> <input
+								type="hidden" name="queryLiveName" value="${queryLiveName!}">
+							</@p.inputs> <@p.column class="text-center mr5 w15"
+							style="text-align: center; width:15px" title="<input
+								type='checkbox' onclick='PL.checkbox(\"ids\",this.checked)'>">
+							<input type="checkbox" name="ids" value="${live.liveId!}">
+							</@p.column> <@p.column class="text-center" style="width:40px;"
+							title="ID">${live.liveId!}</@p.column> <@p.column
+							class="text-left" style=""
+							title="直播名称">${live.liveName!'未知'}</@p.column> <@p.column
+							class="text-center" style="width:90px;" title="直播类型"> <#if
+							live.liveType??&&live.liveType==1>活动直播 <#elseif
+							live.liveType??&&live.liveType==2>主播直播 <#else>未知类型 </#if>
+							</@p.column> <@p.column class="text-center" style="width:60px;"
+							title="状态"> <#if live.status??&&live.status==1>正在直播 <#elseif
+							live.status??&&live.status==0>结束直播 <#else>结束直播 </#if> </@p.column>
+							<@p.column class="text-center" style="width:110px;" title="直播时间">
+							<small style="color: #6B7C98;">${((live.liveStartTime)?string("yyyy-MM-dd
+								HH:mm"))!}</small> <br /> <small>${((live.liveEndTime)?string("yyyy-MM-dd
+								HH:mm"))!}</small> </@p.column> <@p.column class="text-center"
+							style="width:90px; display:none;" title="所属频道"
+							>${live.channelName!}</@p.column> <@p.column class="text-left"
+							style="width:110px;" title="创建人/创建时间"> <small
+								style="color: #6B7C98;">${live.creatorName!}</small> <br /> <small>${((live.createTime)?string("yyyy-MM-dd
+								HH:mm"))!}</small> </@p.column> <@p.column class="text-center"
+							style="width:230px" title="操作">
+							<button class="btn btn-link" type="button"
+								style="margin-bottom: 5px;color:#59AFE8" onclick="message(${live.liveId!})">直播间</button>
+<!-- 							<button class="btn btn-link" type="button"
+								style="margin-bottom: 5px;color:#59AFE8" onclick="edit(${live.liveId!})">编辑</button>
+							button class="btn btn-link" type="button" style="margin-bottom: 5px" onclick="editMore(${live.liveId!})">高级设置</button
+							<button class="btn btn-link" type="button"
+								style="margin-bottom: 5px;color:#59AFE8" onclick="doDelete(${live.liveId!})">删除</button> -->
+							</@p.column> <@p.buttons>
+							<div class="pull-left w30">
+								<input type="checkbox"
+									onclick='PL.checkbox(\"ids\",this.checked)'>
+							</div>
+							<button class="btn" type="button" onclick="doDelete()">删除</button>
+							<button class="btn" type="button" onclick="doOffline()">下线</button>
+							<button class="btn" type="button" onclick="doOnline()">上线</button>
+							</@p.buttons> </@p.pageList>
+						</div>
+					</div>
+				</div>
+				<hr />
+			</div>
+			<#include "/bvRadio/bottom.html"/>
+		</section>
+		<!--右侧框架结束-->
+	</div>
+	<!--主体结束-->
+</body>
+</html>

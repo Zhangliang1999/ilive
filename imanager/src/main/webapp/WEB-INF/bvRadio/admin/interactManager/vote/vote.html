@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<#include "/bvRadio/head.html"/>
+    <title>投票</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/myStyle.css"/>
+    <link rel="stylesheet" href="../css/jbxx.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/public.css"/>
+    <!--新加css-->
+    <link rel="stylesheet" href="../css/shcommon.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/newheader.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/newleft.css"/>
+    <link rel="stylesheet" href="../css/newhdgl.css"/>
+    <style>
+
+    </style>
+</head>
+<body >
+
+<div id="wrapper">
+    <!--右侧内容的区域-->
+			<div id="page-wrapper" class="gray-bg">
+				<!--上面的导航栏部分-->
+				<#include "/bvRadio/admin/top.html"/>
+				<!--左侧部分-->
+				<#include "/bvRadio/admin/left.html"/>
+        <!--下面内容部分-->
+        <div class="wrapper wrapper-content border-left bgc-fff">
+            <div class="row title-header gray-bg">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title">投票设置</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-box">
+                <div class="col-lg-12">
+                    <a href="${base}/admin/interactmanager/entervoteedit.do?roomId=${iLiveLiveRoom.roomId!}" class="btn btn-success m-t-sm m-l-lg">创建投票</a>
+                    <div class="pull-right m-r-lg m-t-xs">
+                        <input type="text" class="serachinput" value="${voteTitle!}" id="activity_title" placeholder="活动名称"/>
+                        <button class="btn commonbtn m-t-n-4" onclick="searchActivity();">搜索</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-t">
+                <div class="col-lg-12 p-w-lg">
+                <@p.pageList value=pagination 
+					listAction="entervote.do";activity,i,has_next> 
+					<@p.column class="text-center mr5 w15"
+					style="text-align: center; width:40px" title="序号">
+					${i+1}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="投票活动名称">
+					${activity.diyformName!}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="投票人数">
+					${activity.voteCount!}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="开关">
+                     <div id="scrollSwitchBox_${i}" style="margin-left:80px;" class="open1 scrollSwitchBox">
+                         <input type="checked" style="display: none;" checked="checked">
+                         <div id="scrollSwitch_${i}"  class="open2 scrollSwitch"></div>
+                     </div>
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="截止时间">
+					${activity.voteEndTime!}
+					</@p.column> 
+					<@p.column class="text-center" style="width:40px;"
+					title="操作">
+                         <a href="entervotedetails.do?voteId=${activity.diyformId!}&&roomId=${iLiveLiveRoom.roomId!}&&voteTitle=${activity.diyformName!}"><i class="fa fa-eye font-content m-r-sm"></i></a>
+                         <a href="entervotecount.do?voteId=${activity.diyformId!}&&roomId=${iLiveLiveRoom.roomId!}&&voteTitle=${activity.diyformName!}"><i class="fa fa-edit font-content m-r-sm"></i></a>
+                         <a href="javascript:void(0);"  onclick="deleteActivity(${activity.diyformId!})"><i class="fa fa-trash font-content"></i></a>
+					</@p.column> 
+					</@p.pageList>
+                </div>
+            </div>
+
+</body>
+<!-- Mainly scripts -->
+<script src="../js/jquery-2.1.1.js"></script>
+<script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="../js/inspinia.js"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
+
+<!-- Chosen -->
+<script src="../js/plugins/chosen/chosen.jquery.js"></script>
+
+<!-- JSKnob -->
+<script src="../js/plugins/jsKnob/jquery.knob.js"></script>
+
+<!-- Input Mask-->
+<script src="../js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+<!-- Data picker -->
+<script src="../js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<!-- NouSlider -->
+<script src="../js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+<!-- Switchery -->
+<script src="../js/plugins/switchery/switchery.js"></script>
+
+<!-- IonRangeSlider -->
+<script src="../js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+<!-- iCheck -->
+<script src="../../js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- MENU -->
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- Color picker -->
+<script src="../js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+<!-- Clock picker -->
+<script src="../js/plugins/clockpicker/clockpicker.js"></script>
+
+<!-- Image cropper -->
+
+<script src="../js/plugins/cropper/cropper.min.js"></script>
+
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="../js/plugins/fullcalendar/moment.min.js"></script>
+
+<!-- Date range picker -->
+<script src="../js/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="../js/myJs.js"></script>
+<script src="../js/video.js" type="text/javascript" charset="utf-8"></script>
+<!--新加js-->
+<script src="../js/lightGallery.js"></script>
+<script src="../js/leftHeight.js"></script>
+<script src="../js/zbj.js"></script>
+<script>
+	
+	$("#_page_form").append($("<input type='hidden' id='activity_hidden_title' name='voteTitle'/>"));
+	$("#_page_form").append($("<input type='hidden'  name='roomId' value='${iLiveLiveRoom.roomId!}' />"));
+
+    var winHeight;
+    //获取页面高度
+    winHeight = $(window).height();
+    //导航栏高度
+    var navHeight = $(".navbar").height();
+    //标题栏高度加边线
+    var titleHeight = $(".title-header").height()+2;
+    $(".tablebox").slimScroll({
+        height: winHeight-navHeight-titleHeight-75
+    });
+    var div1 =  $('.scrollSwitchBox');
+    var div2 =  $('.scrollSwitch');
+    $('.scrollSwitchBox').click(function(){
+    	var idStr = $(this).attr("id")+"";
+    	var index = idStr.split("_")[1];
+    	var div1 = "#scrollSwitchBox_"+index;
+    	var div2 = "#scrollSwitch_"+index;
+        if($(div1).hasClass("open1")){
+            $(div1).addClass("scrollSwitchBox").addClass("close1").removeClass("open1");
+            $(div2).addClass("scrollSwitch").addClass("close2").removeClass("open2");
+            $(div1+"input").attr("checked",false);
+            return
+        }else{
+            $(div1).addClass("scrollSwitchBox").addClass("open1").removeClass("close1");
+            $(div2).addClass("scrollSwitch").addClass("open2").removeClass("close2");
+            $(div1+"input").attr("checked",true);
+            return
+        }
+    })
+    
+    function searchActivity(){
+    	$("#activity_hidden_title").val($("#activity_title").val());
+    	$("#_page_form").submit();
+    }
+    
+    function deleteActivity(id){
+    	if (confirm("确定要删除吗？")){
+    		$.ajax({
+				type : 'POST',
+				url : "deletevote.do",
+				data : {
+					voteId : id
+				},
+				dataType : "json",
+				success : function(data, textStatus) {
+					searchActivity();
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("delete出错>>" + errorThrown);
+				}
+			});
+    	}
+    }
+
+</script>
+</html>

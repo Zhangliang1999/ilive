@@ -1,0 +1,496 @@
+.usercirle{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+.userbox{
+    width: 80%;
+    background: red;
+    margin-left: 10%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.userbottom{
+    margin-left: 10%;
+}
+.userbottom p{
+    height: 30px;
+    line-height: 30px;
+}
+.userbottom p i{
+    margin-right: 10px;
+    font-size: 16px;
+    width: 15px;
+    text-align: center;
+}
+.cjzbinput:first-child {
+    margin-top: 15px;
+}
+.cjzbinput {
+    height: 38px;
+    margin-bottom: 15px;
+}
+.cjzbinput .firstname {
+    width: 80px;
+    display: block;
+    float: left;
+    line-height: 38px;
+    margin-right: 15px;
+}
+.cjzbinput input {
+    width: 457px;
+    height: 36px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 12px;
+}
+.cjzbinput textarea {
+    width: 457px;
+    height: 98px;
+    resize: none;
+    border-radius: 5px;
+}
+.liveall li{
+    float: left;
+    padding: 8px 15px;
+    border: 1px solid #0084ff;
+    margin-left: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: #0084ff;
+}
+.selectBox{
+    padding: 8px 15px;
+    float: left;
+    font-size: 14px;
+}
+.liveRoomName{
+    font-size: 14px;
+}
+.liveRoom{
+    width: 370px;
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    font-size: 14px;
+}
+.liveRoomLeft{
+    width: 100px;
+    float: left;
+    font-weight: bold;
+
+}
+.liveRoomRight{
+    width: 270px;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.liveBg{
+    width: 100%;
+    height: 192px;
+    position: relative;
+}
+.liveBg img{
+    width: 100%;
+    height: 100%;
+}
+.liveBgTag{
+    padding: 5px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background: rgba(0,0,0,0.4);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+}
+.erweimaBox{
+    width: 100px;
+    height: 100px;
+    background: #CCCCCC;
+}
+.livetextarea{
+    width: 100%;
+    height: 200px;
+    resize: none;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+.liveSet{
+    width: 330px;
+    height: 220px;
+    float: left;
+    margin-top: 15px;
+    margin-left: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.liveSetHeader{
+    width: 330px;
+    height: 40px;
+    padding:  0 0 0 10px;
+    line-height: 40px;
+    background: #ddd;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+.liveSetHeader a{
+    color: #0084ff;
+    text-decoration: underline;
+    float: right;
+    margin-right: 10px;
+    font-weight: normal;
+}
+.liveSetCon{
+    width: 100%;
+    height: 180px;
+}
+.liveSetLeft{
+    width: 100px;
+    height: 100%;
+    float: left;
+}
+.liveSetRight{
+    width: 220px;
+    height: 100%;
+    float: left;
+}
+.LogoBox{
+    width: 80px;
+    height: 80px;
+    float: left;
+    margin-left: 20px;
+    background: #ccc;
+    margin-top: 20px;
+}
+.LogoBox img{
+    width: 100%;
+    height: 100%;
+}
+.liveSetpara{
+    width: 300px;
+    overflow: hidden;
+    margin: 20px auto 0;
+}
+.liveSetpara .liveSetName{
+    width: auto;
+    margin-right: 10px;
+    line-height: 20px;
+    float: left;
+    color: #333;
+}
+.liveSetpara .liveSetText{
+    width: 200px;
+    height: 40px;
+    overflow: hidden;
+    line-height: 20px;
+    float: left;
+}
+.liveSetshare{
+    width: 200px;
+    overflow: hidden;
+    float: left;
+}
+.livesharerig{
+    width: 80px;
+    float: right;
+    height: 80px;
+    background: #ccc;
+}
+.leadPic{
+    width: 280px;
+    height: 140px;
+    margin: 20px;
+}
+.leadPic img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.gift{
+    width: 280px;
+    height: 140px;
+    line-height: 140px;
+    text-align: center;
+    margin: 20px;
+}
+.watchList{
+    width: 400px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    margin-left: 15px;
+}
+.watchName{
+    width: 80px;
+    float: left;
+
+}
+.watchText{
+    width: 320px;
+    float: left;
+}
+.watchUnder{
+    float: right;
+    color: #0084ff;
+    text-decoration: underline;
+}
+.historyBox{
+    width: 540px;
+    height: 200px;
+    border: 1px solid #ddd;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+.histroyLeft{
+    width: 250px;
+    height: 170px;
+    margin: 15px 0 0 15px;
+    background: #ccc;
+    float: left;
+    position: relative;
+}
+.histroyRight{
+    width: 250px;
+    height: 170px;
+    margin: 15px 15px 0 5px;
+    float: left;
+}
+.histroyLeft img{
+    width: 100%;
+    height: 100%;
+}
+.histroyMask{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 5px;
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+}
+.historyList{
+    width: 100%;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.histroyName{
+    width: 75px;
+    float: left;
+    font-size: 14px;
+    line-height: 20px;
+}
+.histroyText{
+    width: 145px;
+    float: left;
+    font-size: 12px;
+    line-height: 20px;
+}
+.historyCon{
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+}
+.historyBtn{
+    width: 100%;
+    height: 40px;
+}
+.fengmianPic{
+    width: 60px;
+    height: 40px;
+}
+.playMask{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-size: 60px;
+    color: #fff;
+    margin-top: -30px;
+}
+.liveService{
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #999;
+}
+.serviceName{
+    width: 110px;
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+    margin-right: 10px;
+    float: left;
+    font-size: 14px;
+}
+.serviceInput{
+    width: 200px;
+    height: 30px!important;
+    border: 1px solid rgba(204, 204, 204, 1);
+    border-radius: 2px;
+    padding: 0 5px;
+    margin-right: 5px;
+}
+.serviceArea{
+    width: 86%;
+    height: 138px;
+    border: 1px solid #ddd;
+    resize: none;
+}
+.serviceBox{
+    width: 222px;
+    height: 200px;
+    margin: 0 auto;
+    background: #ccc;
+}
+.serviceBox img{
+    width: 100%;
+    height: 100%;
+}
+.serviceTit{
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.serviceText{
+    color: #999;
+    font-size: 12px;
+    height: 35px;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.serviceBtn{
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+}
+.servicebtn{
+    padding: 3px 8px;
+    border:1px solid #0084ff;
+    color: #0084ff;
+    background: #fff;
+    font-size: 12px!important;
+}
+.servicebtn:hover{
+    padding: 3px 8px;
+    border:1px solid #0084ff;
+    color: #0084ff;
+    background: #fff;
+    font-size: 12px!important;
+}
+.yuyuebtn{
+    padding: 3px 8px;
+    border:1px solid #666;
+    color: #666;
+    background: #fff;
+    font-size: 12px!important;
+}
+.yuyuebtn:hover{
+    padding: 3px 8px;
+    border:1px solid #666;
+    color: #666;
+    background: #fff;
+    font-size: 12px!important;
+}
+.serviceImg{
+    width: 200px;
+    height: 200px;
+    background: #ccc;
+    border: 1px solid #ddd;
+    float: left;
+    margin: 15px;
+}
+.serviceRightTit{
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.serviceRightText{
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 15px;
+}
+.control{
+    width: 288px;
+    height: 238px;
+    float: left;
+    margin-left: 10px;
+}
+.liveControl{
+    width: 288px;
+    height: 208px;
+}
+.littleControl{
+    margin: 15px auto;
+    width: 258px;
+    height: 178px;
+    position: relative;
+}
+.littleControl img{
+    width: 100%;
+    height: 100%;
+}
+.yellowTag{
+    padding: 5px 10px;
+    color: #fff;
+    background: #f8b31d;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.orangeTag{
+    padding: 5px 10px;
+    color: #fff;
+    background: #fc6800;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.controlText{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+.contrLeft{
+    width: 70%;
+    padding-left: 5px;
+    height: 30px;
+    float: left;
+}
+.contrRight{
+    width: 30%;
+    height: 30px;
+    float: left;
+    text-align: right;
+}
+.warnText{
+    color: #f8b31d;
+}
+.dangerText{
+    color: red;
+}
+.m-t-none{
+    margin-top: 0;
+}
+.controlCheck{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}

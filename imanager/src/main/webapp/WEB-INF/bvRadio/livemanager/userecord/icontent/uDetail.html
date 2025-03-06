@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用户详情</title>
+<#include "/bvRadio/livemanager/head.html" />
+<link rel="stylesheet" type="text/css"
+	href="${base}/tysx/css/account.css" />
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.js"></script>
+<style>
+#ul_title {
+	float: left;
+	margin-left: 100px;
+	height: 40px;
+	margin-top: 10px;
+}
+
+#ul_title li {
+	background: #888;
+	color: #eee;
+	float: left;
+	margin-left: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	height: 100%;
+	line-height: 40px;
+	cursor: pointer;
+}
+
+#ul_title li.active2 {
+	background: rgb(255, 153, 0);
+}
+
+.swal2-popup, .swal2-modal, .swal2-show {
+	width: 400px;
+	font-size: 14px;
+}
+
+</style>
+</head>
+<body>
+<div class="row">
+	<div class="col-lg-12 p-w-lg">
+		<#if iLiveManager.isAllBlack?? && iLiveManager.isAllBlack==1>
+		<h2 id="statemark" style="color: red;">拉黑状态</h2>
+		<button data-state="0" class="btn btn-success" id="disablebtn">启用该商户</button>
+		<div id="forbiddenreasondiv">
+			<div>
+				<label>拉黑理由：</label> <span id="forbiddenreason">${iLiveManager.allBlackReason!}</span>
+			</div>
+			<div>
+				<label>拉黑账号：</label> <span id="forbiddenperson">${iLiveManager.allBlackUser!}</span>
+			</div>
+		</div>
+		<#else>
+		<h2 id="statemark" style="">正常状态</h2>
+		<button data-state="1" class="btn btn-danger" id="disablebtn">拉黑该用户</button>
+		<div id="forbiddenreasondiv" style="display: none">
+			<div>
+				<label>拉黑理由：</label> <span id="forbiddenreason">${iLiveManager.allBlackReason!}</span>
+			</div>
+			<div>
+				<label>拉黑账号：</label> <span id="forbiddenperson">${iLiveManager.allBlackUser!}</span>
+			</div>
+		</div></#if>
+		<div></div>
+	</div>
+</div>
+<div class="m-t-xs">
+	<div class="col-lg-12">
+		<div id="myTabContent" class="tab-content">
+			<div class="information">
+				<div class="col-lg-6">
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">用户id</div>
+						<div class="manageRight">
+							<label>${iLiveManager.userId!}</label>
+						</div>
+					</div>
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">用户账号</div>
+						<div class="manageRight">
+							<label>${iLiveManager.mobile!}</label>
+						</div>
+					</div>
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">注册时间</div>
+						<div class="manageRight">
+							<label>${iLiveManager.createTime!}</label>
+						</div>
+					</div>
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">用户头像：</div>
+						<div class="manageRight">
+							<div class="license"
+								style="width: 120px; height: 120px; position: relative; z-index: 999">
+								<img id="img_userImg" style="height: 100%; width: 100%"
+									src="${iLiveManager.userImg!}"> <input id="userImg"
+									name="userImg" value="${iLiveManager.userImg!}" type="hidden">
+
+								<!-- <div style="position:absolute;width:80px;height:40px;line-height:40px;text-align:center;border-radius:5px;left:210px;bottom:0px;background:#ddd">
+                                            			更换logo
+                                            		<input type="file" id="file" accept="image/*" style="position: absolute; cursor:pointer; top: 0; left: 0px; right: 0px; bottom: 0px; opacity: 0; width: 100%;height:100%;z-index:99">
+                                            	</div> -->
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">注册来源：</div>
+						<div class="manageRight">
+							<label>${iLiveManager.registerSource!}</label>
+						</div>
+					</div>
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">用户备注：</div>
+						<div class="manageRight">
+							<textarea id="beizhu" rows="" cols="" style="width: 290px">${iLiveManager.beizhu!}</textarea>
+						</div>
+					</div>
+					<div style="text-align: center; padding-top: 10px">
+						<button class="btn btn-success" style="margin: 10px;" id="subedit">提交编辑</button>
+						<!-- <button class="btn btn-default" style="margin-left:10px;">发站内信</button> -->
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">用户昵称:</div>
+						<div class="manageRight">
+							<input class="manageInput" id="nailName" type="text"
+								placeholder="" value="${iLiveManager.nailName!}" />
+						</div>
+					</div>
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">用户密码:</div>
+						<div class="manageRight">
+							<input class="manageInput" id="userPwd" type="password"
+								value="${iLiveManager.userPwd!}" placeholder="" />
+							<button class="btn btn-default" onclick="resetpwd()">重置</button>
+							<button class="btn btn-default" id="copypwd"
+								data-clipboard-target="password">复制</button>
+						</div>
+					</div>
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">用户状态：</div>
+						<div class="manageRight">
+							<label> 
+								<#if iLiveManager.isAllBlack?? && iLiveManager.isAllBlack==1>拉黑<#else>正常</#if>
+							</label>
+						</div>
+					</div>
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">最后一次登录ip：</div>
+						<div class="manageRight">
+							<label>${iLiveManager.lastIP!}</label>
+						</div>
+					</div>
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">最后编辑人账号：</div>
+						<div class="manageRight">
+							<label>${iLiveManager.updateUserName!}</label>
+						</div>
+					</div>
+					<div class="col-lg-12 manageGroup">
+						<div class="manageName">最后编辑时间：</div>
+						<div class="manageRight">
+							<label>${iLiveManager.updateTime!}</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="bgModule"
+	style="position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; background: #000; display: none; opacity: 0.8; z-index: 9999">
+	<div id="showImg"
+		style="position: absolute; top: 50%; left: 50%; width: 400px; height: 300px; background-size: cover; margin-top: -150px; margin-left: -200px">
+
+	</div>
+	<button class="btn btn-default" onclick="closeModule()"
+		style="display: block; position: absolute; top: 50%; margin-top: -150px; left: 50%; margin-left: 200px;">关闭</button>
+</div>
+<script src="${base}/thirdparty/ZeroClipboard/ZeroClipboard.js"></script>
+<script>
+ function forbidden(){
+    	var userId = "${iLiveManager.userId}";
+    	console.log(userId);
+    	$.ajax({
+    		url:"${base}/operator/userrecord/letBlack",
+    		method:"post",
+    		data:{
+    			userId:userId,
+    			status:1
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1 && res.type==1){
+    				$("#forbidden").remove();
+    				$(".btn-box").append("<button type='button' onclick='noforbidden()' id='noforbidden' class='btn blueButton'>恢复正常</button>");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    }
+    function noforbidden(){
+    	var userId = "${iLiveManager.userId}";
+    	console.log(userId);
+    	$.ajax({
+    		url:"${base}/operator/userrecord/letBlack",
+    		method:"post",
+    		data:{
+    			userId:userId,
+    			status:0
+    		},
+    		success:function(res){
+    			console.log(res);
+    			if(res.status==1 && res.type==0){
+    				$("#noforbidden").remove();
+    				$(".btn-box").append("<button type='button' onclick='forbidden()' id='forbidden' class='btn blueButton'>拉黑</button>");
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    }
+    
+    
+    $("#disablebtn").on("click",function(){
+    	var userId = "${iLiveManager.userId}";
+    	var state = $(this).attr("data-state");
+    	console.log(state);
+    	var that = this;
+    	if(state == 0){
+    		swal({
+  			  title: '是否启用该用户',
+  			  input: 'textarea',
+  			  showCancelButton: true,
+  			  confirmButtonText: '确定',
+  			  showLoaderOnConfirm: true,
+  			  inputPlaceholder:'释放后该用户恢复所有功能！',
+  			  preConfirm: function(reason) {
+  				$.ajax({
+  		    		url:"${base}/operator/userrecord/letBlack",
+  		    		type:"post",
+  		    		data:{
+  		    			userId:userId,
+  		    			status:state
+  		    		},
+  		    		success:function(res){
+  		    			console.log("启用调用成功");
+  		    			console.log(res);
+  		    			if(res.code == 1){
+	    					$("#statemark").html("正常状态").css("color","#000");
+	    					$(that).attr("data-state","1").html("拉黑该用户").removeClass("btn-success").addClass("btn-danger");
+  		    				$("#forbiddenreasondiv").hide();
+  		    			}else{
+  		    				alert("修改失败");
+  		    			}
+  		    		}
+  		    	});
+  			  },
+  			  allowOutsideClick: false
+  			}).then(function(email) {
+				
+  			}) 
+    	}else{
+    		swal({
+    			  title: '是否拉黑该用户',
+    			  input: 'textarea',
+    			  showCancelButton: true,
+    			  confirmButtonText: '确定',
+    			  showLoaderOnConfirm: true,
+    			  inputPlaceholder:'输入拉黑理由，此理由会在用户登录时告知用户',
+    			  preConfirm: function(reason) {
+    				$.ajax({
+    		    		url:"${base}/operator/userrecord/letBlack",
+    		    		type:"post",
+    		    		data:{
+    		    			userId:userId,
+      		    			status:state,
+    		    			reason:reason
+    		    		},
+    		    		success:function(res){
+    		    			if(res.code == 1){
+   		    					$("#statemark").html("拉黑状态").css("color","red");
+   		    					$(that).attr("data-state","0").html("释放该用户").removeClass("btn-danger").addClass("btn-success");
+   		    					$("#forbiddenreasondiv").show();
+   		    					$("#forbiddenreason").html(reason);
+    		    				$("#forbiddenperson").html(res.person);
+    		    			}else{
+    		    				alert("修改失败");
+    		    			}
+    		    		}
+    		    	});
+    			  },
+    			  allowOutsideClick: false
+    			}).then(function(email) {
+  				
+    			}) 
+    	}
+    });
+    
+    //提交编辑
+    $("#subedit").on("click",function(){
+    	var userId = "${iLiveManager.userId}";
+    	var beizhu = $("#beizhu").val();
+    	var nailName = $("#nailName").val();
+    	if(nailName.length==0){
+    		swal("昵称不能为空");
+    		return false;
+    	}
+    	var userPwd = $("#userPwd").val();
+    	$.ajax({
+    		url:"${base}/operator/userrecord/subset",
+    		type:"post",
+    		data:{
+    			userId:userId,
+    			beizhu:beizhu,
+    			nailName:nailName,
+    			userPwd:userPwd
+    		},
+    		success:function(res){
+    			alert(res.msg);
+    		}
+    	});
+    	
+    });
+    
+    //上传图片
+    $("#file").on("change",function(){
+    	//获取点击的文本框
+    	var file = document.getElementById("file");
+    	var imgContainer
+    	//获取的图片文件
+    	var fileList = file.files;
+    	if (fileList.length > 0) {
+    		var formData = new FormData();
+    		var uploadFile = fileList[0];
+    		formData.append("file", uploadFile);
+    		formData.append("fileType", "image");
+    		console.log("${base}/operator/file/o_uploadFile.do");
+    		$.ajax({
+    			url : '${base}/operator/file/o_uploadFile.do',
+    			type : 'POST',
+    			data : formData,
+    			async : false,
+    			cache : false,
+    			contentType : false,
+    			processData : false,
+    			success : function(data) {
+    				console.log(data);
+    				if (data.status == 1) {
+    					var httpUrl = data.httpUrl;
+    					$('#img_enterpriseImg').attr("src", data.httpUrl);
+    					$('#enterpriseImg').val(data.httpUrl);
+    				} else {
+    					swal("上传失败");
+    				}
+    			},
+    			error : function(data) {
+    				console.log(data.code);
+    			}
+    		});
+    	}
+    });
+    
+    function enlarge(id){
+    	$("#bgModule").show();
+    	console.log($("#"+id).val());
+    	$("#showImg").css({"background":"url("+$("#"+id).val()+")","background-size":"contain","background-repeat":"no-repeat"});
+    }
+    function closeModule(){
+    	$("#bgModule").hide();
+    }
+    
+    function resetpwd(){
+    	console.log(111);
+    	$("#userPwd").val("000000");
+    }
+    
+    
+    var clip2 = new ZeroClipboard(document.getElementById("copypwd"), {
+		moviePath : "${base}/thirdparty/ZeroClipboard/ZeroClipboard.swf"
+	});
+	clip2.addEventListener("complete", function() {
+		swal("复制成功！");
+	});
+	
+	//上传图片
+    $("#file").on("change",function(){
+    	//获取点击的文本框
+		
+		var formData = new FormData();  
+	    var uploadFile = $("#file").get(0).files[0];
+	    var selectedId = $('#select').val();  
+	    var serverGroupId = $("#serverGroupId").val();
+	    formData.append("file",uploadFile);  
+	    formData.append("serverGroupId",serverGroupId);
+	    formData.append("fileType", "image");
+		
+	    $.ajax({
+			url : '${base}/admin/file/o_uploadFile.do',
+			type : 'POST',
+			data : formData,
+			async : false,
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				if (data.status==1) {
+					$("#backgroundimg").attr("src",data.httpUrl);
+					replaceImg(data.httpUrl);
+				} else {
+				}
+			},
+			error : function(data) {
+				console.log(data.status);
+			}
+		});
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>体头条管理平台</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; chrset=utf-8" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<#include "/bvRadio/head.html"/>
+<style>
+.control-group .controls .error {
+	color: red;
+}
+
+span .errorMsg {
+	color: red;
+}
+</style>
+<script src="${base}/res/bvRadio/js/jquery.cookie.js"
+	type="text/javascript"></script>
+<script src="${base}/thirdparty/uploadify/jquery.uploadify.min.js"
+	type="text/javascript"></script>
+<link href="${base}/thirdparty/uploadify/uploadify.css" rel="stylesheet"
+	type="text/css">
+<script>
+function getUploadUrl() {
+	var locationUrl = window.location.href;
+	var hostname = window.location.hostname;
+	var uploadUrl = "/bvRadioILive/admin/o_uploadFile.do";
+	if (locationUrl.toLocaleLowerCase().indexOf("https://")!=-1) {
+		uploadUrl = "http://"+hostname+":8585//bvRadioILive/admin/o_uploadFile.do";
+	}
+	return uploadUrl;
+}
+$(document).ready(function() {
+	var upload_url = getUploadUrl();
+	var jsessionid = $.cookie("JSESSIONID");
+	if (jsessionid) {
+		upload_url += ";jsessionid=" + jsessionid;
+	}
+	var fileSizeLimit = "5MB";
+	var fileTypeDesc = "图片文件";
+	var fileTypeExts = "*.jpeg; *.jpg; *.png";
+	$('#reviewImageUpload').uploadify({
+		'queueID' : 'reviewImageUploadProgressWrap',
+		'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+		'uploader' : upload_url, //指定服务器端上传处理文件
+		'auto' : true,
+		'buttonCursor' : 'hand',
+		'fileObjName' : 'Filedata',
+		'fileSizeLimit' : fileSizeLimit,
+		'fileTypeExts' : fileTypeExts,
+		'formData' : {
+			'fileType' : 'image'
+		},
+		'width' : 74,
+		'height' : 30,
+		'buttonText' : '上传图片',
+		'removeCompleted' : true,
+		'removeTimeout' : 0,
+		'multi' : false,
+		'onUploadSuccess' : function(file, data, response) {
+			var jsonObj = eval('(' + data + ')');
+			var imgPath =jsonObj.fileRootUrl + jsonObj.filePath;
+			$("#reviewImageView").attr("src", imgPath);
+			$("#reviewImage").val(imgPath);
+			$("#surface").attr("src", imgPath);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+			alert("上传失败。" + errorMsg);
+		}
+	});
+	$('#bannerImageUpload').uploadify({
+		'queueID' : 'bannerImageUploadProgressWrap',
+		'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+		'uploader' : upload_url, //指定服务器端上传处理文件
+		'auto' : true,
+		'buttonCursor' : 'hand',
+		'fileObjName' : 'Filedata',
+		'fileSizeLimit' : fileSizeLimit,
+		'fileTypeExts' : fileTypeExts,
+		'formData' : {
+			'fileType' : 'image'
+		},
+		'width' : 74,
+		'height' : 30,
+		'buttonText' : '上传图片',
+		'removeCompleted' : true,
+		'removeTimeout' : 0,
+		'multi' : false,
+		'onUploadSuccess' : function(file, data, response) {
+			var jsonObj = eval('(' + data + ')');
+			var imgPath =jsonObj.fileRootUrl + jsonObj.filePath;
+			$("#bannerImageView").attr("src", imgPath);
+			$("#bannerImage").val(imgPath);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+			alert("上传失败。" + errorMsg);
+		}
+	});
+	$('#indexImageUpload').uploadify({
+		'queueID' : 'indexImageUploadProgressWrap',
+		'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+		'uploader' : upload_url, //指定服务器端上传处理文件
+		'auto' : true,
+		'buttonCursor' : 'hand',
+		'fileObjName' : 'Filedata',
+		'fileSizeLimit' : fileSizeLimit,
+		'fileTypeExts' : fileTypeExts,
+		'formData' : {
+			'fileType' : 'image'
+		},
+		'width' : 74,
+		'height' : 30,
+		'buttonText' : '上传图片',
+		'removeCompleted' : true,
+		'removeTimeout' : 0,
+		'multi' : false,
+		'onUploadSuccess' : function(file, data, response) {
+			var jsonObj = eval('(' + data + ')');
+			var imgPath =jsonObj.fileRootUrl + jsonObj.filePath;
+			$("#indexImageView").attr("src", imgPath);
+			$("#indexImage").val(imgPath);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+			alert("上传失败。" + errorMsg);
+		}
+	});
+	$('#recommendImageUpload').uploadify({
+		'queueID' : 'recommendImageUploadProgressWrap',
+		'swf' : '${base}/thirdparty/uploadify/uploadify.swf', //指定上传控件的主体文件
+		'uploader' : upload_url, //指定服务器端上传处理文件
+		'auto' : true,
+		'buttonCursor' : 'hand',
+		'fileObjName' : 'Filedata',
+		'fileSizeLimit' : fileSizeLimit,
+		'fileTypeExts' : fileTypeExts,
+		'formData' : {
+			'fileType' : 'image'
+		},
+		'width' : 74,
+		'height' : 30,
+		'buttonText' : '上传图片',
+		'removeCompleted' : true,
+		'removeTimeout' : 0,
+		'multi' : false,
+		'onUploadSuccess' : function(file, data, response) {
+			var jsonObj = eval('(' + data + ')');
+			var imgPath =jsonObj.fileRootUrl + jsonObj.filePath;
+			$("#recommendImageView").attr("src", imgPath);
+			$("#recommendImage").val(imgPath);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+			alert("上传失败。" + errorMsg);
+		}
+	});
+});
+
+</script>
+</head>
+<body class="contrast-dark fixed-header">
+	<!--顶部开始-->
+	<#include "/bvRadio/admin/top.html"/>
+	<!--顶部结束-->
+	<!--主体开始-->
+	<div id="wrapper">
+		<!--左侧导航开始-->
+		<#include "/bvRadio/admin/left.html"/>
+		<!--左侧导航结束-->
+		<!--右侧框架开始-->
+		<section id='content'>
+			<div class='container-fluid'>
+				<div class='row-fluid' id='content-wrapper'>
+					<div class='span12 box'>
+						<div class='page-header mb10'>
+							<a href="${base}/admin/live/v_active_list.do"
+								class="pull-left btn mr10 mt5" data-placement="bottom"
+								style="color: #1A97D7; width: 41px; height: 17px; text-algin: center; line-height: 17px; font-size: 12px; background-color: rgba(217, 234, 243, 1); border-width: 1px; border-style: solid; border-color: rgba(26, 151, 215, 1); border-radius: 5px !important;"
+								class="btn btn-mini has-tooltip pull-left mb5 mr5">返回</a>
+
+							<!-- <a class="pull-left btn mr10 mt5" href="v_list.do"><i class="icon-chevron-left mr5"></i>返回</a> -->
+							<div class="title">
+								<ul class='breadcrumb no-margin'>
+									<li class=""><i class="icon-map-marker ml5 mr5"></i>直播管理
+									</li>
+									<li class='separator'><i class='icon-angle-right'></i></li>
+									<li class='active'>${live.liveName!}</li>
+								</ul>
+							</div>
+						</div>
+						<div class='row-fluid'>
+							<div class='span12 box'>
+								<div class='box-content overflow-hidden'>
+									<form id="addForm" action="o_update_more.do"
+										class="form form-horizontal" method="post"
+										style="margin-bottom: 0;">
+										<input type="hidden" name="liveId" value="${live.liveId!0}" />
+										<div class='row-fluid'>
+											<div class="span6 lineright">
+
+
+												<div class='control-group'>
+													<img id="surface" class="img " width="401px" height="321px"
+														src="<#if live.reviewImage??&&live.reviewImage!=''>${live.reviewImage!}<#else>${base}/res/bvRadio/img/u596.png</#if>">
+												</div>
+
+												<div class='row-fluid'>
+													<div class='span12'>
+														<div class='box-content overflow-hidden'>
+															<div class='tabbable'>
+																<ul class='nav nav-tabs'>
+																	<li class='active  tabli'><a data-toggle='tab'
+																		href='#tab1'> 封面图 </a></li>
+																	<li class="tabli"><a data-toggle='tab'
+																		href='#tab2'
+																		style="border-left: none; border-right: none"> 引导图
+																	</a></li>
+																	<li class="tabli"><a data-toggle='tab'
+																		href='#tab3'> 背景图 </a></li>
+																</ul>
+
+																<div class='tab-content'>
+																	<div class='tab-pane active' id='tab1'>
+
+																		<div class='row-fluid mt10'>
+																			<div class="pull-left" style="margin-left: 30px;">
+																				<img
+																					src="<#if live.reviewImage??&&live.reviewImage!=''>${live.reviewImage!}<#else>${base}/res/bvRadio/images/zanwu1.png</#if>"
+																					class="img-responsive" width="150px" height="150px"
+																					id="reviewImageView"> <input type="hidden"
+																					name="reviewImage" id="reviewImage"
+																					value="${live.reviewImage!}">
+																				<div id="" class="del"></div>
+
+																				<div class="span4 offset3 mt5">
+																					<input id="reviewImageUpload" type="hidden">
+																					<div id="reviewImageUploadProgressWrap"
+																						style="display: none"></div>
+																				</div>
+
+																			</div>
+																			<div class="pull-left"
+																				style="margin-left: 30px; width: 265px; color: #999;">
+
+																				<p>最大5M，建议750*560像素</p>
+																				<p>最大5M，建议750*560像素</p>
+																				<p>最大5M，建议750*560像素</p>
+
+																			</div>
+
+																		</div>
+
+																	</div>
+																	<div class='tab-pane' id='tab2'>
+																		<div class='row-fluid mt10'>
+																			<div class="pull-left" style="margin-left: 30px;">
+																				<img
+																					src="<#if live.bannerImage??&&live.bannerImage!=''>${live.bannerImage!}<#else>${base}/res/bvRadio/images/zanwu2.png</#if>"
+																					class="img-responsive" width="150px" height="150px"
+																					id="bannerImageView"> <input type="hidden"
+																					name="bannerImage" id="bannerImage"
+																					value="${live.bannerImage!}">
+																				<div id="" class="del"></div>
+
+																				<div class="span4 offset3 mt5">
+																					<input id="bannerImageUpload" type="hidden">
+																					<div id="bannerImageUploadProgressWrap"
+																						style="display: none"></div>
+																				</div>
+
+																			</div>
+																			<div class="pull-left"
+																				style="margin-left: 30px; width: 265px; color: #999;">
+
+																				<p>最大5M，建议750*560像素</p>
+																				<p>最大5M，建议750*560像素</p>
+																				<p>最大5M，建议750*560像素</p>
+
+																			</div>
+
+																		</div>
+
+																	</div>
+
+																	<div class='tab-pane' id='tab3'>
+
+																		<div class='row-fluid mt10'>
+																			<div class="pull-left" style="margin-left: 30px;">
+																				<img
+																					src="<#if live.indexImage??&&live.indexImage!=''>${live.indexImage!}<#else>${base}/res/bvRadio/images/zanwu4.png</#if>"
+																					class="img-responsive" width="150px" height="150px"
+																					id="indexImageView"> <input type="hidden"
+																					name="indexImage" id="indexImage"
+																					value="${live.indexImage!}">
+																				<div id="" class="del"></div>
+
+																				<div class="span4 offset3 mt5">
+																					<input id="indexImageUpload" type="hidden">
+																					<div id="indexImageUploadProgressWrap"
+																						style="display: none"></div>
+																				</div>
+
+																			</div>
+																			<div class="pull-left"
+																				style="margin-left: 30px; width: 265px; color: #999;">
+
+																				<p>最大5M，建议750*560像素</p>
+																				<p>最大5M，建议750*560像素</p>
+																				<p>最大5M，建议750*560像素</p>
+
+																			</div>
+
+																		</div>
+
+
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+
+
+											</div>
+											<div class="span5">
+
+												<div class='control-group'>
+													<label class='control-label'>直播名称：</label>
+													<div class='controls'>
+														<input class='input-xlarge span8' style="width: 385px"
+															name="liveName" type='text' id="liveName"
+															value="${live.liveName!}" /> <span class="errorMsg"></span>
+													</div>
+												</div>
+
+												<div class='control-group'>
+													<label class='control-label'>开始时间：</label>
+													<div class='controls'>
+														<div class="datetimepicker input-append no-marign"
+															style="width: 385px">
+															<input class="input-medium" id="liveStartTime"
+																name="liveStartTime" id="liveStartTime"
+																value="${live.liveStartTime!}" type="text"
+																data-format="yyyy-MM-dd hh:mm:ss" style="width: 347px">
+															<span class="add-on" style="cursor: pointer;"> <i
+																class="icon-calendar" data-time-icon="icon-time"
+																data-date-icon="icon-calendar"></i>
+															</span> <span class="errorMsg"></span>
+														</div>
+													</div>
+												</div>
+												<div class='control-group'>
+													<label class='control-label'>结束时间：</label>
+													<div class='controls'>
+														<div class="datetimepicker input-append no-marign">
+															<input style="width: 347px" class="input-medium"
+																id="liveEndTime" name="liveEndTime" id="liveEndTime"
+																value="${live.liveEndTime!}" type="text"
+																data-format="yyyy-MM-dd hh:mm:ss"> <span
+																class="add-on" style="cursor: pointer;"> <i
+																class="icon-calendar" data-time-icon="icon-time"
+																data-date-icon="icon-calendar"></i>
+															</span> <span class="errorMsg"></span>
+														</div>
+													</div>
+												</div>
+
+
+												<div class='control-group'>
+													<label class='control-label'>活动简介</label>
+													<div class='controls'>
+														<textarea style="width: 385px"
+															class="char-max-length input-block-level" name="liveDesc"
+															style="margin-bottom: 0;" rows="3" maxlength="20">${live.liveDesc!}</textarea>
+													</div>
+												</div>
+												<div class='control-group'>
+													<label class='control-label'>直播地址</label>
+													<div class='controls'>
+														<input style="width: 385px" class='input-xlarge span8'
+															name="playName" id="playName" type='text'
+															value="${live.playName!}" />
+													</div>
+												</div>
+												<div class='control-group'>
+													<label class='control-label'>播放地址</label>
+													<div class='controls'>
+														<input style="width: 385px" class='input-xlarge span8'
+															name="playUrl" id="playUrl" type='text'
+															value="${live.playUrl!}" />
+													</div>
+												</div>
+												<div class='control-group'>
+													<label class='control-label'>分享到：</label>
+													<div class='controls' style="width: 385px; height: 100px">
+														<div class="erweima"
+															style="width: 91px; height: 91px; float: left;">
+															<img src="${base}/res/bvRadio/img/u618.png">
+
+														</div>
+														<div class="tubiao"float:left;margin-left:30px">
+															<img src="${base}/res/bvRadio/img/u624.png"> <img
+																src="${base}/res/bvRadio/img/u622.png">
+														</div>
+
+													</div>
+												</div>
+												<div class='control-group no-margin'>
+													<label>
+														<div class='span2 text-right'>
+															<input class="span3 no-margin" name="enableCountdown"
+																value="1" type="checkbox" checked="checked" />
+														</div> <span class="span8 lh30">显示倒计时</span>
+													</label>
+												</div>
+
+												<div class='control-group no-margin'>
+													<label>
+														<div class='span2 text-right'>
+															<input class="span3 no-margin" name="enableSensitiveword"
+																value="1" type="checkbox" checked="checked" />
+														</div> <span class="span8 lh30">启用敏感字过滤</span>
+													</label>
+												</div>
+												<div class='control-group no-margin'>
+													<label>
+														<div class='span2 text-right'>
+															<input class="span3 no-margin" name="enableCommunity"
+																value="1" type="checkbox" checked="checked" />
+														</div> <span class="span8 lh30">启用互动交流</span>
+													</label>
+												</div>
+												<div class='control-group no-margin'>
+													<label>
+														<div class='span2 text-right'>
+															<input class="span3 no-margin" name="enableLive"
+																value="1" type="checkbox" checked="checked" />
+														</div> <span class="span8 lh30">启用图文直播</span>
+													</label>
+												</div>
+												<div class='control-group no-margin'>
+													<label>
+														<div class='span2 text-right'>
+															<input class="span3 no-margin"
+																name="enableEndCloseCommunity" value="1" type="checkbox"
+																checked="checked" />
+														</div> <span class="span8 lh30">直播结束后关闭互动</span>
+													</label>
+												</div>
+												<div class='control-group no-margin'>
+												<label>
+													<div class='span2 text-right'>
+														<input class="span3 no-margin" readonly
+															name="lianmai" value="1" type="checkbox"
+															 <#if live.lianmai??&&live.lianmai=true> checked="checked"</#if> />
+													</div> <span class="span8 lh30">支持连麦</span>
+												</label>
+											</div>
+											</div>
+										</div>
+										<hr>
+
+										<input type="hidden" name="channelId" id="channelId" value="1">
+										<!-- <input type="hidden" name="liveType" id="liveType" value=${live.liveType!}> -->
+										<div class='form-actions'>
+											<button class='btn btn-primary' type='submit'>
+												<i class='icon-save'></i> 保存
+											</button>
+											<button class='btn' type='button' id="cancel-button">取消</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<#include "/bvRadio/bottom.html"/>
+		</section>
+		<!--右侧框架结束-->
+	</div>
+	<!--主体结束-->
+	<!--主体结束-->
+	<script>
+		$(document).ready(function() {
+			$("#editForm").validate({
+				errorPlacement: function(error, element) {
+					$(element).parent().find(".errorMsg").append(error);
+				},
+				rules : {
+					liveName : {
+						required : true
+					},
+					channelId : {
+						required : true
+					},
+					liveType : {
+						required : true,
+					},
+					liveOneWord : {
+						required : true,
+					},
+					liveStartTime : {
+						required : true,
+					},
+					liveEndTime : {
+						required : true,
+					}
+				},
+				messages : {
+					liveName : {
+						required : "直播名称不能为空"
+					},
+					channelId : {
+						required : "必须选择一个所属频道"
+					},
+					liveType : {
+						required : "必须选择一个直播类型",
+					},
+					liveOneWord : {
+						required : "一句话简介不能为空",
+					},
+					liveStartTime : {
+						required : "直播开始时间不能为空",
+					},
+					liveEndTime : {
+						required : "直播结束时间不能为空",
+					}
+				}
+			});
+			$("#cancel-button").click(function() {
+				window.location.href = "v_list.do?queryUsername=${queryUsername!}";
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+
+// 鉴定登录
+${base}/app/room/vod/checklogin.jspx
+request ：
+{
+	fileId：文件ID
+	
+}
+
+response:
+{
+	code
+	message
+	data : {
+		roomNeedLogin : 是否需要登录
+		userInfo :  用户信息
+	}
+}
+
+
+引导鉴权
+${base}/app/room/vod/guide.jspx
+request ：
+{
+	fileId：文件ID
+	
+}
+
+response:
+{
+	code
+	message
+	data : {
+		通直播间鉴权的引导返回值
+	}
+}
+
+获得文件信息
+${base}/app/room/vod/fileinfo.jspx
+request ：
+{
+	fileId：文件ID
+}
+
+response:
+{
+	code
+	message
+	data : {
+		mediaFileName
+		mediaFileDesc
+		filePath
+		fileId
+		viewNum
+	}
+}
+
+输入房间密码
+${base}/app/room/vod/checkFilePassword.jspx
+request ：
+{
+	fileId：文件ID
+	passWord: 房间密码
+}
+response:
+{
+	code
+	message
+	data : {
+		
+	}
+}

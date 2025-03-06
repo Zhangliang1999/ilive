@@ -1,0 +1,560 @@
+@charset "UTF-8";
+/*----------------------------------------------------------------------------------- */
+/*  Mixins/variables */
+/*----------------------------------------------------------------------------------- */
+
+/*----------------------------------------------------------------------------------- */
+/*  Widget-Container */
+/*----------------------------------------------------------------------------------- */
+.widget-container {
+	min-height: 320px;
+	background: white;
+	/*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);*/
+}
+
+.widget-container.fluid-height {
+	height: auto;
+	min-height: 0;
+}
+
+.widget-container.small {
+	min-height: 120px;
+	height: 200px;
+}
+
+.widget-container.gallery {
+	min-height: 400px;
+}
+
+.widget-container .heading {
+	background: #efefef;
+	height: 35px;
+	padding: 10px 15px 0;
+	color: #007aff;
+	font-size: 15px;
+	font-weight: 400;
+	margin: 0;
+}
+
+.widget-container .heading [class^="icon-"],.widget-container .heading [class*="icon-"]
+	{
+	margin-right: 10px;
+	font-size: 14px;
+}
+
+.widget-container .heading [class^="icon-"].pull-right,.widget-container .heading [class*="icon-"].pull-right
+	{
+	margin-right: 0px;
+	margin-left: 15px;
+	opacity: 0.35;
+	font-size: 1.1em;
+}
+
+.widget-container .heading [class^="icon-"]:hover,.widget-container .heading [class*="icon-"]:hover
+	{
+	cursor: pointer;
+	opacity: 1;
+}
+
+.widget-container .tabs {
+	background: whitesmoke;
+	border-bottom: 1px solid #dddddd;
+}
+
+.widget-container .widget-content {
+	overflow: auto;
+	width: 100%;
+}
+
+.widget-container.scrollable {
+	position: relative;
+	height: 400px;
+	padding-top: 50px;
+}
+
+.widget-container.scrollable.chat-home {
+	height: 427px;
+}
+
+.widget-container.scrollable .heading {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+
+.widget-container.scrollable .shadow {
+	box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.widget-container.scrollable .widget-content {
+	height: 100%;
+	position: relative;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/*----------------------------------------------------------------------------------- */
+/*  Chat widget */
+/*----------------------------------------------------------------------------------- */
+.chat {
+	
+}
+
+.chat .widget-content {
+	background-color: white;
+}
+
+.chat .widget-content .scrollbar-path-vertical {
+	bottom: 56px !important;
+}
+
+.chat .widget-content ul.chatUl {
+	width: 94%;
+	list-style: none;
+	padding: 0;
+}
+
+.chat .widget-content ul.chatUl li.chatLi {
+	border-bottom: 0 !important;
+	padding-left: 40px;
+	padding-right: 15%;
+	position: relative;
+}
+
+.chat .widget-content ul.chatUl li.chatLi:last-child {
+	margin-bottom: 0;
+}
+
+.chat .widget-content ul.chatUl li img.chatface {
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	border-radius: 50%;
+}
+
+.chat .widget-content ul li .bubble {
+	float: left;
+	padding: 12px 15px;
+	background: #e5e5ea;
+	border-radius: 15px;
+	position: relative;
+}
+
+.chat .widget-content ul li .bubble:after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: -5px;
+	background: url("../images/chat-left.png") left top no-repeat;
+	width: 13px;
+	height: 13px;
+	display: block;
+}
+
+@media ( min--moz-device-pixel-ratio : 1.3) , ( -o-min-device-pixel-ratio : 2.6 /
+		2) , ( -webkit-min-device-pixel-ratio : 1.3) , (
+		min-device-pixel-ratio : 1.3) , ( min-resolution : 1.3dppx) {
+	.chat .widget-content ul li .bubble:after {
+		background-image: url("../images/chat-left@2x.png");
+		background-size: 13px 13px;
+	}
+}
+
+.chat .widget-content ul.chatUl li .bubble p.message {
+	margin-bottom: 12px;
+	color: #333333;
+}
+
+.chat .widget-content ul.chatUl li .bubble dl {
+	float: left;
+	margin-bottom: 10px !important;
+}
+
+.chat .widget-content ul.chatUl li .bubble dl img {
+	position: relative;
+	border-radius: 0;
+}
+
+.chat .widget-content ul.chatUl li .bubble .time {
+	font-size: 12px;
+	color: #888888;
+	margin-bottom: 0;
+}
+
+.chat .widget-content ul.chatUl li.current-user {
+	padding-right: 40px;
+	padding-left: 15%;
+}
+
+.chat .widget-content ul.chatUl li.current-user img {
+	right: 0;
+	left: auto;
+}
+
+.chat .widget-content ul.chatUl li.current-user .bubble {
+	float: right;
+	background: #178efe;
+}
+
+.chat .widget-content ul.chatUl li.current-user .bubble:after {
+	background: url("../images/chat-right.png") left top no-repeat;
+	left: auto;
+	right: -6px;
+}
+
+@media ( min--moz-device-pixel-ratio : 1.3) , ( -o-min-device-pixel-ratio : 2.6 /
+		2) , ( -webkit-min-device-pixel-ratio : 1.3) , (
+		min-device-pixel-ratio : 1.3) , ( min-resolution : 1.3dppx) {
+	.chat .widget-content ul li.current-user .bubble:after {
+		background-image: url("../images/chat-right@2x.png");
+		background-size: 13px 13px;
+	}
+}
+
+.chat .widget-content ul.chatUl li.current-user p,.chat .widget-content ul li.current-user a
+	{
+	color: white !important;
+}
+
+.chat .widget-content ul.chatUl li.current-user .time {
+	opacity: 0.75;
+}
+
+.chat .post-message {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 52px;
+	padding: 8px 60px 8px 8px;
+	background: #f2f2f2;
+	border-top: 1px solid #cccccc;
+}
+
+.chat .post-message input[type="text"] {
+	width: 100%;
+	height: 100%;
+}
+
+.chat .post-message input[type="submit"] {
+	position: absolute;
+	top: 12px;
+	right: 10px;
+	margin: 0;
+	border: 0;
+	background: transparent;
+	color: #007aff;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.widget-container.chat-page {
+	position: relative;
+	background-color: #f2f2f2;
+}
+
+.widget-container.chat-page .contact-list {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 222px;
+	height: 100%;
+	border-right: 1px solid #dddddd;
+	padding-top: 50px;
+}
+
+.widget-container.chat-page .contact-list .heading {
+	background-color: transparent;
+	color: #777777;
+	border-bottom: 1px solid #d6d6d6;
+	font-size: 16px;
+	padding-top: 12px;
+	padding-bottom: 14px;
+	background-color: #f2f2f2;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.widget-container.chat-page .contact-list .heading i {
+	margin-top: 4px;
+	font-size: 1em;
+}
+
+.widget-container.chat-page .contact-list ul {
+	list-style: none;
+	padding-left: 15px;
+	margin: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 100%;
+}
+
+.widget-container.chat-page .contact-list ul li {
+	border-bottom: 1px solid #d6d6d6;
+	margin: 0;
+}
+
+.widget-container.chat-page .contact-list ul li a {
+	display: block;
+	position: relative;
+	left: -15px;
+	width: 220px;
+	padding-left: 15px;
+	padding: 8px 0 8px 15px;
+	color: #888888;
+}
+
+.widget-container.chat-page .contact-list ul.chatUl li a:hover {
+	background-color: #e6e6e6;
+	color: #666666;
+}
+
+.widget-container.chat-page .contact-list ul.chatUl li img {
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+.widget-container.chat-page .contact-list ul.chatUl li i {
+	font-size: 12px;
+	float: right;
+	margin: 9px 20px 0 0;
+}
+
+.widget-container.chat-page>.heading {
+	position: relative !important;
+}
+
+.widget-container.chat-page .post-message {
+	position: relative;
+}
+
+/*----------- 含表情包的輸入框  ------------*/
+.Input_BoxMain {
+	width: 100%;
+	height: 127px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.Input_Box {
+	height: 160px;
+	border: 1px solid #ccc;
+	transition: border linear .2s, box-shadow linear .5s;
+	-moz-transition: border linear .2s, -moz-box-shadow linear .5s;
+	-webkit-transition: border linear .2s, -webkit-box-shadow linear .5s;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #fff;
+	overflow: hidden;
+	-moz-box-shadow: 0 0 5px #ccc;
+	-webkit-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+}
+
+.Input_Box>textarea {
+	width: 98%;
+	height: 70px;
+	padding: 1%;
+	outline: none;
+	border: 0px solid #fff;
+	resize: none;
+	font: 13px "微软雅黑", Arial, Helvetica, sans-serif;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	margin-bottom: 0 !important;
+}
+
+.Imginput_Box {
+	display: none;
+	width: 98%;
+	height: 70px;
+	padding: 1%;
+	outline: none;
+	border: 0px solid #fff;
+	resize: none;
+	font: 13px "微软雅黑", Arial, Helvetica, sans-serif;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	margin-bottom: 0 !important;
+}
+
+.Imginput_Box dl {
+	margin: 0;
+}
+
+.Imginput_Box dl dd {
+	position: relative;
+}
+
+.Imginput_Box dl dd .del {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	font-size: 25px;
+	display: none;
+	cursor: pointer;
+	background: #fff;
+	border: 0;
+	border-radius: 80%;
+}
+
+.Imginput_Box dl dd:hover .del {
+	display: block;
+	color: #333;
+}
+
+.Imginput_Box dl dd .del:hover {
+	color: #c52c2c;
+}
+
+.Input_Foot {
+	width: 100%;
+	height: 35px;
+	border-top: 1px solid #ccc;
+	background-color: #fff;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+	position: absolute;
+}
+
+.expression {
+	float: left;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-left: 10px;
+	height: 18px;
+	width: 20px;
+	cursor: pointer
+}
+
+.expression i {
+	font-size: 18px;
+}
+
+.expression:active {
+	margin-top: 9px;
+}
+
+.expression:hover {
+	border-bottom: none;
+	text-decoration: none;
+}
+
+.expression:hover i {
+	color: #f8a326;
+}
+
+.imgBtn {
+	float: left;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-left: 10px;
+	height: 18px;
+	width: 20px;
+	cursor: pointer
+}
+
+.imgBtn i {
+	font-size: 18px;
+}
+
+.imgBtn:hover {
+	border-bottom: none;
+	text-decoration: none;
+}
+
+.imgBtn:hover i {
+	color: #f8a326;
+}
+
+.postBtn {
+	float: right;
+	color: #fff;
+	padding: 9px 20px 7px 20px;
+	border-left: 1px solid #ccc;
+	cursor: pointer;
+	-moz-border-radius: 0 0 5px 0;
+	-webkit-border-radius: 0 0 5px 0;
+	border-radius: 0 0 5px 0px;
+	background-color: #49bf67;
+}
+
+.postBtn:hover {
+	text-decoration: none;
+	color: #fff;
+	background-color: #379e51;
+}
+
+.postBtn:active {
+	padding: 10px 20px 6px 20px;
+}
+
+.faceDiv {
+	width: 620px;
+	/*border-top: 1px solid #ccc;*/
+	position: absolute;
+	bottom: 150px;
+	background-color: #fff;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+}
+
+.faceDiv>img {
+	border: 1px solid #ccc;
+	float: left;
+	margin-left: -1px;
+	margin-top: -1px;
+	position: relative;
+	width: 24px;
+	height: 24px;
+	padding: 3px 3px 3px 3px;
+	cursor: pointer;
+}
+
+.faceDiv>img:hover {
+	background-color: #efefef;
+}
+
+.faceDiv>img:active {
+	padding: 4px 3px 2px 3px;
+}
+
+.editFaceDiv {
+	width: 775px;
+	/*border-top: 1px solid #ccc;*/
+	position: absolute;
+	top: 96px;
+	left: 1px;
+	background-color: #fff;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+}
+
+.editFaceDiv>img {
+	border: 1px solid #ccc;
+	float: left;
+	margin-left: -1px;
+	margin-top: -1px;
+	position: relative;
+	width: 24px;
+	height: 24px;
+	padding: 3px 3px 3px 3px;
+	cursor: pointer;
+}
+
+.editFaceDiv>img:hover {
+	background-color: #efefef;
+}
+
+.editFaceDiv>img:active {
+	padding: 4px 3px 2px 3px;
+}
+/*----------- 含表情包的輸入框  ------------*/

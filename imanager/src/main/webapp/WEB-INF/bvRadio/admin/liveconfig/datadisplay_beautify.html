@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>数据显示美化</title>
+	<#include "/bvRadio/head.html"/>
+    <!--直播设置模块样式-->
+    <link rel="stylesheet" href="${base}/tysx/css/WatchLimit.css"/>
+
+    <style>
+
+    </style>
+</head>
+<body >
+<div id="wrapper" class="bgc-fff normal-font">
+    <!--右侧内容的区域-->
+    <div id="page-wrapper">
+        <!--上面的导航栏部分-->
+        <#include "/bvRadio/admin/top.html"/>
+        <!--左侧部分-->
+        <#include "/bvRadio/admin/left.html"/>
+        <!--下面内容部分-->
+        <!-- roomId -->
+        <input type="hidden" value="${iLiveLiveRoom.roomId}" id="roomId"/>
+        <div class="wrapper wrapper-content bgc-fff datashow">
+            <div class="row title-header">
+                <div class="col-lg-12">
+                    <div class="title-name">
+                        <a class="font-title"> 数据显示设置</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 space-30">
+                    <div class="col-lg-4" style="padding-left:60px;">
+                        <div class="c-contain">
+                            <div class="c-top">
+                                <!--<p style="border:1px solid #ddd; width: 100%; height: 245px;"></p>-->
+                            </div>
+                            <div class="c-middle">
+                                <span class="glyphicon glyphicon-comment p-w-sm pull-right m-t-sm">3666</span>
+                                <span class="glyphicon glyphicon-user p-w-sm pull-right m-t-sm">366</span>
+                            </div>
+                            <div class="c-botttom">
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 cright m-l-lg">
+                        <p>
+                            <span>功能开关:</span>
+                            <input type="checkbox" id="switchbutton" class="chooseBtn" <#if liveEvent.openDataBeautifySwitch??><#if liveEvent.openDataBeautifySwitch == 1>checked</#if></#if> />
+                            <label for="switchbutton" class="choose-label"></label>
+                        </p>
+                        <p id="show_type">
+                            <span>显示数据：</span>
+                            <span><input type="radio" name="num" value="current" checked="checked"/>当前在线人数</span>
+                            <span class="m-l-xl"><input type="radio" name="num" value="total"/>累计浏览人数</span>
+                        </p>
+                        <div class="z_demo">
+                            <div class="m-b-sm">
+                                <p class="m-b-md">
+                                    <span>增加形式：</span>
+                                    <input type="checkbox" id="basetype"/>
+                                    <span>默认基础人数</span>
+                                    <input type="text" id="basenum"/>人
+                                </p>
+                                <p class="m-b-md" style="margin-left: 75px;">
+                                    <input type="checkbox" id="showtype"/>
+                                    <span>显示数据&nbsp;&nbsp;×</span>
+                                    <input type="text" style="margin-left: 18px;" id="shownum"/>倍
+                                </p>
+                            </div>
+                            <p>注：1.显示观众人数=默认基础人数+实际人数×倍数</p>
+                            <p class="p-xs">&nbsp;&nbsp;&nbsp;&nbsp;2.该数据只为前端用户展现，后台数据以真实数据统计</p>
+                        </div>
+                        <button class="btn red-bg m-t-md z-sure" type="submit" id="submit">确定</button>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+</body>
+<script>
+	
+	if(!($("#switchbutton").get(0).checked)){
+		$("input").attr("disabled","disabled");
+		$("#switchbutton").attr("disabled",false);
+	}
+
+    $(".live-bottom").hide()
+
+    wid=$('.blcen').width()
+    $('.textbl').css('width',wid-300)
+    $('.textbl2').css('width',wid-300)
+
+    $(window).resize(function () {          //当浏览器大小变化时
+
+        wid=$('.blcen').width()
+        $('.textbl').css('width',wid-300)
+        $('.textbl2').css('width',wid-300)
+
+    });
+
+    $(".img-box").hover(function(){
+        $(this).find(".live-bottom").stop(true, false).slideDown(300)
+
+    },function(){
+        $(this).find(".live-bottom").stop(true, false).slideUp(300)
+    })
+
+   $("#switchbutton").on("click",function(){
+	   if($("#switchbutton").get(0).checked){
+		   $("input").attr("disabled",false);
+   		}else{
+   			$("input").attr("disabled","disabled");
+   			$("#switchbutton").attr("disabled",false);
+   		}
+   });
+    
+    //确定按钮功能
+    $("#submit").on("click",function(){
+    	var openDataBeautifySwitch;
+    	if($("#switchbutton").get(0).checked){
+    		openDataBeautifySwitch = 1;
+    	}else{
+    		openDataBeautifySwitch = 0;
+    	}
+    	//显示当前在线人数还是累计在线人数
+    	var type = $("#show_type input[name = 'num']:checked").val();
+    	console.log(type);
+    	var num1;
+    	var num2;
+    	//基础人数
+    	var type1 = $("#basetype").get(0).checked;
+    	if($("#basetype").get(0).checked){
+    		num1 = $("#basenum").val();
+    	}else{
+    		num1 = 0;
+    	}
+    	if($("#showtype").get(0).checked){
+    		num2 = $("#shownum").val();
+    	}else{
+    		num2 = 1;
+    	}
+    	var roomId = $("#roomId").val();
+    	$.ajax({
+    		url:"${base}/admin/config/datadisplaybeautifyEdit.do",
+    		method:"post",
+    		data:{
+    			roomId:roomId,
+    			baseNum:num1,
+    			multiple:num2,
+    			openDataBeautifySwitch:openDataBeautifySwitch
+    		},
+    		success:function(){
+    			alert("设置成功");
+    		}
+    	});
+    	
+    	
+    });
+    
+    
+</script>
+</html>

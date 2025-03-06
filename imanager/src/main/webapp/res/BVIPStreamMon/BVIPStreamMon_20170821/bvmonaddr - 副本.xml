@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="GBK"?>
+<root>
+	<monitors>
+	
+		
+		<monitor>
+			<id>1131</id>
+			<name>CCTV2</name>
+			<url>file://i:/vod1/pd1.flv</url>
+		</monitor>	
+		
+		<monitor>
+			<id>1141</id>
+			<name>CCTV3</name>
+			<url>file://i:/vod1/pd2.mp4</url>
+		</monitor>	
+		
+		<monitor>
+			<id>1101</id>
+			<name>CCTV4</name>
+			<url>udp://224.1.1.1:9207</url>
+		</monitor>	
+		
+			<monitor>
+			<id>11011</id>
+			<name>CCTV4</name>
+			<url>udp://224.1.1.1:9207</url>
+		</monitor>	
+		
+		
+		
+		<monitor_lunxun>
+			<id>1161</id>
+			<name>CCTVlunxun2</name>
+			<url>udp://224.1.1.1:9208</url>
+		</monitor_lunxun>		
+		
+		<monitor_lunxun>
+			<id>1171</id>
+			<name>CCTVlunxun3</name>
+			<url>udp://224.1.1.1:9208</url>
+		</monitor_lunxun>	
+			
+		<monitor_lunxun>
+			<id>1181</id>
+			<name>CCTVlunxun4</name>
+			<url>udp://224.1.1.1:9208</url>
+		</monitor_lunxun>	
+		
+			<monitor_lunxun>
+			<id>11811</id>
+			<name>CCTVlunxun4</name>
+			<url>udp://224.1.1.1:9208</url>
+		</monitor_lunxun>	
+				
+		
+
+			
+		
+		
+		
+	</monitors>
+</root>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用户详情</title>
+<#include "/bvRadio/livemanager/head.html" />
+<link rel="stylesheet" type="text/css"
+	href="${base}/tysx/css/account.css" />
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.js"></script>
+<style>
+#ul_title {
+	float: left;
+	margin-left: 100px;
+	height: 40px;
+	margin-top: 10px;
+}
+
+#ul_title li {
+	background: #888;
+	color: #eee;
+	float: left;
+	margin-left: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	height: 100%;
+	line-height: 40px;
+	cursor: pointer;
+}
+
+#ul_title li.active2 {
+	background: rgb(255, 153, 0);
+}
+
+.swal2-popup, .swal2-modal, .swal2-show {
+	width: 400px;
+	font-size: 14px;
+}
+
+</style>
+</head>
+<body>
+	<div id="wrapper">
+		<!--右侧内容的区域-->
+		<div id="page-wrapper" class="gray-bg">
+			<!--上面的导航栏部分-->
+			<#include "/bvRadio/livemanager/top.html" />
+			<!--左侧部分-->
+			<#include "/bvRadio/livemanager/userecord/userRecordleft.html" />
+			<!--下面内容部分-->
+			<input type="hidden" name="serverGroupId" value="${serverGroupId!}"
+				id="serverGroupId" />
+			<input type="hidden" id="isBlack" value="${isBlack!}"/>
+			<div class="wrapper wrapper-content border-left bgc-fff">
+				<div class="row title-header gray-bg">
+					<div class="col-lg-12">
+						<div class="title-name" style="position: relative; width: 100%">
+							<a class="font-title" style="display: block; float: left">用户详情</a>
+							<ul id="ul_title">
+								<li class="active2" id="basicInfoLi">基本资料</li>
+								<li id="showListLi">直播观看列表</li>
+								<li id="showvideoListLi">回看观看列表</li>
+								<li id="appoListLi">预约列表</li>
+								<li id="followListLi">关注商户</li>
+								<li id="commentListLi">直播评论列表</li>
+								<li id="mediacommentListLi">回看评论列表</li>
+								<li id="loginListLi">登录列表</li>
+							</ul>
+							<div style="position: absolute; bottom: 0px; right: 100px">
+								<button type="button" id="backBtn" class="btn btn-default">返回</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content">
+					<!-- 基本资料 -->
+					<div id="basicInfo">
+						<hr/>
+						<iframe width="100%" height="100%" frameborder="no" border="0"  src="${base}/operator/userrecord/uDetail?userId=${iLiveManager.userId}"></iframe>
+					</div>
+					<!-- 观看列表 -->
+					<div id="showList">
+						<hr/>
+						<iframe width="100%" height="100%" frameborder="no" border="0"  src="${base}/operator/userrecord/liveviewlist?userId=${iLiveManager.userId}"></iframe>
+					</div>
+					<!-- 回看列表 -->
+					<div id="showvideoList">
+						<hr/>
+						<iframe width="100%" height="100%" frameborder="no" border="0"  src="${base}/operator/userrecord/videoviewlist?userId=${iLiveManager.userId}"></iframe>
+					</div>
+					<!-- 预约列表 -->
+					<div id="appoList">
+						<hr/>
+						<iframe width="100%" height="100%" frameborder="no" border="0"  src="${base}/operator/userrecord/appointList?userId=${iLiveManager.userId}"></iframe>
+					</div>
+					<!-- 关注商户 -->
+					<div id="followList">
+						<hr/>
+						<iframe width="100%" height="100%" frameborder="no" border="0"  src="${base}/operator/userrecord/followEnt?userId=${iLiveManager.userId}"></iframe>
+					</div>
+					<!-- 评论列表 -->
+					<div id="commentList">
+						<hr/>
+						<iframe width="100%" height="100%" frameborder="no" border="0"  src="${base}/operator/userrecord/liveMsglist?userId=${iLiveManager.userId}"></iframe>
+					</div>
+					<!-- 回看评论列表 -->
+					<div id="mediacommentList">
+						<hr/>
+						<iframe width="100%" height="100%" frameborder="no" border="0"  src="${base}/operator/userrecord/fileCommentsList?userId=${iLiveManager.userId}"></iframe>
+					</div>
+					<!-- 登录列表 -->
+					<div id="loginList">
+						<hr/>
+						<iframe width="100%" height="100%" frameborder="no" border="0"  src="${base}/operator/userrecord/loginList?userId=${iLiveManager.userId}"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="${base}/res/bvRadio/js/address.js" type="text/javascript"></script>
+<script type="text/javascript"
+	src="${base}/thirdparty/ZeroClipboard/ZeroClipboard.js"></script>
+<!-- Mainly scripts -->
+<script>
+$(document).ready(function() {
+	var winH = $(window).height() - 72;
+	$(".companyBox").height(winH - 90);
+	$(".slimBox").slimScroll({
+		height : winH - 90
+	});
+	$("iframe").css("min-height",(winH - 50 - 50)+"px");
+});
+
+    $(function () {
+        $('#myTab li:eq(0) a').tab('show');
+        $(".wrapper").height("auto");
+        var winHeight;
+        //获取页面高度
+        winHeight = $(window).height();
+        //导航栏高度
+        var navHeight = $(".navbar").height();
+        //标题栏高度加边线
+        var titleHeight = $(".title-header").height()+2;
+        $(".information").slimScroll({
+            height: winHeight-navHeight-titleHeight-200
+        });
+        
+        
+    });
+	//返回
+	$("#retback").on("click",function(){
+		$("#zhgl-box").show();
+    	$("#accountEdit").hide();
+	});
+	
+	
+	
+	//列表切换
+	$("#basicInfoLi").on("click",function(){
+		$(this).addClass("active2").siblings().removeClass("active2");
+		$("#basicInfo").show().siblings().hide();
+	});
+	$("#showListLi").on("click",function(){
+		$(this).addClass("active2").siblings().removeClass("active2");
+		$("#showList").show().siblings().hide();
+	});
+	$("#showvideoListLi").on("click",function(){
+		$(this).addClass("active2").siblings().removeClass("active2");
+		$("#showvideoList").show().siblings().hide();
+	});
+	$("#appoListLi").on("click",function(){
+		$(this).addClass("active2").siblings().removeClass("active2");
+		$("#appoList").show().siblings().hide();
+	});
+	$("#followListLi").on("click",function(){
+		$(this).addClass("active2").siblings().removeClass("active2");
+		$("#followList").show().siblings().hide();
+	});
+	$("#commentListLi").on("click",function(){
+		$(this).addClass("active2").siblings().removeClass("active2");
+		$("#commentList").show().siblings().hide();
+	});
+	$("#mediacommentListLi").on("click",function(){
+		$(this).addClass("active2").siblings().removeClass("active2");
+		$("#mediacommentList").show().siblings().hide();
+	});
+	$("#loginListLi").on("click",function(){
+		$(this).addClass("active2").siblings().removeClass("active2");
+		$("#loginList").show().siblings().hide();
+	});
+	
+	//返回
+	$("#backBtn").on("click",function(){
+		var isBlack = $("#isBlack").val();
+		if(isBlack==0){
+			location.href="${base}/operator/userrecord/alluser.do";
+		}else{
+			location.href="${base}/operator/userrecord/alluserblack.do";
+		}
+	});
+    
+	
+</script>
+</html>

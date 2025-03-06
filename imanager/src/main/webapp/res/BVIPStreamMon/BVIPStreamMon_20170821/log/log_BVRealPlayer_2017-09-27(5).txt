@@ -1,0 +1,10 @@
+2017/09/27 15:09:22(INFO)-------report asize=0  dsound asize=0 vsize=0 
+
+2017/09/27 15:09:27(INFO)-------report asize=0  dsound asize=0 vsize=0 
+ warn:recv too many same log 2 
+2017/09/27 15:09:32(INFO)-------report asize=0  dsound asize=0 vsize=0 
+ warn:recv too many same log 4 
+2017/09/27 15:09:37(INFO)-------report asize=0  dsound asize=0 vsize=0 
+ warn:recv too many same log 6 
+2017/09/27 15:09:42(INFO)-------report asize=0  dsound asize=0 vsize=0 
+ warn:recv too many same log 8 

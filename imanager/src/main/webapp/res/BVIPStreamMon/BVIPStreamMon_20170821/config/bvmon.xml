@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK"?>
+<root>
+<ShowWarnMsgTime>20</ShowWarnMsgTime> <!--显示报警信息时间,-1表示永远显示,0不显示-->
+
+<VideoExcetptionTime>10</VideoExcetptionTime> <!--音频异常持续时间-->
+
+<AudioExcetptionTime>10</AudioExcetptionTime> <!--音频异常持续时间-->
+
+<AudioWarnHigh>75</AudioWarnHigh>    <!--音量过高,黄色标记-->
+
+<AudioWarnHighRed>85</AudioWarnHighRed>    <!--音量过高,红色标记-->
+
+<AudioWarnLow>15</AudioWarnLow>    <!--音量过低-->
+
+<NoCheckAVError>0</NoCheckAVError>  <!--是否不检测视音频错误-->
+
+
+</root> 

@@ -1,0 +1,61 @@
+2017/09/27 14:34:51(INFO)-------参数有错误log:
+2017/09/27 14:34:51(INFO)-------监控本地路径=f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/bvmonaddr.xml
+2017/09/27 14:34:51(INFO)-------func=CBVAVStreamMonDlg::ParsetMonAddr msg=monitor_lunxun num<=0 ret=-1
+2017/09/27 14:34:53(INFO)-------虚拟内存使用=67 M
+2017/09/27 14:34:53(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:34:53(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:34:54(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:34:54(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:34:55(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:34:55(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:34:56(INFO)-------ShowThread ,Addr=file://i:/vod1/gaoqing/9_d大象标清2_a41fps.ts s loop num=2591 avg=518.0964 fps
+
+2017/09/27 14:34:56(INFO)-------func=CBVMonDlg::AddAVErrLog msg=检测到视频错误 id=1131,addr=file://i:/vod1/gaoqing/9_d大象标清2_a41fps.ts,类型=断流 ret=-1
+2017/09/27 14:34:56(INFO)-------ShowThread ,Addr=file://i:/vod1/pd2.mp4 s loop num=2594 avg=518.6963 fps
+
+2017/09/27 14:34:56(INFO)-------func=CBVMonDlg::AddAVErrLog msg=检测到视频错误 id=1141,addr=file://i:/vod1/pd2.mp4,类型=断流 ret=-1
+2017/09/27 14:34:56(INFO)-------ShowThread ,Addr=udp://224.1.1.1:9207 s loop num=2589 avg=517.6965 fps
+
+2017/09/27 14:34:56(INFO)-------func=CBVMonDlg::AddAVErrLog msg=检测到视频错误 id=1101,addr=udp://224.1.1.1:9207,类型=断流 ret=-1
+2017/09/27 14:34:56(INFO)-------ShowThread ,Addr=udp://224.1.1.1:9207 s loop num=2591 avg=518.0964 fps
+
+2017/09/27 14:34:56(INFO)-------func=CBVMonDlg::AddAVErrLog msg=检测到视频错误 id=11011,addr=udp://224.1.1.1:9207,类型=断流 ret=-1
+2017/09/27 14:34:56(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:34:56(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:34:57(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:34:57(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:34:58(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:34:58(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:34:59(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:34:59(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:35:00(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:35:00(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:35:01(INFO)-------ShowThread ,Addr=file://i:/vod1/gaoqing/9_d大象标清2_a41fps.ts s loop num=2589 avg=517.8000 fps
+
+2017/09/27 14:35:01(INFO)-------ShowThread ,Addr=file://i:/vod1/pd2.mp4 s loop num=2593 avg=518.6000 fps
+
+2017/09/27 14:35:01(INFO)-------ShowThread ,Addr=udp://224.1.1.1:9207 s loop num=2584 avg=516.8000 fps
+
+2017/09/27 14:35:01(INFO)-------ShowThread ,Addr=udp://224.1.1.1:9207 s loop num=2589 avg=517.8000 fps
+
+2017/09/27 14:35:01(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:35:01(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:35:02(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:35:02(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:35:03(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:35:03(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:35:04(INFO)-------虚拟内存使用=68 M
+2017/09/27 14:35:04(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:35:04(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:35:05(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restarttime.ini 
+2017/09/27 14:35:05(INFO)-------StringFromFile 失败：f:\行业头条\BVIPStreamMon_20170821 (4)\BVIPStreamMon_20170821\/restartlog.log 
+2017/09/27 14:35:06(INFO)-------ShowThread ,Addr=file://i:/vod1/gaoqing/9_d大象标清2_a41fps.ts s loop num=2595 avg=518.8962 fps
+
+2017/09/27 14:35:06(INFO)-------ShowThread ,Addr=file://i:/vod1/pd2.mp4 s loop num=2607 avg=521.2957 fps
+
+2017/09/27 14:35:06(INFO)-------ShowThread ,Addr=udp://224.1.1.1:9207 s loop num=2588 avg=517.6000 fps
+
+2017/09/27 14:35:06(INFO)-------ShowThread ,Addr=udp://224.1.1.1:9207 s loop num=2603 avg=520.6000 fps
+
+2017/09/27 14:35:06(INFO)-------threadquit:SubmitThread
+2017/09/27 14:35:06(INFO)-------threadquit:CBVMonDlg:showthread

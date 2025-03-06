@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>直播</title>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/jquery.slimscroll.js"></script>
+</head>
+<body>
+	<div class="playheader" style="background-color: #be3338;">
+		<div class="playlogo">
+			<p class="pull-left text-center z-logo">
+				<img src="images/zsbank.png" />
+			</p>
+			<!--已关注加上class名：active-->
+			<p class="attention">
+				<button class="btn commonbtn follow">
+					<i></i> 关注
+				</button>
+			</p>
+			<p class="attention">
+				<button class="btn follow active">
+					<i></i> 已关注
+				</button>
+			</p>
+		</div>
+	</div>
+	<div class="playcontent livepage">
+		<div class="playinfo">
+			<div class="pull-left player">
+				<div class="play-titie">
+					<h3>歌手 2018：第8期：霍尊“终极踢馆”，汪峰第一，踢馆成功了吗?</h3>
+					<span class="watchnum">87,654,321</span> <span>开播日期：04-13</span> <span>已开播：76分13秒</span>
+					<div class="pull-right zicon share">
+						<i></i> <span>分享</span> <img src="images/tcode.png" />
+					</div>
+					<span class="pull-right zicon thumpup"><i></i><label>304,567</label></span>
+				</div>
+				<div class="play-video">
+					<div class="mainplayer">
+						<img src="images/play.png" />
+					</div>
+
+					<!--直播状态显示-->
+					<div class="status text-center">
+						<!--直播未开始-->
+						<div class="statusinfo">
+							<p>
+								距离直播开始：<i>1</i>天<i>20</i>小时<i>15</i>分<i>50</i>秒
+							</p>
+							<button class="btn commonbtn">预约本场直播</button>
+							<br>
+							<button class="btn ordered">已预约本场直播</button>
+						</div>
+						<!--直播已结束-->
+						<!--<div class="statusinfo">-->
+						<!--<p style="font-size: 32px;">直播已结束</p>-->
+						<!--</div>-->
+					</div>
+				</div>
+				<div class="action-bar">
+					<div class="actionlist pull-left">
+						<p class="zaction">
+							<i></i><span>签到</span>
+						</p>
+						<p class="zaction">
+							<i></i><span>投票</span>
+						</p>
+						<p class="zaction">
+							<i></i><span>抽奖</span>
+						</p>
+						<p class="zaction">
+							<i></i><span>问卷</span>
+						</p>
+					</div>
+					<div class="pull-right text-right gift">
+						<img src="images/gift.png" /> <img src="images/gift.png" /> <img
+							src="images/gift.png" /> <img src="images/gift.png" />
+					</div>
+				</div>
+			</div>
+			<div class="pull-right interaction">
+				<ul id="myTab" class="nav nav-tabs">
+					<li class="active" onclick="selectLiveMsgType(2)"><a href="#chat" data-toggle="tab">聊天</a></li>
+					<li class="pull-right" onclick="selectLiveMsgType(1)"><a href="#topic" data-toggle="tab">话题</a></li>
+				</ul>
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane fade in active " id="chat">
+						<div class="chatBox"  id="chatMessageDiv">
+						</div>
+					</div>
+					<div class="tab-pane fade text-white " id="topic">
+						<div class="topoicBox" id="topicDiv">
+						</div>
+					</div>
+				</div>
+				<div class="text-center" style="margin-top: 5px;">
+					<div class="inputBox">
+							<span id="questionSpan" class="questionBox" onclick="questionSpan()">问</span>
+							<input type="text" name="content" />
+							<button class="sendBtn">发送</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--弹出登录框-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="loginpage" style="height: 430px;">
+			<form class="form">
+				<div class="form-group">
+					<input type="text" class="form-control phonenum" placeholder="手机号">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control vcode" placeholder="请输入验证码">
+					<a href="javascript:;" class="commonbtn send-sms"><span>获取验证码</span></a>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn commonbtn loginbtn">登 录</button>
+				</div>
+				<div class="form-group">
+					<div class="checkbox">
+						<label> <input type="checkbox"><span> 用户协议</span>
+						</label>
+					</div>
+				</div>
+
+				<div class="otherway">
+					<p>
+						<span></span> <span class="otherlogin">第三方账户直接登陆</span> <span></span>
+					</p>
+					<a href="javascript:;" class="aicon qq"></a> <a href="javascript:;"
+						class="aicon wx" /></a> <a href="javascript:;" class="aicon wb" /></a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="playfooter livefooter">
+		<div class="introduct pull-left">
+			<p class="introductTil">直播简介</p>
+			<img src="images/pic3.png" />
+		</div>
+		<div class="pull-right review-more">
+			<h3 class="text-lightgray">回看视频</h3>
+			<ul>
+				<li>
+					<div class="reviewlist">
+						<a href="#"><img src="images/review.png" /></a> <span>50:20</span>
+					</div>
+					<div class="reviewinfo text-dullgray">
+						<h4>
+							<a href="#">直播名称直播名称直播名称名称直播名称直播名称</a>
+						</h4>
+						<p class="uploadtime">2018/02/01 16:48</p>
+						<p class="totalnum">
+							<span><i></i>3049,980</span> <span><i></i>45,908</span>
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="reviewlist">
+						<a href="#"><img src="images/review.png" /></a> <span>50:20</span>
+					</div>
+					<div class="reviewinfo text-dullgray">
+						<h4>
+							<a href="#">直播名称直播名称直播名称名称直播名称直播名称</a>
+						</h4>
+						<p class="uploadtime">2018/02/01 16:48</p>
+						<p class="totalnum">
+							<span><i></i>3049,980</span> <span><i></i>45,908</span>
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="reviewlist">
+						<a href="#"><img src="images/review.png" /></a> <span>50:20</span>
+					</div>
+					<div class="reviewinfo text-dullgray">
+						<h4>
+							<a href="#">直播名称直播名称直播名称名称直播名称直播名称</a>
+						</h4>
+						<p class="uploadtime">2018/02/01 16:48</p>
+						<p class="totalnum">
+							<span><i></i>3049,980</span> <span><i></i>45,908</span>
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="reviewlist">
+						<a href="#"><img src="images/review.png" /></a> <span>50:20</span>
+					</div>
+					<div class="reviewinfo text-dullgray">
+						<h4>
+							<a href="#">直播名称直播名称直播名称名称直播名称直播名称</a>
+						</h4>
+						<p class="uploadtime">2018/02/01 16:48</p>
+						<p class="totalnum">
+							<span><i></i>3049,980</span> <span><i></i>45,908</span>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<input type="hidden" id="roomId" name="roomId" value="0">
+	<input type="hidden" id="userId" name="userId" value="0">
+	<input type="hidden" id="liveEventId" name="liveEventId" value="0">
+	<input type="hidden" id="liveMsgType" name="liveMsgType" value="2">
+</body>
+<script type="text/javascript">
+	function questionSpan(){
+		var liveMsgType = $("input[name=liveMsgType]").val();
+		if(liveMsgType==2){
+			$("input[name=liveMsgType]").val(3);
+			$("#questionSpan").addClass("questionActive");
+		}else{
+			$("input[name=liveMsgType]").val(2);
+			$("#questionSpan").removeClass("questionActive");
+		}
+	}
+	function selectLiveMsgType(liveMsgType){
+		$("#questionSpan").removeClass("questionActive");
+		if(liveMsgType==2){
+			$("input[name=liveMsgType]").val(2);
+			$("#questionSpan").attr("onclick","questionSpan()");
+			$("input[name=content]").removeAttr("readonly");
+		}else{
+			$("input[name=liveMsgType]").val(1);
+			$("input[name=content]").attr("readonly","readonly");
+			$("#questionSpan").removeAttr("onclick");
+		}
+	}
+</script>
+<script type="text/javascript">
+var h5Base="192.168.222.156:80"; 
+var tomcatBase = "192.168.222.156:8080";
+	$(function(){
+		var param = window.location.search;
+		if(param==""){
+			alert("参数错误");
+			return;
+		}
+		var newsidinfo = param.substr(param.indexOf("?") + 1, param.length)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+		var split = newsidinfo.split("&")
+		for (var i = 0; i < split.length; i++) {
+			var newsids = split[i].split("=");//对获得的参数字符串按照“=”进行分割
+			var newsid = newsids[1];//得到参数值
+			var newsname = newsids[0];
+			if (newsname == "roomId") {
+				$("input[name=roomId]").val(newsid);
+			}else if(newsname == "userId"){
+				$("input[name=userId]").val(newsid);
+			}
+		}
+		var roomId = $("input[name=roomId]").val();
+		if (roomId == 0) {
+			alert("直播间不存在");
+			return;
+		}
+		//=====================建立连接================
+		$.ajax({
+			type : "GET",//请求方式 get/post
+			url : "http://" + tomcatBase + "/ilive/app/room/checkRoomLogin.jspx",
+			dataType : "jsonp",
+			jsonp : "callback",
+			cache : false,
+			data : {
+				roomId  : roomId
+			},
+			success : function(data) {
+				console.log(data);
+				var status = data.code;
+				if (status == 1) {
+					var roomNeedLogin = JSON.parse(data.data).roomNeedLogin;
+					if(roomNeedLogin==1){
+						window.location.href="http://"+h5Base+"/pc/login.html?roomId="+roomId;
+						return;
+					}else if(roomNeedLogin==2){
+						var userInfo = JSON.parse(data.data).userInfo;
+						var userId = userInfo.userId;
+						if(userId!=undefined||userId!=null){
+							$("input[name=userId]").val(userId);
+						}
+						$.ajax({
+							type : "GET",//请求方式 get/post
+							url : "http://" + tomcatBase + "/ilive/app/room/getRoomInfo.jspx",
+							dataType : "jsonp",
+							jsonp : "callback",
+							cache : false,
+							data : {
+								roomId : roomId
+							},
+							success : function(data) {
+								console.log(data);
+								var status = data.code;
+								if(status==1){
+									var liveEvent = data.data.liveEvent;
+									var liveEventId = liveEvent.liveEventId;
+									$("input[name=liveEventId]").val(liveEventId);
+									var openSignupSwitch = liveEvent.openSignupSwitch;
+									if(openSignupSwitch==1){
+										var diyformAddr = liveEvent.diyformAddr;
+										window.location.href="http://"+h5Base+"/pc/form.html?roomId="+roomId;
+										return;
+									}
+									var viewAuthorized = liveEvent.viewAuthorized;
+									if(viewAuthorized==2){
+										window.location.href="http://"+h5Base+"/pc/password.html?roomId="+roomId;
+										return;
+									}else{
+										selectHTML(roomId);
+									}
+								}else{
+									alert(data.message);	
+								}
+							}
+						});
+					}else{
+						alert("roomNeedLogin："+roomNeedLogin);
+					}
+				}else{
+					alert(data.message);
+				}
+			}
+		});
+		//===============================================	
+		window.setTimeout("selectcommentsList("+roomId+")",5000);//页面加载5秒执行一次
+		window.setInterval("selectcommentsList("+roomId+")",30000);//循环执行每一分钟执行一次
+	});
+	function selectHTML(roomId){
+		var userId = $("input[name=userId]").val();//用户ID
+		//用户登录
+		$.ajax({
+			type : "GET",//请求方式 get/post
+			url : "http://" + tomcatBase + "/ilive/app/room/roomenter.jspx",
+			dataType : "jsonp",
+			jsonp : "callback",
+			cache : false,
+			data : {
+				roomId : roomId,
+				sessionType : 1//WebSocket使用用户
+			},
+			success : function(data) {
+				console.log(data);
+				if (data.code == 1) {
+					var hlsAddr = data.hlsAddr;
+					/* $("video").attr("src",hlsAddr); */
+					var token = data.token;
+					console.log(token);
+					var ws;
+					if (typeof (WebSocket) == "undefined") {
+						alert("您的浏览器不支持WebSocket");
+						return;
+					}
+					var url = "ws://" + tomcatBase
+							+ "/ilive/webSocketServer.jspx?username="
+							+ token;
+					ws = new WebSocket(url);
+					ws.onopen = function(e) {
+						console.log("连接成功");
+					}
+					ws.onclose = function(e) {
+						console.log("关闭连接 " + e.reason);
+					}
+					ws.onerror = function(e) {
+						console.log(e);
+						console.log("建立连接异常" + e);
+					}
+					ws.onmessage = function(e) {
+						var iLiveMessage = JSON.parse(e.data);
+						console.log(iLiveMessage);
+						var liveMsgType = iLiveMessage.liveMsgType;
+						if (iLiveMessage.deleted == 1) {
+							$("#msgId_" + iLiveMessage.msgId).remove();
+						} else {
+							if (iLiveMessage.roomType == 1) {
+								//消息管理
+								var deleteAll = iLiveMessage.deleteAll;
+								if (deleteAll == 1) {
+									$("#chatMessageDiv").remove();
+								} else {
+									if (liveMsgType == 2) {
+										if (iLiveMessage.checked == 1) {
+											var HTMLTXT = "<div id=\"msgId_"+iLiveMessage.msgId+"\">";
+												HTMLTXT +="		<p class=\"sofa\">";
+												HTMLTXT +="			<i class=\"btext\">"+iLiveMessage.senderName+"：</i>"+iLiveMessage.content;
+												HTMLTXT +="		</p>";
+												HTMLTXT +="</div>";
+											$("#chatMessageDiv").prepend(HTMLTXT);
+										}
+									}else if(liveMsgType == 1){
+										var HTMLTXT = "<div id=\"msgId_"+iLiveMessage.msgId+"\">";
+											HTMLTXT +="		<p class=\"sofa\">";
+											HTMLTXT +="			<i class=\"btext\">"+iLiveMessage.senderName+"：</i>"+iLiveMessage.content;
+											HTMLTXT +="		</p>";
+											HTMLTXT +="		<p></p>";
+											HTMLTXT +="		<p class=\"handle\">";
+											HTMLTXT +="			<span class=\"message\"><i></i><span id=\"commentsNumber_"+iLiveMessage.msgId+"\">0</span></span>";	
+											HTMLTXT +="		 	<span class=\"thumbup\"><i></i>345,678</span>";
+											HTMLTXT +="		</p>";
+											HTMLTXT +="		<div class=\"reply\">";
+											HTMLTXT +="			<div id=\"commentsList_"+iLiveMessage.msgId+"\"></div>";
+											HTMLTXT +="		</div>";
+											HTMLTXT +="</div>";
+										$("#topicDiv").prepend(HTMLTXT);
+									}else if(liveMsgType == 3){
+										if (iLiveMessage.replyType == 1) {
+											var HTMLTXT = "<div id=\"msgId_"+iLiveMessage.msgId+"\">";
+												HTMLTXT += "	<p class=\"quiz\"><label>提问</label><i>"+iLiveMessage.senderName+"：</i>"+iLiveMessage.content+"</p>";
+												HTMLTXT += "	<p class=\"answer btext\"><label class=\"bluegb\">回答</label><i>"+iLiveMessage.replyName+"：</i>"+iLiveMessage.replyContent+"</p>";
+												HTMLTXT += "</div>";
+											$("#chatMessageDiv").prepend(HTMLTXT);
+										}
+									}
+								}
+							} else {
+								console.log("操作类型:"+ iLiveMessage.roomType);
+							}
+						}
+					}
+				}else{
+					alert(data.message);
+				}
+			}
+		});
+	}
+	//获取话题评论
+	function selectcommentsList(roomId){
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "http://" + tomcatBase + "/ilive/comments/selectList.jspx",
+			dataType : "jsonp",
+			jsonp : "callback",
+			cache : false,
+			data : {
+				roomId : roomId
+			},
+			success : function(data) {
+				var status = data.code;
+				if (status == 1) {
+					var iLiveCommentsMap = JSON.parse(data.iLiveCommentsMap);
+					for (var i = 0; i < iLiveCommentsMap.length; i++) {
+						var vo = iLiveCommentsMap[i];
+						var list = vo.list;
+						var HTMLTXT ="";
+						for (var j = 0; j < list.length; j++) {
+							var comments = list[j];
+							HTMLTXT +="<p>";
+							HTMLTXT +="		<i class=\"btext\">"+comments.commentsName+":</i>"+comments.comments;
+							HTMLTXT +="</p>";
+						}
+						$("#commentsNumber_"+vo.msgId).text(list.length);
+						$("#commentsList_"+vo.msgId).html(HTMLTXT);
+					}
+				} else {
+					alert(data.message);
+				}
+			}
+		});
+	}
+</script>
+<script>
+	$(document).ready(function() {
+		$("#myTabContent").height(460);
+		$(".chatBox").slimScroll({
+			height : '430px'
+		});
+		$(".topoicBox").slimScroll({
+			height : '430px'
+		});
+	})
+</script>
+</html>

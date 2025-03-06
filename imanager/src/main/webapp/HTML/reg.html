@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title></title>
+<link href="css/mui.min.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
+<script src="js/jquery-1.7.2.min.js"></script>
+<style>
+.area {
+	margin: 20px auto 0px auto;
+}
+.mui-input-group:first-child {
+	margin-top: 20px;
+}
+.mui-input-group label {
+	width: 22%;
+}
+.mui-input-row label ~input,.mui-input-row label ~select,.mui-input-row label
+	~textarea {
+	width: 78%;
+}
+.mui-checkbox input[type=checkbox],.mui-radio input[type=radio] {
+	top: 6px;
+}
+.mui-content-padded {
+	margin-top: 25px;
+}
+.mui-btn {
+	padding: 10px;
+}
+</style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">注册</h1>
+	</header>
+	<div class="mui-content">
+		<form class="mui-input-group">
+			<div class="mui-input-row">
+				<label>账号</label> <input id='account' type="text"
+					class="mui-input-clear mui-input" name="userName" placeholder="请输入账号">
+			</div>
+			<div class="mui-input-row">
+				<label>密码</label> <input id='password' type="password"
+					class="mui-input-clear mui-input" name="password" placeholder="请输入密码">
+			</div>
+		</form>
+		<div class="mui-content-padded">
+			<button id='reg' class="mui-btn mui-btn-block mui-btn-primary" onclick="formSumbit()">注册</button>
+		</div>
+		<div class="mui-content-padded">
+			<p>注册真实可用，注册成功后的用户可用于登录，但是示例程序并未和服务端交互，用户相关数据仅存储于本地。</p>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+var h5Base="zb.tv189.com"; 
+var tomcatBase = "mp.zb.tv189.com";
+var roomId = 0
+$(function(){
+	var param = window.location.search;
+	var newsidinfo = param.substr(param.indexOf("?") + 1, param.length)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+	var split = newsidinfo.split("&")
+	for (var i = 0; i < split.length; i++) {
+		var newsids = split[i].split("=");//对获得的参数字符串按照“=”进行分割
+		var newsid = newsids[1];//得到参数值
+		var newsname = newsids[0];
+		if (newsname == "roomId") {
+			roomId = newsid;
+		}
+	}
+});
+	function formSumbit(){
+		var phoneNum = $("input[name=userName]").val();
+		if(phoneNum==undefined||phoneNum.replace("\s+", "")==""){
+			alert("请输入注册用户手机号");
+			return;
+		}
+		var password = $("input[name=password]").val();
+		if(password==undefined||password.replace("\s+", "")==""){
+			alert("请输入密码");
+			return;
+		}
+		console.log("phoneNum："+phoneNum+"   password："+password);
+		$.ajax({
+			type : "POST",//请求方式 get/post
+			url : "http://" + tomcatBase + "/ilive/appuser/reg.jspx",
+			dataType : "jsonp",
+			jsonp : "callback",
+			cache : false,
+			data : {
+				phoneNum : phoneNum,
+				password : password
+			},
+			success : function(data) {
+				var status = data.code;
+				if (status == 1) {
+					window.location.href="http://" +h5Base + "/phone/login.html?roomId="+roomId;
+					return;
+				} else {
+					alert(data.message);
+				}
+			}
+		});
+	}
+</script>
+</html>

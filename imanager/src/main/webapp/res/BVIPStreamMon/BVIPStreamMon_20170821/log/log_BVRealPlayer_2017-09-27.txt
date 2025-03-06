@@ -1,0 +1,5 @@
+2017/09/27 14:12:58(INFO)-------report asize=0  dsound asize=0 vsize=0 
+
+2017/09/27 14:13:03(INFO)-------report asize=0  dsound asize=0 vsize=0 
+ warn:recv too many same log 4 
+2017/09/27 14:13:06(INFO)-------threadquit:CBVRealPlayerImpl PlayThread
