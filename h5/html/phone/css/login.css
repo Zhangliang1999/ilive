@@ -1,0 +1,61 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.container{
+	width: 100%;
+	height: auto;
+	background: url(../img/login.jpg) no-repeat;
+	background-size: 100% 100%;
+	overflow: hidden;
+}
+.header{
+	width: 80%;
+	height: 1.5rem;
+	background: url(../img/logo.png) no-repeat;
+	background-size: 100% 100%;
+	margin: 0rem auto;
+}
+.main{
+	width: 90%;
+	height: 5rem;
+	margin: 0 auto;
+	background: #fff;
+}
+.inputBox{
+	position: relative;
+}
+.yzmBtn{
+	width: auto;
+	height: 0.6rem;
+	position: absolute;
+	top: 0.5rem;
+	right:0.4rem;
+	background: #0084FF;
+	color: #fff;
+	border: none;
+	padding: 0 0.1rem;
+	outline: none;
+}
+.inputBox input{
+	padding: 0 2%;
+	width: 86%;
+	height: 0.8rem;
+	margin: 0.4rem 5% 0 5%;
+	font-size: 0.33rem;
+	outline: #0084FF;
+	border: 1px solid #ccc;
+
+}
+.loginBtn{
+	width: 90%;
+	margin-left: 5%;
+	height: 1rem;
+	margin-top: 0.5rem;
+	background: #0084FF;
+	font-size: 0.33rem;
+	color: #fff;
+	outline: none;
+	border: none;
+	border-radius: 3px;
+}

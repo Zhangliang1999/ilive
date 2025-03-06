@@ -1,0 +1,2100 @@
+
+.pull-left {
+    float: left;
+}
+
+.videoBox {
+    width: 100%;
+    height: 4.6rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.videoBox img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.textMask {
+    font-family: monospace;
+    padding: 0.2rem 0.3rem;
+    background: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    color: #fff;
+    font-size: 0.28rem;
+    position: absolute;
+    left: 50%;
+    border-radius: 50px;
+    top: 1.5rem;
+    z-index: 99;
+    text-shadow: 3px 5px 10px #000;
+}
+
+.yuyueBox {
+    position: absolute;
+    left: 0;
+    bottom: 1.24rem;
+    width: 100%;
+    text-align: center;
+    z-index: 99;
+}
+
+.yuyue {
+    padding: 0.15rem 0.5rem;
+    font-size: 0.24rem;
+    color: #fff;
+    background: #0084ff;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+}
+
+.mainBox {
+    width: 100%;
+}
+
+.firstBox {
+    width: 100%;
+    position: relative
+}
+
+.menuBox {
+    height: 0.9rem;
+    background-color: #fff;
+    position: relative;
+}
+
+.menuBox ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menuBox ul li {
+    height: 100%;
+    width: 33.333%;
+    flex: 1;
+    color: #828282;
+    text-align: center;
+    line-height: 0.8rem;
+    font-weight: bold;
+    font-size: 0.28rem;
+    position: relative;
+}
+
+.menuBox ul li a {
+    color: #828282;
+    text-decoration: none;
+    height: 0.8rem;
+    text-align: center;
+    line-height: 0.8rem;
+    font-weight: bold;
+    font-size: 0.28rem;
+    position: relative;
+}
+
+.menuBox ul li.liactive a {
+
+    color: #fff;
+}
+
+.menuBox ul li.liactive a {
+    display: block;
+    position: relative;
+    height: 100%;
+    border: none;
+}
+
+.contentBox {
+    border-top: 1px solid #e3e3e3;
+    width: 100%;
+    background-color: #f8f8f8;
+    position: absolute;
+    overflow: auto;
+    position: relative;
+    font-weight: normal;
+}
+
+.contentBox > ul {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: all 0.5s ease
+}
+
+.contentBox > ul > li {
+    width: 100%;
+    /*overflow-x: hidden;*/
+    /*overflow-y: auto;*/
+    position: relative;
+    z-index: 8;
+    background-color: #fff !important;
+}
+
+.talkBox {
+    font-size: 0.28rem;
+    color: #333;
+}
+#review {
+    min-height: 150px;
+    position: relative;
+}
+.reviewList:first-child {
+    margin-top: 0;
+}
+
+.talkBox p {
+    padding: 0 0.2rem 0 0.2rem;
+    line-height: 0.48rem;
+}
+
+.imgBox {
+    padding: 0rem 0.2rem 0 0.2rem;
+}
+
+.imgBox img {
+    width: 3rem;
+    height: 1.8rem;
+    border-radius: 5px;
+    margin-right: 3px;
+}
+
+.talkBox .username {
+    color: #e8b333;
+    margin-right: 5px;
+}
+
+.answerBox {
+    width: 100%;
+    background: #f7f4ec;
+    border-top: 1px solid #f4e7c7;
+    border-bottom: 1px solid #f4e7c7;
+    overflow: hidden;
+    padding: 0.2rem 0;
+}
+
+.question {
+    display: block;
+    float: left;
+    margin-right: 0.2rem;
+    background: #db0e0e;
+    color: #FFF;
+    border-radius: 5px;
+    width: 0.6rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    font-size: 0.26rem;
+    text-align: center;
+}
+
+.answer {
+    display: block;
+    float: left;
+    margin-right: 0.2rem;
+    background: #0093f7;
+    color: #FFF;
+    border-radius: 5px;
+    width: 0.6rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    font-size: 0.26rem;
+    text-align: center;
+}
+
+.bottomArrow {
+    height: 0.4rem;
+    line-height: 0.4rem;
+    font-size: 0.35rem;
+    text-align: center;
+    color: #e3ded2;
+}
+
+.talkCon {
+    width: 7rem;
+    padding: 0.25rem;
+    position: absolute;
+    bottom: 0;
+    background: #fff;
+    border-top: 1px solid #e6e6e6;
+    z-index: 9999;
+}
+
+.talkLi {
+    padding-top: 1rem;
+}
+
+.mescroll-upwarp {
+    padding: 0;
+    min-height: 0;
+}
+
+.textarea {
+    width: 6.4rem;
+    height: 1.28rem;
+    border: 1px solid #ddd;
+    resize: none;
+    background: #f7f7f7;
+    padding: 0.2rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.28rem;
+}
+
+.wen {
+    width: 0.53rem;
+    height: 0.53rem;
+    float: left;
+    background: url("../img/graywen.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.biaoqing {
+    width: 0.53rem;
+    height: 0.53rem;
+    float: left;
+    background: url("../img/newbiaoqing.png") no-repeat;
+    background-size: 100% 100%;
+    margin-right: 0.34rem;
+}
+
+.qiandao {
+    width: 0.44rem;
+    height: 0.44rem;
+    position: absolute;
+    top: 0.28rem;
+    right: 1.4rem;
+    background: url("../img/qian.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.liwu {
+    width: 0.5rem;
+    height: 0.44rem;
+    position: absolute;
+    top: 0.28rem;
+    right: 0.4rem;
+    background: url("../img/gift.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.shipinBox {
+    width: 3rem;
+    height: 1.8rem;
+    border-radius: 5px;
+    margin-right: 3px;
+    margin-left: 0.2rem;
+    background: url(../img/111.jpg) no-repeat;
+}
+
+.sendMessage {
+    width: 0.98rem;
+    height: 0.52rem;
+    float: right;
+    outline: none;
+    background: #b2daff;
+    border: none;
+    color: #fff;
+    border-radius: 50px;
+}
+
+.hide {
+    display: none;
+}
+
+.emojiBox {
+    position: fixed;
+    left: 0;
+    bottom: 1rem;
+    background: #fff;
+    z-index: 9999;
+}
+
+#saytext img {
+    width: 0.35rem;
+    height: 0.35rem;
+}
+
+.answerCon {
+    height: auto;
+}
+
+.bottomArrow {
+    padding: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.zhiding {
+    width: 20px;
+    height: 20px;
+    display: block;
+    float: left;
+    background: #ec5151;
+    margin-right: 10px;
+    overflow: hidden;
+    color: #ffffff;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+}
+
+/*直播简介*/
+
+/*.shareCon{*/
+/*width: 2.0rem;*/
+/*height: 0.37rem;*/
+/*float: right;*/
+/*}*/
+.shareIcon {
+    display: inline-block;
+    width: 0.37rem;
+    height: 0.37rem;
+    background: url("../img/shareIcon.png") no-repeat;
+    background-size: 100% 100%;
+    margin-right: 0.51rem;
+}
+
+.signIcon {
+    display: inline-block;
+    width: 0.37rem;
+    height: 0.37rem;
+    background: url("../img/signIcon.png") no-repeat;
+    background-size: 100% 100%;
+    margin-right: 0.51rem;
+}
+
+.collIcon {
+    /*display: inline-block;*/
+    /*width: 0.43rem;*/
+    /*height: 0.37rem;*/
+    /*background: url("../img/collIcon.png") no-repeat;*/
+    /*background-size: 100% 100%;*/
+    /*margin-right: 0.51rem;*/
+}
+
+.zbjj {
+    position: relative;
+    /*z-index: 999!important;*/
+}
+
+#talkLi .ListConTit {
+    position: absolute;
+    top: 0;
+}
+
+.theme, .review, .wendang {
+    z-index: 999 !important;
+}
+
+.zbjjline {
+    width: 7.5rem;
+    height: 0.15rem;
+    background: #f4f4f4;
+}
+
+.zbjjMain .zbjjList {
+    width: 7.5rem;
+    overflow: hidden;
+
+}
+
+.zbjjList .ListCon {
+    width: 7rem;
+    padding: 0 0.25rem;
+    border-top: 1px solid #f4f4f4;
+    font-size: 0.28rem;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.ListConTit {
+    width: 7rem;
+    padding: 0.27rem 0.25rem;
+    /*border-top: 1px solid #f4f4f4;*/
+    font-size: 0.28rem;
+    font-weight: bold;
+}
+
+.listLeft {
+    width: 1rem;
+    padding: 0.27rem 0;
+    float: left;
+    color: #999999;
+    margin-right: 0.2rem;
+    font-size: 0.24rem;
+}
+
+.listRight {
+    width: 5.7rem;
+    float: left;
+    font-size: 0.26rem;
+    color: #333;
+    padding: 0.28rem 0;
+}
+
+/*互动聊天*/
+.topBox {
+    padding: 0.45rem 0.25rem 0.35rem 0.25rem;
+    border-top: 1px solid #ebdcdd;
+    border-bottom: 1px solid #ebdcdd;
+    background: #feeff0;
+    line-height: 0.47rem;
+    font-size: 0.28rem;
+}
+
+.stickName {
+    font-size: 0.28rem;
+    color: #fc1a26;
+}
+
+.stickIcon {
+    display: inline-block;
+    width: 0.76rem;
+    height: 0.32rem;
+    background: url("../img/zhiding.png") no-repeat;
+    background-size: 100% 100%;
+    margin-right: 0.13rem;
+    vertical-align: middle;
+}
+
+.commentText {
+    line-height: 0.47rem;
+    font-size: 0.28rem;
+    color: #32373d;
+    vertical-align: middle;
+}
+
+.commentText img {
+    vertical-align: middle;
+}
+
+.questionBox {
+    padding: 0.1rem 0.25rem;
+    /*border-bottom: 1px solid #ebdcdd;*/
+    line-height: 0.47rem;
+}
+
+.questionName {
+    font-size: 0.28rem;
+    color: #999999;
+}
+
+.questionIcon {
+    display: inline-block;
+    width: 0.39rem;
+    height: 0.38rem;
+    margin-right: 0.13rem;
+    vertical-align: middle;
+}
+
+.questionIcon img {
+    width: 100%;
+    height: 100%;
+}
+
+.questionanswer {
+    padding: 0.3rem 0.25rem;
+    background: #f7f7f7;
+    position: relative;
+    margin-top: 0.2rem;
+}
+
+.manageBox {
+    padding: 0.1rem 0.25rem;
+    /*border-bottom: 1px solid #ebdcdd;*/
+    line-height: 0.47rem;
+}
+
+.manageName {
+    font-size: 0.28rem;
+    color: #f7931e;
+}
+
+.manageIcon {
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.32rem;
+    margin-right: 0.13rem;
+    vertical-align: middle;
+}
+
+.manageIcon img {
+    width: 100%;
+    height: 100%;
+}
+
+.commentBox {
+    padding: 0.1rem 0.25rem;
+    /*border-bottom: 1px solid #ebdcdd;*/
+    line-height: 0.47rem;
+}
+
+.talkLi {
+    position: relative;
+}
+
+.newtalkCon {
+    width: 100%;
+    height: 1rem;
+    background: #fff;
+    /*border-top: 1px solid #ebdcdd;*/
+    border-top: 1px solid #e3e3e3;
+    z-index: 9;
+}
+
+.newtalkCon .jinyanBox {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99;
+}
+
+.talkConLeft {
+    width: 0.51rem;
+    height: 0.5rem;
+    float: left;
+    margin: 0.26rem;
+}
+
+.talkConLeft img {
+    width: 100%;
+    height: 100%;
+}
+
+.talkConRight {
+    width: 6.8rem;
+    height: 0.62rem;
+    float: left;
+    margin: 0.17rem 0.25rem 0 0.25rem;
+    background: #f7f7f7;
+    border-radius: 50px;
+    border: 1px solid #fff;
+    position: relative;
+}
+
+.talkConRight img {
+    width: 100%;
+    /*height: 100%;*/
+}
+
+.biaoqingBox {
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url("../img/newbiaoqing.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 0.1rem;
+    top: 0.1rem;
+}
+
+.newmask {
+    width: 7.5rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+}
+
+.livemask {
+    width: 7.5rem;
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+}
+
+.replymask {
+    width: 7.5rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 9999999;
+}
+
+.replyInput {
+    width: 5.3rem;
+    height: 0.52rem;
+    /*margin: 0.2rem 0 0 0.2rem;*/
+    border: 1px solid #e6e6e6;
+    border-radius: 50px;
+    outline: none;
+    padding: 0 0.2rem;
+}
+
+.replyMessage {
+    width: 0.98rem;
+    height: 0.52rem;
+    float: right;
+    outline: none;
+    background: #b2daff;
+    border: none;
+    color: #fff;
+    border-radius: 50px;
+}
+
+.replyBox {
+    width: 7.5rem;
+    height: 3rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: #fff;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.replyHeader {
+    width: 7.5rem;
+    height: 1rem;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.replyDiv {
+    width: 6.23rem;
+    height: 0.6rem;
+    margin: 0.2rem 0.3rem;
+    background: url("../img/reply.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+
+.videoMask {
+    width: 7.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+}
+
+.videoMask video {
+    width: 7.5rem;
+    object-fit: contain;
+    object-position: center center;
+}
+
+.closeReply {
+    width: 0.4rem;
+    height: 0.4rem;
+    float: left;
+    background: url("../img/delete.png") no-repeat;
+    background-size: 100% 100%;
+    margin-top: 0.3rem;
+}
+
+.replyCon {
+    padding: 0.2rem 0.3rem;
+    overflow: auto;
+
+}
+
+.nothemeBox {
+    width: 2.45rem;
+    height: 2.45rem;
+    clear: both;
+    margin: 1rem auto 0.5rem;
+    background: url("../img/nothemeBox.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.nothemeText {
+    width: 7.5rem;
+    line-height: 0.4rem;
+    font-size: 0.3rem;
+    text-align: center;
+    color: #999;
+}
+
+.closeVideo {
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    float: right;
+    background: url("../img/delete.png") no-repeat;
+    background-size: 100% 100%;
+    top: 0.3rem;
+    right: 0.3rem;
+}
+
+.fireIcon {
+    width: 0.2rem;
+    height: 0.22rem;
+    display: inline-block;
+    background: url("../img/fire.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+/*箭头向上*/
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 0.2rem solid transparent;
+    border-right: 0.2rem solid transparent;
+    border-bottom: 0.2rem solid #f7f7f7;
+    position: absolute;
+    top: -0.2rem;
+}
+
+/*话题*/
+.reply {
+    float: right;
+    color: #999;
+    font-size: 0.24rem;
+    width: 20%;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    float: right;
+    text-align: center;
+    font-size: 0.24rem;
+}
+
+.hintBox {
+    width: 7.5rem;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    text-align: center;
+    font-size: 0.24rem;
+    background: #f4f4f4;
+}
+
+.theme {
+    background: #fff;
+}
+
+.themeBox {
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.themeHeader {
+    width: 100%;
+    height: 0.6rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.1rem;
+}
+
+.themeImg {
+    width: 0.6rem;
+    height: 0.6rem;
+    /*background: #0062CC;*/
+    border-radius: 100%;
+    float: left;
+    margin-left: 0.2rem;
+    margin-right: 0.15rem;
+    overflow: hidden;
+    text-align: center;
+}
+
+.themeImg img {
+    width: 100%;
+    height: 100%;
+}
+
+.themeName {
+    width: 5rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    float: left;
+    color: #0084ff;
+    font-size: 0.26rem;
+    margin-left: 0.2rem;
+}
+
+.themeTime {
+    float: right;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    margin-right: 0.2rem;
+    color: #999999;
+    font-size: 0.22rem;
+}
+
+.themeBody {
+    padding: 0 0.2rem;
+}
+
+.themecol {
+    color: #009cff;
+    text-decoration: none;
+    margin-right: 0.2rem;
+}
+
+.themeText {
+    line-height: 0.5rem;
+    font-size: 0.3rem;
+    color: #444;
+    vertical-align: middle;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.themeText img {
+    vertical-align: middle;
+}
+
+.themePic img {
+    width: 2.3rem;
+    height: 1.7rem;
+    /*margin-left: 0.1rem;*/
+}
+
+.themeBottom {
+    height: 1.3rem;
+    line-height: 1.3rem;
+}
+
+.comment {
+    /*width: 20%;*/
+    /*height: 1.3rem;*/
+    /*line-height: 1.3rem;*/
+    /*float: right;*/
+    /*color: #999;*/
+    /*font-size: 0.24rem;*/
+}
+
+.heartIcon {
+    width: 0.28rem;
+    height: 0.26rem;
+    display: inline-block;
+    margin-right: 0.1rem;
+}
+
+.heartIcon img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.replyIcon {
+    width: 0.28rem;
+    height: 0.26rem;
+    display: inline-block;
+    margin-right: 0.1rem;
+}
+
+.replyIcon img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.upvote {
+    width: 20%;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    float: right;
+    text-align: center;
+    color: #e8e8e8;
+    font-size: 0.24rem;
+}
+
+.upvote i {
+    width: 0.35rem;
+    height: 0.35rem;
+    font-size: 0.35rem;
+    /*vertical-align: middle;*/
+    margin-right: 0.1rem;
+    color: #e8e8e8;
+}
+
+.arrowBox {
+    width: 33.33333%;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    float: left;
+    text-align: right;
+    color: #e8e8e8;
+}
+
+.arrowBox i {
+    width: 0.35rem;
+    height: 0.35rem;
+    font-size: 0.35rem;
+    /*vertical-align: middle;*/
+    margin-right: 0.1rem;
+}
+
+.themeFooter {
+    background: #f7f7f7;
+    width: 6.5rem;
+    padding: 0.1rem 0.25rem;
+    margin: 0 auto 0.3rem;
+    position: relative;
+}
+
+.pinlun {
+    font-size: 0.26rem;
+    line-height: 0.4rem;
+    color: #444;
+    margin-bottom: 0.1rem;
+}
+
+.plname {
+    color: #999999;
+    margin-right: 0.2rem;
+}
+
+/*回看*/
+
+.reviewList {
+    margin-bottom: 0.4rem;
+    width: 100%;
+    height: 1.8rem;
+}
+
+.reviewLeft {
+    width: 3.1rem;
+    height: 1.8rem;
+    float: left;
+    margin-left: 0.2rem;
+    position: relative;
+}
+
+.reviewMask {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0rem;
+    color: #fff;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    font-size: 0.22rem;
+    background: rgba(0, 0, 0, 0.5);
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)); /* IE 10 */
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)); /*火狐*/
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0))); /*谷歌*/
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)); /*Safari5.1 Chrome 10+*/
+}
+
+.reviewMask span {
+    margin-left: 0.2rem;
+}
+
+.maskTime {
+    display: inline-block;
+    height: 0.35rem;
+    line-height: 0.35rem;
+    text-align: center;
+    border-radius: 50px;
+    float: right;
+    margin-right: 0.2rem;
+    margin-top: 0.075rem;
+}
+
+/*.reviewLeft img{*/
+/*width: 100%;*/
+/*height: 100%;*/
+/*}*/
+/*.reviewRight {*/
+/*width: 3.8rem;*/
+/*height: 1.8rem;*/
+/*float: left;*/
+/*margin-left: 0.2rem;*/
+/*}*/
+
+.reviewRightTop {
+    /*width: 3.8rem;*/
+    /*height: 0.8rem;*/
+    /*line-height: 0.4rem;*/
+    /*font-size: 0.3rem;*/
+    /*color: #444;*/
+    /*margin-top: 0.1rem;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*display: -webkit-box;*/
+    /*-webkit-line-clamp: 2;*/
+    /*-webkit-box-orient: vertical;*/
+}
+
+/*.reviewMask span i{*/
+/*margin-right: 0.15rem;*/
+/*}*/
+/*.reviewRightBottom {*/
+/*width: 3.8rem;*/
+/*height: 0.46rem;*/
+/*line-height: 0.46rem;*/
+/*overflow: hidden;*/
+/*text-overflow: ellipsis;*/
+/*white-space: nowrap;*/
+/*font-size: 0.22rem;*/
+/*color: #CCCCCC;*/
+/*}*/
+.reviewIcon {
+    width: 3.8rem;
+    height: 0.46rem;
+    line-height: 0.46rem;
+}
+
+.reviewIcondiv {
+    /*width: 1.9rem;*/
+    /*height: 0.46rem;*/
+    /*background: #fff;*/
+    /*line-height: 0.46rem;*/
+    /*float: left;*/
+    /*font-size: 0.24rem;*/
+    /*color: #999;*/
+}
+
+.reviewplayIcon {
+    display: block;
+    float: left;
+    line-height: 0.46rem;
+}
+
+.gongkai {
+    /*width: 0.28rem;*/
+    /*height: 0.2rem;*/
+    /*margin: 0.15rem 0.1rem;*/
+    /*background: url("../img/gongkai.png") no-repeat;*/
+    /*background-size: 100%;*/
+}
+
+.pass {
+    width: 0.23rem;
+    height: 0.26rem;
+    margin: 0.1rem 0.1rem;
+    background: url("../img/pass.png") no-repeat;
+    background-size: 100%;
+}
+
+.reviewplay {
+    /*width: 0.26rem;*/
+    /*height: 0.26rem;*/
+    /*margin: 0.1rem 0.1rem;*/
+    /*background: url("../img/play.png") no-repeat;*/
+    /*background-size: 100%;*/
+}
+
+/*文档*/
+.wendang {
+    position: relative;
+}
+
+.wendangBox {
+    width: 7.1rem;
+    height: 4.45rem;
+    margin: 0.2rem auto;
+}
+
+.wendangBox img {
+    width: 100%;
+    height: 100%;
+}
+
+.wendangBottom {
+    width: 100%;
+    height: 0.99rem;
+    border-top: 1px solid #ccc;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.pptImg {
+    width: 0.62rem;
+    height: 0.6rem;
+    float: left;
+    margin-left: 0.3rem;
+    margin-top: 0.19rem;
+}
+
+.pptImg img {
+    width: 100%;
+    height: 100%;
+}
+
+.pptCon {
+    width: 3.5rem;
+    height: 0.6rem;
+    float: left;
+    margin-left: 0.2rem;
+    margin-top: 0.19rem;
+}
+
+.pptName {
+    height: 0.36rem;
+    font-size: 0.24rem;
+    color: #444;
+}
+
+.pptSize {
+    height: 0.24rem;
+    color: #CCCCCC;
+    font-size: 0.2rem;
+}
+
+.pptBtn {
+    width: 1.1rem;
+    height: 0.52rem;
+    float: right;
+    margin-top: 0.23rem;
+    margin-right: 0.2rem;
+}
+
+.pptBtn button {
+    width: 1.1rem;
+    height: 0.52rem;
+    background: #e8b333;
+    border-radius: 3px;
+    border: none;
+    color: #fff;
+    font-size: 0.24rem;
+}
+
+.pptBtn i {
+    margin-right: 0.1rem;
+}
+
+.themeCon {
+    padding-bottom: 1rem;
+}
+
+.tuwenPic {
+    margin-top: 10px;
+    width: 2.22rem;
+    height: 1.7rem;
+    margin-right: 2px;
+    margin-left: 2px;
+    object-fit: contain;
+    object-position: center center;
+}
+
+.talkBox p img {
+    vertical-align: middle;
+}
+
+.answerBox p {
+    padding: 0.1rem 0.2rem 0 0.2rem;
+    line-height: 0.5rem;
+}
+
+.mescroll {
+    overflow-x: hidden;
+}
+
+.toBig {
+    width: 2.15rem;
+    height: 1.25rem;
+    margin-left: 0.1rem;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.toVideo {
+    width: 5rem;
+    height: 2.81rem;
+    margin-left: 0.1rem;
+}
+
+.hottheme {
+    padding: 0 0.15rem;
+    background: #f7931e;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.1rem;
+    border-radius: 5px;
+    color: #fff !important;
+    font-size: 0.22rem;
+}
+
+.zdBox {
+    padding: 0 0.15rem;
+    background: #fc1a26;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.1rem;
+    border-radius: 5px;
+    color: #fff !important;
+    font-size: 0.22rem;
+}
+
+.hottheme img {
+    height: 0.4rem;
+}
+
+.zdBox img {
+    height: 0.4rem;
+}
+
+.themename {
+    display: inline-block;
+    max-width: 2.4rem;
+    overflow: hidden;
+    height: 0.6rem;
+    vertical-align: middle;
+}
+
+.tishi {
+    color: #999;
+    font-size: 0.24rem;
+    line-height: 0.4rem;
+    margin: 0.1rem 0;
+}
+
+.notheme {
+    width: 7.5rem;
+    background: #fff !important;
+    float: left;
+}
+
+.notheme img {
+    width: 100%;
+    margin-top: 1rem;
+
+}
+
+.redDot {
+    width: 0.2rem;
+    height: 0.2rem;
+    background: red;
+    display: block;
+    border-radius: 100%;
+    position: absolute;
+    right: 0.3rem;
+    top: 0.2rem;
+}
+
+.mescroll {
+    background: #fff;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.barrageText img {
+    width: 15px !important;
+    height: 15px !important;
+}
+
+.no-strat {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.no-ended {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.timeone {
+    position: absolute;
+    padding: 0.2rem 0.4rem;
+    background: rgba(0, 0, 0, 0.4);
+    height: 0.8rem;
+    border-radius: 50px;
+    font-size: 0.28rem;
+    top: 0.8rem;
+    left: 50%;
+    text-align: center;
+    color: #fff;
+    z-index: 99;
+}
+
+.timeone p {
+    height: 0.4rem;
+}
+
+.timeone p span {
+    font-size: 0.32rem;
+    color: #fcee21;
+}
+
+.no-timeing .yuyueBox {
+    position: absolute;
+    left: 0;
+    top: 3.3rem;
+    width: 100%;
+    text-align: center;
+    z-index: 99;
+}
+
+.no-timeing .yuyue {
+    padding: 0.15rem 0.5rem;
+    font-size: 0.24rem;
+    color: #fff;
+    background: #0084ff;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+}
+
+/*倒计时*/
+#countdown {
+    width: 100% !important;
+    position: absolute;
+    top: 2.3rem;
+    z-index: 99;
+}
+
+.countdownHolder {
+    font-size: 0.48rem !important;
+    letter-spacing: -6px !important;
+    font-family: 微软雅黑;
+}
+
+.countDiv {
+    width: 8px !important;
+    opacity: 0 !important;
+}
+
+.digit {
+    box-shadow: 1px 1px 1px rgba(4, 4, 4, 0.35);
+    color: #333;
+    background-image: linear-gradient(bottom, #ddd 50%, #eee 50%);
+    background-image: -o-linear-gradient(bottom, #ddd 50%, #eee 50%);
+    background-image: -moz-linear-gradient(bottom, #ddd 50%, #eee 50%);
+    background-image: -webkit-linear-gradient(bottom, #ddd 50%, #eee 50%);
+    background-image: -ms-linear-gradient(bottom, #ddd 50%, #eee 50%);
+
+    background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0.5, #ddd),
+            color-stop(0.5, #eee)
+    );
+}
+
+.digit.static {
+    box-shadow: 1px 1px 1px rgba(4, 4, 4, 0.35);
+    color: #333;
+    background-image: linear-gradient(bottom, #ddd 50%, #eee 50%);
+    background-image: -o-linear-gradient(bottom, #ddd 50%, #eee 50%);
+    background-image: -moz-linear-gradient(bottom, #ddd 50%, #eee 50%);
+    background-image: -webkit-linear-gradient(bottom, #ddd 50%, #eee 50%);
+    background-image: -ms-linear-gradient(bottom, #ddd 50%, #eee 50%);
+
+    background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0.5, #ddd),
+            color-stop(0.5, #eee)
+    );
+}
+
+.countDays {
+    display: none !important;
+}
+
+/*抽奖按钮*/
+.drawIcon {
+    width: 1rem;
+    height: 1rem;
+    position: fixed;
+    right: 0.3rem;
+    bottom: 3.1rem;
+    border-radius: 100%;
+    background: url("../img/drawIcon.png") no-repeat;
+    background-size: 100% 100%;
+    z-index: 999999;
+}
+
+/*投票按钮*/
+.toupiaoIcon {
+    width: 1rem;
+    height: 1rem;
+    position: fixed;
+    right: 0.3rem;
+    bottom: 2.1rem;
+    border-radius: 100%;
+    background: url("../img/toupiao.png") no-repeat;
+    background-size: 100% 100%;
+    z-index: 999999;
+}
+
+/*问卷按钮*/
+.wenjuanIcon {
+    width: 1rem;
+    height: 1rem;
+    position: fixed;
+    right: 0.3rem;
+    bottom: 1.1rem;
+    border-radius: 100%;
+    background: url("../img/wenjuan.png") no-repeat;
+    background-size: 100% 100%;
+    z-index: 999999;
+}
+
+/*抽奖遮罩层*/
+.drawMask, .voteMask {
+    width: 7.5rem;
+    height: 7rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    z-index: 999999;
+}
+
+.drawMask {
+    display: none;
+}
+
+.voteMask {
+    display: none;
+}
+
+.drawMask .drawTitle, .voteMask .voteTitle {
+    width: 7.5rem;
+    height: 0.89rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.drawMask .drawContent, .voteMask .voteContent {
+    width: 7.5rem;
+    overflow-y: auto;
+}
+
+.drawMask .drawTitle .drawName, .voteMask .voteTitle .voteName {
+    width: 5rem;
+    height: 0.89rem;
+    float: left;
+    line-height: 0.89rem;
+    font-size: 0.32rem;
+    font-weight: bold;
+    margin-left: 0.37rem;
+}
+
+.drawListMain, .voteListMain {
+    padding-bottom: 1.6rem;
+}
+
+.drawMask .drawTitle .drawClose, .voteMask .voteTitle .voteClose {
+    float: right;
+    width: 1rem;
+    height: 0.89rem;
+    font-size: 0.3rem;
+    line-height: 0.89rem;
+    text-align: center;
+}
+
+.drawMask .drawTitle .drawClose .fa-close, .voteMask .voteTitle .voteClose .fa-close {
+    font-size: 0.35rem;
+    font-weight: 100;
+    color: #999;
+}
+
+/*投票遮罩层*/
+
+.drawEndImg {
+    float: left;
+    width: 2.41rem;
+    height: 2.28rem;
+    margin: 1.3rem 2.5rem 0.6rem;
+    background: url("../img/drawend.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.endText {
+    float: left;
+    width: 7.5rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+    color: #999999;
+}
+
+.drawnostartImg {
+    float: left;
+    width: 2.41rem;
+    height: 2.41rem;
+    margin: 1.3rem 2.5rem 0.6rem;
+    background: url("../img/draw.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.startText {
+    float: left;
+    width: 7.5rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+    color: #333;
+}
+
+.startText span {
+    color: #f56467;
+}
+
+.nodrawText {
+    float: left;
+    width: 7.5rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+    font-size: 0.42rem;
+    font-weight: bold;
+    color: #333;
+    overflow: hidden;
+}
+
+.guize {
+    float: left;
+    width: 7.5rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    text-align: center;
+    color: #999;
+    margin-top: 0.6rem;
+}
+
+.guize a {
+    color: #0084ff;
+    text-decoration: none;
+}
+
+.ensure {
+    width: 7.5rem;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    background: #0084ff;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+}
+
+.drawList .drawListTit {
+    width: 7.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #333;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.drawListCon {
+    overflow: hidden;
+}
+
+.drawLitConTop {
+    width: 7.5rem;
+    overflow: hidden;
+    border-bottom: 1px solid #ddd;
+}
+
+.drawLitConTop .drawImg {
+    width: 3.6rem;
+    height: auto;
+    float: left;
+    margin: 0.3rem auto;
+    margin-left: 1.95rem;
+}
+
+.drawLitConTop .drawImg img {
+    width: 100%;
+}
+
+.drawLitConBottom {
+    width: 7.1rem;
+    padding: 0 0.2rem;
+    line-height: 0.89rem;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.drawLitConBottom .drawLeft {
+    width: 6.3rem;
+    height: 0.89rem;
+    line-height: 0.89rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+}
+
+.drawLitConBottom .drawRight {
+    width: 0.8rem;
+    text-align: center;
+    line-height: 0.89rem;
+    float: left;
+}
+
+.drawbutton {
+    width: 7.5rem;
+    height: 0.69rem;
+    line-height: 0.69rem;
+    position: absolute;
+    left: 0;
+    bottom: 0.88rem;
+    background: #efefef;
+}
+
+.drawbutton .drawbuttonLeft {
+    width: 5.3rem;
+    height: 0.69rem;
+    float: left;
+    padding-left: 0.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.drawbutton .drawbuttonRight {
+    width: 2rem;
+    height: 0.69rem;
+    float: left;
+}
+
+.drawbutton .drawbuttonRight a {
+    color: #0084ff;
+    text-decoration: none;
+}
+
+.drawMain {
+    float: left;
+    width: 5.4rem;
+    height: 5.5rem;
+    margin: 0.2rem auto;
+    margin-left: 1.05rem;
+}
+
+.eggMain {
+    float: left;
+    width: 7.5rem;
+    height: 5.5rem;
+    margin: 0.2rem auto;
+}
+
+/*投票样式*/
+.voteEnd {
+    width: 7.5rem;
+}
+
+.voteendPic {
+    width: 2.4rem;
+    height: 2.4rem;
+    background: url("../img/voteend.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+    margin: 1rem 2.5rem 0.5rem 2.5rem;
+}
+
+.voteendButton, .voteconButton {
+    width: 7.5rem;
+    text-align: center;
+    height: 0.9rem;
+    line-height: 0.9rem;
+    color: #fff;
+    background: #0084ff;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.voteText {
+    width: 7.5rem;
+    text-align: center;
+    font-size: 0.34rem;
+    margin-bottom: 0.2rem;
+    float: left;
+}
+
+.voteNostart {
+    width: 7.5rem;
+}
+
+.voteNostartPic {
+    width: 2.4rem;
+    height: 2.4rem;
+    float: left;
+    margin: 1rem 2.5rem 0.5rem 2.5rem;
+    background: url("../img/voteNo.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.voteResult {
+    width: 7.1rem;
+    overflow: hidden;
+    margin-left: 0.2rem;
+}
+
+.voteQuestion {
+    width: 100%;
+    padding: 0.3rem 0;
+    font-size: 0.32rem;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.voteListCon {
+    width: 100%;
+}
+
+.voteListName {
+    width: 100%;
+    padding: 0.3rem 0;
+}
+
+.Bar {
+    position: relative;
+    width: 5.5rem;
+    float: left;
+    background: #eaeaea;
+    border-radius: 15px;
+    margin-bottom: 0.3rem;
+}
+
+.Bar .progress {
+    display: block;
+    position: relative;
+    background: #edba2d;
+    color: #333333;
+    height: 15px;
+    line-height: 15px;
+    border-radius: 15px;
+}
+
+.Bar .progress span {
+    position: absolute;
+    width: 5.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.progressNum {
+    float: left;
+    width: 1.5rem;
+    text-align: right;
+}
+
+.voteListCon {
+    border-bottom: 1px solid #f5f5f5;
+    overflow: hidden;
+}
+
+.MainUl {
+    width: 100%;
+}
+
+.MainUl li {
+    padding: 0.2rem 0;
+}
+
+.way-choose {
+    float: left;
+    margin-right: 0.2rem;
+}
+
+.way-choose > input[type='checkbox'], .way-choose > input[type='radio'] {
+    position: relative;
+    width: 0.37rem;
+    height: 0.37rem;
+    background: none;
+    background: white;
+    -webkit-appearance: none;
+    border: 1px solid gainsboro;
+    outline: 0;
+    border-radius: 100%;
+}
+
+.way-choose > input[type='checkbox']:before, .way-choose > input[type='radio']:before {
+    font-family: weui;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    text-align: center;
+    speak: none;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: inherit;
+    content: "";
+    color: white;
+    font-size: 13px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -48%) scale(.73);
+    transform: translate(-50%, -48%) scale(.73);
+    outline: 0;
+}
+
+.way-choose > input[type='checkbox']:checked, .way-choose > input[type='radio']:checked {
+    background: #00C90B;
+    -webkit-appearance: none;
+    border: none;
+    outline: 0;
+}
+
+.way-choose > input[type='checkbox']:checked:before, .way-choose > input[type='radio']:checked:before {
+    font-family: weui;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    text-align: center;
+    speak: none;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: inherit;
+    content: "\2714";
+    color: white;
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -48%) scale(.73);
+    transform: translate(-50%, -48%) scale(.73);
+    border: none;
+    outline: 0;
+}
+
+.wayImg {
+    width: 2rem;
+    height: 2rem;
+    display: block;
+    margin-top: 0.2rem;
+    margin-left: 0.5rem;
+}
+
+/*弹窗遮罩层*/
+.passMask {
+    width: 7.5rem;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999999;
+    display: none;
+    height: 100%;
+}
+
+.passMask .icon-close {
+    color: #FFF;
+}
+
+.passBox {
+    width: 6.4rem;
+    height: 5rem;
+    position: absolute;
+    top: 3.7rem;
+    left: 0.55rem;
+    background: rgba(236, 240, 240, 0.9);
+    border-radius: 10px;
+}
+
+.passTit {
+    width: 6.4rem;
+    height: 1.2rem;
+    text-align: center;
+    line-height: 1.2rem;
+    font-size: 0.34rem;
+}
+
+.passBox .passInput {
+    width: 5.3rem;
+    height: 0.8rem;
+    margin-left: 0.55rem;
+    margin-bottom: 0.15rem;
+    position: relative;
+}
+
+.passBox input {
+    width: 100%;
+    padding: 0 0.2rem;
+    height: 0.8rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+.getPass {
+    position: absolute;
+    right: 0.3rem;
+    top: 0.25rem;
+    font-size: 0.26rem;
+}
+
+.confirmbutton {
+    width: 5.3rem;
+    height: 0.8rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: #0084ff;
+    color: #fff;
+    margin-left: 0.55rem;
+    margin-top: 0.35rem;
+}
+
+.closepass {
+    width: 0.8rem;
+    height: 0.8rem;
+    text-align: center;
+    line-height: 0.88rem;
+    position: absolute;
+    top: 9rem;
+    left: 50%;
+    margin-left: -0.4rem;
+    border: 1px solid #fff;
+    border-radius: 100%;
+}
+
+.closepass .fa-close {
+    color: #fff;
+    font-size: 0.4rem;
+    font-weight: 100;
+}
+
+.ewmMask {
+    width: 7.5rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999999;
+}
+
+.ewmBox {
+    width: 6rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -3rem 0 0 -3rem;
+    background: #fff;
+}
+
+.ewmTit, .tishi {
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+}
+
+.ewmMoney {
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    font-size: 0.46rem;
+}
+
+.code {
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    font-size: 0.28rem;
+    font-weight: normal;
+    color: #0084ff;
+    text-decoration: underline;
+}
+
+.submitBtn {
+    width: 84%;
+    height: 1rem;
+    line-height: 1rem;
+    background: #0084ff;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    margin-left: 8%;
+    outline: none;
+}
+
+.checkCon {
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    font-size: 0.26rem;
+    font-weight: normal;
+}
+
+.checkCon a {
+    color: #0084ff;
+    text-decoration: none;
+}
+
+.ewm {
+    width: 5rem;
+    height: 5rem;
+    margin-left: 0.5rem;
+}
+
+.ewm img {
+    width: 100%;
+    height: 100%;
+}
+
+label {
+    display: inline;
+    vertical-align: sub;
+    margin-right: 5px;
+}
+
+.regular-checkbox {
+    display: none;
+}
+
+.regular-checkbox + label {
+    background-color: #fffff;
+    border: 1px solid #00C90D;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 7px;
+    border-radius: 100%;
+    display: inline-block;
+    position: relative;
+}
+
+.regular-checkbox + label:active, .regular-checkbox:checked + label:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.regular-checkbox:checked + label {
+    background-color: #00C90D;
+    border: 1px solid #00C90D;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -12px 10px -12px rgba(0, 0, 0, 0.05), inset 12px 10px -12px rgba(255, 255, 255, 0.1);
+    color: #99a1a7;
+}
+
+.regular-checkbox:checked + label:after {
+    content: '\2714';
+    font-size: 12px;
+    position: absolute;
+    top: -18px;
+    left: 2px;
+    color: #ffffff;
+}
+
+.ewmInput {
+    width: 80%;
+    height: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    padding: 0 5px;
+    outline: none;
+}
+
+.tishi {
+    font-size: 0.28rem;
+}
+
+.color-blue {
+    color: #0084ff;
+    text-decoration: underline;
+}

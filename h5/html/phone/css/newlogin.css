@@ -1,0 +1,248 @@
+.container{
+	position: absolute;
+	z-index: 1000;
+	width: 100vw;
+	height: 100vh;
+	background: url(../img/defultBg.jpg) no-repeat;
+	background-size: 100%;
+	overflow: hidden;
+}
+.container:after{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+}
+.container .main{
+	color: #fff;
+	width: 80%;
+	z-index: 99;
+	position: relative;
+	margin: 40% auto;
+	font-size: .26rem;
+}
+/*.header{*/
+/*	width: 100%;*/
+/*	position:relative;*/
+/*	z-index: 999;*/
+/*	overflow: hidden;*/
+/*	text-align: center;*/
+/*}*/
+.container .header h2{
+	font-size: 0.35rem;
+	margin-bottom: 0.1rem;
+}
+
+.container .welcomeMsg{
+	text-align: center;
+	color: rgba(255,255,255,.8);
+}
+.container #roomName {
+	text-align: center;
+	margin: 5% 0 ;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	font-size: .35rem;
+	color: rgba(255,255,255,1);
+	font-weight: bold;
+}
+.login-input-item .inputBox{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	height: 1rem;
+	border-bottom: 1px solid #4d4b55;
+
+}
+.login-input-item label{
+	flex: 1;
+	position: relative;
+}
+.login-input-item .phoneNumber label:after{
+	position: absolute;
+	content: '';
+	height: 100%;
+	right: 15%;
+	width: 1px;
+	top: 0;
+	background: #4d4b55;
+
+}
+.login-input-item input{
+	flex: 5;
+	padding: 0 2%;
+	height: 100%;
+	width: 50%;
+	outline: #0084FF;
+	border: none;
+	background: transparent;
+	color: #FFF;
+	font-size: .26rem;
+}
+
+
+.yzmBtn{
+	height: .5rem;
+	line-height: .5rem;
+	position: absolute;
+	top: 27%;
+	right: 0;
+	color: #0084FF;
+	border: none;
+	outline: none;
+}
+.text-center{
+	margin-top: .5rem;
+	text-align:center;
+}
+.livebtn {
+	font-size: .28rem;
+	width: 6rem;
+	height: 0.8rem;
+	margin-bottom: .35rem;
+	color: #fff;
+	border: none;
+	outline: none;
+	border-radius: 25px;
+	background-color: #228cef;
+	background-image: linear-gradient(left,#49CBCF ,#228CEF);
+	background-image: -webkit-linear-gradient(left,#49CBCF,#228CEF);
+}
+.goback{
+	margin-top: .5rem;
+	line-height: 2;
+	text-align: center;
+}
+
+
+/*#welcomeMsg {*/
+	/*font-size: 0.28rem;*/
+	/*text-align: center;*/
+/*}*/
+ input::-webkit-input-placeholder {
+    color: #ccc;
+}
+.phone{
+	display: block;
+	width: 0.23rem;
+	height: 0.41rem;
+	position: absolute;
+	left: 0.4rem;
+	bottom: 0.2rem;
+}
+.passyzm{
+	display: block;
+	width: 0.40rem;
+	height: 0.31rem;
+	position: absolute;
+	left: 0.33rem;
+	bottom: 0.25rem;
+}
+.mask{
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left:0;
+	background: rgba(0,0,0,0.5);
+	z-index: 999;
+}
+.titBox{
+	width: 4rem;
+	height: 2rem;
+	background: #fff;
+	border-radius: 3px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -1rem;
+	margin-left: -2rem;
+}
+.closeBox{
+	width: 3.6rem;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	color: #999;
+	text-align: right;
+	padding: 0 0.2rem;
+}
+.textBox{
+	padding: 0.2rem 0.65rem;
+	width: 2.7rem;
+	text-align: center;
+}
+.hide{
+	display: none;
+}
+.no-padding{
+	padding: 0!important;
+}
+
+.newmain{
+	/* position: fixed; */
+	/* bottom: 3rem; */
+	/* left: 50%; */
+	/* margin-left: -3rem; */
+	width: 100%;
+}
+.newmask{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left:0;
+	background: rgba(0,0,0,0.5);
+}
+.permission{
+	text-align: center;
+	margin: .25rem 0 .25rem 0;
+	font-size: .25rem;
+}
+.edit-phone{
+	margin-top: .2rem;
+	line-height: 2;
+}
+.edit-phone a{
+}
+.userPhone {
+	font-size: .3rem;
+}
+.loginpermissions .livebtn{
+	background-image: none;
+	background: transparent;
+	border: 1px solid #4d4b55;
+
+}
+.nopermission {
+	text-align: center;
+	font-size: .26rem;
+	line-height: 2;
+}
+.nopermission .bigtitle{
+	font-size: .35rem;
+}
+.nopermission .otherop{
+	margin-top: 5%;
+}
+.nopermission .otherop a{
+	margin: 5% 0;
+	display: block;
+}
+footer{
+	font-size: .25rem;
+	position: absolute;
+	z-index: 1000;
+	bottom: 2%;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	color: #FFF;
+}
+.third_login {
+	color: #FFF;
+}
