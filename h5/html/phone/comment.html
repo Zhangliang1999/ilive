@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://cloud.iptv-soft.com/qcloud/userLogin.jspx -->
+<html style="font-size: 55.2px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="../phone/css/sweetalert.css">
+    <link href="./userLogin/mui.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./userLogin/login.css">
+    <link rel="stylesheet" href="./css/sign.css">
+    <script type="application/javascript" src="./js/lib-flexible.min.js"></script>
+    <link rel="stylesheet" href="js/need/layer.css"/>
+    <!--<script type="text/javascript" src="./userLogin/allcontent.js"></script>-->
+    <!--<script type="text/javascript" src="./userLogin/public.js"></script>-->
+
+</head>
+<body class="mui-ios mui-ios-11 mui-ios-11-0" style="">
+<div class="page">
+    <header class="mui-bar mui-bar-nav login-header">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title" id="signTitle">评论上墙</h1>
+
+    </header>
+    <div class="sign">
+        <div class="form_item">
+            <input type="text" id="nickname" name="nickname" minlength="2" maxlength="30"
+                   placeholder="昵称">
+        </div>
+
+        <div class="form_item">
+            <input type="text" id="username" name="username" minlength="2" maxlength="30"
+                   placeholder="快来发表您的评论吧">
+        </div>
+        <div class="form_item sign_btn">
+            <button id="input_check_tel">点击立即评论</button>
+        </div>
+    </div>
+</div>
+<script src="./userLogin/mui.min.js"></script>
+<script src="./userLogin/jquery.min.js"></script>
+<script type="text/javascript" src="js/tysx2019.min.js?version=2.0.1"></script>
+<!--<script type="text/javascript" src="js/sweetalert.min.js"></script>-->
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<!--<script type="text/javascript" src="js/tysx2019.js"></script>-->
+<script type="text/javascript">
+
+var cookie = {
+	    set:function(key,val,time){
+	        var date=new Date(); 
+	        var expiresDays=time;  
+	        date.setTime(date.getTime()+expiresDays*24*3600*1000);
+	        document.cookie=key + "=" + escape(val) +";expires="+date.toGMTString(); 
+	    },
+	    get:function(key){
+	        
+	        var getCookie = document.cookie.replace(/[ ]/g,"");  
+	        var arrCookie = getCookie.split(";")  
+	        var tips;  
+	        for(var i=0;i<arrCookie.length;i++){   
+	            var arr=arrCookie[i].split("=");  
+	            if(key==arr[0]){  
+	                tips=unescape(arr[1]);   
+	                break;   
+	            }
+	        }
+	        return tips;
+	    },
+	    delete:function(key){ 
+	         var date = new Date(); 
+	         date.setTime(date.getTime()-10000);
+	         document.cookie = key + "=v; expires =" +date.toGMTString();
+	        }
+	        
+	}
+
+if(cookie.get("nickName")!=null&&cookie.get("nickName")!=""){
+	
+	$("#nickname").val(cookie.get("nickName"));
+}
+
+    var roomId = GetQueryString("roomId");
+    var userId;
+    var liveEvent;
+    $.ajax({
+        type: "POST",//请求方式 get/post
+        url: "http://" + tomcatBase + "/ilive/prize/isOverComment.jspx?roomId=" + roomId,
+        dataType: "jsonp",
+        jsonp: "callback",
+        async: false,
+        cache: false,
+        success: function (data) {
+            console.log(data)
+            var code = data.code;
+            if (code == 1) {
+
+                if (data.isAllow == 1) {
+
+                } else {
+                    window.location.href = "http://" + h5Base + "/phone/commentOver.html?roomId=" + roomId;
+                }
+
+            } else {
+                window.location.href = "http://" + h5Base + "/phone/commentOver.html?roomId=" + roomId;
+            }
+        }
+    });
+
+
+
+
+
+
+
+    $.ajax({
+        type: "GET",//请求方式 get/post
+        url: "http://" + tomcatBase + "/ilive/prize/isLogin.jspx",
+        dataType: "jsonp",
+        jsonp: "callback",
+        cache: false,
+        data: {},
+        success: function (data) {
+
+            console.log(data);
+            if (data.code == 1) {
+                console.log(data.data);
+                userId=data.data.userId;
+            } else {
+            	window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId+"&comment=1";
+            }
+        }
+    });
+
+    $.ajax({
+         type: "GET",//请求方式 get/post
+         url: "http://" + tomcatBase + "/ilive/selectRoom.jspx",
+         dataType: "jsonp",
+         jsonp: "callback",
+         cache: false,
+         data: {
+             roomId: roomId
+         },
+         success: function (data) {
+             console.log(data);
+             if (data.code == 1) {
+                 var iLiveLiveRoom = JSON.parse(data.iLiveLiveRoom);
+                  liveEvent = iLiveLiveRoom.liveEvent;
+
+             } else {
+                 layer.open({
+                    content: '获取直播间信息失败'
+                     ,btn: '确定'
+                     ,yes: function(index){
+                        errorfunction()
+                     }
+                 });
+                 return false
+             }
+         }
+     });
+
+
+
+
+
+
+    function checkRegexValid() {
+        if ($.trim($.trim($('#username').val())) == "") {
+
+            layerOpen('评论不能为空')
+            return false;
+        }
+
+        return true;
+    }
+    var flag = true;
+    // 签到
+    $('#input_check_tel').on("click", function () {
+        if (flag) {
+            flag = false;
+            if (checkRegexValid()) {
+
+            	cookie.set("nickName",$('#nickname').val(),1)
+
+                $.ajax({
+                    type: "POST",//请求方式 get/post
+                    url: "http://" + tomcatBase + "/ilive/sendMessage.jspx",
+                    dataType: "jsonp",
+                    jsonp: "callback",
+                    cache: false,
+                    data: {
+                        terminalType: "h5",
+                        userId: userId,
+                        roomId: roomId,
+                        liveMsgType: 2,
+                        content: encodeURI($.trim($.trim($('#username').val()))),
+                        nickname:encodeURI($.trim($.trim($('#nickname').val()))),
+                        liveEventId: liveEvent.liveEventId,
+                        msgType: 1
+                    },
+                    success: function (data) {
+                        var status = data.code;
+                        //401 手机登录
+                        //402     绑定手机号
+                        //403    微信打开
+                        if (status == 401) {
+                            window.location.href = "http://" + h5Base + "/phone/login.html?roomId=" + roomId+"&comment=1";
+
+                        } else if (status == 402) {
+                        	window.location.href = "http://" + h5Base + "/phone/signOver.html?roomId=" + roomId + "&name=" + name;
+                        } else if (status == 403) {
+
+                        } else if (status == 1) {
+                        	window.location.href = "http://" + h5Base + "/phone/commentSuc.html?roomId=" + roomId;
+                        } else {
+                        	window.location.href = "http://" + h5Base + "/phone/commentLose.html?roomId=" + roomId;
+                        }
+                    }
+                });
+
+            }
+        }
+
+    });
+</script>
+
+
+</body>
+</html>

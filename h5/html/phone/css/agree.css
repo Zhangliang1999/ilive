@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.header{
+    width: 7.5rem;
+    height: 1rem;
+    line-height: 1rem;
+    background: #0084ff;
+    text-align: center;
+    color:#fff;
+    font-size: 0.3rem;
+    position: relative;
+}
+.header i{
+    position: absolute;
+    left: 0.3rem;
+    top: 0.3rem;
+    font-size: 0.4rem;
+}
+.main{
+    padding: 0 0.4rem 0.9rem;
+    overflow: auto;
+}
+.title{
+    width: 6.7rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    text-align: center;
+    font-size: 0.28rem;
+}
+.para{
+    font-size: 0.28rem;
+    line-height: 0.4rem;
+    margin-bottom: 0.5rem;
+    text-indent: 2em;
+}
+.footer{
+    width: 7.5rem;
+    height: 0.9rem;
+    position: fixed;
+    bottom: 0;
+    background: #0084ff;
+    text-align: center;
+    line-height: 0.9rem;
+    color: #fff;
+    font-size: 0.3rem;
+}

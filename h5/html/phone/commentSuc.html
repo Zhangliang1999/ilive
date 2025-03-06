@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://cloud.iptv-soft.com/qcloud/userLogin.jspx -->
+<html style="font-size: 55.2px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+		<!--<link rel="stylesheet" href="./userLogin/iconfont.css">-->
+		<link rel="stylesheet" href="../phone/css/sweetalert.css">
+		<link href="./userLogin/mui.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="./userLogin/login.css">
+		<link rel="stylesheet" href="./css/sign.css">
+		<script type="application/javascript" src="./js/lib-flexible.min.js"></script>
+		
+	</head>
+	<body class="mui-ios mui-ios-11 mui-ios-11-0" style="">
+		<div class="page">
+			<header class="mui-bar mui-bar-nav login-header">
+		    	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    	<h1 class="mui-title" id="signTitle">评论上墙</h1>
+			</header>
+		
+			<div class="mui-content login-content">
+				<div class="sign_result">
+					<img src="./img/images/success.png"/>
+					<p>恭喜！您已评论成功！</p>
+					<a onclick="backRoom()" class="go_live">去看直播</a>
+				</div>
+		</div>
+		</div>
+		<script src="./userLogin/mui.min.js"></script>
+		<script src="./userLogin/jquery.min.js"></script>
+		<script type="text/javascript" src="js/tysx2019.min.js?version=2.0.1"></script>
+		<script type="text/javascript" src="js/sweetalert.min.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript">
+		var roomId = GetQueryString("roomId");
+		
+		function backRoom(){
+			window.location.href="http://"+h5Base+"/phone/live.html?roomId="+roomId;
+		}
+		</script>
+</body>
+</html>
